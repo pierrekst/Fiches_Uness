@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 341 - Hémorragie méningée</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --teal: #1D9E75;
+      --coral: #D85A30;
+      --blue: #378ADD;
+      --red: #E24B4A;
+      --amber: #D97706;
+      --purple-light: #EEF0FB;
+      --teal-light: #E8F7F2;
+      --coral-light: #FBEEE9;
+      --blue-light: #EBF4FC;
+      --red-light: #FDF0F0;
+      --amber-light: #FEF3CD;
+      --bg: #F8F9FA;
+      --card: #FFFFFF;
+      --border: #E5E7EB;
+      --text: #1F2937;
+      --text-muted: #6B7280;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .9rem; line-height: 1.55; padding: 20px; }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    /* Header */
+    .header { background: linear-gradient(135deg, #E24B4A 0%, #D85A30 50%, #534AB7 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: white; }
+    .header-badge { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .85; margin-bottom: 6px; }
+    .header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    .header-intro { font-size: .88rem; opacity: .92; line-height: 1.6; }
+
+    /* Cards */
+    .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Alertes */
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    /* Grilles */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill { padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+    .pill-red    { background: var(--red-light);    color: var(--red);    }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+    /* KV rows */
+    .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .83rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-muted); font-weight: 500; }
+    .kv-val { font-weight: 700; color: var(--text); }
+
+    /* Tableaux */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 8px; }
+    th { background: var(--bg); padding: 7px 10px; text-align: left; font-weight: 700; border-bottom: 1px solid var(--border); }
+    td { padding: 6px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* Étapes numérotées */
+    .steps { display: flex; flex-direction: column; gap: 8px; }
+    .step { display: flex; gap: 12px; align-items: flex-start; }
+    .step-num { width: 24px; height: 24px; border-radius: 50%; background: #E5E7EB; color: var(--text); font-size: .78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .step-content { font-size: .84rem; flex: 1; }
+
+    /* Complication cards */
+    .compl-card { border-left: 3px solid; border-radius: 0 10px 10px 0; padding: 8px 12px; margin-bottom: 8px; font-size: .83rem; background: var(--card); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+    .compl-red    { border-left-color: var(--red);    }
+    .compl-amber  { border-left-color: var(--amber);  }
+    .compl-blue   { border-left-color: var(--blue);   }
+    .compl-purple { border-left-color: var(--purple); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    ul { padding-left: 16px; }
+    li { margin-bottom: 4px; font-size: .84rem; }
+
+    @media (max-width: 600px) {
+      .grid2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">Item 341 · Neurologie · ECNi</div>
+    <h1>Hémorragie méningée</h1>
+    <div class="header-intro">
+      Maîtriser l'HSA de A à Z : reconnaître le tableau typique (céphalée en coup de tonnerre dans un ciel serein),
+      appliquer l'algorithme diagnostique (scanner sans injection → PL → angioscanner → artériographie),
+      identifier l'étiologie (anévrisme artériel dans 85% des HSA spontanées), gérer l'urgence vitale et
+      anticiper les complications redoutables : vasospasme, resaignement, hydrocéphalie, HTIC.
+    </div>
+  </div>
+
+  <!-- DÉFINITION -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Définition</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HSA spontanée</strong></td>
+          <td>Présence de sang dans les espaces sous-arachnoïdiens, en dehors de tout traumatisme crânien</td>
+        </tr>
+        <tr>
+          <td><strong>HSA traumatique</strong></td>
+          <td>Secondaire à un traumatisme crânien, souvent associée à d'autres lésions traumatiques</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;">
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>HSA = hémorragie méningée = hémorragie sous-arachnoïdienne — trois termes synonymes en pratique clinique</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ÉTIOLOGIES + FACTEURS DE RISQUE -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Étiologies
+      </div>
+      <div class="kv-row"><span class="kv-key">HSA traumatique</span><span class="kv-val" style="color:var(--red);">1ère cause globale</span></div>
+      <div class="kv-row"><span class="kv-key">Rupture d'anévrisme artériel</span><span class="kv-val" style="color:var(--red);">85% des HSA spontanées</span></div>
+      <div class="kv-row"><span class="kv-key">HSA péri-mésencéphalique</span><span class="kv-val">10%</span></div>
+      <div class="kv-row"><span class="kv-key">MAV, fistule durale, anévrisme mycotique</span><span class="kv-val">5%</span></div>
+      <div class="alert alert-red" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Toute HSA non traumatique = rupture d'anévrisme artériel intracrânien <strong>jusqu'à preuve du contraire</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        Facteurs de risque d'anévrisme
+      </div>
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">TERRAIN</div>
+      <div class="pills">
+        <span class="pill pill-red">Sexe féminin</span>
+        <span class="pill pill-red">HTA</span>
+        <span class="pill pill-red">Tabagisme</span>
+        <span class="pill pill-red">Alcool chronique</span>
+        <span class="pill pill-amber">ATCD personnel anévrisme</span>
+        <span class="pill pill-amber">ATCD familial anévrisme</span>
+        <span class="pill pill-blue">PKRAD</span>
+        <span class="pill pill-blue">Marfan / Ehler-Danlos</span>
+      </div>
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-muted); margin-top:12px; margin-bottom:4px;">FACTEURS DE RUPTURE</div>
+      <div class="pills">
+        <span class="pill pill-amber">Effort physique</span>
+        <span class="pill pill-amber">Poussée hypertensive</span>
+        <span class="pill pill-amber">Grande taille anévrisme</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PRÉSENTATION CLINIQUE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Présentation clinique
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Signe cardinal :</strong> céphalée en « coup de tonnerre dans un ciel serein » — aiguë, brutale, intense, d'emblée maximale.<br>Toute céphalée brutale intense = HSA jusqu'à preuve du contraire.</div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Signe</th><th>Description clinique</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Syndrome fissuraire</strong></td>
+          <td>Céphalées intenses quelques jours avant la rupture franche — signal d'alarme à ne pas rater</td>
+        </tr>
+        <tr>
+          <td><strong>Syndrome méningé</strong></td>
+          <td>Classiquement apyrétique ; peut être <em>absent initialement</em></td>
+        </tr>
+        <tr>
+          <td><strong>HTIC</strong></td>
+          <td>Troubles de la conscience jusqu'au coma</td>
+        </tr>
+        <tr>
+          <td><strong>Crise convulsive inaugurale</strong></td>
+          <td>Possible dès le début</td>
+        </tr>
+        <tr>
+          <td><strong>Déficit focal</strong></td>
+          <td>Hémorragie cérébro-méningée ; <strong>paralysie du III homolatérale</strong> = anévrisme de la terminaison de la carotide interne</td>
+        </tr>
+        <tr>
+          <td><strong>Signes végétatifs</strong></td>
+          <td>Tachycardie, HTA, réaction de Cushing, troubles du rythme, bradycardie, arrêt cardiaque</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> le syndrome méningé peut être absent au début — ne pas attendre son apparition pour investiguer une céphalée brutale typique.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- STRATÉGIE DIAGNOSTIQUE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Stratégie diagnostique
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:var(--red-light); color:var(--red);">1</div>
+        <div class="step-content">
+          <strong>Scanner cérébral sans injection — en urgence immédiate</strong><br>
+          Hyperdensité spontanée des espaces sous-arachnoïdiens (citernes de la base, sillons corticaux)<br>
+          <span style="color:var(--text-muted); font-size:.79rem;">Sensibilité ~95% à H0, diminue rapidement — 50% à J5</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--amber-light); color:var(--amber);">2</div>
+        <div class="step-content">
+          <strong>Ponction lombaire — si scanner négatif et forte suspicion clinique</strong><br>
+          LCR uniformément rouge, incoagulable, xanthochromique après centrifugation<br>
+          <span style="color:var(--text-muted); font-size:.79rem;">Attendre H12 pour la xanthochromie et la recherche de pigments biliaires</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--blue-light); color:var(--blue);">3</div>
+        <div class="step-content">
+          <strong>Angioscanner cérébral — bilan étiologique en 1ère intention</strong><br>
+          Recherche d'un anévrisme artériel intracrânien
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--purple-light); color:var(--purple);">4</div>
+        <div class="step-content">
+          <strong>Artériographie cérébrale — examen de référence</strong><br>
+          Si doute diagnostique ou absence d'étiologie à l'angioscanner
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> scanner négatif n'élimine pas l'HSA — la PL est <strong>obligatoire</strong> si la suspicion clinique est forte.</div>
+    </div>
+  </div>
+
+  <!-- LCR -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Caractéristiques du LCR dans l'HSA
+    </div>
+    <table>
+      <thead>
+        <tr><th>Paramètre</th><th>Résultat attendu</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Aspect macroscopique</strong></td>
+          <td>Hypertendu, uniformément rouge ou rosé, incoagulable ; surnageant xanthochromique (jaune citrin si HSA ancienne)</td>
+        </tr>
+        <tr>
+          <td><strong>Biochimie</strong></td>
+          <td>Hyperprotéinorachie, normoglycorachie, <strong>pigments biliaires positifs à partir de H12</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Cytologie</strong></td>
+          <td>Rapport GR/GB &gt; ratio plasmatique, sidérophages, globules rouges altérés</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>PL traumatique vs HSA vraie :</strong> la xanthochromie et les pigments biliaires (à partir de H12) signent le caractère vrai de l'HSA — la PL traumatique ne donne pas de xanthochromie.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- URGENCE & TRAITEMENT SYMPTOMATIQUE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Urgence vitale &amp; Traitement symptomatique initial
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>URGENCE VITALE :</strong> transfert immédiat en centre spécialisé neurochirurgie + neuroradiologie interventionnelle</div>
+    </div>
+    <div class="steps" style="margin-top:10px;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Hospitalisation USI/réanimation</strong> — monitorage continu (scope, PA invasive, SpO2, conscience)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Repos au lit strict, tête surélevée à 30°</strong> — limiter toute stimulation nociceptive</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Antalgiques IV</strong> — paracétamol IV (éviter AINS et morphiniques si possible)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Nimodipine</strong> — 60 mg/4h PO ou IV — prévention du vasospasme pendant <strong>21 jours</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>Contrôle tensionnel strict</strong> — éviter toute poussée HTA avant sécurisation de l'anévrisme (risque de resaignement)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>Anti-épileptiques</strong> — si crise inaugurale</div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content"><strong>Correction de l'hyponatrémie</strong> — surveillance ionogramme régulier (SIADH fréquent)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-content"><strong>Drainage ventriculaire externe (DVE)</strong> — si hydrocéphalie aiguë obstructive</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TRAITEMENT ÉTIOLOGIQUE -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        HSA traumatique
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Pas de traitement spécifique de l'HSA en urgence — prise en charge des autres lésions traumatiques associées</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        HSA spontanée (anévrysmale)
+      </div>
+      <div class="kv-row"><span class="kv-key">Délai de sécurisation</span><span class="kv-val" style="color:var(--red);">&lt; 72h</span></div>
+      <div class="kv-row"><span class="kv-key">Traitement endovasculaire</span><span class="kv-val">Embolisation (coiling)</span></div>
+      <div class="kv-row"><span class="kv-key">Traitement neurochirurgical</span><span class="kv-val">Clipping</span></div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Discussion collégiale pluridisciplinaire obligatoire (neuroradiologie interventionnelle + neurochirurgie)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- COMPLICATIONS -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Complications évolutives
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.04em;">Pronostic global (HSA anévrismale)</div>
+      <div class="kv-row"><span class="kv-key">Décès pré-hospitalier</span><span class="kv-val" style="color:var(--red);">20%</span></div>
+      <div class="kv-row"><span class="kv-key">Survie sans séquelles majeures</span><span class="kv-val" style="color:var(--teal);">60%</span></div>
+      <div class="kv-row"><span class="kv-key">Handicap sévère</span><span class="kv-val" style="color:var(--amber);">20%</span></div>
+      <div class="kv-row"><span class="kv-key">Décès en hospitalier</span><span class="kv-val" style="color:var(--red);">20%</span></div>
+    </div>
+
+    <div style="font-size:.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.04em;">Principales complications</div>
+    <div class="compl-card compl-red">
+      <strong>Resaignement</strong> — avant sécurisation de l'anévrisme (risque maximal dans les premières heures) — prévention : sécurisation &lt;72h + contrôle tensionnel strict
+    </div>
+    <div class="compl-card compl-red">
+      <strong>HTIC</strong> — secondaire à œdème cérébral, hydrocéphalie aiguë ou hématome intracrânien — risque d'engagement cérébral mortel
+    </div>
+    <div class="compl-card compl-amber">
+      <strong>Vasospasme</strong> — ischémie cérébrale retardée (équivalent AVC ischémique) — J4 à J14 — dépistage : doppler trans-crânien quotidien
+    </div>
+    <div class="compl-card compl-amber">
+      <strong>Hydrocéphalie aiguë obstructive</strong> — inondation ventriculaire — traitement : drainage ventriculaire externe (DVE)
+    </div>
+    <div class="compl-card compl-blue">
+      <strong>Hyponatrémie</strong> — mécanisme : SIADH — surveillance ionogramme quotidien
+    </div>
+    <div class="compl-card compl-blue">
+      <strong>Épilepsie</strong> — crise ou état de mal épileptique — traitement anti-épileptique si crise inaugurale
+    </div>
+    <div class="compl-card compl-purple">
+      <strong>Hydrocéphalie communicante</strong> — feutrage arachnoïdien à distance du saignement — traitement : dérivation ventriculo-péritonéale (DVP)
+    </div>
+
+    <div style="margin-top:16px;">
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.04em;">Vasospasme — focus</div>
+      <table>
+        <tbody>
+          <tr>
+            <td style="width:35%;"><strong>Délai</strong></td>
+            <td>J4 – J14 après le saignement</td>
+          </tr>
+          <tr>
+            <td><strong>Clinique évocatrice</strong></td>
+            <td>Récidive de céphalées, hyperthermie, modification de l'examen neurologique</td>
+          </tr>
+          <tr>
+            <td><strong>Dépistage</strong></td>
+            <td>Doppler trans-crânien (DTC) quotidien</td>
+          </tr>
+          <tr>
+            <td><strong>Diagnostic positif</strong></td>
+            <td>Scanner cérébral de perfusion et/ou artériographie cérébrale</td>
+          </tr>
+          <tr>
+            <td><strong>Prévention</strong></td>
+            <td>Nimodipine systématique 21 jours</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- POINTS-CLÉS -->
+  <div class="card" style="border: 0.5px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Points-clés à retenir
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>HSA non traumatique = <strong>rupture d'anévrisme jusqu'à preuve du contraire</strong> (85% des cas)</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Toute <strong>céphalée brutale intense</strong> = HSA jusqu'à preuve du contraire — scanner cérébral sans injection en urgence immédiate</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Si TDM négatif et forte suspicion → <strong>PL obligatoire</strong> — attendre H12 pour la xanthochromie / pigments biliaires</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> syndrome méningé absent au début — syndrome fissuraire (céphalées des jours précédents) = signal d'alarme à ne jamais manquer</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> vasospasme entre J4 et J14 — DTC quotidien — nimodipine systématique 21 jours — tableau = récidive céphalées + déficit neurologique retardé</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence absolue :</strong> sécurisation de l'anévrisme &lt;72h (coiling ou clipping) — transfert immédiat en centre spécialisé neurochirurgie + neuroradiologie interventionnelle</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
