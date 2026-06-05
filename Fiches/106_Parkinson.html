@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 106 – Maladie de Parkinson</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d23;
+    --text-secondary: #5a6272;
+    --border: rgba(0,0,0,0.08);
+    --purple: #534AB7;
+    --purple-light: #eeedf9;
+    --teal: #1D9E75;
+    --teal-light: #e6f7f1;
+    --coral: #D85A30;
+    --coral-light: #fbeee9;
+    --blue: #378ADD;
+    --blue-light: #e8f2fd;
+    --red: #E24B4A;
+    --red-light: #fdeaea;
+    --amber: #C07B2A;
+    --amber-light: #fdf3e3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12141a;
+      --card: #1e2028;
+      --text: #e8eaf0;
+      --text-secondary: #8b94a8;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2757;
+      --teal-light: #0e3326;
+      --coral-light: #3d2218;
+      --blue-light: #172b42;
+      --red-light: #3d1616;
+      --amber-light: #3a2510;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; padding: 20px 12px 40px; }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%);
+    border-radius: 18px; padding: 28px 32px; margin-bottom: 22px; color: #fff;
+  }
+  .header-tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+  .header-sub { font-size: .82rem; opacity: .85; line-height: 1.5; }
+
+  /* VISION GLOBALE */
+  .vision-box {
+    background: var(--purple-light); border-radius: 14px; padding: 16px 20px;
+    border-left: 4px solid var(--purple); margin-bottom: 22px; font-size: .84rem; color: var(--text);
+  }
+  .vision-box .vision-title { font-weight: 800; color: var(--purple); margin-bottom: 8px; font-size: .88rem; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* GRILLES */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media(max-width:640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: .82rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-secondary); }
+  .kv-val { font-weight: 700; color: var(--text); }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 700; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+  .pill-red    { background: var(--red-light);    color: var(--red); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+  /* ALERTES */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 15px; height: 15px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+  /* TABLEAUX */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 10px; }
+  th { background: var(--bg); color: var(--text-secondary); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--border); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ÉTAPES NUMÉROTÉES */
+  .steps { list-style: none; padding: 0; }
+  .steps li { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; font-size: .84rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb; color: var(--text); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  @media(prefers-color-scheme:dark) { .step-num { background: #2e3042; } }
+
+  /* BORDURE GAUCHE COLORÉE */
+  .card-border-red    { border-left: 4px solid var(--red); }
+  .card-border-amber  { border-left: 4px solid var(--amber); }
+  .card-border-teal   { border-left: 4px solid var(--teal); }
+  .card-border-blue   { border-left: 4px solid var(--blue); }
+  .card-border-purple { border-left: 4px solid var(--purple); }
+
+  /* HR */
+  hr { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+  /* SECTION HEADER */
+  .section-title { font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 12px 2px; }
+
+  /* TAG RANG */
+  .rang { display: inline-block; font-size: .65rem; font-weight: 800; padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+
+  ul.list { padding-left: 18px; font-size: .84rem; }
+  ul.list li { margin-bottom: 5px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Item 106 — Neurologie</div>
+    <h1>Maladie de Parkinson</h1>
+    <div class="header-sub">Syndrome parkinsonien idiopathique — neurodégénérescence dopaminergique — triade asymétrique</div>
+  </div>
+
+  <!-- VISION GLOBALE -->
+  <div class="vision-box">
+    <div class="vision-title">Vue d'ensemble du chapitre</div>
+    Comprendre la maladie de Parkinson, c'est maîtriser trois niveaux : <strong>reconnaître</strong> la triade parkinsonienne typique et ses signes prodromaux, <strong>éliminer</strong> les diagnostics différentiels grâce aux drapeaux rouges, puis <strong>prendre en charge</strong> selon l'âge et le stade. L'évolution suit un schéma prévisible : phase initiale asymétrique → complications motrices du traitement (4–5 ans) → déclin axial et cognitif tardif résistant à la L-dopa. La stratégie thérapeutique dépend de l'âge (seuil 65–70 ans), du handicap et du risque de complications. Identifier les médicaments inducteurs (neuroleptiques +++) est un point tombable systématique.
+  </div>
+
+  <!-- 1. PHYSIOPATHOLOGIE -->
+  <div class="section-title">Physiopathologie</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Mécanisme physiopathologique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="kv-row"><span class="kv-key">Cible</span><span class="kv-val">Neurones dopaminergiques nigro-striataux</span></div>
+        <div class="kv-row"><span class="kv-key">Seuil clinique</span><span class="kv-val">Perte de 50–60 % des neurones</span></div>
+        <div class="kv-row"><span class="kv-key">Marqueur histologique</span><span class="kv-val">Corps de Lewy (alpha-synucléine)</span></div>
+        <div class="kv-row"><span class="kv-key">Étiologie</span><span class="kv-val">Inconnue (gènes + environnement)</span></div>
+        <div class="kv-row"><span class="kv-key">Facteur environnemental</span><span class="kv-val">Pesticides (exposition professionnelle)</span></div>
+      </div>
+      <div>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div>La dégénérescence <strong>dépasse</strong> la voie nigro-striatale → signes axiaux et non moteurs (cognitifs, dysautonomiques) résistant à la L-dopa.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Exposition professionnelle aux pesticides = maladie professionnelle reconnue → demande de reconnaissance dès le diagnostic.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 2. DIAGNOSTIC CLINIQUE -->
+  <div class="section-title">Diagnostic — Triade parkinsonienne</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Triade parkinsonienne — 3 signes cardinaux (asymétrique ++)
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:22%">Signe</th>
+          <th>Caractéristiques</th>
+          <th>Signes d'examen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--purple)">Tremblement de repos</strong></td>
+          <td>4–6 Hz, unilatéral, disparaît au mouvement, aggravé par émotions / calcul mental</td>
+          <td>Membres, lèvres, menton</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--blue)">Rigidité (hypertonie plastique)</strong></td>
+          <td>Résistance constante à la mobilisation passive, cède par à-coups</td>
+          <td>Roue dentée, manœuvre de Froment</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--teal)">Akinésie / Bradykinésie / Hypokinésie</strong></td>
+          <td>Ralentissement initiation (akinésie), vitesse (bradykinésie), amplitude (hypokinésie)</td>
+          <td>Micrographie, hypomimie, voix monocorde, perte du ballant du bras, opposition pouce-index lente</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-red" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Règle d'or :</strong> L'asymétrie de la triade est caractéristique et persiste tout au long de l'évolution. Une symétrie d'emblée doit faire douter du diagnostic.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Signes prodromaux (précèdent les signes moteurs de plusieurs années)
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">SIGNES NON MOTEURS</div>
+        <div class="pills">
+          <span class="pill pill-purple">Hyposmie (anosmie)</span>
+          <span class="pill pill-blue">Dépression / Anxiété / Apathie</span>
+          <span class="pill pill-amber">Trouble comportement sommeil paradoxal (TCSP)</span>
+          <span class="pill pill-teal">Constipation</span>
+          <span class="pill pill-coral">Amaigrissement</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">SIGNES RHUMATOLOGIQUES</div>
+        <div class="pills">
+          <span class="pill pill-blue">Douleurs articulaires d'un membre</span>
+          <span class="pill pill-amber">Raideur épaule (pseudo-périarthrite)</span>
+        </div>
+        <div class="alert alert-amber" style="margin-top:10px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Le TCSP (rêves agités, actes agressifs durant le sommeil) est un marqueur précoce très spécifique.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 3. DRAPEAUX ROUGES -->
+  <div class="section-title">Drapeaux rouges — Arguments contre la maladie de Parkinson</div>
+  <div class="card card-border-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Signes incompatibles avec une MP idiopathique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-red" style="margin-bottom:5px;">Absence de réponse prolongée à la L-dopa</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Progression rapide + chutes précoces</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Troubles cognitifs précoces</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Syndrome cérébelleux</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Atteinte pyramidale</span>
+        </div>
+      </div>
+      <div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-amber" style="margin-bottom:5px;">Troubles oculomoteurs</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Signes pseudo-bulbaires précoces (dysarthrie, dysphagie)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Dysautonomie sévère précoce (HO sévère, incontinence)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Signes corticaux (apraxie, aphasie, myoclonies)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Symétrie d'emblée</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Ces drapeaux rouges orientent vers d'autres syndromes parkinsoniens : AMS (dysautonomie), PSP (chutes précoces, troubles oculomoteurs), DCB (signes corticaux).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 4. PHASES ÉVOLUTIVES -->
+  <div class="section-title">Phases évolutives</div>
+
+  <!-- Complications motrices -->
+  <div class="card card-border-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Phase des complications motrices (moy. 4–5 ans après début)
+    </div>
+    <div class="kv-row"><span class="kv-key">Facteurs de risque</span><span class="kv-val">Age jeune, durée d'évolution, dose de L-dopa</span></div>
+    <div class="grid2" style="margin-top:12px;">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--amber); margin-bottom:8px;">FLUCTUATIONS D'EFFICACITÉ</div>
+        <table>
+          <thead><tr><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Akinésie de fin de dose</strong></td><td>Réapparition des signes avant la prochaine prise</td></tr>
+            <tr><td><strong>Akinésie du petit matin / nuit</strong></td><td>Crampes des mollets, difficulté à se retourner</td></tr>
+            <tr><td><strong>Phénomène on/off</strong></td><td>Passage brutal état non parkinsonien (on) ↔ parkinsonien sévère (off)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--coral); margin-bottom:8px;">DYSKINÉSIES (MOUVEMENTS INVOLONTAIRES)</div>
+        <table>
+          <thead><tr><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pic de dose</strong></td><td>Choréiques, membres + tronc, lors de l'efficacité max</td></tr>
+            <tr><td><strong>Biphasiques</strong></td><td>Dystoniques MI (douloureux), en début ou fin de dose</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Déclin moteur -->
+  <div class="card card-border-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Phase de déclin moteur — Signes axiaux (résistants à la L-dopa)
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">TROUBLES DE LA MARCHE</div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-blue" style="margin-bottom:5px;">Freezing (pieds collés au sol à l'initiation)</span>
+          <span class="pill pill-blue" style="margin-bottom:5px;">Festination (emballement incontrôlable)</span>
+          <span class="pill pill-blue" style="margin-bottom:5px;">Chutes vers l'avant</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">AUTRES SIGNES AXIAUX</div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-purple" style="margin-bottom:5px;">Dysarthrie + dysphagie → fausses routes</span>
+          <span class="pill pill-purple" style="margin-bottom:5px;">Hypersialorrhée (déglutition spontanée réduite)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Camptocormie (flexion tronc en avant)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Syndrome de Pise (flexion latérale)</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Troubles équilibre postural + chutes en arrière</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Déclin cognitif / comportemental / dysautonomie -->
+  <div class="card card-border-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Phase de déclin cognitif, comportemental et dysautonomique
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">COGNITIF / COMPORTEMENTAL</div>
+        <div class="kv-row"><span class="kv-key">Démence (prévalence)</span><span class="kv-val">30 % des patients, 80 % après 15–20 ans</span></div>
+        <div class="kv-row"><span class="kv-key">Évolution</span><span class="kv-val">Syndrome dysexécutif → démence</span></div>
+        <div class="kv-row"><span class="kv-key">Hallucinations / délire</span><span class="kv-val">Induites par traitement dopaminergique</span></div>
+        <div class="alert alert-amber" style="margin-top:8px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Hallucinations sous agonistes dopaminergiques = signe précurseur d'évolution vers la démence.</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">DYSAUTONOMIE</div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-teal" style="margin-bottom:5px;">Constipation</span>
+          <span class="pill pill-blue" style="margin-bottom:5px;">Hypotension orthostatique</span>
+          <span class="pill pill-purple" style="margin-bottom:5px;">Impériosités mictionnelles</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Troubles érectiles</span>
+        </div>
+        <div style="font-size:.75rem; color:var(--text-secondary); margin-top:8px;">S'accentuent avec le temps, résistants à la L-dopa.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 5. TRAITEMENT MÉDICAMENTEUX -->
+  <div class="section-title">Traitement médicamenteux — Classes</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Classes antiparkinsonniennes
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Classe</th>
+          <th>Mécanisme</th>
+          <th>Principaux effets secondaires / Particularités</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--teal)">L-dopa</strong><br><small>(+ inhibiteur DDC périphérique)</small></td>
+          <td>Précurseur dopamine, transformé en dopamine intracérébrale par la DDC</td>
+          <td>Traitement <strong>le plus efficace</strong> et le mieux toléré. Carbidopa ou bensérazide adjoint. Nausées, HO, dyskinésies à long terme.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--purple)">Agonistes dopaminergiques LP</strong><br><small>pramipéxole, ropinirole, rotigotine, piribédil</small></td>
+          <td>Action directe sur récepteurs dopaminergiques (sans synthèse)</td>
+          <td>Moins puissants que L-dopa. Troubles du contrôle des impulsions 20 % (jeu, hypersexualité, achats compulsifs). Hallucinations, somnolence, attaques d'endormissement (conduite ++), œdèmes MI.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--blue)">IMAO-B</strong></td>
+          <td>Inhibition du métabolisme de la dopamine</td>
+          <td>Action modérée. Utilisable seul ou en association.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--amber)">ICOMT</strong></td>
+          <td>Diminution du métabolisme périphérique de la L-dopa → prolongation d'action</td>
+          <td>Toujours associé à la L-dopa. Utile dans les fluctuations.</td>
+        </tr>
+        <tr>
+          <td><strong>Amantadine</strong></td>
+          <td>Anti-glutamatergique</td>
+          <td>Traitement des <strong>dyskinésies</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Anticholinergiques</strong></td>
+          <td>Blocage muscarinique</td>
+          <td>Peu prescrits (effets secondaires ++). Intérêt : patient jeune avec tremblement résistant.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Informer systématiquement le patient des troubles du contrôle des impulsions sous agonistes. Ces effets sont <strong>réversibles à la réduction / arrêt</strong>. En cas d'antécédent d'addiction : prudence+++ avec les agonistes.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 6. STRATÉGIE THÉRAPEUTIQUE INITIALE -->
+  <div class="section-title">Stratégie thérapeutique initiale</div>
+  <div class="grid2">
+    <div class="card card-border-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Avant 65–70 ans
+      </div>
+      <ol class="steps">
+        <li><div class="step-num">1</div><div><strong>1re ligne :</strong> Agoniste dopaminergique LP (retarde les complications motrices) <br>et/ou IMAO-B</div></li>
+        <li><div class="step-num">2</div><div><strong>Si contrôle insuffisant :</strong> Augmenter posologie agoniste</div></li>
+        <li><div class="step-num">3</div><div><strong>Si contrôle insuffisant ou mauvaise tolérance :</strong> Associer L-dopa ou IMAO-B</div></li>
+        <li><div class="step-num">4</div><div><strong>L-dopa d'emblée possible</strong> si handicap moteur significatif ou altération de qualité de vie</div></li>
+      </ol>
+    </div>
+    <div class="card card-border-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Après 65–70 ans
+      </div>
+      <ol class="steps">
+        <li><div class="step-num">1</div><div><strong>L-dopa + inhibiteur DDC d'emblée</strong> (agonistes moins bien tolérés en âge avancé) ou IMAO-B</div></li>
+        <li><div class="step-num">2</div><div><strong>Si contrôle insuffisant :</strong> Augmenter posologie L-dopa ou associer IMAO-B</div></li>
+      </ol>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>L-dopa :</strong> 3–4 prises/j avant les repas. Dompéridone si nausées (contre-indiquée si allongement QTc ; max 7 jours).</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 7. NON MÉDICAMENTEUX -->
+  <div class="section-title">Mesures non médicamenteuses</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prise en charge globale — à discuter précocement
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-blue" style="margin-bottom:5px;">Kinésithérapie (souplesse, force, équilibre, transferts)</span>
+          <span class="pill pill-blue" style="margin-bottom:5px;">Orthophonie (dysarthrie, déglutition)</span>
+          <span class="pill pill-teal" style="margin-bottom:5px;">Activité physique régulière</span>
+          <span class="pill pill-teal" style="margin-bottom:5px;">Éducation thérapeutique patient + aidant</span>
+        </div>
+      </div>
+      <div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-purple" style="margin-bottom:5px;">Demande d'ALD (ALD 16)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Reconnaissance maladie prof. (pesticides)</span>
+          <span class="pill pill-coral" style="margin-bottom:5px;">Associations de patients</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 8. SYNDROME PARKINSONIEN IATROGÈNE -->
+  <div class="section-title">Syndrome parkinsonien iatrogène — À ne pas manquer</div>
+  <div class="card card-border-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Médicaments inducteurs — Recherche systématique à l'interrogatoire
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--red); margin-bottom:6px;">CAUSES PRINCIPALES</div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-red" style="margin-bottom:5px;">Neuroleptiques / antipsychotiques</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Métoclopramide (antiémétique)</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Métopimazine (antiémétique)</span>
+          <span class="pill pill-red" style="margin-bottom:5px;">Alimémazine (sédatif)</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--amber); margin-bottom:6px;">CAUSES RARES</div>
+        <div class="pills" style="flex-direction:column; align-items:flex-start;">
+          <span class="pill pill-amber" style="margin-bottom:5px;">Flunarizine (traitement fond migraine)</span>
+          <span class="pill pill-amber" style="margin-bottom:5px;">Certains antidépresseurs</span>
+        </div>
+        <div style="font-size:.75rem; color:var(--text-secondary); margin-top:6px;">Dans le doute → consulter le Vidal</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div style="font-size:.78rem; font-weight:700; color:var(--text-secondary); margin-bottom:6px;">CARACTÉRISTIQUES DIFFÉRENTIELLES DU SP IATROGÈNE</div>
+      <table>
+        <thead><tr><th>Signe</th><th>Iatrogène</th><th>MP idiopathique</th></tr></thead>
+        <tbody>
+          <tr><td>Symétrie</td><td>Plutôt <strong>symétrique</strong> (inconstant)</td><td>Asymétrique</td></tr>
+          <tr><td>Tremblement</td><td>Postural ou d'action</td><td>De repos (4–6 Hz)</td></tr>
+          <tr><td>Dyskinésies</td><td>Bucco-linguo-faciales possibles</td><td>Non au début</td></tr>
+          <tr><td>Réponse L-dopa</td><td><strong>Absente</strong></td><td>Bonne</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-red" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège majeur :</strong> Les neuroleptiques "cachés" (métoclopramide, métopimazine) sont très souvent oubliés à l'interrogatoire. Toujours les rechercher activement !</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 9. POINTS CLÉS -->
+  <div class="section-title">Points-clés à retenir</div>
+  <div class="card" style="background: linear-gradient(135deg, var(--teal-light), var(--blue-light)); border-left: 4px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse — Tombable à l'ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div>Triade <strong>asymétrique</strong> : tremblement de repos + rigidité roue dentée + akinésie. L'asymétrie persiste toujours.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div>Seuil thérapeutique selon l'âge :<br><strong>&lt; 65–70 ans</strong> → agoniste LP en 1re intention.<br><strong>&gt; 65–70 ans</strong> → L-dopa d'emblée.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div>Complications motrices apparaissent à <strong>4–5 ans</strong> en moyenne sous traitement.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Métoclopramide et métopimazine = neuroleptiques cachés, causes fréquentes de SP iatrogène. Toujours chercher dans les ordonnances.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Agonistes dopaminergiques → informer patient des troubles du contrôle des impulsions (20 %) et du risque de somnolence au volant.</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>Dompéridone pour les nausées : <strong>contre-indiquée si QTc allongé</strong>, max 7 jours.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
