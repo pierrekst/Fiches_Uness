@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 100 – Céphalée inhabituelle aiguë et chronique</title>
+<style>
+  :root {
+    --bg: #f5f6fa; --card: #ffffff; --text: #1a1d2e; --text2: #4a4f6a;
+    --border: #e2e6f0; --purple: #534AB7; --teal: #1D9E75; --coral: #D85A30;
+    --blue: #378ADD; --red: #E24B4A; --amber: #D97706;
+    --purple-light: #ede9fc; --teal-light: #d1f5eb; --blue-light: #dbeeff;
+    --red-light: #fde8e8; --amber-light: #fef3c7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#12141f; --card:#1e2133; --text:#e8eaf6; --text2:#9095b5; --border:#2d3250; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: .9rem; line-height: 1.6; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #2d257a 0%, #534AB7 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-num { font-size: .8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: .75; margin-bottom: 4px; }
+  .header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+  .header-intro { font-size: .85rem; opacity: .9; line-height: 1.6; }
+
+  /* SECTIONS */
+  section { margin-bottom: 28px; }
+  .section-title { font-size: .75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--text2); margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* ALERTS */
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-icon { flex-shrink:0; margin-top:1px; }
+  .alert-icon svg { width:15px; height:15px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke:var(--red); }
+  .alert-blue  .alert-icon svg { stroke:var(--blue); }
+  .alert-green .alert-icon svg { stroke:var(--teal); }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px dashed var(--border); font-size:.84rem; gap:8px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text2); flex-shrink:0; }
+  .kv-val { font-weight: 700; text-align:right; }
+
+  /* PILLS */
+  .pill { display:inline-block; padding: 2px 9px; border-radius: 20px; font-size:.75rem; font-weight:700; margin:2px; }
+  .pill-red { background:var(--red-light); color:var(--red); }
+  .pill-green { background:var(--teal-light); color:var(--teal); }
+  .pill-blue { background:var(--blue-light); color:var(--blue); }
+  .pill-amber { background:var(--amber-light); color:var(--amber); }
+  .pill-purple { background:var(--purple-light); color:var(--purple); }
+
+  /* TABLE */
+  table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  th { background:var(--border); font-weight:700; padding:7px 10px; text-align:left; }
+  td { padding:7px 10px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  td[rowspan] { vertical-align:middle; text-align:center; font-weight:700; }
+
+  /* STEPS */
+  .step { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; }
+  .step-num { width:24px; height:24px; border-radius:50%; background:var(--border); color:var(--text2); font-size:.75rem; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .step-body { font-size:.84rem; }
+
+  /* COMPLICATION CARD */
+  .compl-card { border-left: 3px solid var(--red); background: var(--card); border-radius:0 10px 10px 0; padding:10px 14px; margin-bottom:8px; }
+  .compl-card.amber { border-left-color: var(--amber); }
+  .compl-card.blue { border-left-color: var(--blue); }
+  .compl-card.teal { border-left-color: var(--teal); }
+  .compl-title { font-weight:800; font-size:.84rem; margin-bottom:3px; }
+
+  ul { padding-left: 18px; }
+  li { margin-bottom:3px; font-size:.84rem; }
+  b { font-weight:700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 100</div>
+  <h1>Céphalée inhabituelle aiguë et chronique chez l'adulte et l'enfant</h1>
+  <div class="header-intro">
+    Objectif central : distinguer une céphalée primaire (bénigne) d'une céphalée secondaire (potentiellement grave).
+    Toute céphalée <strong>aiguë et inhabituelle</strong> est secondaire jusqu'à preuve du contraire.
+    Savoir reconnaître les urgences absolues (HSA, méningite, HTIC), maîtriser les indications de l'imagerie et de la PL, et connaître les principes du traitement aux urgences.
+  </div>
+</div>
+
+<!-- PARTIE 1 : RAISONNEMENT DIAGNOSTIQUE -->
+<section>
+  <div class="section-title">Raisonnement diagnostique — 4 profils temporels clés</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Céphalée BRUTALE
+      </div>
+      <div class="alert alert-red" style="margin-bottom:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>HSA jusqu'à preuve du contraire</strong><br>Max en &lt; 1 min = coup de tonnerre / &lt; 1h = céphalée brutale</div>
+      </div>
+      <div class="kv-row"><span class="kv-key">1er examen</span><span class="kv-val">Scanner cérébral sans injection</span></div>
+      <div class="kv-row"><span class="kv-key">Si scanner normal</span><span class="kv-val">PL impérative (même si céphalée disparue)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Céphalée PROGRESSIVE
+      </div>
+      <div class="alert alert-amber" style="margin-bottom:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>HTIC jusqu'à preuve du contraire</strong><br>Matinale, aggravée en décubitus, vomissements en jets</div>
+      </div>
+      <div class="kv-row"><span class="kv-key">1er examen</span><span class="kv-val">IRM cérébrale (ou scanner)</span></div>
+      <div class="kv-row"><span class="kv-key">PL</span><span class="kv-val">Après imagerie normale/méningée</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Céphalée FEBRILE
+      </div>
+      <div class="alert alert-red" style="margin-bottom:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Méningite infectieuse jusqu'à preuve du contraire</strong><br>PL immédiate SANS imagerie préalable (sauf rares exceptions)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Céphalée CHRONIQUE/HABITUELLE
+      </div>
+      <div class="alert alert-green" style="margin-bottom:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Céphalée primaire probable</strong> — diagnostic sur interrogatoire seul, examen clinique normal</div>
+      </div>
+      <div class="kv-row"><span class="kv-key">Épisodique</span><span class="kv-val">&lt; 15 jours/mois</span></div>
+      <div class="kv-row"><span class="kv-key">Chronique quotidienne (CCQ)</span><span class="kv-val">≥ 15 jours/mois</span></div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 2 : DRAPEAUX ROUGES -->
+<section>
+  <div class="section-title">Drapeaux rouges</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        A l'interrogatoire
+      </div>
+      <table>
+        <tr><th>Signe</th><th>Étiologie à suspecter</th></tr>
+        <tr><td>Début brutal</td><td>HSA, SVCR</td></tr>
+        <tr><td>Age &gt; 50 ans + AEG + claudication mâchoire</td><td>Artérite temporale (Horton)</td></tr>
+        <tr><td>Aggravée en décubitus</td><td>HTIC</td></tr>
+        <tr><td>Aggravée en position debout</td><td>Hypotension intracrânienne</td></tr>
+        <tr><td>Brèche durale récente (PL, péridurale)</td><td>Hypotension intracrânienne</td></tr>
+        <tr><td>Cervicalgie</td><td>Dissection artérielle cervicale</td></tr>
+        <tr><td>Postpartum + substances vasoactives</td><td>SVCR, éclampsie, TVC</td></tr>
+        <tr><td>Effort / orgasmique / Valsalva</td><td>HSA, SVCR, HTIC</td></tr>
+        <tr><td>Chauffage défectueux hivernal</td><td>Intoxication CO</td></tr>
+        <tr><td>VIH non contrôlé</td><td>Toxoplasmose, cryptocoque</td></tr>
+        <tr><td>Néoplasie</td><td>Métastase, méningite carcinomateuse</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        A l'examen clinique
+      </div>
+      <table>
+        <tr><th>Signe</th><th>Étiologie à suspecter</th></tr>
+        <tr><td>HTA sévère</td><td>HSA, AVC, SVCR, encéphalopathie hypertensive</td></tr>
+        <tr><td>Fièvre</td><td>Méningite, infection</td></tr>
+        <tr><td>Raideur méningée</td><td>HSA, méningite</td></tr>
+        <tr><td>Déficit focal ± épilepsie</td><td>HSA, AVC, TVC, tumeur</td></tr>
+        <tr><td>Hémianopsie bitemporale</td><td>Apoplexie pituitaire</td></tr>
+        <tr><td>Diplopie / paralysie VI</td><td>HTIC</td></tr>
+        <tr><td>Syndrome CBH + acouphène pulsatile + paralysie XII</td><td>Dissection carotide interne</td></tr>
+        <tr><td>Mydriase + signes III</td><td>Anévrisme comprimant le III</td></tr>
+        <tr><td>Oedème papillaire bilatéral</td><td>HTIC</td></tr>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> L'absence de signe associé et un examen normal n'éliminent pas une céphalée secondaire si la céphalée est récente et inhabituelle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 3 : URGENCES ABSOLUES -->
+<section>
+  <div class="section-title">Urgences absolues — 2 syndromes à reconnaître</div>
+  <div class="grid2">
+    <div class="card" style="border-left:3px solid var(--red);">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Syndrome méningé
+      </div>
+      <ul>
+        <li>Céphalée en casque, diffuse, intense, résistante aux antalgiques</li>
+        <li>Vomissements en jets (inconstants), photophobie</li>
+        <li>Attitude en chien de fusil, raideur de nuque</li>
+      </ul>
+      <div style="margin-top:10px;">
+        <span class="pill pill-red">+ fièvre → méningite infectieuse — PL immédiate</span>
+        <span class="pill pill-amber">+ apyrexie + début brutal → HSA — Scanner immédiat</span>
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--amber);">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Syndrome HTIC
+      </div>
+      <ul>
+        <li>Céphalée matinale, en casque, aggravée par toux/effort/décubitus</li>
+        <li>Vomissements en jets, diplopie horizontale (VI), troubles vigilance</li>
+        <li>Eclipses visuelles, oedème papillaire bilatéral</li>
+        <li>Nourrisson : bombement fontanelle, augmentation PC</li>
+      </ul>
+      <div style="margin-top:8px;">
+        <span class="pill pill-amber">Scanner/IRM urgence — PL CI AVANT imagerie</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 4 : CEPHALEES BRUTALES -->
+<section>
+  <div class="section-title">Principales causes de céphalée brutale (EVA ≥ 7, max &lt; 1 heure)</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      HSA — Hémorragie sous-arachnoïdienne (10–25% des céphalées brutales)
+    </div>
+    <ul>
+      <li>Céphalée explosive en coup de tonnerre, sévère, persistante</li>
+      <li>± Syndrome méningé, cervicalgie, crises comitiales, déficit focal</li>
+      <li>Paralysie III = anévrisme artère communicante post. ou terminaison carotidienne</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      SVCR — Syndrome de vasoconstriction cérébrale réversible (10–45% des céphalées en coup de tonnerre)
+    </div>
+    <ul>
+      <li>Céphalée en coup de tonnerre récidivante sur 1–3 semaines, provoquée par effort/Valsalva/activité sexuelle</li>
+      <li>Contextes : postpartum, cannabis, cocaïne, triptans, sérotoninergiques, décongestionnants nasaux</li>
+      <li>Peut se compliquer : HSA corticale sans anévrisme, AVC ischémique ou hémorragique</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Autres causes (après exclusion HSA et SVCR)
+    </div>
+    <div class="grid2">
+      <div>
+        <b>Vasculaires :</b>
+        <ul>
+          <li>Hémorragie intracérébrale (parfois déficit discret)</li>
+          <li>AVC ischémique (infarctus cérébelleux)</li>
+          <li>Dissection carotidienne : CBH + acouphène pulsatile + XII</li>
+          <li>Dissection vertébrale : cervicalgie postérieure</li>
+          <li>TVC (parfois brutale)</li>
+        </ul>
+      </div>
+      <div>
+        <b>Non vasculaires :</b>
+        <ul>
+          <li>Apoplexie pituitaire : hémianopsie bitemporale, insuf. hypophysaire</li>
+          <li>Encéphalopathie hypertensive / éclampsie</li>
+          <li>Glaucome aigu : douleur rétrobulbaire, halos, mydriase, oeil rouge</li>
+          <li>HTIC aiguë sur hydrocéphalie</li>
+          <li>Hypotension intracrânienne (posturale)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 5 : CEPHALEES PROGRESSIVES -->
+<section>
+  <div class="section-title">Principales causes de céphalée aiguë progressive</div>
+  <div class="grid2">
+    <div>
+      <div class="compl-card">
+        <div class="compl-title">Méningite/méningo-encéphalite infectieuse</div>
+        <ul>
+          <li>Syndrome méningé + fièvre ± troubles conscience, crises, déficit focal</li>
+          <li>Méningite tuberculeuse : chronique sur semaines/mois</li>
+        </ul>
+      </div>
+      <div class="compl-card amber">
+        <div class="compl-title" style="color:var(--amber);">HTIC (causes)</div>
+        <ul>
+          <li>Tumeur (item 299), hématome sous-dural chronique (item 344)</li>
+          <li>Hydrocéphalie, TVC, méningites chroniques</li>
+          <li>HTIC idiopathique : femme jeune obèse, imagerie et PL normales</li>
+        </ul>
+      </div>
+      <div class="compl-card blue">
+        <div class="compl-title" style="color:var(--blue);">Hypotension intracrânienne</div>
+        <ul>
+          <li>Post-PL / péridurale : posturale, en position debout, disparaît en décubitus</li>
+          <li>Spontanée : même caractère positionnel sans brèche iatrogène</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="compl-card amber">
+        <div class="compl-title" style="color:var(--amber);">Artérite à cellules géantes (Horton)</div>
+        <ul>
+          <li>&gt; 50 ans, AEG, céphalée temporale, artère temporale indurée</li>
+          <li>Claudication mâchoire, VS très élevée</li>
+          <li>A évoquer même sans tableau classique</li>
+        </ul>
+      </div>
+      <div class="compl-card">
+        <div class="compl-title">Autres</div>
+        <ul>
+          <li>Sinusite aiguë bloquée : tête penchée, pression sinusienne</li>
+          <li>Glaucome aigu (rétrobulbaire, halos, mydriase)</li>
+          <li>Intoxication CO : contexte hivernal, système combustion défectueux</li>
+          <li>Céphalée médicamenteuse (inhibiteurs PDE)</li>
+          <li>Céphalée post-traumatique aiguë (&lt; 7 jours après TC)</li>
+          <li>Causes générales : apnée du sommeil, anémie, hypothyroïdie</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 6 : CEPHALEES CHRONIQUES -->
+<section>
+  <div class="section-title">Céphalées chroniques — classification et diagnostic</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Arbre de classification (≥ 3 mois d'évolution)
+    </div>
+    <table>
+      <tr>
+        <th>Fréquence</th>
+        <th>Durée des crises</th>
+        <th>Diagnostic principal</th>
+      </tr>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle; text-align:center;"><b>&lt; 15 j/mois</b><br><small>(épisodique)</small></td>
+        <td>4–72 h</td>
+        <td>Migraine épisodique</td>
+      </tr>
+      <tr>
+        <td>30 min – 7 j</td>
+        <td>Céphalée de tension épisodique</td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><b>≥ 15 j/mois</b><br><small>(CCQ)</small></td>
+        <td>&gt; 4 h (longue durée)</td>
+        <td>Migraine chronique (≥ 8 j/mois migraineux) OU céphalée de tension chronique ± abus médicamenteux</td>
+      </tr>
+      <tr>
+        <td>&lt; 4 h (courte durée)</td>
+        <td>AVF, autres céphalées trigémino-autonomiques, névralgie du trijumeau</td>
+      </tr>
+      <tr>
+        <td>Continue</td>
+        <td>CCQ post-traumatique, d'origine cervicale</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 7 : PL -->
+<section>
+  <div class="section-title">Ponction lombaire devant une céphalée aiguë</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Indications
+      </div>
+      <ul>
+        <li><b>Suspicion HSA :</b> PL si scanner normal, entre 12h et 14 jours (xanthochromie = 100% de sensibilité)</li>
+        <li><b>Suspicion méningite infectieuse :</b> PL d'emblée, sans imagerie préalable, dans l'heure</li>
+        <li><b>HTIC idiopathique suspectée :</b> PL après imagerie normale — mesure pression (&gt; 25 cmH₂O = HTIC), soulagement par soustraction</li>
+        <li><b>Toute céphalée aiguë sans diagnostic après imagerie</b></li>
+      </ul>
+      <div class="alert alert-red" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Méningite : PL dans l'heure, sans imagerie ni bilan bio préalables</strong><br>Trouble de conscience isolé = PAS une CI à la PL</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Contre-indications à la PL
+      </div>
+      <div style="margin-bottom:8px;">
+        <div style="font-weight:700;font-size:.83rem;margin-bottom:4px;color:var(--red);">CI absolues</div>
+        <ul>
+          <li>Infection cutanée étendue du site de ponction</li>
+          <li>Instabilité hémodynamique ou respiratoire</li>
+          <li>Troubles de l'hémostase (coagulopathie, plaquettes &lt; 50 000/mm³)</li>
+          <li>Anticoagulant à dose efficace (AVK, AOD, héparine)</li>
+          <li>Saignements spontanés évoquant une CIVD</li>
+        </ul>
+      </div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:4px;color:var(--amber);">Imagerie préalable obligatoire si :</div>
+      <ul>
+        <li>Signes de localisation ou crises focales récentes</li>
+        <li>Signes d'engagement (troubles vigilance + anomalies pupillaires, dysautonomie)</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Antiagrégants plaquettaires :</strong> PAS une CI à la PL</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Résultats du LCS
+    </div>
+    <table>
+      <tr>
+        <th></th>
+        <th>Normal</th>
+        <th>HSA</th>
+        <th>Méningite infectieuse</th>
+      </tr>
+      <tr>
+        <td><b>Aspect</b></td>
+        <td>Eau de roche</td>
+        <td>Hémorragique, incoagulable — jaune (xanthochromie) après qq jours</td>
+        <td>Trouble ou clair</td>
+      </tr>
+      <tr>
+        <td><b>Leucocytes</b></td>
+        <td>0–5/mm³</td>
+        <td>Parfois augmentés</td>
+        <td>&gt; 10/mm³</td>
+      </tr>
+      <tr>
+        <td><b>Globules rouges</b></td>
+        <td>Absents</td>
+        <td>Très élevés</td>
+        <td>Absents</td>
+      </tr>
+      <tr>
+        <td><b>Protéinorachie</b></td>
+        <td>&lt; 0,40–0,45 g/L</td>
+        <td>Augmentée</td>
+        <td>Augmentée ou normale</td>
+      </tr>
+      <tr>
+        <td><b>Glycorachie</b></td>
+        <td>&gt; 2/3 glycémie</td>
+        <td>Normale</td>
+        <td>Abaissée ou normale</td>
+      </tr>
+      <tr>
+        <td><b>Pigments</b></td>
+        <td>Absents</td>
+        <td>Xanthochromie (spectropho.) — présente 12h–14 jours</td>
+        <td>Absents</td>
+      </tr>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Pédiatrie :</strong> Pression normale d'ouverture LCS &lt; 28 cmH₂O chez l'enfant</div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 8 : IMAGERIE -->
+<section>
+  <div class="section-title">Imagerie devant une céphalée</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Céphalée brutale
+      </div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><b>Scanner cérébral sans injection</b> (+ angioscanner d'emblée si possible) — recherche HSA</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">Si HSA visible : <b>angioscanner cérébral</b> — recherche anévrisme</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">Si scanner normal : <b>PL impérative</b></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">Si scanner + PL négatifs : angioscanner artériel (SVCR) + veineux (TVC) + TSA (dissection) puis IRM</div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Après angioscan + PL sans HSA anévrysmale, l'artériographie cérébrale fémorale n'est PAS utile.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Céphalée progressive
+      </div>
+      <div class="kv-row"><span class="kv-key">&lt; 7 jours de début</span><span class="kv-val">Imagerie en urgence</span></div>
+      <div class="kv-row"><span class="kv-key">&gt; 7 jours stable</span><span class="kv-val">Délai au cas par cas</span></div>
+      <ul style="margin-top:10px;">
+        <li><b>IRM idéale :</b> T1, FLAIR, T1 injecté, séquences vasculaires, T2*</li>
+        <li><b>Dissection :</b> fat-sat + ARM des TSA</li>
+        <li>Si IRM inaccessible : scanner sans/avec injection + angioscanner TSA</li>
+      </ul>
+    </div>
+    <div class="card" style="grid-column:1/-1;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Céphalée chronique — IRM uniquement si suspicion secondaire
+      </div>
+      <div class="grid2">
+        <ul>
+          <li>Migraine débutant après 50 ans</li>
+          <li>Aura atypique (début brusque, &gt; 60 min, toujours même côté, pas de trouble visuel)</li>
+          <li>Migraine chronique depuis &lt; 1 an</li>
+        </ul>
+        <ul>
+          <li>Céphalée de tension chronique depuis &lt; 1 an</li>
+          <li>Au moins 1 épisode d'AVF (écarter lésion hypothalamus/hypophyse/fosse post.)</li>
+          <li>Examen clinique anormal</li>
+        </ul>
+      </div>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Pédiatrie :</strong> Préférer l'IRM (pas d'irradiation). IRM sous AG/sédation si &lt; 7–8 ans. Indications urgence : anomalie neuro, signes HTIC, troubles visuels, vomissements croissants, atteinte hypothalamo-hypophysaire, infléchissement statural.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 9 : TRAITEMENT URGENCES -->
+<section>
+  <div class="section-title">Traitement aux urgences</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Suspicion céphalée secondaire
+      </div>
+      <ul>
+        <li>Position allongée, tête à 30°, calme, obscurité</li>
+        <li>A jeun</li>
+        <li>Paracétamol 1g IV ± néfopam (Acupan) 20 mg</li>
+        <li>Antiémétique si nausées (métoclopramide)</li>
+        <li>Palier 2 si échec</li>
+      </ul>
+      <div class="alert alert-red" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Eviter :</strong> Aspirine/AINS (aggravent hémorragie) — sédatifs (masquent troubles conscience)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Crise de céphalée primaire
+      </div>
+      <ul>
+        <li>Isoler le patient, calme</li>
+        <li>Réhydratation IV si vomissements abondants</li>
+        <li>Paracétamol 1g IV OU AINS (kétoprofène 100 mg IV) + métoclopramide 10 mg</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Si céphalée persiste inchangée malgré traitement :</strong> remettre en cause le diagnostic de céphalée primaire, rechercher cause secondaire.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PARTIE 10 : POINTS CLES -->
+<section>
+  <div class="section-title">Points-clés à retenir</div>
+  <div class="card" style="border-left:3px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse — Ce qui tombe à l'ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Céphalée brutale = HSA jusqu'à preuve du contraire</strong> — scanner d'abord, PL si scanner normal</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Céphalée fébrile = méningite jusqu'à preuve du contraire</strong> — PL dans l'heure, sans imagerie ni bilan préalable</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège SVCR :</strong> céphalée en coup de tonnerre récidivante en postpartum ou sous substances vasoactives — ne pas confondre avec HSA anévrysmale</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>PL AVANT imagerie :</strong> uniquement si suspicion méningite sans CI et sans signes d'engagement — sinon imagerie d'abord</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Xanthochromie :</strong> 100% sensibilité pour HSA entre 12h et 14 jours après début des symptômes — nécessite spectrophotométrie</div>
+        </div>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div>30 à 70% des bilans pour céphalée récente inhabituelle reviennent normaux aux urgences → si soulagé : retour à domicile (souvent 1ère crise migraineuse sévère)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

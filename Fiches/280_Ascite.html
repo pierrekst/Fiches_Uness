@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item 280 - Ascite</title>
+    <style>
+        :root {
+            --purple: #534AB7;
+            --teal: #1D9E75;
+            --coral: #D85A30;
+            --blue: #378ADD;
+            --red: #E24B4A;
+            --bg-color: transparent;
+            --text-color: #333333;
+            --card-bg: #FFFFFF;
+            --card-border: rgba(0,0,0,0.1);
+            --pill-green-bg: #e6f4ea; --pill-green-text: #137333;
+            --pill-red-bg: #fce8e6; --pill-red-text: #c5221f;
+            --pill-blue-bg: #e8f0fe; --pill-blue-text: #1967d2;
+            --pill-amber-bg: #fef7e0; --pill-amber-text: #b06000;
+            --alert-blue-bg: #e8f0fe; --alert-blue-border: #8ab4f8;
+            --alert-red-bg: #fce8e6; --alert-red-border: #f28b82;
+            --alert-green-bg: #e6f4ea; --alert-green-border: #81c995;
+            --alert-amber-bg: #fef7e0; --alert-amber-border: #fde293;
+            --hr-color: #eaeaea;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #e8eaed;
+                --card-bg: #202124;
+                --card-border: rgba(255,255,255,0.1);
+                --pill-green-bg: rgba(29, 158, 117, 0.2); --pill-green-text: #81c995;
+                --pill-red-bg: rgba(226, 75, 74, 0.2); --pill-red-text: #f28b82;
+                --pill-blue-bg: rgba(55, 138, 221, 0.2); --pill-blue-text: #8ab4f8;
+                --pill-amber-bg: rgba(216, 90, 48, 0.2); --pill-amber-text: #fde293;
+                --alert-blue-bg: rgba(55, 138, 221, 0.1); --alert-blue-border: #378ADD;
+                --alert-red-bg: rgba(226, 75, 74, 0.1); --alert-red-border: #E24B4A;
+                --alert-green-bg: rgba(29, 158, 117, 0.1); --alert-green-border: #1D9E75;
+                --alert-amber-bg: rgba(216, 90, 48, 0.1); --alert-amber-border: #D85A30;
+                --hr-color: #3c4043;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .oic-code {
+            display: block;
+            font-size: 0.85em;
+            color: #888;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .badge {
+            font-size: 0.5em;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: white;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+        .badge-a { background-color: var(--coral); }
+        .badge-b { background-color: var(--blue); }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 0.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card-complication {
+            border-left: 4px solid var(--red);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 16px;
+            font-size: 0.9em;
+            margin: 2px;
+            font-weight: 500;
+        }
+        .pill-green { background-color: var(--pill-green-bg); color: var(--pill-green-text); }
+        .pill-red { background-color: var(--pill-red-bg); color: var(--pill-red-text); }
+        .pill-blue { background-color: var(--pill-blue-bg); color: var(--pill-blue-text); }
+        .pill-amber { background-color: var(--pill-amber-bg); color: var(--pill-amber-text); }
+
+        .alert {
+            padding: 15px;
+            border-left: 4px solid;
+            border-radius: 4px 8px 8px 4px;
+            margin-bottom: 20px;
+        }
+        .alert-red { background-color: var(--alert-red-bg); border-color: var(--alert-red-border); }
+        .alert-blue { background-color: var(--alert-blue-bg); border-color: var(--alert-blue-border); }
+        .alert-green { background-color: var(--alert-green-bg); border-color: var(--alert-green-border); }
+        .alert-amber { background-color: var(--alert-amber-bg); border-color: var(--alert-amber-border); }
+
+        .step {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background-color: #888;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+        th {
+            background-color: rgba(0,0,0,0.02);
+            font-weight: bold;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            th { background-color: rgba(255,255,255,0.05); }
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--hr-color);
+            margin: 40px 0;
+        }
+        
+        .icon {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 9h.01"/><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z"/><path d="M12 12v4"/></svg>
+        1. Définition et Présentation Clinique
+        <span class="badge badge-a">Rang A</span>
+        <span class="badge badge-b">Rang B</span>
+    </h2>
+    <span class="oic-code">OIC-280-01-A • OIC-280-04-B</span>
+
+    <div class="card">
+        <div class="alert alert-blue">
+            <strong>Définition :</strong> L'ascite est un <b>épanchement libre dans la cavité péritonéale</b>.
+            <br><em>L'hémopéritoine est exclu de cette définition.</em>
+        </div>
+
+        <h3>Signes d'appel cliniques</h3>
+        <p>En cas de distension abdominale, on recherche :</p>
+        <ul>
+            <li>Une <strong>matité déclive dans les flancs</strong> (sensibilité et spécificité de 70%, témoigne d'un volume > 1500 mL).</li>
+            <li>Une <strong>dyspnée</strong> (si volume important ou épanchement pleural associé).</li>
+            <li>Chez le patient obèse, les signes cliniques peuvent être difficiles à mettre en évidence.</li>
+        </ul>
+        
+        <div class="alert alert-amber">
+            <strong>Diagnostics différentiels :</strong>
+            <br>• Globe vésical (matité hypogastrique à limite supérieure concave, non mobile)
+            <br>• Volumineux kyste (ovarien, rénal, hépatique)
+        </div>
+
+        <div class="card-complication card" style="margin-top: 15px;">
+            <strong>Complication mécanique :</strong> En cas de volumineuse ascite, une hernie abdominale peut apparaître, avec un <b>risque d'étranglement et de rupture</b> (surtout ombilicale).
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 2 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0" fill="currentColor"/></svg>
+        2. La Ponction d'Ascite et Analyse du Liquide
+        <span class="badge badge-b">Rang B</span>
+    </h2>
+    <span class="oic-code">OIC-280-03-B</span>
+
+    <div class="card">
+        <p>L’étude du liquide est primordiale. <b>La ponction exploratrice est systématique devant toute suspicion d’ascite.</b></p>
+        
+        <div class="alert alert-red">
+            La ponction est <strong>urgente</strong> en cas de cirrhose ou de suspicion d’infection du liquide d’ascite.
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <h3>Technique</h3>
+                <div class="step"><div class="step-number">1</div><div>Patient allongé. Désinfection cutanée (± anesthésie locale).</div></div>
+                <div class="step"><div class="step-number">2</div><div>Ponction dans la <b>fosse iliaque gauche</b>, en pleine matité, au tiers externe de la ligne ombilic-épine iliaque antéro-supérieure gauche.</div></div>
+                <div class="step"><div class="step-number">3</div><div>Prélèvements (biochimie, bactério, cytologie) puis évacuation si besoin (max 6 à 8 litres).</div></div>
+                <div class="alert alert-blue" style="padding: 10px; margin-top: 10px;">
+                    <strong>Chez le cirrhotique :</strong> Compensation systématique avec de l'albumine (1 flacon à 20% pour 2 litres ponctionnés).
+                </div>
+            </div>
+            <div>
+                <h3>Aspect macroscopique</h3>
+                <ul>
+                    <li><span class="pill pill-blue">Citrin</span> : le plus fréquent.</li>
+                    <li><span class="pill pill-amber">Chyleux</span> : évoque une compression lymphatique.</li>
+                    <li><span class="pill pill-red">Hémorragique</span> : évoque une néoplasie (demander l'hématocrite pour éliminer un hémopéritoine si < 1%).</li>
+                </ul>
+                <p><em>Attention : l'aspect n'est pas spécifique et ne remplace pas l'analyse.</em></p>
+            </div>
+        </div>
+
+        <h3>Analyses indispensables du liquide</h3>
+        
+        <h4>1. Biochimie (Taux de protides)</h4>
+        <p>C'est l'examen de première intention pour classer l'ascite :</p>
+        <ul>
+            <li><strong>Ascite pauvre en protides</strong> : &lt; 25 g/L (ex: Cirrhose).</li>
+            <li><strong>Ascite riche en protides</strong> : &gt; 25 g/L.</li>
+        </ul>
+        <div class="alert alert-green">
+            <strong>Gradient d'albumine (Sérum - Ascite) :</strong> S'il est <b>&gt; 11 g/L</b>, il est très spécifique d'une ascite liée à une <strong>hypertension portale</strong>.
+        </div>
+
+        <h4>2. Cytologie (Comptage cellulaire)</h4>
+        <div class="card-complication card">
+            <strong>Infection Spontanée du Liquide d'Ascite (ISLA) :</strong>
+            <br>• Complication fréquente de la cirrhose (asymptomatique dans >20% des cas).
+            <br>• Met en jeu le pronostic vital à court terme.
+            <br>• Diagnostic : <strong>PNN &gt; 250/mm³</strong>.
+            <br><em>Un taux de PNN à plusieurs milliers fait rechercher une perforation d'organe creux.</em>
+        </div>
+
+        <h4>3. Bactériologie</h4>
+        <p>Ensemencement dans des flacons d'hémocultures aéro/anaérobies. Un germe n'est identifié que dans 40% des cas.</p>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 3 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg>
+        3. Les Grandes Étiologies
+        <span class="badge badge-a">Rang A</span>
+        <span class="badge badge-b">Rang B</span>
+    </h2>
+    <span class="oic-code">OIC-280-02-A • OIC-280-04-B</span>
+
+    <div class="card">
+        <p>Les deux causes les plus fréquentes en France sont la <strong>cirrhose</strong> et la <strong>carcinose péritonéale</strong>.</p>
+        
+        <h3>Tableau Comparatif des Étiologies</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cause</th>
+                    <th>Éléments Cliniques</th>
+                    <th>Taux de Protides</th>
+                    <th>Gradient Albumine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cirrhose</strong></td>
+                    <td>Signes d'insuffisance hépatocellulaire et d'HTP. Ascite volumineuse (++++).</td>
+                    <td><span class="pill pill-blue">&lt; 25 g/L</span></td>
+                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Carcinose péritonéale</strong></td>
+                    <td>Cancer connu, douleurs (++), signes obstructifs (++).</td>
+                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
+                    <td><span class="pill pill-blue">&lt; 11 g/L</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Syndrome de Budd-Chiari</strong></td>
+                    <td>Sujet jeune, thrombophilie.</td>
+                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
+                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Insuffisance cardiaque droite / Péricardite constrictive</strong></td>
+                    <td>Cardiopathie connue. <br><em>Péricardite: post-chirurgie card, tuberculose.</em></td>
+                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
+                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Syndrome néphrotique</strong></td>
+                    <td>Œdèmes importants, prise de poids, protéinurie &gt; 3g/L.</td>
+                    <td><span class="pill pill-blue">&lt; 25 g/L</span></td>
+                    <td><span class="pill pill-blue">&lt; 11 g/L</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- SECTION 4 -->
+    <h2>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M4 16v2a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M16 20h2a2 2 0 0 0 2-2v-2"/><path d="M9 10l.01 0"/><path d="M15 10l.01 0"/><path d="M9.5 15a3.5 3.5 0 0 0 5 0"/></svg>
+        4. Bilan d'Imagerie
+        <span class="badge badge-a">Rang A</span>
+    </h2>
+    <span class="oic-code">OIC-280-05-A</span>
+
+    <div class="card">
+        <h3>L'Échographie-Doppler abdominale</h3>
+        <p>C'est l'examen radiologique de <strong>première intention</strong>. Ses intérêts :</p>
+        <ul>
+            <li>Détecter de très faibles volumes de liquide.</li>
+            <li>Rechercher des signes d'hypertension portale et de cirrhose.</li>
+            <li><strong>Guider la paracentèse</strong> (ponction) pour éviter les complications (surtout si ascite de faible abondance, cloisonnée, ou patient obèse).</li>
+        </ul>
+
+        <div class="alert alert-amber">
+            <strong>Imageries en coupe :</strong>
+            <br>Le scanner ou l'IRM ne sont <b>pas indiqués en première intention</b> pour l'exploration de l'ascite.
+            <br>Ils sont utiles pour le diagnostic étiologique, notamment en <em>l'absence de cirrhose</em> (ex: Scanner TAP ou IRM hépatique).
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 7 – Les droits du patient</title>
+  
+  <!-- Polices Google Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-color: rgba(148, 163, 184, 0.15);
+      --border-color-strong: rgba(148, 163, 184, 0.3);
+      --hr-color: rgba(148, 163, 184, 0.2);
+      
+      --purple: #534AB7;
+      --purple-light: rgba(83, 74, 183, 0.08);
+      --teal: #1D9E75;
+      --teal-light: rgba(29, 158, 117, 0.08);
+      --coral: #D85A30;
+      --coral-light: rgba(216, 90, 48, 0.08);
+      --blue: #378ADD;
+      --blue-light: rgba(55, 138, 221, 0.08);
+      --red: #E24B4A;
+      --red-light: rgba(226, 75, 74, 0.08);
+      --amber: #D97706;
+      --amber-light: rgba(217, 119, 6, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --card-bg: #1e293b;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color-strong: rgba(255, 255, 255, 0.15);
+        --hr-color: rgba(255, 255, 255, 0.12);
+        
+        --purple-light: rgba(83, 74, 183, 0.2);
+        --teal-light: rgba(29, 158, 117, 0.2);
+        --coral-light: rgba(216, 90, 48, 0.2);
+        --blue-light: rgba(55, 138, 221, 0.2);
+        --red-light: rgba(226, 75, 74, 0.2);
+        --amber-light: rgba(217, 119, 6, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-wrapper {
+      padding: 24px 16px 64px 16px;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--blue) 0%, #205c9b 50%, var(--purple) 100%);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(55, 138, 221, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .header-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .objectifs-box {
+      background: var(--blue-light);
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .objectifs-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .objectifs-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .objectifs-list li {
+      margin-bottom: 4px;
+    }
+
+    hr {
+      border: none;
+      height: 0.5px;
+      background-color: var(--hr-color);
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 0.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 12px var(--border-color);
+    }
+    .card.complication-card {
+      border-left: 4px solid var(--red);
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bg-purple { background-color: var(--purple); }
+    .bg-teal { background-color: var(--teal); }
+    .bg-coral { background-color: var(--coral); }
+    .bg-blue { background-color: var(--blue); }
+    .bg-red { background-color: var(--red); }
+    .bg-amber { background-color: var(--amber); }
+
+    .alert {
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+      line-height: 1.55;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alert strong {
+      font-weight: 800;
+    }
+    .alert-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .alert-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .alert-content {
+      flex-grow: 1;
+    }
+
+    .alert-red {
+      background: var(--red-light);
+      color: var(--red);
+      border-left: 3px solid var(--red);
+    }
+    .alert-blue {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+    }
+    .alert-green, .alert-teal {
+      background: var(--teal-light);
+      color: var(--teal);
+      border-left: 3px solid var(--teal);
+    }
+    .alert-amber {
+      background: var(--amber-light);
+      color: var(--amber);
+      border-left: 3px solid var(--amber);
+    }
+
+    .alert-red .alert-icon svg { stroke: var(--red); }
+    .alert-blue .alert-icon svg { stroke: var(--blue); }
+    .alert-green .alert-icon svg { stroke: var(--teal); }
+    .alert-teal .alert-icon svg { stroke: var(--teal); }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 20px;
+      line-height: 1;
+    }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+
+    .step-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 22px;
+      height: 22px;
+      background-color: var(--border-color-strong);
+      color: var(--text-muted);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-content {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .kv-container {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      background: var(--card-bg);
+    }
+    .kv-row:last-child {
+      border-bottom: none;
+    }
+    .kv-key {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .kv-val {
+      font-weight: 800;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    th {
+      background: var(--purple-light);
+      color: var(--purple);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+      color: var(--text);
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) td {
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .text-dense {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+    }
+    .text-dense:last-child {
+      margin-bottom: 0;
+    }
+    ul.dense-list {
+      margin: 8px 0;
+      padding-left: 20px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    ul.dense-list li {
+      margin-bottom: 4px;
+    }
+    .sub-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue);
+      margin: 12px 0 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="page">
+      
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-tag">ITEM 7</div>
+        <h1>Les Droits du Patient</h1>
+        <p class="header-subtitle">Démocratie en santé, droits individuels et collectifs des usagers. Consentement libre et éclairé, secret médical et directives anticipées.</p>
+      </div>
+
+      <!-- OBJECTIFS -->
+      <div class="objectifs-box">
+        <div class="objectifs-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Objectifs pédagogiques (EDN)</span>
+        </div>
+        <ul class="objectifs-list">
+          <li><strong>Cadre légal :</strong> Loi Kouchner du 4 mars 2002 relative aux droits des malades et la démocratie en santé.</li>
+          <li><strong>Droits individuels & collectifs :</strong> Accès direct, réclamations (CDU), et indemnisation (CCI, ONIAM).</li>
+          <li><strong>Information médicale :</strong> Principes de délivrance, arrêt Hédreul et inversion de la charge de la preuve.</li>
+          <li><strong>Secret médical :</strong> Règles déontologiques et pénales du partage d'informations au sein de l'équipe de soins.</li>
+          <li><strong>Dossier médical :</strong> Contenu communicable vs non-communicable, règles de gestion et délais de conservation.</li>
+          <li><strong>Autonomie & Fin de vie :</strong> Refus de soins, directives anticipées impératives et personne de confiance.</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 1 : DROITS INDIVIDUELS -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-blue">
+            <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+          </div>
+          <span>Les Droits Individuels des Patients</span>
+        </div>
+        
+        <p class="text-dense">
+          La <strong>Loi du 4 mars 2002</strong> a opéré un glissement fondamental : d'un modèle médical paternaliste historique vers le respect absolu de l'<strong>autonomie du patient</strong>, placé au centre du processus décisionnel.
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Domaine de Droit</th>
+                <th>Composants clés reconnus par le CSP</th>
+                <th>Règles d'application et limites</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700;">Protection de la santé</td>
+                <td>Droit à la prévention (dépistage, vaccins, éducation) ;<br>Droit à l'<strong>égal accès aux soins</strong> cruciaux ;<br>Droit à la <strong>continuité des soins</strong> (coordination) ;<br>Droit à la sécurité sanitaire (vigilance).</td>
+                <td>Sollicitation obligatoire de la solidarité. Si un médecin se dégage de sa mission, il a l'<strong>obligation légale</strong> d'orienter le patient vers un confrère compétent.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">Droit au traitement</td>
+                <td>Droit de recevoir les traitements les plus appropriés et conformes aux connaissances avérées ;<br>Droit au <strong>libre choix</strong> du praticien ;<br>Droit à la prise en charge de la <strong>douleur</strong> et accès aux soins palliatifs.</td>
+                <td>Le libre choix du patient est absolu. Ses seules limites réelles sont les situations d'urgence médicale ou l'insuffisance technique d'un plateau.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700;">Respect de la personne</td>
+                <td>Droit au respect de la dignité et absence de discrimination (Art. R. 4127-7 CSP) ;<br>Respect de la <strong>vie privée</strong> ;<br>Respect du <strong>secret médical</strong>.</td>
+                <td>Le secret médical est <strong>général et absolu</strong>. Il couvre tout ce qui est dit, vu, entendu ou compris par le médecin. <strong>Le décès du patient ne délie pas du secret</strong>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 : DROITS COLLECTIFS -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-purple">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Les Droits Collectifs et Voies de Recours</span>
+        </div>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--purple);">1. Droit de Représentation</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              Les usagers participent aux politiques de santé via des représentants issus d'associations agréées (France Assos Santé).
+            </p>
+            <ul class="dense-list">
+              <li><strong>CDU (Commission des Usagers) :</strong> Présente obligatoirement dans chaque hôpital. Analyse trimestriellement les plaintes/réclamations et propose des améliorations.</li>
+            </ul>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--blue);">2. Droit de Réclamation</strong>
+            <ul class="dense-list">
+              <li><strong>Procédure disciplinaire :</strong> Saisine de l'Ordre des médecins avec conciliation obligatoire.</li>
+              <li><strong>Procédure amiable :</strong> Saisine de la <strong>CCI (Commission de Conciliation et d'Indemnisation)</strong>. 
+                <br>&bull; <em>Si faute :</em> l'assureur indemnise.
+                <br>&bull; <em>Si aléa thérapeutique sans faute :</em> indemnisation nationale par l'<strong>ONIAM</strong> (selon gravité).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 : INFORMATION ET CONSENTEMENT -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-teal">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span>Information Médicale & Consentement</span>
+        </div>
+
+        <p class="text-dense">
+          L'information est un droit fondamental du patient (Art. L. 1111-2) et un devoir déontologique majeur du médecin (loyal, clair et approprié).
+        </p>
+
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Preuve de l'information (Arrêt Hédreul, 1997) :</strong> La charge de la preuve est <strong>inversée</strong>. C'est au médecin ou à l'établissement de prouver par tout moyen (courriers dictés tracés, consultations répétées) que l'information a bien été loyale et délivrée.
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <div class="sub-label">Consentement libre et éclairé</div>
+            <p class="text-dense">
+              Prérequis obligatoire à tout acte médical, <strong>retirable à tout moment</strong>.
+            </p>
+            <strong style="font-size:0.8rem; color:var(--red);">Consentement écrit obligatoirement requis dans 6 situations :</strong>
+            <div class="pills-container">
+              <span class="pill pill-red">IVG</span>
+              <span class="pill pill-red">Stérilisation contraceptive</span>
+              <span class="pill pill-red">Recherche clinique (L. Huriet/Jardé)</span>
+              <span class="pill pill-red">Prélèvement d'organe sur donneur vivant</span>
+              <span class="pill pill-red">Étude génétique (tests)</span>
+              <span class="pill pill-red">Don de gamètes</span>
+            </div>
+            <p class="text-dense" style="margin-top:6px;">
+              <em>Cas des mineurs :</em> Le consentement des représentants légaux est nécessaire (les deux parents si acte non usuel ; un seul présumé d'accord si acte usuel). L'avis du mineur doit toujours être recherché.
+            </p>
+          </div>
+          
+          <div>
+            <div class="sub-label">Accès au Dossier Médical (L. 1111-7)</div>
+            <ul class="dense-list">
+              <li><strong>Patient Vivant :</strong> Accès direct sous un délai réglementaire de <strong>48 heures</strong> de réflexion, et au plus tard sous <strong>8 jours</strong> (2 mois si les données datent de &gt; 5 ans).</li>
+              <li><strong>Patient Décédé (Ayants droit/Pacs/Concubins) :</strong> Accès partiel restreint, <strong>uniquement</strong> pour 3 motifs légaux (sauf opposition du vivant du patient) :
+                <br>&bull; Connaître les causes de la mort ;
+                <br>&bull; Défendre la mémoire du défunt ;
+                <br>&bull; Faire valoir leurs droits.
+              </li>
+            </ul>
+            <div class="alert alert-red">
+              <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+              <div class="alert-content">
+                <strong>Non-communicable :</strong> Les informations recueillies auprès de <strong>tiers</strong> ne participant pas aux soins et les <strong>notes personnelles</strong> subjectives du médecin ne sont jamais communicables au patient.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-label">Durée de conservation légale des dossiers médicaux</div>
+        <div class="kv-container">
+          <div class="kv-row">
+            <span class="kv-key">Règle générale en établissement</span>
+            <span class="kv-val">20 ans à compter du dernier séjour ou consultation externe</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Cas des mineurs (pédiatrie)</span>
+            <span class="kv-val">Conservé au moins jusqu'à l'âge de 28 ans</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">En cas de décès du patient</span>
+            <span class="kv-val">10 ans à compter du décès (si survient avant le délai de 20 ans)</span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 4 : AUTONOMIE, REFUS DE SOIN ET FIN DE VIE -->
+      <div class="card complication-card">
+        <div class="card-title">
+          <div class="card-icon bg-red">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>Autonomie, Refus de Soins & Dispositifs Fin de Vie</span>
+        </div>
+
+        <div class="grid2">
+          <div>
+            <strong style="color:var(--red);">Le Refus de Soins</strong>
+            <p class="text-dense">
+              Le corollaire de l'obligation de consentir est le respect du refus. Même si le <strong>pronostic vital est engagé</strong>, le refus doit être respecté si le patient est lucide et réitère son choix après information claire des risques.
+            </p>
+            <strong style="font-size:0.8rem; color:var(--text);">Obligations du médecin face à un refus :</strong>
+            <ul class="dense-list">
+              <li>Tout mettre en œuvre pour convaincre (collégialité, second avis).</li>
+              <li>S'assurer de la réitération après délai raisonnable.</li>
+              <li><strong>Assurer un suivi minimal</strong> et une prise en charge palliative ou sous-optimale compatible avec le refus (pas d'abandon).</li>
+              <li>Tracer rigoureusement tous les échanges dans le dossier.</li>
+            </ul>
+          </div>
+
+          <div>
+            <strong style="color:var(--blue);">Directives Anticipées & Personne de Confiance</strong>
+            <p class="text-dense">
+              Instaurées par la loi Léonetti et renforcées par la loi <strong>Claeys-Léonetti (2016)</strong>.
+            </p>
+            <ul class="dense-list">
+              <li><strong>Directives Anticipées :</strong> Écrit daté, signé par toute personne majeure pour consigner ses choix de fin de vie. Durée <strong>illimitée</strong>.</li>
+              <li>Caractère <strong>impératif</strong> (s'impose au médecin) sauf en cas d'urgence vitale (temporaire) ou de directives inappropriées à la situation médicale.</li>
+              <li><strong>Personne de Confiance :</strong> Majeure, désignée par écrit. Rôle <strong>consultatif</strong> majeur (témoigne de la volonté du patient) si celui-ci est hors d'état de s'exprimer. <em>Son avis n'est pas un consentement juridique mais un éclairage de la volonté du patient.</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Les 3 dimensions de l'autonomie (CCNE) :</strong>
+            <br>&bull; <em>Autonomie d'action :</em> Indépendance physique (mouvements, gestes du quotidien).
+            <br>&bull; <em>Autonomie de pensée :</em> Raisonnement cohérent et esprit critique face aux faits.
+            <br>&bull; <em>Autonomie de volonté :</em> Décision consciente et personnalisée sur un temps long (construction d'un projet de vie/soins).
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SYNTHESE FINALE -->
+      <div class="card" style="border-left: 4px solid var(--blue); background: var(--blue-light);">
+        <div class="card-title">
+          <div class="card-icon bg-blue">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Points-clés à retenir (Synthèse EDN)</span>
+        </div>
+        
+        <ul class="dense-list">
+          <li><strong>Démocratie en santé :</strong> La Loi du 4 mars 2002 est le pivot central des droits individuels (libre choix, secret, accès) et collectifs (CDU, CCI).</li>
+          <li><strong>Arrêt Hédreul (1997) :</strong> Le médecin doit <strong>prouver</strong> qu'il a délivré une information loyale.</li>
+          <li><strong>Accès au dossier :</strong> 48h de réflexion, 8 jours maximum pour délivrer le dossier au patient vivant.</li>
+          <li><strong>Dossier d'un patient décédé :</strong> Accès restreint uniquement aux ayants droit/partenaires sous réserve de <strong>3 motifs stricts</strong> (causes de la mort, mémoire, droits).</li>
+          <li><strong>Consentement écrit obligatoire :</strong> 6 cas stricts (IVG, stérilisation contraceptive, recherche, prélèvement vivant, génétique, gamètes).</li>
+          <li><strong>Directives anticipées :</strong> Durée illimitée, modifiables à tout moment. Elles possèdent un caractère <strong>impératif</strong> sauf exception validée médicalement (urgence, inéquation).</li>
+          <li><strong>Refus de soins :</strong> S'impose au médecin même sous pronostic vital, mais impose de tenter de convaincre et d'assurer une prise en charge minimale.</li>
+        </ul>
+
+        <div class="alert alert-amber" style="margin-top: 12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Piège classique ECNi :</strong> La personne de confiance a un rôle <strong>consultatif</strong> (témoignage de la volonté du patient) et non décisionnel. Le médecin ne recherche pas son <em>consentement</em> mais son <em>témoignage</em> pour guider la décision.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

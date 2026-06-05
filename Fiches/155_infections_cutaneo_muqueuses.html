@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 155 — Infections cutanéo-muqueuses et des phanères</title>
+<style>
+:root {
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --text: #1e2329;
+  --text-muted: #6b7280;
+  --border: rgba(0,0,0,0.08);
+  --purple: #534AB7;
+  --purple-light: #ede9fb;
+  --teal: #1D9E75;
+  --teal-light: #e6f7f2;
+  --coral: #D85A30;
+  --coral-light: #fdf0eb;
+  --blue: #378ADD;
+  --blue-light: #e8f2fc;
+  --red: #E24B4A;
+  --red-light: #fdf0f0;
+  --amber: #D97706;
+  --amber-light: #fffbeb;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111827; --card: #1f2937; --text: #f9fafb; --text-muted: #9ca3af;
+    --border: rgba(255,255,255,0.08); --purple-light: #2d2760; --teal-light: #0d4a37;
+    --coral-light: #5c2a18; --blue-light: #1a3a5c; --red-light: #5c1f1f;
+    --amber-light: #3d2a00; --gray-light: #374151;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.55; padding: 20px 16px 60px; }
+.page { max-width: 920px; margin: 0 auto; }
+
+/* Header */
+.header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px 24px; margin-bottom: 20px; color: #fff; }
+.header-num { font-size: .8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: .8; margin-bottom: 4px; }
+.header-title { font-size: 1.45rem; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+.header-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.htag { background: rgba(255,255,255,.18); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+/* Objectives */
+.objectives { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; }
+.objectives-title { color: var(--blue); font-weight: 700; font-size: .88rem; margin-bottom: 8px; }
+.objectives p { color: var(--text); font-size: .84rem; line-height: 1.6; }
+
+/* Section titles */
+.section-title { font-size: 1.05rem; font-weight: 800; color: var(--text); margin: 28px 0 14px; display: flex; align-items: center; gap: 10px; }
+.section-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.section-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Cards */
+.card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+.card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Grids */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+@media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* KV rows */
+.kv-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+.kv-row td { padding: 6px 10px; font-size: .83rem; border-bottom: 1px solid var(--border); }
+.kv-row td:first-child { color: var(--text-muted); font-weight: 600; width: 38%; }
+.kv-row:last-child td { border-bottom: none; }
+
+/* Alerts */
+.alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+.alert strong { font-weight:800; }
+.alert-icon { flex-shrink: 0; margin-top: 1px; }
+.alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+.alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+.alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+.alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+.alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+.alert-red   .alert-icon svg { stroke:var(--red);   }
+.alert-blue  .alert-icon svg { stroke:var(--blue);  }
+.alert-green .alert-icon svg { stroke:var(--teal);  }
+.alert-amber .alert-icon svg { stroke:var(--amber); }
+.alert-teal  .alert-icon svg { stroke:var(--teal);  }
+
+/* Pills */
+.pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pill { border-radius: 20px; padding: 3px 12px; font-size: .78rem; font-weight: 600; }
+.pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+.pill-red    { background: var(--red-light);    color: var(--red);    }
+.pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+.pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+.pill-purple { background: var(--purple-light); color: var(--purple); }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-bottom: 8px; }
+th { background: var(--gray-light); color: var(--text); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+
+/* Card border variants */
+.card-left-purple { border-left: 4px solid var(--purple); }
+.card-left-red    { border-left: 4px solid var(--red);    }
+.card-left-teal   { border-left: 4px solid var(--teal);   }
+.card-left-amber  { border-left: 4px solid var(--amber);  }
+.card-left-blue   { border-left: 4px solid var(--blue);   }
+
+/* HR */
+hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+/* Badges */
+.badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: .75rem; font-weight: 700; }
+.badge-red    { background: var(--red-light);    color: var(--red);    }
+.badge-teal   { background: var(--teal-light);   color: var(--teal);   }
+.badge-blue   { background: var(--blue-light);   color: var(--blue);   }
+.badge-amber  { background: var(--amber-light);  color: var(--amber);  }
+.badge-purple { background: var(--purple-light); color: var(--purple); }
+
+/* Lists */
+ul.list { padding-left: 0; list-style: none; }
+ul.list li { font-size: .84rem; padding: 3px 0 3px 16px; position: relative; }
+ul.list li::before { content: '–'; position: absolute; left: 0; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="header-num">Item 155</div>
+  <div class="header-title">Infections cutanéo-muqueuses et des phanères<br>bactériennes et mycosiques — adulte et enfant</div>
+  <div class="header-tags">
+    <span class="htag">Dermatologie</span>
+    <span class="htag">Infectiologie</span>
+    <span class="htag">Urgence médicochirurgicale</span>
+    <span class="htag">Pédiatrie</span>
+  </div>
+</div>
+
+<!-- ═══ OBJECTIFS ═══ -->
+<div class="objectives">
+  <div class="objectives-title">Vue d'ensemble</div>
+  <p>Ce chapitre couvre deux grandes catégories. <strong>Les mycoses superficielles</strong> (dermatophytes et Candida) : distinguer les deux agents, identifier les facteurs favorisants, poser les indications d'un prélèvement et prescrire le bon antifongique. <strong>Les infections bactériennes</strong> : maîtriser le spectre clinique allant de la folliculite bénigne à la dermohypodermite nécrosante (urgence vitale), en passant par le furoncle, l'impétigo, le panaris et la cellulite faciale — avec pour chacun les critères de gravité, les germes impliqués, les antibiotiques recommandés et les pièges tombables à l'ECNi.</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PARTIE 1 — MYCOSES SUPERFICIELLES
+════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Mycoses superficielles
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Dermatophytes vs Levures (Candida) — Comparatif fondamental
+  </div>
+  <table>
+    <tr>
+      <th style="width:22%"></th>
+      <th>Dermatophytes</th>
+      <th>Levures (Candida / Malassezia)</th>
+    </tr>
+    <tr>
+      <td><strong>Nature</strong></td>
+      <td>Champignons filamenteux kératinophiles</td>
+      <td>Champignons unicellulaires ovoïdes — commensaux peau/muqueuses</td>
+    </tr>
+    <tr>
+      <td><strong>Pathogénicité</strong></td>
+      <td><span class="badge badge-red">Toujours pathogènes</span></td>
+      <td><span class="badge badge-amber">Pathogènes si facteurs favorisants</span></td>
+    </tr>
+    <tr>
+      <td><strong>Genres</strong></td>
+      <td>Epidermophyton, Microsporum, Trichophyton</td>
+      <td>Candida albicans +++, Malassezia spp.</td>
+    </tr>
+    <tr>
+      <td><strong>Muqueuses ?</strong></td>
+      <td><span class="badge badge-red">JAMAIS</span></td>
+      <td><span class="badge badge-teal">Oui (buccale, génitale, digestive)</span></td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Signes cliniques selon la localisation
+  </div>
+  <table>
+    <tr>
+      <th style="width:16%">Localisation</th>
+      <th>Candidose</th>
+      <th>Dermatophytose</th>
+    </tr>
+    <tr>
+      <td><strong>Buccale</strong></td>
+      <td>
+        <strong>Perlèche</strong> : intertrigo commissure labiale érythémateux fissuraire<br>
+        <strong>Muguet</strong> : érythème diffus + dépôts blanchâtres adhérents<br>
+        <strong>Glossite</strong> : langue rouge dépapillée
+      </td>
+      <td><span class="badge badge-red">Jamais</span></td>
+    </tr>
+    <tr>
+      <td><strong>Génitale</strong></td>
+      <td>
+        <strong>Vulvovaginite</strong> : érythème + œdème + enduit blanchâtre + prurit intense ± leucorrhées blanc-jaunâtres, extension aux plis inguinaux<br>
+        <strong>Balano-posthite</strong> : érythème gland/sillon balano-préputial, rarement pustuleux
+      </td>
+      <td><span class="badge badge-red">Jamais</span></td>
+    </tr>
+    <tr>
+      <td><strong>Peau glabre</strong></td>
+      <td>Exceptionnel (nouveau-né, immunodéprimé)</td>
+      <td>Plaques arrondies/polycycliques, bordure érythémato-vésiculeuse squameuse, <strong>évolution centrifuge avec guérison centrale</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Cuir chevelu</strong></td>
+      <td>Folliculites candidosiques ou à Malassezia</td>
+      <td>
+        <strong>Teignes microsporiques</strong> : grandes plaques alopéciques squameuses, uniques, cheveux cassés régulièrement à quelques mm<br>
+        <strong>Teignes trichophytiques</strong> : multiples petites plaques éparses, squamo-croûteuses, pustuleuses
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Ongles</strong></td>
+      <td>
+        <strong>Péri-onyxis</strong> (mains ++) : tuméfaction douloureuse matricielle ± pus → leuconychie → hyperkératose sous-unguéale → onycholyse → teinte marron verdâtre proximal/latéral
+      </td>
+      <td>
+        <strong>Onyxis</strong> (orteils ++) : début distal, hyperkératose sous-unguéale, décollement tablette
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Grands plis</strong></td>
+      <td>Intertrigo : fond érythémateux + enduit crémeux malodorant, fissure fréquente, bordure pustuleuse / collerette desquamative<br><em>Nourrisson : mycose du siège</em></td>
+      <td>Placard bistre, évolution centrifuge, guérison centrale, bordure érythémato-squameuse ± vésiculeuse<br><em>Pli inguinal homme +++</em></td>
+    </tr>
+    <tr>
+      <td><strong>Petits plis</strong></td>
+      <td>Mains +++ (contact eau, port gants de ménage)</td>
+      <td>Inter-orteils : desquamation sèche/suintante ± fissuraire — espaces 4-5ème orteils +++</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs favorisants — Dermatophytes
+    </div>
+    <div style="font-size:.82rem; font-weight:600; color:var(--text-muted); margin-bottom:5px;">Locaux</div>
+    <div class="pill-list">
+      <span class="pill pill-amber">Contact squames (sol, animal)</span>
+      <span class="pill pill-amber">Peignes / brosses contaminés</span>
+      <span class="pill pill-amber">Macération (obésité, chaussure fermée)</span>
+      <span class="pill pill-amber">Séchage insuffisant</span>
+      <span class="pill pill-amber">Transmission interhumaine (teignes)</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs favorisants — Candida
+    </div>
+    <div style="font-size:.82rem; font-weight:600; color:var(--text-muted); margin-bottom:5px;">Locaux</div>
+    <div class="pill-list">
+      <span class="pill pill-blue">Humidité / macération</span>
+      <span class="pill pill-blue">Occlusion</span>
+      <span class="pill pill-blue">pH acide</span>
+      <span class="pill pill-blue">Effraction épidermique</span>
+      <span class="pill pill-blue">Irritations chroniques</span>
+      <span class="pill pill-blue">Xérostomie</span>
+    </div>
+    <div style="font-size:.82rem; font-weight:600; color:var(--text-muted); margin:8px 0 5px;">Généraux</div>
+    <div class="pill-list">
+      <span class="pill pill-red">Immunosuppression</span>
+      <span class="pill pill-red">Âges extrêmes</span>
+      <span class="pill pill-red">Grossesse</span>
+      <span class="pill pill-red">Antibiotiques</span>
+      <span class="pill pill-red">Immunosuppresseurs</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Prélèvement mycologique — Indications
+    </div>
+    <div style="font-size:.82rem; font-weight:600; color:var(--teal); margin-bottom:5px;">Dermatophytes</div>
+    <ul class="list">
+      <li><strong>Indispensable</strong> avant tout traitement des atteintes <strong>unguéales</strong> et du <strong>cuir chevelu</strong></li>
+    </ul>
+    <div style="font-size:.82rem; font-weight:600; color:var(--blue); margin:8px 0 5px;">Candidose</div>
+    <ul class="list">
+      <li>Pas de prélèvement systématique</li>
+      <li>Indiqué si : atypie clinique, doute diagnostique (diagnostic alternatif fréquent : péri-onyxis), lésions chroniques/récidivantes, résistance à traitement bien conduit</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement des mycoses — Principes
+    </div>
+    <table class="kv-table">
+      <tr class="kv-row"><td>Traiter FDR</td><td>Toujours — corriger les facteurs favorisants locaux et généraux</td></tr>
+      <tr class="kv-row"><td>Tous les foyers</td><td>Simultanément (ex: intertrigo + plante + ongle)</td></tr>
+      <tr class="kv-row"><td>Topique</td><td>Atteintes cutanées limitées — 2 à 3 semaines</td></tr>
+      <tr class="kv-row"><td>Systémique</td><td>Atteintes diffuses, teignes (+ topique), ongles, immunodéprimés — plusieurs semaines à mois</td></tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════
+     PARTIE 2 — INFECTIONS BACTÉRIENNES SUPERFICIELLES
+════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Infections bactériennes superficielles — Follicule pilo-sébacé
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Cascade clinique : Folliculite → Furoncle → Anthrax → Furonculose
+  </div>
+  <table>
+    <tr>
+      <th style="width:16%">Entité</th>
+      <th>Définition / Clinique</th>
+      <th>Germe</th>
+      <th>Traitement</th>
+    </tr>
+    <tr>
+      <td><strong>Folliculite</strong></td>
+      <td>Infection <em>superficielle</em> du follicule pilo-sébacé<br>Pustule centrée par un poil + érythème péri-folliculaire<br>Cuisses, périnée, bras, dos</td>
+      <td><em>S. aureus</em></td>
+      <td>Guérison spontanée<br>Soins locaux (eau + savon + pansement)<br><span class="badge badge-red">Pas d'ATB</span></td>
+    </tr>
+    <tr>
+      <td><strong>Furoncle</strong></td>
+      <td>Infection <em>profonde et nécrosante</em> du follicule pilo-sébacé<br>Papulo-nodule inflammatoire → nécrose → bourbillon (5-10j)</td>
+      <td><em>S. aureus</em> LPV+</td>
+      <td>Hygiène + pansement (ne pas manipuler)<br>ATB si : zone médio-faciale, multiples, terrain débilité — 5 jours — prélèvement bactério avant</td>
+    </tr>
+    <tr>
+      <td><strong>Anthrax</strong></td>
+      <td>Conglomérat de furoncles</td>
+      <td><em>S. aureus</em></td>
+      <td>ATB anti-staphylococcique systémique</td>
+    </tr>
+    <tr>
+      <td><strong>Furonculose</strong></td>
+      <td>Répétition de furoncles sur plusieurs mois/années<br>FDR : contact personne infectée S. aureus LPV+, portage nasal, diabète, VIH</td>
+      <td><em>S. aureus</em> LPV+</td>
+      <td>Recherche FDR (VIH, diabète, hypogammaglobulinémie)<br>Dépistage gîtes bactériens (nez, gorge, anus, périnée)<br>Prélèvement bactério</td>
+    </tr>
+  </table>
+  <div style="margin-top:6px; font-size:.82rem; color:var(--text-muted);">Complications du furoncle : anthrax, dermohypodermite périlésionnelle, abcédation, furonculose, staphylococcie maligne de la face.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — Furoncle médio-facial :</strong> risque de staphylococcie maligne de la face par thrombophlébite du sinus caverneux. Ne jamais manipuler un furoncle centro-facial.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Impétigo et Impétiginisation
+  </div>
+  <div class="grid2" style="margin-bottom:12px;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:5px;">Définition / Épidémio</div>
+      <ul class="list">
+        <li>Infection superficielle <strong>non folliculaire</strong> — lésions vésiculo-pustuleuses croûteuses</li>
+        <li>Germes : <em>S. aureus</em> et/ou <em>S. pyogenes</em></li>
+        <li>Pathologie pédiatrique (pic 0-10 ans), prédominance estivale</li>
+        <li><strong>Impétiginisation</strong> = surinfection d'une dermatose préexistante par les mêmes germes</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:5px;">Formes cliniques</div>
+      <ul class="list">
+        <li><strong>Croûteux (70%)</strong> : vésicule → érosion + croûte mélicérique (couleur miel) — péribuccal ++</li>
+        <li><strong>Bulleux</strong> : bulles flasques ± pus — toutes zones de peau</li>
+      </ul>
+      <div style="font-size:.82rem; font-weight:700; color:var(--red); margin:8px 0 5px;">Complications</div>
+      <ul class="list">
+        <li>Ecthyma (forme nécrotique creusante)</li>
+        <li>Extension des lésions</li>
+        <li>GNA post-streptococcique (dépistage non recommandé)</li>
+      </ul>
+    </div>
+  </div>
+  <table>
+    <tr>
+      <th>Forme</th>
+      <th>Traitement</th>
+    </tr>
+    <tr>
+      <td>Localisé / peu étendu</td>
+      <td>Mupirocine topique 2-3×/j — <strong>5 jours</strong></td>
+    </tr>
+    <tr>
+      <td>Étendu / grave</td>
+      <td>ATB orale 7j — <em>Enfant</em> : amox-AC ou céfadroxil (si allergie PéniG : josamycine) — <em>Adulte</em> : pristinamycine ou céfalexine</td>
+    </tr>
+  </table>
+  <div class="alert alert-blue" style="margin-top:8px; margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Mesures associées : toilette eau + savon, pas d'antiseptique local, pas d'ATB locale. Éviction de collectivité si lésions non couvrables : 3 jours après début du traitement.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Panaris
+    </div>
+    <ul class="list">
+      <li>Infection du <strong>repli unguéal</strong> — <em>S. aureus</em> +++</li>
+      <li>Douleurs pulsatiles de l'extrémité d'un doigt</li>
+      <li>Traitement : antiseptiques locaux en bains pluriquotidiens</li>
+      <li>Incision + drainage si collection purulente ou complication (phlegmon des gaines)</li>
+      <li>ATB anti-staphylococcique PO si résistance ou complication</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Abcès
+    </div>
+    <ul class="list">
+      <li>Collection purulente localisée dans le <strong>derme et/ou hypoderme</strong></li>
+      <li>Traitement : <strong>incision + drainage</strong></li>
+      <li>ATB 5j anti-<em>S. aureus</em> :</li>
+      <li>PO : clindamycine ou pristinamycine</li>
+      <li>IV : oxacilline/cloxacilline ou céfazoline</li>
+      <li>Enfant : amoxicilline-AC ou C1G</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════
+     PARTIE 3 — DERMOHYPODERMITE BACTÉRIENNE
+════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Dermohypodermite bactérienne (DHBNN et DHBN)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définitions
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div class="card card-left-blue" style="margin-bottom:0;">
+      <strong style="font-size:.9rem;">DHBNN</strong> — Dermohypodermite bactérienne non nécrosante<br>
+      <span style="font-size:.83rem; margin-top:4px; display:block;">Infection aiguë <em>non nécrosante</em> du tissu cutané. Germe principal : <strong>Streptococcus pyogenes</strong> (SGA). Synonyme courant : érysipèle.</span>
+    </div>
+    <div class="card card-left-red" style="margin-bottom:0;">
+      <strong style="font-size:.9rem;">DHBN + Fasciite nécrosante (FN)</strong><br>
+      <span style="font-size:.83rem; margin-top:4px; display:block;">Infection nécrosante du derme et de l'hypoderme pouvant atteindre le muscle, production d'endo- et exotoxines. <span class="badge badge-red">Urgence médicochirurgicale — pronostic vital</span></span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie et facteurs de risque
+  </div>
+  <table>
+    <tr>
+      <th style="width:20%"></th>
+      <th>DHBNN</th>
+      <th>DHBN / FN</th>
+    </tr>
+    <tr>
+      <td><strong>Adulte — incidence</strong></td>
+      <td>10–100/100 000 hab. — prédominance féminine — âge moyen 60-65 ans</td>
+      <td>0,4/100 000 hab. — augmentation après 50 ans</td>
+    </tr>
+    <tr>
+      <td><strong>Enfant</strong></td>
+      <td>Prévalence 0,8/million/an</td>
+      <td>Enfants sains, souvent &lt; 3 ans</td>
+    </tr>
+    <tr>
+      <td><strong>FDR adulte</strong></td>
+      <td>Ulcère de jambe, intertrigo inter-orteils, plaie, lymphœdème, insuffisance veineuse, antécédent d'érysipèle, obésité</td>
+      <td>Âge élevé, diabète, insuffisance cardiaque/hépatocellulaire/rénale, obésité, sexe masculin</td>
+    </tr>
+    <tr>
+      <td><strong>FDR enfant</strong></td>
+      <td>Porte d'entrée cutanée, varicelle</td>
+      <td>Traumatisme, morsure, varicelle, immunodépression</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic clinique — DHBNN (Érysipèle)
+  </div>
+  <div class="grid2" style="margin-bottom:10px;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:5px;">Signes locaux</div>
+      <ul class="list">
+        <li>Apparition <strong>aiguë</strong> d'un placard inflammatoire <strong>bien limité</strong> ± bourrelet périphérique</li>
+        <li>Érythème, chaleur, œdème, douleur — extension progressive sur quelques jours</li>
+        <li>Bulles non hémorragiques ou purpura possible</li>
+        <li>Adénopathie locorégionale ou lymphangite</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:5px;">Signes généraux + Localisations</div>
+      <ul class="list">
+        <li>Fièvre 38,5–40°C, frissons, malaise</li>
+        <li><strong>Adulte</strong> : membre inférieur 70-90% ; membre supérieur 5-10% (néoplasie sein) ; face 5%</li>
+        <li><strong>Enfant</strong> : localisations moins prédominantes aux MI — varicelle comme porte d'entrée +++</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Diagnostic 100% clinique.</strong> Devant une DHBNN : aucun examen biologique, microbiologique ou d'imagerie n'est à réaliser.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    DDx — Grosse jambe rouge aiguë
+  </div>
+  <div class="pill-list">
+    <span class="pill pill-amber">Dermite de stase (souvent bilatérale, apyrexie)</span>
+    <span class="pill pill-amber">Eczéma de contact</span>
+    <span class="pill pill-amber">Piqûres d'insecte</span>
+    <span class="pill pill-amber">Érythème migrant</span>
+    <span class="pill pill-amber">Arthrite aiguë / bursite</span>
+    <span class="pill pill-amber">TVP / thrombose veineuse superficielle</span>
+    <span class="pill pill-amber">Fièvres périodiques familiales</span>
+  </div>
+</div>
+
+<div class="card card-left-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Signes de gravité — DHBN / Fasciite nécrosante
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:5px;">Signes locaux</div>
+      <div class="pill-list">
+        <span class="pill pill-red">Douleur intense dépassant la zone érythémateuse</span>
+        <span class="pill pill-red">Crépitation</span>
+        <span class="pill pill-red">Zones cyaniques / livédoïdes</span>
+        <span class="pill pill-red">Nécrose cutanée</span>
+        <span class="pill pill-red">Hypo/anesthésie locale</span>
+        <span class="pill pill-red">Extension très rapide (quelques heures)</span>
+        <span class="pill pill-red">Aggravation à 48h d'ATB bien menée</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:5px;">Signes généraux (sepsis)</div>
+      <div class="pill-list">
+        <span class="pill pill-red">Hypotension (signe tardif chez enfant)</span>
+        <span class="pill pill-red">Tachycardie (signe précoce chez enfant)</span>
+        <span class="pill pill-red">Confusion / irritabilité nourrisson</span>
+        <span class="pill pill-red">Polypnée</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement — DHBNN
+  </div>
+  <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:5px;">Critères d'hospitalisation</div>
+  <div class="pill-list" style="margin-bottom:12px;">
+    <span class="pill pill-red">Signes de gravité locaux ou généraux</span>
+    <span class="pill pill-red">Immunosuppression, diabète, IC, IRC, obésité</span>
+    <span class="pill pill-red">Âges extrêmes</span>
+    <span class="pill pill-red">Absence de réponse à 72h</span>
+    <span class="pill pill-red">Enfant : entourage non fiable</span>
+  </div>
+  <table>
+    <tr>
+      <th style="width:12%"></th>
+      <th>1ère intention</th>
+      <th>Si allergie pénicilline</th>
+    </tr>
+    <tr>
+      <td><strong>Adulte</strong></td>
+      <td>Amoxicilline PO 50 mg/kg/j en 3 prises (max 6 g/j) — <strong>7 jours</strong></td>
+      <td>Pristinamycine 1g × 3/j — ou Clindamycine 600 mg × 3/j (si poids &gt; 100 kg : × 4/j)</td>
+    </tr>
+    <tr>
+      <td><strong>Enfant</strong></td>
+      <td>Amoxicilline-AC 80 mg/kg/j (amox) en 3 prises (max 3 g/j) — <strong>7 jours</strong></td>
+      <td>Clindamycine 40 mg/kg/j × 3 prises (&gt; 6 ans) — ou SMX-TMP 30 mg/kg/j (exprimé SMX) × 3 prises (&lt; 6 ans, suspension buvable)</td>
+    </tr>
+  </table>
+  <div style="font-size:.82rem; font-weight:700; color:var(--text-muted); margin:10px 0 5px;">Mesures complémentaires</div>
+  <div class="pill-list">
+    <span class="pill pill-red">Pas d'ATB locale</span>
+    <span class="pill pill-red">Pas d'AINS</span>
+    <span class="pill pill-teal">Repos + surélévation du membre</span>
+    <span class="pill pill-teal">Anticoagulation prophylactique selon ATVE</span>
+    <span class="pill pill-teal">Contention veineuse dès amélioration des douleurs</span>
+    <span class="pill pill-teal">Traiter la porte d'entrée (intertrigo mycosique)</span>
+    <span class="pill pill-teal">MAJ vaccination antitétanique</span>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>DHBN / Fasciite nécrosante = URGENCE VITALE :</strong> USI + ATB large spectre + débridement chirurgical précoce. Aucun délai acceptable.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Porte d'entrée — rechercher systématiquement :</strong> première cause de récidive de DHBNN. Rechercher une mycose (intertrigo + plante + ongle — peut être multifocale). Prise en charge spécialisée.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════
+     PARTIE 4 — CELLULITE FACIALE
+════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Cellulite faciale
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Physiopathologie
+    </div>
+    <ul class="list">
+      <li>Infection des <strong>espaces aponévrotiques profonds</strong> de la face et du cou</li>
+      <li>Absence de barrière anatomique → diffusion rapide de la base du crâne au diaphragme</li>
+      <li>Infection grave pouvant engager le <strong>pronostic vital</strong></li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Portes d'entrée
+    </div>
+    <div class="pill-list">
+      <span class="pill pill-red">Dentaire / péri-dentaire (80%)</span>
+      <span class="pill pill-amber">Effraction cutanée (DHBNN de la face)</span>
+      <span class="pill pill-amber">Manipulation de furoncle (Staph. maligne)</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Formes cliniques
+  </div>
+  <table>
+    <tr>
+      <th style="width:22%">Entité</th>
+      <th>Clinique spécifique</th>
+      <th style="width:22%">Germe(s)</th>
+    </tr>
+    <tr>
+      <td><strong>DHBNN de la face</strong></td>
+      <td>Placard inflammatoire unilatéral très bien limité ± bourrelet périphérique</td>
+      <td><em>Streptococcus pyogenes</em></td>
+    </tr>
+    <tr>
+      <td><strong>Cellulite dentaire<br>Stade séreux</strong></td>
+      <td>Placard érythémateux œdématié (non fluctuant), inflammation gingivale, dent cariée</td>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><em>S. aureus, S. pyogenes,</em><br>Anaérobies (Prevotella, Fusobacterium, Actinomycètes)</td>
+    </tr>
+    <tr>
+      <td><strong>Cellulite dentaire<br>Stade collecté</strong></td>
+      <td>À J3-4 : aggravation inflammatoire, <strong>douleur pulsatile insomniante</strong>, fluctuation à la palpation, <strong>trismus</strong> si dent postérieure</td>
+    </tr>
+    <tr>
+      <td><strong>Cellulite dentaire<br>Stade gangréneux</strong></td>
+      <td>Fièvre 40°C, choc septique, diffusion rapide des signes cutanés, crépitants possibles</td>
+    </tr>
+    <tr>
+      <td><strong>Staphylococcie maligne de la face</strong></td>
+      <td>Très rare. Furoncle manipulé, topographie centro-faciale, bords <em>mal limités</em>, signes généraux marqués.<br>Chercher signes de thrombophlébite du sinus caverneux : céphalées, cordon veineux facial, exophtalmie, ophtalmoplégie, œdème papillaire, BAV unilatérale</td>
+      <td><em>S. aureus</em> LPV+</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Examens de 1ère intention
+    </div>
+    <ul class="list">
+      <li>Ne doivent <strong>pas retarder la prise en charge</strong></li>
+      <li>Bilan infectieux + <strong>hémocultures</strong></li>
+      <li>Scanner cervico-facial injecté : si doute diagnostique → visualise taille de la collection, impact sur VADS</li>
+      <li>Élimine thrombophlébite sinus caverneux si suspicion de staphylococcie maligne</li>
+    </ul>
+  </div>
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Signes de gravité cellulite faciale
+    </div>
+    <div class="pill-list">
+      <span class="pill pill-red">Douleur intense</span>
+      <span class="pill pill-red">Collection / fluctuation</span>
+      <span class="pill pill-red">Crépitation</span>
+      <span class="pill pill-red">Nécrose cutanée</span>
+      <span class="pill pill-red">Trismus</span>
+      <span class="pill pill-red">Sepsis (hypotension, tachycardie, confusion, polypnée)</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement des cellulites faciales
+  </div>
+  <table>
+    <tr>
+      <th style="width:28%">Forme</th>
+      <th>Traitement</th>
+    </tr>
+    <tr>
+      <td><strong>DHBNN de la face</strong></td>
+      <td>Identique à DHBNN des membres inférieurs (amoxicilline PO 7j)</td>
+    </tr>
+    <tr>
+      <td><strong>Cellulite dentaire collectée</strong></td>
+      <td><span class="badge badge-red">Urgence médicochirurgicale</span><br>ATB large spectre (S. aureus + S. pyogenes + anaérobies) — Anticoagulation préventive ou curative si thrombophlébite — Chirurgie : prise en charge porte d'entrée + exérèse des tissus nécrosés</td>
+    </tr>
+    <tr>
+      <td><strong>Staphylococcie maligne de la face</strong></td>
+      <td><span class="badge badge-red">Urgence médicale</span><br>ATB IV anti-<em>S. aureus</em> — Anticoagulation curative si atteinte de la veine faciale</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════
+     SYNTHÈSE — POINTS CLÉS
+════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés et pièges à l'ECNi
+</div>
+
+<div class="grid2">
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Les dermatophytes n'envahissent <strong>jamais les muqueuses</strong>. Toute candidose muqueuse = Candida exclusivement.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> DHBNN = <strong>diagnostic clinique pur</strong>. Aucun examen complémentaire en l'absence de signe de gravité. Ne pas prescrire de biologie ni d'imagerie.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Les <strong>AINS sont contre-indiqués</strong> dans la DHBNN — risque de masquer l'évolution vers une DHBN / fasciite nécrosante.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Folliculite = <strong>pas d'antibiotique</strong> (guérison spontanée). Ne pas confondre avec le furoncle (nécrose folliculaire → ATB si compliqué).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Enfant avec DHBNN : amoxicilline-AC (couvre S. aureus + S. pyogenes). Adulte : amoxicilline seule suffit (S. pyogenes uniquement ciblé).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Ne jamais manipuler un furoncle centro-facial. Staphylococcie maligne de la face → thrombophlébite du sinus caverneux à rechercher activement.</div>
+  </div>
+</div>
+
+<div class="card card-left-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    À retenir absolument
+  </div>
+  <table>
+    <tr>
+      <td style="width:4%; text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">1</td>
+      <td>Candidose ≠ Dermatophyte : les dermatophytes n'envahissent jamais les muqueuses</td>
+    </tr>
+    <tr>
+      <td style="text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">2</td>
+      <td>Prélèvement mycologique obligatoire avant traitement pour les <strong>ongles</strong> (dermatophytes) et le <strong>cuir chevelu</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">3</td>
+      <td>DHBNN : diagnostic clinique, 0 examen complémentaire, ATB anti-SGA (amox adulte / amox-AC enfant), 7 jours, <strong>pas d'AINS</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">4</td>
+      <td>DHBN/FN = urgence chirurgicale absolue : tout signe évocateur (crépitation, nécrose, livédo, douleur disproportionnée, extension rapide) → bloc opératoire</td>
+    </tr>
+    <tr>
+      <td style="text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">5</td>
+      <td>Cellulite faciale collectée = urgence médicochirurgicale (porte d'entrée dentaire 80%) — Staphylococcie maligne = urgence médicale (thrombophlébite sinus caverneux)</td>
+    </tr>
+    <tr>
+      <td style="text-align:center; font-size:.95rem; font-weight:800; color:var(--teal);">6</td>
+      <td>Traiter systématiquement la porte d'entrée (intertrigo mycosique multifocal ++) pour prévenir les récidives de DHBNN</td>
+    </tr>
+  </table>
+</div>
+
+</div>
+</body>
+</html>

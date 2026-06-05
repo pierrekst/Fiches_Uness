@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 90 — Pathologie des glandes salivaires</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EEF0FC;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F1;
+    --coral: #D85A30;
+    --coral-light: #FAEEE8;
+    --blue: #378ADD;
+    --blue-light: #EAF3FC;
+    --red: #E24B4A;
+    --red-light: #FDEAEA;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1A1A2E;
+    --text-light: #6B7280;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 0.88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: white; margin-bottom: 24px; }
+  .header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.85; font-weight: 500; }
+  .header .overview { margin-top: 16px; background: rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; font-size: 0.84rem; line-height: 1.65; }
+
+  /* Cards */
+  .card { background: var(--card-bg); border-radius: 14px; border: 0.5px solid var(--border); padding: 16px 18px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Section titles */
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin: 22px 0 12px; display: flex; align-items: center; gap: 10px; }
+
+  /* Alerts */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  /* Grids */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .th-purple { background: var(--purple-light); color: var(--purple); }
+  .th-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .th-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .th-amber  { background: var(--amber-light);  color: var(--amber);  }
+
+  /* Pills */
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; margin: 2px; }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  /* KV rows */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: 0.84rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-light); font-weight: 500; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  /* Numbered steps */
+  .steps { list-style: none; }
+  .step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #E5E7EB; color: var(--text); font-size: 0.78rem; font-weight: 800; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .step-content { flex: 1; padding-top: 3px; }
+
+  /* Bordered left */
+  .card-left-purple { border-left: 4px solid var(--purple); }
+  .card-left-teal   { border-left: 4px solid var(--teal);   }
+  .card-left-coral  { border-left: 4px solid var(--coral);  }
+  .card-left-blue   { border-left: 4px solid var(--blue);   }
+  .card-left-red    { border-left: 4px solid var(--red);    }
+  .card-left-amber  { border-left: 4px solid var(--amber);  }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; }
+  .badge-red    { background: var(--red-light);    color: var(--red);    }
+  .badge-green  { background: var(--teal-light);   color: var(--teal);   }
+  .badge-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .badge-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+  ul.compact { padding-left: 18px; }
+  ul.compact li { margin-bottom: 4px; }
+  .small { font-size: 0.80rem; color: var(--text-light); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="subtitle">Item 90 · ORL / Stomatologie</div>
+  <h1>Pathologie des glandes salivaires</h1>
+  <div class="overview">
+    <strong>Vue d'ensemble :</strong> Ce chapitre repose sur un raisonnement diagnostique en 3 catégories (sialite / tumeur / sialose) à distinguer sur la clinique seule. Il faut maîtriser la cascade infectieuse des lithiases, le bilan standardisé d'une tumeur salivaire (IRM avant cytoponction, jamais de biopsie), les types histologiques et la règle chirurgicale. La BGSA est un outil clé pour les maladies systémiques (Gougerot-Sjögren, amylose, sarcoïdose).
+  </div>
+</div>
+
+<!-- ========== SECTION 1 : 3 GRANDES ETIOLOGIES ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  Les 3 grandes étiologies
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:18%"></th>
+        <th class="th-red" style="background:var(--red-light);color:var(--red);">Sialite</th>
+        <th class="th-purple">Tumeur</th>
+        <th class="th-teal">Sialose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="kv-key"><strong>Mécanisme</strong></td>
+        <td>Inflammatoire/infectieux (sialadénite) ou obstructif (sialodochite)</td>
+        <td>Prolifération bénigne ou maligne <em>localisée</em></td>
+        <td>Infiltration parenchymateuse diffuse non infectieuse</td>
+      </tr>
+      <tr>
+        <td class="kv-key"><strong>Clinique clé</strong></td>
+        <td><span class="pill pill-red">Diffuse</span> <span class="pill pill-red">Douloureuse</span></td>
+        <td><span class="pill pill-purple">Localisée</span> <span class="pill pill-purple">Dure</span> <span class="pill pill-purple">Non douloureuse</span></td>
+        <td><span class="pill pill-green">Diffuse</span> <span class="pill pill-green">Indolore</span> <span class="pill pill-green">Ferme/élastique</span></td>
+      </tr>
+      <tr>
+        <td class="kv-key"><strong>Causes</strong></td>
+        <td>Virale, bactérienne, lithiasique</td>
+        <td>Adénome pléomorphe, tumeur de Warthin, carcinomes</td>
+        <td>Sarcoïdose, Gougerot-Sjögren, VIH</td>
+      </tr>
+      <tr>
+        <td class="kv-key"><strong>Imagerie</strong></td>
+        <td>Écho (à distance si lithiase)</td>
+        <td>IRM systématique + écho ± TDM</td>
+        <td>Écho / IRM</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 2 : LITHIASES ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  </div>
+  Lithiases salivaires
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Siège :</strong> glande sous-mandibulaire (canal de Wharton) <strong>&gt;&gt;</strong> parotide (canal de Sténon) — salive sous-mandibulaire plus muqueuse et visqueuse.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-left-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Évènements mécaniques
+    </div>
+    <ul class="compact">
+      <li><strong>Hernie salivaire :</strong> tuméfaction douloureuse de la glande au <em>début</em> du repas ; jet de salive à l'ostium en <em>fin</em> de repas</li>
+      <li><strong>Colique salivaire :</strong> douleur le long du canal en regard de la lithiase</li>
+    </ul>
+    <div style="margin-top:8px;" class="small">Les calculs peuvent être longtemps asymptomatiques. Un évènement infectieux peut survenir bien après les premiers signes mécaniques.</div>
+  </div>
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Cascade infectieuse
+    </div>
+    <ul class="compact">
+      <li><strong>Whartonite :</strong> douleur vive du plancher buccal irradiant vers l'oreille + fièvre</li>
+      <li><strong>Périwhartonite :</strong> abcès/inflammation péricanalaire (plancher buccal)</li>
+      <li><strong>Péristénonite :</strong> inflammation péricanalaire (face interne joue) — parotide</li>
+      <li><strong>Submandibulite/parotidite :</strong> tuméfaction chaude, rouge, douloureuse + pus à l'ostium</li>
+    </ul>
+    <div style="margin-top:6px;" class="small">Sialodochite lithiasique → peut se compliquer en sialadénite bactérienne secondaire</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement des lithiases — selon taille et localisation
+  </div>
+  <table>
+    <thead>
+      <tr><th>Situation</th><th>Technique</th><th>Modalités</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>&gt; 8 mm</strong></td>
+        <td><span class="pill pill-coral">Chirurgie</span></td>
+        <td>Voie endobuccale, incision du canal — AL ou AG selon localisation</td>
+      </tr>
+      <tr>
+        <td><strong>&lt; 8 mm — partie antérieure</strong></td>
+        <td><span class="pill pill-coral">Chirurgie endobuccale</span></td>
+        <td>AL possible pour le tiers antérieur ; AG pour les tiers moyens/postérieurs</td>
+      </tr>
+      <tr>
+        <td><strong>&lt; 4 mm — partie postérieure</strong></td>
+        <td><span class="pill pill-blue">Sialendoscopie</span></td>
+        <td>Endoscope + sonde à panier / pince dédiée</td>
+      </tr>
+      <tr>
+        <td><strong>4–8 mm — partie postérieure</strong></td>
+        <td><span class="pill pill-amber">Lithotripsie</span> + sialendoscopie</td>
+        <td>Fragmentation préalable extracorporelle ou laser endoscopique</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 3 : SIALITES ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Sialites — les 3 causes principales
+</div>
+
+<div class="grid3">
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Virales (sialadénite)
+    </div>
+    <div class="kv-row"><span class="kv-key">Atteinte</span><span class="kv-val"><span class="badge badge-blue">Bilatérale</span></span></div>
+    <div class="kv-row"><span class="kv-key">Glande</span><span class="kv-val">Parotide +++</span></div>
+    <div style="margin-top:8px;" class="small">Oreillons (Paramyxovirus), Coxsackies A/B, Influenza, Para-influenza, CMV</div>
+  </div>
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Bactériennes (sialadénite)
+    </div>
+    <div class="kv-row"><span class="kv-key">Atteinte</span><span class="kv-val"><span class="badge badge-red">Unilatérale</span></span></div>
+    <div class="kv-row"><span class="kv-key">Terrain</span><span class="kv-val">Sujet âgé déshydraté</span></div>
+    <div style="margin-top:8px;" class="small">Parotidite aiguë : tuméfaction diffuse soulevant le lobe auriculaire + pus au canal de Sténon</div>
+  </div>
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Lithiasiques (sialodochite)
+    </div>
+    <div class="kv-row"><span class="kv-key">Glande</span><span class="kv-val">Sous-mandibulaire +++</span></div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Obstruction → stase</span></div>
+    <div style="margin-top:8px;" class="small">Colique salivaire → whartonite → périwhartonite → submandibulite bactérienne secondaire</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 4 : TUMEURS ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  Tumeurs des glandes salivaires
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="card card-left-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Types histologiques
+      </div>
+      <div style="margin-bottom:6px;"><span class="badge badge-green">Bénignes</span></div>
+      <ul class="compact">
+        <li><strong>Adénome pléomorphe</strong> — <span class="pill pill-purple">50%</span> de toutes les tumeurs</li>
+        <li><strong>Tumeur de Warthin</strong> (cystadénolymphome) — <span class="pill pill-blue">5–10%</span></li>
+      </ul>
+      <div style="margin: 10px 0 6px;"><span class="badge badge-red">Malignes primitives</span></div>
+      <ul class="compact">
+        <li>Carcinome mucoépidermoïde</li>
+        <li>Carcinome à cellules acineuses</li>
+        <li>Carcinome adénoïde kystique</li>
+      </ul>
+      <div style="margin: 10px 0 6px;"><span class="badge badge-amber">Malignes secondaires</span></div>
+      <ul class="compact">
+        <li>Métastases : carcinomes cutanés (cuir chevelu), mélanomes, rein, sein</li>
+      </ul>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Règle :</strong> plus la glande est petite, plus le risque de malignité est élevé.<br>Parotide : 20% maligne — Glandes accessoires : 60% maligne</div>
+    </div>
+  </div>
+  <div>
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Bilan tumoral
+      </div>
+      <ul class="steps">
+        <li class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>IRM injectée systématique</strong> (T1/T2/FAT-SAT/diffusion/perfusion)<br>
+            <span class="small">ADC &lt;1,2 + courbe de perfusion type C = très évocatrice de malignité</span>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Cytoponction écho-guidée</strong> — après l'IRM<br>
+            <span class="small">Classification de Milan 2018 : I non satisfaisant · II bénin · III atypies · IV potentiel incertain · V suspect · VI malin</span>
+          </div>
+        </li>
+        <li class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>TDM cervico-thoracique injecté</strong> si malignité très probable (ADP, VII, envahissement cutané)
+          </div>
+        </li>
+      </ul>
+      <div class="alert alert-red" style="margin-top:10px;margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>JAMAIS de biopsie</strong> — risque de lésion du nerf facial et de dissémination tumorale</div>
+      </div>
+    </div>
+    <div class="card card-left-coral" style="margin-top:0;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement chirurgical
+      </div>
+      <ul class="compact">
+        <li><strong>Parotidectomie partielle</strong> (exofaciale/superficielle) + conservation VII + extemporané</li>
+        <li><strong>Parotidectomie totale + évidement cervical homolatéral</strong> si malignité en extemporané</li>
+        <li><strong>Submandibulectomie</strong> pour la glande sous-mandibulaire</li>
+      </ul>
+      <div style="margin-top:8px;" class="small">Post-op : dispositif d'annonce · RCP · radiothérapie post-op (option fréquente) · plan personnalisé de soins</div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber" style="margin-top:4px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Signes de malignité à rechercher :</strong> paralysie faciale (VII), fixité au plan profond ou cutané, adénopathies cervicales, douleur spontanée</div>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 5 : IMAGERIE ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--blue);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  Imagerie selon contexte
+</div>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:22%">Contexte</th>
+        <th>1<sup>re</sup> intention</th>
+        <th>Compléments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tumeur</strong></td>
+        <td><span class="badge badge-purple">IRM systématique</span> injectée T1/T2/diffusion/perfusion</td>
+        <td>Écho (guidage cytoponction) · TDM si malignité probable</td>
+      </tr>
+      <tr>
+        <td><strong>Lithiase</strong></td>
+        <td><span class="badge badge-blue">Échographie</span> — à distance de l'épisode aigu · pas d'imagerie à chaud si tableau typique</td>
+        <td>Scanner salivaire non injecté · Sialo-IRM</td>
+      </tr>
+      <tr>
+        <td><strong>Sialose</strong></td>
+        <td><span class="badge badge-green">Échographie</span> — lésions kystiques diffuses, dilatations canalaires</td>
+        <td>IRM (analyse plus précise)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 6 : BGSA ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Biopsie des glandes salivaires accessoires (BGSA)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Indications et technique
+    </div>
+    <div style="margin-bottom:8px;"><span class="badge badge-green">Indications</span></div>
+    <ul class="compact">
+      <li>Maladie de <strong>Gougerot-Sjögren</strong> (anti-SSA/SSB +)</li>
+      <li><strong>Amylose</strong></li>
+      <li><strong>Sarcoïdose</strong></li>
+      <li>Autres maladies auto-immunes</li>
+    </ul>
+    <div style="margin-top:10px;" class="small">
+      Geste simple sous AL — incision muqueuse lèvre inférieure · résection de quelques glandes accessoires · fermeture par points résorbables.<br>
+      Prélèvement minimal : <strong>8 mm²</strong> = 4 glandes normales ou 6 petites glandes (&lt; 2 mm).
+    </div>
+    <div style="margin-top:10px;">
+      <div class="kv-row"><span class="kv-key">VPP Gougerot-Sjögren</span><span class="kv-val">&gt; 95%</span></div>
+      <div class="kv-row"><span class="kv-key">Sensibilité amylose</span><span class="kv-val">80%</span></div>
+      <div class="kv-row"><span class="kv-key">Sensibilité sarcoïdose</span><span class="kv-val">20–60%</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Score de Chisholm (infiltrat lympho-plasmocytaire)
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td style="width:18%;"><span class="badge badge-green">0</span></td>
+          <td>Absence d'infiltrat</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-green">1</span></td>
+          <td>Infiltrat léger sans foyer</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-amber">2</span></td>
+          <td>&lt; 1 foyer / 4 mm² — <strong>compatible Gougerot-Sjögren</strong></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">3</span></td>
+          <td>1 foyer / 4 mm² — <strong>hautement évocateur</strong></td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">4</span></td>
+          <td>&gt; 1 foyer / 4 mm² — <strong>hautement évocateur</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;" class="small">Syndrome sec + anti-SSA/SSB positifs majore considérablement la probabilité de biopsie positive.<br>Granulome épithélioïde sans nécrose caséeuse : évoquer sarcoïdose mais n'exclut pas la tuberculose si tableau clinique mixte.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== SECTION 7 : POINTS-CLES ========== -->
+<div class="section-title">
+  <div class="card-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Triade diagnostique fondamentale :</strong> Sialite = diffuse + douloureuse · Tumeur = localisée + dure · Sialose = diffuse + indolore + ferme/élastique</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Lithiase :</strong> sous-mandibulaire &gt;&gt; parotide. Cascade infectieuse : whartonite → périwhartonite → submandibulite. Taille &gt; 8 mm = chirurgie. Pas d'imagerie à chaud si tableau typique.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Sialite virale = bilatérale</strong> (oreillons ++) · <strong>Sialite bactérienne = unilatérale</strong> (sujet âgé déshydraté, pus à Sténon)</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège tumeur :</strong> JAMAIS de biopsie (risque VII + dissémination). IRM AVANT cytoponction (hémorragie post-ponction altère l'IRM). Paralysie faciale = malignité jusqu'à preuve du contraire.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège malignité :</strong> petite glande = plus de risque. Parotide 20% maligne / Glandes accessoires 60% malignes. Adénome pléomorphe = tumeur bénigne la plus fréquente (50%).</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>BGSA :</strong> Gougerot-Sjögren + amylose + sarcoïdose. Score de Chisholm ≥ 3 = hautement évocateur. Granulome sans nécrose caséeuse n'exclut pas la tuberculose.</div>
+</div>
+
+</div>
+</body>
+</html>

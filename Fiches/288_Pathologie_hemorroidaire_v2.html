@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 288 — Pathologie hémorroïdaire</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --bg: #f7f8fc;
+    --card-bg: #ffffff;
+    --text: #1a1d2e;
+    --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --radius: 14px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111318; --card-bg: #1c1f2a; --text: #e8eaf0;
+      --text-muted: #9ca3af; --border: rgba(255,255,255,0.08);
+      --shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.87rem; line-height: 1.55; padding: 20px 16px 48px; max-width: 960px; margin: 0 auto; }
+
+  .page-header { background: linear-gradient(135deg, var(--coral) 0%, #e87a56 100%); border-radius: var(--radius); padding: 22px 24px 20px; margin-bottom: 6px; color: #fff; }
+  .page-header .item-tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .page-header h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+  .page-header .overview { font-size: .82rem; opacity: .92; line-height: 1.6; background: rgba(255,255,255,0.15); border-radius: 9px; padding: 11px 14px; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 18px 0; }
+
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .icon-purple { background: var(--purple); }
+  .icon-teal   { background: var(--teal); }
+  .icon-coral  { background: var(--coral); }
+  .icon-blue   { background: var(--blue); }
+  .icon-red    { background: var(--red); }
+  .icon-amber  { background: var(--amber); }
+
+  .section-title { font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin: 20px 0 10px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 620px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { display: inline-block; font-size: .74rem; font-weight: 600; border-radius: 20px; padding: 3px 10px; }
+  .pill-green  { background: #d1fae5; color: #065f46; }
+  .pill-red    { background: #fee2e2; color: #991b1b; }
+  .pill-blue   { background: #dbeafe; color: #1e40af; }
+  .pill-amber  { background: #fef3c7; color: #92400e; }
+  .pill-purple { background: #ede9fe; color: #4c1d95; }
+  .pill-coral  { background: #ffedd5; color: #9a3412; }
+  @media (prefers-color-scheme: dark) {
+    .pill-green { background:#064e3b;color:#6ee7b7; } .pill-red { background:#7f1d1d;color:#fca5a5; }
+    .pill-blue  { background:#1e3a5f;color:#93c5fd; } .pill-amber { background:#78350f;color:#fcd34d; }
+    .pill-purple{ background:#3b0764;color:#c4b5fd; } .pill-coral { background:#7c2d12;color:#fdba74; }
+  }
+
+  .alert { border-radius: 9px; padding: 10px 13px; font-size: .82rem; margin: 8px 0; display: flex; gap: 9px; align-items: flex-start; }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+  .alert-red    { background: #fee2e2; color: #991b1b; border-left: 3px solid var(--red); }
+  .alert-blue   { background: #dbeafe; color: #1e40af; border-left: 3px solid var(--blue); }
+  .alert-green  { background: #d1fae5; color: #065f46; border-left: 3px solid var(--teal); }
+  .alert-amber  { background: #fef3c7; color: #92400e; border-left: 3px solid var(--amber); }
+  @media (prefers-color-scheme: dark) {
+    .alert-red   { background:#450a0a;color:#fca5a5; } .alert-blue  { background:#0c1e3d;color:#93c5fd; }
+    .alert-green { background:#052e16;color:#6ee7b7; } .alert-amber { background:#3d1a00;color:#fcd34d; }
+  }
+
+  .kv-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .82rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); font-weight: 500; min-width: 130px; }
+  .kv-val { font-weight: 600; text-align: right; flex: 1; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  th { background: var(--bg); font-weight: 700; padding: 7px 9px; text-align: left; border-bottom: 1.5px solid var(--border); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  td { padding: 6px 9px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(216,90,48,0.04); }
+
+  .steps { list-style: none; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: #e5e7eb; color: var(--text); font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  @media (prefers-color-scheme: dark) { .step-num { background: #374151; } }
+  .step-content { padding-top: 3px; font-size: .83rem; }
+  .step-content strong { display: block; margin-bottom: 2px; }
+
+  .compl-card { border-left: 3px solid var(--coral); border-radius: 0 9px 9px 0; background: var(--card-bg); padding: 10px 13px; margin-bottom: 8px; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .compl-card.amber { border-left-color: var(--amber); }
+  .compl-card.blue  { border-left-color: var(--blue); }
+  .compl-card.teal  { border-left-color: var(--teal); }
+  .compl-card.red   { border-left-color: var(--red); }
+  .compl-card.purple{ border-left-color: var(--purple); }
+  .compl-card-title { font-weight: 700; font-size: .84rem; margin-bottom: 4px; }
+
+  ul.ul-clean { list-style: none; }
+  ul.ul-clean li { padding: 3px 0 3px 14px; position: relative; font-size: .83rem; }
+  ul.ul-clean li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); }
+
+  /* Grade badges */
+  .grade-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 7px; font-weight: 800; font-size: .82rem; color: #fff; flex-shrink: 0; }
+  .g1 { background: var(--teal); }
+  .g2 { background: var(--blue); }
+  .g3 { background: var(--amber); }
+  .g4 { background: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="item-tag">Item 288 · Gastro-entérologie · Proctologie</div>
+  <h1>Pathologie hémorroïdaire</h1>
+  <div class="overview">
+    <strong>Vision globale du chapitre :</strong> Les hémorroïdes sont des structures vasculaires <em>normales</em> — seules les formes <em>symptomatiques</em> se traitent. Distinguer hémorroïdes internes (classées en grades I–IV) des externes (seule complication : la thrombose). Connaître le tableau clinique typique de chaque entité, le tableau différentiel de la douleur anale, les 4 règles du préambule thérapeutique, et la hiérarchie des traitements : RHD → médicaments (cure courte) → instrumental (fond) → chirurgical (formes évoluées/récidivantes). La thrombose hémorroïdaire externe est bénigne et spontanément résolutive, mais justifie une incision/excision ou des AINS pour raccourcir l'évolution douloureuse.
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 1. DÉFINITION + ANATOMIE ==================== -->
+<div class="section-title">Définition et anatomie</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-coral">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <div class="alert alert-blue" style="margin-bottom:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Les hémorroïdes sont des <strong>structures vasculaires anatomiques normales de l'anus</strong> — pas une pathologie en soi.</span>
+    </div>
+    <p style="font-size:.82rem; margin-bottom:6px;"><strong>Composition :</strong></p>
+    <ul class="ul-clean">
+      <li>Lacs veineux dilatés</li>
+      <li>Petites artérioles ou shunts artério-veineux</li>
+      <li>Tissu de soutien (fibres musculaires lisses + collagène)</li>
+      <li>Épithélium de revêtement</li>
+    </ul>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Rôle fonctionnel</span><span class="kv-val">Système anastomotique porto-systémique + continence fine (tonus de repos)</span></div>
+    <div class="kv-row"><span class="kv-key">Fréquence</span><span class="kv-val">1/3 de la population adulte française symptomatique/an · 1/3 seulement consulte</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Interne vs Externe
+    </div>
+    <table>
+      <thead><tr><th></th><th>Hémorroïdes internes</th><th>Hémorroïdes externes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Localisation</strong></td>
+          <td>Partie haute du canal anal</td>
+          <td>Péri-anal</td>
+        </tr>
+        <tr>
+          <td><strong>Épithélium</strong></td>
+          <td>Intestinal (muqueuse)</td>
+          <td>Malpighien (peau)</td>
+        </tr>
+        <tr>
+          <td><strong>Visibilité</strong></td>
+          <td>Anuscopie (sauf grade IV)</td>
+          <td>Uniquement si <strong>thrombose</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Palpation</strong></td>
+          <td>Non palpables (TR insuffisant)</td>
+          <td>Palpable si thrombose</td>
+        </tr>
+        <tr>
+          <td><strong>Complication</strong></td>
+          <td>Procidence (grades I–IV), saignements</td>
+          <td>Thrombose hémorroïdaire externe</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 2. PHYSIOPATHOLOGIE ==================== -->
+<div class="section-title">Physiopathologie</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Deux théories (partiellement comprises)
+  </div>
+  <div class="grid-2">
+    <div class="compl-card blue">
+      <div class="compl-card-title" style="color:var(--blue);">Théorie mécanique</div>
+      <ul class="ul-clean">
+        <li>Fragilisation du tissu de soutien des hémorroïdes internes</li>
+        <li>Long temps passé à la selle, efforts de poussée (dyschésie)</li>
+        <li>Selles dures, accouchement</li>
+      </ul>
+    </div>
+    <div class="compl-card amber">
+      <div class="compl-card-title" style="color:var(--amber);">Théorie vasculaire</div>
+      <ul class="ul-clean">
+        <li>Apparentée à l'insuffisance veineuse</li>
+        <li>Mais : hémorroïdes ≠ veines (pas de valvules) et saignements rouges artériels</li>
+        <li>Argument : augmentation en fin de grossesse + efficacité à court terme des veinotoniques</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong>Pas de corrélation anatomo-clinique :</strong> on peut se plaindre de petites hémorroïdes ou avoir d'importantes hémorroïdes sans aucun symptôme.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 3. CLINIQUE ==================== -->
+<div class="section-title">Manifestations cliniques</div>
+
+<!-- Hémorroïdes internes — grades -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-coral">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Hémorroïdes internes — Classification par grade (procidence)
+  </div>
+  <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px;">
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div class="grade-badge g1">I</div>
+      <div style="padding-top:4px;"><strong>Grade I :</strong> Pas de procidence dans la lumière de l'anuscope — saignements possibles</div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div class="grade-badge g2">II</div>
+      <div style="padding-top:4px;"><strong>Grade II :</strong> Procidence dans la lumière de l'anuscope, <em>pas à l'extérieur</em></div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div class="grade-badge g3">III</div>
+      <div style="padding-top:4px;"><strong>Grade III :</strong> Procidence à l'extérieur en poussée, <strong>réintégration spontanée</strong> en fin de poussée</div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div class="grade-badge g4">IV</div>
+      <div style="padding-top:4px;"><strong>Grade IV :</strong> <strong>Procidence permanente</strong> — hémorroïdes internes visibles à l'extérieur de l'anus, anuscopie souvent inutile</div>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="compl-card">
+      <div class="compl-card-title" style="color:var(--coral);">Crise hémorroïdaire (aiguë)</div>
+      <ul class="ul-clean">
+        <li>Cuisson, tension, douleur vive de l'anus</li>
+        <li>Saignements rouges défécatoires (<em>épistaxis anal</em>) — spectaculaires, non mélangés aux matières</li>
+        <li>Tuméfaction anale ou tension interne sensible</li>
+        <li>Début rapide, durée quelques jours, accentués par la défécation</li>
+      </ul>
+    </div>
+    <div class="compl-card amber">
+      <div class="compl-card-title" style="color:var(--amber);">Maladie hémorroïdaire chronique</div>
+      <ul class="ul-clean">
+        <li>Brûlures anales défécatoires et post-défécatoires peu durables</li>
+        <li>Procidence anale ± réductible après défécation</li>
+        <li>Saignements chroniques — évolution périodique</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Prurit anal :</strong> relation causale avec les hémorroïdes ténue. Ne pas proposer de traitement instrumental ou chirurgical pour un prurit anal chronique.</span>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Anémie ferriprive hémorroïdaire :</strong> très rare — éliminer toute autre cause d'abord avant de l'attribuer aux hémorroïdes.</span>
+  </div>
+</div>
+
+<!-- Thrombose externe -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-red">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Thrombose hémorroïdaire externe — Diagnostic
+  </div>
+  <div class="kv-row"><span class="kv-key">Aspect</span><span class="kv-val">Tuméfaction <strong>bleutée</strong>, indurée, sensible, souvent localisée</span></div>
+  <div class="kv-row"><span class="kv-key">Signes associés</span><span class="kv-val">Réaction œdémateuse, modification des plis radiés</span></div>
+  <div class="kv-row"><span class="kv-key">Douleur</span><span class="kv-val">Intense, au toucher/appui, quelques heures à quelques jours</span></div>
+  <div class="kv-row"><span class="kv-key">Anuscopie</span><span class="kv-val"><strong>Non indiquée</strong> en phase aiguë (douloureuse, inutile au diagnostic)</span></div>
+  <div style="margin-top:10px;">
+    <p style="font-size:.78rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">ÉVOLUTION SPONTANÉE :</p>
+    <ul class="ul-clean">
+      <li>Affection <strong>bénigne</strong>, ne se complique pas</li>
+      <li>Résorption lente (plusieurs jours) → possible cicatrice en relief = <strong>marisque</strong></li>
+      <li>Parfois ulcération au sommet → saignement chronique par mobilisation partielle du caillot</li>
+      <li>Complications suppuratives : <strong>exceptionnelles</strong></li>
+      <li>Récidives possibles, y compris sur le même site</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 4. DIAGNOSTIC DIFFÉRENTIEL ==================== -->
+<div class="section-title">Diagnostic différentiel — Tableau de la douleur anale</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-purple">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Orientation étiologique selon le type de douleur anale
+  </div>
+  <div class="alert alert-red" style="margin-bottom:10px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Délit d'hémorroïde :</strong> ne pas attribuer a priori toute plainte proctologique aux hémorroïdes — suppuration, fissure, cancer peuvent se cacher derrière.</span>
+  </div>
+  <table>
+    <thead><tr><th>Douleur</th><th>Rythme</th><th>Durée</th><th>Signes associés</th><th>Diagnostic à évoquer</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-coral">Cuisson</span></td>
+        <td>À la selle</td>
+        <td>1–2 jours</td>
+        <td>Œdème, procidence, saignement</td>
+        <td><strong>Crise hémorroïdaire</strong></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Douleur intense</span></td>
+        <td>Au toucher/appui</td>
+        <td>Quelques heures à quelques jours</td>
+        <td>Tuméfaction anale douloureuse bien limitée, bleutée</td>
+        <td><strong>Thrombose hémorroïdaire externe</strong></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Brûlure</span></td>
+        <td>À la selle + longtemps après (heures)</td>
+        <td>Périodes de plusieurs semaines</td>
+        <td>Saignement</td>
+        <td><strong>Fissure anale</strong></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Tension</span></td>
+        <td>Au toucher/appui</td>
+        <td>Continue, inflammatoire (heures)</td>
+        <td>Tuméfaction douloureuse mal limitée, dysurie</td>
+        <td><strong>Abcès anal</strong></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Épreintes</span></td>
+        <td>Avant la selle</td>
+        <td>Plusieurs jours</td>
+        <td>Suintements</td>
+        <td><strong>Fécalome / Cancer</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>L'examen clinique doit aussi rechercher : <strong>fissure anale</strong> (pôle postérieur, diagnostic d'inspection), abcès/fistule, condylomes, marisques, <strong>cancer du canal anal ou du rectum</strong>.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 5. FACTEURS FAVORISANTS ==================== -->
+<div class="section-title">Facteurs favorisants</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-amber">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Principaux facteurs
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Constipation chronique</span>
+    <span class="pill pill-red">Efforts de poussée (dyschésie)</span>
+    <span class="pill pill-red">Long temps passé à la selle</span>
+    <span class="pill pill-amber">Grossesse et accouchement</span>
+    <span class="pill pill-amber">Selles dures</span>
+    <span class="pill pill-amber">Régime pauvre en fibres</span>
+    <span class="pill pill-purple">Obésité</span>
+    <span class="pill pill-purple">Sédentarité</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 6. TRAITEMENT ==================== -->
+<div class="section-title">Les 4 règles du préambule thérapeutique</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Principes fondamentaux
+  </div>
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div style="width:26px; height:26px; border-radius:50%; background:var(--coral); color:#fff; font-weight:800; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+      <div style="padding-top:3px; font-size:.83rem;"><strong>Traitement réservé aux formes symptomatiques</strong> — les hémorroïdes ne présentent aucun risque de dégénérescence ni de complication vitale.</div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div style="width:26px; height:26px; border-radius:50%; background:var(--coral); color:#fff; font-weight:800; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+      <div style="padding-top:3px; font-size:.83rem;"><strong>Traitement de confort dans la majorité des cas</strong> — c'est la demande du patient qui dicte l'attitude thérapeutique.</div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div style="width:26px; height:26px; border-radius:50%; background:var(--coral); color:#fff; font-weight:800; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+      <div style="padding-top:3px; font-size:.83rem;"><strong>Médicaments réservés aux symptômes aigus, en cure courte</strong> — pas de traitement médical au long cours.</div>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start;">
+      <div style="width:26px; height:26px; border-radius:50%; background:var(--coral); color:#fff; font-weight:800; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</div>
+      <div style="padding-top:3px; font-size:.83rem;"><strong>Instrumental et chirurgical = traitement de fond</strong> — réservés à la prise en charge spécialisée.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">Hiérarchie des traitements</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitements — Hémorroïdes internes
+  </div>
+  <table>
+    <thead><tr><th>Niveau</th><th>Traitement</th><th>Indication</th><th>Remarques</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-teal" style="background:#d1fae5;color:#065f46;">1er</span><br><strong>RHD</strong></td>
+        <td>
+          Alimentation riche en fibres solubles (psyllium, graines de lin, chia)<br>
+          Correction de la constipation chronique<br>
+          Régulation du transit
+        </td>
+        <td>Toujours — base de toute prise en charge</td>
+        <td>Diminue le temps passé à la selle et la dyschésie. Aucun régime d'exclusion alimentaire n'a d'efficacité.</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">2ème</span><br><strong>Médicaments</strong></td>
+        <td>
+          <strong>Diosmine</strong> (veinotonique) : diminue intensité et durée de la crise<br>
+          <strong>Topiques locaux</strong> (crèmes, pommades, suppositoires) : émollients, anti-inflammatoires, anesthésiques locaux
+        </td>
+        <td>Crise aiguë uniquement — cure courte</td>
+        <td>Non indiqués si pathologie chronique dominée par saignements ou procidence.</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">3ème</span><br><strong>Instrumental</strong></td>
+        <td>
+          Sclérose chimique · Ligature élastique · Infrarouge · Coagulation bipolaire · Cryothérapie<br>
+          Application en muqueuse rectale (au-dessus du tissu hémorroïdaire)
+        </td>
+        <td>Traitement de fond de la maladie chronique — consultation spécialisée</td>
+        <td>
+          Efficacité &gt; 3 fois sur 4 ; diminue avec la durée du suivi.<br>
+          <strong>Ligature élastique CI</strong> sous anticoagulants.<br>
+          <strong>Jamais en période de poussée aiguë.</strong>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">4ème</span><br><strong>Chirurgical</strong></td>
+        <td>
+          <strong>Hémorroïdectomie</strong> (résection) — référence en termes d'efficacité<br>
+          <strong>Pexie</strong> (fixation mécanique ou thermique) — moins douloureux, récidive plus fréquente
+        </td>
+        <td>
+          Hémorroïdectomie : maladie évoluée (grade IV), récidives après traitement instrumental, thrombose externe récidivante<br>
+          Pexie : formes moins évoluées
+        </td>
+        <td>Sous anesthésie générale, péridurale ou locorégionale. Risque de séquelles fonctionnelles (incontinence) à évaluer avant.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Thrombose externe - traitement -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-red">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement de la thrombose hémorroïdaire externe
+  </div>
+  <div class="grid-2">
+    <div class="compl-card teal">
+      <div class="compl-card-title" style="color:var(--teal);">Traitement de référence — Incision / Excision</div>
+      <ul class="ul-clean">
+        <li>Réalisable en consultation, simple, avec anesthésie locale</li>
+        <li>Soulage la douleur rapidement</li>
+        <li>Raccourcit significativement l'évolution</li>
+      </ul>
+    </div>
+    <div class="compl-card amber">
+      <div class="compl-card-title" style="color:var(--amber);">Alternative médicamenteuse</div>
+      <ul class="ul-clean">
+        <li><strong>AINS</strong> : alternative à l'incision/excision</li>
+        <li><strong>Corticoïdes</strong> (cure courte) si CI aux AINS et au geste chirurgical — notamment si forte composante œdémateuse</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-green" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>La thrombose hémorroïdaire externe est <strong>bénigne et spontanément résolutive</strong> en quelques jours — le traitement vise uniquement à raccourcir et soulager l'évolution douloureuse.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SYNTHÈSE ==================== -->
+<div class="section-title">Points-clés à retenir</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Réflexes et pièges
+  </div>
+  <div class="alert alert-green">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>Les hémorroïdes sont des <strong>structures normales</strong> — aucun risque de dégénérescence. Seules les formes <strong>symptomatiques</strong> se traitent, à la demande du patient.</span>
+  </div>
+  <div class="alert alert-red" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Délit d'hémorroïde :</strong> ne jamais attribuer automatiquement toute douleur anale aux hémorroïdes — fissure, abcès, cancer du canal anal peuvent se cacher derrière. Examen clinique rigoureux obligatoire.</span>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Traitement instrumental JAMAIS en période de poussée aiguë</strong> et <strong>ligature élastique CI sous anticoagulants.</strong></span>
+  </div>
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong>Saignements rouges hémorroïdaires :</strong> rouge vif, non mélangés aux matières, défécatoires. Attribuer à des hémorroïdes uniquement après avoir éliminé toute autre cause (en particulier cancer colorectal).</span>
+  </div>
+  <div class="alert alert-green" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span><strong>Thrombose hémorroïdaire externe :</strong> bénigne, spontanément résolutive (quelques jours). Anuscopie contre-indiquée en phase aiguë. Traitement = incision/excision en consultation ou AINS.</span>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Prurit anal chronique :</strong> ne pas proposer de traitement instrumental ou chirurgical hémorroïdaire — chercher une autre étiologie.</span>
+  </div>
+</div>
+
+</body>
+</html>

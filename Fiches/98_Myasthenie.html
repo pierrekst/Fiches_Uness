@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 98 - Myasthénie</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --surface: #ffffff;
+    --text: #1a1d23;
+    --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --purple: #534AB7;
+    --purple-light: #ede9ff;
+    --teal: #1D9E75;
+    --teal-light: #d1fae9;
+    --coral: #D85A30;
+    --coral-light: #fde8e0;
+    --blue: #378ADD;
+    --blue-light: #dbeafe;
+    --red: #E24B4A;
+    --red-light: #fee2e2;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111318;
+      --surface: #1c1f26;
+      --text: #e8eaf0;
+      --text-muted: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2d2960;
+      --teal-light: #0d3d2d;
+      --coral-light: #4a2010;
+      --blue-light: #1a3454;
+      --red-light: #3d1212;
+      --amber-light: #3d2a00;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .875rem; line-height: 1.6; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: #fff; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .header::after { content: ''; position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; background: rgba(255,255,255,0.06); border-radius: 50%; }
+  .item-badge { display: inline-block; background: rgba(255,255,255,0.18); border-radius: 6px; padding: 3px 10px; font-size: .75rem; font-weight: 700; letter-spacing: .05em; margin-bottom: 8px; }
+  .header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 6px; }
+  .header-sub { font-size: .85rem; opacity: .85; }
+
+  /* OBJECTIFS */
+  .objectifs { background: var(--purple-light); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; border-left: 4px solid var(--purple); }
+  .objectifs-title { font-weight: 700; color: var(--purple); font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+  .objectifs p { font-size: .84rem; color: var(--text); line-height: 1.65; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 28px; }
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+  .section-icon { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* CARDS */
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); margin-bottom: 12px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* GRIDS */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); font-weight: 500; flex: 1; padding-right: 8px; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 600; }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  /* ALERTES */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red   { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue  { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  /* TABLEAU */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  tr:last-child td { border-bottom: none; }
+  td strong { font-weight: 700; }
+  .table-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); margin-bottom: 12px; }
+
+  /* HR */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  /* SYNTHESE */
+  .synth-card { background: linear-gradient(135deg, var(--purple-light), var(--blue-light)); border-radius: 14px; padding: 18px 20px; border: 0.5px solid var(--border); }
+
+  ul.bullet { padding-left: 18px; }
+  ul.bullet li { margin-bottom: 5px; font-size: .84rem; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="item-badge">ITEM 98</div>
+  <h1>Myasthénie</h1>
+  <div class="header-sub">Myasthenia gravis &mdash; Maladie auto-immune de la jonction neuromusculaire (bloc post-synaptique)</div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <div class="objectifs-title">Vue d'ensemble</div>
+  <p>La myasthénie est une maladie auto-immune par anticorps dirigés contre les récepteurs post-synaptiques (anti-RACh principalement, anti-MuSK). Le maitre-symptôme est une <strong>fatigabilité musculaire fluctuante</strong> : aggravée à l'effort et en fin de journée, améliorée au repos, sans aucun signe sensitif ni central. L'étudiant doit savoir : diagnostiquer cliniquement et paracliniquement une myasthénie, distinguer la forme oculaire pure de la forme généralisée, reconnaître en urgence la <strong>crise myasthénique</strong> (insuffisance respiratoire aiguë), la différencier de la <strong>crise cholinergique</strong> (surdosage), et maîtriser les principes thérapeutiques et la liste des <strong>médicaments contre-indiqués</strong>.</p>
+</div>
+
+<hr>
+
+<!-- PHYSIOPATHOLOGIE -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Physiopathologie
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Mécanisme auto-immun
+      </div>
+      <ul class="bullet">
+        <li><strong>Bloc post-synaptique</strong> : anticorps bloquent les récepteurs à l'acétylcholine (RACh) de la plaque motrice</li>
+        <li><strong>Anti-RACh</strong> : 80 % des formes généralisées, 50 % des formes oculaires</li>
+        <li><strong>Anti-MuSK</strong> (Muscle Specific Kinase) : ~10 % des formes généralisées, anti-RACh négatifs</li>
+        <li><strong>Pas de trouble sensitif, pas de signe central</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Rôle du thymus
+      </div>
+      <div class="kv-row"><span class="kv-key">Hyperplasie thymique</span><span class="kv-val">60 % (femmes &lt; 45 ans, anti-RACh+)</span></div>
+      <div class="kv-row"><span class="kv-key">Thymome</span><span class="kv-val">15–20 % (après 40 ans)</span></div>
+      <div class="kv-row"><span class="kv-key">Thymome malin</span><span class="kv-val">taux anti-RACh très élevé</span></div>
+      <div style="font-size:.82rem; color:var(--text-muted); margin-top:8px;">Cellules myoïdes thymiques → stimulation Ac anti-RACh via LT helper → LB</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background: var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">20–40 ans</span><span class="kv-val">Prédominance féminine</span></div>
+    <div class="kv-row"><span class="kv-key">&gt; 60 ans</span><span class="kv-val">Prédominance masculine</span></div>
+    <div class="kv-row"><span class="kv-key">Tout âge</span><span class="kv-val">Possible</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- CLINIQUE -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Sémiologie clinique
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:14px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Signature clinique :</strong> faiblesse musculaire fluctuante — apparaît/s'aggrave à l'effort et en fin de journée, s'améliore au repos. Peut atteindre des muscles non sollicités lors de l'effort. <strong>Zéro trouble sensitif. Zéro signe central.</strong> L'examen peut être normal en période intercritique.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Muscles oculaires et palpébraux
+      </div>
+      <ul class="bullet">
+        <li><strong>Ptosis</strong> : unilatéral au début, asymétrique, aggravé regard vers le haut</li>
+        <li><strong>Ptosis à bascule</strong> : quasi-pathognomonique</li>
+        <li><strong>Test au glaçon positif</strong> : améliore le ptosis (poche plastique 2 min sur l'oeil fermé)</li>
+        <li><strong>Diplopie</strong> : intermittente, disparaît en vision monoculaire, difficile à analyser (pas d'atteinte précise d'un nerf oculomoteur)</li>
+        <li><strong>Pupille indemne</strong> (absence d'atteinte muscarinique)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--coral);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Muscles bulbaires
+      </div>
+      <ul class="bullet">
+        <li><strong>Déglutition :</strong> fausses routes, reflux nasal des liquides, sonde gastrique parfois nécessaire</li>
+        <li><strong>Mastication :</strong> fatigabilité en cours de repas (sujet soutient sa mâchoire)</li>
+        <li><strong>Phonation :</strong> voix qui s'éteint progressivement, puis nasonnée, puis inintelligible</li>
+        <li><strong>Faciès atone :</strong> parésie faciale — sourire vertical évocateur</li>
+        <li>Troubles de la motricité linguale</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Membres et muscles axiaux
+      </div>
+      <ul class="bullet">
+        <li><strong>Prédominance proximale</strong> aux membres (atteinte distale rare)</li>
+        <li>Barré et Mingazzini pathologiques (N : 2 min 30 / 1 min 15)</li>
+        <li>Muscles abdominaux : difficultés à se relever du décubitus</li>
+        <li>Muscles cervicaux : chute de la tête en avant, douleurs cervicales</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--red);">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--red);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Muscles respiratoires — URGENCE
+      </div>
+      <ul class="bullet">
+        <li>Dyspnée d'effort puis de repos, orthopnée, toux inefficace</li>
+        <li><strong>Insuffisance respiratoire aiguë possible</strong> — pronostic vital engagé</li>
+        <li>Apparition brutale possible en quelques heures</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- FORMES CLINIQUES -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Formes cliniques
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>Myasthénie oculaire pure</th>
+          <th>Myasthénie généralisée</th>
+          <th>Forme anti-MuSK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Définition</strong></td>
+          <td>Atteinte limitée aux muscles oculaires après <strong>2 ans</strong> d'évolution</td>
+          <td>Atteinte au-delà des muscles oculaires</td>
+          <td>Anti-MuSK+ (~10 % formes généralisées)</td>
+        </tr>
+        <tr>
+          <td><strong>Épidémio</strong></td>
+          <td>Prédominance masculine, &gt; 40 ans</td>
+          <td>Variable (F 20–40 ans ; H &gt; 60 ans)</td>
+          <td>Prédominance féminine</td>
+        </tr>
+        <tr>
+          <td><strong>Anti-RACh</strong></td>
+          <td>Absent dans 50 % des cas</td>
+          <td>80 %</td>
+          <td>Négatifs</td>
+        </tr>
+        <tr>
+          <td><strong>Thymome</strong></td>
+          <td>Rare</td>
+          <td>15–20 %</td>
+          <td>Absent</td>
+        </tr>
+        <tr>
+          <td><strong>ENMG décrément</strong></td>
+          <td>Souvent négatif (couples extra-oculaires testés)</td>
+          <td>Décrément &gt; 10 %</td>
+          <td>Souvent négatif</td>
+        </tr>
+        <tr>
+          <td><strong>Anticholinestérasiques</strong></td>
+          <td>Mauvaise réponse</td>
+          <td>Bonne réponse habituelle</td>
+          <td>Mauvaise réponse / intolérance</td>
+        </tr>
+        <tr>
+          <td><strong>Particularités</strong></td>
+          <td>Surtout problème fonctionnel</td>
+          <td>Risque crise myasthénique</td>
+          <td>Atrophie de la langue, crises respiratoires fréquentes, échanges plasmatiques &gt; IgIV, <strong>Rituximab très efficace</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> le diagnostic de myasthénie oculaire ne peut être posé qu'après <strong>2 ans</strong> d'évolution sans généralisation. Dans 50 % des cas, les premières manifestations sont purement oculaires — une généralisation tardive reste possible.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- DIAGNOSTIC PARACLINIQUE -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic paraclinique
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Autoanticorps (1re intention)
+      </div>
+      <div class="kv-row"><span class="kv-key">Anti-RACh — forme généralisée</span><span class="kv-val">80 %</span></div>
+      <div class="kv-row"><span class="kv-key">Anti-RACh — forme oculaire</span><span class="kv-val">50 %</span></div>
+      <div class="kv-row"><span class="kv-key">Anti-MuSK</span><span class="kv-val">~10 % formes généralisées</span></div>
+      <div class="kv-row"><span class="kv-key">Taux d'Ac ↔ gravité</span><span class="kv-val">Pas de corrélation</span></div>
+      <div class="kv-row"><span class="kv-key">Taux ↔ évolutivité (même patient)</span><span class="kv-val">Corrélation possible</span></div>
+      <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div><strong>Piège :</strong> négativité n'exclut pas le diagnostic — répéter à 3–6 mois (positivation secondaire possible)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        ENMG — Stimulodétection répétitive
+      </div>
+      <ul class="bullet">
+        <li>Stimulation nerveuse à <strong>3 Hz</strong></li>
+        <li><strong>Décrément &gt; 10 %</strong> de l'amplitude du potentiel moteur = bloc neuromusculaire</li>
+        <li>Sensibilité &le; 75 % — si négatif : <strong>EMG fibre unique</strong> (jitter) dans centres spécialisés</li>
+        <li>Réaliser sans anticholinestérasique, sur plusieurs couples nerf-muscle (territoires symptomatiques)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background: var(--coral);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Test pharmacologique aux anticholinestérasiques
+    </div>
+    <div class="alert alert-red" style="margin-bottom:12px;">
+      <div class="alert-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div><strong>En hospitalisation uniquement</strong> — risque de syndrome vagotonique ou de crise cholinergique</div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700; font-size:.83rem; margin-bottom:6px; color:var(--text);">Edrophonium IV (Enlon® 10 mg)</div>
+        <div class="kv-row"><span class="kv-key">Délai d'action</span><span class="kv-val">&lt; 5 min</span></div>
+        <div class="kv-row"><span class="kv-key">Atropine associée</span><span class="kv-val">0,25 mg (bradycardie)</span></div>
+      </div>
+      <div>
+        <div style="font-weight:700; font-size:.83rem; margin-bottom:6px; color:var(--text);">Néostigmine SC/IM (Prostigmine® 0,5 mg)</div>
+        <div class="kv-row"><span class="kv-key">Délai d'action</span><span class="kv-val">15 min – 1 heure</span></div>
+        <div class="kv-row"><span class="kv-key">Atropine associée</span><span class="kv-val">0,25 mg</span></div>
+      </div>
+    </div>
+    <div style="font-size:.82rem; margin-top:8px; color:var(--text-muted);">Interprétation : amélioration franche et rapide des signes objectivables (ptosis, déficit moteur, signes bulbaires) = test positif à forte valeur diagnostique.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PATHOLOGIES ASSOCIÉES -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Pathologies associées &mdash; Bilan systématique
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Thymus (toujours rechercher)
+      </div>
+      <div class="kv-row"><span class="kv-key">Hyperplasie thymique</span><span class="kv-val">60 %</span></div>
+      <div class="kv-row"><span class="kv-key">Thymome (bénin ou malin)</span><span class="kv-val">15–20 %</span></div>
+      <div class="kv-row"><span class="kv-key">Examen de référence</span><span class="kv-val">Scanner thoracique systématique</span></div>
+      <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div><strong>Piège :</strong> injection d'iode <strong>contre-indiquée en poussée</strong> (peut aggraver une myasthénie instable)</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Maladies auto-immunes associées
+      </div>
+      <div class="kv-row"><span class="kv-key">Pathologie thyroïdienne (Basedow, thyroïdite)</span><span class="kv-val">~10 %</span></div>
+      <div class="kv-row"><span class="kv-key">PR, Sjögren, Biermer, LED…</span><span class="kv-val">~5 %</span></div>
+      <div style="margin-top:10px; font-size:.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.04em;">Bilan à réaliser</div>
+      <div class="pills" style="margin-top:6px;">
+        <span class="pill pill-blue">T4, TSH</span>
+        <span class="pill pill-blue">Ac antithyroïdiens</span>
+        <span class="pill pill-blue">Vitamine B12</span>
+        <span class="pill pill-blue">Facteurs rhumatoïdes</span>
+        <span class="pill pill-blue">FAN</span>
+        <span class="pill pill-blue">Ac anti-DNA, anti-ENA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- URGENCES -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--red);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Urgences &mdash; Crise myasthénique vs Crise cholinergique
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:12px;">
+    <table>
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th style="color: var(--red);">Crise myasthénique</th>
+          <th style="color: var(--amber);">Crise cholinergique</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mécanisme</strong></td>
+          <td>Poussée auto-immune</td>
+          <td>Surdosage en anticholinestérasiques</td>
+        </tr>
+        <tr>
+          <td><strong>Facteurs déclenchants</strong></td>
+          <td>Médicament CI, infection, chirurgie, post-partum</td>
+          <td>Augmentation excessive des anticholinestérasiques</td>
+        </tr>
+        <tr>
+          <td><strong>Signes communs</strong></td>
+          <td colspan="2" style="vertical-align:middle; text-align:center;"><strong>Faiblesse musculaire + détresse respiratoire aiguë</strong> — les deux crises peuvent s'intriquer</td>
+        </tr>
+        <tr>
+          <td><strong>Signes spécifiques</strong></td>
+          <td>Aggravation motrice sans signes muscariniques</td>
+          <td><strong>Fasciculations</strong>, crampes, <strong>myosis</strong>, bradycardie, nausées/vomissements/diarrhée, hypersalivation, hypersécrétion bronchique, sueurs</td>
+        </tr>
+        <tr>
+          <td><strong>Traitement</strong></td>
+          <td>Réanimation + IgIV ou échanges plasmatiques</td>
+          <td>Arrêt des anticholinestérasiques + réanimation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Signes d'alarme de crise imminente :</strong> encombrement, essoufflement au moindre effort + orthopnée, toux inefficace, fausses routes, faiblesse très marquée → appel SAMU, hospitalisation en réanimation en urgence. Sonde gastrique + intubation si nécessaire.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- TRAITEMENT -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--coral);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--coral);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        1. Anticholinestérasiques (symptomatique)
+      </div>
+      <div class="kv-row"><span class="kv-key">Pyridostigmine (Mestinon® 60 mg)</span><span class="kv-val">Durée 4h</span></div>
+      <div class="kv-row"><span class="kv-key">Ambénonium (Mytelase® 10 mg)</span><span class="kv-val">Durée 4–6h</span></div>
+      <div class="kv-row"><span class="kv-key">Posologie habituelle</span><span class="kv-val">6–8 cp/j en 3–4 prises</span></div>
+      <div class="kv-row"><span class="kv-key">Forme retard Mestinon</span><span class="kv-val">Au coucher (symptômes au réveil)</span></div>
+      <div style="font-size:.81rem; margin-top:8px; color:var(--text-muted);"><strong>EI muscariniques :</strong> diarrhées, douleurs abdo, hypersalivation, hypersécrétion bronchique, sueurs, bradycardie.<br><strong>EI nicotiniques :</strong> fasciculations, crampes.<br><strong>Anti-MuSK :</strong> mauvaise réponse / intolérance.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        2. Thymectomie
+      </div>
+      <ul class="bullet">
+        <li><strong>Toujours indiquée</strong> si thymome (quelle que soit la gravité)</li>
+        <li>Discutée chez les &lt; 50 ans, anti-RACh+, myasthénie récente (&lt; 3 ans)</li>
+        <li><strong>Jamais en urgence, jamais en poussée</strong></li>
+        <li>Bénéfice démontré mais retardé</li>
+        <li><strong>Non indiquée</strong> dans les formes anti-MuSK</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        3. Corticothérapie
+      </div>
+      <div class="kv-row"><span class="kv-key">Prednisone — dose initiale</span><span class="kv-val">1 mg/kg/j (4–6 sem.)</span></div>
+      <div class="kv-row"><span class="kv-key">Décroissance M4</span><span class="kv-val">0,5 mg/kg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Décroissance M9</span><span class="kv-val">0,25 mg/kg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Myasthénie oculaire rebelle</span><span class="kv-val">0,5 mg/kg/j</span></div>
+      <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+        <div class="alert-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div><strong>Piège :</strong> aggravation transitoire possible dans les <strong>2 premières semaines</strong> → instauration en hospitalisation ou à doses progressives</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        4. Immunosuppresseurs
+      </div>
+      <div class="kv-row"><span class="kv-key">Azathioprine (Imurel®)</span><span class="kv-val">1er choix — épargne cortisonique</span></div>
+      <div class="kv-row"><span class="kv-key">Surveillance azathioprine</span><span class="kv-val">NFS hebdo M1, puis mensuelle</span></div>
+      <div class="kv-row"><span class="kv-key">Mycophénolate (Cellcept®)</span><span class="kv-val">Alternative (CI grossesse)</span></div>
+      <div class="kv-row"><span class="kv-key">Rituximab (anti-CD20)</span><span class="kv-val">Anti-MuSK++ ; formes sévères</span></div>
+      <div class="kv-row"><span class="kv-key">Autres (formes sévères)</span><span class="kv-val">Ciclosporine, tacrolimus, cyclophosphamide, éculizumab</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px; border-left: 3px solid var(--red);">
+    <div class="card-title">
+      <div class="card-icon" style="background: var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      5. Poussée sévère — traitement d'urgence
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700; font-size:.83rem; margin-bottom:6px;">Réanimation</div>
+        <ul class="bullet">
+          <li>Hospitalisation en réanimation, appel SAMU</li>
+          <li>Sonde gastrique si troubles de déglutition</li>
+          <li>Intubation + ventilation assistée si nécessaire</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-weight:700; font-size:.83rem; margin-bottom:6px;">Immunomodulation (efficacité comparable)</div>
+        <div class="pills">
+          <span class="pill pill-blue">IgIV polyvalentes IV</span>
+          <span class="pill pill-purple">Échanges plasmatiques</span>
+        </div>
+        <div style="font-size:.81rem; margin-top:8px; color:var(--text-muted);">Effet <strong>transitoire</strong> → toujours associer un traitement de fond.<br>Forme <strong>anti-MuSK</strong> : échanges plasmatiques supérieurs aux IgIV.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:4px;">
+    <div class="card-title">
+      <div class="card-icon" style="background: var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      6. Suivi au long cours
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Paramètres guidant la stratégie</div>
+        <ul class="bullet">
+          <li>Âge du patient</li>
+          <li>Existence d'un thymome</li>
+          <li>Gravité (troubles déglutition / respiratoires)</li>
+          <li>Tolérance des traitements</li>
+          <li>Impact socio-professionnel</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Outils d'évaluation à chaque visite</div>
+        <ul class="bullet">
+          <li><strong>Score myasthénique de Garches</strong></li>
+          <li><strong>Capacité vitale</strong> si dyspnée ou toux inefficace</li>
+          <li>Éducation patient : signes d'alerte, liste CI médicamenteux</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- MÉDICAMENTS CI -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--red);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Médicaments contre-indiqués &mdash; Carte myasthénie obligatoire
+  </div>
+  <div class="grid2">
+    <div class="card" style="border-left: 3px solid var(--red);">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--red);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Contre-indications absolues
+      </div>
+      <div class="pills">
+        <span class="pill pill-red">Aminosides</span>
+        <span class="pill pill-red">Colimycine</span>
+        <span class="pill pill-red">Polymyxine</span>
+        <span class="pill pill-red">Télithromycine</span>
+        <span class="pill pill-red">Cyclines injectables</span>
+        <span class="pill pill-red">Macrolides</span>
+        <span class="pill pill-red">Fluoroquinolones</span>
+        <span class="pill pill-red">Quinine / Quinidine</span>
+        <span class="pill pill-red">Hydroxychloroquine</span>
+        <span class="pill pill-red">Procaïnamide</span>
+        <span class="pill pill-red">Bêtabloquants (y compris collyre)</span>
+        <span class="pill pill-red">Phénytoïne</span>
+        <span class="pill pill-red">Trimétha­dione</span>
+        <span class="pill pill-red">Dantrolène</span>
+        <span class="pill pill-red">D-pénicillamine</span>
+        <span class="pill pill-red">Magnésium</span>
+      </div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--amber);">
+      <div class="card-title">
+        <div class="card-icon" style="background: var(--amber);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Contre-indications relatives
+      </div>
+      <div class="pills">
+        <span class="pill pill-amber">Curarisants (atracurium possible avec monitorage strict)</span>
+        <span class="pill pill-amber">Benzodiazépines</span>
+        <span class="pill pill-amber">Neuroleptiques phénothiaziniques</span>
+        <span class="pill pill-amber">Carbamazépine</span>
+        <span class="pill pill-amber">Lithium</span>
+      </div>
+      <div style="margin-top:12px; font-size:.82rem; color:var(--text);">
+        <strong>Vaccins :</strong> vaccins vivants atténués formellement CI sous corticoïdes ou immunosuppresseurs. Grippe, tétanos, polio injectable = pas d'aggravation si myasthénie contrôlée.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background: var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés &mdash; Ce qui tombe à l'ECNi
+  </div>
+  <div class="synth-card">
+    <div class="card-title" style="margin-bottom:14px;">
+      <div class="card-icon" style="background: var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Bloc POST-synaptique</strong> (≠ Lambert-Eaton = pré-synaptique). Anticorps anti-RACh ou anti-MuSK.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Fatigabilité fluctuante</strong> : aggravée effort/soirée, améliorée repos. Ptosis asymétrique + diplopie = tableau classique. Pupille toujours indemne.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Scanner thoracique systématique</strong> à la découverte. CI injection iode en poussée.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Thymectomie</strong> toujours si thymome ; jamais en urgence / jamais en poussée. Non indiquée si anti-MuSK.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> anticorps négatifs n'excluent pas le diagnostic — répéter à 3–6 mois</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> myasthénie oculaire = diagnostic possible seulement après 2 ans sans généralisation</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> corticoïdes peuvent aggraver transitoirement au départ → instauration hospitalière ou progressive</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Crise cholinergique :</strong> fasciculations + myosis + signes muscariniques + aggravation → arrêt anticholinestérasiques + réanimation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

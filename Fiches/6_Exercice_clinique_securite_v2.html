@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 6 — Organisation de l'exercice clinique et sécurisation du parcours patient</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #eeedf8;
+    --teal: #1D9E75;
+    --teal-light: #e6f6f1;
+    --coral: #D85A30;
+    --coral-light: #fbeee9;
+    --blue: #378ADD;
+    --blue-light: #eaf2fc;
+    --red: #E24B4A;
+    --red-light: #fdeaea;
+    --amber: #C47B0A;
+    --amber-light: #fef4e3;
+    --text: #1a1a2e;
+    --text-light: #555;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --border: #e2e4ec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 40px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-num { font-size: .78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header-title { font-size: 1.45rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .htag { background: rgba(255,255,255,.18); border-radius: 20px; padding: 4px 12px; font-size: .75rem; font-weight: 600; }
+
+  /* CARDS */
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* GRIDS */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  /* KV */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: .83rem; gap: 8px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-light); flex: 1; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { border-radius: 20px; padding: 3px 11px; font-size: .78rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+  .pill-red    { background: var(--red-light);    color: var(--red); }
+
+  /* STEPS */
+  .steps { list-style: none; margin-top: 8px; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 9px; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: #e8e8f0; color: var(--text); font-size: .75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* BORDER CARDS */
+  .bcard { border-left: 4px solid; border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; background: var(--card-bg); }
+  .bcard-purple { border-color: var(--purple); }
+  .bcard-teal   { border-color: var(--teal); }
+  .bcard-blue   { border-color: var(--blue); }
+  .bcard-coral  { border-color: var(--coral); }
+  .bcard-amber  { border-color: var(--amber); }
+  .bcard-red    { border-color: var(--red); }
+  .bcard-label  { font-size: .72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+
+  /* SECTION TITLE */
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 14px; padding-left: 10px; border-left: 4px solid var(--purple); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  ul { padding-left: 18px; }
+  ul li { margin-bottom: 4px; }
+  strong { font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 6</div>
+  <div class="header-title">Organisation de l'exercice clinique et méthodes de sécurisation du parcours patient</div>
+  <div class="header-tags">
+    <span class="htag">Équipe pluriprofessionnelle</span>
+    <span class="htag">Parcours de soins</span>
+    <span class="htag">RCP / RMM / Check-list</span>
+    <span class="htag">SAMU · SMUR · SU</span>
+    <span class="htag">Urgences</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Vision globale du chapitre
+  </div>
+  <p style="font-size:.85rem; color:var(--text-light);">
+    Cet item porte sur <strong>comment les soignants travaillent ensemble et de manière sécurisée</strong>. Il faut maîtriser deux grandes thématiques : (1) les <strong>outils du travail en équipe</strong> (protocoles, RCP, check-lists, RMM) qui structurent la coordination et réduisent les erreurs ; (2) l'<strong>organisation des urgences</strong> (SAMU, SMUR, SU) et le circuit d'un appel d'urgence. La logique fil directeur : le parcours de soins doit être coordonné, sécurisé et évalué en continu.
+  </p>
+</div>
+
+<hr>
+
+<!-- SECTION 1 : EQUIPE PLURIPROFESSIONNELLE -->
+<div class="section-title">Travail en équipe pluriprofessionnelle</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <p style="font-size:.84rem;">Professionnels aux <strong>qualifications différentes et complémentaires</strong> travaillant ensemble vers un même but.</p>
+    <div class="pills" style="margin-top:10px;">
+      <span class="pill pill-purple">Médecins</span>
+      <span class="pill pill-teal">Infirmiers</span>
+      <span class="pill pill-blue">Pharmaciens</span>
+      <span class="pill pill-coral">Kinésithérapeutes</span>
+      <span class="pill pill-amber">Sage-femmes</span>
+      <span class="pill pill-purple">AS / Ergothérapeutes</span>
+      <span class="pill pill-blue">Diététiciens</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Bénéfices (4 rôles clés)
+    </div>
+    <ul style="font-size:.84rem;">
+      <li><strong>Barrière de sécurité</strong> contre les événements indésirables</li>
+      <li><strong>Facteur de qualité</strong> de la prise en charge</li>
+      <li><strong>Santé et bien-être</strong> des professionnels au travail</li>
+      <li><strong>Réponse collaborative</strong> aux besoins du patient</li>
+    </ul>
+  </div>
+</div>
+
+<!-- PARCOURS DE SOINS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Parcours de soins — définition
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span>Organiser et coordonner le <strong>juste enchaînement</strong> et <strong>au bon moment</strong> des compétences professionnelles <strong>tout au long de la prise en charge</strong> d'un patient.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : DISPOSITIFS -->
+<div class="section-title">Les 4 dispositifs du travail en équipe</div>
+
+<!-- TABLEAU COMPARATIF DES 4 OUTILS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Tableau comparatif des outils
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Outil</th>
+        <th>Qui / Quand</th>
+        <th>Objectifs</th>
+        <th>Valide le DPC ?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Protocole pluriprofessionnel</strong></td>
+        <td>Plusieurs professionnels, structure de soins ou territoire</td>
+        <td>Consensus prise en charge maladie aiguë/chronique ; aide-mémoire, checklist, aide à la prescription</td>
+        <td style="text-align:center;"><span class="pill pill-teal">Oui</span></td>
+      </tr>
+      <tr>
+        <td><strong>RCP</strong></td>
+        <td><strong>≥ 3 médecins</strong> de spécialités différentes</td>
+        <td>Meilleure prise en charge selon l'état de la science ; <strong>systématique en cancérologie</strong></td>
+        <td style="text-align:center;"><span class="pill pill-teal">Oui</span></td>
+      </tr>
+      <tr>
+        <td><strong>Check-list</strong></td>
+        <td>Bloc opératoire + activités interventionnelles</td>
+        <td>Vérification croisée identité/intervention/site opératoire/matériel/risques</td>
+        <td style="text-align:center;"><span class="pill pill-blue">Non</span></td>
+      </tr>
+      <tr>
+        <td><strong>RMM</strong></td>
+        <td>Analyse collective, rétrospective, systémique</td>
+        <td>Analyser les EIAS (décès, complication) → actions de prévention/récupération ; culture du retour d'expérience</td>
+        <td style="text-align:center;"><span class="pill pill-teal">Oui</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <!-- PROTOCOLE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Protocole pluriprofessionnel
+    </div>
+    <div class="kv-row"><span class="kv-key">Nature</span><span class="kv-val">Consensus formalisé</span></div>
+    <div class="kv-row"><span class="kv-key">Scope</span><span class="kv-val">Pathologie aiguë ou chronique</span></div>
+    <div class="kv-row"><span class="kv-key">Contenu</span><span class="kv-val">Aide-mémoire, checklist, aide Rx</span></div>
+    <div class="kv-row"><span class="kv-key">Valide DPC</span><span class="kv-val">Oui</span></div>
+  </div>
+
+  <!-- RCP -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      RCP — Réunion de Concertation Pluridisciplinaire
+    </div>
+    <div class="kv-row"><span class="kv-key">Composition</span><span class="kv-val">≥ 3 médecins, spécialités diff.</span></div>
+    <div class="kv-row"><span class="kv-key">Obligatoire en</span><span class="kv-val">Cancérologie (systématique)</span></div>
+    <div class="kv-row"><span class="kv-key">Autres indications</span><span class="kv-val">Toute prise en charge complexe</span></div>
+    <div class="kv-row"><span class="kv-key">Valide DPC</span><span class="kv-val">Oui</span></div>
+    <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> RCP n'est pas réservée à la cancérologie — toute complexité clinique peut la justifier.</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <!-- CHECK-LIST -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Check-list sécurité patient
+    </div>
+    <p style="font-size:.83rem; margin-bottom:8px;">Bloc opératoire + activités interventionnelles (endoscopie, radiologie interventionnelle, CVC, chimiothérapie...)</p>
+    <p style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Vérifications croisées :</p>
+    <div class="pills">
+      <span class="pill pill-teal">Identité patient</span>
+      <span class="pill pill-teal">Type d'intervention</span>
+      <span class="pill pill-teal">Site opératoire</span>
+      <span class="pill pill-teal">Matériel</span>
+      <span class="pill pill-teal">Risques envisagés</span>
+    </div>
+    <div class="alert alert-blue" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Inspiré du modèle <strong>aéronautique</strong> (partage d'information + vérification croisée).</span>
+    </div>
+  </div>
+
+  <!-- RMM -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      RMM — Réunion de Morbi-Mortalité
+    </div>
+    <div class="kv-row"><span class="kv-key">Type d'analyse</span><span class="kv-val">Collective, rétrospective, systémique</span></div>
+    <div class="kv-row"><span class="kv-key">Déclencheur</span><span class="kv-val">EIAS : décès, complication...</span></div>
+    <div class="kv-row"><span class="kv-key">Composantes</span><span class="kv-val">Orga. + technique + humain</span></div>
+    <div class="kv-row"><span class="kv-key">But</span><span class="kv-val">Prévention / récupération / atténuation</span></div>
+    <div class="kv-row"><span class="kv-key">Culture</span><span class="kv-val">Retour d'expérience collectif</span></div>
+    <div class="kv-row"><span class="kv-key">Valide DPC</span><span class="kv-val">Oui</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : URGENCES -->
+<div class="section-title">Organisation des urgences</div>
+
+<!-- VUE GLOBALE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Trois structures de médecine d'urgence
+  </div>
+  <div class="grid3" style="margin-top:8px; margin-bottom:0;">
+    <div class="bcard bcard-red">
+      <div class="bcard-label" style="color:var(--red);">SAMU — Centre 15</div>
+      <p style="font-size:.82rem;">Régulation médicale 24h/24, 7j/7 — numéro national unique : <strong>15</strong></p>
+    </div>
+    <div class="bcard bcard-amber">
+      <div class="bcard-label" style="color:var(--amber);">SMUR</div>
+      <p style="font-size:.82rem;">Soins sur place hors hôpital + transport vers structure adaptée</p>
+    </div>
+    <div class="bcard bcard-blue">
+      <div class="bcard-label" style="color:var(--blue);">SU — Structure des Urgences</div>
+      <p style="font-size:.82rem;">Accueil non programmé 24h/24, sans sélection, toutes urgences y compris psychiatriques</p>
+    </div>
+  </div>
+</div>
+
+<!-- SAMU DETAIL -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    SAMU — Centre 15 : missions et fonctionnement
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; margin-bottom:8px; color:var(--text-light);">MISSIONS PRINCIPALES</div>
+      <ul style="font-size:.83rem;">
+        <li><strong>Écoute médicale permanente</strong> 24h/24, 7j/7</li>
+        <li>Déterminer et déclencher la <strong>réponse la plus adaptée</strong> dans le délai le plus rapide</li>
+        <li>S'assurer de la <strong>disponibilité des moyens hospitaliers</strong> (public/privé)</li>
+        <li>Organiser le <strong>transport</strong> et l'<strong>accueil hospitalier</strong></li>
+        <li>Participer aux <strong>plans de secours</strong> et situations sanitaires exceptionnelles</li>
+        <li>Former les acteurs via les <strong>CESU</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; margin-bottom:8px; color:var(--text-light);">CIRCUIT DE L'APPEL</div>
+      <ol class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div style="font-size:.83rem;"><strong>ARM</strong> (Assistant de Régulation Médicale) : identifie lieu, appelant, nature de l'appel</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div style="font-size:.83rem;"><strong>MR</strong> (Médecin Régulateur) — <em>acte I</em> : évalue, engage les moyens pendant le dialogue (pas de retard)</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div style="font-size:.83rem;">Aide aux gestes par téléphone (ARR cardiaque...) — ARM et MR formés</div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div style="font-size:.83rem;"><strong>MR — acte II</strong> : suivi, conseils aux équipes sur place, orientation dans la bonne filière</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:12px; margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span>La régulation médicale (acte I) est un <strong>acte de télémédecine reconnu réglementairement et ordinalement</strong>. Le CRRA dispose du numéro <strong>15</strong> depuis 1978.</span>
+  </div>
+</div>
+
+<!-- SMUR + SU -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      SMUR
+    </div>
+    <div class="kv-row"><span class="kv-key">Déclenchement par</span><span class="kv-val">SAMU — Centre 15</span></div>
+    <div class="kv-row"><span class="kv-key">Mission</span><span class="kv-val">Soins sur place + pendant transport</span></div>
+    <div class="kv-row"><span class="kv-key">Lieu d'intervention</span><span class="kv-val">Hors hôpital</span></div>
+    <div class="kv-row"><span class="kv-key">SMUR spécialisé</span><span class="kv-val">SMUR Pédiatrique</span></div>
+    <p style="font-size:.82rem; margin-top:8px; color:var(--text-light);">Transport vers l'établissement <strong>désigné par le SAMU</strong>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      SU — Structure des Urgences
+    </div>
+    <div class="kv-row"><span class="kv-key">Accueil</span><span class="kv-val">Non programmé, sans sélection</span></div>
+    <div class="kv-row"><span class="kv-key">Horaires</span><span class="kv-val">24h/24, 365j/an</span></div>
+    <div class="kv-row"><span class="kv-key">Accueil IOA</span><span class="kv-val">Infirmière Organisatrice de l'Accueil</span></div>
+    <div style="font-size:.82rem; font-weight:700; margin: 8px 0 6px;">Filières internes :</div>
+    <div class="pills">
+      <span class="pill pill-red">SAUV (réglementaire)</span>
+      <span class="pill pill-blue">Filière pédiatrique (réglementaire)</span>
+      <span class="pill pill-amber">Filière courte (prise en charge rapide)</span>
+      <span class="pill pill-purple">Filière longue (examens + hospit.)</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>SAUV + filière pédia :</strong> les 2 sont réglementaires dans toute SU.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : POINTS CLES -->
+<div class="section-title">Points-clés à retenir</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Ce qui tombe à l'ECNi
+  </div>
+
+  <div class="alert alert-green" style="margin-bottom:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span>Les 3 dispositifs qui valident le DPC : <strong>protocole pluriprofessionnel, RCP, RMM</strong>. La check-list NE valide PAS le DPC.</span>
+  </div>
+
+  <div class="alert alert-green" style="margin-bottom:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span>RCP obligatoire en <strong>cancérologie</strong>, avec <strong>au moins 3 médecins de spécialités différentes</strong>.</span>
+  </div>
+
+  <div class="alert alert-amber" style="margin-bottom:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège :</strong> la RMM analyse des EIAS <em>réels</em> — elle est rétrospective, collective et systémique (pas seulement médicale : composante organisationnelle, technique, humaine).</span>
+  </div>
+
+  <div class="alert alert-amber" style="margin-bottom:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège SAMU :</strong> l'engagement des moyens peut se faire <em>pendant</em> le dialogue — l'interrogatoire médical ne retarde PAS l'intervention.</span>
+  </div>
+
+  <div class="alert alert-red" style="margin-bottom:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Urgence vitale :</strong> SAUV + filière pédiatrique sont <strong>réglementaires</strong> dans toute SU. La SAUV prend en charge les patients <em>graves</em>.</span>
+  </div>
+
+  <div class="alert alert-blue" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span>La régulation médicale par le MR = <strong>acte de télémédecine</strong> reconnu réglementairement et ordinalement (lien item 17). Le SMUR est toujours déclenché par le SAMU.</span>
+  </div>
+</div>
+
+<!-- TABLEAU RECAPITULATIF URGENCES -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Récapitulatif — Acteurs des urgences
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Structure</th>
+        <th>Numéro / Lieu</th>
+        <th>Acteur clé</th>
+        <th>Mission principale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SAMU — Centre 15</strong></td>
+        <td><strong>15</strong> (depuis 1978)</td>
+        <td>ARM + Médecin Régulateur</td>
+        <td>Régulation médicale, coordination, orientation</td>
+      </tr>
+      <tr>
+        <td><strong>SMUR</strong></td>
+        <td>Hors hôpital</td>
+        <td>Équipe médicale mobile</td>
+        <td>Soins sur place + transport médicalisé</td>
+      </tr>
+      <tr>
+        <td><strong>SU</strong></td>
+        <td>Hôpital public/privé</td>
+        <td>IOA (infirmière accueil)</td>
+        <td>Accueil non programmé 24h/24 sans sélection</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

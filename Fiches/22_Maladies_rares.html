@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 22 — Maladies rares</title>
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#ede9ff;
+    --teal:#1D9E75;   --teal-light:#d1fae5;
+    --coral:#D85A30;  --coral-light:#ffe4d6;
+    --blue:#378ADD;   --blue-light:#dbeafe;
+    --red:#E24B4A;    --red-light:#fee2e2;
+    --amber:#D97706;  --amber-light:#fef3c7;
+    --text:#1e293b; --sub:#64748b;
+    --bg:#f8fafc; --card-bg:#fff;
+    --border:#e2e8f0;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --text:#e2e8f0; --sub:#94a3b8;
+      --bg:#0f172a; --card-bg:#1e293b;
+      --border:#334155;
+      --purple-light:#312e81; --teal-light:#064e3b;
+      --blue-light:#1e3a5f; --red-light:#7f1d1d;
+      --amber-light:#78350f; --coral-light:#7c2d12;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.875rem;background:var(--bg);color:var(--text);line-height:1.6;}
+  .page{max-width:920px;margin:0 auto;padding:20px 16px;}
+
+  /* Header */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 50%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-bottom:4px;}
+  .header-title{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:12px;}
+  .header-intro{font-size:.85rem;opacity:.9;line-height:1.6;}
+
+  /* Cards */
+  .card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* Grilles */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+
+  /* KV rows */
+  .kv-table{width:100%;border-collapse:collapse;}
+  .kv-row td{padding:6px 10px;font-size:.83rem;border-bottom:1px solid var(--border);}
+  .kv-row td:first-child{color:var(--sub);font-weight:600;width:45%;}
+  .kv-row:last-child td{border-bottom:none;}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  th{background:var(--border);padding:8px 10px;text-align:left;font-weight:700;color:var(--text);}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+
+  /* Alertes */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:2px;}
+  .alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  /* Pills */
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.75rem;font-weight:700;margin:2px;}
+  .pill-blue  {background:var(--blue-light); color:var(--blue);}
+  .pill-teal  {background:var(--teal-light); color:var(--teal);}
+  .pill-red   {background:var(--red-light);  color:var(--red); }
+  .pill-amber {background:var(--amber-light);color:var(--amber);}
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral);}
+
+  /* Sections */
+  .section-title{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sub);margin:22px 0 10px;}
+
+  /* Étapes numérotées */
+  .step{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;}
+  .step-num{width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--sub);font-size:.75rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  hr{border:none;border-top:1px solid var(--border);margin:22px 0;}
+  ul{padding-left:18px;}
+  li{margin-bottom:4px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 22</div>
+  <div class="header-title">Maladies rares</div>
+  <div class="header-intro">
+    Ce chapitre couvre la définition et l'épidémiologie des maladies rares, l'organisation nationale des soins (CRMR, CCMR, FSMR, PNMR3),
+    les notions fondamentales d'errance et d'impasse diagnostique, et les 5 maladies rares à connaître impérativement pour l'ECNi :
+    hémochromatose, hémophilie, drépanocytose, thalassémies et dystrophie musculaire de Duchenne.
+    La prise en charge en ville (culture du doute, ressources Orphanet, PNDS HAS) est également examinable.
+  </div>
+</div>
+
+<hr>
+
+<!-- DÉFINITIONS ET ÉPIDÉMIOLOGIE -->
+<div class="section-title">Définitions et épidémiologie</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Définition réglementaire
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Prévalence <strong>&lt; 1/2 000</strong> en population générale<br>Source : Règlement européen sur les médicaments orphelins</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </span>
+      Épidémiologie — Chiffres clés
+    </div>
+    <table class="kv-table">
+      <tr class="kv-row"><td>Maladies répertoriées</td><td><strong>7 000</strong></td></tr>
+      <tr class="kv-row"><td>D'origine génétique</td><td><strong>80 %</strong></td></tr>
+      <tr class="kv-row"><td>Patients en France</td><td><strong>&gt; 3 millions</strong></td></tr>
+      <tr class="kv-row"><td>Dans le monde</td><td><strong>350 millions</strong></td></tr>
+      <tr class="kv-row"><td>Malades = enfants</td><td><strong>75 %</strong></td></tr>
+      <tr class="kv-row"><td>Sans diagnostic précis</td><td><strong>50 %</strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Errance / Impasse -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Errance diagnostique <span class="pill pill-amber">OIC-A</span>
+    </div>
+    <p style="font-size:.83rem;">Période allant de l'<strong>apparition des 1ers symptômes</strong> à la date à laquelle un <strong>diagnostic précis est posé</strong>.</p>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>PNMR3 : diagnostic dans l'<strong>an suivant la 1ère consultation spécialisée</strong></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Impasse diagnostique <span class="pill pill-amber">OIC-A</span>
+    </div>
+    <p style="font-size:.83rem;">Échec à définir la cause précise <strong>après toutes les investigations disponibles</strong>. Concerne :</p>
+    <ul style="font-size:.82rem;margin-top:6px;">
+      <li>Forme atypique d'une maladie connue</li>
+      <li>Maladie dont la cause génétique n'a pas encore été reconnue</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ORGANISATION DES SOINS -->
+<div class="section-title">Organisation des soins en France</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>
+    Structures — PNMR3
+  </div>
+  <table>
+    <thead><tr><th>Structure</th><th>Acronyme</th><th>Rôle</th><th>Chiffres</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Centre de Référence Maladies Rares</strong></td>
+        <td><span class="pill pill-purple">CRMR</span></td>
+        <td>Coordination, expertise, recours, recherche, formation — site coordonnateur + sites constitutifs</td>
+        <td><strong>603</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Centre de Compétence Maladies Rares</strong></td>
+        <td><span class="pill pill-blue">CCMR</span></td>
+        <td>Suivi <em>au plus proche du domicile</em> — dépend fonctionnellement du CRMR</td>
+        <td><strong>1 708</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Filière de Santé Maladies Rares</strong></td>
+        <td><span class="pill pill-teal">FSMR</span></td>
+        <td>Coordination en réseau : centres de soins, labos, structures sociales, universités, associations</td>
+        <td><strong>23</strong> nationales</td>
+      </tr>
+      <tr>
+        <td><strong>Réseaux européens de référence</strong></td>
+        <td><span class="pill pill-coral">ERN</span></td>
+        <td>Homologues européens des FSMR (20/24 concernent les maladies rares)</td>
+        <td><strong>24</strong> ERN</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      Ressources d'information
+    </div>
+    <ul style="font-size:.83rem;">
+      <li><strong>Orphanet</strong> — maladies rares et médicaments orphelins (orpha.net)</li>
+      <li><strong>Maladies Rares Info Services</strong> — écoute et soutien (maladiesraresinfo.org)</li>
+      <li><strong>PNDS HAS</strong> — Protocoles Nationaux de Diagnostic et de Soins, avec synthèse médecin traitant</li>
+      <li><strong>&gt; 250 associations</strong> de malades — Alliance Maladies Rares pour orientation</li>
+      <li><strong>ERHR</strong> — Équipes Relais Handicaps Rares (situations médico-sociales complexes)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Prise en charge en ville
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Culture du doute</strong> — devant tout tableau clinique atypique ou association inhabituelle de symptômes</div>
+    </div>
+    <ul style="font-size:.83rem;">
+      <li>Symptômes à âge précoce ou incohérents → évoquer maladie rare</li>
+      <li>Orienter vers CRMR/CCMR compétent</li>
+      <li>S'appuyer sur le PNDS HAS pour la démarche diagnostique</li>
+      <li>Informer le patient des associations disponibles</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- MALADIES RARES À CONNAÎTRE -->
+<div class="section-title">Maladies rares à connaître</div>
+
+<!-- HÉMOCHROMATOSE -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>
+    Hémochromatose
+    <span class="pill pill-coral">Gène HFE</span>
+    <span class="pill pill-blue">Autosomique récessive</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Mécanisme</td><td>Absorption intestinale excessive de fer — déficit en <strong>hepcidine</strong></td></tr>
+        <tr class="kv-row"><td>Mutation principale</td><td><strong>HFE C282Y homozygote</strong></td></tr>
+        <tr class="kv-row"><td>Fréquence</td><td>~1/200 caucasiens porteurs (pénétrance incomplète)</td></tr>
+        <tr class="kv-row"><td>Sexe</td><td>Aussi fréquent H=F ; expression plus marquée chez l'homme</td></tr>
+        <tr class="kv-row"><td>Formes rares (non-HFE)</td><td>Avant 30 ans ("juvéniles"), plus sévères, non caucasiens</td></tr>
+        <tr class="kv-row"><td>Exception</td><td>Hepcidino-résistance : transmission <strong>autosomique dominante</strong></td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;">Complications organiques</div>
+      <span class="pill pill-coral">Cirrhose → CHC</span>
+      <span class="pill pill-amber">Diabète sucré</span>
+      <span class="pill pill-blue">Insuffisance cardiaque</span>
+      <span class="pill pill-purple">Hypogonadisme</span>
+      <span class="pill pill-teal">Arthropathie</span>
+      <span class="pill pill-teal">Ostéoporose</span>
+      <span class="pill pill-coral">Mélanodermie</span>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.05em;">Biologie — Chronologie</div>
+      <table class="kv-table">
+        <tr class="kv-row"><td><strong>Précoce</strong> (hyperabsorption)</td><td>Coeff. saturation transferrine élevé</td></tr>
+        <tr class="kv-row"><td><strong>Tardif</strong> (surcharge viscérale)</td><td>Ferritinémie élevée</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> pénétrance incomplète — un homozygote C282Y peut être totalement asymptomatique. Le coefficient de saturation de la transferrine s'élève <strong>avant</strong> la ferritine.</div>
+  </div>
+</div>
+
+<!-- HÉMOPHILIE -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>
+    Hémophilie
+    <span class="pill pill-red">Liée à l'X</span>
+    <span class="pill pill-blue">Garçons</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Hémophilie A</td><td>Déficit <strong>Facteur VIII</strong> — gène F8</td></tr>
+        <tr class="kv-row"><td>Hémophilie B</td><td>Déficit <strong>Facteur IX</strong> — gène F9</td></tr>
+        <tr class="kv-row"><td>Incidence</td><td>1/5 000 naissances garçons</td></tr>
+        <tr class="kv-row"><td>Prévalence</td><td>1/12 000</td></tr>
+      </table>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin:10px 0 6px;text-transform:uppercase;letter-spacing:.05em;">Sévérité (activité facteur)</div>
+      <table class="kv-table">
+        <tr class="kv-row"><td><strong>Sévère</strong></td><td>&lt; 1 %</td></tr>
+        <tr class="kv-row"><td><strong>Modérée</strong></td><td>1 – 5 %</td></tr>
+        <tr class="kv-row"><td><strong>Mineure</strong></td><td>5 – 40 %</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;">Clinique et traitement</div>
+      <ul style="font-size:.82rem;">
+        <li>Hémorragies dès l'apprentissage de la marche</li>
+        <li><strong>Hémarthroses</strong> ++ / hématomes musculaires</li>
+        <li>Traitement : <strong>facteur antihémophilique recombinant</strong> (demande ou prophylactique)</li>
+        <li>Complication principale : <strong>anticorps inhibiteurs</strong> anti-facteur perfusé</li>
+        <li>ETP indispensable — corrections orthopédiques possibles en centres spécialisés</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> complication la plus fréquente = <strong>inhibiteurs anti-facteur</strong>, pas les hémarthroses elles-mêmes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DRÉPANOCYTOSE -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </span>
+    Drépanocytose (Anémie falciforme)
+    <span class="pill pill-purple">Gène HBB</span>
+    <span class="pill pill-blue">Autosomique récessive</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Mécanisme</td><td>Hb S → GR en faucille → hémolyse chronique + occlusion vasculaire</td></tr>
+        <tr class="kv-row"><td>Population</td><td>Africaine subsaharienne, antillaise — protection neuropaludisme</td></tr>
+        <tr class="kv-row"><td>Nouveaux cas/an</td><td>~270 en Île-de-France, ~400 en France</td></tr>
+        <tr class="kv-row"><td>Hétérozygotes Europe</td><td>~1/150 — forte prévalence en zones impaludées (15–25 % Afrique centrale)</td></tr>
+        <tr class="kv-row"><td>Dépistage</td><td><strong>Néonatal systématique</strong> en France</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;">3 types d'accidents aigus</div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Anémies graves</strong> + <strong>infections bactériennes graves</strong> + <strong>AVO</strong> (accidents vaso-occlusifs ischémiques)</div>
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em;">Traitements</div>
+      <span class="pill pill-blue">Transfusion sanguine</span>
+      <span class="pill pill-teal">Hydroxycarbamide</span>
+      <span class="pill pill-purple">Greffe CSH</span>
+      <span class="pill pill-coral">Thérapie génique</span>
+      <div style="font-size:.82rem;margin-top:6px;">Indication greffe moelle : <strong>vasculopathie cérébrale</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- THALASSÉMIES -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </span>
+    Thalassémies
+    <span class="pill pill-blue">Autosomique récessive</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Alpha-thalassémie</td><td>Réduction chaînes <strong>alpha</strong> — gènes HBA1 / HBA2</td></tr>
+        <tr class="kv-row"><td>Bêta-thalassémie</td><td>Réduction chaînes <strong>bêta</strong> — gène HBB</td></tr>
+        <tr class="kv-row"><td>Mécanisme</td><td>Déséquilibre alpha/non-alpha → précipitation + érythropoïèse inefficace + anémie</td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <thead><tr><th>Forme</th><th>Caractéristique principale</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Intermédiaire</strong></td><td>Besoins transfusionnels modérés</td></tr>
+          <tr><td><strong>Majeure</strong></td><td>Transfusions régulières <strong>vitales</strong> + chélation du fer</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-blue" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Greffe moelle osseuse proposée aux enfants si donneur HLA apparenté compatible</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DMD -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>
+    Dystrophie Musculaire de Duchenne (DMD)
+    <span class="pill pill-red">Liée à l'X</span>
+    <span class="pill pill-blue">Garçons</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Gène / protéine</td><td><strong>DMD</strong> — absence totale de dystrophine</td></tr>
+        <tr class="kv-row"><td>Prévalence (naissances masc.)</td><td>1/3 500 – 1/9 300</td></tr>
+        <tr class="kv-row"><td>CK sérique</td><td><strong>× 100 à 200</strong> la normale</td></tr>
+        <tr class="kv-row"><td>Méthode diagnostique de réf.</td><td>Analyse génétique</td></tr>
+        <tr class="kv-row"><td>Perte de marche (moy.)</td><td>9,5 ans sans stéroïdes (entre 6 et 13 ans)</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--sub);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em;">Évolution chronologique</div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div style="font-size:.82rem;">Trouble neurodéveloppement + retard de langage après 18 mois</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div style="font-size:.82rem;">Démarche <strong>dandinante</strong> + signe de <strong>Gowers</strong> positif</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div style="font-size:.82rem;">Perte de la marche (6–13 ans)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div style="font-size:.82rem;">Décès tôt à l'âge adulte (cardiaque / respiratoire)</div>
+      </div>
+      <div class="alert alert-red" style="margin-top:4px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Pronostic sévère — espérance de vie significativement réduite</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- TABLEAU COMPARATIF -->
+<div class="section-title">Tableau comparatif — 5 maladies à retenir</div>
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    Récapitulatif diagnostique rapide
+  </div>
+  <table>
+    <thead><tr><th>Maladie</th><th>Gène / Mécanisme</th><th>Transmission</th><th>Point ECNi clé</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Hémochromatose</strong></td>
+        <td>HFE C282Y / déficit hepcidine</td>
+        <td>AR (AD si hepcidino-résistance)</td>
+        <td>Sat. transferrine précoce &gt; ferritine ; cirrhose → CHC</td>
+      </tr>
+      <tr>
+        <td><strong>Hémophilie A/B</strong></td>
+        <td>F8/F9 — déficit facteur VIII ou IX</td>
+        <td>Liée à l'X</td>
+        <td>Hémarthroses ; complication = inhibiteurs anti-facteur</td>
+      </tr>
+      <tr>
+        <td><strong>Drépanocytose</strong></td>
+        <td>HBB / Hb S → GR falciformes</td>
+        <td>AR</td>
+        <td>3 accidents aigus ; dépistage néonatal systématique</td>
+      </tr>
+      <tr>
+        <td><strong>Thalassémies</strong></td>
+        <td>HBA1/2 ou HBB / réduction globine</td>
+        <td>AR</td>
+        <td>Forme majeure = transfusions vitales + chélation fer</td>
+      </tr>
+      <tr>
+        <td><strong>DMD</strong></td>
+        <td>DMD / absence dystrophine</td>
+        <td>Liée à l'X</td>
+        <td>CK × 100–200 ; Gowers ; perte marche avant 13 ans</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- POINTS CLÉS -->
+<div class="section-title">Points-clés à retenir</div>
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    Synthèse ECNi — À ne pas rater
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Définition :</strong> prévalence &lt; 1/2 000 (règlement européen médicaments orphelins). 7 000 maladies différentes, 80 % génétiques, 3 millions de patients en France.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Errance ≠ Impasse :</strong> errance = délai avant diagnostic posé ; impasse = échec définitif après toutes les investigations disponibles.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>PNMR3 :</strong> diagnostic en moins d'un an après la 1ère consultation spécialisée. Hiérarchie : CRMR (603) → CCMR (1 708) → FSMR (23 nationales).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège hémochromatose :</strong> pénétrance incomplète — homozygote C282Y peut être asymptomatique. Coeff. saturation transferrine s'élève <strong>avant</strong> la ferritine. Hepcidino-résistance = transmission dominante (exception).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège hémophilie :</strong> complication la plus fréquente = <strong>anticorps inhibiteurs</strong> anti-facteur perfusé, et non les hémarthroses en elles-mêmes.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Drépanocytose :</strong> dépistage néonatal systématique en France. Indication greffe de moelle = <strong>vasculopathie cérébrale</strong> (pas uniquement anémie sévère).</div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Ressources en ville :</strong> Orphanet (info libre), PNDS HAS (conduite diagnostique), Alliance Maladies Rares (orientation associative), ERHR (situations médico-sociales complexes).</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

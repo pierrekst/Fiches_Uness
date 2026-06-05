@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 6 – Exercice clinique & parcours sécurisé</title>
+  
+  <!-- Polices Google Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-color: rgba(148, 163, 184, 0.15);
+      --border-color-strong: rgba(148, 163, 184, 0.3);
+      --hr-color: rgba(148, 163, 184, 0.2);
+      
+      --purple: #534AB7;
+      --purple-light: rgba(83, 74, 183, 0.08);
+      --teal: #1D9E75;
+      --teal-light: rgba(29, 158, 117, 0.08);
+      --coral: #D85A30;
+      --coral-light: rgba(216, 90, 48, 0.08);
+      --blue: #378ADD;
+      --blue-light: rgba(55, 138, 221, 0.08);
+      --red: #E24B4A;
+      --red-light: rgba(226, 75, 74, 0.08);
+      --amber: #D97706;
+      --amber-light: rgba(217, 119, 6, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --card-bg: #1e293b;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color-strong: rgba(255, 255, 255, 0.15);
+        --hr-color: rgba(255, 255, 255, 0.12);
+        
+        --purple-light: rgba(83, 74, 183, 0.2);
+        --teal-light: rgba(29, 158, 117, 0.2);
+        --coral-light: rgba(216, 90, 48, 0.2);
+        --blue-light: rgba(55, 138, 221, 0.2);
+        --red-light: rgba(226, 75, 74, 0.2);
+        --amber-light: rgba(217, 119, 6, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-wrapper {
+      padding: 24px 16px 64px 16px;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--teal) 0%, #157958 50%, var(--blue) 100%);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(29, 158, 117, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .header-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .objectifs-box {
+      background: var(--teal-light);
+      border: 1px dashed var(--teal);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .objectifs-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .objectifs-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .objectifs-list li {
+      margin-bottom: 4px;
+    }
+
+    hr {
+      border: none;
+      height: 0.5px;
+      background-color: var(--hr-color);
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 0.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 12px var(--border-color);
+    }
+    .card.complication-card {
+      border-left: 4px solid var(--red);
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bg-purple { background-color: var(--purple); }
+    .bg-teal { background-color: var(--teal); }
+    .bg-coral { background-color: var(--coral); }
+    .bg-blue { background-color: var(--blue); }
+    .bg-red { background-color: var(--red); }
+    .bg-amber { background-color: var(--amber); }
+
+    .alert {
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+      line-height: 1.55;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alert strong {
+      font-weight: 800;
+    }
+    .alert-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .alert-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .alert-content {
+      flex-grow: 1;
+    }
+
+    .alert-red {
+      background: var(--red-light);
+      color: var(--red);
+      border-left: 3px solid var(--red);
+    }
+    .alert-blue {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+    }
+    .alert-green, .alert-teal {
+      background: var(--teal-light);
+      color: var(--teal);
+      border-left: 3px solid var(--teal);
+    }
+    .alert-amber {
+      background: var(--amber-light);
+      color: var(--amber);
+      border-left: 3px solid var(--amber);
+    }
+
+    .alert-red .alert-icon svg { stroke: var(--red); }
+    .alert-blue .alert-icon svg { stroke: var(--blue); }
+    .alert-green .alert-icon svg { stroke: var(--teal); }
+    .alert-teal .alert-icon svg { stroke: var(--teal); }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 20px;
+      line-height: 1;
+    }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+
+    .step-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 22px;
+      height: 22px;
+      background-color: var(--border-color-strong);
+      color: var(--text-muted);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-content {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .kv-container {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      background: var(--card-bg);
+    }
+    .kv-row:last-child {
+      border-bottom: none;
+    }
+    .kv-key {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .kv-val {
+      font-weight: 800;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    th {
+      background: var(--purple-light);
+      color: var(--purple);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+      color: var(--text);
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) td {
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .text-dense {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+    }
+    .text-dense:last-child {
+      margin-bottom: 0;
+    }
+    ul.dense-list {
+      margin: 8px 0;
+      padding-left: 20px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    ul.dense-list li {
+      margin-bottom: 4px;
+    }
+    .sub-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--teal);
+      margin: 12px 0 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="page">
+      
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-tag">ITEM 6</div>
+        <h1>Exercice clinique & Parcours sécurisé</h1>
+        <p class="header-subtitle">Travail en équipe pluriprofessionnelle, consensus et coordination des soins. Organisation de la régulation et des urgences vitales.</p>
+      </div>
+
+      <!-- OBJECTIFS -->
+      <div class="objectifs-box">
+        <div class="objectifs-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Objectifs pédagogiques (EDN)</span>
+        </div>
+        <ul class="objectifs-list">
+          <li><strong>Travail en équipe :</strong> Avantages et qualification des intervenants complémentaires.</li>
+          <li><strong>Outils cliniques de sécurité :</strong> Protocoles de soins, RCP, Check-lists de sécurité et RMM.</li>
+          <li><strong>Parcours de soins :</strong> Définition, organisation et enjeux médico-professionnels du DPC.</li>
+          <li><strong>Médecine d'urgence :</strong> Structures de soins (SAMU, SMUR, SU) et dynamique réglementaire de la régulation.</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 1 : LE TRAVAIL EN EQUIPE PLURIPROFESSIONNELLE -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-teal">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <span>Le Travail en Équipe Pluriprofessionnelle</span>
+        </div>
+        
+        <p class="text-dense">
+          L'équipe pluriprofessionnelle associe des professionnels de santé de qualifications complémentaires (médecins, pharmaciens, infirmiers, kinésithérapeutes, sages-femmes, assistants sociaux, ergothérapeutes, diététiciens) qui unissent leurs compétences dans un même but.
+        </p>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--teal);">Intérêts majeurs du travail d'équipe</strong>
+            <ul class="dense-list">
+              <li><strong>Barrière de sécurité</strong> robuste contre les événements indésirables associés aux soins (EIAS).</li>
+              <li>Garantie de <strong>qualité de la prise en charge</strong> collaborative.</li>
+              <li>Facteur de <strong>bien-être au travail</strong> et de santé pour les soignants.</li>
+            </ul>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--blue);">Parcours de soins sécurisé</strong>
+            <p class="text-dense">
+              Le <strong>parcours de soins</strong> coordonne le juste enchaînement, au bon moment, de toutes les compétences professionnelles nécessaires à la prise en charge globale d'un patient.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 : DISPOSITIFS DE SÉCURISATION ET DE CONCERTATION -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-purple">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Les Dispositifs du Travail Collaboratif</span>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Dispositif</th>
+                <th>Définition & Modalités</th>
+                <th>Objectifs & Enjeux</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700; color:var(--purple);">Protocole pluriprofessionnel</td>
+                <td>Consensus écrit sur la prise en charge d'une maladie aiguë ou chronique par plusieurs professionnels d'un territoire ou d'une structure (ex : MSP). Basé sur la science.</td>
+                <td>Facilite le travail coordonné (aide-mémoires, check-lists locales, outils de prescription) et valide l'obligation de <strong>Développement Professionnel Continu (DPC)</strong>.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--blue);">RCP<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Réunion de Concertation</span></td>
+                <td>Réunion collégiale regroupant au minimum <strong>trois médecins de spécialités différentes</strong>. Systématique en <strong>cancérologie</strong> (Item 295) ou dossiers complexes.</td>
+                <td>Garantit la meilleure stratégie diagnostique, thérapeutique et de suivi. Outil officiel validant le <strong>DPC</strong>.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--teal);">Check-list de sécurité</td>
+                <td>Liste de vérification croisée HAS en 3 étapes clés au bloc opératoire et dans les activités interventionnelles (endoscopie, chimio, cathéters).</td>
+                <td>Vérification croisée obligatoire en équipe de : <strong>identité du patient</strong>, site opératoire, type d'intervention, risques identifiés et matériel disponible. (Modèle aviation).</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--coral);">RMM<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Morbi-Mortalité</span></td>
+                <td>Réunion d'analyse collective, rétrospective, systémique d'événements indésirables (décès, complications). Liée à l'<strong>Item 4 (Gestion des risques)</strong>.</td>
+                <td>Mise en place de barrières correctives (prévention, récupération, atténuation). Incruste la <strong>culture du retour d'expérience</strong> et valide le <strong>DPC</strong>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 : L'ORGANISATION DE LA MEDECINE D'URGENCE -->
+      <div class="card complication-card">
+        <div class="card-title">
+          <div class="card-icon bg-red">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>Organisation de la Médecine d'Urgence en France</span>
+        </div>
+
+        <p class="text-dense">
+          Les soins d'urgence reposent sur trois structures clés interconnectées : le <strong>SAMU</strong>, le <strong>SMUR</strong> et les <strong>Structures des Urgences (SU)</strong>.
+        </p>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--red);">SAMU — Centre 15</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              Service hospitalier régulateur. Assure une <strong>écoute médicale permanente 24h/24 et 7j/7</strong>.
+            </p>
+            <ul class="dense-list">
+              <li>Déclenche la réponse la plus adaptée au patient.</li>
+              <li>S'assure de la disponibilité des lits d'hospitalisation publics/privés.</li>
+              <li>Organise le transport sanitaire et l'accueil hospitalier.</li>
+              <li>Participe aux plans de secours et situations sanitaires exceptionnelles (SSE).</li>
+              <li>Héberge le Centre de Réception et de Régulation des Appels (CRRA).</li>
+            </ul>
+          </div>
+          
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color: var(--blue);">SMUR — Prise en Charge Préhospitalière</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              Unités mobiles médicalisées (médecin + infirmier + ambulancier) déclenchées par le médecin régulateur du SAMU.
+            </p>
+            <ul class="dense-list">
+              <li><strong>Missions :</strong> Traitement et stabilisation sur place, réanimation et soins d'urgence hors hôpital.</li>
+              <li>Transport direct sécurisé du patient vers le plateau technique adéquat.</li>
+              <li>Existence de SMUR pédiatriques spécialisés.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sub-label">La Dynamique et la Gestion d'un Appel d'Urgence (CRRA)</div>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Processus de régulation (15) :</strong>
+            <br>1. <strong>ARM (Assistant de Régulation Médicale) :</strong> Prise en charge initiale rapide. Identifie le lieu exact de la détresse, l'appelant et l'objet de l'appel.
+            <br>2. <strong>MR (Médecin Régulateur) :</strong> Évalue la gravité clinique ("Acte I" de télémédecine, réglementé). Déclenche les moyens sans interrompre le dialogue. Conseille les témoins sur les gestes d'urgence (massage cardiaque en cas d'arrêt).
+            <br>3. <strong>ARM & MR (Acte II) :</strong> Suivi, orientation dans la filière adéquate, et organisation de l'admission à l'hôpital.
+          </div>
+        </div>
+
+        <div class="sub-label">Structures des Urgences (SU)</div>
+        <p class="text-dense">
+          Les SU hospitalières accueillent <strong>24h/24, sans sélection</strong>, toutes les venues non programmées. L'admission et l'évaluation sont formalisées par l'<strong>IOA (Infirmière Organisatrice de l'Accueil)</strong> qui effectue le tri clinique.
+        </p>
+
+        <div class="kv-container">
+          <div class="kv-row">
+            <span class="kv-key">Filière d'urgence vitale</span>
+            <span class="kv-val">Prise en charge en SAUV (Salle d'Accueil des Urgences Vitales)</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Filière courte</span>
+            <span class="kv-val">Orientation rapide des motifs ambulatoires simples</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-key">Filière longue</span>
+            <span class="kv-val">Patients complexes nécessitant des bilans ou une hospitalisation</span>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SYNTHESE FINALE -->
+      <div class="card" style="border-left: 4px solid var(--teal); background: var(--teal-light);">
+        <div class="card-title">
+          <div class="card-icon bg-teal">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Points-clés à retenir (Synthèse EDN)</span>
+        </div>
+        
+        <ul class="dense-list">
+          <li><strong>Le travail d'équipe :</strong> Barrière de sécurité collective primordiale. Il implique une multitude de professionnels listés au CSP.</li>
+          <li><strong>Consensus médico-légal :</strong> Les RCP, les RMM et les protocoles pluriprofessionnels sont des outils indispensables validant formellement l'obligation de <strong>DPC</strong>.</li>
+          <li><strong>RCP en cancérologie :</strong> Obligatoire au moins à trois médecins de spécialités distinctes pour valider toute décision thérapeutique anticancéreuse.</li>
+          <li><strong>SAMU Centre 15 :</strong> Service de régulation. L'ARM localise et identifie ; le <strong>Médecin Régulateur (MR)</strong> prend la décision médicale d'orientation ("Acte I" de télémédecine).</li>
+          <li><strong>SMUR :</strong> Plateau technique mobile de réanimation de terrain (hors hôpital), déclenché uniquement par le SAMU.</li>
+          <li><strong>SU et IOA :</strong> L'Infirmière de Tri (IOA) oriente selon les filières (SAUV, courte, longue) en fonction du niveau d'urgence clinique.</li>
+        </ul>
+
+        <div class="alert alert-amber" style="margin-top: 12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Piège classique ECNi :</strong> Ne pas confondre <strong>SAMU</strong> (Service de régulation, CRRA) et <strong>SMUR</strong> (Véhicule et équipe mobile de réanimation de terrain). C'est le SAMU qui régule et envoie le SMUR.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 149 – Angines de l'adulte et de l'enfant</title>
+<style>
+  :root {
+    --bg: #f4f5f9;
+    --surface: #ffffff;
+    --border: #e2e4ec;
+    --text: #1e2235;
+    --text-muted: #6b7280;
+    --purple: #534AB7;
+    --purple-light: #eeecfb;
+    --teal: #1D9E75;
+    --teal-light: #e6f7f2;
+    --coral: #D85A30;
+    --coral-light: #fbeee9;
+    --blue: #378ADD;
+    --blue-light: #e8f2fd;
+    --red: #E24B4A;
+    --red-light: #fdeaea;
+    --amber: #D97706;
+    --amber-light: #fef3cd;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d2e;
+      --border: #2d3148;
+      --text: #e8eaf6;
+      --text-muted: #9ca3af;
+      --purple-light: #2a2560;
+      --teal-light: #0d3d2c;
+      --coral-light: #4a2016;
+      --blue-light: #1a3558;
+      --red-light: #3d1515;
+      --amber-light: #3d2a05;
+      --gray-light: #22253a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.6; padding: 24px 16px 48px; }
+  .page { max-width: 920px; margin: 0 auto; }
+  /* Header */
+  .page-header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 20px; color: #fff; }
+  .page-header .item-badge { display: inline-block; background: rgba(255,255,255,0.22); border-radius: 8px; padding: 3px 12px; font-size: .75rem; font-weight: 700; letter-spacing: .06em; margin-bottom: 10px; }
+  .page-header h1 { font-size: 1.55rem; font-weight: 800; margin-bottom: 6px; line-height: 1.2; }
+  .page-header .subtitle { font-size: .85rem; opacity: .85; }
+  /* Vision globale */
+  .vision-box { background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; font-size: .84rem; color: var(--text); line-height: 1.65; }
+  .vision-box .vision-title { font-weight: 800; color: var(--purple); font-size: .88rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .vision-box .vision-title svg { width: 16px; height: 16px; fill: none; stroke: var(--purple); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  /* Section */
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+  .section-title svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  /* Cards */
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .ci-purple { background: var(--purple); }
+  .ci-teal   { background: var(--teal); }
+  .ci-blue   { background: var(--blue); }
+  .ci-coral  { background: var(--coral); }
+  .ci-red    { background: var(--red); }
+  .ci-amber  { background: var(--amber); }
+  /* Alertes */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue  { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+  /* Grilles */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .grid3 { grid-template-columns: 1fr; } }
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 700; }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+  .pill-red    { background: var(--red-light);     color: var(--red); }
+  .pill-blue   { background: var(--blue-light);    color: var(--blue); }
+  .pill-amber  { background: var(--amber-light);   color: var(--amber); }
+  .pill-purple { background: var(--purple-light);  color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);   color: var(--coral); }
+  /* KV rows */
+  .kv-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  .kv-table td { padding: 5px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .kv-table td:first-child { font-weight: 700; color: var(--text-muted); white-space: nowrap; width: 44%; }
+  .kv-table tr:last-child td { border-bottom: none; }
+  /* Tableaux */
+  .tbl { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 8px; }
+  .tbl th { background: var(--gray-light); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+  .tbl td { padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .tbl tr:last-child td { border-bottom: none; }
+  /* Steps */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; font-size: .84rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--gray-light); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  /* Complication cards */
+  .compl-card { border-left: 4px solid var(--red); border-radius: 10px; background: var(--surface); border: 0.5px solid var(--border); border-left-width: 4px; padding: 12px 16px; margin-bottom: 10px; font-size: .83rem; }
+  .compl-card.c-amber { border-left-color: var(--amber); }
+  .compl-card.c-blue  { border-left-color: var(--blue); }
+  .compl-card.c-teal  { border-left-color: var(--teal); }
+  .compl-title { font-weight: 800; font-size: .86rem; margin-bottom: 4px; }
+  /* HR */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+  /* Small label */
+  .label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 4px; }
+  /* Badge score */
+  .score-badge { display: inline-block; background: var(--blue-light); color: var(--blue); border-radius: 8px; padding: 2px 10px; font-size: .78rem; font-weight: 800; }
+  /* Synthèse finale */
+  .synth-card { background: linear-gradient(135deg, var(--purple-light) 0%, var(--teal-light) 100%); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+<!-- ========== HEADER ========== -->
+<div class="page-header">
+  <div class="item-badge">ITEM 149</div>
+  <h1>Angines de l'adulte et de l'enfant</h1>
+  <div class="subtitle">Infectiologie — ORL</div>
+</div>
+
+<!-- ========== VISION GLOBALE ========== -->
+<div class="vision-box">
+  <div class="vision-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Vision globale du chapitre
+  </div>
+  Ce chapitre exige de maîtriser <strong>4 formes cliniques d'angines</strong> avec leur présentation, leur étiologie et leur prise en charge spécifique. Le fil conducteur est le suivant : devant toute angine, reconnaître la forme (érythémateuse/pultacée, pseudomembraneuse, vésiculeuse, ulcéreuse) oriente directement l'étiologie et la décision thérapeutique. La forme érythémato-pultacée est de loin la plus fréquente (80-90%) et domine le programme : il faut savoir utiliser le <strong>score de Mac Isaac</strong> et le <strong>TDR</strong> pour ne prescrire l'antibiothérapie que si SGA est prouvé. Les <strong>complications suppuratives loco-régionales</strong> (phlegmon, abcès rétropharyngé...) et le <strong>syndrome de Lemierre</strong> sont des tableaux à identifier impérativement.
+</div>
+
+<!-- ========== CLASSIFICATION ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--purple);">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    Définition &amp; Classification
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-purple">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <p style="font-size:.84rem; margin-bottom:10px;">Atteinte inflammatoire de l'oropharynx touchant les amygdales.</p>
+    <table class="tbl">
+      <thead><tr><th>Forme clinique</th><th>Aspect amygdalien</th><th>Étiologie principale</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Érythémateuse / Érythémato-pultacée</strong></td>
+          <td>Hypertrophie rouge ± enduit blanchâtre punctiforme non adhérent</td>
+          <td>Viral 50–90% ; SGA si bactérien</td>
+        </tr>
+        <tr>
+          <td><strong>Pseudomembraneuse</strong></td>
+          <td>Fausses membranes grises épaisses, adhérentes, saignantes, extensives</td>
+          <td>EBV (MNI), diphtérie (C. diphtheriae)</td>
+        </tr>
+        <tr>
+          <td><strong>Vésiculeuse</strong></td>
+          <td>Vésicules sur la muqueuse pharyngée</td>
+          <td>HSV, Coxsackie A, entérovirus — toujours virale</td>
+        </tr>
+        <tr>
+          <td><strong>Ulcéreuse / Ulcéro-nécrotique</strong></td>
+          <td>Ulcération unilatérale</td>
+          <td>Association fuso-spirillaire (Vincent), T. pallidum, cancer ORL, hémopathie</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== ÉRYTHÉMATEUSES / PULTACÉES ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--blue);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Angines érythémateuses &amp; érythémato-pultacées (80–90%)
+  </div>
+
+  <div class="grid2">
+    <!-- Épidémio -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-blue">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Épidémiologie
+      </div>
+      <table class="kv-table">
+        <tr><td>Incidence</td><td>9 millions de diagnostics/an en France</td></tr>
+        <tr><td>Étiologie virale</td><td>50–90% des cas</td></tr>
+        <tr><td>SGA si bactérien</td><td>90% des angines bactériennes</td></tr>
+        <tr><td>Risque SGA maximal</td><td>5–15 ans</td></tr>
+        <tr><td>SGA très rare</td><td>&lt; 3 ans et &gt; 45 ans</td></tr>
+      </table>
+    </div>
+    <!-- Clinique -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-blue">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Signes cliniques
+      </div>
+      <p style="font-size:.82rem; margin-bottom:8px;"><strong>Diagnostic clinique.</strong> Association variable :</p>
+      <div class="pills">
+        <span class="pill pill-blue">Fièvre</span>
+        <span class="pill pill-blue">Odynophagie</span>
+        <span class="pill pill-blue">Adénopathies cervicales</span>
+        <span class="pill pill-blue">Douleur oropharynx</span>
+      </div>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Signes orientant vers l'origine virale :</strong> toux, rhinorrhée, conjonctivite, enrouement (présents dans ~50% des cas)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Étiologies -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-teal">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Étiologies détaillées
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="label">Virus (50–90%)</div>
+        <div class="pills">
+          <span class="pill pill-teal">Rhinovirus</span>
+          <span class="pill pill-teal">Coronavirus</span>
+          <span class="pill pill-teal">VRS</span>
+          <span class="pill pill-teal">Influenza</span>
+          <span class="pill pill-teal">Adénovirus</span>
+          <span class="pill pill-teal">EBV</span>
+          <span class="pill pill-teal">CMV</span>
+          <span class="pill pill-teal">VIH</span>
+        </div>
+        <p style="font-size:.79rem; margin-top:6px; color:var(--text-muted);">Avant 3 ans : quasi-exclusivement virale</p>
+      </div>
+      <div>
+        <div class="label">Bactéries</div>
+        <div class="pills">
+          <span class="pill pill-red">SGA (90%)</span>
+          <span class="pill pill-amber">Gonocoque</span>
+          <span class="pill pill-amber">Strepto B/C/F/G</span>
+          <span class="pill pill-amber">Fuso-spirillaire</span>
+          <span class="pill pill-amber">Anaérobies</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TDR + Mac Isaac -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-purple">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Stratégie diagnostique : TDR &amp; Score de Mac Isaac
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="label">Indications TDR</div>
+        <ul class="steps">
+          <li><div class="step-num">1</div><div><strong>&lt; 3 ans :</strong> aucun test, aucune antibio (toujours viral)</div></li>
+          <li><div class="step-num">2</div><div><strong>≥ 3 ans (enfant) :</strong> TDR systématique devant angine érythémato-pultacée</div></li>
+          <li><div class="step-num">3</div><div><strong>Adulte :</strong> calcul Mac Isaac d'abord → TDR si score ≥ 2</div></li>
+        </ul>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div>TDR : spécificité ~95% ; sensibilité 80–98%</div>
+        </div>
+      </div>
+      <div>
+        <div class="label">Score de Mac Isaac (adulte)</div>
+        <table class="kv-table">
+          <tr><td>Fièvre &gt; 38°C</td><td>+1</td></tr>
+          <tr><td>Exsudat amygdalien</td><td>+1</td></tr>
+          <tr><td>Adénopathies cervicales douloureuses</td><td>+1</td></tr>
+          <tr><td>Absence de toux</td><td>+1</td></tr>
+          <tr><td>&gt; 45 ans</td><td>−1</td></tr>
+        </table>
+        <div style="margin-top:10px; font-size:.82rem;">
+          <span class="score-badge">Score &lt; 2</span> → pas de TDR, pas d'antibio (VPN &gt; 95%)<br>
+          <span class="score-badge" style="margin-top:4px; display:inline-block;">Score ≥ 2</span> → TDR obligatoire
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Un score Mac Isaac ≤ 1 chez l'adulte autorise à ne pas faire le TDR et à ne pas prescrire d'antibiotique. Ne pas confondre seuil ≤ 1 (pas de TDR) et seuil &lt; 2 (même chose — mais attention à la formulation de l'item).</div>
+    </div>
+  </div>
+
+  <!-- Traitement -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-teal">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement — Angine à SGA (TDR positif)
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="label">1re intention (sans allergie)</div>
+        <table class="kv-table">
+          <tr><td>Enfant &gt; 3 ans</td><td>Amoxicilline <strong>50 mg/kg/24h</strong> en 2 prises/j — <strong>6 jours</strong></td></tr>
+          <tr><td>Adulte</td><td>Amoxicilline <strong>1g × 2/j</strong> — <strong>6 jours</strong></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="label">En cas d'allergie à la pénicilline</div>
+        <div class="pills" style="margin-top:4px;">
+          <span class="pill pill-amber">Céphalosporines</span>
+          <span class="pill pill-amber">Macrolides</span>
+        </div>
+        <div class="label" style="margin-top:10px;">Traitement symptomatique</div>
+        <div class="pills">
+          <span class="pill pill-teal">Paracétamol (antalgique)</span>
+          <span class="pill pill-red">AINS non recommandés</span>
+          <span class="pill pill-red">Corticoïdes non recommandés</span>
+        </div>
+        <p style="font-size:.79rem; margin-top:6px; color:var(--text-muted);">Arrêt de travail référence : 3 jours (adaptable)</p>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> TDR négatif = pas d'antibiotique, même si tableau clinique "évocateur". L'antibiothérapie n'est justifiée QUE si TDR positif.</div>
+    </div>
+    <div class="alert alert-blue" style="margin-top:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Signes d'alerte à informer le patient :</strong> fièvre &gt; 3 j ou réapparition, symptômes &gt; 10 j, gêne respiratoire, conjonctivite purulente, œdème palpébral, éruption cutanée, troubles digestifs → ré-évaluation rapide.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== COMPLICATIONS ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Complications
+  </div>
+
+  <!-- Suppuratives loco-régionales -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-red">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Complications suppuratives loco-régionales (4 à connaître)
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Complication</th><th>Signes caractéristiques</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Phlegmon périamygdalien</strong></td>
+          <td>Trismus + tuméfaction voile du palais + œdème de la luette</td>
+        </tr>
+        <tr>
+          <td><strong>Abcès rétropharyngé</strong></td>
+          <td>Fièvre + dysphagie + dyspnée ; chez l'enfant : <strong>torticolis fébrile</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Adénophlegmon (abcès parapharyngé)</strong></td>
+          <td>Douleurs cervicales → torticolis fébrile + altération état général</td>
+        </tr>
+        <tr>
+          <td><strong>Cellulite cervicale</strong></td>
+          <td>Placard inflammatoire cervical extensif ± crépitants sous-cutanés</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Complications générales -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-coral">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Complications générales par forme
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="label">Angine à SGA</div>
+        <div class="pills">
+          <span class="pill pill-red">RAA (rare en France)</span>
+          <span class="pill pill-red">GNA post-strepto</span>
+          <span class="pill pill-amber">Scarlatine</span>
+          <span class="pill pill-red">Choc toxinique strepto</span>
+        </div>
+      </div>
+      <div>
+        <div class="label">Angine pseudomembraneuse</div>
+        <div class="pills">
+          <span class="pill pill-red">Anémie hémolytique (MNI)</span>
+          <span class="pill pill-red">Purpura thrombo (MNI)</span>
+          <span class="pill pill-red">Atteinte neuro (MNI)</span>
+          <span class="pill pill-red">Rupture de rate (MNI)</span>
+          <span class="pill pill-amber">Complications cardiaques (diphtérie)</span>
+          <span class="pill pill-amber">Complications neuro (diphtérie)</span>
+        </div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px;">
+      <div>
+        <div class="label">Angine vésiculeuse</div>
+        <div class="pills">
+          <span class="pill pill-amber">Gingivostomatite herpétique sévère</span>
+        </div>
+      </div>
+      <div>
+        <div class="label">Angine ulcéreuse (Vincent)</div>
+        <div class="pills">
+          <span class="pill pill-red">Syndrome de Lemierre</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lemierre -->
+  <div class="card" style="border-left: 4px solid var(--red);">
+    <div class="card-title">
+      <div class="card-icon ci-red">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Syndrome de Lemierre — à identifier impérativement
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Mécanisme :</strong> thrombophlébite jugulaire septique → emboles pulmonaires septiques</div>
+    </div>
+    <table class="kv-table">
+      <tr><td>Contexte</td><td>Angine de Vincent (fuso-spirillaire) compliquée</td></tr>
+      <tr><td>Signes généraux</td><td>État fébrile, altération de l'état général</td></tr>
+      <tr><td>Signes respiratoires</td><td>Dyspnée, douleurs pleurétiques, hémoptysies</td></tr>
+      <tr><td>Autres</td><td>Douleurs ostéo-articulaires, abdominales, ictère</td></tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== PSEUDOMEMBRANEUSES ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--teal);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Angines pseudomembraneuses
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Aspect :</strong> fausses membranes grises, épaisses, adhérentes, saignantes, extensives au-delà des piliers — peuvent couvrir la luette. Purpura du voile possible dans la MNI.</div>
+  </div>
+
+  <div class="grid2">
+    <!-- EBV -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-teal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        MNI à EBV (mononucléose infectieuse)
+      </div>
+      <div class="label">Bilan</div>
+      <div class="pills" style="margin-bottom:8px;">
+        <span class="pill pill-teal">NFS : syndrome mononucléosique</span>
+        <span class="pill pill-teal">Cytolyse hépatique modérée</span>
+        <span class="pill pill-teal">MNI-test (peu sensible &lt; 10 ans)</span>
+        <span class="pill pill-teal">IgM anti-VCA</span>
+      </div>
+      <div class="label">Traitement</div>
+      <div class="pills">
+        <span class="pill pill-blue">Antalgiques / antipyrétiques</span>
+        <span class="pill pill-amber">Corticoïdes si forme grave (avis spécialisé)</span>
+      </div>
+      <div class="alert alert-red" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>INTERDIT :</strong> Amoxicilline dans la MNI → exanthème maculopapuleux généralisé (piège classique ECNi)</div>
+      </div>
+    </div>
+    <!-- Diphtérie -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-coral">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Diphtérie — Corynebacterium diphtheriae
+      </div>
+      <div class="label">Examens</div>
+      <div class="pills" style="margin-bottom:8px;">
+        <span class="pill pill-red">NFS : hyperleucocytose PNN</span>
+        <span class="pill pill-red">Prélèvement gorge : bacilles Gram+ (direct + culture)</span>
+        <span class="pill pill-red">PCR gène de la toxine</span>
+      </div>
+      <div class="label">Complications redoutées</div>
+      <div class="pills">
+        <span class="pill pill-red">Myocardite diphtérique</span>
+        <span class="pill pill-red">Neuropathie diphtérique</span>
+      </div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Contexte :</strong> patient non vacciné ou voyage en zone endémique — toujours évoquer devant une fausse membrane extensive.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== VÉSICULEUSES ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--teal);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Angines vésiculeuses — Toujours virales
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon ci-teal">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Étiologies, clinique &amp; prise en charge
+    </div>
+    <table class="tbl">
+      <thead><tr><th>Contexte</th><th>Virus</th><th>Particularité clinique</th><th>Traitement</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Enfant &lt; 7 ans</strong></td>
+          <td>Coxsackie A</td>
+          <td>Début brutal, guérison 2–4 j<br>± syndrome main-pied-bouche</td>
+          <td>Symptomatique (soins de bouche, antalgiques, réhydratation)</td>
+        </tr>
+        <tr>
+          <td><strong>Adulte</strong></td>
+          <td>HSV1 (primo-infection)</td>
+          <td>Gingivostomatite marquée et très douloureuse</td>
+          <td>Symptomatique ± antiviral si primo-infection herpétique</td>
+        </tr>
+        <tr>
+          <td><strong>Unilatérale + douleur intense</strong></td>
+          <td>Zona glosso-pharyngien (VZV)</td>
+          <td>Très rare — évoquer si unilatéral + douleurs intenses</td>
+          <td>Antiviral</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>À retenir :</strong> aucun examen complémentaire nécessaire. Évolution naturelle = guérison. Jamais d'antibiotique.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== ULCÉREUSES ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Angines ulcéreuses &amp; ulcéro-nécrotiques
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Clinique commune :</strong> <strong>unilatérales</strong> — odynophagie unilatérale, ulcération amygdalienne, fièvre, adénopathies cervicales</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-coral">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Angine de Vincent (fuso-spirillaire)
+      </div>
+      <table class="kv-table">
+        <tr><td>Étiologie</td><td>Association fuso-spirillaire</td></tr>
+        <tr><td>Contexte évocateur</td><td>Mauvais état dentaire, haleine fétide</td></tr>
+        <tr><td>Type d'ulcération</td><td>Douloureuse</td></tr>
+        <tr><td>Traitement</td><td>Antibiothérapie + suivi bucco-dentaire</td></tr>
+        <tr><td>Complication redoutée</td><td>Syndrome de Lemierre</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-coral">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Chancre syphilitique (T. pallidum)
+      </div>
+      <table class="kv-table">
+        <tr><td>Étiologie</td><td>Treponema pallidum</td></tr>
+        <tr><td>Contexte évocateur</td><td>Prise de risque sexuel (rapport non protégé)</td></tr>
+        <tr><td>Type d'ulcération</td><td><strong>Indolore</strong> (critère différentiel)</td></tr>
+        <tr><td>Traitement</td><td>Antibiothérapie + éducation IST / prévention</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Devant une angine ulcéro-nécrotique traînante :</strong> éliminer un <strong>cancer ORL</strong> ou une <strong>hémopathie maligne</strong>.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========== SYNTHÈSE FINALE ========== -->
+<div class="section">
+  <div class="section-title" style="color:var(--teal);">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    Points-clés à retenir — Pièges ECNi
+  </div>
+
+  <div class="synth-card">
+    <div class="card-title" style="margin-bottom:14px;">
+      <div class="card-icon ci-teal">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse &amp; pièges tombables
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège 1 :</strong> Amoxicilline formellement contre-indiquée dans la MNI (exanthème maculopapuleux).</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège 2 :</strong> &lt; 3 ans = aucun TDR, aucune antibio (toujours viral).</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège 3 :</strong> TDR négatif = pas d'antibio, même si Mac Isaac élevé.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Score Mac Isaac :</strong> adulte, 4 critères (+1 chacun) — déduire 1 point si &gt; 45 ans. Seuil ≤ 1 = ni TDR ni antibio.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Amoxicilline SGA :</strong> 6 jours (plus 10 jours — mise à jour recommandations).</div>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Urgence :</strong> Phlegmon périamygdalien = trismus. Lemierre = thrombophlébite jugulaire + emboles pulmonaires.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:10px; font-size:.82rem; color:var(--text-muted);">
+      Angines vésiculeuses = toujours virale, jamais d'antibio. Angines ulcéreuses = unilatérales par définition. Chancre syphilitique = indolore (ne pas confondre avec Vincent = douloureux).
+    </div>
+  </div>
+</div>
+
+</div><!-- /.page -->
+</body>
+</html>

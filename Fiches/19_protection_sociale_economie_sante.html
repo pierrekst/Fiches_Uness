@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 19 - Protection sociale &amp; Économie de la santé</title>
+<style>
+  :root {
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #1a1d23;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --purple: #534AB7;
+    --purple-light: #ede9fb;
+    --teal: #1D9E75;
+    --teal-light: #d1f5e8;
+    --coral: #D85A30;
+    --coral-light: #fde8e0;
+    --blue: #378ADD;
+    --blue-light: #dbeafe;
+    --red: #E24B4A;
+    --red-light: #fee2e2;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117; --card-bg: #1a1d2e; --text: #e8eaf0; --text-muted: #9ca3af; --border: #2d3142;
+      --purple-light: #2d2860; --teal-light: #0d3d2e; --coral-light: #4a1f0e;
+      --blue-light: #1e3a5f; --red-light: #4a1212; --amber-light: #4a2d06;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .9rem; line-height: 1.6; padding: 16px; }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  .header { background: linear-gradient(135deg, #1D9E75 0%, #378ADD 55%, #534AB7 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-number { font-size: .8rem; font-weight: 700; opacity: .8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .header-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+  .header-sub { font-size: .85rem; opacity: .85; margin-bottom: 14px; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .header-tag { background: rgba(255,255,255,.2); border-radius: 20px; padding: 3px 12px; font-size: .76rem; font-weight: 600; }
+
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 14px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width:18px; height:18px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke:var(--red);   }
+  .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+  .alert-green .alert-icon svg { stroke:var(--teal);  }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: .78rem; font-weight: 600; }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-top: 8px; }
+  th { background: var(--purple); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child  { border-radius: 0 8px 0 0; }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(83,74,183,.04); }
+
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 0.5px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  .section-title { font-size: 1.05rem; font-weight: 800; color: var(--text); margin: 22px 0 12px; display: flex; align-items: center; gap: 10px; }
+  .section-bar { width: 4px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 22px 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-number">Item 19 · Santé Publique</div>
+  <div class="header-title">Protection sociale &amp; Économie de la santé</div>
+  <div class="header-sub">Sécurité Sociale · Assurance Maladie · Complémentaires · CSS · Consommation médicale · ONDAM</div>
+  <div class="header-tags">
+    <span class="header-tag">Transversal</span>
+    <span class="header-tag">Financement santé</span>
+    <span class="header-tag">ALD</span>
+    <span class="header-tag">Parcours de soins</span>
+    <span class="header-tag">CSS / CMU-C</span>
+  </div>
+</div>
+
+<!-- ===== OBJECTIFS ===== -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Vision d'ensemble
+  </div>
+  <p style="font-size:.85rem; color:var(--text-muted); line-height:1.6;">
+    Ce chapitre répond à une question centrale : <strong>qui finance quoi dans le système de santé français ?</strong>
+    Il faut maîtriser l'architecture de la Sécurité Sociale (branches, régimes, financement), les règles de remboursement (ticket modérateur, ALD, parcours de soins), les dispositifs d'aide pour les plus précaires (CSS), et les outils de pilotage macro-économique (ONDAM, CSBM). Ces connaissances conditionnent chaque acte de prescription et de prise en charge au quotidien.
+  </p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : SÉCURITÉ SOCIALE ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--teal);"></div>
+  Sécurité Sociale — Organisation générale
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Historique &amp; principes
+    </div>
+    <div class="kv-row"><span class="kv-key">Création</span><span class="kv-val">Ordonnances 4-19 oct. 1945</span></div>
+    <div class="kv-row"><span class="kv-key">Principe fondateur</span><span class="kv-val">Solidarité nationale</span></div>
+    <div class="kv-row"><span class="kv-key">Loi de financement annuelle</span><span class="kv-val">PLFSS / LFSS</span></div>
+    <div class="kv-row"><span class="kv-key">Gestion branche maladie</span><span class="kv-val">CNAM (CPAM locales)</span></div>
+    <div style="margin-top:10px;">
+      <div class="pills">
+        <span class="pill pill-green">Universalité</span>
+        <span class="pill pill-green">Solidarité</span>
+        <span class="pill pill-green">Cotisations ∝ revenus</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      4 branches de la SS
+    </div>
+    <table>
+      <thead><tr><th>Branche</th><th>Caisse nationale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Maladie</strong> (+ AT/MP)</td><td>CNAM</td></tr>
+        <tr><td><strong>Retraite</strong></td><td>CNAV</td></tr>
+        <tr><td><strong>Famille</strong></td><td>CNAF</td></tr>
+        <tr><td><strong>Autonomie</strong></td><td>CNSA (depuis 2021)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Financement de la Sécurité Sociale
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Recettes principales</div>
+      <div class="pills">
+        <span class="pill pill-blue">Cotisations sociales (patronales + salariales)</span>
+        <span class="pill pill-blue">CSG (Contribution Sociale Généralisée)</span>
+        <span class="pill pill-blue">CRDS (remboursement dette SS)</span>
+        <span class="pill pill-blue">Taxes affectées (tabac, alcool…)</span>
+        <span class="pill pill-blue">Transferts de l'État</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">Régimes d'assurance maladie</div>
+      <div class="pills">
+        <span class="pill pill-purple">Régime général (CNAM) ~90%</span>
+        <span class="pill pill-purple">MSA (agriculteurs)</span>
+        <span class="pill pill-purple">SSI / ex-RSI (indépendants)</span>
+        <span class="pill pill-purple">Régimes spéciaux (SNCF, RATP…)</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>PUMa (2016) — Protection Universelle Maladie :</strong> toute personne travaillant ou résidant de façon stable et régulière en France est couverte, sans condition de cotisation préalable.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : REMBOURSEMENTS ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--blue);"></div>
+  Remboursements — Ticket modérateur &amp; participations
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Taux de remboursement SS
+    </div>
+    <p style="font-size:.82rem; color:var(--text-muted); margin-bottom:8px;">Ticket modérateur = 100% − taux de remboursement SS</p>
+    <table>
+      <thead><tr><th>Acte / Prestation</th><th>Taux SS</th></tr></thead>
+      <tbody>
+        <tr><td>Consultation médecin (secteur 1)</td><td>70%</td></tr>
+        <tr><td>Médicaments liste I &amp; II</td><td>65%</td></tr>
+        <tr><td>Médicaments vignette bleue (SMR modéré)</td><td>30%</td></tr>
+        <tr><td>Médicaments vignette orange (SMR faible)</td><td>15%</td></tr>
+        <tr><td>Hospitalisation MCO (soins)</td><td>80%</td></tr>
+        <tr><td>Soins infirmiers / Kiné</td><td>60%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Autres participations (non remboursées SS)
+    </div>
+    <div class="kv-row"><span class="kv-key">Forfait journalier MCO</span><span class="kv-val">20 €/j</span></div>
+    <div class="kv-row"><span class="kv-key">Forfait journalier SSR</span><span class="kv-val">15 €/j</span></div>
+    <div class="kv-row"><span class="kv-key">Forfait journalier psychiatrie</span><span class="kv-val">13,50 €/j</span></div>
+    <div class="kv-row"><span class="kv-key">Participation forfaitaire (consultation)</span><span class="kv-val">1 €/acte — plaf. 50 €/an</span></div>
+    <div class="kv-row"><span class="kv-key">Franchise médicaments</span><span class="kv-val">0,50 €/boîte — plaf. 50 €/an</span></div>
+    <div class="kv-row"><span class="kv-key">Franchise paramédicaux</span><span class="kv-val">0,50 €/acte</span></div>
+    <div class="kv-row"><span class="kv-key">Franchise transports</span><span class="kv-val">2 €/transport — plaf. 4 €/j</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Franchises (médicaments/paramédicaux/transports) ≠ Participation forfaitaire (consultations). Les complémentaires peuvent rembourser la participation forfaitaire mais <em>pas</em> les franchises.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Exonérations du ticket modérateur (prise en charge à 100%)
+  </div>
+  <table>
+    <thead><tr><th>Situation</th><th>Conditions</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ALD 30</strong> (liste)</td><td>Soins <em>en rapport</em> avec l'ALD uniquement</td></tr>
+      <tr><td><strong>ALD hors liste</strong></td><td>Maladie grave non listée, traitements &gt; 6 mois coûteux</td></tr>
+      <tr><td><strong>Polypathologie</strong></td><td>≥ 2 affections entraînant invalidité notable</td></tr>
+      <tr><td><strong>Maternité</strong></td><td>À partir du 6e mois de grossesse + 12 jours post-partum</td></tr>
+      <tr><td><strong>AT/MP</strong></td><td>Soins liés à l'accident du travail ou maladie professionnelle</td></tr>
+      <tr><td><strong>Hospitalisation &gt; 30 j</strong></td><td>Soins en rapport avec l'affection principale</td></tr>
+      <tr><td><strong>Prévention</strong></td><td>Dépistages organisés (cancer, MST), vaccinations obligatoires</td></tr>
+      <tr><td><strong>Nouveau-nés hospitalisés</strong></td><td>Dans les 30 premiers jours de vie</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : ALD ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--purple);"></div>
+  Affections de Longue Durée (ALD)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Critères ALD (liste 30)
+    </div>
+    <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+      <li>Maladie nécessitant un traitement prolongé <strong>(&gt; 6 mois)</strong></li>
+      <li>ET thérapeutique particulièrement <strong>coûteuse</strong></li>
+    </ul>
+    <div style="margin-top:10px; font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">Exemples ALD 30 :</div>
+    <div class="pills">
+      <span class="pill pill-purple">Diabète T1 et T2 (ALD 8)</span>
+      <span class="pill pill-purple">Insuffisance cardiaque (ALD 5)</span>
+      <span class="pill pill-purple">HTA sévère (ALD 12)</span>
+      <span class="pill pill-purple">Cancer (ALD 30)</span>
+      <span class="pill pill-purple">BPCO (ALD 14)</span>
+      <span class="pill pill-purple">IRC (ALD 19)</span>
+      <span class="pill pill-purple">VIH/SIDA (ALD 7)</span>
+      <span class="pill pill-purple">Épilepsie (ALD 9)</span>
+      <span class="pill pill-purple">Maladie psychiatrique (ALD 23)</span>
+      <span class="pill pill-purple">SEP (ALD 25)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Types d'ALD &amp; données chiffrées
+    </div>
+    <table>
+      <thead><tr><th>Type</th><th>Particularité</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ALD 30</strong> (liste)</td><td>30 maladies exonérantes prédéfinies</td></tr>
+        <tr><td><strong>ALD hors liste</strong></td><td>Grave + traitement long + coûteux</td></tr>
+        <tr><td><strong>Polypathologie</strong></td><td>≥ 2 affections invalidantes non listées</td></tr>
+      </tbody>
+    </table>
+    <div class="kv-row" style="margin-top:10px;"><span class="kv-key">Patients en ALD en France</span><span class="kv-val">~13 millions</span></div>
+    <div class="kv-row"><span class="kv-key">Part des dépenses AM</span><span class="kv-val">~65% pour les ALD</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège classique :</strong> ALD diabète → 100% <em>uniquement</em> pour les soins EN RAPPORT avec le diabète. Une fracture intercurrente reste soumise au TM habituel (sauf si complication directe).</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : PARCOURS DE SOINS ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--blue);"></div>
+  Parcours de soins coordonnés &amp; Médecin traitant
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Respect vs non-respect du parcours de soins
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--teal); margin-bottom:6px;">Dans le parcours (remboursement normal)</div>
+      <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+        <li>Déclaration d'un <strong>médecin traitant (MT)</strong></li>
+        <li>MT peut être généraliste <em>ou</em> spécialiste</li>
+        <li>Spécialiste consulté <strong>sur adressage MT</strong></li>
+        <li>Taux de remboursement : <strong>70%</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:6px;">Hors parcours (majoration TM)</div>
+      <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+        <li>Consultation spécialiste sans adressage MT</li>
+        <li>Taux de remboursement réduit : <strong>50%</strong></li>
+        <li>Dépassements non couverts par la SS</li>
+        <li>Complémentaires limitent leur prise en charge</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Accès direct autorisé (sans pénalité) :</strong> gynécologue, ophtalmologue, psychiatre/neuropsychiatre, stomatologiste — accès direct pour tout patient. Pour les ALD : accès direct au spécialiste de l'ALD (cardiologue, endocrinologue, rhumatologue, neurologue).</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Secteurs de conventionnement médecin
+  </div>
+  <table>
+    <thead><tr><th>Secteur</th><th>Dépassements</th><th>Remboursement SS</th><th>Complémentaire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Secteur 1</strong></td><td>Aucun</td><td>70% tarif SS</td><td>Couvre le TM</td></tr>
+      <tr><td><strong>Secteur 2</strong></td><td>Autorisés (tact &amp; mesure)</td><td>70% tarif SS seulement</td><td>Variable</td></tr>
+      <tr><td><strong>Secteur 3</strong> (non conventionné)</td><td>Libres</td><td>Minimal (tarif d'autorité)</td><td>Très partielle</td></tr>
+      <tr><td><strong>OPTAM / OPTAM-CO</strong></td><td>Encadrés (&lt; secteur 2)</td><td>Taux majoré</td><td>Meilleure prise en charge</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>OPTAM :</strong> Option Pratique Tarifaire Maîtrisée — engagement du médecin à limiter ses dépassements en échange d'une meilleure prise en charge par les complémentaires (dispositif incitatif).</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 : COMPLÉMENTAIRES &amp; CSS ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--teal);"></div>
+  Assurances complémentaires &amp; Complémentaire Santé Solidaire (CSS)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      3 types d'organismes complémentaires
+    </div>
+    <table>
+      <thead><tr><th>Type</th><th>Régime juridique</th><th>But lucratif</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mutuelles</strong></td><td>Code mutualité</td><td>Non</td></tr>
+        <tr><td><strong>Sociétés d'assurance</strong></td><td>Code des assurances</td><td>Oui</td></tr>
+        <tr><td><strong>Institutions de prévoyance</strong></td><td>Code SS (paritaires)</td><td>Non</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Complémentaire santé d'entreprise</strong> obligatoire depuis le 1er janvier 2016 (ANI) pour tous les salariés du privé.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Ce que couvrent les complémentaires
+    </div>
+    <div class="pills">
+      <span class="pill pill-green">Ticket modérateur</span>
+      <span class="pill pill-green">Forfait journalier hospitalier</span>
+      <span class="pill pill-green">Dépassements d'honoraires</span>
+      <span class="pill pill-green">Participation forfaitaire (1€)</span>
+    </div>
+    <div style="margin-top:12px; font-size:.82rem; font-weight:700; color:var(--teal); margin-bottom:6px;">Dispositif 100% Santé (Reste à Charge Zéro) :</div>
+    <table>
+      <thead><tr><th>Domaine</th><th>Panier garanti</th></tr></thead>
+      <tbody>
+        <tr><td>Optique</td><td>1 paire/2 ans (verres + monture plafonnés)</td></tr>
+        <tr><td>Dentaire</td><td>Prothèses et bridges dans le panier 100% SS</td></tr>
+        <tr><td>Audioprothèse</td><td>2 appareils/5 ans (&gt; 20 ans) — plafond LPP</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="border-left: 3px solid var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Complémentaire Santé Solidaire (CSS) — depuis novembre 2019
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>La CSS <strong>remplace</strong> la <strong>CMU-C</strong> (Couverture Maladie Universelle Complémentaire) et l'<strong>ACS</strong> (Aide à l'acquisition d'une Complémentaire Santé). L'AME reste distincte (étrangers en situation irrégulière).</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--teal); margin-bottom:6px;">CSS sans participation financière</div>
+      <div class="kv-row"><span class="kv-key">= Ancienne</span><span class="kv-val">CMU-C</span></div>
+      <div class="kv-row"><span class="kv-key">Condition revenus</span><span class="kv-val">&lt; plafond CSS (~900 €/mois/pers.)</span></div>
+      <div class="kv-row"><span class="kv-key">Cotisation</span><span class="kv-val">Gratuite</span></div>
+      <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">1 an renouvelable</span></div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">CSS avec participation financière</div>
+      <div class="kv-row"><span class="kv-key">= Ancienne</span><span class="kv-val">ACS</span></div>
+      <div class="kv-row"><span class="kv-key">Condition revenus</span><span class="kv-val">100%–135% du plafond CSS</span></div>
+      <div class="kv-row"><span class="kv-key">Cotisation</span><span class="kv-val">~11–30 €/mois selon âge</span></div>
+      <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">1 an renouvelable</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px; font-size:.82rem; color:var(--text-muted);">
+    Gestion : CPAM (régime général) ou organismes habilités. Garantit : TM + FJ + dépassements encadrés + 100% Santé.
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 6 : DÉPENSES / ONDAM ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--purple);"></div>
+  Dépenses de santé &amp; ONDAM
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      ONDAM
+    </div>
+    <p style="font-size:.83rem; margin-bottom:10px;"><strong>Objectif National des Dépenses d'Assurance Maladie</strong> — voté chaque année par le Parlement dans la <strong>LFSS</strong>.</p>
+    <div style="font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">5 sous-objectifs :</div>
+    <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+      <li><strong>Soins de ville</strong> (médecins, médicaments, auxiliaires médicaux)</li>
+      <li><strong>Établissements de santé</strong> (MCO + SSR + psychiatrie)</li>
+      <li><strong>Médico-social personnes âgées</strong> (EHPAD, SSIAD)</li>
+      <li><strong>Médico-social personnes handicapées</strong></li>
+      <li><strong>Autres</strong> (prévention, investissement, gestion)</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> ONDAM = <em>objectif</em> (prospectif, voté) ≠ CSBM = <em>mesure</em> effective rétrospective (comptes nationaux de santé).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      CSBM — Consommation de Soins et Biens Médicaux
+    </div>
+    <div class="kv-row"><span class="kv-key">CSBM totale annuelle</span><span class="kv-val">~245 Md€</span></div>
+    <div class="kv-row"><span class="kv-key">Part du PIB (dép. santé)</span><span class="kv-val">~12%</span></div>
+    <table style="margin-top:10px;">
+      <thead><tr><th>Poste</th><th>Part ~</th></tr></thead>
+      <tbody>
+        <tr><td>Soins hospitaliers</td><td>45–50%</td></tr>
+        <tr><td>Soins ambulatoires (méd. + param.)</td><td>~25%</td></tr>
+        <tr><td>Médicaments</td><td>~17%</td></tr>
+        <tr><td>Transports, optique, autres</td><td>~8%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Qui finance la CSBM ?
+  </div>
+  <table>
+    <thead><tr><th>Financeur</th><th>Part</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Sécurité Sociale</strong></td><td><strong>~77%</strong></td><td>Régimes de base (CNAM, MSA, SSI…)</td></tr>
+      <tr><td><strong>Complémentaires</strong></td><td>~13%</td><td>Mutuelles, assurances, prévoyance</td></tr>
+      <tr><td><strong>Ménages</strong> (reste à charge)</td><td>~7%</td><td>Un des plus bas d'Europe</td></tr>
+      <tr><td><strong>État / CSS / AME</strong></td><td>~1%</td><td>Aide médicale de l'État incluse</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-green" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>À retenir :</strong> Le reste à charge des ménages français (~7%) est l'un des plus faibles d'Europe, grâce au système de complémentaires santé quasi-universel.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 7 : TARIFICATION ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--coral);"></div>
+  Tarification des établissements &amp; nomenclature
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      T2A — Tarification à l'activité
+    </div>
+    <p style="font-size:.83rem; margin-bottom:8px;">Mode de financement des <strong>hôpitaux MCO</strong> (depuis 2004 public, 2008 privé). Financement lié au volume et à la nature des actes.</p>
+    <div class="kv-row"><span class="kv-key">Unité de base</span><span class="kv-val">GHM (Groupe Homogène de Malades)</span></div>
+    <div class="kv-row"><span class="kv-key">Tarif appliqué</span><span class="kv-val">GHS (Groupe Homogène de Séjours)</span></div>
+    <div class="kv-row"><span class="kv-key">Codage diagnostic</span><span class="kv-val">CIM-10</span></div>
+    <div class="kv-row"><span class="kv-key">Codage actes</span><span class="kv-val">CCAM</span></div>
+    <div class="kv-row"><span class="kv-key">Système d'information</span><span class="kv-val">PMSI</span></div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>SSR &amp; PSY :</strong> Financés par dotation annuelle (DAF) + financement à l'activité partiel.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Nomenclature des actes ambulatoires
+    </div>
+    <div class="kv-row"><span class="kv-key">Consultation généraliste (C)</span><span class="kv-val">26,50 € (tarif SS)</span></div>
+    <div class="kv-row"><span class="kv-key">Consultation spécialiste (CS)</span><span class="kv-val">30 € (tarif SS)</span></div>
+    <div class="kv-row"><span class="kv-key">Majoration médecin traitant (MT)</span><span class="kv-val">+ 2 €</span></div>
+    <div style="margin-top:10px; font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Autres nomenclatures :</div>
+    <div class="pills">
+      <span class="pill pill-blue">NGAP (actes médicaux courants)</span>
+      <span class="pill pill-blue">CCAM (actes techniques)</span>
+      <span class="pill pill-blue">NABM (biologie médicale)</span>
+      <span class="pill pill-blue">LPP (dispositifs médicaux)</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 8 : ACCÈS AUX SOINS ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--blue);"></div>
+  Accès aux soins &amp; indicateurs
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Données clés &amp; déserts médicaux
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; margin-bottom:6px; color:var(--blue);">Indicateurs démographiques médicaux</div>
+      <div class="kv-row"><span class="kv-key">Densité médicale</span><span class="kv-val">~3,2 médecins/1 000 hab</span></div>
+      <div class="kv-row"><span class="kv-key">Médecins actifs</span><span class="kv-val">~230 000</span></div>
+      <div class="kv-row"><span class="kv-key">Part généralistes</span><span class="kv-val">~50%</span></div>
+      <div class="kv-row"><span class="kv-key">Espérance de vie H/F</span><span class="kv-val">~80 / 85 ans</span></div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; margin-bottom:6px; color:var(--purple);">Mesures contre les déserts médicaux</div>
+      <div class="pills">
+        <span class="pill pill-purple">MSP (Maisons de Santé Pluri-pro)</span>
+        <span class="pill pill-purple">CPTS (Communautés Territoriales de Santé)</span>
+        <span class="pill pill-purple">Télémédecine (téléexpertise, téléconsultation)</span>
+        <span class="pill pill-purple">Assistants médicaux</span>
+        <span class="pill pill-purple">Incitations financières à l'installation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 9 : SYNTHÈSE ===== -->
+<div class="section-title">
+  <div class="section-bar" style="background:var(--teal);"></div>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="card" style="border-left: 3px solid var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Ce qu'il faut savoir impérativement
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--teal); margin-bottom:6px;">Structure &amp; financement</div>
+      <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+        <li>4 branches SS (maladie, famille, retraite, autonomie)</li>
+        <li>Financement : cotisations + CSG + CRDS + taxes</li>
+        <li>PLFSS voté annuellement par le Parlement</li>
+        <li>SS finance ~77% · Complémentaires ~13% · Ménages ~7%</li>
+        <li>ONDAM = 5 sous-objectifs (ville, ES, PA, PH, autres)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Remboursements &amp; dispositifs clés</div>
+      <ul style="font-size:.83rem; padding-left:16px; line-height:1.9;">
+        <li>TM = 100% − taux de remboursement SS</li>
+        <li>ALD : 100% seulement sur les soins en rapport</li>
+        <li>Maternité : 100% à partir du 6e mois</li>
+        <li>CSS (2019) = fusion CMU-C + ACS</li>
+        <li>FJ MCO = 20€/j, non remboursé par la SS</li>
+        <li>T2A : GHM/GHS pour financer les MCO</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 1 :</strong> ALD → 100% <em>uniquement</em> pour les soins EN RAPPORT. Fracture chez un diabétique = TM habituel (sauf complication directe du diabète).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 2 :</strong> CSS remplace CMU-C + ACS (depuis 2019), <em>pas</em> l'AME. L'AME couvre les étrangers en situation irrégulière résidant en France &gt; 3 mois.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 3 :</strong> Franchises (0,50 €/2 €) ≠ participation forfaitaire (1 €/consultation). Complémentaires peuvent couvrir la participation forfaitaire — <em>pas</em> les franchises.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 4 :</strong> Forfait journalier hospitalier NON remboursé par la SS. Couvert par les complémentaires. <em>Exception :</em> les ALD ne sont PAS exonérées du FJ.</div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Ne pas confondre :</strong> ONDAM = objectif prospectif voté ≠ CSBM = mesure rétrospective réelle (comptes nationaux de santé).</div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Hors parcours :</strong> consultation spécialiste sans adressage MT → taux 50% au lieu de 70%. Exception : gynéco, ophtalmo, psychiatre, stomatologue (accès direct autorisé).</div>
+  </div>
+</div>
+
+<div class="alert alert-green" style="margin-top:8px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Mémo global :</strong><br>
+  SS ~77% · Complémentaires ~13% · Ménages ~7% · État ~1%<br>
+  ALD 100% = soins en rapport uniquement · FJ MCO 20€/j non remboursé SS<br>
+  CSS 2019 = CMU-C + ACS fusionnées · AME reste distincte<br>
+  Parcours de soins : MT → spécialiste sur adressage (sinon 50%) · Accès direct : gynéco / ophtalmo / psy / stomato<br>
+  ONDAM (objectif, voté PLFSS) ≠ CSBM (mesure rétrospective) · T2A = GHM/GHS</div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

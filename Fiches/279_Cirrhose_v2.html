@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 279 — Cirrhose et complications</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --purple-light: #EEEDFB;
+    --teal-light: #E6F7F1;
+    --coral-light: #FBF0EC;
+    --blue-light: #EBF4FF;
+    --red-light: #FDEEEE;
+    --amber-light: #FEF3C7;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%);
+    border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff;
+  }
+  .header-badge { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .header h1 { font-size: 1.55rem; font-weight: 800; margin-bottom: 10px; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .htag { background: rgba(255,255,255,.18); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+  /* VUE D'ENSEMBLE */
+  .overview { background: var(--purple-light); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; border-left: 4px solid var(--purple); }
+  .overview-title { font-size: .8rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+  .overview p { font-size: .85rem; color: var(--text); line-height: 1.6; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 24px; }
+  .section-title {
+    font-size: 1rem; font-weight: 800; color: #fff;
+    padding: 9px 16px; border-radius: 9px; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .sec-purple { background: linear-gradient(90deg, var(--purple), #6b63d4); }
+  .sec-teal   { background: linear-gradient(90deg, var(--teal), #25c490); }
+  .sec-blue   { background: linear-gradient(90deg, var(--blue), #5a9de0); }
+  .sec-coral  { background: linear-gradient(90deg, var(--coral), #e07a56); }
+  .sec-red    { background: linear-gradient(90deg, var(--red), #e96f6e); }
+  .sec-amber  { background: linear-gradient(90deg, var(--amber), #f59e0b); }
+
+  /* CARDS */
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .ci-purple { background: var(--purple); }
+  .ci-teal   { background: var(--teal); }
+  .ci-blue   { background: var(--blue); }
+  .ci-coral  { background: var(--coral); }
+  .ci-red    { background: var(--red); }
+  .ci-amber  { background: var(--amber); }
+
+  /* GRILLES */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  /* ALERTES */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke: var(--red); }
+  .alert-blue  .alert-icon svg { stroke: var(--blue); }
+  .alert-green .alert-icon svg { stroke: var(--teal); }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 3px 11px; font-size: .78rem; font-weight: 600; }
+  .pill-red    { background: var(--red-light);   color: var(--red); }
+  .pill-blue   { background: var(--blue-light);  color: var(--blue); }
+  .pill-teal   { background: var(--teal-light);  color: var(--teal); }
+  .pill-amber  { background: var(--amber-light); color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light); color: var(--coral); }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px dashed var(--border); font-size: .84rem; gap: 8px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); font-weight: 500; flex: 1; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+  .kv-val.red    { color: var(--red); }
+  .kv-val.teal   { color: var(--teal); }
+  .kv-val.blue   { color: var(--blue); }
+  .kv-val.amber  { color: var(--amber); }
+  .kv-val.purple { color: var(--purple); }
+
+  /* TABLEAUX */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg); }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; gap: 12px; align-items: flex-start; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .8rem; flex-shrink: 0; color: var(--text-muted); }
+  .step-content { flex: 1; padding-top: 3px; font-size: .84rem; }
+
+  /* COMPLICATION CARDS */
+  .comp-card { border-left: 4px solid; border-radius: 10px; padding: 12px 14px; background: var(--card-bg); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); margin-bottom: 10px; }
+  .comp-card.red    { border-left-color: var(--red); }
+  .comp-card.amber  { border-left-color: var(--amber); }
+  .comp-card.blue   { border-left-color: var(--blue); }
+  .comp-card.coral  { border-left-color: var(--coral); }
+  .comp-title { font-weight: 800; font-size: .88rem; margin-bottom: 6px; }
+  .comp-card.red   .comp-title { color: var(--red); }
+  .comp-card.amber .comp-title { color: var(--amber); }
+  .comp-card.blue  .comp-title { color: var(--blue); }
+  .comp-card.coral .comp-title { color: var(--coral); }
+
+  ul.dot { padding-left: 16px; }
+  ul.dot li { margin-bottom: 3px; font-size: .84rem; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+
+  .badge { display: inline-block; border-radius: 6px; padding: 2px 9px; font-size: .75rem; font-weight: 700; }
+  .badge-a { background: var(--teal-light); color: var(--teal); }
+  .badge-b { background: var(--amber-light); color: var(--amber); }
+  .badge-c { background: var(--red-light); color: var(--red); }
+
+  .score-row { display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; align-items: center; }
+  .score-label { font-size: .8rem; color: var(--text-muted); font-weight: 600; min-width: 130px; }
+
+  @media (max-width: 620px) {
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-badge">Item 279 — ECNi / R2C</div>
+    <h1>Cirrhose et complications</h1>
+    <div class="header-tags">
+      <span class="htag">Gastro-Hépato</span>
+      <span class="htag">Urgences</span>
+      <span class="htag">Médecine générale</span>
+      <span class="htag">Child-Pugh · MELD</span>
+    </div>
+  </div>
+
+  <!-- VUE D'ENSEMBLE -->
+  <div class="overview">
+    <div class="overview-title">Vue d'ensemble — Ce qu'il faut maîtriser</div>
+    <p>La cirrhose est le stade terminal commun des hépatopathies chroniques. L'enjeu clinique est triple : <strong>diagnostiquer tôt</strong> (méthodes non invasives, biopsie), <strong>identifier la cause</strong> (traitable dans la majorité des cas) et <strong>prévenir/gérer les 4 complications sévères</strong> : hémorragie digestive, encéphalopathie hépatique, infection du liquide d'ascite (ISLA) et syndrome hépato-rénal. La surveillance du CHC est obligatoire chez tout cirrhotique.</p>
+  </div>
+
+  <hr>
+
+  <!-- 1. DÉFINITION & ÉPIDÉMIOLOGIE -->
+  <div class="section">
+    <div class="section-title sec-purple">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      Définition &amp; Épidémiologie
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+          Définition histologique
+        </div>
+        <div class="kv-row"><span class="kv-key">Lésion élémentaire</span><span class="kv-val purple">Fibrose annulaire + nodules de régénération</span></div>
+        <div class="kv-row"><span class="kv-key">Architecture</span><span class="kv-val">Désorganisation globale du foie</span></div>
+        <div class="kv-row"><span class="kv-key">Délai d'installation</span><span class="kv-val">10–20 ans en général</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+          Épidémiologie France
+        </div>
+        <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val blue">2 000–3 300 / million hab.</span></div>
+        <div class="kv-row"><span class="kv-key">Incidence</span><span class="kv-val">150–200 / million / an</span></div>
+        <div class="kv-row"><span class="kv-key">Fibrose avancée F3+</span><span class="kv-val">~500 000 personnes</span></div>
+        <div class="kv-row"><span class="kv-key">Mortalité annuelle</span><span class="kv-val red">16 000 décès/an</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 2. STADES & SCORES -->
+  <div class="section">
+    <div class="section-title sec-teal">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      Stades évolutifs &amp; Scores pronostiques
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+          Stades évolutifs
+        </div>
+        <div class="kv-row"><span class="kv-key">Compensée</span><span class="kv-val teal">Asymptomatique</span></div>
+        <div class="kv-row"><span class="kv-key">Décompensée</span><span class="kv-val amber">Ascite, ictère, EH, hémorragie</span></div>
+        <div class="kv-row"><span class="kv-key">CHC</span><span class="kv-val red">Peut survenir avant la cirrhose (HBV, hémochromatose, NASH)</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+          Score MELD
+        </div>
+        <div class="kv-row"><span class="kv-key">Variables (3)</span><span class="kv-val">Bilirubinémie · INR · Créatininémie</span></div>
+        <div class="kv-row"><span class="kv-key">Type</span><span class="kv-val">Score continu</span></div>
+        <div class="kv-row"><span class="kv-key">Usage</span><span class="kv-val">Liste greffe, pronostic</span></div>
+      </div>
+    </div>
+
+    <!-- Child-Pugh -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+        Score de Child-Pugh — 5 variables
+      </div>
+      <table>
+        <thead>
+          <tr><th>Paramètre</th><th>1 point</th><th>2 points</th><th>3 points</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Albumine</strong> (g/L)</td><td>&gt; 35</td><td>28–35</td><td>&lt; 28</td></tr>
+          <tr><td><strong>Bilirubine</strong> (µmol/L)</td><td>&lt; 35</td><td>35–50</td><td>&gt; 50</td></tr>
+          <tr><td><strong>Encéphalopathie</strong></td><td>Absente</td><td>Légère–modérée (1-2)</td><td>Sévère (3-4)</td></tr>
+          <tr><td><strong>TP</strong> (%)</td><td>&gt; 50</td><td>40–50</td><td>&lt; 40</td></tr>
+          <tr><td><strong>Ascite</strong></td><td>Absente</td><td>Modérée</td><td>Abondante</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:180px;">
+          <div class="kv-row"><span class="kv-key"><span class="badge badge-a">Child A</span> 5–6 pts</span><span class="kv-val teal">Survie 1 an : 100 %</span></div>
+          <div class="kv-row"><span class="kv-key"><span class="badge badge-b">Child B</span> 7–9 pts</span><span class="kv-val amber">Survie 1 an : 80 %</span></div>
+          <div class="kv-row"><span class="kv-key"><span class="badge badge-c">Child C</span> 10–15 pts</span><span class="kv-val red">Survie 1 an : 45 %</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 3. CLINIQUE -->
+  <div class="section">
+    <div class="section-title sec-blue">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Manifestations cliniques
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          Insuffisance hépatocellulaire
+        </div>
+        <div class="pills">
+          <span class="pill pill-red">Angiomes stellaires &gt; 5</span>
+          <span class="pill pill-red">Érythrose palmaire</span>
+          <span class="pill pill-red">Ongles blancs</span>
+          <span class="pill pill-red">Ictère</span>
+          <span class="pill pill-red">Foetor hepaticus</span>
+          <span class="pill pill-red">Hypogonadisme</span>
+          <span class="pill pill-red">Astérixis / EH</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+          Hypertension portale
+        </div>
+        <div class="pills">
+          <span class="pill pill-blue">CVC sus-ombilicale</span>
+          <span class="pill pill-blue">Splénomégalie</span>
+          <span class="pill pill-blue">Ascite</span>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="kv-row"><span class="kv-key">Foie palpable</span><span class="kv-val">Consistance ferme/dure, bord tranchant</span></div>
+          <div class="kv-row"><span class="kv-key">Taille</span><span class="kv-val">Variable (augmentée, normale, atrophique)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> L'examen clinique peut être strictement normal en cirrhose compensée. L'absence de signe clinique n'élimine pas le diagnostic.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 4. PARACLINIQUE -->
+  <div class="section">
+    <div class="section-title sec-blue">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Bilan paraclinique
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          Biologie — Insuffisance hépatique
+        </div>
+        <div class="kv-row"><span class="kv-key">TP / Facteur V</span><span class="kv-val red">Diminués</span></div>
+        <div class="kv-row"><span class="kv-key">INR</span><span class="kv-val red">Augmenté</span></div>
+        <div class="kv-row"><span class="kv-key">Albuminémie</span><span class="kv-val red">Diminuée</span></div>
+        <div class="kv-row"><span class="kv-key">Bilirubinémie</span><span class="kv-val amber">Augmentée</span></div>
+        <div class="kv-row"><span class="kv-key">Transaminases / GGT</span><span class="kv-val">Elévation modérée (parfois normaux)</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          Biologie — HTP &amp; Étiologie
+        </div>
+        <div class="kv-row"><span class="kv-key">Hypersplénisme</span><span class="kv-val">Thrombopénie ++, leucopénie, anémie</span></div>
+        <div class="kv-row"><span class="kv-key">Alcool</span><span class="kv-val amber">Macrocytose, bloc beta-gamma EPP</span></div>
+        <div class="kv-row"><span class="kv-key">Ferritine</span><span class="kv-val">Élevée (non spécifique hémochromatose)</span></div>
+        <div class="kv-row"><span class="kv-key">Sat. transferrine</span><span class="kv-val">Peut être élevée (baisse de la transferrine)</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        Échographie-Doppler abdominale — examen de 1ère intention
+      </div>
+      <table>
+        <thead><tr><th>Signe</th><th>Signification</th></tr></thead>
+        <tbody>
+          <tr><td>Irrégularité des contours hépatiques</td><td>Évocateur de cirrhose</td></tr>
+          <tr><td>Dysmorphie : atrophie lobe droit + hypertrophie lobe gauche</td><td>Évocateur de cirrhose</td></tr>
+          <tr><td>Splénomégalie + voies porto-caves</td><td>Hypertension portale</td></tr>
+          <tr><td>Ascite</td><td>Décompensation</td></tr>
+          <tr><td>Nodule hépatique</td><td>Suspicion CHC — compléter par TDM/IRM</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 5. DIAGNOSTIC -->
+  <div class="section">
+    <div class="section-title sec-purple">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      Méthodes diagnostiques (cirrhose compensée)
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          Méthodes non invasives (1ère intention)
+        </div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Échographie-Doppler</strong> — dysmorphie hépatique, signes HTP</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Élastométrie impulsionnelle (Fibroscan)</strong> — mesure de la dureté hépatique en kPa, examen non invasif le plus performant. À réaliser <strong>à jeun ≥ 2h</strong></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Tests sériques de fibrose</strong> — Fib4, Fibrotest, Fibromètre (non validés pour toutes les causes)</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+          Biopsie hépatique (référence)
+        </div>
+        <div class="kv-row"><span class="kv-key">Indication</span><span class="kv-val">Si non-invasif non concluant</span></div>
+        <div class="kv-row"><span class="kv-key">Voie percutanée</span><span class="kv-val teal">Si pas d'ascite / hémostase correcte</span></div>
+        <div class="kv-row"><span class="kv-key">Voie transjugulaire</span><span class="kv-val amber">Si ascite ou troubles hémostase</span></div>
+        <div class="kv-row"><span class="kv-key">Apport</span><span class="kv-val">Confirme cirrhose + lésions étiologiques</span></div>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Condition Fibroscan :</strong> Mesure à jeun depuis au moins 2 heures. Plaquettes normales + élasticité &lt; 20 kPa = risque de varices de grande taille très faible (pas de fibroscopie d'emblée).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 6. ÉTIOLOGIES -->
+  <div class="section">
+    <div class="section-title sec-coral">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Étiologies &amp; Arguments diagnostiques
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        Causes fréquentes
+      </div>
+      <table>
+        <thead><tr><th>Étiologie</th><th>Arguments diagnostiques clés</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Alcool</strong></td>
+            <td>Consommation excessive · ASAT/ALAT <strong>≥ 2</strong> · GGT élevée / PA subnormales · Bloc beta-gamma EPP · Macrocytose</td>
+          </tr>
+          <tr>
+            <td><strong>Stéatopathie métabolique (NASH)</strong></td>
+            <td>Surpoids · Diabète · HTA · Dyslipidémie · Histologie</td>
+          </tr>
+          <tr>
+            <td><strong>Hépatite chronique C</strong></td>
+            <td>Ac anti-VHC · ARN VHC par PCR</td>
+          </tr>
+          <tr>
+            <td><strong>Hépatite chronique B</strong></td>
+            <td>Ag HBs · ADN VHB par PCR</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-amber"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        Causes moins fréquentes
+      </div>
+      <table>
+        <thead><tr><th>Étiologie</th><th>Arguments diagnostiques clés</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hémochromatose génétique</strong></td><td>Sat. transferrine &gt; 45 % · Mutation C282Y homozygote · ± Hyperferritinémie</td></tr>
+          <tr><td><strong>Cholangite biliaire primitive (CBP)</strong></td><td>Femme d'âge mûr · Cholestase · Ac anti-mitochondries M2</td></tr>
+          <tr><td><strong>Cholangite sclérosante primitive (CSP)</strong></td><td>Homme jeune · MICI associée · Cholestase · Cholangite diffuse (bili-IRM)</td></tr>
+          <tr><td><strong>Hépatite auto-immune (HAI)</strong></td><td>Femme · Cytolyse marquée · Hypergammaglobulinémie IgG · Ac anti-tissus</td></tr>
+          <tr><td><strong>Cirrhose biliaire secondaire</strong></td><td>Antécédent d'obstacle prolongé voies biliaires</td></tr>
+          <tr><td><strong>Hépatite B-delta</strong></td><td>Ag HBs · Ac anti-VHD · ARN VHD</td></tr>
+          <tr><td><strong>Syndrome de Budd-Chiari</strong></td><td>Obstruction veines hépatiques en imagerie · Affection prothrombotique</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        Bilan étiologique systématique
+      </div>
+      <div style="margin-bottom:8px;"><strong>1ère intention :</strong></div>
+      <div class="pills">
+        <span class="pill pill-blue">Sérologies VHB (Ag HBs) + VHC (Ac anti-VHC)</span>
+        <span class="pill pill-blue">Glycémie à jeun</span>
+        <span class="pill pill-blue">Bilan lipidique</span>
+        <span class="pill pill-blue">Ferritine + Sat. transferrine à jeun</span>
+        <span class="pill pill-blue">EPP</span>
+      </div>
+      <div style="margin-top:10px;margin-bottom:6px;"><strong>2ème intention :</strong></div>
+      <div class="pills">
+        <span class="pill pill-amber">Sérologie VHD si Ag HBs +</span>
+        <span class="pill pill-amber">Ac anti-nucléaires</span>
+        <span class="pill pill-amber">Ac anti-muscle lisse</span>
+        <span class="pill pill-amber">Ac anti-LKM1</span>
+        <span class="pill pill-amber">Ac anti-mitochondries</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 7. COMPLICATIONS -->
+  <div class="section">
+    <div class="section-title sec-red">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      4 Complications sévères
+    </div>
+
+    <!-- Hémorragie -->
+    <div class="comp-card red">
+      <div class="comp-title">1. Hémorragie digestive</div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">CAUSES</div>
+          <div class="pills">
+            <span class="pill pill-red">Rupture varices oesophagiennes (RVO) +++</span>
+            <span class="pill pill-red">Varices gastriques/ectopiques</span>
+            <span class="pill pill-red">Gastropathie HTP</span>
+            <span class="pill pill-amber">Ulcère gastroduodénal (fréquence accrue)</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">CLINIQUE</div>
+          <div class="kv-row"><span class="kv-key">Signes</span><span class="kv-val">Hématémèse, méléna, hématochézies</span></div>
+          <div class="kv-row"><span class="kv-key">Signe précoce</span><span class="kv-val red">Tachycardie (sauf bêtabloquants)</span></div>
+          <div class="kv-row"><span class="kv-key">Endoscopie</span><span class="kv-val">Dans les 12 h</span></div>
+        </div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:8px;margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> L'hématocrite précoce peut sous-estimer la gravité. Toucher rectal si absence d'extériorisation pour chercher un méléna.</div>
+      </div>
+    </div>
+
+    <!-- Encéphalopathie -->
+    <div class="comp-card amber">
+      <div class="comp-title">2. Encéphalopathie hépatique (EH)</div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">MÉCANISME CLÉ</div>
+          <div class="kv-row"><span class="kv-key">Hyperammoniémie</span><span class="kv-val">Insuffisance hépatique + shunts porto-systémiques</span></div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin:8px 0 4px;">CLINIQUE</div>
+          <div class="kv-row"><span class="kv-key">Du + léger au + sévère</span><span class="kv-val">Astérixis → confusion → coma</span></div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">FACTEURS DÉCLENCHANTS — à rechercher systématiquement</div>
+          <div class="pills">
+            <span class="pill pill-amber">Infections bactériennes</span>
+            <span class="pill pill-amber">Hémorragie digestive</span>
+            <span class="pill pill-amber">Médicaments sédatifs</span>
+            <span class="pill pill-amber">Insuffisance rénale</span>
+            <span class="pill pill-amber">Hyponatrémie</span>
+            <span class="pill pill-amber">Constipation</span>
+            <span class="pill pill-amber">Shunt porto-systémique (TIPS)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISLA -->
+    <div class="comp-card blue">
+      <div class="comp-title">3. Infection spontanée du liquide d'ascite (ISLA)</div>
+      <div class="grid2">
+        <div>
+          <div class="kv-row"><span class="kv-key">Fréquence</span><span class="kv-val blue">10–30 % des cirrhotiques avec ascite</span></div>
+          <div class="kv-row"><span class="kv-key">Clinique</span><span class="kv-val">Fièvre, douleurs abdo, diarrhée, EH</span></div>
+          <div class="kv-row"><span class="kv-key">Peut être</span><span class="kv-val amber">Asymptomatique !</span></div>
+          <div class="kv-row"><span class="kv-key">Germes</span><span class="kv-val">Entérobactéries +++</span></div>
+        </div>
+        <div>
+          <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val blue">PNN ascite &gt; 250/mm³</span></div>
+          <div class="kv-row"><span class="kv-key">Direct positif</span><span class="kv-val">~40 % des cas seulement</span></div>
+          <div class="kv-row"><span class="kv-key">Ponction</span><span class="kv-val red">Systématique à chaque poussée d'ascite</span></div>
+        </div>
+      </div>
+      <div class="alert alert-red" style="margin-top:8px;margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Si méconnue :</strong> EH, insuffisance rénale, choc septique → décès. Urgence thérapeutique.</div>
+      </div>
+    </div>
+
+    <!-- SHR -->
+    <div class="comp-card coral">
+      <div class="comp-title">4. Syndrome hépato-rénal (SHR)</div>
+      <div class="grid2">
+        <div>
+          <div class="kv-row"><span class="kv-key">Nature</span><span class="kv-val">Insuffisance rénale fonctionnelle</span></div>
+          <div class="kv-row"><span class="kv-key">Stade</span><span class="kv-val red">Insuffisance hépatique sévère (TP &lt; 50 %) + ascite abondante</span></div>
+        </div>
+        <div>
+          <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Non corrigée par : remplissage albumine + arrêt diurétiques/néphrotoxiques</span></div>
+          <div class="kv-row"><span class="kv-key">Seul traitement durable</span><span class="kv-val red">Transplantation hépatique</span></div>
+          <div class="kv-row"><span class="kv-key">Traitement transitoire</span><span class="kv-val">Vasoconstricteurs + albumine IV</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 8. TRAITEMENT -->
+  <div class="section">
+    <div class="section-title sec-teal">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      Traitement
+    </div>
+
+    <!-- Principes généraux -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+        Principes généraux + Traitement étiologique
+      </div>
+      <table>
+        <thead><tr><th>Étiologie</th><th>Traitement spécifique</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Alcool</strong></td><td>Arrêt complet et définitif · Hépatite alcoolique sévère : score de Maddrey (TP + bilirubinémie) → corticoïdes si Maddrey &gt; 32</td></tr>
+          <tr><td><strong>VHB</strong></td><td>Antiviral dès le stade de cirrhose même si virémie faible</td></tr>
+          <tr><td><strong>VHC</strong></td><td>Antiviraux directs oraux — éradication 99 % des cas</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:12px;">
+        <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">OBJECTIFS TRANSVERSAUX</div>
+        <div class="pills">
+          <span class="pill pill-teal">Prévenir hémorragie digestive</span>
+          <span class="pill pill-teal">Contrôler ascite/oedèmes</span>
+          <span class="pill pill-teal">Prévenir ISLA</span>
+          <span class="pill pill-teal">Prévenir EH</span>
+          <span class="pill pill-teal">Dépistage CHC tous 6 mois</span>
+          <span class="pill pill-teal">Vaccination pneumocoque, VHA, VHB, grippe, COVID</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hémorragie digestive traitement -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        Hémorragie digestive — Prise en charge
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">MESURES GÉNÉRALES</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content">2 VVP de bon calibre · Remplissage vasculaire</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content">Transfusion si Hb &lt; 7 g/dL → objectif <strong>7–8 g/dL</strong></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content">Sonde naso-gastrique : <strong>non recommandée</strong></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-content">PFC non recommandé</div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">TRAITEMENTS SPÉCIFIQUES — TRIADE OBLIGATOIRE</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Vasoactif en urgence (avant endoscopie)</strong> : somatostatine/octréotide ou terlipressine IV pendant 2–5 j puis bêtabloquants</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Antibiothérapie</strong> : Céphalosporine 3G (céfotaxime) 7 j</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Endoscopie</strong> dans les 12 h (érythromycine IV préalable) · Ligature élastique / sclérose</div></div>
+          </div>
+          <div style="margin-top:8px;">
+            <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">RECOURS EN CAS D'ÉCHEC</div>
+            <div class="pills">
+              <span class="pill pill-red">Sonde de Blakemore</span>
+              <span class="pill pill-red">TIPS en urgence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prophylaxie hémorragie -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-amber"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+        Prophylaxie des hémorragies digestives
+      </div>
+      <table>
+        <thead><tr><th>Situation</th><th>Stratégie</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Prévention primaire</strong><br>Pas de varices à risque</td>
+            <td>Endoscopie de dépistage (sauf si plaquettes normales + Fibroscan &lt; 20 kPa)</td>
+          </tr>
+          <tr>
+            <td><strong>Prévention primaire</strong><br>Varices à risque, jamais saigné</td>
+            <td>Bêtabloquants non cardiosélectifs <strong>OU</strong> ligatures élastiques itératives si CI aux BB</td>
+          </tr>
+          <tr>
+            <td><strong>Prévention secondaire</strong><br>Déjà saigné</td>
+            <td>Bêtabloquants non cardiosélectifs <strong>+</strong> ligatures élastiques toutes les 2–3 semaines jusqu'à éradication</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EH traitement -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-amber"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+        Encéphalopathie hépatique — Traitement &amp; Prévention
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">CURATIF</div>
+          <div class="kv-row"><span class="kv-key">Étape 1</span><span class="kv-val">Identifier et corriger le facteur déclenchant</span></div>
+          <div class="kv-row"><span class="kv-key">Troubles conscience sévères</span><span class="kv-val">Sonde naso-gastrique + position demi-assise ± intubation</span></div>
+          <div class="kv-row"><span class="kv-key">Traitement de fond</span><span class="kv-val teal">Lactulose</span></div>
+          <div class="kv-row"><span class="kv-key">Échec lactulose</span><span class="kv-val">Rifaximine (non absorbable)</span></div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">PRÉVENTION</div>
+          <div class="kv-row"><span class="kv-key">Primaire</span><span class="kv-val">Éviction des sédatifs +++ · Prévention facteurs déclenchants</span></div>
+          <div class="kv-row"><span class="kv-key">Secondaire</span><span class="kv-val teal">Lactulose ± rifaximine</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ascite traitement -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+        Ascite — Traitement
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">TRAITEMENT DE FOND</div>
+          <div class="kv-row"><span class="kv-key">Régime hyposodé</span><span class="kv-val">80–120 mmol/j (~5 g sel)</span></div>
+          <div class="kv-row"><span class="kv-key">Diurétique 1</span><span class="kv-val teal">Spironolactone (anti-aldostérone)</span></div>
+          <div class="kv-row"><span class="kv-key">Diurétique 2 si insuffisant</span><span class="kv-val">+ Furosémide</span></div>
+          <div class="kv-row"><span class="kv-key">Ascite tendue</span><span class="kv-val">Ponctions évacuatrices + albumine</span></div>
+          <div style="margin-top:8px;font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">EFFETS SECONDAIRES À SURVEILLER</div>
+          <div class="pills">
+            <span class="pill pill-amber">Hyperkaliémie (spiro)</span>
+            <span class="pill pill-amber">Hypokaliémie (furosémide)</span>
+            <span class="pill pill-amber">Hyponatrémie</span>
+            <span class="pill pill-amber">Gynécomastie (spiro)</span>
+            <span class="pill pill-amber">IRA fonctionnelle</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">ISLA — URGENCE THÉRAPEUTIQUE</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content">Hémocultures + ponction ascite + ECBU avant ATB</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content"><strong>ATB IV probabiliste 5 jours</strong><br>Communautaire : Céfotaxime / Ceftriaxone<br>Nosocomiale : Tazocilline</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Albumine 20% J1 + J3</strong> → prévention SHR et mortalité</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-content">Ponction de contrôle à 48h → objectif : PNN diminués d'au moins 25 %</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-blue" style="margin-top:8px;margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Surveillance efficacité ascite :</strong> Périmètre abdominal · Poids · Diurèse · Natriurèse · Ionogramme sanguin régulier sous diurétiques.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 9. CHC -->
+  <div class="section">
+    <div class="section-title sec-coral">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Carcinome hépatocellulaire (CHC) — Dépistage
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+        Dépistage systématique chez tout cirrhotique
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="kv-row"><span class="kv-key">Incidence CHC</span><span class="kv-val red">1–5 % / an</span></div>
+          <div class="kv-row"><span class="kv-key">Modalité</span><span class="kv-val">Écho hépatique + alpha-fœtoprotéine (AFP)</span></div>
+          <div class="kv-row"><span class="kv-key">Rythme</span><span class="kv-val teal">Tous les 6 mois</span></div>
+          <div class="kv-row"><span class="kv-key">Si écho non contributive</span><span class="kv-val">TDM ± IRM avec injection</span></div>
+        </div>
+        <div>
+          <div style="font-size:.8rem;font-weight:700;color:var(--text-muted);margin-bottom:6px;">NODULE SUR CIRRHOSE → CHC ?</div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-content">TDM iode + IRM gadolinium en coupes fines</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-content">CHC caractéristique : <strong>wash-in artériel + wash-out veineux</strong></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-content">Si atypique : biopsie écho-guidée du nodule + foie non tumoral</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px;margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Le CHC peut survenir <em>avant</em> le stade de cirrhose dans l'hémochromatose, l'hépatite B et la NASH. La surveillance s'impose dès la fibrose sévère dans ces contextes.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 10. SYNTHÈSE / POINTS CLÉS -->
+  <div class="section">
+    <div class="section-title sec-teal">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      Points-clés à retenir — À ne pas rater à l'ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Child-Pugh :</strong> 5 variables (albumine, bilirubine, TP, ascite, encéphalopathie). MELD : 3 variables sanguines (bilirubine, INR, créatinine).</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Fibroscan :</strong> à jeun ≥ 2h. Plaquettes normales + &lt; 20 kPa = pas de fibroscopie d'emblée.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Hémorragie digestive :</strong> triade = vasoactif (avant endoscopie) + ATB 7j C3G + endoscopie dans les 12h. Objectif Hb 7–8 g/dL.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Prévention secondaire hémorragie :</strong> bêtabloquants non cardiosélectifs + ligatures élastiques itératives.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège ISLA :</strong> Ponction d'ascite systématique à chaque poussée (souvent asymptomatique). Seuil : PNN &gt; 250/mm³. Albumine obligatoire J1+J3.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège ASAT/ALAT :</strong> rapport ASAT/ALAT ≥ 2 oriente vers l'alcool. Les transaminases peuvent être normales dans la cirrhose.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>EH :</strong> toujours chercher le facteur déclenchant. Sédatifs = contre-indiqués. Traitement = lactulose ± rifaximine.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>CHC :</strong> écho + AFP tous les 6 mois chez tout cirrhotique. Aspect typique = wash-in artériel + wash-out portal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

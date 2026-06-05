@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 105 — Épilepsie</title>
+<style>
+  :root {
+    --bg:#f8f9fb; --card:#ffffff; --text:#1a1d23; --text-light:#6b7280; --border:#e5e7eb;
+    --purple:#534AB7; --purple-light:#ede9fa;
+    --teal:#1D9E75;   --teal-light:#d1f5ea;
+    --coral:#D85A30;  --coral-light:#fde8df;
+    --blue:#378ADD;   --blue-light:#dbeafe;
+    --red:#E24B4A;    --red-light:#fee2e2;
+    --amber:#D97706;  --amber-light:#fef3c7;
+    --gray:#6b7280;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#111318;--card:#1e2028;--text:#e8eaf0;--text-light:#9ca3af;--border:#2d3040;
+      --purple-light:#2a2460;--teal-light:#0d4a35;--coral-light:#5c2a15;
+      --blue-light:#1a3a6a;--red-light:#5c1a1a;--amber-light:#4a3300;
+    }
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:.875rem;line-height:1.6;padding:16px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#1D9E75 100%);border-radius:14px;padding:28px 32px;margin-bottom:20px;color:#fff;}
+  .header h1{font-size:1.45rem;font-weight:800;margin-bottom:6px;}
+  .header .sub{font-size:.82rem;opacity:.9;margin-bottom:14px;}
+  .header .pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px;}
+  .header .pill-obj{background:rgba(255,255,255,.2);border-radius:20px;padding:3px 12px;font-size:.78rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:18px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ALERTS */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red  {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green{background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+
+  /* SECTION TITLE */
+  .section-title{font-size:1rem;font-weight:800;color:var(--text);margin:6px 0 14px;display:flex;align-items:center;gap:8px;}
+  .section-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .section-icon svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:10px;}
+  th{background:var(--bg);font-weight:700;padding:7px 10px;text-align:left;border:.5px solid var(--border);}
+  td{padding:7px 10px;border:.5px solid var(--border);vertical-align:top;}
+  tr:nth-child(even) td{background:rgba(0,0,0,.015);}
+
+  /* PILLS */
+  .pill{display:inline-block;border-radius:20px;padding:2px 10px;font-size:.76rem;font-weight:600;margin:2px;}
+  .pill-green {background:var(--teal-light); color:var(--teal);  }
+  .pill-red   {background:var(--red-light);  color:var(--red);   }
+  .pill-blue  {background:var(--blue-light); color:var(--blue);  }
+  .pill-amber {background:var(--amber-light);color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light);color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+
+  /* KV */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--border);font-size:.82rem;gap:8px;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-label{color:var(--text-light);flex-shrink:0;}
+  .kv-val{font-weight:700;text-align:right;}
+
+  /* STEPS */
+  .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;}
+  .step-num{width:26px;height:26px;border-radius:50%;background:#e5e7eb;color:var(--gray);font-weight:800;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-content{flex:1;font-size:.84rem;}
+  .step-title{font-weight:700;margin-bottom:2px;}
+
+  /* BORDER LEFT */
+  .bl-amber{border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-red  {border-left:4px solid var(--red);  padding-left:12px;}
+
+  /* LISTES */
+  ul.list{padding-left:18px;margin:6px 0;font-size:.83rem;}
+  ul.list li{margin-bottom:4px;line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
+<div class="header">
+  <h1>Item 105 — Épilepsie de l'enfant et de l'adulte</h1>
+  <div class="sub">Prévalence 0,5–1 % · Incidence 0,5 / 1 000 / an</div>
+  <div class="pills">
+    <span class="pill-obj">Définitions crise / épilepsie / état de mal</span>
+    <span class="pill-obj">Classification étiologique &amp; syndromique</span>
+    <span class="pill-obj">Sémiologie des crises</span>
+    <span class="pill-obj">Diagnostics différentiels</span>
+    <span class="pill-obj">Syndromes West · Absence · EMJ</span>
+    <span class="pill-obj">CAT crise TCG &amp; état de mal</span>
+    <span class="pill-obj">Vie quotidienne</span>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Ce chapitre couvre l'épilepsie de A à Z : distinguer crise isolée vs maladie épileptique, reconnaître les différentes sémiologies (TCG, myoclonies, absences, focales), savoir diagnostiquer les syndromes pédiatriques clés (West, absence, EMJ), éliminer les diagnostics différentiels (syncope, CNEP, AIT, hypoglycémie), gérer l'état de mal en urgence et accompagner le patient au long cours (permis, profession, contraception, grossesse).</div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ DÉFINITIONS ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#534AB7;">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Définitions fondamentales
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Crise épileptique
+    </div>
+    <p style="font-size:.83rem;">Survenue <strong>transitoire brutale imprévisible</strong> de signes/symptômes due à une activité neuronale excessive et anormalement synchrone.</p>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--text-light);">Peut être isolée, symptomatique, provoquée — ≠ maladie épileptique</div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Maladie épileptique (épilepsie)
+    </div>
+    <p style="font-size:.83rem;">Maladie cérébrale chronique — <strong>triade :</strong></p>
+    <ul class="list" style="margin-top:6px;">
+      <li>≥ 1 crise épileptique</li>
+      <li>Prédisposition cérébrale durable à générer des crises</li>
+      <li>Conséquences neurobiologiques, neuropsychologiques, sociales, psychiatriques</li>
+    </ul>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-label">Prévalence</span><span class="kv-val">0,5–1 %</span></div>
+    <div class="kv-row"><span class="kv-label">Incidence</span><span class="kv-val">0,5 / 1 000 / an</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#E24B4A;"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    État de mal épileptique (EME)
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div class="bl-amber">
+      <div style="font-weight:700;font-size:.83rem;color:var(--amber);">EME menaçant</div>
+      <div style="font-size:.82rem;margin-top:4px;">Crise <strong>&gt; 5 minutes</strong> → délai d'administration de la 1ère ligne de traitement</div>
+    </div>
+    <div class="bl-red">
+      <div style="font-weight:700;font-size:.83rem;color:var(--red);">EME installé</div>
+      <div style="font-size:.82rem;margin-top:4px;">Crise <strong>&gt; 30 minutes</strong> OU crises répétées sans reprise de conscience → pronostic vital engagé</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ ÉTIOLOGIES ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#1D9E75;">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  Classification étiologique &amp; facteurs de risque
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    5 catégories étiologiques (non exclusives)
+  </div>
+  <table>
+    <thead><tr><th>Étiologie</th><th>Détails</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill pill-purple">Génétique</span></td><td><strong>40 % des épilepsies.</strong> Génétique prouvée (rares) ou présumée (données électrocliniques + histoire familiale). <em>Terme idiopathique</em> = 4 syndromes seulement (voir alerte ci-dessous)</td></tr>
+      <tr><td><span class="pill pill-blue">Structurelle</span></td><td>Congénitale (malformations corticales, vasculaires) ou acquise (post-traumatique, tumorale, vasculaire)</td></tr>
+      <tr><td><span class="pill pill-amber">Inflammatoire / dysimmune</span></td><td>Encéphalites auto-immunes</td></tr>
+      <tr><td><span class="pill pill-red">Infectieuse</span></td><td>Post-méningitique, post-encéphalitique</td></tr>
+      <tr><td><span class="pill pill-coral">Métabolique</span></td><td>Secondaire à cause génétique ou acquise</td></tr>
+      <tr><td><span class="pill pill-gray">Inconnue</span></td><td>Aucune cause suspectée ou identifiée</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — "Idiopathique" :</strong> terme ré-introduit mais désigne <strong>exclusivement 4 syndromes</strong> : Épilepsie absence de l'enfant · Épilepsie absence de l'adolescent · Épilepsie myoclonique juvénile (EMJ) · Épilepsie avec crises TCG seules. Les termes "partielle / généralisée / idiopathique / lésionnelle" sont <strong>abandonnés</strong> dans la classification internationale actuelle.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#D97706;"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Facteurs de risque de crise
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+    <span class="pill pill-amber">Privation de sommeil</span>
+    <span class="pill pill-amber">Stimulation lumineuse intermittente (SLI) — écrans</span>
+    <span class="pill pill-red">Arrêt BZD au long cours</span>
+    <span class="pill pill-red">Prise / sevrage toxiques (THC, héroïne, alcool)</span>
+    <span class="pill pill-amber">Excès excitants (café, thé, cola)</span>
+    <span class="pill pill-red">Huiles essentielles proconvulsivantes (sauge, thym, eucalyptus, millepertuis)</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ SÉMIOLOGIE ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#378ADD;">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Sémiologie des crises
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Crise généralisée tonicoclonique (TCG) — 3 phases
+  </div>
+  <div class="alert alert-amber" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Terminologie :</strong> le terme "convulsions" est <strong>abandonné</strong> dans la classification internationale — ne plus employer</div>
+  </div>
+  <table>
+    <thead><tr><th>Phase</th><th style="text-align:center;">Durée</th><th>Signes cliniques clés</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--red);">Tonique</strong></td>
+        <td style="vertical-align:middle;text-align:center;">20–30 s</td>
+        <td>Vocalisation, abolition conscience, contraction tonique axiale + membres, apnée + cyanose, troubles végétatifs (tachycardie, mydriase, hypersécrétion), <strong>morsure latérale de langue</strong> possible</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--blue);">Clonique</strong></td>
+        <td style="vertical-align:middle;text-align:center;">20–30 s</td>
+        <td>Secousses bilatérales synchrones intenses s'espaçant progressivement</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--teal);">Résolutive (post-critique)</strong></td>
+        <td style="vertical-align:middle;text-align:center;">Quelques min</td>
+        <td>Perte de connaissance profonde, hypotonie, <strong>énurésie</strong> possible, stertor, confusion + agitation au réveil. <strong>Amnésie totale</strong> de la crise. Céphalées, myalgies, luxation épaule, tassement vertébral possibles</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Crise myoclonique
+    </div>
+    <ul class="list">
+      <li><strong>SANS trouble de conscience</strong> — seule crise généralisée dans ce cas</li>
+      <li>Très brève : &lt; 1 s à quelques secondes</li>
+      <li>Secousses isolées ou en courtes salves</li>
+      <li>Lâchage / projection de l'objet tenu, rarement chute brutale en pleine conscience</li>
+      <li>Fréquentes au <strong>réveil</strong></li>
+      <li>Favorisées par SLI (écrans)</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Différencier des myoclonies physiologiques à l'endormissement</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Absence typique
+    </div>
+    <ul class="list">
+      <li>Trouble de conscience <strong>isolé</strong> (pas de chute)</li>
+      <li>Début et fin <strong>brutales</strong></li>
+      <li>Arrêt activité, fixité du regard, quelques secondes</li>
+      <li>Favorisée par l'<strong>hyperpnée</strong></li>
+    </ul>
+    <div style="margin-top:8px;font-size:.81rem;background:var(--purple-light);color:var(--purple);border-radius:8px;padding:7px 10px;">
+      <strong>EEG pathognomonique :</strong> décharge pointes-ondes généralisées 3 Hz, bilatérales synchrones, début et fin brusques, fond normal
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#D85A30;"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Crises focales
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-weight:700;font-size:.84rem;color:var(--coral);margin-bottom:6px;">Crises temporales internes</div>
+      <ul class="list">
+        <li>Sensations végétatives initiales : <em>ascension épigastrique</em>, chaleur</li>
+        <li>Sensations émotionnelles : angoisse</li>
+        <li>Sensations mnésiques : déjà-vu, état de rêve</li>
+        <li>Trouble de conscience inconstant, toujours secondaire</li>
+        <li>Automatismes oro-alimentaires (mâchonnement)</li>
+        <li>Automatismes gestuels (émiettement, manipulation)</li>
+        <li>Durée <strong>&gt; 1 min</strong></li>
+        <li>Généralisation TCG secondaire exceptionnelle sous traitement</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.84rem;color:var(--blue);margin-bottom:6px;">Crises région centrale</div>
+      <ul class="list">
+        <li>Paresthésies et/ou clonies conscientes</li>
+        <li>Début à la <strong>main</strong>, progression vers le membre sup puis la face (<em>marche Bravais-Jacksonienne</em>)</li>
+        <li>Déficit moteur ou sensitif post-critique possible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ DIAGNOSTICS DIFFÉRENTIELS ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#534AB7;">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  Diagnostics différentiels
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    DD de la crise TCG
+  </div>
+  <table>
+    <thead><tr><th>Diagnostic</th><th>Arguments pour</th><th>Contre épilepsie</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Syncope</strong></td>
+        <td>Contexte (effort, miction, douleur, toux), signes lipothymiques, mouvements toniques/trémulations</td>
+        <td>Reprise conscience rapide, <strong>pas de confusion post-critique</strong>, morsure à la pointe de langue (vs latérale en épilepsie)</td>
+      </tr>
+      <tr>
+        <td><strong>CNEP</strong><br><small>(crise non épileptique psychogène)</small></td>
+        <td>Psycho-traumatismes anciens, manifestations polymorphes et prolongées : négation de tête, balancement bassin, pleurs, yeux clos résistants, activité motrice asynchrone</td>
+        <td><strong>EEG-vidéo</strong> : absence d'activité épileptique concomitante aux manifestations cliniques</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    DD de la crise focale
+  </div>
+  <table>
+    <thead><tr><th>Diagnostic</th><th>Éléments distinctifs</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Aura migraineuse</strong></td>
+        <td>Marche <strong>lente (5–60 min)</strong> : phosphènes → paresthésies → troubles phasiques. Céphalées en fin de séquence (heures à jours)</td>
+      </tr>
+      <tr>
+        <td><strong>AIT</strong></td>
+        <td>Facteurs CV, déficit s'installant <strong>d'emblée</strong> (pas de dynamique temporelle), plus prolongé. Si IRM normale + récidive stéréotypée → évoquer crise focale</td>
+      </tr>
+      <tr>
+        <td><strong>Hypoglycémie</strong></td>
+        <td>Contexte diabète/insuline, signes hyperadrénergiques (sueurs, tremblements, tachycardie). <strong>Correction au resucrage.</strong> Attention : l'hypoglycémie peut aussi déclencher une vraie crise épileptique symptomatique aiguë</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Bilan diagnostique de l'épilepsie
+  </div>
+  <ul class="list">
+    <li><strong>Anamnèse :</strong> événements suspects antérieurs, antécédents prédisposants</li>
+    <li><strong>Examen neurologique intercritique :</strong> signes de focalisation, acquisitions</li>
+    <li><strong>EEG ± EEG-vidéo prolongé</strong> si EEG précoce normal</li>
+    <li><strong>IRM encéphalique</strong> (selon syndrome)</li>
+    <li>Selon orientation : PL, bilan génétique, bilan métabolique, neuropsychologique</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ SYNDROMES ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#1D9E75;">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  Syndromes épileptiques à connaître
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Syndromes généralisés génétiques (= idiopathiques)
+  </div>
+  <table>
+    <thead>
+      <tr><th>Syndrome</th><th style="text-align:center;">Âge début</th><th>Crise principale</th><th>EEG</th><th>Pronostic</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Absence de l'enfant</strong></td>
+        <td style="vertical-align:middle;text-align:center;">~6 ans</td>
+        <td>Absences typiques (jusqu'à 100/j) ± TCG rares ± myoclonies</td>
+        <td>PO 3 Hz, favorisées hyperventilation</td>
+        <td><span class="badge badge-green">80 % pharmacosensible</span><br>Arrêt possible après puberté</td>
+      </tr>
+      <tr>
+        <td><strong>Épilepsie myoclonique juvénile (EMJ)</strong></td>
+        <td style="vertical-align:middle;text-align:center;">Adolescence</td>
+        <td>Myoclonies matinales photosensibles ± TCG ± absences</td>
+        <td>Polypointes-ondes, favorisées SLI</td>
+        <td><span class="badge badge-green">80 % pharmacosensible</span><br><span class="badge badge-amber">Pharmacodépendance à vie</span></td>
+      </tr>
+      <tr>
+        <td><strong>TCG seules</strong></td>
+        <td style="vertical-align:middle;text-align:center;">Ado–Adulte</td>
+        <td>TCG uniquement, favorisées manque sommeil + alcool</td>
+        <td>PO généralisées (peut être normal)</td>
+        <td><span class="badge badge-green">90 % si règles hygiène</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#E24B4A;"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Syndrome de West
+    </div>
+    <div class="kv-row"><span class="kv-label">Âge début</span><span class="kv-val">6 mois — avant 1 an</span></div>
+    <div class="kv-row"><span class="kv-label">Crise</span><span class="kv-val">Spasmes en flexion</span></div>
+    <div class="kv-row"><span class="kv-label">EEG</span><span class="kv-val">Hypsarythmie</span></div>
+    <div style="font-size:.82rem;margin-top:8px;"><strong>Triade :</strong> spasmes en flexion + régression psychomotrice + hypsarythmie EEG</div>
+    <div style="font-size:.82rem;margin-top:6px;"><strong>Étiologies :</strong> génétique présumée, structurelle (sclérose tubéreuse de Bourneville, trisomie 21)</div>
+    <div class="alert alert-red" style="margin-top:8px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Avis hospitalier RAPIDE obligatoire</strong> — EEG-vidéo, bilan étiologique, traitement urgent</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#D85A30;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Épilepsie temporale médiale
+    </div>
+    <div class="kv-row"><span class="kv-label">ATCD</span><span class="kv-val">Crises hyperthermiques compliquées</span></div>
+    <div class="kv-row"><span class="kv-label">Âge début</span><span class="kv-val">5–15 ans</span></div>
+    <div class="kv-row"><span class="kv-label">IRM</span><span class="kv-val">Sclérose hippocampique unilatérale</span></div>
+    <div class="kv-row"><span class="kv-label">Chirurgie</span><span class="kv-val">Guérison 70 %</span></div>
+    <div style="font-size:.82rem;margin-top:6px;"><strong>Crises :</strong> focales temporales internes (ascension épigastrique, déjà-vu, automatismes)</div>
+    <div class="alert alert-amber" style="margin-top:8px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Pharmacorésistance fréquente → avis centre référence épilepsies rares si avérée</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ CONVULSIONS FÉBRILES ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#D85A30;">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Crises hyperthermiques (convulsions fébriles)
+</div>
+
+<div class="grid2">
+  <div class="card" style="border-top:3px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Simple — TOUS les critères requis
+    </div>
+    <ul class="list">
+      <li>Âge de début <strong>&gt; 1 an</strong></li>
+      <li>Fièvre <strong>&gt; 37,5 °C</strong></li>
+      <li>Manifestations motrices <strong>symétriques</strong></li>
+      <li>Durée <strong>&lt; 15 minutes</strong></li>
+      <li>Pas de déficit post-critique</li>
+      <li>Unique pour un épisode fébrile donné</li>
+      <li><strong>&lt; 3 épisodes</strong> au total</li>
+    </ul>
+    <div class="alert alert-green" style="margin-top:10px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Pas d'EEG, pas de traitement AE au long cours.</strong><br>Prévention : contrôle de l'hyperthermie</div>
+    </div>
+  </div>
+  <div class="card" style="border-top:3px solid var(--red);">
+    <div class="card-title">
+      <div class="card-icon" style="background:#E24B4A;"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Compliquée — ≥ 1 critère non rempli
+    </div>
+    <ul class="list">
+      <li>Focale ou asymétrique</li>
+      <li>Durée &gt; 15 min</li>
+      <li>Déficit post-critique</li>
+      <li>Récidive dans le même épisode fébrile</li>
+      <li>≥ 3 épisodes au total</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:10px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Bilan étiologique obligatoire + traitement AE de fond</strong></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ CAT CRISE TCG ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#1D9E75;">
+    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  </div>
+  CAT devant une crise TCG
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Pendant la crise
+  </div>
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content"><div class="step-title">Observer et noter l'heure de début</div>Décrire la sémiologie (utile pour le bilan)</div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content"><div class="step-title">Libérer les VAS + PLS</div>Ne jamais introduire les doigts ou objet dans la bouche. PLS prévient l'inhalation en cas de vomissements</div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content"><div class="step-title">Si épilepsie connue</div>Administrer la BZD de recours selon prescription (habituellement après 5 min de crise TCG). Pas d'hospitalisation systématique</div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content"><div class="step-title">Appel du 15</div>Si 1ère crise, crise inhabituelle, ou durée &gt; 5 min</div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Initiation d'un traitement AE :</strong> ne pas commencer systématiquement après une 1ère crise. Indication uniquement si risque élevé de récidive → avis spécialisé <strong>dans les 2 semaines</strong> (pas en urgence aux SAU). Information claire + accord du patient obligatoires avant initiation</div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ ÉTAT DE MAL ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#E24B4A;">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Traitement de l'état de mal épileptique TCG
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>URGENCE VITALE.</strong> Diagnostic clinique. Si &gt; 30 min : hypotension/collapsus, hypoxie, rhabdomyolyse, atteinte multiviscérale, ischémie cérébrale</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#E24B4A;"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Protocole thérapeutique
+  </div>
+
+  <div style="font-weight:700;font-size:.84rem;color:var(--teal);margin-bottom:8px;">Intervention avant 30 min</div>
+  <div class="step">
+    <div class="step-num step-num-red">1</div>
+    <div class="step-content">
+      <div class="step-title">1ère ligne — BZD IV lente</div>
+      <span class="pill pill-blue">Clonazépam (Rivotril®) 1 mg IVL</span> — répéter 1 fois si échec à 5 min
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num step-num-red">2</div>
+    <div class="step-content">
+      <div class="step-title">2ème ligne — AE action prolongée IV (si échec 5 min après 2ème BZD)</div>
+      <span class="pill pill-blue">Fosphénitoïne (Prodilantin®)</span>
+      <span class="pill pill-blue">Phénitoïne (&lt; 4 ans)</span>
+      <span class="pill pill-blue">Phénobarbital (Gardénal®)</span><br>
+      <span style="font-size:.8rem;color:var(--text-light);">Alternatives :</span>
+      <span class="pill pill-purple">Lévétiracétam (Keppra®)</span>
+      <span class="pill pill-purple">Acide valproïque (Dépakine®)</span>
+      <span class="pill pill-purple">Lacosamide (Vimpat®)</span>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num step-num-red">3</div>
+    <div class="step-content">
+      <div class="step-title">3ème ligne — EME réfractaire (persistance &gt; 30 min après 2ème ligne)</div>
+      Réanimation / soins continus — Sédation : <span class="pill pill-red">propofol</span> ou <span class="pill pill-red">midazolam</span> ou <span class="pill pill-red">thiopental</span> + <strong>intubation orotrachéale</strong>
+    </div>
+  </div>
+
+  <div style="font-weight:700;font-size:.84rem;color:var(--coral);margin:10px 0 8px;">Intervention après 30 min</div>
+  <div style="font-size:.83rem;background:var(--coral-light);border-radius:8px;padding:8px 12px;color:var(--coral);">BZD IV + AE action prolongée IV de 2ème ligne <strong>d'emblée</strong></div>
+
+  <div style="font-weight:700;font-size:.84rem;color:var(--text);margin:12px 0 8px;">Dans tous les cas</div>
+  <ul class="list">
+    <li>PLS, libération VAS, oxygénothérapie</li>
+    <li>Voie veineuse périphérique</li>
+    <li>Surveillance : SaO2, FC, FR, TA, glycémie, ionogramme, pH</li>
+    <li>Traitement étiologique</li>
+    <li>Mise en place rapide du traitement AE de relais</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ VIE QUOTIDIENNE ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#378ADD;">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  Vie quotidienne du patient épileptique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#378ADD;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Permis de conduire
+    </div>
+    <div class="kv-row"><span class="kv-label">Permis B</span><span class="kv-val">1 an sans crise + ttt stable</span></div>
+    <div class="kv-row"><span class="kv-label">Poids lourd / TC</span><span class="kv-val">10 ans sans crise, sans traitement</span></div>
+    <div class="kv-row"><span class="kv-label">Aptitude médicale</span><span class="kv-val">Médecin agréé préfecture</span></div>
+    <div class="alert alert-amber" style="margin-top:8px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Conduite <strong>interdite</strong> hors validation préfectorale. Le médecin informe mais conserve le <strong>secret professionnel</strong> (pas de déclaration obligatoire)</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#D85A30;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Activités — Loisirs
+    </div>
+    <div style="font-size:.82rem;margin-bottom:5px;"><strong style="color:var(--red);">Proscrites :</strong></div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;">
+      <span class="pill pill-red">Plongée</span>
+      <span class="pill pill-red">Escalade sans sécurité</span>
+      <span class="pill pill-red">Tir sportif</span>
+      <span class="pill pill-red">Parachute</span>
+    </div>
+    <div style="font-size:.82rem;margin-bottom:5px;"><strong style="color:var(--amber);">À éviter si non contrôlée :</strong></div>
+    <span class="pill pill-amber">Baignade sans surveillance</span>
+    <div style="font-size:.82rem;margin-top:8px;">Photosensibilité : limiter écrans/stroboscopes, lunettes solaires polarisantes si handicap</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#534AB7;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Activités professionnelles
+    </div>
+    <div style="font-size:.82rem;margin-bottom:5px;"><strong style="color:var(--red);">Interdites même si bien contrôlée :</strong></div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;">
+      <span class="pill pill-red">Port d'armes</span>
+      <span class="pill pill-red">Chauffeur professionnel</span>
+      <span class="pill pill-red">Surveillant baignade</span>
+      <span class="pill pill-red">Bâtiment (charpentier, zingueur)</span>
+    </div>
+    <div style="font-size:.82rem;">Interlocuteur : <strong>médecin du travail.</strong> Si inaptitude : <strong>RQTH</strong> (reconnaissance qualité travailleur handicapé)</div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Scolarité
+    </div>
+    <ul class="list">
+      <li>Maintien en milieu normal autant que possible</li>
+      <li><strong>PAI</strong> (projet d'accueil individualisé)</li>
+      <li>Tiers-temps aux examens</li>
+      <li>Auxiliaire de vie scolaire (AVS)</li>
+      <li>Scolarité adaptée selon sévérité et comorbidités</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#D97706;"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Contraception et grossesse
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">Inducteurs enzymatiques (ex : carbamazépine)</div>
+      <ul class="list">
+        <li>Réduisent efficacité des <strong>OP oraux</strong> et des <strong>implants progestatifs</strong></li>
+        <li>Alternative → <strong>DIU</strong> (lévonorgestrel ou cuivre) ou méthodes barrière</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">OCP et lamotrigine</div>
+      <ul class="list">
+        <li>Contraception OP → baisse efficacité de la <strong>lamotrigine</strong></li>
+        <li>Vigilance accrue, informer le neurologue traitant</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Grossesse :</strong> préparer avec le neurologue. Informer toutes les femmes en âge de procréer, même sans désir imminent. La grossesse peut aggraver l'épilepsie</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ POINTS-CLÉS ══════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:#1D9E75;">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:#1D9E75;"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Synthèse finale
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> "Crise épileptique" (symptôme, peut être isolée) ≠ "Épilepsie" (maladie chronique). Une 1ère crise isolée non provoquée n'est pas forcément une épilepsie.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> "Idiopathique" = 4 syndromes seulement (absence enfant, absence adolescent, EMJ, TCG seules). La classification "partielle/généralisée/idiopathique/lésionnelle" est abandonée.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> La crise myoclonique est la <strong>seule crise généralisée SANS trouble de conscience.</strong></div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Crise hyperthermique simple → pas d'EEG, pas de traitement AE. Si ≥ 1 critère manque → compliquée → bilan + traitement.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> L'EMJ est pharmacosensible à 80 % mais nécessite un traitement <strong>à vie</strong> (pharmacodépendance). L'épilepsie absence de l'enfant est la seule où l'arrêt est souvent possible.</div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Urgence :</strong> EME TCG = urgence vitale. Protocole : BZD IVL (clonazépam) → AE action prolongée IV (fosphénitoïne/phénobarbital/lévétiracétam/VPA) → sédation + IOT en réanimation si réfractaire</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>À retenir :</strong> Absence enfant = EEG pathognomonique PO 3 Hz favorisé par hyperventilation. Épilepsie temporale médiale sur sclérose hippocampique = pharmacorésistante mais 70 % de guérison par chirurgie.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>À retenir :</strong> Inducteurs enzymatiques (carbamazépine) → OP et implant inefficaces → DIU préféré. OCP → baisse la lamotrigine. Permis B : 1 an sans crise. Permis poids lourd : 10 ans sans crise et sans traitement.</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 9 – Introduction à l'éthique médicale</title>
+  
+  <!-- Polices Google Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-color: rgba(148, 163, 184, 0.15);
+      --border-color-strong: rgba(148, 163, 184, 0.3);
+      --hr-color: rgba(148, 163, 184, 0.2);
+      
+      --purple: #534AB7;
+      --purple-light: rgba(83, 74, 183, 0.08);
+      --teal: #1D9E75;
+      --teal-light: rgba(29, 158, 117, 0.08);
+      --coral: #D85A30;
+      --coral-light: rgba(216, 90, 48, 0.08);
+      --blue: #378ADD;
+      --blue-light: rgba(55, 138, 221, 0.08);
+      --red: #E24B4A;
+      --red-light: rgba(226, 75, 74, 0.08);
+      --amber: #D97706;
+      --amber-light: rgba(217, 119, 6, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --card-bg: #1e293b;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color-strong: rgba(255, 255, 255, 0.15);
+        --hr-color: rgba(255, 255, 255, 0.12);
+        
+        --purple-light: rgba(83, 74, 183, 0.2);
+        --teal-light: rgba(29, 158, 117, 0.2);
+        --coral-light: rgba(216, 90, 48, 0.2);
+        --blue-light: rgba(55, 138, 221, 0.2);
+        --red-light: rgba(226, 75, 74, 0.2);
+        --amber-light: rgba(217, 119, 6, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-wrapper {
+      padding: 24px 16px 64px 16px;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--purple) 0%, #3a328f 50%, var(--coral) 100%);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(83, 74, 183, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .header-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .objectifs-box {
+      background: var(--purple-light);
+      border: 1px dashed var(--purple);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .objectifs-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .objectifs-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .objectifs-list li {
+      margin-bottom: 4px;
+    }
+
+    hr {
+      border: none;
+      height: 0.5px;
+      background-color: var(--hr-color);
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 0.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 12px var(--border-color);
+    }
+    .card.complication-card {
+      border-left: 4px solid var(--red);
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bg-purple { background-color: var(--purple); }
+    .bg-teal { background-color: var(--teal); }
+    .bg-coral { background-color: var(--coral); }
+    .bg-blue { background-color: var(--blue); }
+    .bg-red { background-color: var(--red); }
+    .bg-amber { background-color: var(--amber); }
+
+    .alert {
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+      line-height: 1.55;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alert strong {
+      font-weight: 800;
+    }
+    .alert-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .alert-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .alert-content {
+      flex-grow: 1;
+    }
+
+    .alert-red {
+      background: var(--red-light);
+      color: var(--red);
+      border-left: 3px solid var(--red);
+    }
+    .alert-blue {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+    }
+    .alert-green, .alert-teal {
+      background: var(--teal-light);
+      color: var(--teal);
+      border-left: 3px solid var(--teal);
+    }
+    .alert-amber {
+      background: var(--amber-light);
+      color: var(--amber);
+      border-left: 3px solid var(--amber);
+    }
+
+    .alert-red .alert-icon svg { stroke: var(--red); }
+    .alert-blue .alert-icon svg { stroke: var(--blue); }
+    .alert-green .alert-icon svg { stroke: var(--teal); }
+    .alert-teal .alert-icon svg { stroke: var(--teal); }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 20px;
+      line-height: 1;
+    }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+
+    .step-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 16px 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .step-number {
+      width: 22px;
+      height: 22px;
+      background-color: var(--border-color-strong);
+      color: var(--text-muted);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-content {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    .kv-container {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      background: var(--card-bg);
+    }
+    .kv-row:last-child {
+      border-bottom: none;
+    }
+    .kv-key {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .kv-val {
+      font-weight: 800;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    th {
+      background: var(--purple-light);
+      color: var(--purple);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+      color: var(--text);
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) td {
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .text-dense {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+    }
+    .text-dense:last-child {
+      margin-bottom: 0;
+    }
+    ul.dense-list {
+      margin: 8px 0;
+      padding-left: 20px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    ul.dense-list li {
+      margin-bottom: 4px;
+    }
+    .sub-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--purple);
+      margin: 12px 0 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="page">
+      
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-tag">ITEM 9</div>
+        <h1>Introduction à l'Éthique Médicale</h1>
+        <p class="header-subtitle">Définitions de l'éthique, bioéthique et déontologie. Principisme, mesures de protection des majeurs, éthique du début et de la fin de vie.</p>
+      </div>
+
+      <!-- OBJECTIFS -->
+      <div class="objectifs-box">
+        <div class="objectifs-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Objectifs pédagogiques (EDN)</span>
+        </div>
+        <ul class="objectifs-list">
+          <li><strong>Distinctions :</strong> Éthique (reflexive), morale (normative) et déontologie (code réglementaire).</li>
+          <li><strong>Bioéthique & Principisme :</strong> Les 4 principes fondamentaux de Beauchamp & Childress (1979).</li>
+          <li><strong>Protection des Majeurs :</strong> Vulnérabilité, Sauvegarde de justice, Curatelle, Tutelle et Mandat.</li>
+          <li><strong>Éthique du début de vie :</strong> Cadre et délais de l'IVG, conditions de l'IMG, DPN vs DPI.</li>
+          <li><strong>Éthique de la fin de vie :</strong> Obstination déraisonnable, LATA, sédation profonde, procédure collégiale.</li>
+          <li><strong>Recherche et Dons :</strong> Lois de bioéthique, CPP (Huriet/Jardé), don d'organes (présomption de consentement).</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 1 : ETHIQUE, MORALE, DEONTOLOGIE & PRINCIPISME -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-purple">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Définitions & Les 4 Principes de la Bioéthique</span>
+        </div>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--purple);">Concepts de Régulation</strong>
+            <ul class="dense-list">
+              <li><strong>Éthique :</strong> Réflexion critique, reflexive et pluridisciplinaire visant à guider la décision ("comment agir au mieux ?"). <em>Consequentialiste</em>.</li>
+              <li><strong>Morale :</strong> Normative, dogmatique. Elle catégorise le bien/mal (aristotélicienne).</li>
+              <li><strong>Déontologie :</strong> Cadre réglementaire de bonnes pratiques ordinale inséré dans le CSP (subordonné aux lois).</li>
+              <li><strong>Bioéthique :</strong> Conflit entre ce qui est techniquement possible et ce qui est éthiquement acceptable.</li>
+            </ul>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--blue);">Le Principisme (Beauchamp & Childress, 1979)</strong>
+            <ul class="dense-list">
+              <li><strong>Bienfaisance :</strong> Agir pour l'avantage/bien du patient (conception hippocratique).</li>
+              <li><strong>Non-malfaisance :</strong> <em>Primum non nocere</em> (évaluation balance bénéfices/risques).</li>
+              <li><strong>Autonomie :</strong> Liberté de choix du patient (co-décision, consentement).</li>
+              <li><strong>Justice :</strong> Non-discrimination, universalité, et équité (justice redistributive/universalisme proportionné).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 : VULNERABILITÉ ET PROTECTION JURIDIQUE -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-blue">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span>Vulnérabilité & Protection Juridique des Majeurs</span>
+        </div>
+
+        <p class="text-dense">
+          La <strong>vulnérabilité</strong> clinique ou sociale impose des mesures judiciaires proportionnées de protection des personnes, ordonnées par le juge des contentieux de la protection.
+        </p>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Mesure</th>
+                <th>Définition & Durée</th>
+                <th>Représentation / Droits</th>
+                <th>Saisine / Rôle du Médecin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700; color:var(--purple);">Sauvegarde de justice</td>
+                <td>Urgence / transitoire.<br>Durée maximum <strong>1 an</strong> (renouvelable 1 fois).</td>
+                <td>Le majeur <strong>conserve ses droits civils</strong>. Un mandataire spécial peut être désigné pour des actes précis de disposition.</td>
+                <td>Saisine par déclaration médicale au procureur ou décision du juge. Rapide.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--teal);">Curatelle<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Assistance</span></td>
+                <td>Majeur ayant besoin d'être <strong>conseillé ou assisté</strong> dans les actes de la vie civile.<br>Durée max <strong>5 ans</strong> (renouvelable).</td>
+                <td>Le majeur prend ses décisions simples seul, mais a besoin de la <strong>co-signature du curateur</strong> pour les actes de disposition (vente d'immeuble, etc.).</td>
+                <td>Nécessite obligatoirement un <strong>certificat médical circonstancié</strong> rédigé par un médecin inscrit sur la liste du Procureur.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--coral);">Tutelle<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Représentation</span></td>
+                <td>Représentation continue nécessaire pour tous les actes de la vie civile.<br>Durée max <strong>5 ans</strong> (ou 10 ans si altération incurable).</td>
+                <td>Le tuteur <strong>représente</strong> le majeur et agit en son nom pour tous les actes (le majeur perd l'exercice direct de ses droits civils).</td>
+                <td>Idem curatelle. Certificat médical spécialisé obligatoire. Le juge prononce la tutelle après audition.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Mandat de protection future :</strong> Dispositif conventionnel permettant à une personne d'organiser à l'avance sa propre protection (désignation de son futur mandataire) pour le jour où elle ne sera plus en mesure de gérer seule ses intérêts.
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 : ETHIQUE DU DEBUT DE VIE -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-teal">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span>Éthique du Début de Vie (Procréation & Grossesse)</span>
+        </div>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--teal);">IVG vs IMG</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              &bull; <strong>IVG (Interruption Volontaire) :</strong> Demande de la femme enceinte. Réalisable jusqu'à <strong>14 semaines de grossesse (16 SA)</strong>. Clause de conscience spécifique des médecins/sages-femmes. Consentement écrit obligatoire.
+              <br>&bull; <strong>IMG (Interruption Médicale) :</strong> Réalisable <strong>à tout moment</strong> de la grossesse. Deux critères stricts alternatifs : péril grave pour la santé de la femme, ou forte probabilité que l'enfant à naître soit atteint d'une affection d'une particulière gravité incurable. Nécessite l'accord d'une <strong>équipe pluridisciplinaire collégiale</strong> (centre agréé CPDPN).
+            </p>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--blue);">Diagnostic : DPN vs DPI</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              &bull; <strong>DPN (Diagnostic Prénatal) :</strong> Examens cliniques et biologiques in utero (échographie, amniocentèse) visant à détecter une affection fœtale.
+              <br>&bull; <strong>DPI (Diagnostic Préimplantatoire) :</strong> Biopsie embryonnaire réalisée in vitro lors d'une AMP. Strictement réservé aux couples ayant une probabilité élevée de transmettre une <strong>maladie génétique d'une particulière gravité reconnue comme incurable</strong> au moment du diagnostic.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 4 : ETHIQUE DE LA FIN DE VIE -->
+      <div class="card complication-card">
+        <div class="card-title">
+          <div class="card-icon bg-red">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>Éthique de la Fin de Vie (Loi Claeys-Léonetti, 2016)</span>
+        </div>
+
+        <p class="text-dense">
+          Les décisions d'arrêt ou de limitation de traitements (LATA) s'inscrivent dans un cadre légal restrictif visant à proscrire l'<strong>obstination déraisonnable</strong> (acharnement thérapeutique).
+        </p>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--red);">Obstination déraisonnable (LATA)</strong>
+            <p class="text-dense">
+              Les actes de prévention, d'investigation ou de soins ne doivent pas être poursuivis par une <strong>obstination déraisonnable</strong>. Lorsqu'ils apparaissent inutiles, disproportionnés ou n'ayant d'autre effet que le seul maintien artificiel de la vie, ils peuvent être limités ou arrêtés.
+            </p>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--coral);">Sédation Profonde & Continue</strong>
+            <p class="text-dense">
+              Droit d'obtenir une sédation profonde et continue provoquant une altération de la conscience maintenue jusqu'au décès, associée à une analgésie et à l'arrêt de tous les traitements de maintien en vie, dans 2 situations :
+              <br>&bull; Maladie grave et incurable à pronostic vital engagé à court terme souffrant de douleur réfractaire.
+              <br>&bull; Décision de LATA engageant le pronostic vital à court terme du patient incapable d'exprimer sa volonté.
+            </p>
+          </div>
+        </div>
+
+        <div class="sub-label">La Procédure Collégiale Obligatoire</div>
+        <p class="text-dense">
+          En cas de LATA chez un <strong>patient incapable d'exprimer sa volonté</strong>, la décision ne peut pas être prise seule par le médecin traitant. Elle requiert obligatoirement une <strong>procédure collégiale</strong> :
+        </p>
+        <ol class="step-list">
+          <li class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">Recherche obligatoire de l'existence de <strong>directives anticipées</strong> et consultation de la <strong>personne de confiance</strong> (ou à défaut de la famille/proches).</div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">Concertation collective avec l'équipe de soins (infirmiers, etc.) et sollicitation de l'avis motivé d'un <strong>médecin consultant extérieur indépendant</strong> (sans lien hiérarchique).</div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">Prise de décision motivée par le médecin en charge. Inscription obligatoire de tous les avis et motifs de LATA dans le dossier du patient.</div>
+          </li>
+        </ol>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 5 : RECHERCHE ET DONS D'ORGANES -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-coral">
+            <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+          </div>
+          <span>Recherche Clinique, Dons d'Organes & Tests Génétiques</span>
+        </div>
+
+        <ul class="dense-list">
+          <li><strong>Recherche Clinique (Loi Huriet / Jardé) :</strong> Classe les recherches sur l'homme en 3 catégories. Avis conforme obligatoire d'un <strong>CPP (Comité de Protection des Personnes)</strong> et autorisation de l'ANSM. Consentement écrit et éclairé du participant.</li>
+          <li><strong>Dons d'Organes (Personne Décédée) :</strong> Régis par le principe du <strong>consentement présumé</strong> (Loi Caillavet). Tout citoyen est considéré comme donneur d'organes à sa mort, sauf s'il s'est inscrit de son vivant sur le <strong>Registre national des refus</strong> géré par l'Agence de la biomédecine (ou si la famille apporte un témoignage écrit de son refus).</li>
+          <li><strong>Dons d'Organes (Donneur Vivant) :</strong> Strictement limités au cercle familial proche. Requiert le recueil obligatoire du <strong>consentement écrit solennel devant le Président du Tribunal judiciaire</strong>.</li>
+          <li><strong>Tests Génétiques :</strong> Uniquement à visée médicale ou scientifique. Consentement écrit obligatoire préalable du patient. Si anomalie grave détectée, obligation légale pour le patient d'informer sa parentèle (transmission de l'information par le médecin possible en cas de refus du patient).</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- SYNTHESE FINALE -->
+      <div class="card" style="border-left: 4px solid var(--purple); background: var(--purple-light);">
+        <div class="card-title">
+          <div class="card-icon bg-purple">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Points-clés à retenir (Synthèse EDN)</span>
+        </div>
+        
+        <ul class="dense-list">
+          <li><strong>Morale, Droit, Déontologie, Éthique :</strong> Éthique = processus dynamique d'arbitrage critique conséquent ; Déontologie = code réglementaire ordinal CSP.</li>
+          <li><strong>Principisme :</strong> Bienfaisance, non-malfaisance, autonomie (co-décision) et justice (redistributive/proportionnée).</li>
+          <li><strong>Protection Juridique :</strong> Sauvegarde de justice (1 an transitoire, droits conservés) ; Curatelle (5 ans, assistance act. disposition) ; Tutelle (5 ans, représentation complète).</li>
+          <li><strong>IMG :</strong> Aucun délai légal (réalisable jusqu'au terme). Décision de CPDPN pluridisciplinaire obligatoire.</li>
+          <li><strong>Fin de vie (LATA) :</strong> Prohibition de l'obstination déraisonnable. <strong>Procédure collégiale obligatoire</strong> si patient inconscient (médecin consultant externe requis).</li>
+          <li><strong>Directives Anticipées :</strong> Durée de validité <strong>illimitée</strong>, modifiables/annulables. Impératives (s'imposent au médecin) sauf urgence vitale.</li>
+          <li><strong>Dons d'organes :</strong> Consentement présumé chez le défunt (registre des refus) ; consentement écrit devant le juge judiciaire pour le donneur vivant.</li>
+        </ul>
+
+        <div class="alert alert-amber" style="margin-top: 12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Piège classique ECNi :</strong> Ne pas confondre <strong>Sauvegarde de justice</strong> (mesure transitoire d'urgence, conservation des droits) avec la <strong>Tutelle</strong> (perte des droits civils, représentation complète). Le certificat médical spécialisé circonstancié est indispensable pour la tutelle/curatelle.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

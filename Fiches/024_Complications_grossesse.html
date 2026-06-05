@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 24 – Principales complications de la grossesse</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #E8A020;
+    --rang-a: #D85A30;
+    --rang-b: #378ADD;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #555577;
+    --border: rgba(0,0,0,0.08);
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12121f;
+      --card-bg: #1e1e30;
+      --text: #e8e8f0;
+      --text-light: #9999bb;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; font-size: 15px; padding: 24px 16px 60px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%); border-radius: 20px; padding: 32px 36px; margin-bottom: 32px; color: white; }
+  .header .item-num { font-size: 13px; font-weight: 600; opacity: 0.75; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 16px; }
+  .header .intro { font-size: 14.5px; opacity: 0.92; line-height: 1.7; background: rgba(255,255,255,0.12); border-radius: 12px; padding: 16px 20px; }
+  .header .intro p { margin-bottom: 8px; }
+  .header .intro p:last-child { margin-bottom: 0; }
+
+  /* Sections */
+  .section-title { display: flex; align-items: center; gap: 12px; margin: 36px 0 18px; }
+  .section-title .icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .section-title h2 { font-size: 20px; font-weight: 700; color: var(--text); }
+
+  /* Cards */
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 16px; padding: 22px 24px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .card-title h3 { font-size: 16px; font-weight: 700; }
+  .oic-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.5px; white-space: nowrap; }
+  .rang-a { background: rgba(216,90,48,0.12); color: var(--rang-a); }
+  .rang-b { background: rgba(55,138,221,0.12); color: var(--rang-b); }
+  .oic-label { font-size: 11px; color: var(--text-light); font-style: italic; margin-top: -10px; margin-bottom: 10px; }
+
+  /* Grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+  .pill { padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+  .pill-green { background: rgba(29,158,117,0.13); color: #1D9E75; }
+  .pill-red { background: rgba(226,75,74,0.13); color: var(--red); }
+  .pill-blue { background: rgba(55,138,221,0.13); color: var(--blue); }
+  .pill-amber { background: rgba(232,160,32,0.13); color: var(--amber); }
+  .pill-purple { background: rgba(83,74,183,0.13); color: var(--purple); }
+  .pill-coral { background: rgba(216,90,48,0.13); color: var(--coral); }
+
+  /* Alertes */
+  .alert { border-radius: 12px; padding: 14px 18px; margin: 14px 0; font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .alert-red { background: rgba(226,75,74,0.1); border-left: 4px solid var(--red); }
+  .alert-blue { background: rgba(55,138,221,0.1); border-left: 4px solid var(--blue); }
+  .alert-green { background: rgba(29,158,117,0.1); border-left: 4px solid var(--teal); }
+  .alert-amber { background: rgba(232,160,32,0.1); border-left: 4px solid var(--amber); }
+
+  /* Complications cards */
+  .complication-card { border-left: 4px solid var(--red); border-radius: 0 12px 12px 0; background: var(--card-bg); padding: 12px 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .complication-card.blue { border-left-color: var(--blue); }
+  .complication-card.amber { border-left-color: var(--amber); }
+  .complication-card.teal { border-left-color: var(--teal); }
+  .complication-card.purple { border-left-color: var(--purple); }
+
+  /* Steps */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; background: #e8e8f0; color: var(--text); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  @media (prefers-color-scheme: dark) { .step-num { background: #2e2e45; } }
+
+  /* Tableaux */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 10px; }
+  th { background: var(--purple); color: white; padding: 10px 14px; text-align: left; font-weight: 600; }
+  th:first-child { border-radius: 10px 0 0 0; }
+  th:last-child { border-radius: 0 10px 0 0; }
+  td { padding: 9px 14px; border-bottom: 0.5px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(83,74,183,0.04); }
+
+  /* Kv data */
+  .kv-list { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 14px; }
+  .kv-key { color: var(--text-light); font-weight: 600; white-space: nowrap; }
+  .kv-val { color: var(--text); }
+
+  /* Separator */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 32px 0; }
+
+  ul, ol { padding-left: 18px; }
+  li { margin-bottom: 5px; }
+  strong { color: var(--text); }
+  .text-red { color: var(--red); font-weight: 700; }
+  .text-amber { color: var(--amber); font-weight: 600; }
+  .text-teal { color: var(--teal); font-weight: 600; }
+  .text-blue { color: var(--blue); font-weight: 600; }
+  .text-purple { color: var(--purple); font-weight: 600; }
+  .small { font-size: 13px; color: var(--text-light); }
+
+  .subsection-title { font-size: 14px; font-weight: 700; color: var(--purple); margin: 14px 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ====== HEADER ====== -->
+  <div class="header">
+    <div class="item-num">Item 24 — IC-24</div>
+    <h1>Principales complications de la grossesse</h1>
+    <div class="intro">
+      <p>Ce chapitre couvre les <strong>4 grandes urgences obstétricales</strong> à maîtriser absolument :</p>
+      <p>① <strong>Hémorragies</strong> (tous trimestres + post-partum) — savoir distinguer GEU, fausse couche, placenta praevia, HRP et HPP, et agir en urgence.</p>
+      <p>② <strong>HTA gravidique et prééclampsie</strong> — comprendre le spectre (HTAg → prééclampsie → HELLP/éclampsie), prescrire les bons antihypertenseurs et surveiller.</p>
+      <p>③ <strong>Menace d'accouchement prématuré (MAP)</strong> — définir, évaluer, tocolyser et prévenir la prématurité.</p>
+      <p>④ <strong>Fièvre pendant la grossesse</strong> — penser systématiquement à la listériose, éliminer une chorioamniotite, protéger le fœtus.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PARTIE 1 : HÉMORRAGIES                                       -->
+  <!-- ============================================================ -->
+
+  <div class="section-title">
+    <div class="icon" style="background:rgba(226,75,74,0.13);">🩸</div>
+    <h2>Partie 1 — Hémorragies de la grossesse</h2>
+  </div>
+
+  <!-- 1er trimestre -->
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Hémorragie du 1<sup>er</sup> trimestre</h3>
+    </div>
+    <div class="oic-label">OIC-024-01-A</div>
+    <div class="alert alert-amber">
+      <span class="alert-icon">⚠️</span>
+      <div>Touche <strong>25 % des grossesses</strong>. Toujours éliminer une <strong>GEU</strong> en priorité. Groupe + Rhésus + RAI systématiques (prévention allo-immunisation Rh-D).</div>
+    </div>
+
+    <div class="subsection-title">Causes possibles</div>
+    <div class="pills">
+      <span class="pill pill-red">GEU</span>
+      <span class="pill pill-amber">Fausse couche (GIU non évolutive)</span>
+      <span class="pill pill-blue">GIU évolutive + hématome décidual</span>
+      <span class="pill pill-purple">Lyse d'un jumeau</span>
+      <span class="pill pill-purple">Grossesse môlaire</span>
+      <span class="pill pill-green">Cause cervicale (cancer, ectropion)</span>
+    </div>
+
+    <div class="subsection-title" style="margin-top:16px;">Bilan systématique</div>
+    <div class="grid-2">
+      <div>
+        <strong>Biologie</strong>
+        <ul style="margin-top:6px;">
+          <li>β-hCG plasmatique quantitatif</li>
+          <li>NFS (si saignement abondant)</li>
+          <li>Groupe, Rhésus, phénotype, RAI</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Imagerie</strong>
+        <ul style="margin-top:6px;">
+          <li>Écho pelvienne abdominale <em>et</em> endovaginale</li>
+          <li>Recherche : sac gestationnel, masse latéro-utérine, épanchement pelvien, débris ovulaires</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fausse couche -->
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Fausse couche du 1<sup>er</sup> trimestre (GIU non évolutive)</h3>
+    </div>
+    <div class="oic-label">OIC-024-02-A</div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">💬</span>
+      <div>Information et soutien psychologique systématiques. Prévention de l'allo-immunisation Rh-D si patiente Rh–.</div>
+    </div>
+    <div class="grid-2">
+      <div class="complication-card blue">
+        <strong>Traitement médical</strong> (prostaglandines)
+        <ul style="margin-top:6px; font-size:13.5px;">
+          <li>Sacs de petite taille</li>
+          <li>Hémorragies peu importantes</li>
+        </ul>
+      </div>
+      <div class="complication-card">
+        <strong>Traitement chirurgical</strong>
+        <ul style="margin-top:6px; font-size:13.5px;">
+          <li>Dilatation col + aspiration (AG ou AL)</li>
+          <li>Examen anapath du produit</li>
+          <li>Vérification vacuité utérine écho</li>
+          <li>Sortie J0 ou J1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEU -->
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Grossesse extra-utérine (GEU)</h3>
+    </div>
+    <div class="oic-label">OIC-024-03-A (voir aussi Item 25)</div>
+    <div class="alert alert-red">
+      <span class="alert-icon">🚨</span>
+      <div><strong>Urgence chirurgicale</strong> dès l'un des critères : instabilité hémodynamique, défense abdominale, hémopéritoine à l'écho.</div>
+    </div>
+
+    <div class="grid-2" style="margin-top:12px;">
+      <div>
+        <div class="subsection-title">GEU symptomatique → Chirurgie</div>
+        <ul>
+          <li>Conditionnement, bilan préop, groupage, RAI, anesthésiste</li>
+          <li>Cœlioscopie diagnostique et thérapeutique</li>
+          <li><strong>Salpingotomie</strong> (conservateur) ou <strong>salpingectomie</strong></li>
+          <li>Chirurgie indiquée aussi si algies ET/OU β-hCG &gt; 5 000 UI/L</li>
+        </ul>
+      </div>
+      <div>
+        <div class="subsection-title">GEU pauci/asymptomatique → Méthotrexate</div>
+        <ul>
+          <li>MTX 1 mg/m² IM dose unique (si pas de CI biologique)</li>
+          <li>Surveillance hebdomadaire β-hCG ; 2<sup>e</sup> injection si décroissance insuffisante à J7</li>
+          <li>Guérison = β-hCG indétectable (~1 mois)</li>
+          <li>Abstention si β-hCG &lt; 1 000 UI/L en décroissance constante (sous surveillance stricte)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <span class="alert-icon">⚠️</span>
+      <div>Toujours vérifier le groupe sanguin pour prévenir l'allo-immunisation anti-D.</div>
+    </div>
+  </div>
+
+  <!-- 2e/3e trimestre -->
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Hémorragie du 2<sup>e</sup> ou 3<sup>e</sup> trimestre</h3>
+    </div>
+    <div class="oic-label">OIC-024-04-A</div>
+    <div class="alert alert-red">
+      <span class="alert-icon">🚨</span>
+      <div><strong>Urgence obstétricale.</strong> Évoquer placenta praevia (PP) et hématome rétroplacentaire (HRP). <strong>Toucher vaginal interdit tant que PP non éliminé.</strong></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Placenta praevia (PP)</th>
+          <th>Hématome rétroplacentaire (HRP)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Saignement</strong></td>
+          <td>Abondant, rouge vif, récidivant</td>
+          <td>Peu abondant, noirâtre, incoagulable</td>
+        </tr>
+        <tr>
+          <td><strong>Douleurs</strong></td>
+          <td>Absentes ou légères CU</td>
+          <td>Brutales, permanentes, « ventre de bois »</td>
+        </tr>
+        <tr>
+          <td><strong>Utérus</strong></td>
+          <td>Souple, indolore</td>
+          <td>Contracture permanente douloureuse</td>
+        </tr>
+        <tr>
+          <td><strong>Contexte</strong></td>
+          <td>Présentation pathologique (siège, transverse)</td>
+          <td>Vasculaire : HTA, tabac, cocaïne, prééclampsie</td>
+        </tr>
+        <tr>
+          <td><strong>BCF</strong></td>
+          <td>Perçus</td>
+          <td>Absents dans les formes complètes (MFIU)</td>
+        </tr>
+        <tr>
+          <td><strong>Écho</strong></td>
+          <td>Placenta bas inséré (&lt; 50 mm de l'OI)</td>
+          <td>Souvent non visible ! (non informatif pour exclure HRP)</td>
+        </tr>
+        <tr>
+          <td><strong>Bilan</strong></td>
+          <td>NFS, TP, TCA, hémostase complète, RCF</td>
+          <td>NFS, TP, TCA, hémostase complète, RCF</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <span class="alert-icon">⚠️</span>
+      <div>Ne pas retarder la PEC pour réaliser l'écho si suspicion d'HRP. L'écho ne doit pas être l'examen prioritaire !</div>
+    </div>
+  </div>
+
+  <!-- HPP -->
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Hémorragie du post-partum (HPP) — Définition</h3>
+    </div>
+    <div class="oic-label">OIC-024-05-A</div>
+    <div class="kv-list" style="margin-top:6px;">
+      <span class="kv-key">HPP</span><span class="kv-val">Hémorragie &gt; <strong>500 mL</strong> dans les 24 h suivant l'accouchement (voies naturelles ou césarienne)</span>
+      <span class="kv-key">HPP sévère</span><span class="kv-val">&gt; <strong>1 000 mL</strong></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-b">Rang B</span>
+      <h3>Prise en charge de l'HPP</h3>
+    </div>
+    <div class="oic-label">OIC-024-06-B</div>
+    <div class="alert alert-amber">
+      <span class="alert-icon">⚠️</span>
+      <div>Les pertes sanguines sont <strong>systématiquement sous-estimées</strong>. La temporalité est essentielle.</div>
+    </div>
+    <div class="subsection-title">1ère ligne (mesures immédiates)</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div>Estimation des pertes (sac collecteur)</div></li>
+      <li><span class="step-num">2</span><div>Délivrance artificielle si placenta non expulsé</div></li>
+      <li><span class="step-num">3</span><div>Révision utérine + massage utérin</div></li>
+      <li><span class="step-num">4</span><div>Inspection sous valves des voies génitales basses</div></li>
+      <li><span class="step-num">5</span><div><strong>Oxytocine 10 UI IVL</strong> (à renouveler une fois si nécessaire)</div></li>
+      <li><span class="step-num">6</span><div>Sondage urinaire à demeure + suture des déchirures périnéales</div></li>
+    </ol>
+    <div class="subsection-title">En cas d'échec</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div>2<sup>e</sup> VVP, remplissage, oxygénothérapie</div></li>
+      <li><span class="step-num">2</span><div><strong>Sulprostone</strong> (prostaglandine) en SE + acide tranexamique 1 g IV</div></li>
+      <li><span class="step-num">3</span><div>Bilan biologique (NFS, coag, RAI) + transfusion CGR/PFC si nécessaire</div></li>
+      <li><span class="step-num">4</span><div>Ballon de Bakri (tamponnement intra-utérin)</div></li>
+      <li><span class="step-num">5</span><div><strong>Embolisation artérielle sélective</strong> (si patiente stable + radiologue dispo)</div></li>
+      <li><span class="step-num">6</span><div>Ligature chirurgicale artères utérines / hypogastriques ou compression utérine</div></li>
+      <li><span class="step-num">7</span><div class="text-red">Hystérectomie d'hémostase (en dernier recours ou d'emblée si hémodynamique instable / CIVD)</div></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-b">Rang B</span>
+      <h3>Prévention de l'HPP</h3>
+    </div>
+    <div class="oic-label">OIC-024-07-B</div>
+    <div class="pills">
+      <span class="pill pill-teal" style="background:rgba(29,158,117,0.13);color:#1D9E75;">Administration prophylactique oxytocine dès la sortie de l'enfant (5–10 UI IVL)</span>
+      <span class="pill pill-blue">Sac collecteur systématique</span>
+      <span class="pill pill-blue">Surveillance 2 h en salle de travail</span>
+      <span class="pill pill-amber">Délivrance artificielle si non-décollement à 30 min</span>
+      <span class="pill pill-purple">Vérification macroscopique du placenta</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- PARTIE 2 : HTA GRAVIDIQUE                                    -->
+  <!-- ============================================================ -->
+
+  <div class="section-title">
+    <div class="icon" style="background:rgba(83,74,183,0.13);">🫀</div>
+    <h2>Partie 2 — HTA gravidique et prééclampsie</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Définitions et classification</h3>
+    </div>
+    <div class="oic-label">OIC-024-08-A | OIC-024-09-B</div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">📊</span>
+      <div>HTA chez la femme enceinte : <strong>5–10 %</strong> des grossesses. Parmi elles, <strong>10 % → prééclampsie</strong>.</div>
+    </div>
+
+    <table style="margin-top:12px;">
+      <thead>
+        <tr>
+          <th>Entité</th>
+          <th>Définition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>HTA gravidique</strong></td>
+          <td>HTA apparue après 20 SA, sans protéinurie, disparaissant avant 6 sem. post-partum</td>
+        </tr>
+        <tr>
+          <td><strong>Prééclampsie (PE)</strong></td>
+          <td>HTA gravidique + protéinurie ≥ 300 mg/24 h</td>
+        </tr>
+        <tr>
+          <td><strong>PE surajoutée</strong></td>
+          <td>PE chez une patiente avec HTA chronique préexistante</td>
+        </tr>
+        <tr>
+          <td><strong>HTA chronique</strong></td>
+          <td>Antérieure à la grossesse ; découverte avant 20 SA ou persistance &gt; 6 sem. post-partum</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid-2" style="margin-top:14px;">
+      <div class="complication-card amber">
+        <strong>HTA modérée</strong>
+        <p style="font-size:13.5px;">PAS 140–159 mmHg <br>ET/OU PAD 90–109 mmHg</p>
+      </div>
+      <div class="complication-card" style="border-left-color:var(--red);">
+        <strong>HTA sévère</strong>
+        <p style="font-size:13.5px;">PAS ≥ 160 mmHg <br>ET/OU PAD ≥ 110 mmHg</p>
+      </div>
+    </div>
+    <div class="small" style="margin-top:8px;">HTA = PAS ≥ 140 mmHg ET/OU PAD ≥ 90 mmHg à au moins 2 reprises.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Complications de l'HTA gravidique</h3>
+    </div>
+    <div class="oic-label">OIC-024-11-A</div>
+    <div class="subsection-title">Complications maternelles (engagement du pronostic vital)</div>
+    <div class="grid-2">
+      <div>
+        <div class="complication-card">Éclampsie (crise convulsive)</div>
+        <div class="complication-card">HELLP syndrome (Hemolysis + ↑ enzymes hépatiques + ↓ plaquettes)</div>
+        <div class="complication-card">HRP (hématome rétroplacentaire)</div>
+        <div class="complication-card">CIVD</div>
+      </div>
+      <div>
+        <div class="complication-card blue">IRA (insuffisance rénale aiguë)</div>
+        <div class="complication-card blue">Hématome sous-capsulaire du foie</div>
+        <div class="complication-card blue">Rétinopathie hypertensive</div>
+        <div class="complication-card blue">Hémorragie cérébroméningée</div>
+      </div>
+    </div>
+    <div class="subsection-title">Complications fœtales</div>
+    <div class="pills">
+      <span class="pill pill-red">RCIU</span>
+      <span class="pill pill-red">MFIU (sur RCIU sévère, éclampsie ou HRP)</span>
+      <span class="pill pill-amber">Prématurité induite (sauvetage maternel ou fœtal)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Critères de sévérité de la prééclampsie</h3>
+    </div>
+    <div class="oic-label">OIC-024-12-A</div>
+    <div class="grid-2">
+      <div>
+        <ul>
+          <li>HTA sévère (PAS ≥ 160 ou PAD ≥ 110 mmHg)</li>
+          <li>Protéinurie &gt; 3 g/24 h</li>
+          <li>Créatinémie ≥ 90 µmol/L</li>
+          <li>Oligurie ≤ 500 mL/24 h ou ≤ 25 mL/h</li>
+          <li>Thrombopénie &lt; 100 000/mm³</li>
+          <li>Cytolyse hépatique (ASAT/ALAT &gt; 2N)</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Douleur épigastrique/hypochondre droit « en barre »</li>
+          <li>Douleur thoracique, dyspnée, OAP</li>
+          <li>Céphalées sévères résistantes au traitement</li>
+          <li>Troubles visuels ou auditifs persistants</li>
+          <li>ROT vifs, diffusés, polycinétiques</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-red" style="margin-top:12px;">
+      <span class="alert-icon">🚨</span>
+      <div>1 seul critère de sévérité suffit à reclasser la prééclampsie en <strong>prééclampsie sévère</strong> → hospitalisation et PEC urgente.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-b">Rang B</span>
+      <h3>Examens complémentaires, traitement et surveillance</h3>
+    </div>
+    <div class="oic-label">OIC-024-10-B | OIC-024-13-B | OIC-024-14-B</div>
+
+    <div class="subsection-title">Bilan maternel (dépister la prééclampsie)</div>
+    <ul>
+      <li>Protéinurie sur échantillon (BU &gt; 1 croix) ou 24 h (&gt; 300 mg) — <strong>examen indispensable</strong></li>
+      <li>Ratio P/C &gt; 30 = protéinurie significative → quantification sur 24 h</li>
+    </ul>
+
+    <div class="subsection-title">Bilan fœtal</div>
+    <ul>
+      <li>Écho obstétricale + Doppler ombilical (RCIU, résistances placentaires)</li>
+      <li>RCF : indispensable dans les formes sévères et/ou RCIU avec Doppler pathologique</li>
+    </ul>
+
+    <div class="subsection-title">Traitement antihypertenseur</div>
+    <div class="alert alert-amber">
+      <span class="alert-icon">⛔</span>
+      <div><strong>Contre-indiqués pendant la grossesse :</strong> IEC, ARA2, diurétiques, régime sans sel.</div>
+    </div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">🎯</span>
+      <div>Traitement si HTA sévère. <strong>Objectif : PAS 140–155 mmHg, PAD 90–105 mmHg.</strong></div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Ligne</th><th>Médicament</th><th>Note</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1<sup>re</sup> intention</td><td><strong>Alphaméthyldopa</strong></td><td>Référence en grossesse</td></tr>
+        <tr><td>2<sup>e</sup> intention / PE</td><td>Inhibiteurs calciques : <strong>nicardipine, nifédipine</strong></td><td>—</td></tr>
+        <tr><td>2<sup>e</sup> intention / PE</td><td>Alphabloquants : <strong>urapidil</strong></td><td>—</td></tr>
+        <tr><td>Bithérapie</td><td>Alpha+bêtabloquant : <strong>labétalol</strong></td><td>Moins d'effets secondaires que les bêtabloquants seuls</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-title">Surveillance (HTA modérée ambulatoire)</div>
+    <div class="pills">
+      <span class="pill pill-blue">Autosurveillance tensionnelle</span>
+      <span class="pill pill-blue">Consultation tous les 10 jours</span>
+      <span class="pill pill-blue">Bilan biologique régulier</span>
+      <span class="pill pill-blue">Écho mensuelle</span>
+      <span class="pill pill-amber">Carnet suivi « Grossesse et HTA »</span>
+      <span class="pill pill-green">Déclenchement envisageable au 9<sup>e</sup> mois</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-b">Rang B</span>
+      <h3>Conduite à tenir en post-partum</h3>
+    </div>
+    <div class="oic-label">OIC-024-15-B | OIC-024-17-B</div>
+    <div class="alert alert-amber">
+      <span class="alert-icon">⚠️</span>
+      <div>Les complications (poussée hypertensive, PE) restent possibles en post-partum. L'HTA peut mettre plusieurs semaines à disparaître.</div>
+    </div>
+    <ul>
+      <li>Surveillance étroite + arrêt progressif du traitement (objectif PAS &lt; 150, PAD &lt; 100 mmHg)</li>
+      <li>Si allaitement : labétalol, propranolol, nicardipine, nifédipine, alphaméthyldopa</li>
+      <li>IEC (bénazépril, captopril, énalapril, quinapril) si patiente <em>sans</em> allaitement</li>
+      <li>Contraception : microprogestatifs/progestatifs ou non hormonale si HTA non stabilisée</li>
+      <li>Consultation postnatale : informer du risque cardiovasculaire et rénal ultérieur</li>
+      <li>À 3 mois : bilan vasculorénal (PA, créatinémie, protéinurie 24 h)</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:12px;">
+      <span class="alert-icon">📋</span>
+      <div>Un ATCD d'HTAg expose à un <strong>risque accru d'HTA chronique, maladies cardiovasculaires et rénales</strong> → suivi ultérieur adapté impératif.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Prévention lors des grossesses ultérieures</h3>
+    </div>
+    <div class="oic-label">OIC-024-16-A</div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">🔄</span>
+      <div>Risque de récidive chez <strong>1 patiente sur 5</strong> (pathologie vasculo-placentaire : PE, RCIU, HRP, MFIU).</div>
+    </div>
+    <ul>
+      <li>Consultation préconceptionnelle (adaptation du traitement, contre-indications)</li>
+      <li>Arrêt tabac et autres facteurs de risque</li>
+      <li><strong>Aspirine à faibles doses (75–160 mg/j le soir)</strong> : avant 16 SA jusqu'à 35 SA si ATCD de RCIU sévère ou PE précoce/sévère avec prématurité induite</li>
+      <li>Suivi dans une maternité de type adapté</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- PARTIE 3 : MAP                                               -->
+  <!-- ============================================================ -->
+
+  <div class="section-title">
+    <div class="icon" style="background:rgba(29,158,117,0.13);">🤰</div>
+    <h2>Partie 3 — Menace d'accouchement prématuré (MAP)</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Définition et diagnostic</h3>
+    </div>
+    <div class="oic-label">OIC-024-18-A</div>
+    <div class="kv-list" style="margin-top:8px;">
+      <span class="kv-key">MAP</span><span class="kv-val">Contractions utérines régulières et douloureuses + modifications cervicales entre <strong>22 SA et 36 SA + 6 jours</strong></span>
+      <span class="kv-key">FCT</span><span class="kv-val">Accouchement avant 22 SA = fausse couche tardive</span>
+      <span class="kv-key">Col court</span><span class="kv-val">Longueur cervicale &lt; <strong>25 mm</strong> à l'écho (plus objective que le TV)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Facteurs de risque</h3>
+    </div>
+    <div class="oic-label">OIC-024-19-A</div>
+    <div class="alert alert-blue">
+      <span class="alert-icon">ℹ️</span>
+      <div>Aucune étiologie retrouvée dans <strong>~60 %</strong> des cas.</div>
+    </div>
+    <div class="grid-2">
+      <div>
+        <div class="subsection-title">Facteurs maternels</div>
+        <div class="pills">
+          <span class="pill pill-amber">Âge &lt; 18 ou &gt; 35 ans</span>
+          <span class="pill pill-red">Tabac, toxiques</span>
+          <span class="pill pill-amber">Précarité, travail pénible</span>
+          <span class="pill pill-blue">Grossesses rapprochées</span>
+          <span class="pill pill-blue">Troubles psychologiques</span>
+          <span class="pill pill-red">Métrorragies T2/T3</span>
+        </div>
+      </div>
+      <div>
+        <div class="subsection-title">Causes obstétricales</div>
+        <div class="pills">
+          <span class="pill pill-red">ATCD AP ou FCT</span>
+          <span class="pill pill-purple">Béance cervico-isthmique, conisation, col court</span>
+          <span class="pill pill-purple">Malformation utérine, fibromes</span>
+          <span class="pill pill-amber">Grossesses multiples, hydramnios, macrosomie</span>
+        </div>
+        <div class="subsection-title" style="margin-top:12px;">Causes infectieuses</div>
+        <div class="pills">
+          <span class="pill pill-red">Infections urinaires, bactériuries</span>
+          <span class="pill pill-red">Vaginoses bactériennes</span>
+          <span class="pill pill-red">Chorioamniotite</span>
+          <span class="pill pill-red">Rupture des membranes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Bilan de la MAP</h3>
+    </div>
+    <div class="oic-label">OIC-024-20-A</div>
+    <div class="grid-2">
+      <div>
+        <strong>Biologie</strong>
+        <ul style="margin-top:6px;">
+          <li>NFS, CRP (syndrome inflammatoire, chorioamniotite)</li>
+          <li>ECBU + prélèvement cervicovaginal</li>
+          <li>Fibronectine fœtale (prédiction risque AP)</li>
+          <li>Groupe/Rh/Phénotype/RAI si accouchement imminent</li>
+          <li>Si doute sur RPM : IGFBP-1 ou PAMG-1</li>
+        </ul>
+      </div>
+      <div>
+        <strong>Imagerie</strong>
+        <ul style="margin-top:6px;">
+          <li>Tocométrie externe + RCF</li>
+          <li>Écho obstétricale : biométries, LAA, EPF</li>
+          <li>Écho du col : longueur cervicale (&lt; 25 mm = col court)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-b">Rang B</span>
+      <h3>Prise en charge de la MAP</h3>
+    </div>
+    <div class="oic-label">OIC-024-21-B</div>
+    <div class="grid-2">
+      <div>
+        <div class="subsection-title">Traitement étiologique</div>
+        <ul>
+          <li>Antibiothérapie si infection diagnostiquée</li>
+          <li>En cas de RPM : antibioprophylaxie courte systématique</li>
+        </ul>
+        <div class="subsection-title" style="margin-top:12px;">Tocolyse (48 h)</div>
+        <div class="pills">
+          <span class="pill pill-blue">Inhibiteurs calciques : nifédipine</span>
+          <span class="pill pill-purple">Antagoniste oxytocine : atosiban</span>
+        </div>
+        <div class="alert alert-red" style="margin-top:10px;">
+          <span class="alert-icon">⛔</span>
+          <div><strong>CI à la tocolyse :</strong> chorioamniotite, métrorragies importantes, anomalies du RCF.</div>
+        </div>
+      </div>
+      <div>
+        <div class="subsection-title">Mesures associées systématiques +++</div>
+        <ul>
+          <li>Transfert vers maternité adaptée au terme</li>
+          <li><strong>Corticothérapie</strong> anténatale : bétaméthasone 12 mg IM × 2 (à 24 h d'intervalle), <strong>avant 34 SA</strong> — 1 seule cure</li>
+          <li><strong>Sulfate de magnésium</strong> avant 32 SA si accouchement imminent : charge 4 g puis 1 g/h jusqu'à l'accouchement (neuroprotection fœtale)</li>
+          <li>Repos (sans alitement strict), antipyrétique, antispasmodique</li>
+          <li>Entretien pédiatrique + soutien psychologique</li>
+          <li>Suivi ambulatoire possible (SF libérale, HAD)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Prévention de la MAP</h3>
+    </div>
+    <div class="oic-label">OIC-024-22-A</div>
+    <div class="grid-2">
+      <div>
+        <div class="subsection-title">Prévention primaire</div>
+        <ul>
+          <li>Suppression des facteurs de risque (tabac, toxiques)</li>
+          <li>Arrêt de travail si besoin</li>
+          <li>Si ATCD AP ou FCT : bilan morphologique cavité utérine + recherche et traitement vaginose bactérienne</li>
+        </ul>
+      </div>
+      <div>
+        <div class="subsection-title">Prévention secondaire</div>
+        <ul>
+          <li>Cerclage envisagé selon type d'ATCD et grossesse actuelle</li>
+          <li><strong>Pas de cerclage préventif</strong> isolément pour : conisation, malformation utérine, grossesse gémellaire, ou AP isolé</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- PARTIE 4 : FIÈVRE                                            -->
+  <!-- ============================================================ -->
+
+  <div class="section-title">
+    <div class="icon" style="background:rgba(232,160,32,0.13);">🌡️</div>
+    <h2>Partie 4 — Fièvre pendant la grossesse</h2>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Orientations diagnostiques et signes de gravité</h3>
+    </div>
+    <div class="oic-label">OIC-024-23-A</div>
+    <div class="alert alert-red">
+      <span class="alert-icon">🚨</span>
+      <div><strong>Toute fièvre pendant la grossesse est une listériose jusqu'à preuve du contraire</strong> (résistance naturelle aux C2G et C3G).</div>
+    </div>
+    <div class="subsection-title">Étiologies à évoquer systématiquement</div>
+    <div class="pills">
+      <span class="pill pill-red">Pyélonéphrite aiguë +++</span>
+      <span class="pill pill-red">Listériose</span>
+      <span class="pill pill-red">Chorioamniotite</span>
+      <span class="pill pill-amber">Grippe / COVID</span>
+      <span class="pill pill-blue">Angine, infection ORL</span>
+      <span class="pill pill-blue">Appendicite, cholécystite</span>
+    </div>
+    <div class="subsection-title" style="margin-top:14px;">Retentissement obstétrical à évaluer</div>
+    <div class="pills">
+      <span class="pill pill-red">MAP (CU régulières)</span>
+      <span class="pill pill-red">Rupture prématurée des membranes</span>
+      <span class="pill pill-amber">Mouvements actifs fœtaux</span>
+    </div>
+    <div class="subsection-title" style="margin-top:14px;">Examen clinique ciblé</div>
+    <div class="grid-2">
+      <div>
+        <ul>
+          <li>Température + constantes</li>
+          <li>ORL, cardio-respi, aires gg, cutané, méningé</li>
+          <li>Fosses lombaires, abdomen</li>
+          <li>BU (aspect des urines)</li>
+        </ul>
+      </div>
+      <div>
+        <ul>
+          <li>Hauteur utérine + BCF</li>
+          <li>Spéculum : RPM, leucorrhées, vésicules herpétiques</li>
+          <li>TV éventuel : modifications cervicales</li>
+          <li>Sérologies : vérifier statut toxoplasmose, rubéole</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Bilan de fièvre pendant la grossesse</h3>
+    </div>
+    <div class="oic-label">OIC-024-24-A</div>
+    <table>
+      <thead>
+        <tr><th>Examen</th><th>Indication / précision</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>ECBU</strong></td><td>Systématique</td></tr>
+        <tr><td><strong>NFS + CRP</strong></td><td>Systématique</td></tr>
+        <tr><td><strong>Hémocultures</strong></td><td>Si fièvre &gt; 38,5 °C avec recherche de <em>Listeria monocytogenes</em></td></tr>
+        <tr><td><strong>Sérologies</strong></td><td>Selon contexte : rubéole, toxoplasmose, hépatites, CMV, VIH, PB19</td></tr>
+        <tr><td><strong>Tests rapides</strong></td><td>PCR COVID, test rapide grippe, strepto-test…</td></tr>
+        <tr><td><strong>RCF + tocométrie</strong></td><td>Systématique</td></tr>
+        <tr><td><strong>Écho obstétricale</strong></td><td>EPF, bien-être fœtal, quantité de LA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="oic-badge rang-a">Rang A</span>
+      <h3>Prise en charge d'une fièvre pendant la grossesse</h3>
+    </div>
+    <div class="oic-label">OIC-024-25-A</div>
+    <div class="alert alert-amber">
+      <span class="alert-icon">💊</span>
+      <div><strong>En l'absence d'orientation étiologique spécifique :</strong> antibiothérapie préventive active sur <em>Listeria</em> = <strong>amoxicilline 3 g/j</strong> (ou érythromycine si allergie) + paracétamol.</div>
+    </div>
+    <div class="subsection-title">Traitements spécifiques</div>
+    <div class="grid-2">
+      <div class="complication-card blue">
+        <strong>Pyélonéphrite</strong>
+        <p style="font-size:13.5px;">Selon recommandations spécifiques grossesse (cf. infections urinaires)</p>
+      </div>
+      <div class="complication-card">
+        <strong>Chorioamniotite</strong>
+        <ul style="font-size:13.5px; margin-top:4px;">
+          <li>Antibiothérapie parentérale urgente : C3G + aminosides</li>
+          <li><strong>Tocolyse contre-indiquée</strong></li>
+          <li>Préparer l'accueil d'un nouveau-né prématuré</li>
+        </ul>
+      </div>
+      <div class="complication-card teal">
+        <strong>Listériose confirmée</strong>
+        <ul style="font-size:13.5px; margin-top:4px;">
+          <li>Amoxicilline 6 g/j IV</li>
+          <li>Si allergie : érythromycine PO ou vancomycine IV</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-green" style="margin-top:12px;">
+      <span class="alert-icon">✅</span>
+      <div>Surveillance étroite systématique : température, CU ± col utérin, RCF.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- SYNTHÈSE                                                     -->
+  <!-- ============================================================ -->
+
+  <div class="section-title">
+    <div class="icon" style="background:rgba(29,158,117,0.13);">📋</div>
+    <h2>Synthèse — Ce qu'il faut retenir</h2>
+  </div>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>Situation</th><th>Urgence ?</th><th>Geste-clé</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>GEU symptomatique</td><td class="text-red">Oui — chirurgie immédiate</td><td>Cœlioscopie en urgence</td></tr>
+        <tr><td>Hémorragie T2–T3</td><td class="text-red">Oui — TV interdit</td><td>Écho + RCF + bilan hémostase</td></tr>
+        <tr><td>HPP</td><td class="text-red">Oui</td><td>Oxytocine → sulprostone → embolisation → hystérectomie</td></tr>
+        <tr><td>Prééclampsie sévère</td><td class="text-red">Oui</td><td>Hospitalisation, antihypertenseur IV, envisager extraction</td></tr>
+        <tr><td>MAP avant 34 SA</td><td class="text-amber">Urgent</td><td>Tocolyse 48 h + corticoïdes + transfert maternité adaptée</td></tr>
+        <tr><td>MAP avant 32 SA</td><td class="text-amber">Urgent</td><td>Idem + sulfate de magnésium</td></tr>
+        <tr><td>Fièvre sans orientation</td><td class="text-amber">Relatif</td><td>Amoxicilline 3 g/j (couverture Listeria) + RCF</td></tr>
+        <tr><td>Chorioamniotite</td><td class="text-red">Oui</td><td>C3G + aminosides IV — tocolyse CI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="small" style="text-align:center; margin-top:24px;">Source : LiSa UNESS — Item IC-24 | Fiche générée pour révision médicale</div>
+
+</div>
+</body>
+</html>

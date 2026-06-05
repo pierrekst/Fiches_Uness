@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-127 — Hypertrophie bénigne de la prostate</title>
+<style>
+  :root {
+    --bg: #f5f6fa; --card: #ffffff; --text: #1e1e2e; --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08); --purple: #534AB7; --teal: #1D9E75;
+    --coral: #D85A30; --blue: #378ADD; --red: #E24B4A; --amber: #D97706;
+    --green: #16a34a; --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f0f1a; --card: #1a1a2e; --text: #e2e8f0; --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08); --shadow: 0 1px 4px rgba(0,0,0,0.3); }
+    .step-num { background: #2d2d4e !important; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; color: var(--text); font-family: system-ui,-apple-system,sans-serif;
+    font-size: 13.5px; line-height: 1.55; padding: 16px; max-width: 960px; margin: 0 auto; }
+
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    border-radius: 16px; padding: 20px; color: #fff; margin-bottom: 20px; }
+  .page-header h1 { font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { opacity: .85; font-size: .88rem; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .header-tag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 2px 10px;
+    font-size: .75rem; font-weight: 600; }
+
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 1.02rem;
+    font-weight: 700; margin: 20px 0 12px; color: var(--text); }
+  .section-icon { width: 30px; height: 30px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 17px; height: 17px; stroke: #fff; fill: none; stroke-width: 1.8; }
+
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 12px;
+    padding: 14px; box-shadow: var(--shadow); margin-bottom: 12px; }
+  .card-title { font-size: .86rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 14px; height: 14px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 2px 8px; font-size: .72rem; font-weight: 600; }
+  .pill-green { background: rgba(22,163,74,.1); color: var(--green); border: 1px solid rgba(22,163,74,.2); }
+  .pill-red { background: rgba(226,75,74,.1); color: var(--red); border: 1px solid rgba(226,75,74,.2); }
+  .pill-blue { background: rgba(55,138,221,.1); color: var(--blue); border: 1px solid rgba(55,138,221,.2); }
+  .pill-amber { background: rgba(217,119,6,.1); color: var(--amber); border: 1px solid rgba(217,119,6,.2); }
+  .pill-purple { background: rgba(83,74,183,.1); color: var(--purple); border: 1px solid rgba(83,74,183,.2); }
+  .pill-teal { background: rgba(29,158,117,.1); color: var(--teal); border: 1px solid rgba(29,158,117,.2); }
+
+  .alert { border-radius: 8px; padding: 10px 12px; margin-bottom: 10px;
+    display: flex; gap: 8px; align-items: flex-start; font-size: .82rem; }
+  .alert svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; fill: none; stroke-width: 2; }
+  .alert-red { background: rgba(226,75,74,0.06); border: 1px solid rgba(226,75,74,0.2); color: #b91c1c; }
+  .alert-red svg { stroke: #b91c1c; }
+  .alert-blue { background: rgba(55,138,221,0.06); border: 1px solid rgba(55,138,221,0.2); color: var(--blue); }
+  .alert-blue svg { stroke: var(--blue); }
+  .alert-green { background: rgba(22,163,74,0.06); border: 1px solid rgba(22,163,74,0.2); color: var(--green); }
+  .alert-green svg { stroke: var(--green); }
+  .alert-amber { background: rgba(217,119,6,0.06); border: 1px solid rgba(217,119,6,0.2); color: var(--amber); }
+  .alert-amber svg { stroke: var(--amber); }
+
+  .compl-card { background: var(--card); border: 0.5px solid var(--border); border-left: 3.5px solid;
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; box-shadow: var(--shadow); }
+  .compl-title { font-weight: 700; font-size: .82rem; margin-bottom: 3px; }
+
+  .tbl-wrap { overflow-x: auto; margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  th { background: var(--bg); padding: 6px 8px; text-align: left; font-weight: 700;
+    border-bottom: 1.5px solid var(--border); font-size: .75rem; letter-spacing: .02em;
+    text-transform: uppercase; color: var(--text-muted); }
+  td { padding: 6px 8px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .kv { display: flex; flex-direction: column; gap: 4px; }
+  .kv-row { display: flex; gap: 8px; font-size: .8rem; }
+  .kv-key { font-weight: 700; min-width: 140px; flex-shrink: 0; color: var(--text-muted); }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+  ul { padding-left: 16px; } li { margin-bottom: 2px; }
+  .text-muted { color: var(--text-muted); font-size: .8rem; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>IC-127 — Hypertrophie bénigne de la prostate</h1>
+  <p>Fiche Synthèse : Sémiologie · Diagnostic · Complications · Traitements · Avis spécialisé</p>
+  <div class="header-tags">
+    <span class="header-tag">Essentiel</span>
+    <span class="header-tag">Clinique &amp; Diagnostic</span>
+    <span class="header-tag">Explorations</span>
+    <span class="header-tag">Complications</span>
+    <span class="header-tag">Traitements</span>
+  </div>
+</div>
+
+<!-- L'ESSENTIEL EN UN COUP D'ŒIL -->
+<div class="card" style="background:rgba(83,74,183,0.03); border:1px solid rgba(83,74,183,0.18);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <span>L'Essentiel en 1 coup d'œil</span>
+  </div>
+  <p style="font-size:.84rem;">
+    L'<strong>HBP</strong> est une hyperplasie bénigne (stromale et glandulaire) de la <strong>zone de transition</strong> prostatique, très fréquente (80% après 60 ans). L'objectif est d'identifier les <strong>symptômes urinaires (SBAU)</strong>, évaluer le retentissement vésical ou rénal (stase) et exclure les diagnostics différentiels majeurs (cancer de prostate, tumeur vésicale, sténose).
+  </p>
+</div>
+
+<hr>
+
+<!-- SECTION 1: CLINIQUE ET DIAGNOSTIC -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Clinique &amp; Démarche Diagnostique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <span>Terrain &amp; Diagnostic Positif</span>
+    </div>
+    <ul style="font-size:.81rem; padding-left:14px; display:flex; flex-direction:column; gap:4px;">
+      <li><strong>Fréquence :</strong> 80% des hommes de &gt; 60 ans. Développement continu dès 30 ans.</li>
+      <li><strong>Clinique :</strong> SBAU + arguments cliniques et paracliniques rattachables à l'HBP.</li>
+      <li><strong>Diagnostic positif :</strong> Interrogatoire + absence d'autre cause + Toucher Rectal (TR).</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <span>Toucher Rectal (TR) &amp; Examen</span>
+    </div>
+    <ul style="font-size:.81rem; padding-left:14px; display:flex; flex-direction:column; gap:4px;">
+      <li><strong>TR d'HBP typique :</strong> Prostate augmentée de volume, <strong>souple, lisse, régulière, élastique et indolore</strong>.</li>
+      <li><strong>Signes d'alerte au TR :</strong> Nodule/induration (cancer) ou douleur exquise (prostatite).</li>
+      <li><strong>Examen physique :</strong> Palpation abdominale (recherche globe) et inspection externe (phimosis, sténose du méat).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <span>Interrogatoire : Typologie des SBAU</span>
+  </div>
+  <div class="grid2" style="gap:10px; margin-bottom:8px;">
+    <div style="background:rgba(29,158,117,0.04); padding:6px 10px; border-radius:6px; border:0.5px solid var(--border);">
+      <p style="font-weight:700; font-size:.78rem; margin-bottom:2px; color:var(--teal);">Stockage / Irritatifs (Remplissage)</p>
+      <p style="font-size:.75rem;">Pollakiurie (diurne/nocturne) · Urgenturies</p>
+    </div>
+    <div style="background:rgba(55,138,221,0.04); padding:6px 10px; border-radius:6px; border:0.5px solid var(--border);">
+      <p style="font-weight:700; font-size:.78rem; margin-bottom:2px; color:var(--blue);">Vidange / Obstructifs (Miction)</p>
+      <p style="font-size:.75rem;">Dysurie · Jet faible/interrompu · Gouttes retardataires · Sensation de vidange incomplète</p>
+    </div>
+  </div>
+  <div class="kv" style="font-size:.8rem;">
+    <div class="kv-row"><span class="kv-key">Score IPSS / 35 :</span><span>Quantifie les SBAU (0-7 : léger · 8-19 : modéré · 20-35 : sévère).</span></div>
+    <div class="kv-row"><span class="kv-key">Troubles sexuels :</span><span>Association fréquente. Évaluer libido et dysfonction érectile (score <strong>IIEF-5</strong>).</span></div>
+    <div class="kv-row"><span class="kv-key"> diagnostics diff. :</span><span>Rechercher hématurie (cancer ?), polyurie (diabète, apnée, insuffisance cardiaque), antécédents d'urétrite/trauma (sténose).</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2: EXPLORATIONS PARACLINIQUES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  </div>
+  Explorations Paracliniques
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    <span>Bilan Biologique &amp; d'Imagerie indispensable</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Examen</th>
+          <th style="width: 25%;">Indication</th>
+          <th style="width: 50%;">Rôle clinique &amp; Valeur clé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:rgba(29,158,117,0.02);">
+          <td><strong>ECBU</strong></td>
+          <td style="color:var(--teal); font-weight:700;">1ère intention</td>
+          <td>Exclut une infection urinaire ou une micro-hématurie.</td>
+        </tr>
+        <tr style="background:rgba(29,158,117,0.02);">
+          <td><strong>Débitmétrie</strong></td>
+          <td style="color:var(--teal); font-weight:700;">1ère intention</td>
+          <td>Objective la dysurie. Pathologique si Qmax <strong>&lt; 15 mL/s</strong> (volume uriné &gt; 150 mL requis). Courbe aplatie (obstruction) vs cloche (normale).</td>
+        </tr>
+        <tr style="background:rgba(29,158,117,0.02);">
+          <td><strong>Résidu Post-Mictionnel (RPM)</strong></td>
+          <td style="color:var(--teal); font-weight:700;">1ère intention</td>
+          <td>Mesure par Bladder Scan. Pathologique si <strong>&gt; 100 mL</strong> (témoigne d'une vidange incomplète). Ne justifie pas une chirurgie seul.</td>
+        </tr>
+        <tr style="background:rgba(29,158,117,0.02);">
+          <td><strong>Échographie rénovésico-prostatique</strong></td>
+          <td style="color:var(--teal); font-weight:700;">1ère intention</td>
+          <td>Recherche dilatation des cavités rénales (retentissement haut), retentissement vésical (diverticules, lithiase), évalue le volume prostatique et un lobe médian.</td>
+        </tr>
+        <tr>
+          <td><strong>PSA total</strong></td>
+          <td>Selon contexte</td>
+          <td>Dépistage individuel du cancer (après information). Non systématique, ne diagnostique pas l'HBP seule.</td>
+        </tr>
+        <tr>
+          <td><strong>Créatininémie &amp; DFG</strong></td>
+          <td>Selon contexte</td>
+          <td>Uniquement si suspicion d'insuffisance rénale obstructive (retentissement échographique/clinique).</td>
+        </tr>
+        <tr>
+          <td><strong>Urétro-cystoscopie</strong></td>
+          <td>Selon contexte</td>
+          <td>Examen invasif (urologue) indiqué en cas d'hématurie (éliminer tumeur) ou suspicion de sténose de l'urètre.</td>
+        </tr>
+        <tr>
+          <td><strong>Bilan Urodynamique (BUD)</strong></td>
+          <td>Selon contexte</td>
+          <td>En cas de discordance ou maladie neurologique pour différencier obstruction et <strong>hypotonie du détrusor</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3: COMPLICATIONS -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red)">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Complications de l'HBP
+</div>
+
+<div class="grid2">
+  <div class="card" style="border-left: 3.5px solid var(--red);">
+    <div class="card-title" style="color:var(--red); font-size:.84rem; margin-bottom:6px;">
+      ⚡ Complications Aiguës (Prise en charge immédiate)
+    </div>
+    <ul style="font-size:.81rem; padding-left:14px; display:flex; flex-direction:column; gap:8px;">
+      <li>
+        <strong>Rétention Aiguë d'Urines (RAU) :</strong> Globe vésical très douloureux + impossibilité de mictionner.
+        <span style="display:block; color:var(--text-muted);">Urgence &rarr; Sondage urinaire ou cathéter sus-pubien + introduction immédiate d'un alpha-bloquant.</span>
+      </li>
+      <li>
+        <strong>Infection urinaire (Prostatite / Orchi-épididymite) :</strong> Fièvre + brûlures + TR douloureux ou bourse inflammatoire.
+        <span style="display:block; color:var(--text-muted);">ECBU + Antibiothérapie par fluoroquinolones (quinolones) en 1ère intention. Hospitaliser si mauvaise tolérance.</span>
+      </li>
+      <li>
+        <strong>Hématurie macroscopique :</strong> Diagnostic d'élimination (exclure d'abord tumeur urothéliale/rénale par uro-TDM + cystoscopie).
+        <span style="display:block; color:var(--text-muted);">Caillotage vésical &rarr; Sonde double courant gros calibre pour décaillotage et lavage continu.</span>
+      </li>
+      <li>
+        <strong>IRA obstructive :</strong> Dilatation pyélocalicielle bilatérale à l'écho + hausse créatinine.
+        <span style="display:block; color:var(--text-muted);">Urgence &rarr; Dérivation des urines en urgence + surveiller attentivement le syndrome de levée d'obstacle.</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left: 3.5px solid var(--coral);">
+    <div class="card-title" style="color:var(--coral); font-size:.84rem; margin-bottom:6px;">
+      ⏳ Complications Chroniques (Indications chirurgicales)
+    </div>
+    <ul style="font-size:.81rem; padding-left:14px; display:flex; flex-direction:column; gap:8px;">
+      <li>
+        <strong>Vessie de lutte :</strong> Hypertrophie détrusorienne chronique face à l'obstacle, avec trabéculations et diverticules vésicaux à l'écho.
+      </li>
+      <li>
+        <strong>Rétention chronique d'urines :</strong> Globe vésical <strong>indolore</strong> (parfois fuites par regorgement/trop-plein).
+        <span style="display:block; color:var(--text-muted);">RPM persistant &gt; 150 mL à l'écho. Bilan urodynamique nécessaire pour éliminer une hypocontractilité.</span>
+      </li>
+      <li>
+        <strong>Lithiase de stase :</strong> Liée au résidu urinaire chronique. Entraîne dysurie majeure, infections et hématurie. Image hyperéchogène.
+      </li>
+      <li>
+        <strong>IRC obstructive :</strong> Dilatation bilatérale des cavités + atrophie du parenchyme rénal.
+      </li>
+      <li>
+        <strong>Hernie de l'aine :</strong> Favorisée par les poussées abdominales chroniques.
+        <span style="display:block; color:var(--text-muted); font-weight:600; color:var(--green);">⚠️ Effectuer la désobstruction prostatique AVANT la cure de hernie.</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4: TRAITEMENTS -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  </div>
+  Prise en Charge Thérapeutique
+</div>
+
+<div class="alert alert-green" style="font-size:.82rem;">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  <span><strong>Algorithme décisionnel :</strong> SBAU minimes ou modérés (IPSS &lt; 9) et non compliqués &rarr; <strong>Surveillance</strong>. SBAU gênants (IPSS &ge; 9) non compliqués &rarr; <strong>Médical</strong>. HBP compliquée ou échec médical &rarr; <strong>Chirurgie</strong>.</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      <span>Traitements Médicaux : Classes clés</span>
+    </div>
+    <ul style="font-size:.81rem; padding-left:14px; display:flex; flex-direction:column; gap:6px;">
+      <li>
+        <strong>Alpha-bloquants :</strong> Relaxent le col vésical et les muscles lisses. Action rapide.
+        <span style="display:block; color:var(--red); font-weight:600;">EI : hypotension orthostatique, anéjaculation.</span>
+      </li>
+      <li>
+        <strong>Inhibiteurs 5&alpha;-réductase / 5-ARI :</strong> Bloquent la testostérone en DHT. Réduisent le volume (si prostate &gt; 40 mL). Action lente (mois).
+        <span style="display:block; color:var(--amber); font-weight:600;">⚠️ Divisent le PSA par 2 à 6 mois (le multiplier par 2 pour analyse).</span>
+        <span style="display:block; color:var(--red);">EI : dysfonction érectile, baisse libido, asthénie.</span>
+      </li>
+      <li>
+        <strong>Bithérapie (Alpha-bloquant + 5-ARI) :</strong> Plus efficace si monothérapie insuffisante. Cumule les effets indésirables.
+      </li>
+      <li>
+        <strong>IPDE-5 (Tadalafil 5 mg) :</strong> Indiqué si SBAU gênants ET dysfonction érectile associée.
+      </li>
+      <li>
+        <strong>Anticholinergiques :</strong> Si symptômes de stockage persistants.
+        <span style="display:block; color:var(--red); font-weight:600;">CI : résidu post-mictionnel &gt; 150 mL, glaucome aigu à angle fermé non traité.</span>
+      </li>
+      <li>
+        <strong>Phytothérapie :</strong> SBAU modérés, très bien tolérée (recommandation moindre).
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <span>Traitements Chirurgicaux (Désobstruction)</span>
+    </div>
+    <div style="background:rgba(216,90,48,0.03); border:0.5px solid rgba(216,90,48,0.2); padding:8px; border-radius:6px; margin-bottom:10px; font-size:.78rem;">
+      <p style="font-weight:700; color:var(--coral); margin-bottom:2px;">Techniques Ablatives (Réduction volumétrique)</p>
+      · <strong>RTUP (Résection transurétrale) :</strong> Si volume <strong>&lt; 80 mL</strong>.<br>
+      · <strong>Énucléation laser (HoLEP) / Vaporisation / Chirurgie ouverte :</strong> Si volume <strong>&gt; 80 mL</strong> (pas de limiteHoLEP).
+    </div>
+    <div style="background:rgba(29,158,117,0.03); border:0.5px solid rgba(29,158,117,0.2); padding:8px; border-radius:6px; margin-bottom:10px; font-size:.78rem;">
+      <p style="font-weight:700; color:var(--teal); margin-bottom:2px;">Techniques Non Ablatives (Conservatrices)</p>
+      · <strong>Incision cervico-prostatique :</strong> Si volume <strong>&lt; 30 mL</strong>, sans lobe médian (préserve au mieux l'éjaculation antérograde).<br>
+      · <strong>Implants Urolift :</strong> Si volume &lt; 80 mL, sans lobe médian.
+    </div>
+    <div class="alert alert-red" style="font-size:.78rem; padding:8px; margin-bottom:0;">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span><strong>Complication majeure :</strong> Risque d'<strong>éjaculation rétrograde</strong> très élevé. Incontinence transitoire ou sténose urétrale secondaires possibles mais rares.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5: AVIS SPECIALISE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  Avis Spécialisé en Urologie
+</div>
+
+<div class="card" style="background:rgba(83,74,183,0.03); border:1px solid rgba(83,74,183,0.2);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <span>Critères stricts de référence à l'Urologue (AFU)</span>
+  </div>
+  <div class="grid2" style="font-size:.81rem; gap:10px;">
+    <ul style="padding-left:14px; display:flex; flex-direction:column; gap:4px;">
+      <li>Âge <strong>&lt; 50 ans</strong> (SBAU atypiques).</li>
+      <li>Globe vésical palpable à l'examen.</li>
+      <li>Nodule ou induration suspecte au <strong>Toucher Rectal</strong>.</li>
+      <li>Hématurie macroscopique ou micro-hématurie persistante.</li>
+    </ul>
+    <ul style="padding-left:14px; display:flex; flex-direction:column; gap:4px;">
+      <li>Élévation inexpliquée du <strong>PSA</strong>.</li>
+      <li><strong>Complication avérée :</strong> RAU, IRC/IRA obstructive, lithiase, diverticule, prostatite aiguë.</li>
+      <li>Résidu Post-Mictionnel persistant <strong>&gt; 100 mL</strong>.</li>
+      <li>Échec des traitements médicaux bien conduits.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6: POINTS CLÉS POUR LES EXAMENS -->
+<div class="card" style="background:linear-gradient(135deg, rgba(29,158,117,0.06) 0%, rgba(55,138,221,0.06) 100%); border:1px solid rgba(29,158,117,0.25);">
+  <div class="card-title" style="font-size: .92rem; color:var(--teal);">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <span>Points Clés ECN / EDN à retenir</span>
+  </div>
+  <ul style="font-size:.82rem; padding-left:16px; display:flex; flex-direction:column; gap:4px;">
+    <li><strong>Sémiologie des SBAU :</strong> Distinguer les symptômes de stockage (irritatifs : pollakiurie, urgenturie) et de vidange (obstructifs : dysurie, jet faible).</li>
+    <li><strong>Le Toucher Rectal (TR) :</strong> Indispensable. Retrouve une prostate augmentée de volume, <strong>souple, lisse, régulière, élastique et indolore</strong>.</li>
+    <li><strong>Bilan de 1ère intention :</strong> Quatre examens systématiques &rarr; <strong>ECBU</strong> (infection), <strong>Débitmétrie</strong> (Qmax &lt; 15 mL/s), <strong>RPM</strong> (bladder scan) et <strong>Écho arbre urinaire</strong> (retentissement).</li>
+    <li><strong>Complications Aiguës :</strong> Rétention aiguë d'urines (globe douloureux &rarr; drainage d'urgence + alpha-bloquant), Prostatite (fièvre + TR douloureux &rarr; ECBU + quinolones).</li>
+    <li><strong>Complications Chroniques :</strong> Vessie de lutte (retentissement vésical), rétention chronique indolore (RPM &gt; 150 mL), dilatation bilatérale obstructive (atrophie rénale et IRC).</li>
+    <li><strong>Piège diagnostique PSA / 5-ARI :</strong> Les 5-ARI divisent le taux de PSA par 2 à 6 mois. Multiplier le taux mesuré par 2 pour interpréter correctement un dépistage.</li>
+  </ul>
+</div>
+
+<p style="text-align:center; font-size:.7rem; color:var(--text-muted); margin-top:20px; margin-bottom:8px;">
+  Fiche qualitative d'apprentissage condensée · Item 127
+</p>
+
+</body>
+</html>

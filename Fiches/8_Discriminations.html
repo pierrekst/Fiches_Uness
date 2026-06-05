@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 8 — Les discriminations</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EDE9FB;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F2;
+    --coral: #D85A30;
+    --coral-light: #FDEEE8;
+    --blue: #378ADD;
+    --blue-light: #E8F2FB;
+    --red: #E24B4A;
+    --red-light: #FDE8E8;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1a1a2e;
+    --text-secondary: #555;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --border: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e8f0;
+      --text-secondary: #aaa;
+      --bg: #14141f;
+      --card-bg: #1e1e2e;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2660;
+      --teal-light: #0f3d2e;
+      --coral-light: #4a2010;
+      --blue-light: #162d4a;
+      --red-light: #4a1010;
+      --amber-light: #3d2a00;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-tag { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+  .header-intro { font-size: .84rem; opacity: .9; line-height: 1.6; }
+  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .header-badge { background: rgba(255,255,255,0.18); border-radius: 20px; padding: 4px 12px; font-size: .75rem; font-weight: 600; }
+
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 28px 0 14px; }
+  .section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+
+  .card { background: var(--card-bg); border: .5px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .card-left-red    { border-left: 4px solid var(--red);   }
+  .card-left-teal   { border-left: 4px solid var(--teal);  }
+  .card-left-coral  { border-left: 4px solid var(--coral); }
+  .card-left-amber  { border-left: 4px solid var(--amber); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);    color: var(--red);    border-left: 3px solid var(--red);    }
+  .alert-blue   { background: var(--blue-light);   color: var(--blue);   border-left: 3px solid var(--blue);   }
+  .alert-green  { background: var(--teal-light);   color: var(--teal);   border-left: 3px solid var(--teal);   }
+  .alert-amber  { background: var(--amber-light);  color: var(--amber);  border-left: 3px solid var(--amber);  }
+  .alert-purple { background: var(--purple-light); color: var(--purple); border-left: 3px solid var(--purple); }
+  .alert-red    .alert-icon svg { stroke: var(--red);    }
+  .alert-blue   .alert-icon svg { stroke: var(--blue);   }
+  .alert-green  .alert-icon svg { stroke: var(--teal);   }
+  .alert-amber  .alert-icon svg { stroke: var(--amber);  }
+  .alert-purple .alert-icon svg { stroke: var(--purple); }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--bg); font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: .5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .steps { }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); font-weight: 700; font-size: .8rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+  .step-content { flex: 1; padding-top: 2px; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  p { margin-bottom: 8px; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-tag">Item 8 — Sciences humaines et sociales</div>
+    <h1>Les discriminations</h1>
+    <div class="header-intro">
+      Ce chapitre couvre trois axes : la définition juridique et les mécanismes (psychosociaux et structurels) qui produisent les discriminations ; leurs conséquences sur le gradient social de santé et le non-recours aux soins ; et leurs formes spécifiques dans le système de santé — du refus de soin explicite aux biais de catégorisation. L'enjeu pratique est de reconnaître et prévenir ces discriminations dans la relation de soin.
+    </div>
+    <div class="header-badges">
+      <span class="header-badge">Définition &amp; droit</span>
+      <span class="header-badge">Mécanismes psychosociaux</span>
+      <span class="header-badge">ISS &amp; non-recours</span>
+      <span class="header-badge">Système de santé</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--purple)"></div>
+    <span class="section-label" style="background:var(--purple-light);color:var(--purple)">Définition &amp; cadre légal</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <div class="alert alert-purple">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Discrimination :</strong> différence de traitement fondée sur des critères prohibés, entraînant un préjudice pour la personne.</div>
+    </div>
+    <div class="grid2" style="margin-top:8px;">
+      <div>
+        <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Critères prohibés — international</div>
+        <div class="pills">
+          <span class="pill pill-purple">Appartenance ethnique</span>
+          <span class="pill pill-purple">Opinions politiques</span>
+          <span class="pill pill-purple">Identité de genre</span>
+          <span class="pill pill-purple">Orientation sexuelle</span>
+          <span class="pill pill-purple">Nationalité</span>
+          <span class="pill pill-purple">Religion</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Critères spécifiques France</div>
+        <div class="pills">
+          <span class="pill pill-blue">Patronyme</span>
+          <span class="pill pill-blue">Maîtrise du français</span>
+          <span class="pill pill-blue">Apparence physique</span>
+          <span class="pill pill-blue">Lieu de résidence</span>
+          <span class="pill pill-blue">Bénéficiaire AME / CSS</span>
+          <span class="pill pill-blue">Perte d'autonomie</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Textes de référence
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Serment d'Hippocrate :</strong> « rétablir, préserver ou promouvoir la santé... sans aucune discrimination selon leur état ou leurs convictions »</div>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>CSP art. R4127-7 :</strong> obligation de soigner « avec la même conscience toutes les personnes » — quels que soient leur origine, mœurs, handicap, état de santé, réputation...</div>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>CSP art. L1110-3 :</strong> interdiction explicite de refuser un soin sur le motif d'une couverture santé particulière (AME, CSS)</div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — Différenciation légitime :</strong> une politique ciblée sur un critère prohibé n'est pas nécessairement une discrimination si elle est proportionnée et justifiée par un enjeu de santé publique. Ex : recommandations 2007 vaccination BCG pour enfants nés en pays à forte endémie tuberculose — validé par le Défenseur des Droits.</div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--teal)"></div>
+    <span class="section-label" style="background:var(--teal-light);color:var(--teal)">Mécanismes des discriminations</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Stéréotypes
+      </div>
+      <ul>
+        <li>Représentations <strong>simplificatrices</strong> et <strong>rigides</strong> d'un groupe</li>
+        <li>Avantageux ou désavantageux, toujours simplificateurs</li>
+        <li>Attribution de traits stéréotypiques à l'ensemble du groupe</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Préjugés
+      </div>
+      <ul>
+        <li>Opinions <strong>préconçues</strong>, généralement <strong>dépréciatives</strong></li>
+        <li>À propos d'un groupe social</li>
+        <li>Prédisposent à agir défavorablement envers ses membres</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Étiquetage des patients (catégorisation)
+    </div>
+    <p>Les soignants emploient des catégories pour classer patients et situations (gain de temps, contexte d'urgence). Certaines étiquettes très répandues charrient des connotations simplificatrices sans aucune base scientifique validée.</p>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège — "Syndrome méditerranéen" :</strong> aucun fondement scientifique. Les modes d'expression de la douleur varient autant <em>au sein</em> d'un groupe culturel qu'entre groupes. Une grille culturaliste peut masquer une complication grave (cas clinique : accouchement avec complication réelle ignorée).</div>
+    </div>
+    <div class="pills">
+      <span class="pill pill-red">« Patient CMU »</span>
+      <span class="pill pill-red">« Patient psy »</span>
+      <span class="pill pill-red">« Syndrome méditerranéen »</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Types de discriminations
+    </div>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Caractéristiques</th><th>Exemple concret</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Directe</strong></td>
+          <td>Consciente, explicite, intentionnelle</td>
+          <td>Refus de RDV car bénéficiaire AME</td>
+        </tr>
+        <tr>
+          <td><strong>Indirecte</strong></td>
+          <td>Apparemment neutre, résultat discriminatoire</td>
+          <td>RDV fixé très tardivement, orientation abusive</td>
+        </tr>
+        <tr>
+          <td><strong>Systémique</strong></td>
+          <td>Structurelle, produit des organisations et politiques</td>
+          <td>Désertification médicale, inégalités territoriales d'offre</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div><strong>Testing :</strong> méthode principale de mesure. Révèle les comportements discriminatoires à grande échelle mais <strong>ne démontre pas l'intention</strong>. Étude 2019 : 10-15 % de refus de soin discriminatoires explicites parmi 1 500 professionnels.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--coral)"></div>
+    <span class="section-label" style="background:var(--coral-light);color:var(--coral)">Refus de soin</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Refus discriminatoires (illicites)
+      </div>
+      <div class="pills" style="margin-bottom:8px;">
+        <span class="pill pill-red">Statut AME / CSS</span>
+        <span class="pill pill-red">Origine / nationalité</span>
+        <span class="pill pill-red">Barrière linguistique</span>
+        <span class="pill pill-red">Apparence physique</span>
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);margin-bottom:6px;margin-top:8px;">Formes insidieuses</div>
+      <ul>
+        <li>RDV fixé tardivement et abusivement</li>
+        <li>Orientation répétée vers autre praticien sans raison médicale</li>
+        <li>Refus d'élaborer un devis</li>
+        <li>Non-respect des tarifs opposables</li>
+        <li>Refus de dispense d'avance des frais</li>
+      </ul>
+    </div>
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Refus légitimes
+      </div>
+      <ul>
+        <li>Soins hors compétence du professionnel</li>
+        <li>CSP art. R4127-47 al.2 : « raisons professionnelles ou personnelles » — sauf urgence et manquement à l'humanité</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Limite absolue :</strong> tout refus légitime ne peut se faire <strong>au préjudice de la personne</strong> — droit à la santé garanti par des textes de haute valeur normative (Pacte 1976, Charte européenne, Préambule Constitution 1946).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Voies de recours
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Ordre professionnel</span>
+      <span class="pill pill-blue">CPAM</span>
+      <span class="pill pill-blue">Défenseur des Droits</span>
+      <span class="pill pill-blue">Associations d'aide</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Sous-recours aux plaintes :</strong> rare, car les faits sont difficiles à établir (surtout si non directs/explicites) et les instances de recours sont méconnues et difficiles à saisir.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--blue)"></div>
+    <span class="section-label" style="background:var(--blue-light);color:var(--blue)">Effets sur les inégalités sociales de santé</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Gradient social de santé &amp; déterminants sociaux
+    </div>
+    <p>La santé est socialement déterminée : revenu, instruction, emploi, genre, origine ethnique influencent les conditions de vie et la vulnérabilité face à la maladie. Les discriminations agissent sur ces déterminants (logement, emploi, loisirs) et accentuent le gradient social de santé — avec un effet potentiellement multiplicatif.</p>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>OMS :</strong> « La place des individus dans l'échelle sociale influe sur les conditions dans lesquelles ils grandissent, apprennent, vivent, travaillent et vieillissent — et sur leur vulnérabilité face à la maladie. »</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-coral">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Effets sur la santé individuelle
+      </div>
+      <ul>
+        <li><strong>Stress chronique</strong> → risque cardiovasculaire accru</li>
+        <li>Risque de <strong>dépression, anxiété, symptômes psychotiques</strong></li>
+        <li>Facteur de risque de <strong>conduites suicidaires</strong> (Bardol 2020)</li>
+        <li>Discrimination ethno-raciale → moins bonne santé (Paradies 2015)</li>
+        <li>Accumulation de désavantages : effet « corrosif » (Pelet 2020)</li>
+      </ul>
+    </div>
+    <div class="card card-left-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Non-recours aux soins
+      </div>
+      <p><strong>Définition :</strong> les ayants droit n'utilisent pas les prestations auxquelles ils ont droit.</p>
+      <ul>
+        <li>Anticipation d'un rejet ou de propos stigmatisants</li>
+        <li>Peur d'une avance de frais ou dépassement d'honoraires</li>
+        <li>Retard de prise en charge → aggravation de l'état de santé</li>
+        <li>Phénomène massif, au-delà des seuls facteurs géographiques</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Paradoxe des politiques ciblées :</strong> certaines politiques visant l'accès aux soins des catégories défavorisées peuvent induire une stigmatisation de ces catégories (ex : AME).</div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--amber)"></div>
+    <span class="section-label" style="background:var(--amber-light);color:var(--amber)">Discriminations dans le système de santé</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      6 facteurs structurels (Migration Santé Alsace, 2019)
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Rapport de pouvoir asymétrique :</strong> patients se sentent illégitimes → ne posent pas de questions, n'expriment pas leurs préférences</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Hétérogénéité des pratiques :</strong> certaines équipes n'ont pas les conditions pour réfléchir aux dysfonctionnements pouvant entraîner des discriminations</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Inégalités territoriales de l'offre :</strong> en situation de désertification médicale, le refus de soin n'est pas réparti équitablement</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Manque de coordination :</strong> certains soignants renoncent à prendre en charge des patients jugés « plus difficiles »</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>Recours insuffisant à l'interprétariat professionnel :</strong> la barrière linguistique crée des erreurs et inégalités — mais elle ne justifie pas un refus d'accueil en première intention</div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>Logiques économiques en tension :</strong> la course à la rentabilité peut renforcer l'orientation différentielle de patients réputés « plus compliqués »</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--teal)"></div>
+    <span class="section-label" style="background:var(--teal-light);color:var(--teal)">Points-clés à retenir</span>
+  </div>
+
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Essentiels ECNi
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Définition :</strong> différence de traitement sur critère prohibé + préjudice. Toute sélection n'est pas une discrimination (proportionnalité + enjeu santé publique).</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Refus de soin :</strong> interdit sur critère AME/CSS (CSP L1110-3). La difficulté administrative ou linguistique ne justifie pas un refus.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Testing :</strong> révèle les comportements discriminatoires mais ne prouve pas l'intention. Étude 2019 : 10-15 % de refus discriminatoires explicites parmi 1 500 professionnels.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>ISS :</strong> les discriminations accentuent le gradient social, induisent stress/risque CV/psychiatrique et alimentent le non-recours aux soins.</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 1 :</strong> le "syndrome méditerranéen" n'a aucune validité scientifique — son utilisation est une discrimination déguisée et peut masquer une urgence vitale.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 2 :</strong> une politique ciblée sur un critère prohibé peut être légitime si proportionnée à un enjeu de santé publique — ce n'est pas automatiquement une discrimination.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

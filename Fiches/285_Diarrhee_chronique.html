@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-285 – Diarrhée chronique adulte &amp; enfant</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #F59E0B;
+    --green: #1D9E75;
+    --bg: #F8F9FA;
+    --card-bg: #FFFFFF;
+    --text: #1A1A2E;
+    --text-muted: #6B7280;
+    --border: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0F1117;
+      --card-bg: #1C1E2A;
+      --text: #E8EAF0;
+      --text-muted: #9CA3AF;
+      --border: rgba(255,255,255,0.08);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; line-height: 1.6; padding: 24px; max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; color: var(--purple); }
+  h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 16px; padding: 20px 24px; margin-bottom: 16px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; }
+  .badge-a { background: rgba(216,90,48,0.12); color: var(--coral); }
+  .badge-b { background: rgba(55,138,221,0.12); color: var(--blue); }
+  .oic { font-size: 0.75rem; color: var(--text-muted); font-family: monospace; }
+  .icon { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .pill { display: inline-block; padding: 3px 11px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; margin: 2px 3px; }
+  .pill-green { background: rgba(29,158,117,0.12); color: var(--teal); }
+  .pill-red { background: rgba(226,75,74,0.12); color: var(--red); }
+  .pill-blue { background: rgba(55,138,221,0.12); color: var(--blue); }
+  .pill-amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+  .pill-purple { background: rgba(83,74,183,0.12); color: var(--purple); }
+  .alert { border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; font-size: 0.9rem; }
+  .alert-red { background: rgba(226,75,74,0.09); border-left: 3px solid var(--red); }
+  .alert-blue { background: rgba(55,138,221,0.09); border-left: 3px solid var(--blue); }
+  .alert-green { background: rgba(29,158,117,0.09); border-left: 3px solid var(--teal); }
+  .alert-amber { background: rgba(245,158,11,0.09); border-left: 3px solid var(--amber); }
+  .alert strong { display: block; margin-bottom: 4px; }
+  .complication-card { border-radius: 12px; background: var(--card-bg); padding: 14px 16px; margin-bottom: 10px; }
+  .cc-blue { border-left: 4px solid var(--blue); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .cc-red { border-left: 4px solid var(--red); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .cc-teal { border-left: 4px solid var(--teal); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .cc-amber { border-left: 4px solid var(--amber); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .cc-purple { border-left: 4px solid var(--purple); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .step { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+  .step-num { min-width: 30px; height: 30px; background: #E5E7EB; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #374151; flex-shrink: 0; }
+  @media (prefers-color-scheme: dark) { .step-num { background: #374151; color: #E5E7EB; } }
+  .step-content { flex: 1; padding-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  th { background: rgba(83,74,183,0.07); color: var(--purple); font-weight: 600; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 5px; }
+  .kv-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 0.5px solid var(--border); align-items: baseline; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { font-weight: 600; min-width: 170px; font-size: 0.88rem; color: var(--text-muted); flex-shrink: 0; }
+  .kv-val { flex: 1; font-size: 0.9rem; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .mnemonic { background: rgba(83,74,183,0.07); border: 0.5px dashed var(--purple); border-radius: 12px; padding: 14px 18px; font-size: 0.9rem; margin-top: 10px; }
+  .mnemonic strong { color: var(--purple); }
+  .meca-tag { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; }
+  .meca-secret { background: rgba(226,75,74,0.12); color: var(--red); }
+  .meca-motrice { background: rgba(29,158,117,0.12); color: var(--teal); }
+  .meca-osmo { background: rgba(55,138,221,0.12); color: var(--blue); }
+  .meca-malab { background: rgba(245,158,11,0.12); color: var(--amber); }
+  .meca-lesion { background: rgba(83,74,183,0.12); color: var(--purple); }
+</style>
+</head>
+<body>
+
+<h1>💧 Diarrhée chronique — Adulte &amp; Enfant</h1>
+<div class="subtitle">IC-285 · Gastroentérologie · Pédiatrie</div>
+
+<div class="alert alert-blue">
+  <strong>🧭 Fil conducteur</strong>
+  Ce cours s'articule autour d'un raisonnement en 3 niveaux : <strong>(1) confirmer la diarrhée</strong> chronique et éliminer les faux tableaux ; <strong>(2) identifier le mécanisme</strong> (5 mécanismes physiopathologiques) ; <strong>(3) trouver la cause</strong>. La maladie cœliaque est la cause la plus fréquente de malabsorption et mérite un développement propre. Chez l'enfant, les causes diffèrent selon l'âge.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITION -->
+<div class="section-header">
+  <svg class="icon" color="var(--coral)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <h2>Définition &amp; Diagnostics différentiels <span class="badge badge-a">Rang A</span></h2>
+  <span class="oic">OIC-285-04</span>
+</div>
+
+<div class="card">
+  <div class="grid2">
+    <div>
+      <div class="kv-row">
+        <span class="kv-key">Définition clinique (OMS)</span>
+        <span class="kv-val">&gt; 3 selles/jour molles à liquides</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Définition en poids</span>
+        <span class="kv-val">Poids moyen des selles &gt; <strong>300 g/24h</strong> (pesée sur 3 jours consécutifs)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Chronicité</span>
+        <span class="kv-val">Durée &gt; <strong>4 semaines</strong></span>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <strong>⚠️ 3 faux tableaux de diarrhée (poids des selles NORMAL)</strong>
+        <ul style="margin-top:6px">
+          <li><strong>Syndrome rectal / troubles statique pelvienne</strong> → émissions fréquentes afécales</li>
+          <li><strong>Incontinence fécale</strong> → selles non contrôlées (à demander systématiquement !)</li>
+          <li><strong>Fausse diarrhée du constipé</strong> → exsudation colique au contact de selles dures, alternance diarrhée/constipation, émissions glaireuses</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : 5 MÉCANISMES -->
+<div class="section-header">
+  <svg class="icon" color="var(--purple)" viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+  <h2>Les 5 mécanismes physiopathologiques <span class="badge badge-a">Rang A</span></h2>
+  <span class="oic">OIC-285-05 · OIC-285-06 · OIC-285-10 · OIC-285-11 · OIC-285-12 · OIC-285-19</span>
+</div>
+
+<div class="card">
+  <div class="mnemonic" style="margin-bottom:18px">
+    <strong>Mnémotechnique "SOMLL"</strong> : <strong>S</strong>écrétoire · <strong>O</strong>smotique · <strong>M</strong>otrice · <strong>L</strong>ésionnelle · ma<strong>L</strong>absorption
+  </div>
+
+  <table>
+    <tr>
+      <th>Mécanisme</th>
+      <th>Caractéristiques des selles</th>
+      <th>Clé clinique</th>
+      <th>Causes fréquentes</th>
+    </tr>
+    <tr>
+      <td><span class="meca-motrice">MOTRICE</span></td>
+      <td>Diurnes, matinales, post-prandiales, fractionnées, peu abondantes (&lt;500g/j). Parfois résidus alimentaires. Impérieuses.</td>
+      <td>Cède au <strong>jeûne</strong>. Sensible aux freinateurs. Pas d'AEG.</td>
+      <td>SII-D (1er), dysautonomie diabétique, alcool chronique, hyperthyroïdie</td>
+    </tr>
+    <tr>
+      <td><span class="meca-osmo">OSMOTIQUE</span></td>
+      <td>Liquides, mousseuses. Météorisme, borborygmes, flatulences si agent fermentescible.</td>
+      <td>Cesse à l'<strong>arrêt de l'ingestion</strong> de l'agent responsable. Pas d'AEG.</td>
+      <td>Intolérance au lactose (test respiratoire ou éviction empirique), FODMAPs, mannitol/sorbitol, laxatifs osmotiques, magnésium</td>
+    </tr>
+    <tr>
+      <td><span class="meca-malab">MALABSORPTION</span></td>
+      <td><strong>Stéatorrhée</strong> : selles grasses, collantes, malodorantes, "bouses".</td>
+      <td>AEG fréquente, signes de <strong>carences</strong> (vitamines liposolubles, anémie, œdèmes, aménorrhée, ostéomalacie, glossite)</td>
+      <td>Maladie cœliaque (1ère cause), insuffisance pancréatique exocrine, cholestase, pullulation microbienne</td>
+    </tr>
+    <tr>
+      <td><span class="meca-secret">SÉCRÉTOIRE</span></td>
+      <td>Très aqueuses, parfois abondantes. Risque de déshydratation, hypokaliémie, acidose métabolique. Trou osmotique normal.</td>
+      <td><strong>Résiste au jeûne</strong>. Coloscopie avec biopsies indispensable.</td>
+      <td>Colites microscopiques (médicaments++), malabsorption acides biliaires (iléon terminal), adénomes villeux/adénocarcinomes, iatrogènes (laxatifs irritants, colchicine)</td>
+    </tr>
+    <tr>
+      <td><span class="meca-lesion">LÉSIONNELLE</span></td>
+      <td>Selles glairo-sanglantes si lésions rectosigmoïdiennes.</td>
+      <td>Douleurs abdominales, fièvre, AEG, syndrome rectal ou dysentérique possible.</td>
+      <td>MICI, tumeurs intestinales, infection, ischémie mésentérique</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : DÉMARCHE DIAGNOSTIQUE -->
+<div class="section-header">
+  <svg class="icon" color="var(--teal)" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+  <h2>Stratégie diagnostique <span class="badge badge-a">Rang A</span></h2>
+  <span class="oic">OIC-285-06 · OIC-285-08 · OIC-285-09</span>
+</div>
+
+<div class="card">
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-content">
+      <strong>Confirmer la diarrhée chronique</strong><br>
+      Interrogatoire (éliminer les 3 faux tableaux). Examen périnéal + toucher rectal systématique.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-content">
+      <strong>Rechercher une cause évidente/fréquente</strong><br>
+      Médicaments (voir liste), consommation de lait, hyperthyroïdie, voyage zone endémique parasitaire, chirurgie digestive. ATCD personnels et familiaux.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-content">
+      <strong>Orienter selon la sémiologie</strong><br>
+      Selles sanglantes/glaireuses → lésionnelle / Selles grasses → malabsorption / Selles aqueuses → sécrétoire, motrice, osmotique
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-content">
+      <strong>Examens biologiques systématiques 1ère intention :</strong>
+      <div style="margin-top:8px">
+        <span class="pill pill-blue">CRP (inflammation)</span>
+        <span class="pill pill-blue">NFS (anémie)</span>
+        <span class="pill pill-blue">Ionogramme, créatinine, calcémie, phosphorémie</span>
+        <span class="pill pill-blue">TP (carence vit K)</span>
+        <span class="pill pill-blue">Électrophorèse protéines (albuminémie)</span>
+        <span class="pill pill-blue">Ferritine, B12, folates</span>
+        <span class="pill pill-green">Glycémie, TSH</span>
+        <span class="pill pill-green">EPS (giardiase)</span>
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-content">
+      <strong>Endoscopie digestive :</strong> EOGD + iléo-coloscopie avec biopsies étagées (duodénum, estomac, côlon, iléon terminal). Indiquée en cas de diarrhée lésionnelle ou sans cause évidente, signes d'alarme, âge &gt;50 ans.
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-content">
+      <strong>2ème intention :</strong> Scanner abdomino-pelvien
+    </div>
+  </div>
+  <div class="step">
+    <div class="step-num">7</div>
+    <div class="step-content">
+      <strong>3ème intention :</strong> Fécalogramme (coprologie fonctionnelle) sur 72h avec surcharge graisseuse préalable (50g beurre/j). Paramètres : pesée, lipides, azote fécal, recherche laxatifs, ionogramme fécal, élastase, α1-antitrypsine, test rouge carmin.
+    </div>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top: 4px">
+    <strong>Valeurs clés du fécalogramme</strong>
+    Stéatorrhée → malabsorption · Baisse élastase fécale → insuffisance pancréatique exocrine · Élévation clairance α1-antitrypsine → entéropathie exsudative · Test rouge carmin &lt;6h → diarrhée motrice
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : MÉDICAMENTS -->
+<div class="section-header">
+  <svg class="icon" color="var(--amber)" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+  <h2>Médicaments responsables <span class="badge badge-b">Rang B</span></h2>
+  <span class="oic">OIC-285-07</span>
+</div>
+
+<div class="card">
+  <table>
+    <tr>
+      <th>Médicament(s)</th>
+      <th>Mécanisme</th>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Antibiotiques</span></td>
+      <td>Réduction fermentation colique des glucides → diarrhée osmotique</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">IPP (lansoprazole)</span> <span class="pill pill-amber">AINS</span> <span class="pill pill-amber">IRS</span> <span class="pill pill-amber">Veinotoniques</span></td>
+      <td>Colites microscopiques</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Colchicine</span></td>
+      <td>Diarrhée sécrétoire</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Metformine</span></td>
+      <td>Augmentation synthèse hépatique des acides biliaires</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Olmésartan</span> <span class="pill pill-amber">Mycophénolate mofétil</span></td>
+      <td>Entéropathie avec atrophie villositaire (mimant maladie cœliaque !)</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Immunothérapie (anti-CTLA-4, anti-PD1)</span></td>
+      <td>Colite auto-immune avec exsudation digestive</td>
+    </tr>
+  </table>
+  <div class="alert alert-amber" style="margin-top:12px">
+    <strong>⚠️ Piège</strong> Olmésartan et mycophénolate mofétil → atrophie villositaire qui mime la maladie cœliaque (anticorps anti-transglutaminase négatifs)
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : MALADIE COELIAQUE -->
+<div class="section-header">
+  <svg class="icon" color="var(--red)" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  <h2>Maladie cœliaque — Focus complet <span class="badge badge-a">Rang A</span> <span class="badge badge-b">Rang B</span></h2>
+  <span class="oic">OIC-285-13 à 18</span>
+</div>
+
+<div class="card">
+  <div class="alert alert-blue">
+    <strong>Cause la plus fréquente de malabsorption de l'adulte et de l'enfant</strong>
+    Intolérance digestive aux fragments de gluten (gliadine) des céréales : seigle, blé, orge.
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div>
+      <h3>Épidémiologie <span style="font-size:0.7rem;font-weight:400">(OIC-285-13 — B)</span></h3>
+      <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">1/100 – 1/300 (pop. caucasienne)</span></div>
+      <div class="kv-row"><span class="kv-key">Sexe</span><span class="kv-val">Femme × 2</span></div>
+      <div class="kv-row"><span class="kv-key">Génétique</span><span class="kv-val">HLA-DQ2 ou DQ8 (nécessaire mais insuffisant ; présent chez 20-30% des sujets sains)</span></div>
+      <div class="kv-row"><span class="kv-key">Apparentés 1er degré</span><span class="kv-val">10-20% de prévalence</span></div>
+      <div class="kv-row"><span class="kv-key">Pics diagnostiques</span><span class="kv-val">Petite enfance (introduction gluten) + 20-40 ans</span></div>
+    </div>
+    <div>
+      <h3>Tableau clinique <span style="font-size:0.7rem;font-weight:400">(OIC-285-14 — A)</span></h3>
+      <div class="complication-card cc-red" style="margin-bottom:8px">
+        <strong>Forme typique</strong> : douleurs abdominales postprandiales + diarrhée par malabsorption + carences
+      </div>
+      <div class="complication-card cc-amber" style="margin-bottom:8px">
+        <strong>Forme pauci-symptomatique</strong> : diagnostiquée SII ou asymptomatique
+      </div>
+      <div class="complication-card cc-blue">
+        <strong>Forme extra-digestive fréquente</strong> : anémie ferriprive (1ère circonstance diagnostic actuelle), anomalies hépatiques, dermatite herpétiforme (rare mais typique)
+      </div>
+      <div style="margin-top:10px">
+        <h3>Maladies auto-immunes associées</h3>
+        <span class="pill pill-purple">Diabète type 1</span>
+        <span class="pill pill-purple">Maladie de Biermer</span>
+        <span class="pill pill-purple">Thyroïdite auto-immune</span>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 20px 0">
+
+  <div class="grid2">
+    <div>
+      <h3>Diagnostic positif <span style="font-size:0.7rem;font-weight:400">(OIC-285-15 — A)</span></h3>
+      <div class="alert alert-green">
+        <strong>Critères anatomopathologiques + sérologiques</strong>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Sérologie</span>
+        <span class="kv-val"><strong>Ac IgA anti-transglutaminase</strong> (très sensibles et spécifiques) + dosage IgA totales concomitant</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Endoscopie</span>
+        <span class="kv-val">EOGD avec biopsies duodénales multiples (aspect évocateur d'atrophie villositaire)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Anapath (4 signes)</span>
+        <span class="kv-val">1) ↑ lymphocytes intra-épithéliaux · 2) Atrophie villositaire totale ou subtotale · 3) Hypertrophie des cryptes · 4) Infiltrat lymphoplasmocytaire du chorion</span>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px">
+        <strong>⚠️ Déficit en IgA (3-5% des cœliaques) — OIC-285-16 — B</strong>
+        Ac IgA anti-TG faux négatifs ! → doser les <strong>Ac IgG anti-transglutaminase</strong> + biopsies duodénales
+      </div>
+    </div>
+    <div>
+      <h3>Traitement <span style="font-size:0.7rem;font-weight:400">(OIC-285-17 — A)</span></h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Régime sans gluten à vie</strong> (seigle, blé, orge exclus totalement). Difficile à suivre, parfois vécu comme exclusion sociale.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">Accompagnement <strong>diététicienne</strong> + coordonnées associations de patients</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Corriger les carences</strong> au diagnostic (fer, B12, folates, vitamines liposolubles)</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Ostéodensitométrie</strong> : ostéoporose chez 50% des adultes au diagnostic → traiter</div>
+      </div>
+      <div class="alert alert-blue" style="margin-top:4px">
+        <strong>ℹ️</strong> Non reconnue en ALD. Aide financière mensuelle possible pour produits sans gluten (déclaration SS).
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 20px 0">
+
+  <h3>Complications &amp; Suivi <span style="font-size:0.7rem;font-weight:400">(OIC-285-18 — B)</span></h3>
+  <div class="grid3">
+    <div class="complication-card cc-red">
+      <strong>Sprue réfractaire</strong> type 1 ou 2 — entité pré-lymphomateuse (rare)
+    </div>
+    <div class="complication-card cc-red">
+      <strong>Lymphome du grêle</strong> + cancers épithéliaux (œsophage, pharynx, grêle)
+    </div>
+    <div class="complication-card cc-amber">
+      <strong>Baisse de fertilité</strong> (plus fréquente)
+    </div>
+  </div>
+  <div class="grid2" style="margin-top: 12px">
+    <div class="kv-row" style="border:none"><span class="kv-key">Suivi annuel</span><span class="kv-val">Ac IgA anti-TG → négativation attendue à 1 an sous régime sans gluten</span></div>
+    <div class="kv-row" style="border:none"><span class="kv-key">Biopsies de contrôle</span><span class="kv-val">À 1-2 ans pour vérifier disparition des anomalies histologiques</span></div>
+  </div>
+  <div class="alert alert-red" style="margin-top:10px">
+    <strong>Récidive sous régime "bien suivi" → chercher dans l'ordre :</strong>
+    1) Mauvaise observance (nouvelles biopsies + IgA anti-TG + diét.) · 2) Diagnostic erroné (autre cause d'atrophie villositaire, colite microscopique associée) · 3) Néoplasie du grêle (lymphome, adénocarcinome, sprue réfractaire)
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : DIARRHÉE ENFANT -->
+<div class="section-header">
+  <svg class="icon" color="var(--teal)" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  <h2>Diarrhée chronique de l'enfant <span class="badge badge-b">Rang B</span></h2>
+  <span class="oic">OIC-285-01 · OIC-285-02 · OIC-285-03</span>
+</div>
+
+<div class="card">
+  <div class="grid2">
+    <div>
+      <div class="alert alert-blue">
+        <strong>Définition pédiatrique</strong> : diarrhée &gt; 3 semaines
+      </div>
+
+      <h3>Causes fonctionnelles (les plus fréquentes)</h3>
+      <div class="complication-card cc-teal" style="margin-bottom:8px">
+        <strong>Diarrhée du trotteur / intestin irritable</strong> (6 mois – 3 ans) : aucun examen complémentaire. Régresse en limitant les sucres fermentescibles.
+      </div>
+      <div class="complication-card cc-teal">
+        <strong>Intestin irritable grand enfant / adolescent</strong> : même présentation que l'adulte
+      </div>
+    </div>
+    <div>
+      <h3>Causes organiques selon l'âge</h3>
+      <div class="complication-card cc-red" style="margin-bottom:8px">
+        <strong>Nourrisson / jeune enfant</strong>
+        <ul style="margin-top:6px">
+          <li><strong>APLV</strong> (allergie protéines lait de vache) : allergie retardée non IgE-médiée. Après introduction PLV. Eczéma souvent associé. Diagnostic = éviction-réintroduction. Traitement = éviction pendant plusieurs mois.</li>
+          <li><strong>Maladie cœliaque</strong> (cf. ci-dessus)</li>
+          <li><strong>Mucoviscidose</strong></li>
+          <li><strong>Giardiase</strong> (parasitaire)</li>
+        </ul>
+      </div>
+      <div class="complication-card cc-amber">
+        <strong>Grand enfant / Adolescent</strong>
+        <ul style="margin-top:6px">
+          <li>MICI (Crohn, RCH)</li>
+          <li>Maladie cœliaque</li>
+          <li>Intolérance au lactose secondaire (&gt;5 ans)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 16px 0">
+  <h3>Diagnostic maladie cœliaque chez l'enfant</h3>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Clinique</span><span class="kv-val">Cassure pondérale/stagnation, ballonnement, douleurs abdominales, amyotrophie, retentissement développement</span></div>
+      <div class="kv-row"><span class="kv-key">Condition</span><span class="kv-val">Sérologie uniquement si <strong>consommation de gluten en cours</strong></span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Sérologie</span><span class="kv-val">IgA anti-transglutaminase + IgA totales</span></div>
+      <div class="kv-row"><span class="kv-key">Confirmation</span><span class="kv-val">Biopsie intestinale</span></div>
+      <div class="kv-row"><span class="kv-key">Traitement</span><span class="kv-val">Éviction du gluten à vie</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SYNTHÈSE FINALE -->
+<div class="section-header">
+  <svg class="icon" color="var(--teal)" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+  <h2>Synthèse — Points clés à retenir</h2>
+</div>
+
+<div class="card">
+  <table>
+    <tr><th>Thème</th><th>Points essentiels</th></tr>
+    <tr><td><strong>Définition</strong></td><td>&gt;3 selles/j liquides OU poids &gt;300g/24h, durée &gt;4 semaines. 3 faux tableaux à éliminer.</td></tr>
+    <tr><td><strong>5 mécanismes</strong></td><td>SOMLL : Sécrétoire · Osmotique · Motrice · Lésionnelle · maLabsorption</td></tr>
+    <tr><td><strong>Clé motrice</strong></td><td>Cède au jeûne, post-prandiale, fractionnée. SII-D = 1ère cause.</td></tr>
+    <tr><td><strong>Clé osmotique</strong></td><td>Cesse à l'arrêt de l'agent. Intolérance lactose = prototype.</td></tr>
+    <tr><td><strong>Clé sécrétoire</strong></td><td>Résiste au jeûne. Trou osmotique normal. Colites microscopiques = médicaments++.</td></tr>
+    <tr><td><strong>Clé malabsorption</strong></td><td>Stéatorrhée + carences multiples. Maladie cœliaque = 1ère cause.</td></tr>
+    <tr><td><strong>Bilan 1ère int.</strong></td><td>CRP, NFS, iono/créat, TP, EPP, ferritine, B12, folates, glycémie, TSH, EPS.</td></tr>
+    <tr><td><strong>Cœliaque : diagnostic</strong></td><td>IgA anti-TG + IgA totales + biopsies duodénales (4 signes anapath).</td></tr>
+    <tr><td><strong>Piège cœliaque</strong></td><td>Déficit IgA (3-5%) → IgA anti-TG faux négatifs → doser IgG anti-TG.</td></tr>
+    <tr><td><strong>Traitement cœliaque</strong></td><td>Régime sans gluten à vie + diét. + corriger carences + ostéodensitométrie.</td></tr>
+    <tr><td><strong>Suivi cœliaque</strong></td><td>IgA anti-TG annuel (négativation à 1 an) + biopsies à 1-2 ans.</td></tr>
+    <tr><td><strong>Enfant nourrisson</strong></td><td>APLV (éviction-réintroduction), maladie cœliaque, mucoviscidose, giardiase.</td></tr>
+    <tr><td><strong>Médicament piège</strong></td><td>Olmésartan/mycophénolate → atrophie villositaire (mime cœliaque, anticorps négatifs).</td></tr>
+  </table>
+</div>
+
+<div style="text-align:center; color: var(--text-muted); font-size: 0.78rem; margin-top: 12px;">
+  IC-285 · UNESS/CNCEM · Fiche générée pour révision médicale
+</div>
+
+</body>
+</html>

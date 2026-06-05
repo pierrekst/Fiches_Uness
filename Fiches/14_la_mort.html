@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 14 — La mort</title>
+<style>
+:root {
+  --purple:#534AB7; --teal:#1D9E75; --coral:#D85A30; --blue:#378ADD; --red:#E24B4A; --amber:#D97706;
+  --purple-light:#EEF0FF; --teal-light:#E6F7F2; --coral-light:#FBF0EC; --blue-light:#EBF4FF;
+  --red-light:#FEF2F2; --amber-light:#FFFBEB;
+  --text:#1a1a2e; --text-sec:#6b7280; --bg:#f8f9fc; --card:#fff; --border:#e5e7eb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;}
+.page{max-width:920px;margin:0 auto;padding:20px 16px 48px;}
+.header{background:linear-gradient(135deg,#2d2d4e 0%,#534AB7 60%,#1D9E75 100%);color:#fff;border-radius:16px;padding:24px 28px;margin-bottom:20px;}
+.header-num{font-size:.72rem;font-weight:700;opacity:.75;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.header h1{font-size:1.5rem;font-weight:800;margin-bottom:5px;}
+.header-desc{font-size:.83rem;opacity:.9;}
+.intro-box{background:var(--purple-light);border-left:4px solid var(--purple);border-radius:10px;padding:13px 17px;margin-bottom:18px;font-size:.85rem;line-height:1.65;color:var(--text);}
+.intro-box strong{color:var(--purple);}
+.card{background:var(--card);border:.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+.card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+.alert strong{font-weight:800;}
+.alert-icon{flex-shrink:0;margin-top:1px;}
+.alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.alert-red{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+.alert-blue{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue);}
+.alert-green{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+.alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+.alert-red .alert-icon svg{stroke:var(--red);}
+.alert-blue .alert-icon svg{stroke:var(--blue);}
+.alert-green .alert-icon svg{stroke:var(--teal);}
+.alert-amber .alert-icon svg{stroke:var(--amber);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.pill{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:.77rem;font-weight:600;}
+.pill-purple{background:var(--purple-light);color:var(--purple);}
+.pill-teal{background:var(--teal-light);color:var(--teal);}
+.pill-red{background:var(--red-light);color:var(--red);}
+.pill-amber{background:var(--amber-light);color:var(--amber);}
+.pill-blue{background:var(--blue-light);color:var(--blue);}
+.pill-coral{background:var(--coral-light);color:var(--coral);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+th{background:#f3f4f6;font-weight:700;padding:7px 10px;text-align:left;border:.5px solid var(--border);}
+td{padding:6px 10px;border:.5px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:#fafafa;}
+.kv-table{width:100%;border-collapse:collapse;font-size:.84rem;}
+.kv-row td{padding:5px 8px;border-bottom:.5px solid var(--border);}
+.kv-row:last-child td{border-bottom:none;}
+.kv-row td:first-child{font-weight:600;color:var(--text-sec);width:40%;}
+.kv-row td:last-child{color:var(--text);}
+ul.clist{padding-left:16px;font-size:.84rem;line-height:1.7;}
+ul.clist li{margin-bottom:2px;}
+hr{border:none;border-top:1.5px solid var(--border);margin:18px 0;}
+.bc{border-left:3px solid var(--purple);padding:8px 12px;border-radius:0 8px 8px 0;background:#fafafa;margin-bottom:8px;font-size:.84rem;}
+.bc.red{border-left-color:var(--red);} .bc.teal{border-left-color:var(--teal);} .bc.blue{border-left-color:var(--blue);} .bc.amber{border-left-color:var(--amber);} .bc.coral{border-left-color:var(--coral);}
+.bc h4{font-weight:700;font-size:.83rem;margin-bottom:3px;}
+.sub{font-size:.81rem;color:var(--text-sec);margin-top:3px;}
+.sec-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;margin-top:10px;}
+.quote{border-left:3px solid var(--purple);padding:8px 14px;background:var(--purple-light);border-radius:0 8px 8px 0;font-size:.84rem;font-style:italic;color:var(--text);margin-bottom:10px;}
+.quote cite{font-style:normal;font-weight:700;font-size:.78rem;color:var(--text-sec);display:block;margin-top:4px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 14</div>
+  <h1>La mort</h1>
+  <div class="header-desc">Anthropologie de la mort &mdash; Représentations sociales et culturelles &mdash; Horizon de la mort dans la maladie grave &mdash; Attitudes soignants &mdash; Consciences de la mort</div>
+</div>
+
+<div class="intro-box">
+  <strong>Vue d'ensemble :</strong> Chapitre de sciences humaines et sociales portant sur 2 dimensions. <strong>1) Anthropologique :</strong> la mort est un événement social universellement ritualisé, mais aucune définition ni signification universelle n'existe. La médicalisation progressive de la mort au XX<sup>e</sup> siècle a transformé radicalement notre rapport à la fin de vie. <strong>2) Psychologique/existentielle :</strong> comment le patient, les proches et les soignants font face à l'horizon de la mort — la sémiologie des différentes "consciences de la mort" (Strauss &amp; Glaser) et les trois grandes voies contemporaines face à la mort.
+</div>
+
+<!-- ANTHROPOLOGIE DE LA MORT -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Représentations et pratiques sociales autour de la mort
+  </div>
+
+  <div class="quote">
+    "Ce n'est pas véritablement la mort, mais le savoir sur la mort qui crée des problèmes à l'homme."
+    <cite>— Norbert Elias, La Solitude des mourants</cite>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--purple);">Invariants anthropologiques</div>
+      <div class="bc">
+        <h4>La mort = événement social</h4>
+        <div class="sub">Pas seulement biologique. Ritualisée dans toutes les sociétés. Fait passer du monde des vivants au monde des morts à travers différents rituels (mort biologique, deuil, mort sociale).</div>
+      </div>
+      <div class="bc">
+        <h4>Pas de définition universelle</h4>
+        <div class="sub">Ni du deuil, ni de la signification de la mort. Mais la <strong>ritualisation est un invariant anthropologique</strong> — universellement présente, bien que culturellement diverse.</div>
+      </div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--amber);">Critique de Kübler-Ross (1970)</div>
+      <div class="bc amber">
+        <h4>5 phases du deuil</h4>
+        <div class="sub">Déni &rarr; Colère &rarr; Marchandage &rarr; Dépression &rarr; Acceptation</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Limites :</strong> Construction <strong>médicocentrée</strong> et <strong>occidentalocentrée</strong> — normalisation du deuil ignorant la diversité socioculturelle, l'historicité et les acquis de l'anthropologie.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="color:var(--blue);">Évolution historique du rapport à la mort</div>
+  <table>
+    <thead><tr><th>Époque</th><th>Rapport à la mort</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Sociétés traditionnelles</strong></td>
+        <td>Mort comme processus rituel collectif. Codifié par les cultes monothéistes. Mort = accomplissement spirituel dans une continuité signifiante.</td>
+      </tr>
+      <tr>
+        <td><strong>XIX<sup>e</sup> siècle</strong></td>
+        <td>Avènement de la médecine scientifique. Hantise de l'inhumation prématurée. Médecine cherche une preuve indubitable de la mort.</td>
+      </tr>
+      <tr>
+        <td><strong>XX<sup>e</sup> siècle</strong></td>
+        <td>Médicalisation de la mort. Redéfinition avec mort encéphalique (liée aux préoccupations de greffe/transplantation). Mort de plus en plus en institution, à l'écart de la vie sociale.</td>
+      </tr>
+      <tr>
+        <td><strong>XXI<sup>e</sup> siècle</strong></td>
+        <td>Nouveaux états limites : comas, états végétatifs, longues fins de vie. Question de la sédation profonde et continue. Utopies transhumanistes d'immortalité.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="font-size:.82rem; color:var(--text-sec); margin-top:8px;">Phénomène de <strong>sécularisation</strong> : explication rationnelle des phénomènes naturels, désagrégation des communautés traditionnelles, individualisation des parcours &rarr; perte de la dimension spirituelle collective de la mort.</div>
+</div>
+
+<hr>
+
+<!-- HORIZON DE LA MORT DANS LA MALADIE GRAVE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Horizon de la mort dans la maladie grave — Approche psychologique et existentielle
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--teal);">Réactions du patient (Canguilhem/Freud)</div>
+      <div class="bc teal">
+        <h4>Résignation</h4>
+        <div class="sub">Expérience d'un épuisement des forces vitales luttant contre l'entropie et la dégradation. Sentiment d'impuissance face à la mort biologique programmée.</div>
+      </div>
+      <div class="bc teal">
+        <h4>Révolte</h4>
+        <div class="sub">La mort = fin de la participation à un monde de sens, de projets, de relations et d'affects partagés. La dimension existentielle de l'être humain (projet, ouverture à l'avenir) résiste à la réduction biologique.</div>
+      </div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--red);">Attitudes des soignants (peu préparés)</div>
+      <div class="bc red">
+        <h4>Refuge derrière la technique</h4>
+        <div class="sub">Adresser le patient à un spécialiste ou aux soins palliatifs pour fuir le colloque singulier face à la mort.</div>
+      </div>
+      <div class="bc red">
+        <h4>Thérapeutiques compassionnelles</h4>
+        <div class="sub">Mettre en œuvre une nouvelle ligne de chimiothérapie inutile pour "prouver" qu'on prend soin — signe d'obstination déraisonnable.</div>
+      </div>
+      <div style="font-size:.82rem; color:var(--text-sec); margin-top:4px;">Ces attitudes représentent un <strong>recul de la clinique</strong> : passage de l'exégèse (souffrance vitale et ses répercussions existentielles) à l'exérèse (élimination du support anatomique).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="sec-label" style="color:var(--purple);">Les 4 consciences de la mort (Strauss &amp; Glaser)</div>
+  <table>
+    <thead><tr><th>Type</th><th>Qui sait quoi ?</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Conscience ouverte</strong></td>
+        <td>Équipe + patient : tous au courant</td>
+        <td>Chacun sait que le patient va mourir. Le moment précis et les conditions restent flous. Communication possible et authentique.</td>
+      </tr>
+      <tr>
+        <td><strong>Conscience fermée</strong></td>
+        <td>Équipe (et famille) sait / patient ne sait pas</td>
+        <td>L'équipe soignante (et parfois la famille) sait que le patient va mourir, mais le patient l'ignore. Problème d'accompagnement et d'autonomie.</td>
+      </tr>
+      <tr>
+        <td><strong>Conscience feinte mutuelle</strong></td>
+        <td>Les deux savent / les deux font semblant</td>
+        <td>Les deux parties savent que le patient est mourant, mais chacun feint que l'autre l'ignore. Forme de protection mutuelle fragile et épuisante.</td>
+      </tr>
+      <tr>
+        <td><strong>Conscience présumée</strong></td>
+        <td>Patient se doute / cherche des indices</td>
+        <td>Le patient se doute qu'il est en fin de vie et cherche des indices pour confirmer ou infirmer sa croyance, sans communication directe.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <div class="sec-label" style="color:var(--purple);">Les 3 voies contemporaines face à la mort</div>
+  <div class="grid3">
+    <div class="bc">
+      <h4>Repousser la mort</h4>
+      <div class="sub">Obstination déraisonnable — utopie transhumaniste (immortalité). Risque de prolonger inutilement la souffrance.</div>
+    </div>
+    <div class="bc teal">
+      <h4>Accompagner le mourant</h4>
+      <div class="sub">Développement des <strong>soins palliatifs</strong>. Ambition de "pacifier" le rapport à la mort et d'améliorer la qualité de la fin de vie.</div>
+    </div>
+    <div class="bc blue">
+      <h4>Maîtriser la mort</h4>
+      <div class="sub">Revendications en faveur du <strong>suicide assisté</strong> ou de l'<strong>euthanasie</strong>. Droit de choisir le moment et les conditions de sa mort.</div>
+    </div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Ces trois voies expriment la persistance d'un désir de combattre ou maîtriser la mort — désir dont la médecine est devenue un instrument essentiel. Mais "le sens de la mort, résistant à toute appropriation, ne cesse de nous échapper."</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>La ritualisation de la mort est un <strong>invariant anthropologique</strong> — mais il n'existe aucune signification universelle de la mort ni du deuil.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Kübler-Ross : les 5 phases du deuil (déni, colère, marchandage, dépression, acceptation) sont une construction médicocentrée et occidentalocentrée — critiquée pour son ethnocentrisme.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>4 consciences de la mort (Strauss &amp; Glaser) : ouverte, fermée, feinte mutuelle, présumée. La <strong>conscience ouverte</strong> est idéalement visée dans une approche palliative.</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Le refuge derrière la technique (adresser le patient mourant à un spécialiste pour éviter le colloque singulier) et les thérapeutiques compassionnelles inutiles sont des signes de <strong>recul clinique</strong>.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> La mort encéphalique (XX<sup>e</sup> siècle) est liée aux besoins de greffe/transplantation — ce n'est pas un concept purement médical ou éthique, c'est une construction historique.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>À retenir :</strong> "Mourir devient un travail" — pour le patient, les proches ET les soignants. La question n'est plus la mort mais la "fin de vie" (notion contemporaine).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 16 — Organisation du système de soins</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EEEDFA;
+    --teal: #1D9E75;
+    --teal-light: #E6F5F0;
+    --coral: #D85A30;
+    --coral-light: #FBF0EC;
+    --blue: #378ADD;
+    --blue-light: #EBF3FC;
+    --red: #E24B4A;
+    --red-light: #FDECEA;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f8f9fa;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text);
+    background: transparent;
+    padding: 16px;
+  }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  /* ── Header ──────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%);
+    border-radius: 14px;
+    padding: 28px 32px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 3px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  .header h1 { font-size: 1.5rem; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+  .header-subtitle { font-size: 0.82rem; opacity: 0.88; line-height: 1.55; }
+
+  /* ── Section headers ─────────────────────────── */
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px; border-radius: 10px;
+    margin-bottom: 14px;
+    font-size: 0.95rem; font-weight: 800; color: white;
+  }
+  .section-header svg {
+    width: 16px; height: 16px; fill: none; stroke: white;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
+  }
+  .sh-purple { background: linear-gradient(90deg, #534AB7, #6b64c8); }
+  .sh-teal   { background: linear-gradient(90deg, #1D9E75, #27ae87); }
+  .sh-coral  { background: linear-gradient(90deg, #D85A30, #e06b45); }
+  .sh-blue   { background: linear-gradient(90deg, #378ADD, #4d9ae8); }
+  .sh-red    { background: linear-gradient(90deg, #E24B4A, #e85f5e); }
+  .sh-amber  { background: linear-gradient(90deg, #D97706, #e88c1a); }
+
+  /* ── Cards ───────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: .88rem; font-weight: 700; color: var(--text);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .card-icon {
+    width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-icon svg {
+    width: 15px; height: 15px; fill: none; stroke: #fff;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .bg-purple { background: var(--purple); }
+  .bg-teal   { background: var(--teal);   }
+  .bg-coral  { background: var(--coral);  }
+  .bg-blue   { background: var(--blue);   }
+  .bg-red    { background: var(--red);    }
+  .bg-amber  { background: var(--amber);  }
+
+  /* ── Grid ────────────────────────────────────── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+  /* ── Tables ──────────────────────────────────── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.83rem; margin-bottom: 10px; }
+  th {
+    background: var(--bg); font-weight: 700; padding: 8px 10px;
+    text-align: left; border-bottom: 1.5px solid var(--border); color: var(--text);
+  }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f9fafb; }
+
+  /* ── KV rows ─────────────────────────────────── */
+  .kv-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 5px 0; border-bottom: 0.5px solid var(--border);
+    font-size: 0.83rem; gap: 10px;
+  }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-muted); flex: 1; }
+  .kv-value { font-weight: 700; text-align: right; }
+
+  /* ── Pills ───────────────────────────────────── */
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+
+  /* ── Alerts ──────────────────────────────────── */
+  .alert {
+    border-radius: 10px; padding: 11px 16px; font-size: .84rem;
+    margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start;
+  }
+  .alert strong { font-weight: 800; }
+  .alert-red   { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue  { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  /* ── Border-left cards ───────────────────────── */
+  .bl { border-left: 3px solid var(--purple); padding-left: 12px; margin-bottom: 8px; }
+  .bl-teal  { border-color: var(--teal);  }
+  .bl-blue  { border-color: var(--blue);  }
+  .bl-coral { border-color: var(--coral); }
+  .bl-amber { border-color: var(--amber); }
+
+  /* ── Lists ───────────────────────────────────── */
+  ul.cl { padding-left: 16px; margin-top: 4px; }
+  ul.cl li { margin-bottom: 3px; font-size: 0.83rem; }
+
+  /* ── HR ──────────────────────────────────────── */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+
+  /* ── Dark mode ───────────────────────────────── */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e8f0; --text-muted: #9ca3af; --border: #2d2d3a;
+      --bg: #1a1a2e; --white: #1e1e2e;
+      --purple-light: #2a2860; --teal-light: #0d3d2a;
+      --coral-light: #3d2015; --blue-light: #1a2d4a;
+      --red-light: #3d0f0f; --amber-light: #3d2800;
+    }
+    body { background: #12121f; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════ -->
+<div class="header">
+  <div class="header-badge">ITEM 16</div>
+  <h1>Organisation du système de soins<br>Sa régulation — Les indicateurs — Parcours de soins</h1>
+  <div class="header-subtitle">
+    Ce chapitre dresse la cartographie complète du système de santé français : architecture administrative (État → ARS → Département → Commune), financement (Sécu, PUMA, CSS), agences sanitaires, offre de soins et démographie médicale, systèmes européens, inégalités sociales et outils incitatifs (CESP, ROSP, convention médicale). Maîtriser ce chapitre, c'est comprendre qui décide, qui finance, qui soigne et avec quels outils d'information.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     1. DÉFINITIONS
+══════════════════════════════════════════════ -->
+<div class="section-header sh-purple">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions fondamentales
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Système de santé (OMS 2000)
+    </div>
+    <div style="font-size:0.84rem; font-style:italic; color:var(--text-muted); margin-bottom:8px;">Toutes les activités dont le but essentiel est de promouvoir ou d'entretenir la santé.</div>
+    <div style="font-weight:700; font-size:0.82rem; margin-bottom:4px;">Moyens :</div>
+    <div class="pill-list" style="margin-bottom:8px;">
+      <span class="pill pill-purple">Organisationnels (Min. Santé, SS, universités)</span>
+      <span class="pill pill-blue">Humains (médecins, paramédicaux, administratifs)</span>
+    </div>
+    <div style="font-weight:700; font-size:0.82rem; margin-bottom:4px;">Objectifs :</div>
+    <ul class="cl">
+      <li>Préserver / améliorer la santé</li>
+      <li>Répondre aux attentes (accès 24h/24, délais spécialistes acceptables)</li>
+      <li>Assurer l'équité dans l'accès (supprimer la barrière financière)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Santé vs Soins — la distinction clé
+    </div>
+    <table>
+      <tr><th>Santé (publique)</th><th>Soins</th></tr>
+      <tr>
+        <td>Approche <strong>populationnelle</strong><br><span style="color:var(--text-muted);font-size:0.78rem;">Prévention, promotion, déterminants</span></td>
+        <td>Approche <strong>individuelle</strong><br><span style="color:var(--text-muted);font-size:0.78rem;">Diagnostic, traitement, réadaptation</span></td>
+      </tr>
+      <tr>
+        <td>Développée dès 1984 (1er rapport HCSP)</td>
+        <td>Développés 1958–1984 (accent hôpitaux)</td>
+      </tr>
+    </table>
+    <div class="alert alert-blue" style="margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>SNS 2018–2022 :</strong> 4 principes (interministériel, inégalités, territorial, citoyens) + 5 axes (prévention, virage ambulatoire, qualité, innovation, santé enfant/ado)</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     2. ORGANISATION ADMINISTRATIVE
+══════════════════════════════════════════════ -->
+<div class="section-header sh-blue">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Organisation administrative — du national au local
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Pyramide administrative du système de santé français
+  </div>
+  <table>
+    <tr>
+      <th style="width:22%;">Échelon</th>
+      <th style="width:28%;">Acteur principal</th>
+      <th>Missions clés</th>
+    </tr>
+    <tr>
+      <td><strong>National — Politique</strong></td>
+      <td>Parlement + Gouvernement<br><span style="color:var(--text-muted);font-size:0.78rem;">Ministère des Solidarités et de la Santé</span></td>
+      <td>Vote des lois de santé (LFSS annuelle depuis 1996), fixe l'ONDAM, élabore la politique de santé</td>
+    </tr>
+    <tr>
+      <td><strong>National — Technique</strong></td>
+      <td>DGS, DGOS, DSS, DREES, IGAS</td>
+      <td>Directions sous autorité du ministre : santé publique, offre de soins, sécurité sociale, statistiques, inspection générale</td>
+    </tr>
+    <tr>
+      <td><strong>Régional</strong></td>
+      <td>ARS (17 depuis 2016)<br><span style="color:var(--text-muted);font-size:0.78rem;">Coordonnées par le CNP</span></td>
+      <td>Veille sanitaire, pilotage offre de soins (hôpitaux, cliniques, EHPAD), prévention régionale, autorisation des établissements</td>
+    </tr>
+    <tr>
+      <td><strong>Départemental</strong></td>
+      <td>Délégations ARS<br>+ Conseils départementaux</td>
+      <td>Déclinaison locale, PMI, protection de l'enfance, aide aux personnes handicapées/âgées (APA)</td>
+    </tr>
+    <tr>
+      <td><strong>Communal</strong></td>
+      <td>Commune / Maire<br><span style="color:var(--text-muted);font-size:0.78rem;">CCAS (missions facultatives)</span></td>
+      <td>Hygiène publique (eau potable, habitat insalubre), création centres de santé, aide médicale (optionnel)</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      ARS — Missions et leviers
+    </div>
+    <div style="font-size:0.83rem;">
+      <div style="font-weight:700; margin-bottom:4px;">3 champs d'intervention :</div>
+      <ul class="cl">
+        <li>Veille et sécurité sanitaires + observation</li>
+        <li>Financement et évaluation des actions de prévention</li>
+        <li>Gestion des crises sanitaires (avec le préfet)</li>
+      </ul>
+      <div style="font-weight:700; margin: 8px 0 4px;">Leviers du DG de l'ARS :</div>
+      <ul class="cl">
+        <li>Autorisation de création des établissements</li>
+        <li>Allocation des ressources (hôpitaux, cliniques, médico-social)</li>
+        <li>Gestion du risque assurantiel en région (équilibre recettes/dépenses)</li>
+      </ul>
+      <div style="font-weight:700; margin: 8px 0 4px;">Délégations départementales (1/département) :</div>
+      <div class="pill-list">
+        <span class="pill pill-blue">Pôle offre de soins</span>
+        <span class="pill pill-teal">Pôle prévention / risques</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      PMI — Missions (Conseil départemental)
+    </div>
+    <div style="font-size:0.83rem;">
+      <div style="font-style:italic; color:var(--text-muted); margin-bottom:6px;">Service créé le 2 novembre 1945. Gratuit. Equipe pluridisciplinaire (infirmières puéricultrice, médecins, sages-femmes, psychologues, éducateurs).</div>
+      <div class="pill-list">
+        <span class="pill pill-teal">Contraception / IST</span>
+        <span class="pill pill-teal">Entretien pré-IVG</span>
+        <span class="pill pill-teal">Suivi grossesse</span>
+        <span class="pill pill-teal">Suivi postnatal</span>
+        <span class="pill pill-teal">Vaccinations &lt;6 ans</span>
+        <span class="pill pill-teal">Bilan santé 3-4 ans</span>
+        <span class="pill pill-teal">Prévention maltraitance</span>
+        <span class="pill pill-teal">Agrément assistantes mat.</span>
+        <span class="pill pill-teal">Contrôle crèches / haltes</span>
+        <span class="pill pill-teal">Aide adoption</span>
+      </div>
+      <div style="margin-top:8px;">
+        <div class="bl bl-teal">
+          <div style="font-size:0.82rem;"><strong>Commune :</strong> eau potable, habitat insalubre, sécurité sanitaire ERP, qualité air extérieur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     3. ASSURANCE MALADIE
+══════════════════════════════════════════════ -->
+<div class="section-header sh-teal">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Assurance maladie — Financement — Protection sociale
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Ressources de la protection sociale (ordre décroissant à retenir)
+  </div>
+  <table>
+    <tr><th style="width:6%;">#</th><th style="width:30%;">Ressource</th><th>Détail</th></tr>
+    <tr>
+      <td style="vertical-align:middle; text-align:center;"><strong>1</strong></td>
+      <td><strong>Cotisations sociales</strong></td>
+      <td>Versements obligatoires (salariés, non-salariés, employeurs) — maladie, vieillesse, chômage, famille. Part qui diminue.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle; text-align:center;"><strong>2</strong></td>
+      <td><strong>Impôts et taxes</strong></td>
+      <td>CSG (revenus + patrimoine), taxes alcool/tabac/assurances auto. Part <strong>croissante</strong>. Fiscalisation progressive depuis 1993 (CSG).</td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle; text-align:center;"><strong>3</strong></td>
+      <td><strong>Contributions publiques de l'État</strong></td>
+      <td>Dépenses de solidarité : RSA, fonds de solidarité vieillesse</td>
+    </tr>
+  </table>
+  <div class="alert alert-amber" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège classique :</strong> finances de l'État ≠ finances de la Sécurité sociale. Ce sont deux budgets distincts. La CSG est un impôt affecté à la Sécu, pas une cotisation. Seules les indemnités journalières restent financées par cotisations sociales.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Convention médicale et médecin traitant
+    </div>
+    <div style="font-size:0.83rem; color:var(--text-muted); margin-bottom:8px;">Négociée entre syndicats de médecins et assurance maladie</div>
+    <table>
+      <tr><th>Secteur</th><th>Tarifs</th><th>Remboursement</th></tr>
+      <tr><td><strong>Secteur 1</strong></td><td>Tarif conventionné fixe</td><td>70%</td></tr>
+      <tr><td><strong>Secteur 2</strong></td><td>Honoraires libres (DP)</td><td>Partiel</td></tr>
+    </table>
+    <div class="bl bl-teal" style="margin-top:8px;">
+      <div style="font-size:0.83rem;"><strong>Médecin traitant (depuis 2004)</strong><br>Obligatoire pour patient &gt;16 ans. Assure 1er recours et coordination.<br>Sans MT déclaré → remboursement réduit à <strong>30%</strong> (au lieu de 70%)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      PUMA — CSS — AME
+    </div>
+    <div class="bl bl-teal" style="margin-bottom:8px;">
+      <div style="font-weight:700; font-size:0.84rem;">PUMA (Protection Universelle Maladie)</div>
+      <div style="font-size:0.82rem; color:var(--text-muted);">Remplace la CMU de base depuis 2016</div>
+      <ul class="cl" style="margin-top:4px;">
+        <li>Couvre tout travailleur ou résident stable en France</li>
+        <li>Continuité des droits sans démarche annuelle</li>
+        <li>Seuls les mineurs gardent le statut d'ayant droit</li>
+      </ul>
+    </div>
+    <div class="bl bl-teal" style="margin-bottom:8px;">
+      <div style="font-weight:700; font-size:0.84rem;">CSS (Complémentaire Santé Solidaire)</div>
+      <div style="font-size:0.82rem;">Ressources &lt; plafond selon composition du foyer. RSA → CSS sans participation. Remplace CMU-C + ACS.</div>
+    </div>
+    <div class="bl bl-coral">
+      <div style="font-weight:700; font-size:0.84rem;">AME</div>
+      <div style="font-size:0.82rem;">Étrangers en situation irrégulière + résidence stable &gt;3 mois + conditions de ressources</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     4. AGENCES SANITAIRES
+══════════════════════════════════════════════ -->
+<div class="section-header sh-purple">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Agences sanitaires et organismes consultatifs
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Principales agences sanitaires
+  </div>
+  <table>
+    <tr><th style="width:18%;">Agence</th><th style="width:12%;">Création</th><th>Mission principale</th></tr>
+    <tr><td><strong>HAS</strong></td><td>2004</td><td>Évaluation utilité médicale (actes, produits, prestations), certification des établissements, bonnes pratiques et bon usage</td></tr>
+    <tr><td><strong>ANSM</strong></td><td>2012</td><td>Bénéfices/risques des produits de santé (médicaments, DM, produits biologiques) tout au long du cycle de vie</td></tr>
+    <tr><td><strong>ANSES</strong></td><td>—</td><td>Sécurité sanitaire alimentation, environnement, travail + santé animale, végétale, médicaments vétérinaires</td></tr>
+    <tr><td><strong>ABM</strong></td><td>2004</td><td>Prélèvement et greffe d'organes/tissus/cellules, procréation, embryologie, génétique — sécurité, éthique, équité</td></tr>
+    <tr><td><strong>EFS</strong></td><td>—</td><td>Autosuffisance en produits sanguins : collecte, préparation, qualification, distribution → 1 900 établissements</td></tr>
+    <tr><td><strong>INCa</strong></td><td>2004</td><td>Coordination lutte contre le cancer (prévention, dépistage, soins, recherche)</td></tr>
+    <tr><td><strong>SPF</strong></td><td>—</td><td>Surveillance épidémiologique, veille sanitaire, promotion santé, préparation et réponse aux crises, alerte</td></tr>
+  </table>
+  <div class="alert alert-blue" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Contexte historique :</strong> agences créées après l'affaire du sang contaminé (1980–1990) pour <strong>séparer l'évaluation des risques de la décision politique</strong>. Coordonnées par le CASA (Comité d'animation du système d'agences).</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Organismes consultatifs nationaux
+    </div>
+    <div style="font-size:0.83rem;">
+      <div class="bl" style="margin-bottom:8px;">
+        <div style="font-weight:700;">HCSP</div>
+        <div style="font-size:0.81rem; color:var(--text-muted);">Expertise politique de santé, suivi SNS, prospective, santé enfant</div>
+      </div>
+      <div class="bl" style="margin-bottom:8px;">
+        <div style="font-weight:700;">CCNE</div>
+        <div style="font-size:0.81rem; color:var(--text-muted);">Avis éthiques en biologie, médecine et santé (ex: passe sanitaire)</div>
+      </div>
+      <div class="bl" style="margin-bottom:8px;">
+        <div style="font-weight:700;">HCAAM</div>
+        <div style="font-size:0.81rem; color:var(--text-muted);">Évaluation et pérennité financière de l'assurance maladie</div>
+      </div>
+      <div class="bl" style="margin-bottom:0;">
+        <div style="font-weight:700;">Inserm / EHESP</div>
+        <div style="font-size:0.81rem; color:var(--text-muted);">Recherche en santé / Formation cadres hospitaliers (directeurs d'hôpitaux, médecins et pharmaciens inspecteurs)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      HAS — focus détaillé (tombable)
+    </div>
+    <div style="font-size:0.83rem;">
+      <div style="font-style:italic; color:var(--text-muted); margin-bottom:6px;">Créée par la loi du 13 août 2004 — organisme d'expertise scientifique, consultatif et indépendant</div>
+      <div class="pill-list">
+        <span class="pill pill-blue">Évalue utilité médicale des actes/prestations/produits pris en charge par l'AM</span>
+        <span class="pill pill-purple">Certification des établissements de santé</span>
+        <span class="pill pill-teal">Bonnes pratiques et bon usage des soins</span>
+        <span class="pill pill-blue">Outils, guides et méthodes pour les acteurs de santé</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     5. OFFRE DE SOINS
+══════════════════════════════════════════════ -->
+<div class="section-header sh-coral">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Offre de soins — Établissements — Démographie médicale
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-coral"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Les 3 composantes de l'offre de soins
+  </div>
+  <div class="grid2" style="margin-bottom:10px;">
+    <div>
+      <div style="font-weight:700; font-size:0.84rem; margin-bottom:6px;">1. Professionnels de santé (1,9 million en 2015)</div>
+      <div class="pill-list">
+        <span class="pill pill-purple">Professions médicales (médecins, sages-femmes, odontologistes)</span>
+        <span class="pill pill-blue">Pharmacie (officine + hospitalière)</span>
+        <span class="pill pill-teal">Auxiliaires médicaux (infirmiers, kiné, orthophonistes…)</span>
+      </div>
+      <div style="font-size:0.81rem; margin-top:6px; color:var(--text-muted);">7 professions avec Ordre professionnel (obligatoire pour exercer)</div>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:0.84rem; margin-bottom:6px;">2. Établissements de santé (3 042 au 31/12/2018)</div>
+      <div class="pill-list">
+        <span class="pill pill-coral">Public</span>
+        <span class="pill pill-blue">ESPIC (privé non lucratif)</span>
+        <span class="pill pill-amber">Privé commercial</span>
+      </div>
+      <div style="font-size:0.81rem; margin-top:6px; color:var(--text-muted);">Tendance : baisse lits aigus, hausse chirurgie ambulatoire, développement médico-social</div>
+    </div>
+  </div>
+  <div class="bl bl-coral" style="margin-bottom:0;">
+    <div style="font-size:0.83rem;"><strong>3. Industrie biomédicale / pharmaceutique</strong> — logiques de marché économique (production médicaments, dispositifs médicaux, matériel)</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-coral"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Types d'établissements par activité
+    </div>
+    <table>
+      <tr><th>Sigle</th><th>Activité</th></tr>
+      <tr><td><strong>MCO</strong></td><td>Médecine, Chirurgie, Obstétrique — soins aigus</td></tr>
+      <tr><td><strong>SSR</strong></td><td>Soins de Suite et Réadaptation — convalescence</td></tr>
+      <tr><td><strong>USLD</strong></td><td>Unités Soins Longue Durée — surveillance médicale constante</td></tr>
+      <tr><td><strong>Psychiatrie</strong></td><td>Hôpitaux psychiatriques</td></tr>
+      <tr><td><strong>Unicancer</strong></td><td>20 centres de lutte contre le cancer</td></tr>
+    </table>
+    <div class="alert alert-amber" style="margin-bottom:0; margin-top:4px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>En hospit. de jour : on parle de <strong>"places"</strong> et non de "lits". Objectif chirurgie ambulatoire = 70% (réalisé à 57,6% en 2018).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-coral"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Démographie médicale — données clés
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Médecins actifs (France métro + DROM)</span>
+      <span class="kv-value" style="color:var(--coral);">~214 200</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Densité (2015)</span>
+      <span class="kv-value">337 / 100 000 hab</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Âge moyen (2021)</span>
+      <span class="kv-value">49,3 ans (vs 50,7 en 2012)</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Femmes parmi médecins &lt;40 ans (2021)</span>
+      <span class="kv-value" style="color:var(--coral);">62%</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Spécialistes vs généralistes</span>
+      <span class="kv-value">56% vs 44%</span>
+    </div>
+    <div style="font-size:0.81rem; margin-top:8px; color:var(--text-muted);">Croissance ralentie depuis 2005. Féminisation et rajeunissement des nouvelles générations. Niveau OCDE.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     6. DÉPENSES ET SYSTÈMES EUROPÉENS
+══════════════════════════════════════════════ -->
+<div class="section-header sh-blue">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Dépenses de santé en France — Systèmes européens
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Postes de dépense — ordre décroissant
+    </div>
+    <table>
+      <tr><th style="width:6%;">#</th><th>Poste</th><th>Part estimée</th></tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700;">1</td>
+        <td><strong>Hôpital</strong></td>
+        <td><span class="pill pill-red">&lt; 50%</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700;">2</td>
+        <td><strong>Médecine de ville (ambulatoire)</strong></td>
+        <td><span class="pill pill-amber">~25%</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700;">3</td>
+        <td><strong>Médicaments</strong></td>
+        <td><span class="pill pill-blue">~20%</span></td>
+      </tr>
+    </table>
+    <div class="alert alert-amber" style="margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>À mémoriser dans l'ordre :</strong> Hôpital &gt; Ville &gt; Médicaments. Système fortement hospitalo-centré, caractéristique des systèmes assurantiels européens.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      3 modèles européens — convergence
+    </div>
+    <table>
+      <tr><th>Modèle</th><th>Financement</th><th>Exemple</th></tr>
+      <tr><td><strong>Beveridgien</strong></td><td>Impôt (universel)</td><td>Royaume-Uni (NHS)</td></tr>
+      <tr><td><strong>Bismarckien</strong></td><td>Cotisations salariales</td><td>Allemagne</td></tr>
+      <tr><td><strong>Libéral</strong></td><td>Assurance privée</td><td>USA</td></tr>
+    </table>
+    <div style="font-size:0.82rem; margin-top:6px;"><strong>Convergence :</strong> mixité du financement partout. France : fiscalisation via CSG depuis 1993. Seules les IJ restent sous cotisations.</div>
+    <div style="font-size:0.82rem; margin-top:6px;"><strong>Tendance commune :</strong> recentrage vers les <strong>soins primaires</strong> + prise en charge organisée des <strong>maladies chroniques</strong></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     7. RECOURS AUX SOINS ET INÉGALITÉS
+══════════════════════════════════════════════ -->
+<div class="section-header sh-red">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Recours aux soins — Inégalités sociales
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-red"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Recours aux soins — données clés
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Personnes hospitalisées court séjour (2018)</span>
+      <span class="kv-value">12 millions</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Nombre total d'hospitalisations</span>
+      <span class="kv-value">18 millions</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Taux chirurgie ambulatoire (2018)</span>
+      <span class="kv-value">57,6%</span>
+    </div>
+    <div style="font-size:0.83rem; margin-top:8px; font-weight:700;">Motifs fréquents (tous âges, CIM-10) :</div>
+    <div class="pill-list" style="margin-top:4px;">
+      <span class="pill pill-blue">1. Appareil digestif</span>
+      <span class="pill pill-blue">2. Tumeurs</span>
+      <span class="pill pill-blue">3. Appareil circulatoire</span>
+    </div>
+    <div style="font-size:0.82rem; margin-top:6px; color:var(--text-muted);">&lt;15 ans : respiratoire. 15–44 ans : fécondité. 45–64 ans : digestif. 65–84 ans : tumeurs. &gt;85 ans : circulatoire.</div>
+    <div style="font-size:0.82rem; margin-top:4px; color:var(--text-muted);">Pic : &lt;1 an puis 70 ans (500‰ chez hommes), 75 ans chez femmes.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Inégalités sociales d'utilisation
+    </div>
+    <div style="font-size:0.83rem;">
+      <div style="font-style:italic; color:var(--text-muted); margin-bottom:6px;">Définition : différences de consommation de soins entre groupes sociaux à état de santé donné. France parmi les pays aux inégalités les plus fortes.</div>
+      <div style="font-weight:700; margin-bottom:4px;">3 types de barrières au recours :</div>
+      <div class="pill-list" style="margin-bottom:8px;">
+        <span class="pill pill-red">Informationnelle (méconnaissance filières)</span>
+        <span class="pill pill-red">Culturelle (rapport au corps, défiance)</span>
+        <span class="pill pill-red">Financière (reste à charge)</span>
+      </div>
+      <div style="font-weight:700; margin-bottom:4px;">Renoncement aux soins (enquête 2019) :</div>
+      <ul class="cl">
+        <li><strong>59%</strong> ont renoncé à des soins dans l'année</li>
+        <li><strong>29%</strong> pour raisons financières</li>
+        <li>+ touchés : 25–34 ans, faibles revenus</li>
+        <li>Dentaire (61%), optique (55%), bilans (34%), cardio (22%)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Mesures contre le renoncement aux soins
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <ul class="cl">
+      <li>Maîtrise du reste à charge (éviter franchises/déremboursements)</li>
+      <li>CSS : solvabiliser les plus modestes</li>
+      <li><strong>100% santé</strong> : dentaire, optique, audioprothèse — reste à charge zéro</li>
+    </ul>
+    <ul class="cl">
+      <li>Développement maisons de santé pluridisciplinaires</li>
+      <li>Télémédecine</li>
+      <li>Engagement des PS à ne pas pratiquer de dépassements</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     8. MÉTHODES INCITATIVES
+══════════════════════════════════════════════ -->
+<div class="section-header sh-amber">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Méthodes incitatives — CESP — ROSP — Convention médicale
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-amber"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      CESP — Contrat d'Engagement de Service Public
+    </div>
+    <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:8px;">Loi HPST — 21 juillet 2009</div>
+    <div class="kv-row">
+      <span class="kv-label">Allocation mensuelle brute</span>
+      <span class="kv-value" style="color:var(--amber);">1 200 €</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">À partir de</span>
+      <span class="kv-value">D2 médecine (ou internat)</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Durée engagement minimale</span>
+      <span class="kv-value">2 ans</span>
+    </div>
+    <div style="font-weight:700; font-size:0.83rem; margin: 8px 0 4px;">Contreparties :</div>
+    <ul class="cl">
+      <li>Exercer en zone d'intervention prioritaire (définie par l'ARS)</li>
+      <li>Durée engagement = durée de l'allocation reçue (min. 2 ans)</li>
+      <li>Secteur 1 obligatoire (tarifs conventionnés)</li>
+      <li>Lieu d'exercice sur liste nationale selon besoins régionaux</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-amber"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      ROSP — Rémunération sur Objectifs de Santé Publique
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Valeur du point</span>
+      <span class="kv-value" style="color:var(--amber);">7 €</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">ROSP médecin traitant (max)</span>
+      <span class="kv-value">1 000 pts → ~7 000 €/an</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Patientèle de référence MT</span>
+      <span class="kv-value">800–1 000 patients</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Nb d'indicateurs totaux</span>
+      <span class="kv-value">29</span>
+    </div>
+    <div style="font-weight:700; font-size:0.83rem; margin: 8px 0 4px;">Indicateurs clés :</div>
+    <div class="pill-list">
+      <span class="pill pill-amber">Suivi diabétiques (pieds, microalbuminurie)</span>
+      <span class="pill pill-amber">Risque cardiovasculaire</span>
+      <span class="pill pill-amber">Dépistage cancer colorectal</span>
+      <span class="pill pill-amber">Addictions (tabac, alcool)</span>
+      <span class="pill pill-amber">Antibiorésistance</span>
+    </div>
+    <div style="font-size:0.81rem; margin-top:6px; color:var(--text-muted);">Médecins concernés : MT + cardiologues (340 pts) + gastro-entérologues (300 pts) + médecins traitants enfants (305 pts)</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-amber"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Consultations complexes et très complexes (Convention 2016)
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-weight:700; font-size:0.83rem; margin-bottom:4px;">Consultations complexes :</div>
+      <ul class="cl">
+        <li>Contraception / IST</li>
+        <li>Sortie de maternité</li>
+        <li>Suivi nourrisson / enfant (consultations obligatoires)</li>
+        <li>Suivi obésité</li>
+        <li>CSE (suivi enfant autiste, annuel)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:0.83rem; margin-bottom:4px;">Consultations très complexes :</div>
+      <ul class="cl">
+        <li>IRC terminale : dossier greffe rénale</li>
+        <li>Infection VIH : information et organisation initiale</li>
+        <li>TSA enfant 0–6 ans : repérage signes</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     9. TRAITEMENT DE L'INFORMATION EN SANTÉ
+══════════════════════════════════════════════ -->
+<div class="section-header sh-purple">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Traitement de l'information en santé — SNDS
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    SNDS — Système National des Données de Santé (depuis 2016)
+  </div>
+  <table>
+    <tr><th style="width:18%;">Base</th><th style="width:30%;">Contenu</th><th>Utilisation principale</th></tr>
+    <tr>
+      <td><strong>SNIIRAM</strong></td>
+      <td>Remboursements AM, soins libéraux (1,2 Md feuilles de soins), données professionnels de santé</td>
+      <td>Gestion du risque assurantiel, analyse consommation de soins, économie de la santé</td>
+    </tr>
+    <tr>
+      <td><strong>PMSI</strong></td>
+      <td>Données médico-administratives établissements : MCO, SSR, Psychiatrie (RIM-Psy), HAD</td>
+      <td><strong>Tarification à l'activité (T2A)</strong> + planification et organisation de l'offre de soins</td>
+    </tr>
+    <tr>
+      <td><strong>Causes de décès</strong></td>
+      <td>Certificats médicaux de décès (CIM-10) : cause initiale + facteurs contributifs</td>
+      <td>Épidémiologie, disparités, surveillance et alerte (ex: 15 000 décès canicule 2003)</td>
+    </tr>
+    <tr>
+      <td><strong>CNSA / MDPH</strong></td>
+      <td>Données handicap (demandes MDPH)</td>
+      <td>Appariement au SNDS pour observer liens accompagnement/parcours</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      PMSI — Codage médical (détail)
+    </div>
+    <div style="font-size:0.83rem;">
+      <div style="font-weight:700; margin-bottom:6px;">4 champs du PMSI :</div>
+      <div class="pill-list" style="margin-bottom:8px;">
+        <span class="pill pill-purple">MCO</span>
+        <span class="pill pill-blue">SSR</span>
+        <span class="pill pill-teal">Psychiatrie (RIM-Psy)</span>
+        <span class="pill pill-coral">HAD</span>
+      </div>
+      <div style="font-weight:700; margin-bottom:4px;">Nomenclatures :</div>
+      <div class="kv-row">
+        <span class="kv-label">Codage des maladies</span>
+        <span class="kv-value">CIM-10 (OMS)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-label">Codage des actes médicaux</span>
+        <span class="kv-value">CCAM (AM, depuis 2002)</span>
+      </div>
+      <div style="font-size:0.81rem; margin-top:8px;"><strong>RSA</strong> (Résumé de Sortie Anonyme) : produit par chaque établissement → centralisé nationalement. Contient : diagnostics, actes, durée séjour, mode d'entrée/sortie, données patient (sexe, âge, CP).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon bg-purple"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Finalités des systèmes d'information en santé
+    </div>
+    <div class="bl" style="margin-bottom:8px;">
+      <div style="font-weight:700; font-size:0.83rem;">Épidémiologique</div>
+      <div style="font-size:0.81rem; color:var(--text-muted);">Base causes de décès → disparités de santé, évolutions, surveillance, alerte</div>
+    </div>
+    <div class="bl bl-teal" style="margin-bottom:8px;">
+      <div style="font-weight:700; font-size:0.83rem;">Gestionnaire</div>
+      <div style="font-size:0.81rem; color:var(--text-muted);">PMSI → T2A (financement hôpitaux). SNIIRAM → suivi consommation de soins et dépenses AM.</div>
+    </div>
+    <div class="bl bl-blue" style="margin-bottom:0;">
+      <div style="font-weight:700; font-size:0.83rem;">Économie de la santé</div>
+      <div style="font-size:0.81rem; color:var(--text-muted);">SNIIRAM + PMSI → analyse efficience, planification, organisation de l'offre</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════
+     10. POINTS-CLÉS À RETENIR
+══════════════════════════════════════════════ -->
+<div class="section-header sh-teal">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon bg-teal"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Synthèse — Item 16
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°1 :</strong> Finances de l'État ≠ Assurance maladie (Sécurité sociale). Deux budgets distincts. La LFSS est votée chaque année depuis 1996 — elle fixe l'ONDAM (objectif national de dépenses d'assurance maladie).</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°2 :</strong> ESPIC = établissements privés à but <strong>non lucratif</strong> (d'intérêt collectif). À ne pas confondre avec les cliniques privées commerciales (but lucratif).</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°3 :</strong> La PMI dépend du <strong>Conseil départemental</strong> (et non de l'ARS). L'eau potable relève de la <strong>Commune</strong>. La veille sanitaire régionale est à l'<strong>ARS</strong>.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Postes de dépense :</strong> Hôpital (&lt;50%) &gt; Médecine de ville (~25%) &gt; Médicaments (~20%). Système hospitalo-centré.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Protection sociale :</strong> PUMA (2016, remplace CMU de base) = couverture universelle. CSS (remplace CMU-C + ACS) = complémentaire solidaire sous plafond de ressources. AME = étrangers en situation irrégulière &gt;3 mois de résidence.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>CESP :</strong> 1 200 €/mois dès D2, zone prioritaire (ARS), engagement min. 2 ans = durée de l'allocation reçue, secteur 1 obligatoire pendant l'engagement.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>ROSP :</strong> 1 point = 7 €. MT = max 1 000 pts (~7 000 €/an). 29 indicateurs dont : suivi diabète, risque CV, dépistage CCR, addictions, antibiorésistance. Pondéré par la patientèle réelle.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>PMSI :</strong> 4 champs (MCO / SSR / Psychiatrie–RIM-Psy / HAD). CIM-10 (maladies) + CCAM (actes). RSA = résumé de sortie anonyme → financement par T2A et planification.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Agences :</strong> HAS = évalue et certifie. ANSM = sécurité des produits de santé. ANSES = alimentation/environnement. ABM = greffes. EFS = produits sanguins. Santé publique France = épidémio et alertes. INCa = cancer. Toutes coordonnées par le CASA.</div>
+  </div>
+</div>
+
+</div><!-- fin .page -->
+</body>
+</html>

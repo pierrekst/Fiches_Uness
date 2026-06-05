@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 124 — Ménopause, IOP, Andropause</title>
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card: #ffffff;
+    --text: #1a1d2e;
+    --sub: #5a6070;
+    --border: #e4e7ef;
+    --purple: #534AB7;
+    --purple-light: #eeedf8;
+    --teal: #1D9E75;
+    --teal-light: #e6f7f2;
+    --coral: #D85A30;
+    --coral-light: #fdf0eb;
+    --blue: #378ADD;
+    --blue-light: #eaf3fd;
+    --red: #E24B4A;
+    --red-light: #fdecea;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: .9rem; line-height: 1.6; padding: 20px 12px 40px; }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%);
+    border-radius: 16px; padding: 28px 32px; margin-bottom: 22px; color: #fff;
+  }
+  .header-tag { font-size: .72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.45rem; font-weight: 800; line-height: 1.25; }
+  .header-sub { font-size: .82rem; opacity: .8; margin-top: 6px; }
+  .header-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .header-pill { background: rgba(255,255,255,.18); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+  /* OBJECTIFS */
+  .objectifs { background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 12px; padding: 14px 18px; margin-bottom: 22px; font-size: .85rem; color: var(--purple); }
+  .objectifs strong { font-weight: 800; display: block; margin-bottom: 6px; font-size: .88rem; }
+
+  /* SECTION TITLE */
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1.05rem; font-weight: 800; margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .section-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { border-radius: 20px; padding: 3px 11px; font-size: .78rem; font-weight: 600; }
+  .pill-teal { background: var(--teal-light); color: var(--teal); }
+  .pill-red { background: var(--red-light); color: var(--red); }
+  .pill-blue { background: var(--blue-light); color: var(--blue); }
+  .pill-amber { background: var(--amber-light); color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral { background: var(--coral-light); color: var(--coral); }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: .84rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--sub); }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  /* STEPS */
+  .steps { list-style: none; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: #eef0f8; color: var(--purple); font-weight: 800; font-size: .8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-body { font-size: .84rem; line-height: 1.5; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 8px; }
+  th { background: #f0f1f8; color: var(--text); font-weight: 700; padding: 8px 10px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 7px 10px; border: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) { background: #fafbfd; }
+
+  /* BORDER-LEFT CARDS */
+  .compl-card { border-left: 4px solid var(--coral); background: var(--card); border-radius: 0 12px 12px 0; padding: 12px 16px; margin-bottom: 10px; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); font-size: .84rem; }
+  .compl-card-title { font-weight: 700; margin-bottom: 4px; color: var(--coral); font-size: .85rem; }
+
+  .synth-card { background: linear-gradient(135deg, var(--teal-light), var(--blue-light)); border: 1px solid var(--teal); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+  .synth-card .card-title { color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════════ HEADER ═══════════════════ -->
+<div class="header">
+  <div class="header-tag">Item 124</div>
+  <h1>Ménopause — Insuffisance ovarienne prématurée (IOP)<br>Andropause — Déficit androgénique lié à l'âge (DALA/SDT)</h1>
+  <div class="header-sub">Voir item 330 pour les troubles de la sexualité liés à l'âge</div>
+  <div class="header-pills">
+    <span class="header-pill">Ménopause</span>
+    <span class="header-pill">Périménopause</span>
+    <span class="header-pill">IOP</span>
+    <span class="header-pill">THM / THS</span>
+    <span class="header-pill">SGUM</span>
+    <span class="header-pill">Ostéoporose</span>
+    <span class="header-pill">SDT / Andropause</span>
+    <span class="header-pill">Score ADAM</span>
+  </div>
+</div>
+
+<!-- ═══════════════════ OBJECTIFS ═══════════════════ -->
+<div class="objectifs">
+  <strong>Vision globale du chapitre</strong>
+  Ce chapitre couvre deux versants du vieillissement hormonal : <strong>la ménopause</strong> (carence œstrogénique de la femme) et <strong>le déficit androgénique lié à l'âge</strong> (carence en testostérone de l'homme). Pour chacun, maîtriser : définition/diagnostic (clinique +/- biologique), conséquences à court/moyen/long terme (syndrome climatérique, SGUM, ostéoporose, risque CV), et traitement substitutif (THM/THS) avec sa balance bénéfice-risque, ses CI et ses alternatives. Point tomable : l'IOP est une urgence diagnostique avec THS obligatoire ; toute métrorragie post-ménopausique évoque un cancer de l'endomètre.
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--          PARTIE 1 : MÉNOPAUSE                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  PARTIE 1 — MÉNOPAUSE
+</div>
+
+<!-- Définitions -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Ménopause — Définition
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition OMS 1996</span><span class="kv-val">Arrêt permanent des menstruations par perte de l'activité folliculaire</span></div>
+    <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">Rétrospectif</span></div>
+    <div class="kv-row"><span class="kv-key">Critères</span><span class="kv-val">Aménorrhée ≥ 12 mois + femme &gt; 45 ans + signes climatériques</span></div>
+    <div class="kv-row"><span class="kv-key">Biologie de routine</span><span class="kv-val">Aucun intérêt (sauf cas particuliers)</span></div>
+    <div style="margin-top:10px;">
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> Le diagnostic est CLINIQUE dans la forme typique — pas de confirmation biologique nécessaire</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Périménopause
+    </div>
+    <p style="font-size:.84rem; margin-bottom:10px;">Période <strong>précédant</strong> la ménopause, avant 12 mois d'aménorrhée. Symptômes dominants : troubles du cycle + BVM.</p>
+    <div class="kv-row"><span class="kv-key">Âge médian ménopause (Europe)</span><span class="kv-val">50 – 51,5 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Ménopause avant 45 ans</span><span class="kv-val">10 – 15 % des femmes</span></div>
+    <div style="margin-top:10px;">
+      <p style="font-size:.82rem; color:var(--sub);">Cas particuliers nécessitant la biologie :</p>
+      <div class="pills" style="margin-top:6px;">
+        <span class="pill pill-blue">Hystérectomie</span>
+        <span class="pill pill-blue">Contraception œstroprogestative</span>
+        <span class="pill pill-blue">Aménorrhée induite par traitement</span>
+      </div>
+      <p style="font-size:.82rem; margin-top:8px; color:var(--sub);">Dans ces cas : FSH &gt; 30 UI/ml + E2 &lt; 10-20 pg/ml (mais dosages faussés par la contraception hormonale)</p>
+    </div>
+  </div>
+</div>
+
+<!-- IOP -->
+<hr>
+<div class="section-title" style="font-size:.95rem; border-bottom-color:var(--coral);">
+  <div class="section-icon" style="background:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Insuffisance Ovarienne Prématurée (IOP)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Définition et diagnostic
+    </div>
+    <div class="kv-row"><span class="kv-key">Aménorrhée</span><span class="kv-val">Primaire ou secondaire &gt; 4 mois</span></div>
+    <div class="kv-row"><span class="kv-key">Âge</span><span class="kv-val">&lt; 40 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Gonadotrophines</span><span class="kv-val">Augmentées</span></div>
+    <div class="kv-row"><span class="kv-key">Confirmation (×2 à 4 semaines d'intervalle)</span><span class="kv-val">FSH &gt; 25 UI/l + E2 &lt; 20 pg/ml</span></div>
+    <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">1 – 2 %</span></div>
+    <div class="kv-row"><span class="kv-key">Formes familiales</span><span class="kv-val">10 – 15 % des cas</span></div>
+    <div class="kv-row"><span class="kv-key">Cause inconnue</span><span class="kv-val">80 % des cas</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Étiologies
+    </div>
+    <table>
+      <tr><th>Cause</th><th>Exemples</th><th>Mécanisme</th></tr>
+      <tr><td><strong>Génétique</strong></td><td>Syndrome de Turner, prémutation FMR1, dysgénésies gonadiques</td><td>Accélération apoptose</td></tr>
+      <tr><td><strong>Auto-immune</strong></td><td>APECED type I et III, IOP isolée</td><td>Blocage maturation folliculaire</td></tr>
+      <tr><td><strong>Toxique</strong></td><td>Chimiothérapie, Radiothérapie</td><td>Accélération apoptose</td></tr>
+    </table>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>THS obligatoire jusqu'à l'âge théorique de la ménopause</strong> — sans traitement : ↑ mortalité CV, ostéoporose, dégénérescences cognitives</span>
+    </div>
+  </div>
+</div>
+
+<!-- Syndrome climatérique -->
+<hr>
+<div class="section-title" style="font-size:.95rem; border-bottom-color:var(--purple);">
+  <div class="section-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Syndrome Climatérique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Symptômes de la carence œstrogénique
+    </div>
+    <table>
+      <tr><th>Signes physiques</th><th>Signes mentaux</th></tr>
+      <tr><td><strong>Bouffées vasomotrices (BVM)</strong></td><td>Troubles du sommeil / insomnies</td></tr>
+      <tr><td>Sueurs nocturnes</td><td>Asthénie</td></tr>
+      <tr><td><strong>Sécheresse vulvo-vaginale</strong></td><td>Perte d'attention, mémoire</td></tr>
+      <tr><td>Prise de poids</td><td>Dépression, irritabilité</td></tr>
+      <tr><td>Arthralgies / myalgies (type inflammatoire, dérouillage matinal)</td><td>Labilité thymique</td></tr>
+    </table>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Fréquence des BVM</span><span class="kv-val">80 % des femmes</span></div>
+    <div class="kv-row"><span class="kv-key">Durée moyenne des BVM</span><span class="kv-val">5 – 7 ans (jusqu'à 20 ans !)</span></div>
+    <div class="kv-row"><span class="kv-key">Maximum de fréquence des BVM</span><span class="kv-val">1 – 2 ans après ménopause</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      BVM typiques vs atypiques
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--teal); margin-bottom:4px;">BVM typiques</div>
+    <div class="pills" style="margin-bottom:10px;">
+      <span class="pill pill-teal">Péri/ménopause</span>
+      <span class="pill pill-teal">Essentiellement nocturnes</span>
+      <span class="pill pill-teal">Sans signe prémonitoire</span>
+      <span class="pill pill-teal">Favorisées par émotion/chaleur</span>
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:4px;">BVM atypiques — chercher autre cause si :</div>
+    <div class="pills">
+      <span class="pill pill-red">Ne cèdent pas sous THM adapté</span>
+      <span class="pill pill-red">Apparaissent à distance de la ménopause</span>
+      <span class="pill pill-red">Modification des BVM habituelles</span>
+      <span class="pill pill-red">Céphalées / palpitations / HTA / diarrhées associées</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Évaluation BVM atypiques :</strong> interrogatoire (fréquence, facteur déclenchant) + examen clinique complet (fièvre, HTA, thyroïde, AEG, ganglions) + examens selon clinique</span>
+    </div>
+  </div>
+</div>
+
+<!-- Hypo/Hyper estrogénie -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hypo-œstrogénie
+    </div>
+    <p style="font-size:.83rem; margin-bottom:8px;">= syndrome climatérique + <strong>SGUM</strong></p>
+    <div style="font-weight:700; font-size:.82rem; margin-bottom:4px; color:var(--blue);">Syndrome génito-urinaire de la ménopause (SGUM)</div>
+    <div class="kv-row"><span class="kv-key">Symptômes vulvo-vaginaux</span><span class="kv-val">Sécheresse (78%), brûlures, irritation (30%)</span></div>
+    <div class="kv-row"><span class="kv-key">Symptômes sexuels</span><span class="kv-val">Dyspareunie (31%)</span></div>
+    <div class="kv-row"><span class="kv-key">Symptômes urinaires</span><span class="kv-val">Douleurs miction, infections répétition (5-17%), pollakiurie, incontinence par urgenturie (15-35% après 60 ans)</span></div>
+    <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">10 – 70 % des femmes ménopausées</span></div>
+    <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">Clinique — 1 seul symptôme suffit</span></div>
+    <div class="kv-row"><span class="kv-key">Évolution</span><span class="kv-val">S'aggrave avec l'âge, ↓ avec rapports sexuels</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hyper-œstrogénie
+    </div>
+    <p style="font-size:.83rem; margin-bottom:8px; color:var(--sub);">Fréquente en périménopause ou par surdosage THM</p>
+    <div class="pills">
+      <span class="pill pill-amber">Mastodynies bilatérales</span>
+      <span class="pill pill-amber">Douleurs pelviennes</span>
+      <span class="pill pill-amber">Prise de poids / sensation de gonflement</span>
+      <span class="pill pill-amber">Pertes vaginales "blanches"</span>
+      <span class="pill pill-amber">Irritabilité</span>
+    </div>
+  </div>
+</div>
+
+<!-- Effets à long terme -->
+<hr>
+<div class="section-title" style="font-size:.95rem; border-bottom-color:var(--coral);">
+  <div class="section-icon" style="background:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  Effets à Moyen et Long Terme de la Ménopause
+</div>
+
+<div class="grid2">
+  <div class="compl-card">
+    <div class="compl-card-title">Ostéoporose post-ménopausique</div>
+    <p style="font-size:.83rem; margin-bottom:6px;">Carence œstrogénique → hyperactivité ostéoclastique → ↑ perte osseuse.</p>
+    <div class="kv-row"><span class="kv-key">Fractures typiques</span><span class="kv-val">Poignet, vertèbres (tassement), col du fémur</span></div>
+    <div class="kv-row"><span class="kv-key">Dépistage</span><span class="kv-val">DEXA (rachis + ESF) si facteurs de risque</span></div>
+    <div class="kv-row"><span class="kv-key">Seuil ostéoporose</span><span class="kv-val">T-score &lt; -2,5</span></div>
+  </div>
+  <div class="compl-card">
+    <div class="compl-card-title">Maladies cardio-vasculaires</div>
+    <p style="font-size:.83rem; margin-bottom:6px;">La ménopause fait disparaître l'avantage cardio-vasculaire de la femme sur l'homme.</p>
+    <p style="font-size:.82rem; margin-bottom:4px; color:var(--sub);">Mécanismes :</p>
+    <div class="pills">
+      <span class="pill pill-coral">↑ LDL / ↓ HDL</span>
+      <span class="pill pill-coral">Insulino-résistance</span>
+      <span class="pill pill-coral">Redistribution adiposité abdominale</span>
+      <span class="pill pill-coral">↓ vaso-réactivité artérielle</span>
+      <span class="pill pill-coral">↑ athérosclérose</span>
+    </div>
+    <p style="font-size:.82rem; margin-top:8px; color:var(--sub);">FdR émergents : HTA gravidique, DG, migraines avec aura</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--          PARTIE 2 : THM                            -->
+<!-- ══════════════════════════════════════════════════ -->
+<hr>
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue);">
+    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  </div>
+  PARTIE 2 — TRAITEMENT HORMONAL DE LA MÉNOPAUSE (THM)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Principes du THM
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Estrogènes</div>
+      <div class="kv-row"><span class="kv-key">Molécule de référence</span><span class="kv-val">17β-estradiol</span></div>
+      <div class="kv-row"><span class="kv-key">Voie préférée</span><span class="kv-val">Transdermique / percutanée</span></div>
+      <div class="kv-row"><span class="kv-key">Avantage voie transdermique</span><span class="kv-val">Pas d'1er passage hépatique → pas ↑ risque TEV ni AVC</span></div>
+      <div class="kv-row"><span class="kv-key">Voie orale</span><span class="kv-val">↑ risque TEV et AVC (à éviter si FdR)</span></div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:6px;">Progestatifs</div>
+      <div class="kv-row"><span class="kv-key">Indication</span><span class="kv-val">Obligatoire si utérus présent (prévention cancer endomètre)</span></div>
+      <div class="kv-row"><span class="kv-key">Molécules préférées</span><span class="kv-val">Progestérone naturelle ou dydrogestérone (rétroprogestérone)</span></div>
+      <div class="kv-row"><span class="kv-key">Durée minimale</span><span class="kv-val">≥ 12 jours / cycle</span></div>
+      <div class="kv-row"><span class="kv-key">Avantage</span><span class="kv-val">Meilleur profil : ↓ risque TEV et cancer du sein</span></div>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>Schémas :</strong> Avec règles (progestatif séquentiel) ou sans règles (progestatif continu). Estrogènes en continu ou discontinu (21 ou 25 j/mois).</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan pré-THM
+    </div>
+    <div class="kv-row"><span class="kv-key">Mammographie</span><span class="kv-val">&lt; 2 ans (dépistage systématique tous les 2 ans)</span></div>
+    <div class="kv-row"><span class="kv-key">Bilan biologique minimum</span><span class="kv-val">Cholestérol total + TG + Glycémie à jeun</span></div>
+    <div class="kv-row"><span class="kv-key">Ostéodensitométrie (DEXA)</span><span class="kv-val">Recommandée si facteurs de risque d'ostéoporose</span></div>
+    <div class="kv-row"><span class="kv-key">Écho utéro-ovarienne</span><span class="kv-val">NON pertinente chez la femme asymptomatique</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Contre-indications / Précautions
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--red); margin-bottom:6px;">Voie orale contre-indiquée — utiliser voie transdermique si :</div>
+    <div class="pills">
+      <span class="pill pill-red">Hypertriglycéridémie</span>
+      <span class="pill pill-red">HTA</span>
+      <span class="pill pill-red">FdR thrombo-embolique veineux</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>CI absolues :</strong> Cancer du sein, cancer de l'endomètre, ATCD TEV sévère, méningiome (avec progestérone)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Balance B/R -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Balance Bénéfice / Risque du THM — Ménopause naturelle
+  </div>
+  <table>
+    <tr><th>Domaine</th><th style="color:var(--teal);">Bénéfices</th><th style="color:var(--red);">Risques</th></tr>
+    <tr>
+      <td><strong>Syndrome climatérique</strong></td>
+      <td>Traitement le plus efficace des BVM</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Os</strong></td>
+      <td>Prévention fractures ostéoporotiques (1ère intention)</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Cardio-vasculaire</strong></td>
+      <td>↓ risque IDM si THM dans les <strong>10 premières années</strong><br>Neutre (AVC, TEV) avec voie cutanée + progestérone naturelle</td>
+      <td>↑ risque IDM si THM &gt; 10 ans après ménopause</td>
+    </tr>
+    <tr>
+      <td><strong>Cancer</strong></td>
+      <td>↓ cancer colorectal<br>↓ mortalité globale</td>
+      <td>↑ cancer du sein (surrisque faible, absence dans études obs. européennes &lt; 5-7 ans)<br>↑ cancer endomètre (annihilé si progestatif ≥ 12 j/mois)<br>↑ cancer ovaire (RR = 1,14)</td>
+    </tr>
+  </table>
+  <div class="alert alert-green" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span><strong>Balance B/R POSITIVE</strong> chez femme symptomatique et/ou à risque d'ostéoporose dans les <strong>10 premières années</strong> de ménopause ou <strong>avant 60 ans</strong></span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    THS en cas d'IOP — Balance B/R toujours positive
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span>En IOP, on parle de <strong>THS</strong> (substitutif). Balance toujours positive : annule les risques CV et osseux de la carence œstrogénique précoce. <strong>Pas de surrisque de cancer du sein</strong> par rapport à une femme réglée.</span>
+  </div>
+  <div class="kv-row"><span class="kv-key">Durée recommandée</span><span class="kv-val">Jusqu'à l'âge théorique de la ménopause physiologique (~50 ans)</span></div>
+</div>
+
+<!-- Alternatives -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Alternatives au THM
+  </div>
+  <p style="font-size:.83rem; margin-bottom:10px; color:var(--sub);">Efficacité <strong>moindre</strong> que le THM pour les BVM.</p>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">Pharmacologiques</div>
+      <div class="pills">
+        <span class="pill pill-purple">IRS (inhibiteurs recapture sérotonine)</span>
+        <span class="pill pill-purple">Clonidine</span>
+        <span class="pill pill-purple">Gabapentine</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--sub); margin-bottom:6px;">Non pharmacologiques</div>
+      <div class="pills">
+        <span class="pill pill-blue">Acupuncture</span>
+        <span class="pill pill-blue">Yoga</span>
+        <span class="pill pill-blue">Hypnose</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Phytoestrogènes CONTRE-INDIQUÉS</strong> en cas d'antécédent de cancer du sein. Pas d'efficacité démontrée par rapport au placebo.</span>
+  </div>
+</div>
+
+<!-- Mesures HDI + Métrorragies -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Mesures hygiéno-diététiques
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="step-num">1</span><span class="step-body">Éviction des FdR CV : <strong>tabac, alcool</strong></span></li>
+      <li class="step"><span class="step-num">2</span><span class="step-body">Activité physique régulière (↑ dépenses énergétiques)</span></li>
+      <li class="step"><span class="step-num">3</span><span class="step-body">Modérer apport énergétique glucido-lipidique</span></li>
+      <li class="step"><span class="step-num">4</span><span class="step-body">Apports suffisants en <strong>calcium et vitamine D</strong> — supplémentation si besoin (ostéoporose++)</span></li>
+    </ol>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Métrorragie post-ménopausique — Cancer endomètre ?
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Tout saignement utérin anormal chez une femme ménopausée = éliminer un cancer de l'endomètre</strong></span>
+    </div>
+    <p style="font-size:.82rem; font-weight:700; margin:8px 0 4px;">Facteurs de risque de cancer endomètre :</p>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-red">Obésité</span>
+      <span class="pill pill-red">HTA</span>
+      <span class="pill pill-red">DT2</span>
+      <span class="pill pill-red">THM (estrogènes seuls)</span>
+      <span class="pill pill-red">Tamoxifène</span>
+      <span class="pill pill-red">ATCD familiaux</span>
+    </div>
+    <p style="font-size:.82rem; font-weight:700; margin-bottom:4px;">Conduite à tenir :</p>
+    <ol class="steps">
+      <li class="step"><span class="step-num">1</span><span class="step-body">Éliminer cause vaginale/cervicale à l'examen</span></li>
+      <li class="step"><span class="step-num">2</span><span class="step-body">Biopsie endométriale à la <strong>pipelle de Cornier</strong> (valeur si positive)</span></li>
+      <li class="step"><span class="step-num">3</span><span class="step-body">Échographie pelvienne : <strong>épaisseur endomètre</strong></span></li>
+      <li class="step"><span class="step-num">4</span><span class="step-body">Si endomètre <strong>&gt; 4 mm</strong> ou saignements récidivants → <strong>hystéroscopie diagnostique + histologie</strong></span></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--          PARTIE 3 : ANDROPAUSE / SDT               -->
+<!-- ══════════════════════════════════════════════════ -->
+<hr>
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  </div>
+  PARTIE 3 — ANDROPAUSE / DÉFICIT ANDROGÉNIQUE LIÉ À L'ÂGE (DALA / SDT)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition — SDT (Syndrome de Déficit en Testostérone)
+    </div>
+    <div class="alert alert-blue" style="margin-bottom:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Préférer <strong>"SDT"</strong> au terme "andropause" — terme recommandé</span>
+    </div>
+    <p style="font-size:.84rem; margin-bottom:10px;">Association d'un <strong>syndrome biochimique</strong> (hypotestostéronémie) + symptômes impactant la qualité de vie, liés à l'âge.</p>
+    <div style="font-weight:700; font-size:.82rem; color:var(--purple); margin-bottom:4px;">Physiopathologie du vieillissement testiculaire :</div>
+    <div class="pills">
+      <span class="pill pill-purple">↓ Cellules de Leydig → ↓ stéroïdogénèse</span>
+      <span class="pill pill-purple">Atteinte centrale : ↓ GnRH</span>
+      <span class="pill pill-purple">↓ Récepteurs androgéniques dans les tissus cibles</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostic biologique du SDT
+    </div>
+    <div class="alert alert-amber" style="margin-bottom:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Dosage le matin entre 8h et 11h</strong> (pic physiologique)</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Déficit confirmé si testostérone totale</span><span class="kv-val">&lt; 2,3 ng/ml (8 nmol/l)</span></div>
+    <div class="kv-row"><span class="kv-key">Zone grise (entre 2,3 et 3,5 ng/ml) ET</span><span class="kv-val">T° biodisponible &lt; 0,7 ng/ml<br>T° libre calculée &lt; 0,07 ng/ml</span></div>
+    <div class="kv-row"><span class="kv-key">Confirmation (2ème dosage)</span><span class="kv-val">T° biodisponible 2-4 semaines après</span></div>
+    <div class="kv-row"><span class="kv-key">Bilan complet (2ème intention)</span><span class="kv-val">T° totale + SHBG + albumine + FSH/LH + Prolactine</span></div>
+    <div class="kv-row"><span class="kv-key">Évaluation clinique</span><span class="kv-val">Score ADAM (Androgen Deficiency in Aging Male)</span></div>
+  </div>
+</div>
+
+<!-- Signes cliniques SDT -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Signes cliniques du SDT (Score ADAM + examen)
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">Interrogatoire (Score ADAM)</div>
+      <div class="pills">
+        <span class="pill pill-purple">Dysfonction érectile</span>
+        <span class="pill pill-purple">↓ libido / qualité orgasmes</span>
+        <span class="pill pill-purple">↓ mémoire / attention</span>
+        <span class="pill pill-purple">Irritabilité</span>
+        <span class="pill pill-purple">Troubles du sommeil</span>
+        <span class="pill pill-purple">Bouffées de chaleur / hypersudation</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.82rem; font-weight:700; color:var(--purple); margin-bottom:6px;">Examen physique</div>
+      <div class="pills">
+        <span class="pill pill-blue">Obésité / syndrome métabolique / graisse viscérale</span>
+        <span class="pill pill-blue">↓ pilosité + atrophie cutanée</span>
+        <span class="pill pill-blue">Gynécomastie non douloureuse</span>
+        <span class="pill pill-blue">Sarcopénie (fonte musculaire, ↓ force)</span>
+        <span class="pill pill-blue">Signes d'ostéoporose (fracture récente, perte de taille)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DD et effets non traités -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostics différentiels — À éliminer
+    </div>
+    <div class="pills">
+      <span class="pill pill-amber">Hypothyroïdie</span>
+      <span class="pill pill-amber">Adénome à prolactine (atteinte hypophysaire)</span>
+      <span class="pill pill-amber">Atteinte hypothalamique</span>
+      <span class="pill pill-amber">Hypogonadisme iatrogène<br>(spironolactone, kétoconazole, flutamide, cyprotérone)</span>
+      <span class="pill pill-amber">Hémochromatose</span>
+      <span class="pill pill-amber">Cushing</span>
+      <span class="pill pill-amber">Cirrhose</span>
+      <span class="pill pill-amber">Obésité pathologique</span>
+      <span class="pill pill-amber">Hypopituitarisme</span>
+      <span class="pill pill-amber">Vieillissement naturel</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Symptômes peu spécifiques</strong> — les DD doivent être systématiquement éliminés avant de confirmer le SDT</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Effets du DALA non traité (chronologie)
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--blue); margin-bottom:4px;">Court terme</div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-blue">Dysfonction érectile / ↓ libido</span>
+      <span class="pill pill-blue">Troubles de l'humeur / irritabilité</span>
+      <span class="pill pill-blue">Troubles du sommeil</span>
+      <span class="pill pill-blue">Bouffées de chaleur / hypersudation</span>
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--amber); margin-bottom:4px;">Moyen terme</div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-amber">Obésité / syndrome métabolique</span>
+      <span class="pill pill-amber">Symptômes gynoïdes (gynécomastie, ↓ pilosité)</span>
+      <span class="pill pill-amber">↑ risque CV et thromboembolique (formes sévères)</span>
+      <span class="pill pill-amber">Troubles cognitifs (mémoire, attention)</span>
+    </div>
+    <div style="font-size:.82rem; font-weight:700; color:var(--coral); margin-bottom:4px;">Long terme</div>
+    <div class="pills">
+      <span class="pill pill-coral">Ostéoporose (fractures, perte de taille)</span>
+      <span class="pill pill-coral">Sarcopénie (atrophie musculaire, ↓ force)</span>
+    </div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span><strong>Traitement :</strong> Testostérone naturelle par voie <strong>transdermique ou IM</strong> + prise en charge des complications (ostéoporose, syndrome métabolique)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--          SYNTHÈSE FINALE                           -->
+<!-- ══════════════════════════════════════════════════ -->
+<hr>
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="synth-card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse finale
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège n°1 :</strong> Le diagnostic de ménopause est CLINIQUE (aménorrhée 12 mois + signes climatériques chez femme &gt;45 ans). PAS de biologie en routine.</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège n°2 :</strong> THM voie orale → ↑ risque TEV et AVC. La voie transdermique est neutre sur le risque thromboembolique.</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège n°3 :</strong> IOP = urgence diagnostique. THS obligatoire jusqu'à ~50 ans. Balance B/R TOUJOURS positive. Pas de surrisque cancer du sein par rapport à une femme réglée.</span>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Règle absolue :</strong> Toute métrorragie post-ménopausique = cancer de l'endomètre jusqu'à preuve du contraire → pipelle + écho pelvienne → si endomètre &gt; 4 mm : hystéroscopie.</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège n°4 :</strong> Le progestatif (≥ 12 j/mois) DOIT être associé à l'estrogène si utérus présent. Progestérone naturelle ou dydrogestérone = meilleur profil de sécurité.</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège n°5 :</strong> SDT — dosage testostérone le MATIN (8h-11h). Confirmation par 2ème dosage à 2-4 semaines. Éliminer DD avant de conclure (hypothyroïdie, adénome à prolactine, iatrogène).</span>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span><strong>À retenir :</strong> Balance B/R THM POSITIVE chez femme symptomatique et/ou à risque d'ostéoporose dans les <strong>10 premières années</strong> de ménopause ou <strong>avant 60 ans</strong>. Au-delà, réévaluation nécessaire.</span>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

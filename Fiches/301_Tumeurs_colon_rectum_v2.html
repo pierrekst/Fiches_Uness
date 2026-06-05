@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 301 — Tumeurs du côlon et du rectum</title>
+<style>
+  :root {
+    --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --text-muted: #64748b;
+    --border: rgba(15, 23, 42, 0.06); --purple: #6366f1; --teal: #0f766e;
+    --coral: #e11d48; --blue: #2563eb; --red: #dc2626; --amber: #d97706;
+    --green: #15803d; --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 15px -3px rgba(99, 102, 241, 0.08), 0 4px 6px -4px rgba(99, 102, 241, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { 
+      --bg: #0b0f19; --card: #151f32; --text: #f1f5f9; --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.06); --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+      --purple: #818cf8; --teal: #2dd4bf; --coral: #fb7185; --blue: #60a5fa;
+      --red: #f87171; --amber: #fbbf24; --green: #4ade80;
+      --shadow-hover: 0 10px 15px -3px rgba(129, 140, 248, 0.15), 0 4px 6px -4px rgba(129, 140, 248, 0.15);
+    }
+    .step-num { background: #1e293b !important; border: 2px solid #334155 !important; color: #94a3b8 !important; }
+    .timeline-bar { background: #334155 !important; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; color: var(--text); font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 15px; line-height: 1.6; padding: 20px; max-width: 980px; margin: 0 auto; -webkit-font-smoothing: antialiased; }
+
+  /* Page Header */
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    border-radius: 20px; padding: 32px; color: #fff; margin-bottom: 28px; box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2);
+    position: relative; overflow: hidden; }
+  .page-header::before { content: ""; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); border-radius: 50%; }
+  .page-header h1 { font-size: 1.65rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .page-header p { opacity: .9; font-size: .98rem; font-weight: 500; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .header-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 14px;
+    font-size: .8rem; font-weight: 600; backdrop-filter: blur(4px); transition: all 0.2s; }
+  .header-tag:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+
+  /* Section Title */
+  .section-title { display: flex; align-items: center; gap: 12px; font-size: 1.15rem;
+    font-weight: 800; margin: 32px 0 16px; color: var(--text); letter-spacing: -0.01em; }
+  .section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s; }
+  .section-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; }
+  .section-title:hover .section-icon { transform: scale(1.05); }
+
+  /* Premium Card Design */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 20px; box-shadow: var(--shadow); margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative; overflow: hidden; }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: rgba(99, 102, 241, 0.15); }
+  .card-title { font-size:.95rem; font-weight:800; color:var(--text); margin-bottom: 14px; display:flex; align-items:center; gap:10px; letter-spacing: -0.01em; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Grids */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 768px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { border-radius: 20px; padding: 4px 12px; font-size: .78rem; font-weight: 700; display: inline-block; transition: all 0.2s; }
+  .pill:hover { transform: scale(1.02); }
+  .pill-green { background: rgba(21, 128, 61, 0.08); color: var(--green); border: 1px solid rgba(21, 128, 61, 0.15); }
+  .pill-red { background: rgba(220, 38, 38, 0.08); color: var(--red); border: 1px solid rgba(220, 38, 38, 0.15); }
+  .pill-blue { background: rgba(37, 99, 237, 0.08); color: var(--blue); border: 1px solid rgba(37, 99, 237, 0.15); }
+  .pill-amber { background: rgba(217, 119, 6, 0.08); color: var(--amber); border: 1px solid rgba(217, 119, 6, 0.15); }
+  .pill-purple { background: rgba(99, 102, 241, 0.08); color: var(--purple); border: 1px solid rgba(99, 102, 241, 0.15); }
+  .pill-teal { background: rgba(15, 118, 110, 0.08); color: var(--teal); border: 1px solid rgba(15, 118, 110, 0.15); }
+  .pill-coral { background: rgba(225, 29, 72, 0.08); color: var(--coral); border: 1px solid rgba(225, 29, 72, 0.15); }
+
+  /* Highlighting numbers */
+  .num-badge { background: rgba(15, 23, 42, 0.05); border-radius: 6px; padding: 1px 6px; font-weight: 700; font-family: monospace; font-size: 0.85rem; }
+  @media (prefers-color-scheme: dark) {
+    .num-badge { background: rgba(255, 255, 255, 0.08); }
+  }
+
+  /* Alerts */
+  .alert { border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
+    display: flex; gap: 12px; align-items: flex-start; font-size: .88rem; border: 1px solid; }
+  .alert svg { width:18px; height:18px; flex-shrink:0; margin-top:2px; fill:none; stroke-width:2.2; }
+  .alert-red { background: rgba(220, 38, 38, 0.04); border-color: rgba(220, 38, 38, 0.18); color: var(--red); }
+  .alert-red svg { stroke: var(--red); }
+  .alert-blue { background: rgba(37, 99, 237, 0.04); border-color: rgba(37, 99, 237, 0.18); color: var(--blue); }
+  .alert-blue svg { stroke: var(--blue); }
+  .alert-green { background: rgba(21, 128, 61, 0.04); border-color: rgba(21, 128, 61, 0.18); color: var(--green); }
+  .alert-green svg { stroke: var(--green); }
+  .alert-amber { background: rgba(217, 119, 6, 0.04); border-color: rgba(217, 119, 6, 0.18); color: var(--amber); }
+  .alert-amber svg { stroke: var(--amber); }
+
+  /* Complication Cards */
+  .compl-card { background: var(--card); border: 1px solid var(--border); border-left: 4px solid;
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; box-shadow: var(--shadow); transition: all 0.2s; }
+  .compl-card:hover { transform: translateX(2px); box-shadow: var(--shadow-hover); }
+  .compl-title { font-weight: 800; font-size: .88rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+
+  /* Professional Timeline Design */
+  .timeline-container { position: relative; padding-left: 28px; margin: 10px 0; }
+  .timeline-bar { position: absolute; top: 8px; bottom: 8px; left: 11px; width: 2px; background: #e2e8f0; }
+  .timeline-step { position: relative; margin-bottom: 18px; }
+  .timeline-step:last-child { margin-bottom: 0; }
+  .step-num { position: absolute; left: -28px; top: 2px; width: 24px; height: 24px; border-radius: 50%;
+    background: #f1f5f9; border: 2px solid #cbd5e1; color: #475569; font-weight: 800; font-size: .75rem;
+    display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; }
+  .timeline-step:hover .step-num { transform: scale(1.1); border-color: var(--purple); color: var(--purple); }
+  .step-title { font-size: .9rem; font-weight: 800; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
+  .step-desc { font-size: .85rem; color: var(--text-muted); line-height: 1.45; }
+
+  /* Tables & Dashboards */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 12px; border-radius: 12px; border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+  table { width: 100%; border-collapse: collapse; font-size: .86rem; }
+  th { background: rgba(15, 23, 42, 0.02); padding: 10px 12px; text-align: left; font-weight: 800;
+    border-bottom: 2px solid var(--border); font-size: .78rem; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--text-muted); }
+  @media (prefers-color-scheme: dark) {
+    th { background: rgba(255, 255, 255, 0.02); }
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background-color: rgba(99, 102, 241, 0.01); }
+
+  /* Key-Value rows */
+  .kv { display: flex; flex-direction: column; gap: 8px; }
+  .kv-row { display: flex; gap: 12px; font-size: .86rem; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+  .kv-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .kv-key { font-weight: 800; min-width: 150px; flex-shrink: 0; color: var(--text-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: 0.02em; }
+  .kv-value { line-height: 1.45; }
+
+  hr { border: none; border-top: 2px solid var(--border); margin: 36px 0; position: relative; }
+  hr::after { content: "❖"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    background: var(--card); color: var(--text-muted); padding: 0 12px; font-size: 0.75rem; }
+  @media (prefers-color-scheme: dark) {
+    hr::after { background: var(--bg); }
+  }
+  ul { padding-left: 18px; } li { margin-bottom: 4px; font-size: .86rem; }
+  .text-muted { color: var(--text-muted); font-size: .83rem; }
+  .bold-tag { font-weight: 700; color: var(--text); }
+  .intro-box { background: linear-gradient(135deg, rgba(99, 102, 241, 0.04) 0%, rgba(37, 99, 237, 0.04) 100%);
+    border: 1px solid rgba(99, 102, 241, 0.12); border-radius: 16px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Item 301 — Tumeurs du côlon et du rectum</h1>
+  <p>Histologie · Séquence Adénome-Cancer · Circonstances de découverte · Dépistage &amp; Génétique · Bilan &amp; Prise en charge</p>
+  <div class="header-tags">
+    <span class="header-tag">Histologie colique</span>
+    <span class="header-tag">Séquence 10 ans</span>
+    <span class="header-tag">Test FIT / Dépistage</span>
+    <span class="header-tag">Syndrome de Lynch / PAF</span>
+    <span class="header-tag">Bilan d'extension</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE & OBJECTIFS -->
+<div class="intro-box">
+  <h3 style="margin-top:0; color:var(--purple); font-size: 1.02rem; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+    <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2;" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    🎯 Synthèse des Objectifs (Programme National EDN)
+  </h3>
+  <ul style="line-height: 1.5; color: var(--text);">
+    <li><span class="bold-tag">Histologie &amp; Polypes :</span> Distinguer les polypes bénins à risque (adénomes tubuleux/villeux, adénomes festonnés sessiles) des formes sans risque (polypes hyperplasiques, juvéniles).</li>
+    <li><span class="bold-tag">Séquence physiopathologique :</span> Maîtriser la filiation adénome-cancer (séquence moyenne de <span class="num-badge">10 ans</span>) et les facteurs favorisant la dysplasie.</li>
+    <li><span class="bold-tag">Dépistage précoce :</span> FIT (test immunologique) tous les <span class="num-badge">2 ans</span> de 50 à 75 ans en population à risque moyen, coloscopie d'emblée si risque élevé.</li>
+    <li><span class="bold-tag">Oncogénétique :</span> Dépister le syndrome de Lynch (autosomique dominant, recherche systématique de MSI &lt; 70 ans) et la PAF (mutation gène APC, colectomie totale prophylactique).</li>
+    <li><span class="bold-tag">Bilan d'extension :</span> Coloscopie complète sous AG (diagnostic), scanner TAP injecté (systématique), et IRM pelvienne (spécifique pour le rectum).</li>
+    <li><span class="bold-tag">Traitements :</span> Résection endoscopique pour Tis/T1sm1 ; chirurgie carcinologique (marges &ge; 5 cm + &ge; 12 ganglions) ; radio-chimiothérapie préopératoire pour cancer du rectum localement avancé (T3-T4 ou N+) ; chimiothérapie adjuvante postopératoire si Stade III (N+).</li>
+  </ul>
+</div>
+
+<!-- PARTIE 1: TYPES HISTOLOGIQUES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Classification Histologique des Tumeurs Coliques
+</div>
+
+<div class="card">
+  <div class="grid2">
+    <div class="compl-card" style="border-left-color:var(--purple); margin-bottom:0;">
+      <div class="compl-title" style="color:var(--purple); display:flex; align-items:center; gap:6px;">
+        <span class="num-badge" style="background:rgba(99,102,241,0.1); color:var(--purple);">1</span> Tumeurs bénignes dégénératives (À risque)
+      </div>
+      <p style="font-size:.84rem; line-height: 1.45;">
+        • <span class="bold-tag">Les Adénomes :</span> Tumeurs les plus fréquentes (sessiles, pédiculées, planes). 3 sous-types :
+        <br>— Tubuleux (<span class="num-badge">75%</span>, risque le plus faible).
+        <br>— Tubulo-villeux (<span class="num-badge">20%</span>, risque intermédiaire).
+        <br>— Villeux (<span class="num-badge">5%</span>, risque le plus élevé).
+        <br>• <span class="bold-tag">Lésions festonnées :</span> Risque élevé de cancer.
+        <br>— Adénomes festonnés sessiles (côlon droit ++, forte dégénérescence).
+        <br>— Adénomes festonnés traditionnels (plus rares).
+      </p>
+    </div>
+    <div class="compl-card" style="border-left-color:var(--teal); margin-bottom:0;">
+      <div class="compl-title" style="color:var(--teal); display:flex; align-items:center; gap:6px;">
+        <span class="num-badge" style="background:rgba(15,118,110,0.1); color:var(--teal);">2</span> Formes non dégénératives (Sans risque)
+      </div>
+      <p style="font-size:.84rem; line-height: 1.45;">
+        • <span class="bold-tag">Polypes hyperplasiques :</span> Très fréquents (<span class="num-badge">20-30%</span> à 50 ans). Sans dysplasie, pas de dégénérescence.
+        <br>• <span class="bold-tag">Polypes juvéniles :</span> Polypes bénins de l'enfance.
+        <br>• <span class="bold-tag">Pseudo-polypes inflammatoires :</span> Cicatrisation muqueuse sur maladies inflammatoires chroniques de l'intestin (MICI).
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <span><strong>Tumeur maligne :</strong> Dans plus de <strong>90%</strong> des cas, il s'agit d'un <strong>adénocarcinome lieberkühnien</strong>, développé aux dépens des glandes de Lieberkühn par transformation progressive (dégénérescence) d'un adénome ou d'une lésion festonnée.</span>
+</div>
+
+<hr>
+
+<!-- PARTIE 2: FILIATION ADENOME-CANCER -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Séquence Physiologique Adénome-Cancer
+</div>
+
+<div class="card">
+  <div class="timeline-container">
+    <div class="timeline-bar"></div>
+    
+    <div class="timeline-step">
+      <div class="step-num">1</div>
+      <div class="step-title">Muqueuse colique saine</div>
+      <div class="step-desc">Premières mutations génétiques somatiques acquises (ex: perte du gène APC).</div>
+    </div>
+    
+    <div class="timeline-step">
+      <div class="step-num">2</div>
+      <div class="step-title">Adénome bénin (Polype)</div>
+      <div class="step-desc">Lésion tumorale bénigne. Sa prévalence augmente fortement avec l'âge (<span class="num-badge">30 à 50%</span> après 50 ans). Seulement <span class="num-badge">5%</span> des adénomes finiront par dégénérer.</div>
+    </div>
+    
+    <div class="timeline-step">
+      <div class="step-num">3</div>
+      <div class="step-title">Dysplasie de bas grade &rarr; haut grade</div>
+      <div class="step-desc">Accumulation d'anomalies morphologiques et chromosomiques nucléaires au sein des glandes de l'adénome.</div>
+    </div>
+    
+    <div class="timeline-step">
+      <div class="step-num">4</div>
+      <div class="step-title" style="color:var(--red);">Adénocarcinome invasif</div>
+      <div class="step-desc">Franchissement de la muscularis mucosae (invasion de la sous-muqueuse). La durée moyenne de cette séquence est estimée à <strong>10 ans</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Facteurs majeurs influençant la dégénérescence de l'adénome
+  </div>
+  <div class="grid2">
+    <div class="compl-card" style="border-left-color:var(--purple); margin-bottom: 0;">
+      <p style="font-size:.84rem; line-height: 1.45;">
+        • <span class="bold-tag">Taille de l'adénome :</span> Facteur prédominant. 
+        <br>— Moins de 1 cm : risque de cancer mineur (<span class="num-badge">0,3%</span>).
+        <br>— Plus de 1 cm : risque de dégénérescence de <span class="num-badge">8%</span> à 10 ans et <span class="num-badge">25%</span> à 20 ans.
+        <br>• <span class="bold-tag">Nombre d'adénomes :</span> Risque significativement plus élevé si le patient présente <strong>plus de 5 adénomes</strong> lors de la coloscopie.
+      </p>
+    </div>
+    <div class="compl-card" style="border-left-color:var(--coral); margin-bottom: 0;">
+      <p style="font-size:.84rem; line-height: 1.45;">
+        • <span class="bold-tag">Type histologique :</span> Risque croissant selon la séquence : <strong>Tubuleux</strong> &lt; <strong>Tubulo-villeux</strong> &lt; <strong>Villeux</strong>.
+        <br>• <span class="bold-tag">Forme macroscopique :</span> Risque particulièrement accru pour les adénomes <strong>plans</strong> et <strong>festonnés</strong>.
+        <br>• <span class="bold-tag">Degré de dysplasie :</span> Risque croissant selon : <strong>Bas grade</strong> &lt; <strong>Haut grade</strong>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 3: EPIDEMIOLOGIE DES CANCERS COLORECTAUX -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--coral)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  Épidémiologie &amp; Facteurs de Risque Analytiques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Épidémiologie descriptive
+    </div>
+    <div class="kv" style="font-size:.85rem;">
+      <div class="kv-row"><span class="kv-key">Fréquence</span><span>Le <strong>3ème cancer le plus fréquent en France</strong> (après sein et prostate). 1er cancer digestif (&gt; 47 000 nouveaux cas et 17 000 décès en 2023). Localisation rectale dans <span class="num-badge">35%</span> des cas.</span></div>
+      <div class="kv-row"><span class="kv-key">Terrain</span><span>Diagnostic posé après 50 ans dans <span class="num-badge">85%</span> des cas. Âge moyen au diagnostic : <strong>70 ans</strong>. Sex-ratio de 1.</span></div>
+      <div class="kv-row"><span class="kv-key">Participation</span><span>Seulement <strong>30% de participation</strong> au dépistage de masse (FIT). Une participation à 50% réduirait la mortalité de 20%.</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Facteurs de Risque (Analytique)
+    </div>
+    <div class="kv" style="font-size:.85rem;">
+      <div class="kv-row"><span class="kv-key">Exogènes</span><span>Sédentarité, surpoids, alimentation riche en viande rouge et pauvre en fibres, tabac, alcool.</span></div>
+      <div class="kv-row"><span class="kv-key">Endogènes</span><span>• Antécédent personnel d'adénome ou d'adénocarcinome colorectal.
+        <br>• Antécédents familiaux au 1er degré avant 65 ans de cancer ou d'adénome &gt; 1 cm.
+        <br>• Maladie Inflammatoire Chronique de l'intestin (MICI) colique évoluant depuis <strong>plus de 20 ans</strong>.
+        <br>• Prédisposition génétique (Syndrome de Lynch, PAF).</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 4: GENETIQUE & ONCOGENETIQUE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  Génétique, Syndrome de Lynch &amp; Polyposes
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Syndrome de Lynch (HNPCC)
+    </div>
+    <p style="font-size:.84rem; line-height: 1.45; margin-bottom: 8px;">
+      Syndrome de prédisposition génétique aux cancers colorectaux le plus fréquent (3 à 5% des cas), de transmission <strong>autosomique dominante</strong>.
+    </p>
+    <ul style="line-height: 1.45; padding-left: 16px;">
+      <li><span class="bold-tag">Mécanisme :</span> Mutation constitutionnelle d'un des 4 gènes de réparation des mésappariements de l'ADN (gènes MMR : <strong>MLH1, MSH2, MSH6, PMS2</strong>).</li>
+      <li><span class="bold-tag">Statut Tumoral MSI :</span> La perte d'expression de ces protéines entraîne un phénotype d'<strong>Instabilité des Microsatellites (MSI)</strong> au niveau de la tumeur (détecté par immunohistochimie ou PCR).</li>
+      <li><span class="bold-tag" style="color:var(--teal);">Dépistage systématique :</span> Il est recommandé de rechercher systématiquement le statut MSI sur toute tumeur colorectale diagnostiquée <strong>avant l'âge de 70 ans</strong>.</li>
+      <li><span class="bold-tag">Spectre tumoral :</span> Prédispose au cancer colorectal, mais également aux cancers de l'<strong>endomètre (utérus)</strong>, de l'intestin grêle, des voies urinaires excrétrices, des voies biliaires, de l'estomac et de l'ovaire.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Polypose Adénomateuse Familiale (PAF)
+    </div>
+    <p style="font-size:.84rem; line-height: 1.45; margin-bottom: 8px;">
+      Affection rare (&lt; 1% des cancers), de transmission <strong>autosomique dominante</strong>.
+    </p>
+    <ul style="line-height: 1.45; padding-left: 16px;">
+      <li><span class="bold-tag">Mécanisme :</span> Mutation constitutionnelle du gène suppresseur de tumeur <strong>APC</strong>.</li>
+      <li><span class="bold-tag">Clinique :</span> Apparition d'<strong>innombrables adénomes coliques (&gt; 100 à des milliers)</strong> se développant dès l'âge de 10 ans.</li>
+      <li><span class="bold-tag" style="color:var(--coral);">Évolution :</span> Risque cumulé de cancer colorectal de plus de <strong style="color:var(--coral);">70%</strong>. Apparition fréquente dès l'adolescence/jeune adulte.</li>
+      <li><span class="bold-tag">Prise en charge :</span> Surveillance par coloscopie annuelle discutée dès l'âge de 10 ans. <strong>Colectomie totale prophylactique</strong> systématique indiquée à la fin de l'adolescence.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Indications cliniques d'un Test Génétique constitutionnel (Consultation d'Oncogénétique)
+  </div>
+  <p style="font-size:.84rem; margin-bottom:12px;">
+    La recherche d'une prédisposition héréditaire est systématiquement déclenchée dans les situations suivantes :
+  </p>
+  <ul style="line-height: 1.45; padding-left: 16px;">
+    <li>Découverte d'un phénotype tumoral <strong>MSI</strong> (Instabilité des microsatellites).</li>
+    <li>Détection d'une <strong>Polypose</strong> colique (plus de 100 polypes cumulés).</li>
+    <li>Survenue d'un cancer colorectal à un âge jeune (systématiquement <strong>avant l'âge de 40 ans</strong>).</li>
+    <li>Après 40 ans, en présence d'antécédents familiaux répondant aux <strong>critères d'Amsterdam II</strong> : au moins 3 cas familiaux au premier degré (adénocarcinome colorectal, endomètre, grêle, excréto-urinaire) sur 2 générations successives, dont au moins un cas survenu avant l'âge de 50 ans.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- PARTIE 5: CIRCONSTANCES DE DECOUVERTE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  Circonstances de Découverte du Cancer Colorectal
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      1. Dépistage en population asymptomatique
+    </div>
+    <div class="kv" style="font-size:.85rem;">
+      <div class="kv-row">
+        <span class="kv-key">Risque moyen (Sujet sain)</span>
+        <span class="kv-value">Dépistage de masse par <strong>Test Immunologique fécal (FIT)</strong> de recherche de sang occulte dans les selles. Réalisé <strong>tous les 2 ans entre 50 ans et 75 ans</strong>. Si FIT positif &rarr; Coloscopie complète sous AG en urgence.</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Risque élevé / Très élevé</span>
+        <span class="kv-value">Coloscopie complète d'emblée. Indiquée si antécédents familiaux de cancer ou d'adénome &gt; 1 cm, MICI ancienne évolutive, ou prédispositions génétiques connues (Lynch, PAF).</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      2. Symptômes &amp; Révélation Clinique
+    </div>
+    <ul style="line-height: 1.45; padding-left: 16px;">
+      <li><span class="bold-tag">Troubles du transit :</span> Modification récente (quelques semaines/mois) du transit (diarrhée ou constipation progressive d'apparition nouvelle).</li>
+      <li><span class="bold-tag">Hémorragie digestive :</span> Rectorragies (côlon gauche / rectum) ou méléna (côlon droit). <strong style="color:var(--coral);">Règle d'or :</strong> Des rectorragies chez un sujet de &gt; 50 ans ne doivent jamais être attribuées à tort à des hémorroïdes sans exploration par coloscopie.
+        <br>• *Saignement occulte :* Révélé par une <strong>anémie ferriprive inexpliquée +++++</strong> (côlon droit, asymptomatique longtemps).
+      </li>
+      <li><span class="bold-tag">Douleurs abdominales :</span> Cadre colique, d'apparition récente, mimant parfois une sigmoïdite.</li>
+      <li><span class="bold-tag">Signes spécifiques du Rectum :</span> <strong>Syndrome rectal</strong> (faux besoins = épreintes, sensation douloureuse de tension rectale = ténesme) ou fausse diarrhée de constipation sur obstacle sténosant.</li>
+      <li><span class="bold-tag" style="color:var(--red);">Urgences chirurgicales :</span> Occlusion colique aiguë (principalement sur le côlon gauche sténosant), perforation ou péritonite colique.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 6: COMPTE-RENDU ACP & CLASSIFICATION TNM -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--coral)">
+    <svg viewBox="0 0 24 24"><path d="M12.219 2.281a1 1 0 0 0-1.438 0l-8.5 8.5a1 1 0 0 0 0 1.438l8.5 8.5a1 1 0 0 0 1.438 0l8.5-8.5a1 1 0 0 0 0-1.438l-8.5-8.5z"/></svg>
+  </div>
+  Anatomie Pathologique &amp; Classification des Stades (pTNM)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Vocabulaire du Compte-Rendu d'ACP
+  </div>
+  <p style="font-size:.84rem; margin-bottom:12px;">
+    Le compte-rendu décrit le type histologique (le plus souvent <strong>adénocarcinome lieberkühnien</strong>) et son degré de différenciation (bien, moyennement ou peu différencié). Le pronostic est corrélé à la perte de différenciation.
+  </p>
+  
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Infiltration pariétale (T)</th>
+          <th>Définition microscopique</th>
+          <th>Envahissement (N) &amp; Facteurs pronostiques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tis</strong></td>
+          <td>Dysplasie de haut grade / Carcinome in situ (limité à la muqueuse).</td>
+          <td rowspan="5">
+            • <strong>Envahissement Ganglionnaire (N) :</strong>
+            <br>— <strong>N0 :</strong> Aucun ganglion envahi.
+            <br>— <strong>N+ :</strong> Au moins 1 ganglion envahi.
+            <br>• <span class="bold-tag" style="color:var(--coral);">Règle de sécurité :</span> L'analyse doit examiner au minimum <strong>&ge; 12 ganglions</strong> pour valider un stade N0.
+            <br><br>• <strong>Facteurs pronostiques négatifs :</strong>
+            <br>— Présence d'emboles tumoraux veineux ou lymphatiques.
+            <br>— Engainements péri-nerveux.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>T1</strong></td>
+          <td>Tumeur envahissant la <strong>sous-muqueuse</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>T2</strong></td>
+          <td>Tumeur envahissant la <strong>musculeuse</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>T3</strong></td>
+          <td>Tumeur envahissant la <strong>sous-séreuse</strong> ou le tissu péri-colique/péri-rectal non péritonisé, sans franchir la séreuse.</td>
+        </tr>
+        <tr>
+          <td><strong>T4</strong></td>
+          <td>Tumeur franchissant la <strong>séreuse</strong> (péritoine viscéral) ou envahissant les organes de voisinage.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Classification simplifiée des Stades de Gravité
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Stade Clinique</th>
+          <th>Définition TNM</th>
+          <th>Gravité anatomique &amp; Pronostic</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stade I</strong></td>
+          <td>T1 - T2, N0, M0</td>
+          <td>Petite tumeur localisée, sans aucun envahissement ganglionnaire.</td>
+        </tr>
+        <tr>
+          <td><strong>Stade II</strong></td>
+          <td>T3 - T4, N0, M0</td>
+          <td>Tumeur infiltrant profondément la paroi colique, mais sans envahissement ganglionnaire.</td>
+        </tr>
+        <tr style="background: rgba(225,29,72,0.02);">
+          <td><strong>Stade III</strong></td>
+          <td>Tous T, <strong>N+</strong>, M0</td>
+          <td>Présence d'envahissement tumoral ganglionnaire régional (quel que soit le degré d'infiltration T).</td>
+        </tr>
+        <tr style="background: rgba(220,38,38,0.02);">
+          <td><strong>Stade IV</strong></td>
+          <td>Tous T, Tous N, <strong>M+</strong></td>
+          <td>Présence de métastases à distance (métastases hépatiques ou pulmonaires les plus fréquentes).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 7: EXAMEN CLINIQUE COMPLET -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  </div>
+  Démarche Clinique complète de l'Examen Physique
+</div>
+
+<div class="card">
+  <div class="kv" style="font-size:.86rem; line-height: 1.45;">
+    <div class="kv-row">
+      <span class="kv-key">1. Abdomen</span>
+      <span class="kv-value">Palpation à la recherche d'une masse colique (fosse iliaque droite / caecum ++). Recherche d'une hépatomégalie dure, nodulaire (métastases). Recherche d'une ascite (matité déclive des flancs) ou de nodules pariétaux signant une carcinose péritonéale.</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key" style="color:var(--coral);">2. Toucher Rectal</span>
+      <span class="kv-value"><strong>Systématique pour tout cancer du rectum</strong> : évalue la distance par rapport au sphincter anal (fondamental pour la conservation sphinctérienne), apprécie la mobilité de la tumeur. Recherche de nodules du cul-de-sac de Douglas (blindage pelvien en cas de carcinose péritonéale).</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">3. Ganglions</span>
+      <span class="kv-value">Palpation rigoureuse des aires ganglionnaires périphériques (ganglion de Troisier sus-claviculaire gauche, ganglions inguinaux en cas de cancer du très bas rectum).</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">4. Nutrition</span>
+      <span class="kv-value">Évaluation nutritionnelle systématique (recommandation HAS) : mesure du poids, de la taille, calcul de l'IMC et quantification précise de la perte de poids au cours des 6 derniers mois (dépister la dénutrition).</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 8: EXAMENS COMPLEMENTAIRES DE PREMIERE INTENTION -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><path d="M12.219 2.281a1 1 0 0 0-1.438 0l-8.5 8.5a1 1 0 0 0 0 1.438l8.5 8.5a1 1 0 0 0 1.438 0l8.5-8.5a1 1 0 0 0 0-1.438l-8.5-8.5z"/></svg>
+  </div>
+  Examens Complémentaires &amp; Stratégie d'Imagerie
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Bilan diagnostique et d'extension de première intention
+  </div>
+  <p style="font-size:.84rem; margin-bottom:12px;">
+    En dehors de l'urgence chirurgicale (occlusion), la stratégie diagnostique repose sur les examens suivants :
+  </p>
+  <ul style="line-height: 1.5; padding-left: 16px;">
+    <li><span class="bold-tag">La Coloscopie complète sous anesthésie générale (Examen clé) :</span> diagnostic de certitude par la réalisation de <strong>biopsies multiples</strong>. Recherche également des lésions synchrones (autres adénomes ou un second cancer synchrone colique).</li>
+    <li><span class="bold-tag">Bilan Biologique :</span> NFS (recherche d'une anémie ferriprive), créatininémie (avant injection de scanner), TP, TCA, plaquettes, et albumine (statut nutritionnel).
+      <br>— <strong>L'ACE (Antigène Carcino-Embryonnaire) :</strong> N'est PAS un examen de diagnostic (sensibilité insuffisante), mais doit être dosé au bilan initial comme <strong>marqueur de référence pour la surveillance</strong> post-thérapeutique.
+    </li>
+    <li><span class="bold-tag">Scanner Thoraco-Abdomino-Pelvien (TAP) injecté :</span> Réalisé systématiquement pour les cancers du côlon et du rectum pour rechercher des métastases à distance (foie, poumons).</li>
+    <li><span class="bold-tag" style="color:var(--blue);">L'IRM Pelvienne (Obligatoire pour le cancer du Rectum) :</span> Examen d'imagerie de référence pour évaluer l'extension locale de la tumeur par rapport au <strong>mésorectum</strong> et aux structures musculaires sphinctériennes (décide du traitement néoadjuvant).</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Explorations spécifiques de deuxième intention
+  </div>
+  <div class="kv" style="font-size:.86rem;">
+    <div class="kv-row">
+      <span class="kv-key">IRM Hépatique</span>
+      <span class="kv-value">Indiquée en cas de doute sur des nodules hépatiques suspects au scanner, ou en pré-opératoire d'une résection programmée de métastases hépatiques (plus sensible que le TDM).</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Écho-endoscopie rectale</span>
+      <span class="kv-value">Réservée aux cancers du rectum de petite taille, cliniquement mobiles. Elle évalue l'infiltration de la paroi (T1 vs T2) pour guider une éventuelle résection locale superficielle par voie endoscopique. Elle n'a aucun intérêt dans les formes sténosantes.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 9: RYTHME DE SURVEILLANCE DES ADENOMES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--amber)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Rythme de Surveillance post-polypectomie (Recommandations)
+</div>
+
+<div class="card">
+  <p style="font-size:.84rem; margin-bottom:12px;">
+    Après la résection endoscopique (polypectomie) d'adénomes, le rythme de surveillance coloscopique est adapté au niveau de risque de récidive déterminé par la pièce d'ACP :
+  </p>
+  <div class="kv" style="font-size:.86rem;">
+    <div class="kv-row">
+      <span class="kv-key" style="color:var(--green);">Surveillance à 5 ans</span>
+      <span class="kv-value">Examen initial complet de bonne qualité (préparation colique parfaite) ET découverte de <strong>moins de 3 adénomes</strong>, de taille <strong>inférieure à 1 cm</strong>, sans aucun contingent villeux ni dysplasie de haut grade.</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key" style="color:var(--amber);">Surveillance à 3 ans</span>
+      <span class="kv-value">Présence d'au moins un critère de risque élevé :
+        <br>— <strong>Nombre d'adénomes &ge; 3</strong> lors de la coloscopie.
+        <br>— <strong>Taille de l'adénome &ge; 1 cm</strong>.
+        <br>— Contingent histologique <strong>villeux ou tubulo-villeux</strong>.
+        <br>— Dysplasie de <strong>haut grade</strong>.
+        <br>— Lésion festonnée sessile &ge; 1 cm ou avec dysplasie.
+      </span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key" style="color:var(--red);">Surveillance à 3-6 mois</span>
+      <span class="kv-value">Résection endoscopique fragmentaire (polypectomie "piecemeal") de volumineux adénomes plans ou sessiles (risque important de reliquat tumoral nécessitant un contrôle précoce de la cicatrice).</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 10: GRANDS PRINCIPES DE TRAITEMENT -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  </div>
+  Grands Principes Thérapeutiques des Cancers Localisés
+</div>
+
+<div class="alert alert-blue">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+  <span><strong>Validation RCP obligatoire :</strong> Toute décision thérapeutique curative ou palliative doit être discutée et validée en Réunion de Concertation Pluridisciplinaire (RCP).</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      1. Cancer du Côlon
+    </div>
+    <ul style="line-height: 1.45; padding-left: 16px;">
+      <li><span class="bold-tag">Lésions superficielles (Tis, T1sm1) :</span> Résection endoscopique exclusive (mucosectomie ou dissection sous-muqueuse) à privilégier par rapport à la chirurgie.</li>
+      <li class="mt8"><span class="bold-tag">Traitement chirurgical de référence :</span> Colectomie segmentaire carcinologique. Exige :
+        <br>— Une marge de sécurité intestinale saine d'au moins <strong>5 cm</strong> de part et d'autre de la tumeur.
+        <br>— Une ligature à l'origine des vaisseaux mésentériques irriguant le segment.
+        <br>— Un curage ganglionnaire large contenant le réseau lymphatique, avec l'analyse d'au minimum <strong>&ge; 12 ganglions</strong>.
+      </li>
+      <li class="mt8"><span class="bold-tag">Chimiothérapie adjuvante (post-opératoire) :</span> Recommandée systématiquement en cas d'envahissement ganglionnaire (<strong>Stade III, N+</strong>) pour diminuer le risque de récidive. Durée standard de 3 à 6 mois.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      2. Cancer du Rectum (Sous-péritonéal)
+    </div>
+    <ul style="line-height: 1.45; padding-left: 16px;">
+      <li><span class="bold-tag">Principes chirurgicaux :</span> 
+        <br>— Exérèse du rectum associée à l'<strong>exérèse complète du mésorectum (chirurgie de référence)</strong>. Elle permet de minimiser le risque de récidive locale.
+        <br>— Si la tumeur est à distance du sphincter anal &rarr; Anastomose et conservation sphinctérienne.
+        <br>— Si la tumeur envahit ou est très proche du sphincter anal &rarr; Amputation abdomino-périnéale avec colostomie définitive.
+      </li>
+      <li class="mt8"><span class="bold-tag" style="color:var(--red);">Radio-chimiothérapie pré-opératoire (Néoadjuvante) :</span> Indiquée systématiquement pour les tumeurs du rectum localement avancées (<strong>T3-T4 ou N+</strong> à l'IRM pelvienne). Diminue drastiquement le taux de récidive locale.</li>
+      <li class="mt8"><span class="bold-tag">Chimiothérapie post-opératoire (Adjuvante) :</span> Discutée selon l'envahissement ganglionnaire (Stade III).</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SYNTHÈSE / POINTS CLÉS -->
+<div class="card" style="background:linear-gradient(135deg,rgba(99,102,241,0.06),rgba(37,99,237,0.06)); border:1px solid rgba(99, 102, 241, 0.2);">
+  <div class="card-title" style="font-size:1rem; color:var(--purple); display:flex; align-items:center; gap:8px;">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    🧠 Synthèse Flash pour Révisions (Indispensables EDN)
+  </div>
+  <ul style="line-height: 1.45; padding-left: 16px; color: var(--text);">
+    <li><span class="bold-tag">Bénin vs Malin :</span> Adénomes (tubuleux <span class="num-badge">75%</span>, tubulo-villeux <span class="num-badge">20%</span>, villeux <span class="num-badge">5%</span>) et lésions festonnées sessiles = bénins avec risque de dégénérescence. Polypes hyperplasiques, juvéniles et inflammatoires = pas de risque. <span class="bold-tag">Adénocarcinome lieberkühnien :</span> &gt;90% des cancers.</li>
+    <li><span class="bold-tag">Filiation adénome-cancer :</span> Durée moyenne de la séquence muqueuse saine-adénome-cancer de <strong>10 ans</strong>. Risque majeur de dégénérescence si taille <strong>&gt; 1 cm</strong> (25% à 20 ans), nombre <strong>&gt; 5</strong>, type villeux, ou dysplasie de haut grade.</li>
+    <li><span class="bold-tag">Circonstances de découverte :</span> Dépistage FIT (test immunologique) tous les <strong>2 ans</strong> de 50 à 75 ans en risque moyen. Coloscopie directe si risque élevé (antécédents familiaux). Signes cliniques : rectorragies (&gt;50 ans = coloscopie), modifications transit, anémie ferriprive occulte, syndrome rectal.</li>
+    <li><span class="bold-tag">Génétique :</span> Recherche de phénotype <strong>MSI</strong> systématique pour tout cancer colorectal diagnostiqué <strong>avant 70 ans</strong> (dépistage du <strong>Syndrome de Lynch</strong>). Syndrome de Lynch = autosomique dominant, mutations MMR (MLH1, MSH2, MSH6, PMS2). Polypose adénomateuse familiale (PAF) = mutation gène <strong>APC</strong>, &gt;100 polypes, colectomie totale de sécurité à la fin de l'adolescence.</li>
+    <li><span class="bold-tag">Examen clinique :</span> Abdomen (masse, ascite, foie), aires ganglionnaires (Troisier), toucher rectal (fondamental si rectum) et statut nutritionnel (HAS 2019).</li>
+    <li><span class="bold-tag">ACP &amp; Classification :</span> Muqueuse = Tis (in situ), sous-muqueuse = T1, musculeuse = T2, séreuse non franchie = T3, franchie = T4. minimum de <strong>&ge; 12 ganglions</strong> examinés pour valider le stade N0. Stade III = tous T, N+, M0. Stade IV = métastatique (M+).</li>
+    <li><span class="bold-tag">Bilan d'extension :</span> Coloscopie complète sous AG (systématique) + Scanner TAP injecté (extension). <strong>IRM pelvienne obligatoire</strong> uniquement pour le cancer du rectum. Dosage initial <strong>ACE</strong> pour suivi.</li>
+    <li><span class="bold-tag">Traitements localisés :</span> Colectomie segmentaire avec marges <strong>&ge; 5 cm</strong> et curage ganglionnaire (&ge; 12 ganglions). Pour le rectum : exérèse rectale + <strong>exérèse complète du mésorectum</strong>. Radio-chimiothérapie pré-opératoire (néoadjuvante) systématique pour cancer du rectum localement avancé (T3-T4 ou N+). Chimiothérapie adjuvante (post-op) systématique pour le Stade III (N+).</li>
+    <li><span class="bold-tag">Surveillance :</span> Après polypectomie : coloscopie à 5 ans si faible risque (&lt;3 adénomes, &lt;1cm, tubuleux), 3 ans si haut risque (&ge;3 adénomes, &ge;1cm, contingent villeux, dysplasie haut grade), 3-6 mois si polypectomie fragmentaire.</li>
+  </ul>
+</div>
+
+<p style="text-align:center; font-size:.75rem; color:var(--text-muted); margin-top:24px; margin-bottom: 24px;">
+  Fiche condensée d'apprentissage · UNESS.fr / CNCEM · Item 301
+</p>
+
+</body>
+</html>

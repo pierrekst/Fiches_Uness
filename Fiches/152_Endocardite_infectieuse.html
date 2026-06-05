@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 152 — Endocardite infectieuse</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d23;
+    --text2: #4b5563;
+    --border: #e2e6ea;
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --purple-light: #edeafc;
+    --teal-light: #d0f4ea;
+    --coral-light: #fce8e0;
+    --blue-light: #ddeeff;
+    --red-light: #fde8e8;
+    --amber-light: #fef3c7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --card: #1c1f2a;
+      --text: #e8eaf0;
+      --text2: #9aa3b2;
+      --border: #2d3240;
+      --purple-light: #2a2560;
+      --teal-light: #0d4a36;
+      --coral-light: #5c2510;
+      --blue-light: #153a6b;
+      --red-light: #5a1a1a;
+      --amber-light: #4a2e00;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.55; padding: 24px 16px 48px; }
+  .page { max-width: 900px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 28px 32px 24px;
+    color: #fff;
+    margin-bottom: 28px;
+  }
+  .header-item { font-size: .78rem; font-weight: 600; letter-spacing: .08em; opacity: .82; text-transform: uppercase; margin-bottom: 6px; }
+  .header-title { font-size: 1.7rem; font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
+  .header-summary { font-size: .88rem; opacity: .92; line-height: 1.6; max-width: 760px; }
+
+  /* OBJECTIFS VISION */
+  .vision-box {
+    background: var(--purple-light);
+    border: .5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  .vision-box strong { color: var(--purple); }
+
+  /* SECTIONS */
+  .section-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: .03em;
+    margin-bottom: 14px;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media(max-width:640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: .5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+  }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* KV ROWS */
+  .kv-row { display:flex; justify-content:space-between; align-items:center; padding: 5px 0; border-bottom: .5px solid var(--border); gap:12px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text2); font-size: .82rem; flex:1; }
+  .kv-val { font-weight: 700; font-size: .88rem; text-align:right; }
+
+  /* PILLS */
+  .pill-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { display:inline-block; padding: 3px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+  .pill-green { background: var(--teal-light); color: var(--teal); }
+  .pill-red { background: var(--red-light); color: var(--red); }
+  .pill-blue { background: var(--blue-light); color: var(--blue); }
+  .pill-amber { background: var(--amber-light); color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-icon { flex-shrink: 0; margin-top:1px; }
+  .alert-icon svg { width:15px; height:15px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red { background: var(--red-light); color: var(--red); border-left: 3px solid var(--red); }
+  .alert-red .alert-icon svg { stroke: var(--red); }
+  .alert-blue { background: var(--blue-light); color: var(--blue); border-left: 3px solid var(--blue); }
+  .alert-blue .alert-icon svg { stroke: var(--blue); }
+  .alert-green { background: var(--teal-light); color: var(--teal); border-left: 3px solid var(--teal); }
+  .alert-green .alert-icon svg { stroke: var(--teal); }
+  .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal { background: var(--teal-light); color: var(--teal); border-left: 3px solid var(--teal); }
+  .alert-teal .alert-icon svg { stroke: var(--teal); }
+  .alert strong { font-weight: 800; }
+
+  /* COMPLICATION CARDS */
+  .compl-card { background: var(--card); border: .5px solid var(--border); border-radius: 12px; padding: 13px 16px; border-left: 4px solid var(--red); margin-bottom: 10px; }
+  .compl-card.blue { border-left-color: var(--blue); }
+  .compl-card.amber { border-left-color: var(--amber); }
+  .compl-card.teal { border-left-color: var(--teal); }
+  .compl-card h4 { font-size: .84rem; font-weight: 700; margin-bottom: 6px; }
+
+  /* STEPS */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .84rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--bg); border: .5px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .78rem; flex-shrink: 0; color: var(--text2); }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); color: var(--text2); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: .5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* UL listes */
+  ul.list { list-style: none; padding: 0; }
+  ul.list li { padding: 3px 0 3px 14px; font-size: .83rem; position: relative; }
+  ul.list li::before { content: '—'; position: absolute; left: 0; color: var(--text2); }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: .75rem; font-weight: 700; margin-left: 6px; }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-item">Item 152 — Cardiologie / Infectiologie</div>
+    <div class="header-title">Endocardite infectieuse</div>
+    <div class="header-summary">
+      Infection de l'endocarde valvulaire ou prothétique secondaire à une bactériémie. Maladie rare mais grave (mortalité 20 %), diagnostiquée par hémocultures + échocardiographie, traitée par antibiothérapie bactéricide prolongée +/- chirurgie. La prévention repose sur l'antibioprophylaxie ciblée (groupe A + geste dentaire à risque).
+    </div>
+  </div>
+
+  <!-- VISION GLOBALE -->
+  <div class="vision-box">
+    <strong>Vue d'ensemble pédagogique</strong><br>
+    Ce chapitre demande de maîtriser la <strong>définition et le mécanisme</strong> (greffe microbienne sur endocarde lésé ou matériel), l'<strong>épidémiologie</strong> (35 cas/million/an, profil vieillissant, mortalité 20 %), les <strong>situations à risque</strong> (groupe A, matériel, bactériémie à CGP), les <strong>agents infectieux et portes d'entrée</strong>, la <strong>démarche diagnostique</strong> (hémocultures en 1er, ETT puis ETO, critères de Duke, bilan embolique), les <strong>principes thérapeutiques</strong> (antibiothérapie bactéricide IV prolongée, traitement de la porte d'entrée), la <strong>prévention primaire</strong> (antibioprophylaxie groupe A + geste dentaire) et les <strong>complications</strong> (cardiaques, emboliques, infectieuses).
+  </div>
+
+  <!-- PARTIE 1 : DÉFINITION & ÉPIDÉMIOLOGIE -->
+  <div class="section-title">
+    <span style="color:var(--purple)">1.</span> Définition &amp; Épidémiologie
+  </div>
+
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définition
+      </div>
+      <ul class="list">
+        <li>Infection de l'<strong>endocarde</strong> — le plus souvent <strong>valvulaire</strong></li>
+        <li>Peut toucher endocarde pariétal, prothèse valvulaire, sonde de PM</li>
+        <li>Origine bactérienne dans la grande majorité (plus rarement fongique)</li>
+        <li>Mécanisme : <strong>bactériémie/fongémie</strong> → greffe sur endothélium lésé ou matériel étranger → végétation, abcès, destruction valvulaire</li>
+        <li>Endocardites non infectieuses (lupique, marastique) = rares</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Épidémiologie
+      </div>
+      <div class="kv-row"><span class="kv-key">Incidence France</span><span class="kv-val">~35 cas/million/an</span></div>
+      <div class="kv-row"><span class="kv-key">Mortalité hospitalière</span><span class="kv-val" style="color:var(--red)">~20 %</span></div>
+      <div class="kv-row"><span class="kv-key">Âge moyen</span><span class="kv-val">62 ans</span></div>
+      <div class="kv-row"><span class="kv-key">EI liées aux soins</span><span class="kv-val">25–30 % (en hausse)</span></div>
+      <div class="kv-row"><span class="kv-key">Cœur sain</span><span class="kv-val">40 % des cas</span></div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 2 : FACTEURS DE RISQUE & AGENTS -->
+  <div class="section-title"><span style="color:var(--purple)">2.</span> Facteurs de risque &amp; Agents infectieux</div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Cardiopathies Groupe A <span class="badge badge-red">Haut risque</span>
+      </div>
+      <ul class="list">
+        <li><strong>Prothèse valvulaire</strong> (mécanique, biologique, homogreffe)</li>
+        <li><strong>Antécédent d'EI</strong></li>
+        <li><strong>Cardiopathie congénitale cyanogène</strong> (toute)</li>
+        <li>Cardiopathie congénitale réparée avec matériel prothétique <strong>&lt; 6 mois</strong> après procédure, ou à vie si shunt résiduel</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Cardiopathies Groupe B <span class="badge badge-amber">Risque intermédiaire</span>
+      </div>
+      <ul class="list">
+        <li>Valvulopathies : IA, IM, RA</li>
+        <li>Prolapsus valve mitrale</li>
+        <li>Bicuspidie aortique</li>
+        <li>Cardiopathies congénitales non cyanogènes (sauf CIA isolée)</li>
+        <li>Cardiomyopathie hypertrophique obstructive (avec souffle)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Agents infectieux &amp; Portes d'entrée
+    </div>
+    <table>
+      <thead>
+        <tr><th>Agent infectieux</th><th>Fréquence</th><th>Porte(s) d'entrée</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Staphylococcus aureus</strong></td><td><span class="badge badge-red">30 %</span></td><td>Cutanée (furoncles, plaies), cathéter/matériel endovasculaire, toxicomanie IV</td></tr>
+        <tr><td><strong>Streptocoques oraux</strong></td><td><span class="badge badge-amber">20 %</span></td><td>Bucco-dentaire (foyer infectieux, geste dentaire)</td></tr>
+        <tr><td><strong>S. gallolyticus (groupe D)</strong></td><td><span class="badge badge-amber">13 %</span></td><td>Digestive : polype/tumeur côlon, diverticulose, voie biliaire — <strong>coloscopie systématique</strong></td></tr>
+        <tr><td><strong>Entérocoques</strong></td><td><span class="badge badge-blue">10 %</span></td><td>Digestive, urinaire, matériel endovasculaire</td></tr>
+        <tr><td><strong>Staph. coagulase négative</strong></td><td><span class="badge badge-blue">10 %</span> (en hausse)</td><td>Matériel endovasculaire (prothèse, PM, défibrillateur), cathéter</td></tr>
+        <tr><td><strong>Groupe HACEK</strong></td><td rowspan="3" style="vertical-align:middle; text-align:center;"><span class="badge badge-teal">8 %</span></td><td>Bucco-dentaire</td></tr>
+        <tr><td><strong>Coxiella burnetii, Bartonella</strong></td><td>Intracellulaires — hémocultures négatives</td></tr>
+        <tr><td><strong>Candida spp.</strong></td><td>Cathéter, chirurgie digestive, toxicomanie IV</td></tr>
+        <tr><td><strong>EI à hémocultures négatives</strong></td><td><span class="badge badge-blue">5–10 %</span></td><td>ATB préalable (1ère cause), bactéries à croissance lente, intracellulaires</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-amber">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <div><strong>Piège — S. gallolyticus</strong> Toute EI à S. gallolyticus impose une coloscopie totale systématique à la recherche d'une lésion colique (polype, K colorectal). Ne pas l'omettre !</div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 3 : DIAGNOSTIC CLINIQUE -->
+  <div class="section-title"><span style="color:var(--purple)">3.</span> Présentation clinique</div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Signes cardinaux
+      </div>
+      <div style="margin-bottom:8px"><strong>Signes généraux</strong></div>
+      <div class="pill-wrap" style="margin-bottom:10px">
+        <span class="pill pill-red">Fièvre aiguë ou prolongée</span>
+        <span class="pill pill-red">Frissons</span>
+        <span class="pill pill-amber">AEG (asthénie, amaigrissement)</span>
+      </div>
+      <div style="margin-bottom:8px"><strong>Signes cardiaques</strong></div>
+      <div class="pill-wrap" style="margin-bottom:10px">
+        <span class="pill pill-red">Souffle cardiaque nouveau ou modifié</span>
+        <span class="pill pill-red">Insuffisance cardiaque G ou D</span>
+      </div>
+      <div style="margin-bottom:8px"><strong>Signes cutanés (immunologiques/emboliques)</strong></div>
+      <div class="pill-wrap">
+        <span class="pill pill-blue">Faux panaris d'Osler</span>
+        <span class="pill pill-blue">Érythème de Janeway</span>
+        <span class="pill pill-blue">Purpura vasculaire</span>
+        <span class="pill pill-blue">Hémorragies sous-unguéales en flammèche</span>
+        <span class="pill pill-blue">Taches de Roth (FO)</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Situations imposant de chercher une EI
+      </div>
+      <div class="alert alert-red" style="margin-bottom:8px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div>Tout <strong>souffle cardiaque fébrile</strong></div>
+      </div>
+      <div class="alert alert-red" style="margin-bottom:8px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div>Tout <strong>AVC fébrile</strong></div>
+      </div>
+      <div class="alert alert-red" style="margin-bottom:8px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div>Toute <strong>fièvre inexpliquée chez porteur de valvulopathie</strong></div>
+      </div>
+      <div style="margin-top:10px; font-size:.82rem; color:var(--text2)"><strong>Formes trompeuses :</strong> fièvre nue, lombalgies fébriles, arthralgies, absence de fièvre</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 4 : DIAGNOSTIC PARACLINIQUE -->
+  <div class="section-title"><span style="color:var(--purple)">4.</span> Démarche diagnostique</div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Hémocultures — examen clé N°1
+      </div>
+      <ul class="list">
+        <li><strong>3 paires</strong> (aéro-anaérobie) sur <strong>24h</strong>, espacées d'au moins 1h</li>
+        <li>Volume suffisant : <strong>40–60 mL</strong> chez l'adulte</li>
+        <li>Même en <strong>apyrexie</strong></li>
+        <li>Informer le laboratoire de la suspicion d'EI</li>
+        <li>Répéter si négatives à 24h (surtout si ATB préalable)</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:10px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div><strong>EI à HC négatives</strong> (5–10 %) : 1ère cause = ATB préalable → stopper ATB 72h si possible, puis refaire HC. Sinon : sérologie Coxiella, Bartonella, HC à incubation prolongée, PCR</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Échocardiographie — examen clé N°2
+      </div>
+      <div class="kv-row"><span class="kv-key">ETT (1ère intention)</span><span class="kv-val">Sensibilité ~70 %</span></div>
+      <div class="kv-row"><span class="kv-key">ETO (si ETT+ ou ETT– avec forte suspicion)</span><span class="kv-val">Sensibilité ≥ 90 %</span></div>
+      <div style="margin-top:10px; font-size:.82rem"><strong>Arguments écho d'EI :</strong></div>
+      <div class="pill-wrap" style="margin-top:6px">
+        <span class="pill pill-red">Végétation (masse mobile hyperéchogène)</span>
+        <span class="pill pill-red">Perforation / rupture de cordage</span>
+        <span class="pill pill-red">Abcès péri-valvulaire / fistule</span>
+        <span class="pill pill-red">Désinsertion prothèse / fuite paraprothétique</span>
+      </div>
+      <div class="alert alert-blue" style="margin-top:10px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+        <div>Écho normale <strong>n'élimine pas</strong> le diagnostic. Si forte présomption : répéter à 7–10 j</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Hiérarchisation selon état clinique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-red">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><strong>Urgence (sepsis, choc, chirurgie)</strong><br>HC + ATB probabiliste immédiatement + ETO en urgence</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-blue">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div><strong>Stabilité clinique</strong><br>HC × 3 sur 24h → attendre résultats → ATB adaptée + ETT puis ETO</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-size:.82rem; color:var(--text2)">ECG systématique dès la suspicion (dépiste trouble de conduction = abcès anneau, ischémie = embolie coronaire).</div>
+    <div style="margin-top:8px; font-size:.82rem; color:var(--text2)">Si écho non contributive : scanner cardiaque ou <strong>PET-scanner</strong>. Après confirmation : IRM cérébrale + scanner TAP systématiques.</div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 5 : EMBOLIES -->
+  <div class="section-title"><span style="color:var(--purple)">5.</span> Localisations emboliques</div>
+
+  <div class="alert alert-blue" style="margin-bottom:14px">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <div><strong>45 % des patients</strong> ont des lésions emboliques — souvent asymptomatiques. Recherche systématique car modifient la prise en charge.</div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Cœur gauche — bilan systématique
+      </div>
+      <table>
+        <thead><tr><th>Site</th><th>Examen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cérébral</strong> <span class="badge badge-red">2ème cause décès</span><br>AVC, abcès, anévrysme infectieux</td><td>IRM cérébrale +Gado (référence)<br>ou Scanner cérébral si IRM indispo</td></tr>
+          <tr><td><strong>Rate, rein, foie</strong><br>Abcès, infarctus</td><td>Scanner TAP avec injection</td></tr>
+          <tr><td><strong>Rachis</strong><br>Spondylodiscite</td><td>IRM rachidienne (si point d'appel)</td></tr>
+          <tr><td><strong>Coronaires</strong><br>Ischémie (emboles infectieux)</td><td>Coronarographie (si point d'appel)</td></tr>
+          <tr><td><strong>Trajets artériels</strong><br>Anévrysmes infectieux</td><td>Scanner TAP / artériographie cérébrale</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Cœur droit
+      </div>
+      <ul class="list">
+        <li>Embolies pulmonaires multiples et bilatérales</li>
+        <li>Abcès et infarctus pulmonaires</li>
+        <li>Bilan : <strong>Angioscanner thoracique systématique</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-teal" style="margin-bottom:0">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <div><strong>Bilan systématique EI cœur gauche :</strong> IRM cérébrale + Gado (ou scanner cérébral si IRM indispo) <strong>+</strong> Scanner TAP injecté — toujours réalisés, même en l'absence de signes cliniques (lésions fréquemment asymptomatiques)</div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 6 : TRAITEMENT -->
+  <div class="section-title"><span style="color:var(--purple)">6.</span> Traitement</div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Principes de l'antibiothérapie
+      </div>
+      <div class="pill-wrap" style="margin-bottom:12px">
+        <span class="pill pill-green">Bactéricide</span>
+        <span class="pill pill-green">Prolongée</span>
+        <span class="pill pill-green">Fortes doses (IV)</span>
+        <span class="pill pill-green">Adaptée aux HC</span>
+        <span class="pill pill-green">Synergique si nécessaire</span>
+        <span class="pill pill-green">Terrain pris en compte</span>
+      </div>
+      <div style="font-size:.82rem; color:var(--text2); margin-bottom:6px">Pourquoi difficile ? Endocarde peu vascularisé, végétation avasculaire, inoculum élevé, fibrine protège les bactéries, croissance lente</div>
+      <div class="kv-row"><span class="kv-key">Suivi efficacité</span><span class="kv-val">Clinique + HC négatives (écho non fiable à CT)</span></div>
+      <div class="kv-row"><span class="kv-key">EI sur prothèse</span><span class="kv-val">Avis chir. systématique (ATB seule insuffisante)</span></div>
+
+      <div class="alert alert-red" style="margin-top:12px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div><strong>ATB probabiliste sans délai si :</strong> sepsis/choc septique, forte suspicion clinique avec écho évocatrice, ou indication chirurgie urgente — juste après les HC</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Prise en charge de la porte d'entrée
+      </div>
+      <table>
+        <thead><tr><th>Germe</th><th>Action clé</th></tr></thead>
+        <tbody>
+          <tr><td>S. aureus / Staph. cogn. négative</td><td>Examen cutané + ablation matériel endovasculaire (cathéter, PM)</td></tr>
+          <tr><td>Streptocoques oraux / HACEK</td><td><strong>Orthopantomogramme + examen odonto systématique</strong></td></tr>
+          <tr><td>S. gallolyticus</td><td><strong>Coloscopie totale systématique</strong> + imagerie abdominale</td></tr>
+          <tr><td>Entérocoques</td><td>ECBU + imagerie urinaire + imagerie digestive</td></tr>
+          <tr><td>Candida</td><td>Ablation cathéter + avis chirurgical</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 7 : PRÉVENTION -->
+  <div class="section-title"><span style="color:var(--purple)">7.</span> Prévention</div>
+
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Antibioprophylaxie — indications strictes
+      </div>
+      <div class="alert alert-red" style="margin-bottom:10px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+        <div><strong>2 conditions CUMULATIVES requises :</strong><br>
+        <strong>(1)</strong> Patient <strong>Groupe A</strong> (prothèse valvulaire, ATCD EI, cardiopathie congénitale cyanogène)<br>
+        <strong>(2)</strong> Soin dentaire à haut risque : manipulation gencive, région péri-apicale, effraction muqueuse</div>
+      </div>
+      <div class="kv-row"><span class="kv-key">Molécule de 1ère intention</span><span class="kv-val">Amoxicilline PO dose unique 1h avant</span></div>
+      <div class="kv-row"><span class="kv-key">Allergie pénicilline</span><span class="kv-val">Clindamycine</span></div>
+      <div class="kv-row"><span class="kv-key">Autres cardiopathies / autres voies</span><span class="kv-val" style="color:var(--red)">PAS d'antibioprophylaxie</span></div>
+      <div style="margin-top:10px; font-size:.82rem; color:var(--text2)">Remettre une <strong>carte "patient à risque d'EI"</strong> à présenter avant tout soin bucco-dentaire.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Éducation à la santé (après un épisode d'EI)
+      </div>
+      <div style="font-size:.82rem; margin-bottom:8px; color:var(--text2)">ATCD d'EI = <strong>Groupe A</strong> = haut risque de récidive</div>
+      <ul class="list">
+        <li>Bonne hygiène bucco-dentaire + consultation odonto 2×/an</li>
+        <li>Hygiène cutanée stricte, désinfection rapide des plaies</li>
+        <li>Éviter effraction cutanéo-muqueuse : piercing, tatouage, acupuncture</li>
+        <li>Prise en charge d'une toxicomanie IV</li>
+        <li>Limiter les gestes invasifs endovasculaires</li>
+        <li>Suivi cardiologique régulier</li>
+        <li>Fièvre sans cause → HC systématiques ; <strong>ne pas donner ATB "à l'aveugle"</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PARTIE 8 : COMPLICATIONS -->
+  <div class="section-title"><span style="color:var(--purple)">8.</span> Complications</div>
+
+  <div class="alert alert-red" style="margin-bottom:14px">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <div><strong>Mortalité hospitalière 20–25 %.</strong> Principales causes de décès : <strong>1. Complications cardiaques</strong> — <strong>2. Embolies cérébrales</strong></div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div class="compl-card">
+        <h4>Complications cardiaques <span class="badge badge-red">1ère cause décès</span></h4>
+        <ul class="list">
+          <li>Insuffisance cardiaque aiguë (OAP, choc cardiogénique) — fuite valvulaire/paraprothétique sévère</li>
+          <li>Trouble de conduction (abcès intracardiaque) — surveiller ECG</li>
+          <li>Embolie coronarienne</li>
+          <li>Fistule intracardiaque</li>
+        </ul>
+      </div>
+      <div class="compl-card blue" style="margin-top:10px">
+        <h4>Complications emboliques cérébrales <span class="badge badge-red">2ème cause décès</span></h4>
+        <ul class="list">
+          <li>AVC ischémique, AIT</li>
+          <li>Rupture d'anévrysme infectieux → hémorragie intracrânienne</li>
+          <li>Séquelles neurologiques à long terme</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="compl-card amber">
+        <h4>Complications infectieuses</h4>
+        <ul class="list">
+          <li>Sepsis et choc septique</li>
+          <li>Abcès périphériques (drainage chir.)</li>
+        </ul>
+      </div>
+      <div class="compl-card teal" style="margin-top:10px">
+        <h4>Autres complications emboliques</h4>
+        <ul class="list">
+          <li>Embolie splénique → risque de rupture splénique</li>
+          <li>Spondylodiscite → compression médullaire possible</li>
+          <li>Ischémie aiguë de membre</li>
+          <li>Anévrysme infectieux → risque de rupture</li>
+          <li>Embolie pulmonaire (cœur droit)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SYNTHÈSE FINALE -->
+  <div class="section-title"><span style="color:var(--purple)">9.</span> Points-clés à retenir</div>
+
+  <div class="card" style="border:1.5px solid var(--teal)">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse examinable
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div><strong>Examens clés = HC × 3 + ETT/ETO</strong><br>Toujours avant ATB (sauf urgence)</div>
+        </div>
+        <div class="alert alert-green" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div><strong>ATB bactéricide IV prolongée</strong> adaptée aux HC + traitement porte d'entrée</div>
+        </div>
+        <div class="alert alert-green" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div><strong>Antibioprophylaxie</strong> = Groupe A + geste dentaire à risque seulement → Amoxicilline PO</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><strong>Piège S. gallolyticus</strong> → coloscopie systématique (K côlon)</div>
+        </div>
+        <div class="alert alert-amber" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><strong>HC négatives</strong> → 1ère cause = ATB préalable. Écho normale n'élimine pas le diagnostic</div>
+        </div>
+        <div class="alert alert-amber" style="margin-bottom:8px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><strong>40 % d'EI sur cœur sain</strong> — ne pas se rassurer sur l'absence de valvulopathie connue</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px; font-size:.75rem; color:var(--text2); text-align:center">
+    Source : UNESS / CNCEM — LiSa — Item 152 | Fiche générée pour révision ECNi
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 104 — Sclérose en plaques</title>
+<style>
+  :root {
+    --purple: #534AB7; --purple-light: #EEF0FF;
+    --teal: #1D9E75;   --teal-light: #E6F7F2;
+    --coral: #D85A30;  --coral-light: #FDF0EB;
+    --blue: #378ADD;   --blue-light: #EAF3FF;
+    --red: #E24B4A;    --red-light: #FFF0F0;
+    --amber: #F59E0B;  --amber-light: #FFFBEB;
+    --text: #1A1A2E;   --text-light: #6B7280;
+    --border: rgba(0,0,0,0.08); --bg: #F8F9FA;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #E8E8F0; --text-light: #9CA3AF;
+      --border: rgba(255,255,255,0.1); --bg: #1A1A2E;
+      --purple-light: #1E1A4A; --teal-light: #0D3D2E;
+      --coral-light: #3D1A0D; --blue-light: #0D2A4A;
+      --red-light: #3D1A1A; --amber-light: #3D2A0D;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: white; margin-bottom: 24px; }
+  .header-item { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .85; margin-bottom: 6px; }
+  .header-title { font-size: 1.65rem; font-weight: 800; margin-bottom: 12px; }
+  .header-intro { font-size: .89rem; opacity: .92; line-height: 1.65; }
+
+  /* Cards */
+  .card { background: white; border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+  @media (prefers-color-scheme: dark) { .card { background: #22223A; } }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Grilles */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Alertes */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+
+  /* KV rows */
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--border); gap: 8px; font-size: .84rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-light); flex-shrink: 0; }
+  .kv-val { font-weight: 700; text-align: right; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--purple-light); color: var(--purple); font-weight: 700; padding: 7px 10px; text-align: left; }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Steps */
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: #E5E7EB; color: #374151; font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-content { flex: 1; padding-top: 3px; }
+
+  /* Border cards */
+  .border-card { border-left: 4px solid; border-radius: 10px; padding: 9px 13px; margin-bottom: 8px; font-size: .84rem; line-height: 1.5; }
+  .bc-purple { border-color: var(--purple); background: var(--purple-light); }
+  .bc-teal   { border-color: var(--teal);   background: var(--teal-light);   }
+  .bc-blue   { border-color: var(--blue);   background: var(--blue-light);   }
+  .bc-red    { border-color: var(--red);    background: var(--red-light);    }
+  .bc-amber  { border-color: var(--amber);  background: var(--amber-light);  }
+  .bc-coral  { border-color: var(--coral);  background: var(--coral-light);  }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: .71rem; font-weight: 700; vertical-align: middle; }
+  .badge-purple { background: var(--purple); color: white; }
+  .badge-teal   { background: var(--teal);   color: white; }
+  .badge-coral  { background: var(--coral);  color: white; }
+  .badge-red    { background: var(--red);    color: white; }
+  .badge-amber  { background: var(--amber);  color: white; }
+  .badge-blue   { background: var(--blue);   color: white; }
+
+  /* Sub-title */
+  .sub-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--text-light); margin: 10px 0 6px; }
+
+  /* Divider */
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<div class="header">
+  <div class="header-item">Item 104 — Neurologie</div>
+  <div class="header-title">Sclérose en plaques (SEP)</div>
+  <div class="header-intro">
+    Maladie auto-immune démyélinisante du SNC de l'adulte jeune. Maîtriser : les <strong>critères de McDonald 2017</strong> (dissémination spatiale + temporelle), les <strong>symptômes révélateurs</strong> dont la NORB (urgence diagnostique), les <strong>modes évolutifs</strong> (RR 85%, PP 15%), les examens clés (IRM, PL, PEV), le <strong>traitement des poussées</strong> par corticoïdes IV, et les <strong>complications</strong> multiples à prendre en charge symptomatiquement.
+  </div>
+</div>
+
+<!-- ═══════════════ ÉPIDÉMIOLOGIE ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Prévalence France</span><span class="kv-val">1/1 000 — ~100 000 patients</span></div>
+      <div class="kv-row"><span class="kv-key">Sex-ratio</span><span class="kv-val">3 femmes / 1 homme</span></div>
+      <div class="kv-row"><span class="kv-key">Âge de début</span><span class="kv-val">20–40 ans</span></div>
+      <div class="kv-row"><span class="kv-key">Population</span><span class="kv-val">Caucasoïde +++</span></div>
+      <div class="kv-row"><span class="kv-key">Gradient géographique</span><span class="kv-val">Plus fréquente loin de l'équateur</span></div>
+    </div>
+    <div>
+      <div class="sub-title" style="margin-top:0">Causes multifactorielles</div>
+      <div class="border-card bc-purple">
+        <strong>Génétiques :</strong> concordance MZ 30% vs DZ 2-3% — gènes HLA de susceptibilité
+      </div>
+      <div class="border-card bc-blue">
+        <strong>Environnementales :</strong> EBV +++, carence en vitamine D, tabagisme actif/passif
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ PHYSIOPATHOLOGIE ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Physiopathologie
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="border-card bc-teal">
+        <strong>Auto-immunité à médiation cellulaire</strong> — cible : myéline du SNC (substance blanche)
+      </div>
+      <div class="border-card bc-teal">
+        Inflammation focale répétée → <strong>démyélinisation</strong> → conduction axonale altérée → symptômes topographiques
+      </div>
+    </div>
+    <div>
+      <div class="border-card bc-blue">
+        <strong>Remyélinisation</strong> par oligodendrocytes → récupération partielle ou complète (= poussée)
+      </div>
+      <div class="border-card bc-red">
+        <strong>Dégénérescence axonale secondaire</strong> → évolution progressive irréversible (formes progressives)
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ SYMPTÔMES RÉVÉLATEURS ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Symptômes révélateurs — Installation subaiguë (85%) ou progressive (15%)
+  </div>
+  <table>
+    <thead>
+      <tr><th>Territoire</th><th>Symptômes / Signes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Nerf optique</strong><br><span class="badge badge-red">NORB</span></td>
+        <td>BAV subaiguë, douleur périorbitaire à la mobilisation, scotome central, dyschromatopsie, FO normal</td>
+      </tr>
+      <tr>
+        <td><strong>Moelle épinière</strong><br><span class="badge badge-purple">Myélite</span></td>
+        <td>Déficit sensitif/moteur bilatéral, Brown-Séquard, signe de Lhermitte, troubles vésico-sphinctériens (RAU, incontinence)</td>
+      </tr>
+      <tr>
+        <td><strong>Tronc cérébral</strong></td>
+        <td>Vertiges, diplopie, ophtalmoplégie internucléaire (OIN), paralysie faciale, névralgie faciale</td>
+      </tr>
+      <tr>
+        <td><strong>Cervelet</strong></td>
+        <td>Ataxie, incoordination, dysarthrie, dysphagie, nystagmus, tremblements</td>
+      </tr>
+      <tr>
+        <td><strong>Encéphale</strong></td>
+        <td>Signes sensitifs/moteurs unilatéraux, boiterie, faiblesse musculaire</td>
+      </tr>
+      <tr>
+        <td><strong>Formes progressives</strong><br><span class="badge badge-coral">15%</span></td>
+        <td>Paraparésie ou ataxie progressive sur &ge; 6-12 mois — pas de poussée identifiable</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════ DÉFINITION POUSSÉE ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Définition d'une poussée
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Apparition</span><span class="kv-val">Subaiguë — quelques heures à jours</span></div>
+      <div class="kv-row"><span class="kv-key">Durée minimale</span><span class="kv-val"><strong>&ge; 24 h</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Intervalle entre 2 poussées</span><span class="kv-val"><strong>&ge; 30 jours</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Évolution</span><span class="kv-val">Récupération spontanée partielle ou complète</span></div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>NON poussées :</strong> fatigue isolée — symptômes survenant dans un contexte de fièvre (= phénomène d'Uhthoff)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ NORB ═══════════════ -->
+<div class="card" style="border-color: var(--blue);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    NORB — Névrite Optique Rétrobulbaire &nbsp;<span class="badge badge-red">URGENCE DIAGNOSTIQUE</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub-title" style="margin-top:0">Signes cliniques</div>
+      <div class="kv-row"><span class="kv-key">BAV</span><span class="kv-val">Subaiguë, unilatérale</span></div>
+      <div class="kv-row"><span class="kv-key">Douleur</span><span class="kv-val">Périorbitaire, à la mobilisation oculaire</span></div>
+      <div class="kv-row"><span class="kv-key">Champ visuel</span><span class="kv-val">Scotome central ou paracentral</span></div>
+      <div class="kv-row"><span class="kv-key">Vision couleurs</span><span class="kv-val">Dyschromatopsie</span></div>
+      <div class="kv-row"><span class="kv-key">Fond d'œil</span><span class="kv-val">Normal (rare œdème papillaire)</span></div>
+      <div class="kv-row"><span class="kv-key">Oeil rouge</span><span class="kv-val"><strong>ABSENT</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Récupération</span><span class="kv-val">80 % complète à 6 mois</span></div>
+      <div class="kv-row"><span class="kv-key">Phénomène d'Uhthoff</span><span class="kv-val">BAV transitoire effort/chaleur ≠ poussée</span></div>
+    </div>
+    <div>
+      <div class="sub-title" style="margin-top:0">Bilan en urgence</div>
+      <div class="border-card bc-blue"><strong>AV + Champ visuel + FO</strong> — sévérité, scotome, œdème papillaire</div>
+      <div class="border-card bc-blue"><strong>IRM nerfs optiques</strong> avec injection — lésion inflammatoire, éliminer compression</div>
+      <div class="border-card bc-blue"><strong>PEV</strong> (2e temps) — allongement latence P100 = démyélinisation NF optique</div>
+      <div class="border-card bc-blue"><strong>OCT</strong> — diagnostic (œdème papillaire) + pronostic</div>
+      <div class="alert alert-red" style="margin-top:10px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Traitement dès confirmation :</strong> méthylprednisolone forte dose IV ou PO.<br><strong>JAMAIS petites doses per os</strong> (pronostic visuel aggravé).</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub-title">Diagnostics différentiels de BAV à FO normal</div>
+  <div class="grid2">
+    <div class="border-card bc-amber">
+      <strong>NOIA</strong> (neuropathie optique ischémique antérieure) : BAV brutale, indolore, altération altitudinale du champ visuel
+    </div>
+    <div class="border-card bc-red">
+      <strong>NMO / MOGAD</strong> : anti-AQP4 ou anti-MOG — NORB sévère ou bilatérale, pronostic plus péjoratif — à évoquer systématiquement
+    </div>
+  </div>
+  <div class="pills" style="margin-top:6px">
+    <span class="pill pill-purple">Sarcoïdose</span>
+    <span class="pill pill-purple">Lupus</span>
+    <span class="pill pill-purple">Gougerot-Sjögren</span>
+    <span class="pill pill-purple">Behçet</span>
+    <span class="pill pill-purple">NORB idiopathique / virale / post-infectieuse</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ DIAGNOSTIC ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic — Critères de McDonald 2017
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>4 piliers : <strong>dissémination spatiale + dissémination temporelle + inflammation LCS + pas de meilleure explication</strong></div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub-title">Dissémination spatiale</div>
+      <div class="border-card bc-purple">
+        &ge; 2 lésions IRM dans &ge; 2 des <strong>4 zones stratégiques</strong> :<br>
+        <div class="pills" style="margin-top:6px">
+          <span class="pill pill-purple">Périventriculaire</span>
+          <span class="pill pill-purple">Juxta-corticale/corticale</span>
+          <span class="pill pill-purple">Infratentorielle</span>
+          <span class="pill pill-purple">Médullaire</span>
+        </div>
+      </div>
+      <div class="border-card bc-purple">
+        OU &ge; 2 localisations cliniques distinctes (ex : NORB + myélite)
+      </div>
+    </div>
+    <div>
+      <div class="sub-title">Dissémination temporelle</div>
+      <div class="border-card bc-blue">&ge; 2 poussées séparées de &ge; 30 jours</div>
+      <div class="border-card bc-blue">OU lésions d'âge différent sur 1 IRM (avec + sans prise de contraste)</div>
+      <div class="border-card bc-blue">OU nouvelle lésion T2 sur IRM de suivi</div>
+      <div class="border-card bc-blue">OU progression &ge; 1 an (formes PP)</div>
+      <div class="border-card bc-teal" style="margin-top:4px">
+        <strong>Substitut :</strong> si critère temporel absent → <strong>bandes oligoclonales LCS (&ge; 2)</strong> peut remplacer le critère temporel
+      </div>
+    </div>
+  </div>
+  <div class="sub-title">Ponction lombaire — Inflammation du LCS</div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Bandes oligoclonales</span><span class="kv-val">&ge; 2 en iso-électrofocalisation</span></div>
+      <div class="kv-row"><span class="kv-key">Index IgG</span><span class="kv-val">&gt; 0,7 (sécrétion intrathécale)</span></div>
+      <div class="kv-row"><span class="kv-key">Protéinorachie</span><span class="kv-val">Augmentée dans 25% (&lt; 1 g/L)</span></div>
+      <div class="kv-row"><span class="kv-key">Cytorachie</span><span class="kv-val">&gt; 4 élts/mm³ dans 1/3 — mononucléés &lt; 50/mm³</span></div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> LCS peut être <em>normal</em> dans la SEP — PL non systématique si critères McDonald déjà remplis. Sert aussi à éliminer les diagnostics différentiels.</div>
+      </div>
+    </div>
+  </div>
+  <div class="sub-title">Arguments du contexte</div>
+  <div class="pills">
+    <span class="pill pill-blue">Sujet jeune</span>
+    <span class="pill pill-blue">Atteinte substance blanche SNC</span>
+    <span class="pill pill-blue">Pas d'atteinte extra-neurologique</span>
+    <span class="pill pill-blue">Pas de syndrome inflammatoire général</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ IRM & IMAGERIE ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Imagerie — IRM (examen de référence)
+  </div>
+  <table>
+    <thead>
+      <tr><th>Présentation clinique</th><th>IRM initiale</th><th>IRM complémentaire</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Myélite</strong></td>
+        <td>IRM médullaire</td>
+        <td>IRM cérébrale si SEP évoquée (4 zones stratégiques, dissémination)</td>
+      </tr>
+      <tr>
+        <td><strong>NORB / atteinte encéphalique</strong></td>
+        <td>IRM cérébrale</td>
+        <td>IRM médullaire si critères non remplis (utile aussi pour pronostic)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="grid2" style="margin-top:12px">
+    <div class="border-card bc-blue"><strong>T2/FLAIR :</strong> hypersignal = lésions de démyélinisation (charge lésionnelle)</div>
+    <div class="border-card bc-blue"><strong>T1 + Gadolinium :</strong> prise de contraste = lésion active récente (rupture BHE)</div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>PEV :</strong> indiqués uniquement si dissémination spatiale non remplie avec tableau clinique compatible. Allongement de la latence P100 = atteinte infra-clinique du nerf optique.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ DIAGNOSTICS DIFFÉRENTIELS ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostics différentiels
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub-title" style="margin-top:0">Maladies limitées au SNC</div>
+      <div class="border-card bc-red"><strong>NMO</strong> (neuromyélite optique) : anti-AQP4 — NORB + myélite sévère, pronostic péjoratif</div>
+      <div class="border-card bc-red"><strong>MOGAD</strong> : anti-MOG — NORB bilatérale possible</div>
+      <div class="border-card bc-coral"><strong>ADEM</strong> : encéphalite post-infectieuse, surtout enfant, monophasique</div>
+    </div>
+    <div>
+      <div class="sub-title" style="margin-top:0">Maladies systémiques</div>
+      <div class="pills">
+        <span class="pill pill-purple">Sarcoïdose</span>
+        <span class="pill pill-purple">Lupus</span>
+        <span class="pill pill-purple">Behçet</span>
+        <span class="pill pill-purple">Gougerot-Sjögren</span>
+        <span class="pill pill-purple">Infections neuro-tropiques</span>
+        <span class="pill pill-purple">Artérites cérébrales</span>
+      </div>
+      <div class="alert alert-red" style="margin-top:10px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Drapeaux rouges :</strong> AEG, atteinte extra-neurologique, syndrome inflammatoire biologique, méningite, absence de bandes oligoclonales</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ MODES ÉVOLUTIFS & PRONOSTIC ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Modes évolutifs & Pronostic
+  </div>
+  <table>
+    <thead>
+      <tr><th>Forme</th><th>Description</th><th>Fréquence</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Rémittente-récurrente (RR)</strong></td>
+        <td>Poussées + récupération variable, séquelles stables entre 2 épisodes</td>
+        <td><span class="badge badge-teal">85 %</span> des débuts</td>
+      </tr>
+      <tr>
+        <td><strong>Secondairement progressive (SP)</strong></td>
+        <td>Évolution naturelle tardive de la RR — phase de progression après 15-20 ans en moyenne. Des poussées peuvent survenir sur la progression.</td>
+        <td>Tous patients à long terme</td>
+      </tr>
+      <tr>
+        <td><strong>Primaire progressive (PP)</strong></td>
+        <td>Progression continue dès le début, début plus tardif (~40 ans), pas de poussée identifiable</td>
+        <td><span class="badge badge-coral">15 %</span> des débuts</td>
+      </tr>
+      <tr>
+        <td><strong>Maladie active</strong></td>
+        <td>Poussée clinique ET/OU nouvelle lésion T2 ou Gado+ dans l'année précédente — oriente les indications thérapeutiques</td>
+        <td>Concept thérapeutique</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="grid2" style="margin-top:12px">
+    <div>
+      <div class="kv-row"><span class="kv-key">Espérance de vie</span><span class="kv-val">Peu modifiée</span></div>
+      <div class="kv-row"><span class="kv-key">Sans traitement</span><span class="kv-val">1/3 → fauteuil roulant — 1/4 évolution bénigne</span></div>
+      <div class="kv-row"><span class="kv-key">Pronostic individuel</span><span class="kv-val">Imprévisible — grande variabilité</span></div>
+    </div>
+    <div>
+      <div class="sub-title" style="margin-top:0">Facteurs de bon pronostic</div>
+      <div class="pills">
+        <span class="pill pill-teal">Début jeune</span>
+        <span class="pill pill-teal">Forme RR initiale</span>
+        <span class="pill pill-teal">Long délai inter-poussées</span>
+        <span class="pill pill-teal">NORB inaugurale</span>
+        <span class="pill pill-teal">Faible charge lésionnelle T2</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ TRAITEMENT POUSSÉE ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement d'une poussée
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Évaluer le retentissement fonctionnel</strong><br>Poussée invalidante ou peu gênante ?</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Poussée invalidante</strong><br>Méthylprednisolone <strong>1 g/j × 3 jours</strong> IV ou per os</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Poussée peu gênante</strong><br>Abstention thérapeutique à discuter</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Effet anti-inflammatoire → récupération plus rapide. <strong>N'a pas d'effet sur la prévention des poussées futures.</strong></div>
+      </div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>NORB :</strong> jamais de petites doses de corticoïdes per os — risque d'aggravation du pronostic visuel.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ COMPLICATIONS ═══════════════ -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Complications & Traitement symptomatique
+  </div>
+  <table>
+    <thead>
+      <tr><th>Complication</th><th>Traitement</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Troubles moteurs</strong><br>Déficit, ataxie, perte d'autonomie</td>
+        <td>Kinésithérapie, ergothérapie, appareillages (canne, béquille, fauteuil)</td>
+      </tr>
+      <tr>
+        <td><strong>Spasticité pyramidale</strong></td>
+        <td>Baclofène / dantrolène — kinésithérapie — toxine botulinique locale — pompe intrathécale (formes sévères)</td>
+      </tr>
+      <tr>
+        <td><strong>Troubles urinaires</strong><br>Hyperactivité vésicale + dysurie</td>
+        <td>Bilan urodynamique + écho résidu post-mictionnel<br>Hyperactivité : anticholinergiques ou toxine botulinique intradétrusorienne<br>Dysurie : alphabloquants<br>Résidu significatif : autosondages intermittents</td>
+      </tr>
+      <tr>
+        <td><strong>Infections urinaires</strong></td>
+        <td>Traitement si <strong>symptomatiques uniquement</strong> — bactériurie asymptomatique = pas de traitement</td>
+      </tr>
+      <tr>
+        <td><strong>Troubles sexuels</strong></td>
+        <td>Médicamenteux + suivi sexologique/psychothérapique (dépistage systématique, y compris chez la femme)</td>
+      </tr>
+      <tr>
+        <td><strong>Douleurs neuropathiques</strong></td>
+        <td>Antalgiques classiques, tricycliques, antiépileptiques</td>
+      </tr>
+      <tr>
+        <td><strong>Fatigue</strong></td>
+        <td>Activité physique adaptée — amantadine, modafinil (peu efficaces)</td>
+      </tr>
+      <tr>
+        <td><strong>Syndrome dépressif</strong></td>
+        <td>Psychothérapie — antidépresseurs si besoin</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Une ITU symptomatique peut aggraver la spasticité (épine irritative). Les complications sont très hétérogènes entre patients — la prise en charge est individualisée.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════ POINTS-CLÉS À RETENIR ═══════════════ -->
+<div class="card" style="border: 1.5px solid var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir — ECNi
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Qui ?</strong> Femme 20-40 ans, caucasoïde, gradient Nord-Sud, EBV — maladie auto-immune cellulaire ciblant la myéline du SNC.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>NORB = urgence diagnostique :</strong> BAV subaiguë + douleur à la mobilisation + FO normal + récupération 80% à 6 mois. Traitement = méthylprednisolone IV/PO forte dose (jamais petites doses PO).</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>McDonald 2017 :</strong> dissémination spatiale (&ge; 2 zones parmi 4) + temporelle (&ge; 2 poussées séparées de &ge; 30j ou lésions d'âges différents) ± bandes oligoclonales LCS (&ge; 2) si critère temporel absent.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Poussée invalidante :</strong> méthylprednisolone 1 g/j × 3j IV ou PO — accélère la récupération mais ne prévient pas les futures poussées.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Modes évolutifs :</strong> RR (85%, début) → SP (tardive, 15-20 ans) — PP (15%, début ~40 ans). Maladie active = poussée et/ou nouvelle lésion IRM dans l'année.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Pièges classiques :</strong> phénomène d'Uhthoff (BAV effort/chaleur) ≠ poussée — fatigue isolée ≠ poussée — LCS normal ≠ SEP exclue — bactériurie asymptomatique = pas de traitement — petites doses corticoïdes per os contre-indiquées dans la NORB.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Drapeaux rouges → évoquer un DD :</strong> AEG, atteinte extra-neurologique, syndrome inflammatoire biologique, méningite, absence de bandes oligoclonales — penser NMO (anti-AQP4), MOGAD (anti-MOG), sarcoïdose, lupus.</div>
+  </div>
+</div>
+
+</div><!-- fin .page -->
+</body>
+</html>

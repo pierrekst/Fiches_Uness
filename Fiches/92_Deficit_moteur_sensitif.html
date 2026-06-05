@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item 92 - Déficit moteur et/ou sensitif des membres</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        :root {
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --purple: #534AB7;
+            --teal: #1D9E75;
+            --coral: #D85A30;
+            --blue: #378ADD;
+            --red: #E24B4A;
+            --red-light: rgba(226, 75, 74, 0.1);
+            --blue-light: rgba(55, 138, 221, 0.1);
+            --teal-light: rgba(29, 158, 117, 0.1);
+            --amber-light: rgba(251, 146, 60, 0.1);
+            --amber: #d97706;
+            --border: #e5e5e5;
+            --card-bg: #fafafa;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            font-size: 0.94rem;
+        }
+        .page {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+        h2 {
+            font-size: 1.15rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        h3 {
+            font-size: 0.95rem;
+            margin-top: 18px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 20px 0;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 0.5px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .card-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-icon svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: #fff;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .icon-purple { background: var(--purple); }
+        .icon-teal { background: var(--teal); }
+        .icon-coral { background: var(--coral); }
+        .icon-blue { background: var(--blue); }
+        .icon-red { background: var(--red); }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            font-size: 0.82rem;
+        }
+        th {
+            background: #f0f0f0;
+            border: 0.5px solid var(--border);
+            padding: 10px 8px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text);
+        }
+        td {
+            border: 0.5px solid var(--border);
+            padding: 10px 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+        td[colspan] {
+            text-align: center;
+            vertical-align: middle;
+            font-weight: 700;
+        }
+
+        .alert {
+            border-radius: 10px;
+            padding: 11px 16px;
+            font-size: 0.84rem;
+            margin-bottom: 10px;
+            line-height: 1.55;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .alert strong { font-weight: 800; }
+        .alert-red { background: var(--red-light); color: var(--red); border-left: 3px solid var(--red); }
+        .alert-blue { background: var(--blue-light); color: var(--blue); border-left: 3px solid var(--blue); }
+        .alert-green { background: var(--teal-light); color: var(--teal); border-left: 3px solid var(--teal); }
+        .alert-amber { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .grid2 .card { margin-bottom: 0; }
+
+        .kv-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 0.5px solid var(--border);
+            font-size: 0.82rem;
+        }
+        .kv-row:last-child { border-bottom: none; }
+        .kv-key { font-weight: 600; }
+        .kv-val { text-align: right; color: #666; }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+        .pill-purple { background: rgba(83, 74, 183, 0.25); color: var(--purple); }
+        .pill-red { background: rgba(226, 75, 74, 0.25); color: var(--red); }
+        .pill-teal { background: rgba(29, 158, 117, 0.25); color: var(--teal); }
+        .pill-blue { background: rgba(55, 138, 221, 0.25); color: var(--blue); }
+        .pill-coral { background: rgba(216, 90, 48, 0.25); color: var(--coral); }
+
+        .step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .step-text { flex: 1; }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        li { margin-bottom: 6px; }
+
+        .compl-card {
+            background: var(--card-bg);
+            border: 0.5px solid var(--border);
+            border-left: 3px solid var(--red);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        .compl-card .compl-title {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .synthesis {
+            background: rgba(29, 158, 117, 0.08);
+            border: 1px solid #cce5d9;
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 20px;
+            color: #1a1a1a;
+        }
+        .synthesis strong { color: var(--teal); }
+    </style>
+</head>
+<body>
+<div class="page">
+
+<h1>Item 92 — Déficit moteur et/ou sensitif des membres</h1>
+<div class="subtitle">
+    <strong>Objectif :</strong> Maîtriser la démarche diagnostique syndromique et topographique devant tout déficit moteur ou sensitif des membres. Identifier rapidement le niveau de la lésion (central vs périphérique), reconnaître les syndromes médullaires singuliers, hiérarchiser les examens, prévenir les complications graves (thromboembolisme, escarres, algodystrophie).
+</div>
+
+<hr>
+
+<h2>1. Démarche diagnostique syndromique</h2>
+<div class="alert alert-blue">
+    <div><strong>Objectif fondamental :</strong> Chaque déficit moteur/sensitif doit être classé rapidement en 5 syndromes (pyramidal, périphérique, myasthénique, myogène) grâce aux signes cliniques associés (tonus, ROT, réflexe cutané plantaire, amyotrophie, cinétique, distribution).</div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-purple"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        Tableau comparatif des 5 syndromes moteurs
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th style="width:18%;">Syndrome</th>
+        <th style="width:16%;">Déficit moteur</th>
+        <th style="width:14%;">ROT &amp; RCP</th>
+        <th style="width:14%;">Tonus</th>
+        <th style="width:12%;">Amyotrophie</th>
+        <th style="width:14%;">Signes associés</th>
+        <th style="width:12%;">Marche</th>
+    </tr>
+    <tr>
+        <td><strong>Pyramidal (SNC)</strong><br>Motoneuraone central</td>
+        <td>Hémiplégie ou para/tétraplégie<br>Prédomine extenseurs MS, fléchisseurs MI</td>
+        <td>Vifs, diffusés<br>RCP en extension (Babinski)</td>
+        <td>Spasticité (augmente à la vitesse)</td>
+        <td>Globale si ancien (atrophie de désusage)</td>
+        <td>Trépidation épileptoïde<br>Clonus</td>
+        <td>En fauchant</td>
+    </tr>
+    <tr>
+        <td><strong>Périphérique (SNP)</strong><br>Motoneuraone périphérique</td>
+        <td>Radiculaire, tronculaire, poly-neuropathie<br>Longueur-dépendant si poly</td>
+        <td>Diminués ou abolis selon territoire</td>
+        <td>Normal ou hypotonie</td>
+        <td>Après semaines/mois (vraie amyotrophie)</td>
+        <td>Crampes, fasciculations<br>Myalgies</td>
+        <td>Steppage</td>
+    </tr>
+    <tr>
+        <td><strong>Myasthénique</strong><br>Jonction neuromusculaire</td>
+        <td>Fluctuant, fatigabilité<br>Diplopie, ptosis, muscles pharyngés</td>
+        <td>Normaux</td>
+        <td>Normal</td>
+        <td>Normale</td>
+        <td>Amélioration au repos<br>Aggravation à l'effort répété</td>
+        <td>Fatigabilité fluctuante</td>
+    </tr>
+    <tr>
+        <td><strong>Myogène</strong><br>Muscle</td>
+        <td>Proximaux, axiaux, respiratoires<br>Faiblesse symétrique habituelle</td>
+        <td>Normaux</td>
+        <td>Normal ou hypotonie</td>
+        <td>Oui, proximale</td>
+        <td>Dyspnée d'effort<br>Peut avoir CPK élévés</td>
+        <td>Dandinante</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>2. Démarche topographique : localisations selon la répartition des déficits</h2>
+
+<h3>A. Atteinte du système nerveux central (SNC)</h3>
+
+<table>
+    <tr>
+        <th>Localisation</th>
+        <th>Déficit moteur</th>
+        <th>Déficit sensitif</th>
+        <th>Signes associés</th>
+    </tr>
+    <tr>
+        <td><strong>Cortical</strong></td>
+        <td>Hémicorporel<br>(peut être partiel : brachio-facial, MI seul)</td>
+        <td>Hémicorporel, même topographie que motrice</td>
+        <td>Aphasie si hémisphère gauche<br>Héminégligence si droit</td>
+    </tr>
+    <tr>
+        <td><strong>Sous-cortical</strong></td>
+        <td>Hémicorporel proportionnel<br>(touche tout l'hémicorps pareillement)</td>
+        <td>Peut être absent<br>ou même topographie que motrice</td>
+        <td>Dépend de la structure (thalamus, capsule interne, noyaux gris)</td>
+    </tr>
+    <tr>
+        <td><strong>Tronc cérébral</strong></td>
+        <td>Hémicorporel épargnant la face<br>+ atteinte paires crâniennes homolatérales<br>= SYNDROME ALTERNE</td>
+        <td>Hémicorporel épargnant la face ± hémiface controlatérale</td>
+        <td>Exemple : Syndrome de Wallenberg<br>(vertige, Horner, HVC céreb, anesthésie face, paralysie voile/larynx controlatéral)</td>
+    </tr>
+    <tr>
+        <td><strong>Moelle</strong></td>
+        <td><strong>Tétraplégie</strong> si lésion cervicale/renflementcervical<br><strong>Paraplégie</strong> si lésion sous-cervicale<br>Niveau sensitif souvent plus bas que la lésion anatomique</td>
+        <td>Troubles tous modes en dessous du niveau lesionnel</td>
+        <td>Syndrome lésionnel possible (douleur médullaire)<br>Troubles génito-sphinctériens (queue de cheval/cône terminal)</td>
+    </tr>
+</table>
+
+<hr>
+
+<h3>B. Atteinte du système nerveux périphérique (SNP)</h3>
+
+<table>
+    <tr>
+        <th>Étiologie</th>
+        <th>Déficit moteur</th>
+        <th>Déficit sensitif</th>
+        <th>ROT</th>
+        <th>Signes distinctifs</th>
+    </tr>
+    <tr>
+        <td><strong>Corne antérieure</strong><br>(ex : SLA)</td>
+        <td>Oui, territoires variés<br>Progressif</td>
+        <td>Préservé</td>
+        <td>Parfois vifs et diffusés</td>
+        <td><strong>Amyotrophie + fasciculations + crampes</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Racine</strong></td>
+        <td>Oui, muscles innervés par la racine<br>(ex : L5 = tibial antérieur + moyen glutéal)</td>
+        <td>Oui, territoire radiculaire<br>Souvent douleur radiculaire</td>
+        <td>Aboli si ROT sur cette racine<br>(pas de ROT L5, par exemple)</td>
+        <td>Trajet douloureux spécifique<br>Anesthésie en selle si queue de cheval</td>
+    </tr>
+    <tr>
+        <td><strong>Tronc nerveux</strong></td>
+        <td>Oui, muscles innervés en aval<br>(ex : radial = extenseurs doigts/poignet)</td>
+        <td>Oui, territoire tronculaire spécifique<br>(ex : médian = 3 doigts + 1/2 du 4e)</td>
+        <td>Réduit/aboli si ROT sur ce tronc<br>(pas toujours)</td>
+        <td>Amyotrophie localisée<br>(ex : thénar en Médian)</td>
+    </tr>
+    <tr>
+        <td><strong>Polyneuropathie</strong></td>
+        <td>Oui, distale symétrique aux MI<br>Habituellement moins que sensitif</td>
+        <td><strong>Oui, longueur-dépendant</strong><br>(socquettes, chaussettes, mi-bas…)</td>
+        <td>Achilléens réduits/abolis surtout</td>
+        <td>Trouble trophiques distaux<br>Atrophie distal MI</td>
+    </tr>
+    <tr>
+        <td><strong>Polyradiculonévrite aiguë</strong></td>
+        <td>Oui, proximale + distale<br>Souvent symétrique</td>
+        <td>Oui, assez globale<br>Pas systématisable</td>
+        <td>Réduits/abolis de façon diffuse</td>
+        <td>Progression ascendante rapide<br>Ataxie fréquente</td>
+    </tr>
+    <tr>
+        <td><strong>Neuronopathie sensitive</strong><br>(ganglionopathie)</td>
+        <td>Non</td>
+        <td>Oui, très variable<br>Pas systématisable</td>
+        <td>Réduits/abolis diffusément</td>
+        <td>Atteinte sensitive isolée</td>
+    </tr>
+</table>
+
+<hr>
+
+<h2>3. Circonstances de l'atteinte : cinétique diagnostique</h2>
+
+<div class="grid2">
+    <div class="card">
+        <div class="card-title">
+            <div class="card-icon icon-red"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/></svg></div>
+            Atteinte brutale
+        </div>
+        <div style="font-size:0.82rem;">
+            <strong>Délai :</strong> minutes à heures<br>
+            <strong>Diagnose :</strong> <span class="pill pill-red">AVC ischémique</span> <span class="pill pill-red">Hémorragie</span> <span class="pill pill-red">Traumatisme</span>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <div class="card-icon icon-coral"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            Aggravation rapide
+        </div>
+        <div style="font-size:0.82rem;">
+            <strong>Délai :</strong> jours à semaines<br>
+            <strong>Diagnose :</strong> <span class="pill pill-blue">Inflammatoire</span> <span class="pill pill-blue">Infectieux</span> <span class="pill pill-blue">Tumoral</span>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <div class="card-icon icon-teal"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+            Aggravation lente
+        </div>
+        <div style="font-size:0.82rem;">
+            <strong>Délai :</strong> mois à années<br>
+            <strong>Diagnose :</strong> <span class="pill pill-teal">Dégénératif</span> <span class="pill pill-teal">Héréditaire</span>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-title">
+            <div class="card-icon icon-purple"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            Transitoire
+        </div>
+        <div style="font-size:0.82rem;">
+            <strong>Points clés :</strong><br>
+            ✓ AIT : brutal, max d'emblée<br>
+            ✓ Épilepsie : 2-3 sec, stéréotypé<br>
+            ✓ Migraine : minutes, progressif
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h2>4. Complications du déficit moteur (surtout MI)</h2>
+
+<h3>A. Complications générales</h3>
+<div class="compl-card">
+    <div class="compl-title">Thromboembolisme (GRAVE)</div>
+    Alitement + immobilité = TVP/EP. Mesures : anticoagulation préventive, mobilisation, stimulation mécanique retour veineux.
+</div>
+<div class="compl-card">
+    <div class="compl-title">Bronchopneumopathie par encombrement</div>
+    Alitement favorise encombrement ; fausses routes aggravées si atteinte bulbaire. Kinésithérapie respiratoire.
+</div>
+<div class="compl-card">
+    <div class="compl-title">Chutes</div>
+    Déficit moteur + trouble proprioceptif → risque fracture, traumatisme crânien. Prévention : réadaptation progressive.
+</div>
+
+<h3>B. Complications locorégionales</h3>
+<div class="compl-card">
+    <div class="compl-title">Escarres (talons, sacrum)</div>
+    Prévention : décubitus latéral alterné, massages pluriquotidiens, mobilisation, matériel de décharge.
+</div>
+<div class="compl-card">
+    <div class="compl-title">Enraidissement et rétraction</div>
+    Spasticité pyramidale → périarthrite scapulohumérale, ostéome para-articulaire. Traitement : kinésithérapie, toxine botulique.
+</div>
+<div class="compl-card">
+    <div class="compl-title">Algoneurodystrophie du MS</div>
+    Prévention : kinésithérapie douce et indolore. Traitement : repos, refroidissement.
+</div>
+<div class="compl-card">
+    <div class="compl-title">Traumatismes sur membre anesthésique</div>
+    Brûlures non perçues à la main, mal perforant du pied. Prévention : protection, éducation du patient.
+</div>
+
+<hr>
+
+<h2>5. Hiérarchisation des examens complémentaires</h2>
+
+<div class="alert alert-blue">
+    <div><strong>Règle d'or :</strong> Aucun examen systématique. Le choix et l'ordre dépendent de la localisation supposée (analyses syndromique et topographique).</div>
+</div>
+
+<h3>Par présentation clinique</h3>
+
+<div class="step">
+    <div class="step-num">1</div>
+    <div class="step-text">
+        <strong>Hémiplégie</strong><br>
+        → <span class="pill pill-blue">IRM cérébrale</span> en urgence (tous les cas)
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">2</div>
+    <div class="step-text">
+        <strong>Tétraplégie/Paraplégie centrales</strong><br>
+        → <span class="pill pill-blue">IRM médullaire</span> (niveau ciblé)<br>
+        → <span class="pill pill-blue">Ponction lombaire</span> si pas compression et suspicion inflammatoire/infectieuse<br>
+        → <span class="pill pill-blue">IRM cérébrale</span> si IRM moelle normale (éliminer atteinte bilatérale)
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">3</div>
+    <div class="step-text">
+        <strong>Paraplégie périphérique (queue de cheval)</strong><br>
+        → <span class="pill pill-blue">IRM centrée sur queue de cheval</span>
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">4</div>
+    <div class="step-text">
+        <strong>Mononeuropathie multiple (atteinte rapide plusieurs troncs)</strong><br>
+        → <span class="pill pill-coral">ENMG urgence</span> (confirme mononeuropathie multiple)<br>
+        → Recherche diabète, vascularite<br>
+        → Biopsie neuromusculaire à discuter
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">5</div>
+    <div class="step-text">
+        <strong>Polyradiculonévrite aiguë (atteinte rapide, ascendante, symétrique)</strong><br>
+        → <span class="pill pill-coral">ENMG + ponction lombaire</span> (peuvent être normaux J1-3)<br>
+        → Urgence diagnostique
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">6</div>
+    <div class="step-text">
+        <strong>Myasthénie (fatigabilité fluctuante)</strong><br>
+        → <span class="pill pill-purple">ENMG</span> (recherche bloc neuromusculaire en stimulation répétée)
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">7</div>
+    <div class="step-text">
+        <strong>Atteinte musculaire (faiblesse proximale symétrique progressive)</strong><br>
+        → <span class="pill pill-purple">ENMG</span> (tracés myogènes)<br>
+        → <span class="pill pill-purple">CPK sériques</span><br>
+        → Biopsie musculaire à discuter
+    </div>
+</div>
+
+<div class="step">
+    <div class="step-num">8</div>
+    <div class="step-text">
+        <strong>Polyneuropathie progressive, symétrique, longueur-dépendante</strong><br>
+        → <span class="pill pill-teal">ENMG</span> (confirme, précise mécanisme axonal vs démyélinisant)<br>
+        → <span class="pill pill-teal">Examens biologiques étiologiques</span> (glycémie, sérologies, autoimmunité…)
+    </div>
+</div>
+
+<h3>Modalités d'imagerie SNC</h3>
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        IRM (examen de référence)
+    </div>
+    <div style="font-size:0.82rem;">
+        <strong>Niveaux :</strong> cerveau, moelle (niveau ciblé selon hypothèse topographique)<br>
+        <strong>Au cerveau recherche :</strong> lésion vasculaire, tumorale, inflammatoire, infectieuse (+ autres lésions périventriculaires en SEP)<br>
+        <strong>À la moelle recherche :</strong> compression extra-axiale, lésion intra-axiale (méningiome, schwannome), lésion intramédullaire (tumeur gliale, démyélinisation)<br>
+        <strong>Si CI (pacemaker, claustrophobie) :</strong> scanner
+    </div>
+</div>
+
+<h3>Modalités ENMG</h3>
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-coral"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+        ENMG (référence SNP)
+    </div>
+    <div style="font-size:0.82rem;">
+        <strong>Objectifs :</strong> confirmer neuropathie, préciser extension (racines, troncs, poly), mécanisme (axonal vs démyélinisant)<br>
+        <strong>En jonction neuromusculaire :</strong> bloc neuromusculaire en stimulation répétée (décrément en myasthénie ; incrément haute fréquence en Lambert-Eaton)<br>
+        <strong>En myopathie :</strong> tracés myogènes (trop riches pour l'effort, amplitude basse, brevets, polyphasiques)
+    </div>
+</div>
+
+<hr>
+
+<h2>6. Syndromes médullaires singuliers</h2>
+
+<h3>A. Syndrome de Brown-Séquard (atteinte demi-moelle)</h3>
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        Organisation anatomique clé
+    </div>
+    <div style="font-size:0.82rem;">
+        <strong>Cordons postérieurs :</strong> sensibilité épicritique + proprioceptive montent directement du côté de l'entrée (homolatéral)<br>
+        <strong>Voies extra-lemniscales :</strong> sensibilité thermique + nociceptive relaient dans la corne postérieure, croisent immédiatement, montent du côté opposé
+    </div>
+</div>
+
+<table>
+    <tr>
+        <th colspan="2">Brown-Séquard clinique (sous la lésion)</th>
+    </tr>
+    <tr>
+        <td style="width:50%;"><strong>Côté de la lésion</strong></td>
+        <td style="width:50%;"><strong>Côté opposé</strong></td>
+    </tr>
+    <tr>
+        <td>
+            ✓ Déficit moteur type central (pyramidal)<br>
+            ✓ Atteinte épicritique + proprioceptive<br>
+            ✓ HOMOLATÉRAL à la lésion
+        </td>
+        <td>
+            ✓ Atteinte thermique + nociceptive<br>
+            ✓ Pas d'épicritique<br>
+            ✓ CONTROLATÉRAL à la lésion<br>
+            ✓ = sensibilité "à l'envers"
+        </td>
+    </tr>
+</table>
+
+<h3>B. Syndrome syringomyélique (atteinte centro-médullaire)</h3>
+<div class="alert alert-green">
+    <div><strong>Singularité :</strong> Seule atteinte thermique + nociceptive <strong>suspendue</strong> au niveau de la lésion (voies extra-lemniscales passent au centre)</div>
+</div>
+
+<div class="kv-row">
+    <div class="kv-key">Déficit sensitif thermique/nociceptif</div>
+    <div class="kv-val">Suspendu au niveau lésionnel = signe pathognomonique</div>
+</div>
+<div class="kv-row">
+    <div class="kv-key">Épicritique/proprioceptive</div>
+    <div class="kv-val">Préservés (cordons postérieurs pas atteints)</div>
+</div>
+<div class="kv-row">
+    <div class="kv-key">Déficit moteur</div>
+    <div class="kv-val">Absent habituellement (sauf si lésion très sévère)</div>
+</div>
+
+<hr>
+
+<h2>7. Valeur localisatrice des signes associés</h2>
+
+<h3>A. Troubles génito-sphinctériens</h3>
+<div class="alert alert-amber">
+    <div><strong>ALERTE :</strong> Troubles urinaires (rétention, incontinence) + troubles sexuels (ED, anesthésie) + atteinte motrice des MI = suspecter queue de cheval ou cône terminal</div>
+</div>
+
+<h3>Queue de cheval (triade caractéristique)</h3>
+<table>
+    <tr>
+        <th>Élément</th>
+        <th>Caractéristiques</th>
+    </tr>
+    <tr>
+        <td><strong>Moteur MI</strong></td>
+        <td>Déficit moteur L2-S1, souvent bilatéral asymétrique</td>
+    </tr>
+    <tr>
+        <td><strong>Sensitif</strong></td>
+        <td>Troubles radiculaires (sciatalgies), surtout <strong>anesthésie en selle</strong> (racines sacrées) = pathognomonique</td>
+    </tr>
+    <tr>
+        <td><strong>Sphinctérien</strong></td>
+        <td>Rétention urinaire ou besoin de pousser (pas insensibilité à la miction)<br>Incontinence fécale possible</td>
+    </tr>
+    <tr>
+        <td><strong>Génital</strong></td>
+        <td>Impuissance, anesthésie vaginale</td>
+    </tr>
+</table>
+
+<h3>Cône terminal (ressemble à queue de cheval, mais…)</h3>
+<div class="kv-row">
+    <div class="kv-key">Signes communs</div>
+    <div class="kv-val">Anesthésie en selle, troubles génito-sphinctériens</div>
+</div>
+<div class="kv-row">
+    <div class="kv-key">Différence clé</div>
+    <div class="kv-val">Signe de Babinski peut être présent (atteinte pyramidale associée)</div>
+</div>
+<div class="kv-row">
+    <div class="kv-key">Niveau sensitif</div>
+    <div class="kv-val">Peut remonter jusqu'à T10</div>
+</div>
+
+<h3>B. Douleur vertébrale</h3>
+<div class="alert alert-blue">
+    <div><strong>Interprétation :</strong> Douleur du rachis + déficit moteur/sensitif = atteinte médullaire très probable. La douleur localise le niveau de la lésion (syndrome lésionnel).</div>
+</div>
+
+<h3>C. Confusion associée</h3>
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-purple"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        Ne pas localiser = diffuse
+    </div>
+    <div style="font-size:0.82rem;">
+        <strong>Signification :</strong> Installation aiguë, évolution fluctuante = souffrance cérébrale diffuse<br>
+        <strong>Causes à chercher :</strong> infection, trouble métabolique (dyscalcémie, dysnatrémie, hypoglycémie), toxique<br>
+        <strong>Piège :</strong> Confusion sur rétention urinaire aiguë (globe vésical sur moelle) chez sujet âgé
+    </div>
+</div>
+
+<hr>
+
+<h2>8. Syndrome de Wallenberg (syndrome alterne du bulbe)</h2>
+
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-blue"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        Prototype du syndrome alterne
+    </div>
+</div>
+
+<div class="alert alert-red">
+    <div><strong>Diagnostic :</strong> Vertige massif (noyau vestibulaire) + <strong>syndrome alterne</strong> (paires crâniennes + HVC controlatéral)</div>
+</div>
+
+<h3>Syndrome de Wallenberg = Lésion rétro-olivaire du bulbe (artère fossette latérale ou PICA)</h3>
+
+<table>
+    <tr>
+        <th style="text-align:center; vertical-align:middle;">Du côté de la lésion</th>
+        <th style="text-align:center; vertical-align:middle;">Du côté opposé</th>
+    </tr>
+    <tr>
+        <td>
+            ✓ Nystagmus<br>
+            ✓ Hémi-syndrome cérébelleux (statique++)<br>
+            ✓ Signe Claude-Bernard-Horner<br>
+            ✓ Hypoesthésie hémiface<br>
+            ✓ Paralysie hémivoile (nasonnement)<br>
+            ✓ Paralysie hémipharynx (dysphagie)<br>
+            ✓ Paralysie hémilarynx (voix bitonale)
+        </td>
+        <td>
+            ✓ Hémianesthésie thermique + nociceptive<br>
+            ✓ Épargne la face<br>
+            <br>
+            <br>
+            <br>
+        </td>
+    </tr>
+</table>
+
+<div class="alert alert-red">
+    <div><strong>COMPLICATION GRAVE :</strong> Fausses routes alimentaires (troubles déglutition) → pneumopathie d'inhalation. Alimentation orale à suspendre.</div>
+</div>
+
+<hr>
+
+<h2>9. Multifactorialité chez le sujet âgé</h2>
+
+<div class="alert alert-amber">
+    <div><strong>Règle d'or :</strong> Chez le patient âgé, chercher toujours <strong>plusieurs causes</strong> concomitantes : centrales (AVC, leucopathie), périphériques (polyneuropathie longueur-dépendante), rhumatologiques (arthrose).</div>
+</div>
+
+<div class="card">
+    <div class="card-title">
+        <div class="card-icon icon-coral"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+        Causes fréquentes d'interférence diagnostique
+    </div>
+</div>
+
+<div style="font-size:0.82rem; margin-left:10px;">
+    <div style="margin-bottom:12px;">
+        <strong>Exemple 1 :</strong> Antécédent de sciatique S1 (abolition ROT Achille) + nouvel AVC homolateral<br>
+        → Atteinte centrale peut être masquée par le déficit périphérique ancien
+    </div>
+    <div style="margin-bottom:12px;">
+        <strong>Exemple 2 :</strong> Polyneuropathie chronique progressive + arthrose<br>
+        → Difficile de séparer déficit neurologique de déficit mécanique
+    </div>
+    <div>
+        <strong>Exemple 3 :</strong> Hémiplégie + périarthrite scapulohumérale secondaire<br>
+        → La périarthrite peut être une complication, pas une cause primitive
+    </div>
+</div>
+
+<hr>
+
+<h2>Synthèse et points clés à retenir</h2>
+
+<div class="synthesis">
+    <strong>1. Syndromique d'abord :</strong> Pyramidal vs périphérique vs myasthénique vs myogène sur les signes associés (tonus, ROT, RCP, amyotrophie, cinétique).<br><br>
+    <strong>2. Topographique ensuite :</strong> Localiser la lésion (cortex, sous-cortex, tronc, moelle, racine, tronc nerveux, poly) grâce à la distribution des déficits moteurs et sensitifs.<br><br>
+    <strong>3. Circonstances :</strong> Brutal = vasculaire ; rapide = inflammatoire/infectieux/tumoral ; lent = dégénératif.<br><br>
+    <strong>4. Examens hiérarchisés :</strong> Jamais systématiques. IRM SNC pour déficit central (urgent si hémiplégie), ENMG pour déficit périphérique (urgent si polyradiculonévrite ou mononeuropathie multiple).<br><br>
+    <strong>5. Syndromes médullaires clés :</strong><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• <strong>Brown-Séquard :</strong> Déficit moteur + épicritique homolatéral ; thermique/nociceptif controlatéral.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• <strong>Syringomyélie :</strong> Atteinte thermique/nociceptive suspendue, épargne épicritique.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• <strong>Wallenberg :</strong> Syndrome alterne (paires crâniennes homolatérales + HVC controlatéral), vertige d'emblée.<br><br>
+    <strong>6. Signes localisateurs :</strong> Troubles génito-sphinctériens + déficit MI = queue de cheval ou cône terminal. Douleur vertébrale = moelle probable. Anesthésie en selle = pathognomonique queue de cheval.<br><br>
+    <strong>7. Complications : PRÉVENTION !</strong><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• Thromboembolisme : anticoagulation préventive + mobilisation<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• Escarres : décubitus alterné + matériel de décharge<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• Enraidissement : kinésithérapie + toxine botulique si spasticité<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;• Algodystrophie : kinésithérapie douce indolore<br><br>
+    <strong>8. Sujet âgé :</strong> Toujours multifactoriel. Chercher atteinte centrale + périphérique + arthrose concomitante.
+</div>
+
+</div>
+</body>
+</html>

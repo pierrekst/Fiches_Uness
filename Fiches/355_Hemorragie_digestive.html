@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-355 — Hémorragie digestive</title>
+<style>
+  :root {
+    --bg: #f5f6fa; --card: #ffffff; --text: #1e1e2e; --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08); --purple: #534AB7; --teal: #1D9E75;
+    --coral: #D85A30; --blue: #378ADD; --red: #E24B4A; --amber: #D97706;
+    --green: #16a34a; --rank-a: #D85A30; --rank-b: #378ADD;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f0f1a; --card: #1a1a2e; --text: #e2e8f0; --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08); --shadow: 0 1px 4px rgba(0,0,0,0.3); }
+    .step-num { background: #2d2d4e !important; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; color: var(--text); font-family: system-ui,-apple-system,sans-serif;
+    font-size: 14px; line-height: 1.6; padding: 16px; max-width: 960px; margin: 0 auto; }
+
+  .page-header { background: linear-gradient(135deg, var(--red) 0%, var(--coral) 100%);
+    border-radius: 16px; padding: 24px; color: #fff; margin-bottom: 24px; }
+  .page-header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { opacity: .85; font-size: .9rem; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .header-tag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px;
+    font-size: .78rem; font-weight: 600; }
+
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 1.05rem;
+    font-weight: 700; margin: 24px 0 14px; color: var(--text); }
+  .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.8; }
+
+  .oic-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .oic-badge { display: inline-flex; align-items: center; gap: 4px; border-radius: 20px;
+    padding: 2px 10px; font-size: .72rem; font-weight: 700; letter-spacing: .03em; }
+  .oic-a { background: rgba(216,90,48,.12); color: var(--rank-a); border: 1px solid rgba(216,90,48,.3); }
+  .oic-b { background: rgba(55,138,221,.12); color: var(--rank-b); border: 1px solid rgba(55,138,221,.3); }
+
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px;
+    padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: .75rem; font-weight: 600; }
+  .pill-green { background: rgba(22,163,74,.12); color: var(--green); border: 1px solid rgba(22,163,74,.25); }
+  .pill-red { background: rgba(226,75,74,.12); color: var(--red); border: 1px solid rgba(226,75,74,.25); }
+  .pill-blue { background: rgba(55,138,221,.12); color: var(--blue); border: 1px solid rgba(55,138,221,.25); }
+  .pill-amber { background: rgba(217,119,6,.12); color: var(--amber); border: 1px solid rgba(217,119,6,.25); }
+  .pill-purple { background: rgba(83,74,183,.12); color: var(--purple); border: 1px solid rgba(83,74,183,.25); }
+  .pill-teal { background: rgba(29,158,117,.12); color: var(--teal); border: 1px solid rgba(29,158,117,.25); }
+  .pill-coral { background: rgba(216,90,48,.12); color: var(--coral); border: 1px solid rgba(216,90,48,.25); }
+
+  .alert { border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
+    display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; }
+  .alert svg { width:18px; height:18px; flex-shrink:0; margin-top:1px; fill:none; stroke-width:2; }
+  .alert-red { background: rgba(226,75,74,.1); border: 1px solid rgba(226,75,74,.3); color: #b91c1c; }
+  .alert-red svg { stroke: #b91c1c; }
+  .alert-blue { background: rgba(55,138,221,.1); border: 1px solid rgba(55,138,221,.3); color: var(--blue); }
+  .alert-blue svg { stroke: var(--blue); }
+  .alert-green { background: rgba(22,163,74,.1); border: 1px solid rgba(22,163,74,.3); color: var(--green); }
+  .alert-green svg { stroke: var(--green); }
+  .alert-amber { background: rgba(217,119,6,.1); border: 1px solid rgba(217,119,6,.3); color: var(--amber); }
+  .alert-amber svg { stroke: var(--amber); }
+
+  .compl-card { background: var(--card); border: 0.5px solid var(--border); border-left: 4px solid;
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .compl-title { font-weight: 700; font-size: .85rem; margin-bottom: 4px; }
+
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .84rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb;
+    color: var(--text-muted); font-weight: 700; font-size: .75rem;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); padding: 8px 10px; text-align: left; font-weight: 700;
+    border-bottom: 1.5px solid var(--border); font-size: .78rem; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--text-muted); }
+  td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .kv { display: flex; flex-direction: column; gap: 6px; }
+  .kv-row { display: flex; gap: 8px; font-size: .83rem; }
+  .kv-key { font-weight: 700; min-width: 160px; flex-shrink: 0; color: var(--text-muted); }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  ul { padding-left: 18px; } li { margin-bottom: 3px; }
+  .text-muted { color: var(--text-muted); font-size: .82rem; }
+  .mt8 { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>IC-355 — Hémorragie digestive</h1>
+  <p>Urgence médicale · Adulte &amp; Enfant</p>
+  <div class="header-tags">
+    <span class="header-tag">Définition haute / basse</span>
+    <span class="header-tag">Modes de révélation</span>
+    <span class="header-tag">Étiologies</span>
+    <span class="header-tag">Gravité</span>
+    <span class="header-tag">PEC en urgence</span>
+    <span class="header-tag">Endoscopie</span>
+    <span class="header-tag">Pédiatrie</span>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <span><strong>Urgence médicale.</strong> Hématémèse / méléna / rectorragies avec retentissement hémodynamique → hospitalisation immédiate. TR impératif (haute valeur diagnostique).</span>
+</div>
+
+<!-- DÉFINITION & ÉPIDÉMIO -->
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-355-01 A</span>
+  <span class="oic-badge oic-b">OIC-355-02 B</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">📍 Définition anatomique</div>
+    <div class="kv">
+      <div class="kv-row"><span class="kv-key">Angle de Treitz</span><span>Jonction duodéno-jéjunale = frontière haute/basse</span></div>
+      <div class="kv-row"><span class="kv-key">Haute</span><span>Au-dessus de l'angle de Treitz</span></div>
+      <div class="kv-row"><span class="kv-key">Basse</span><span>En-dessous de l'angle de Treitz</span></div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Anatomie ≠ présentation clinique : un saignement haut peut s'extérioriser par l'anus (méléna).</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 Épidémiologie</div>
+    <div class="kv">
+      <div class="kv-row"><span class="kv-key">Incidence</span><span>145/100 000 hab/an · âge médian 70 ans</span></div>
+      <div class="kv-row"><span class="kv-key">80% haute</span><span>Mortalité 3-10%</span></div>
+      <div class="kv-row"><span class="kv-key">— Ulcère GD</span><span>30% · mortalité 2,5-5%</span></div>
+      <div class="kv-row"><span class="kv-key">— HTP / varices</span><span>10-20% · mortalité à 6 sem : 10-20%</span></div>
+      <div class="kv-row"><span class="kv-key">20% basse</span><span>Mortalité 2-8% · arrêt spontané 70% · 90% colo-anorectale</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- MODES DE RÉVÉLATION -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+  Modes de révélation clinique
+</div>
+
+<div class="oic-row"><span class="oic-badge oic-a">OIC-355-03 A</span></div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Mode</th><th>Description</th><th>Origine</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--red);">Hématémèse</strong></td>
+        <td>Sang émis à la bouche dans un effort de vomissement (rouge vif ou digéré "marc de café")</td>
+        <td><strong>Toujours haute</strong> (&gt; angle de Treitz)</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--purple);">Méléna</strong></td>
+        <td>Sang digéré extériorisé par l'anus : noir, brillant, malodorant ("aspect de goudron")</td>
+        <td><strong>Haute dans 80% des cas</strong> · en amont de l'angle colique droit</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--amber);">Hématochézie</strong></td>
+        <td>Sang rouge mélangé aux selles par l'anus</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--coral);">Rectorragie</strong></td>
+        <td>Sang rouge non mélangé aux selles — 2 types : <br>
+        · Sans ↓Hb : souvent ano-rectale, pas urgence<br>
+        · Avec ↓Hb / choc : soit haute (débit énorme), soit basse grave → toujours urgence</td>
+        <td>Ano-rectale majoritaire ; haute si choc hémorragique massif</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--blue);">Anémie ferriprive</strong></td>
+        <td>Révèle un saignement infra-clinique chronique (pas d'extériorisation décrite)</td>
+        <td>À explorer en endoscopie</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--text-muted);">Choc hypovolémique isolé</strong></td>
+        <td>Sans extériorisation → TR + sonde gastrique</td>
+        <td>Rare</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">⚖️ Diagnostics différentiels</div>
+  <div class="grid2">
+    <div>
+      <p style="font-weight:700; font-size:.84rem; margin-bottom:6px;">Avec production de sang à la bouche</p>
+      <div class="pills">
+        <span class="pill pill-amber">Hémoptysie (effort de toux)</span>
+        <span class="pill pill-amber">Épistaxis postérieure déglutie</span>
+        <span class="pill pill-amber">Saignement gingival dégluti</span>
+        <span class="pill pill-blue">Vomissement de vin ou betteraves</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-weight:700; font-size:.84rem; margin-bottom:6px;">Avec production de sang à l'anus</p>
+      <div class="pills">
+        <span class="pill pill-amber">Saignement gynécologique</span>
+        <span class="pill pill-blue">Charbon / fer PO (selles noires sans odeur)</span>
+        <span class="pill pill-blue">Betteraves (selles rouges)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ÉTIOLOGIES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+  Étiologies
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-355-04 A</span>
+  <span class="oic-badge oic-a">OIC-355-07 A</span>
+  <span class="oic-badge oic-a">OIC-355-08 A</span>
+  <span class="oic-badge oic-a">OIC-355-13 A</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title" style="color:var(--red);">⬆️ Hémorragies digestives HAUTES</div>
+    <p class="text-muted" style="font-size:.79rem; margin-bottom:8px;">Toujours rechercher : anticoagulants, antiagrégants plaquettaires, AINS</p>
+    <div class="tbl-wrap" style="margin-bottom:0;">
+      <table>
+        <thead><tr><th>Cause</th><th>Terrain / Signes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Ulcère GD (1ère cause ++)</strong></td><td>AINS, aspirine, H. pylori · Douleur épigastrique</td></tr>
+          <tr><td>Varices œsophagiennes</td><td>Cirrhose / HTP · Signes d'HTP</td></tr>
+          <tr><td>Mallory-Weiss</td><td>Vomissements répétés initialement non sanglants</td></tr>
+          <tr><td>Œsophagite</td><td>RGO · Pyrosis</td></tr>
+          <tr><td>Ulcération de Dieulafoy</td><td>Ponctiforme, érosion artérielle</td></tr>
+          <tr><td>Cancer gastrique / œsophagien</td><td>Dysphagie · Amaigrissement</td></tr>
+          <tr><td>Angiodysplasies GD</td><td>Âge · cirrhose · sclérodermie</td></tr>
+          <tr><td>Fistule aorto-duodénale</td><td>Prothèse aortique · Hémorragie grave</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--blue);">⬇️ Hémorragies digestives BASSES</div>
+    <p class="text-muted" style="font-size:.79rem; margin-bottom:8px;">Toujours rechercher : anticoagulants, antiagrégants plaquettaires, AINS</p>
+    <div class="tbl-wrap" style="margin-bottom:0;">
+      <table>
+        <thead><tr><th>Cause</th><th>Terrain / Signes</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Proctologique</strong> (hémorroïdes, fissure, ulcération)</td><td>ATCD proctologique · Constipation · Sang rouge sans ↓Hb</td></tr>
+          <tr><td>Diverticules coliques</td><td>Diverticulose connue · AINS</td></tr>
+          <tr><td>Cancer colorectal</td><td>ATCD personnel/familial · Masse au TR</td></tr>
+          <tr><td>MICI (Crohn, RCH)</td><td>Diarrhée sanglante · MICI connue</td></tr>
+          <tr><td>Colite ischémique</td><td>Vasculaire · AINS · Troubles du rythme</td></tr>
+          <tr><td>Colite infectieuse</td><td>ATB · TIAC · Diarrhée</td></tr>
+          <tr><td>Angiodysplasies</td><td>Âge avancé</td></tr>
+          <tr><td>Diverticule de Meckel</td><td>Sujet jeune · Hémorragie basse grave</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- BILAN & GRAVITÉ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  Bilan biologique, Imagerie &amp; Gravité
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-355-09 A</span>
+  <span class="oic-badge oic-b">OIC-355-10 B</span>
+  <span class="oic-badge oic-a">OIC-355-11 A</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">🔬 Bilan biologique immédiat</div>
+    <div class="pills">
+      <span class="pill pill-red">NFS (Hb ++) · Ionogramme · Créatinine</span>
+      <span class="pill pill-red">Groupe Rh RAI (dès suspicion d'hémorragie sévère)</span>
+      <span class="pill pill-red">Hémostase : TP · TCA · Plaquettes</span>
+    </div>
+    <p class="text-muted mt8" style="font-size:.81rem;">Hémoglobine au doigt = approximatif (instantané). L'hémoglobinémie peut être normale ou sous-estimer le saignement à la phase initiale.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">🖼️ Imagerie</div>
+    <div class="alert alert-blue" style="margin-bottom:8px;">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <span><strong>L'endoscopie est l'examen de 1ère intention</strong> — pas l'imagerie en coupe dans la grande majorité des cas.</span>
+    </div>
+    <p style="font-size:.83rem;"><strong>Scanner AP (temps artériel précoce et tardif)</strong> uniquement si :</p>
+    <div class="pills" style="margin-top:6px;">
+      <span class="pill pill-amber">Patient instable hémodynamiquement</span>
+      <span class="pill pill-amber">FOGD négative + méléna / rectorragies abondantes persistantes</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">⚠️ Signes de gravité · <span class="oic-badge oic-a">OIC-355-11 A</span></div>
+  <div class="alert alert-red">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Le volume évalué de sang extériorisé est un TRÈS MAUVAIS indicateur de gravité !</strong></span>
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">État de choc initial ou résistant au remplissage (critère le plus grave)</span>
+    <span class="pill pill-red">Lipothymie · Chute · Tachycardie</span>
+    <span class="pill pill-red">Baisse de l'Hb à la phase initiale</span>
+    <span class="pill pill-red">Mauvais rendement transfusionnel</span>
+    <span class="pill pill-amber">Comorbidités cardio-vasculaires</span>
+    <span class="pill pill-amber">Instabilité hémodynamique malgré remplissage</span>
+  </div>
+  <div style="margin-top:12px;">
+    <p style="font-weight:700; font-size:.84rem; margin-bottom:8px;">Degré d'urgence</p>
+    <div class="kv">
+      <div class="kv-row"><span class="kv-key" style="color:var(--red);">Urgence immédiate</span><span>Hématémèse OU méléna OU rectorragies avec retentissement hémodynamique → hospitalisation immédiate</span></div>
+      <div class="kv-row"><span class="kv-key" style="color:var(--amber);">Urgence différée</span><span>Rectorragies sans ↓Hb ni retentissement hémodynamique → prise en charge différée possible</span></div>
+      <div class="kv-row"><span class="kv-key" style="color:var(--blue);">Ambulatoire</span><span>Anémie ferriprive bien tolérée sans urgence → supplémentation martiale IV + explorations endoscopiques programées</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PRISE EN CHARGE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  Prise en charge thérapeutique en urgence
+</div>
+
+<div class="oic-row"><span class="oic-badge oic-a">OIC-355-14 A</span></div>
+
+<div class="card">
+  <div class="card-title">🏥 Mesures générales immédiates</div>
+  <ol class="steps">
+    <li><span class="step-num">1</span>
+      <div><strong>Hospitalisation</strong> en soins intensifs ou réanimation · Monitorage continu (TA, FC, SpO₂) · Voie veineuse de bon calibre · Oxygénothérapie.</div>
+    </li>
+    <li><span class="step-num">2</span>
+      <div><strong>Bilan biologique urgent</strong> : NFS, Groupe Rh RAI, hémostase (TP, TCA), ionogramme, créatinine ± gaz du sang.</div>
+    </li>
+    <li><span class="step-num">3</span>
+      <div><strong>Remplissage + transfusion</strong> selon hémodynamique et Hb.
+      <div class="pills" style="margin-top:6px;">
+        <span class="pill pill-amber">Cible Hb : 7-9 g/dL</span>
+        <span class="pill pill-amber">&gt; 9 g/dL si comorbidités CV</span>
+        <span class="pill pill-amber">7-8 g/dL si rupture de VO</span>
+      </div></div>
+    </li>
+    <li><span class="step-num">4</span>
+      <div><strong>Traitement médical avant endoscopie</strong> (si suspicion d'hémorragie haute) :
+        <div class="pills" style="margin-top:6px;">
+          <span class="pill pill-blue">IPP IVSE (systématique si suspicion ulcère)</span>
+          <span class="pill pill-purple">Vaso-actif IV si suspicion HTP : octréotide / somatostatine / terlipressine</span>
+        </div>
+      </div>
+    </li>
+    <li><span class="step-num">5</span>
+      <div><strong>30 min avant la FOGD :</strong> <strong>érythromycine IV</strong> lente (stimule la motricité gastrique, vide l'estomac des caillots). CI si QT allongé.</div>
+    </li>
+  </ol>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title" style="color:var(--purple);">Traitement spécifique · HTP / Varices</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div>Ligature des varices œsophagiennes ± sclérose à la colle (varices gastriques)</div></li>
+      <li><span class="step-num">2</span><div>Vaso-actifs IV (octréotide / terlipressine)</div></li>
+      <li><span class="step-num">3</span><div>Antibioprophylaxie 5-7j (C3G IV) : prévention pneumopathie, infection d'ascite</div></li>
+      <li><span class="step-num">4</span><div>Si incontrôlable : sonde de Blakemore (tamponnement à ballonnets) en attente de TIPS</div></li>
+    </ol>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--teal);">Prévention des récidives</div>
+    <p style="font-weight:700; font-size:.83rem; margin-bottom:6px;">Varices œsophagiennes :</p>
+    <ul style="font-size:.83rem;">
+      <li>Ligatures itératives jusqu'à éradication complète</li>
+      <li>+ Bêta-bloquants non cardio-sélectifs</li>
+      <li>Discuter TIPS préventif (Child C ou Child B + saignement actif)</li>
+    </ul>
+    <p style="font-weight:700; font-size:.83rem; margin-top:10px; margin-bottom:6px;">Ulcère GD :</p>
+    <ul style="font-size:.83rem;">
+      <li>Éradication H. pylori si lié à Hp</li>
+      <li>Arrêt des AINS sur les ulcères Hp-négatifs</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ENDOSCOPIE -->
+<div class="oic-row"><span class="oic-badge oic-b">OIC-355-17 B</span></div>
+<div class="card">
+  <div class="card-title">🔭 Place de l'endoscopie digestive</div>
+  <div class="alert alert-green">
+    <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span><strong>Toute hémorragie digestive relève d'une exploration endoscopique en 1ère intention.</strong></span>
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-weight:700; font-size:.84rem; color:var(--red); margin-bottom:8px;">FOGD (hémorragie haute)</p>
+      <div class="kv">
+        <div class="kv-row"><span class="kv-key">Patient stable</span><span>Dans les 24h</span></div>
+        <div class="kv-row"><span class="kv-key">Suspicion VO</span><span>Dans les 12h</span></div>
+        <div class="kv-row"><span class="kv-key">Instabilité hémodyn.</span><span>Dès que possible</span></div>
+      </div>
+      <p class="text-muted mt8" style="font-size:.81rem;">Réalisée idéalement sous anesthésie avec intubation oro-trachéale. Permet : diagnostic + localisation + traitement hémostatique.</p>
+    </div>
+    <div>
+      <p style="font-weight:700; font-size:.84rem; color:var(--blue); margin-bottom:8px;">Coloscopie (hémorragie basse)</p>
+      <p style="font-size:.83rem;">Préparation optimale requise (urgence différée dans la majorité des cas). Examen proctologique (TR + anuscopie + rectoscopie) si orientation clinique. Scanner AP si instabilité hémodynamique sans diagnostic endoscopique.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PÉDIATRIE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--coral)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+  Particularités pédiatriques
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-b">OIC-355-05 B</span>
+  <span class="oic-badge oic-b">OIC-355-06 B</span>
+  <span class="oic-badge oic-a">OIC-355-12 A</span>
+  <span class="oic-badge oic-b">OIC-355-15 B</span>
+  <span class="oic-badge oic-b">OIC-355-16 B</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">🩸 Hémorragie haute (hématémèse)</div>
+    <p class="text-muted" style="font-size:.81rem; margin-bottom:8px;">Toujours distinguer d'une épistaxis déglutie (plus fréquente).</p>
+    <div class="tbl-wrap" style="margin-bottom:0;">
+      <table>
+        <thead><tr><th>Âge</th><th>Cause principale</th></tr></thead>
+        <tbody>
+          <tr><td>Nouveau-né</td><td>Déglutition de sang issu de <strong>crevasses maternelles</strong> · Œsophagite néonatale</td></tr>
+          <tr><td>Nourrisson</td><td>Idem · (épistaxis déglutie plus fréquente)</td></tr>
+          <tr><td>Enfant</td><td><strong>Mallory-Weiss</strong> · Ulcères / gastrites (AINS, corticoïdes)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.82rem; margin-top:8px;"><strong>Traitement :</strong> IPP + éradication H. pylori. Soins crevasses maternelles si sang dégluti. Soins intensifs si grave (scope, VVP, remplissage, transfusion).</p>
+  </div>
+  <div class="card">
+    <div class="card-title">🩸 Hémorragie basse (rectorragies)</div>
+    <p style="font-size:.83rem; margin-bottom:8px;"><strong>Cause 1ère :</strong> fissure sur constipation (sang rouge, non mélangé, à l'exonération).</p>
+    <div class="compl-card" style="border-left-color:var(--red);">
+      <div class="compl-title" style="color:var(--red);">⚡ Diagnostics urgents · OIC-355-12 A</div>
+      <p style="font-size:.82rem;"><strong>Invagination intestinale aiguë</strong> (3 mois–3 ans) → réduction par lavement baryté ou pneumatique<br><strong>Diverticule de Meckel</strong> → chirurgie</p>
+    </div>
+    <p style="font-size:.82rem; margin-top:6px;"><strong>Autres causes :</strong><br>
+    Nouveau-né : entérocolite ulcéro-nécrosante (prématuré) · Campylobacter<br>
+    Enfant : colites infectieuses · MICI (grand enfant) · causes traumatiques</p>
+    <p class="text-muted mt8" style="font-size:.81rem;"><em>Grand enfant + fissure anale → évoquer Crohn (cassure de courbe, aphtes, troubles du transit)</em></p>
+  </div>
+</div>
+
+<!-- SYNTHÈSE -->
+<hr>
+<div class="card" style="background:linear-gradient(135deg,rgba(226,75,74,.08),rgba(216,90,48,.08)); border:1px solid rgba(226,75,74,.2);">
+  <div class="card-title" style="font-size:1rem;">🧠 Points clés à retenir — IC-355</div>
+  <ul style="font-size:.84rem;">
+    <li>Hématémèse = toujours d'origine <strong>haute</strong>. Méléna = <strong>haute dans 80%</strong> des cas.</li>
+    <li><strong>Le volume extériorisé est un très mauvais indicateur de gravité.</strong></li>
+    <li><strong>TR impératif</strong> devant toute hémorragie digestive.</li>
+    <li><strong>Endoscopie en 1ère intention</strong> (pas le scanner, sauf patient instable).</li>
+    <li>Érythromycine IV 30 min avant la FOGD (vide l'estomac).</li>
+    <li>Cible Hb : 7-9 g/dL (7-8 si VO, &gt;9 si CV).</li>
+    <li>HTP : ligature VO + vaso-actifs + antibioprophylaxie 5-7j (C3G).</li>
+    <li>Enfant — Urgences : invagination intestinale aiguë (3 mois–3 ans) et diverticule de Meckel.</li>
+  </ul>
+</div>
+
+<p style="text-align:center; font-size:.75rem; color:var(--text-muted); margin-top:20px;">
+  Fiche générée à partir des ressources UNESS.fr / CNCEM · IC-355
+</p>
+
+</body>
+</html>

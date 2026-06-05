@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 298 – Cancers des VADS</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #ede9ff;
+    --teal: #1D9E75;
+    --teal-light: #d4f5ea;
+    --coral: #D85A30;
+    --coral-light: #fde8df;
+    --blue: #378ADD;
+    --blue-light: #ddeeff;
+    --red: #E24B4A;
+    --red-light: #fde8e8;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+    --bg: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --purple-light: #2d2560;
+      --teal-light: #0d4a34;
+      --blue-light: #1a3a5c;
+      --red-light: #4a1515;
+      --amber-light: #4a2d05;
+      --coral-light: #4a2010;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .875rem; line-height: 1.6; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: #fff; margin-bottom: 24px; }
+  .header-num { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .header-title { font-size: 1.45rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; }
+  .header-desc { font-size: .85rem; opacity: .92; line-height: 1.6; background: rgba(255,255,255,.12); border-radius: 10px; padding: 12px 16px; }
+
+  /* Cards */
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Grid */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Alertes */
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+  .alert-icon { flex-shrink: 0; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* Pills */
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 99px; font-size: .75rem; font-weight: 600; margin: 2px; }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 12px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* KV rows */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--text-muted); }
+  .kv-val { font-weight: 700; }
+
+  /* Comp-cards */
+  .comp-card { border-left: 3px solid var(--purple); background: var(--card-bg); border-radius: 0 10px 10px 0; padding: 10px 14px; margin-bottom: 8px; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); font-size: .83rem; }
+
+  /* Sous-titre sans icône */
+  .sub-title { font-size: .79rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin: 12px 0 6px; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 3px; font-size: .83rem; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 298 — ORL / Cancérologie</div>
+  <div class="header-title">Tumeurs de la cavité buccale, naso-sinusiennes et du cavum,<br>et des voies aérodigestives supérieures</div>
+  <div class="header-desc">
+    Ce chapitre couvre l'anatomie fonctionnelle des VADS (fosses nasales → larynx), les grands types histologiques selon la localisation (carcinome épidermoïde dominant, adénocarcinome de l'ethmoïde, UCNT du cavum), les facteurs de risque (alcool-tabac, HPV 16, EBV, expositions professionnelles), les signes d'appel cliniques site par site, les indications d'imagerie dans le bilan initial et la surveillance, et les axes de prévention primaire/secondaire/tertiaire.
+  </div>
+</div>
+
+<!-- 1. ANATOMIE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Anatomie des VADS
+  </div>
+  <table>
+    <tr>
+      <th>Structure</th>
+      <th>Contenu / Limites clés</th>
+    </tr>
+    <tr>
+      <td><strong>Fosses nasales</strong></td>
+      <td>2 cavités séparées par le septum nasal ; limitées en arrière par les choanes (entrée du rhinopharynx)</td>
+    </tr>
+    <tr>
+      <td><strong>Sinus (8)</strong></td>
+      <td>2 maxillaires, 2 frontaux, 2 ethmoïdaux, 2 sphénoïdaux</td>
+    </tr>
+    <tr>
+      <td><strong>Cavité buccale</strong></td>
+      <td>Lèvres, gencives, langue mobile, face interne des joues, plancher buccal, palais osseux.<br>Limite post : V lingual + piliers antérieurs des amygdales + jonction palais osseux/membraneux (isthme du gosier). En arrière = oropharynx.</td>
+    </tr>
+    <tr>
+      <td><strong>Pharynx</strong></td>
+      <td>
+        <span class="pill pill-purple">Rhinopharynx (cavum)</span> en arrière des cavités nasales<br>
+        <span class="pill pill-blue">Oropharynx</span> (amygdales, base de langue) en arrière de la cavité buccale<br>
+        <span class="pill pill-coral">Hypopharynx</span> (sinus piriformes) en arrière du larynx → sphincter sup. de l'œsophage
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Larynx</strong></td>
+      <td>
+        <span class="pill pill-teal">Sus-glotte</span> (margelle laryngée, épiglotte, bandes ventriculaires)<br>
+        <span class="pill pill-blue">Glotte</span> (cordes vocales)<br>
+        <span class="pill pill-amber">Sous-glotte</span> → trachée
+      </td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- 2. HISTOLOGIE + FDR -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Types histologiques et facteurs de risque par localisation
+  </div>
+  <table>
+    <tr>
+      <th>Localisation</th>
+      <th>Fréquence</th>
+      <th>Histologie</th>
+      <th>Facteurs de risque principaux</th>
+    </tr>
+    <tr>
+      <td><strong>Cavité buccale</strong></td>
+      <td>20–25 %</td>
+      <td>Carcinome épidermoïde</td>
+      <td>Alcool + tabac (synergie), mauvais état dentaire</td>
+    </tr>
+    <tr>
+      <td><strong>Oropharynx</strong></td>
+      <td>10–15 %</td>
+      <td>Carcinome épidermoïde</td>
+      <td>Alcool + tabac ; <strong>HPV 16</strong> (patients jeunes, sans intoxication)</td>
+    </tr>
+    <tr>
+      <td><strong>Hypopharynx</strong></td>
+      <td>25–30 %</td>
+      <td>Carcinome épidermoïde</td>
+      <td>Alcool + tabac</td>
+    </tr>
+    <tr>
+      <td><strong>Larynx</strong></td>
+      <td>30–35 %</td>
+      <td>Carcinome épidermoïde</td>
+      <td>Principalement tabac, alcool</td>
+    </tr>
+    <tr>
+      <td><strong>Ethmoïde</strong></td>
+      <td>&lt; 1 %</td>
+      <td><strong>Adénocarcinome</strong></td>
+      <td>Poussières de bois, nickel, aldéhyde formique, acide chromique (maladie professionnelle)</td>
+    </tr>
+    <tr>
+      <td><strong>Sinus maxillaire</strong></td>
+      <td>&lt; 1 %</td>
+      <td>Carcinome épidermoïde</td>
+      <td>Sujet âgé</td>
+    </tr>
+    <tr>
+      <td><strong>Nasopharynx (cavum)</strong></td>
+      <td>&lt; 1 %</td>
+      <td><strong>UCNT</strong></td>
+      <td><strong>EBV</strong>, origine géographique (Méditerranée, Asie du Sud-Est)</td>
+    </tr>
+  </table>
+
+  <div class="alert alert-amber" style="margin-top:12px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> L'absence d'intoxication alcoolo-tabagique ne doit pas faire éliminer le diagnostic de carcinome épidermoïde des VADS (cavité buccale, oropharynx, hypopharynx, larynx) — penser HPV.</div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Lymphomes des VADS :</strong> Anneau de Waldeyer (amygdales palatines +++, amygdales linguales, cavum) et sinus. Hypertrophie amygdalienne unilatérale, voix étouffée, otite séreuse (cavum), adénopathies cervicales. 7e cause de cancer en France.</div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Tumeurs bénignes notables :</strong> Papillome inversé des sinus (risque de transformation maligne → traitement + surveillance spécifiques), chondrome, mélanome muqueux (toutes localisations y compris sinus). Tumeurs des glandes salivaires accessoires : cavité buccale (palais++) et oropharynx — 50–60 % malignes.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 3. EPIDEMIOLOGIE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie (données 2017, hors lymphomes)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub-title">Homme</div>
+      <div class="kv-row"><span class="kv-label">Rang incidence</span><span class="kv-val">4e</span></div>
+      <div class="kv-row"><span class="kv-label">Nouveaux cas/an</span><span class="kv-val">10 932</span></div>
+      <div class="kv-row"><span class="kv-label">Rang décès</span><span class="kv-val">8e</span></div>
+      <div class="kv-row"><span class="kv-label">Survie globale à 5 ans</span><span class="kv-val"><span class="pill pill-red">34 %</span></span></div>
+    </div>
+    <div>
+      <div class="sub-title">Femme</div>
+      <div class="kv-row"><span class="kv-label">Rang incidence</span><span class="kv-val">10e</span></div>
+      <div class="kv-row"><span class="kv-label">Nouveaux cas/an</span><span class="kv-val">4 332</span></div>
+      <div class="kv-row"><span class="kv-label">Rang décès</span><span class="kv-val">8e</span></div>
+      <div class="kv-row"><span class="kv-label">Survie globale à 5 ans</span><span class="kv-val"><span class="pill pill-amber">49 %</span></span></div>
+    </div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div>Pronostic variable selon : stade, facteur étiologique (<strong>HPV+ → meilleur pronostic</strong>), localisation (<strong>larynx → meilleur pronostic</strong>).</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 4. HISTOIRE NATURELLE / FDR -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Histoire naturelle et facteurs de risque
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="comp-card" style="border-left-color:var(--red);">
+        <strong>Alcool + Tabac</strong> — CE des VADS classiques
+        <ul style="margin-top:6px;">
+          <li>Synergie multiplicative du risque</li>
+          <li>Tumeurs synchrones possibles : VADS + œsophage + poumon</li>
+          <li>Second cancer primitif lors du suivi</li>
+          <li>Bilan initial : exhaustif sur toutes les localisations à risque</li>
+        </ul>
+      </div>
+      <div class="comp-card" style="border-left-color:var(--blue);">
+        <strong>HPV 16</strong> — oropharynx
+        <ul style="margin-top:6px;">
+          <li>Patients plus jeunes, sans intoxication alcoolo-tabagique</li>
+          <li>Carcinome épidermoïde de l'oropharynx</li>
+          <li>Meilleur pronostic</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="comp-card" style="border-left-color:var(--purple);">
+        <strong>EBV</strong> — nasopharynx (UCNT)
+        <ul style="margin-top:6px;">
+          <li>Facteur étiologique principal du UCNT</li>
+          <li>Terrain géographique : Méditerranée, Asie du Sud-Est</li>
+        </ul>
+      </div>
+      <div class="comp-card" style="border-left-color:var(--amber);">
+        <strong>Expositions professionnelles</strong> — ethmoïde
+        <ul style="margin-top:6px;">
+          <li>Poussières de bois +++</li>
+          <li>Nickel, aldéhyde formique, acide chromique</li>
+          <li>→ Adénocarcinome de l'ethmoïde (maladie pro reconnue)</li>
+        </ul>
+      </div>
+      <div class="comp-card" style="border-left-color:var(--teal);">
+        <strong>Lésions précancéreuses</strong>
+        <ul style="margin-top:6px;">
+          <li>Leucoplasie, érythroplasie</li>
+          <li>Lichen plan buccal, chéilite achromique</li>
+          <li>Candidose chronique, papillomatose orale floride/laryngée</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 5. SIGNES CLINIQUES -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Signes cliniques par localisation
+  </div>
+  <table>
+    <tr>
+      <th>Localisation</th>
+      <th>Signes d'appel principaux</th>
+      <th>Signes avancés / spécifiques</th>
+    </tr>
+    <tr>
+      <td><strong>Cavité buccale</strong></td>
+      <td>Lésion leucoplasique hétérogène persistante, ulcération/tuméfaction indurée, douleurs, mobilité dentaire<br>Adénopathies sous-mentales / sous-angulo-maxillaires ± bilatérales</td>
+      <td>Trouble de la protraction linguale (T4), trismus (T4)</td>
+    </tr>
+    <tr>
+      <td><strong>Oropharynx</strong></td>
+      <td>Dysphagie, odynophagie, <strong>otalgie réflexe ++</strong><br>Adénopathies sous-angulo-maxillaires ++ ± bilatérales<br><strong>Adénopathie cervicale isolée = 1er signe fréquent</strong></td>
+      <td>Trouble de mobilité linguale (base de langue), ulcération/induration</td>
+    </tr>
+    <tr>
+      <td><strong>Hypopharynx</strong></td>
+      <td>Dysphagie, odynophagie, otalgie réflexe ++<br>Adénopathies jugulocarotidiennes unilatérales ++</td>
+      <td>Dysphonie ou dyspnée si envahissement laryngé</td>
+    </tr>
+    <tr>
+      <td><strong>Larynx glottique</strong></td>
+      <td><strong>Dysphonie ++</strong> (blocage d'une corde vocale / envahissement glottique)</td>
+      <td>Dyspnée (masse ++). Pas d'adénopathies sauf extension extraglottique</td>
+    </tr>
+    <tr>
+      <td><strong>Larynx sus-glottique</strong></td>
+      <td>Dysphagie, dysphonie</td>
+      <td>Dyspnée, adénopathies jugulocarotidiennes</td>
+    </tr>
+    <tr>
+      <td><strong>Larynx sous-glottique</strong></td>
+      <td>Forme tumorale précoce rare</td>
+      <td>Odynophagie, otalgie réflexe, dyspnée, adénopathies jugulocarotidiennes</td>
+    </tr>
+    <tr>
+      <td><strong>Nasopharynx (cavum)</strong></td>
+      <td><strong>Dysfonction tubaire / otite séreuse ++</strong>, obstruction nasale, épistaxis<br>Adénopathie cervicale isolée ou bilatérale</td>
+      <td>Envahissement base du crâne (tardif) : paralysie III, IV, V, VI ; thrombose sinus caverneux</td>
+    </tr>
+    <tr>
+      <td><strong>Sinus ethmoïdal</strong></td>
+      <td>Obstruction nasale unilatérale ++, épistaxis ++, rhinorrhée mucopurulente, hyposmie</td>
+      <td>Signes ophtalmologiques et neurologiques (masse tumorale)</td>
+    </tr>
+    <tr>
+      <td><strong>Sinus maxillaire</strong></td>
+      <td>Douleurs/mobilité dentaire ++, algie faciale (V2/nerf sous-orbitaire), tableau de sinusite aiguë ou chronique</td>
+      <td>Envahissement de l'arcade maxillaire (tableau bucco-dentaire initial)</td>
+    </tr>
+  </table>
+
+  <div class="alert alert-amber" style="margin-top:12px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège — Otalgie réflexe :</strong> signe fonctionnel majeur de l'oropharynx et de l'hypopharynx. Chercher un cancer pharyngo-laryngé avant d'attribuer à une pathologie de l'oreille.</div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège — Otite séreuse unilatérale de l'adulte :</strong> évoquer systématiquement un cancer du cavum jusqu'à preuve du contraire.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 6. IMAGERIE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Imagerie — Bilan initial et surveillance
+  </div>
+
+  <div class="sub-title">Bilan initial prethérapeutique</div>
+  <table style="margin-bottom:16px;">
+    <tr>
+      <th style="width:24%">Localisation</th>
+      <th>Examens et indications</th>
+    </tr>
+    <tr>
+      <td><strong>Cavité buccale / Oropharynx / Sinus maxillaire</strong></td>
+      <td>
+        <span class="pill pill-blue">Scanner cervico-thoracique</span> — extension tissus mous et os, tumeur synchrone, métastases ganglionnaires et pulmonaires<br>
+        <span class="pill pill-purple">IRM cavité buccale / mandibule</span> — extension médullaire osseuse, langue ; meilleur si artéfacts dentaires au scanner<br>
+        <span class="pill pill-purple">IRM oropharynx</span> — extension voile, muscles masticateurs, langue<br>
+        <span class="pill pill-amber">TEP-TDM</span> — si ≥ N2b, adénopathies secteurs IV-V, recherche localisations secondaires / second primitif / primitif inconnu (adénopathie sans porte d'entrée, notamment oropharynx)
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Larynx / Hypopharynx</strong></td>
+      <td>
+        <span class="pill pill-blue">Scanner cervico-thoracique</span> — extension tissus mous et cartilages, tumeur synchrone, métastases ganglionnaires et pulmonaires<br>
+        <span class="pill pill-amber">TEP-TDM</span> — si ≥ N2b, adénopathies secteurs IV-V, recherche localisations secondaires / second primitif
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Nasopharynx</strong></td>
+      <td>
+        <span class="pill pill-blue">Scanner ou IRM base du crâne et cervical</span> — extension tissus mous, os, cavité orbitaire, sinus caverneux, métastases ganglionnaires<br>
+        <span class="pill pill-amber">TEP-TDM systématique</span> — recherche localisations secondaires notamment ganglionnaires (sensibilité ++)
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Sinus ethmoïdal</strong></td>
+      <td>
+        <span class="pill pill-blue">Scanner cervico-thoracique</span> — extension tissus mous et os, métastases ganglionnaires (poumon : exceptionnel)<br>
+        <span class="pill pill-purple">IRM</span> — extension cavité orbitaire, sinus caverneux, cerveau
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Si reconstruction par lambeau osseux</strong></td>
+      <td><span class="pill pill-coral">Artériographie des membres inférieurs</span></td>
+    </tr>
+  </table>
+
+  <div class="sub-title">Surveillance post-thérapeutique</div>
+  <table style="margin-bottom:16px;">
+    <tr>
+      <th style="width:24%">Localisation</th>
+      <th>Systématique</th>
+      <th>Sur points d'appel / facteurs de risque</th>
+    </tr>
+    <tr>
+      <td><strong>Cavité buccale / Oropharynx / Larynx / Hypopharynx / Sinus maxillaire</strong></td>
+      <td>
+        <span class="pill pill-blue">Scanner cervico-thoracique à 3 mois</span> (imagerie de référence)<br>
+        <span class="pill pill-teal">Scanner thoracique low dose / an × 5 ans</span>
+      </td>
+      <td style="vertical-align:middle;">Scanner cervico-thoracique, IRM ou TEP si suspicion de récidive<br>Scanner thoracique low dose après 5 ans si tabagisme poursuivi ou récemment arrêté</td>
+    </tr>
+    <tr>
+      <td><strong>Nasopharynx</strong></td>
+      <td>
+        <span class="pill pill-purple">IRM à 3 mois puis tous les 6 mois pendant au moins 3 ans</span><br>
+        <span class="pill pill-amber">TEP-TDM à discuter à 3 mois</span>
+      </td>
+      <td style="vertical-align:middle;">IRM<br>TEP-TDM à discuter</td>
+    </tr>
+    <tr>
+      <td><strong>Sinus ethmoïde</strong></td>
+      <td><span class="pill pill-purple">IRM à 3 mois puis selon avis expert</span></td>
+      <td style="vertical-align:middle;">IRM</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- 7. PREVENTION -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Prévention
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="comp-card" style="border-left-color:var(--teal);">
+        <strong>Prévention primaire</strong>
+        <ul style="margin-top:6px;">
+          <li>Suppression de la consommation d'alcool</li>
+          <li>Suppression de la consommation de tabac</li>
+          <li>Vaccination HPV (garçons et filles)</li>
+          <li>Contrôle des expositions professionnelles (bois, nickel…)</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="comp-card" style="border-left-color:var(--blue);">
+        <strong>Prévention secondaire</strong>
+        <ul style="margin-top:6px;">
+          <li>Dépistage cancers naso-sinusiens chez les travailleurs du bois</li>
+          <li>Surveillance dentaire régulière (dépistage des lésions précancéreuses de la cavité buccale)</li>
+        </ul>
+      </div>
+      <div class="comp-card" style="border-left-color:var(--purple);">
+        <strong>Prévention tertiaire</strong>
+        <ul style="margin-top:6px;">
+          <li>Suivi post-thérapeutique rigoureux</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 8. POINTS CLES -->
+<div class="card" style="border-color:var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div><strong>Histologies-clés :</strong> CE (80–90 % des VADS classiques) — Adénocarcinome (ethmoïde, exposition bois) — UCNT (cavum, EBV).</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div><strong>Adénopathie cervicale isolée :</strong> premier signe fréquent de l'oropharynx → bilan complet obligatoire, TEP-TDM si primitif inconnu.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div><strong>Tumeurs synchrones :</strong> alcool-tabac → chercher systématiquement VADS + œsophage + poumon au bilan initial.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> Otite séreuse unilatérale de l'adulte = cavum jusqu'à preuve du contraire. Otalgie réflexe sans signe otologique = cancer pharyngo-laryngé à éliminer.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> Papillome inversé = tumeur bénigne des sinus mais avec risque de transformation maligne → traitement + surveillance spécifiques.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Imagerie :</strong> IRM préférable au scanner pour mandibule/cavité buccale (artéfacts dentaires) et nasopharynx (base du crâne). TEP-TDM systématique pour l'ethmoïde. Scanner thoracique low dose en surveillance annuelle pendant 5 ans.</div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Pronostic :</strong> Larynx = meilleur pronostic. HPV(+) = meilleur pronostic. Survie à 5 ans : 34 % (H) / 49 % (F). Variable selon stade et localisation.</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

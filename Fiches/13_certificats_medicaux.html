@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 13 — Certificats médicaux, décès et législation</title>
+<style>
+:root {
+  --purple:#534AB7; --teal:#1D9E75; --coral:#D85A30; --blue:#378ADD; --red:#E24B4A; --amber:#D97706;
+  --purple-light:#EEF0FF; --teal-light:#E6F7F2; --coral-light:#FBF0EC; --blue-light:#EBF4FF;
+  --red-light:#FEF2F2; --amber-light:#FFFBEB;
+  --text:#1a1a2e; --text-sec:#6b7280; --bg:#f8f9fc; --card:#fff; --border:#e5e7eb;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;}
+.page{max-width:920px;margin:0 auto;padding:20px 16px 48px;}
+.header{background:linear-gradient(135deg,#D85A30 0%,#E24B4A 100%);color:#fff;border-radius:16px;padding:24px 28px;margin-bottom:20px;}
+.header-num{font-size:.72rem;font-weight:700;opacity:.75;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.header h1{font-size:1.5rem;font-weight:800;margin-bottom:5px;}
+.header-desc{font-size:.83rem;opacity:.9;}
+.intro-box{background:var(--coral-light);border-left:4px solid var(--coral);border-radius:10px;padding:13px 17px;margin-bottom:18px;font-size:.85rem;line-height:1.65;color:var(--text);}
+.intro-box strong{color:var(--coral);}
+.card{background:var(--card);border:.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+.card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+.alert strong{font-weight:800;}
+.alert-icon{flex-shrink:0;margin-top:1px;}
+.alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.alert-red{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+.alert-blue{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue);}
+.alert-green{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+.alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+.alert-red .alert-icon svg{stroke:var(--red);}
+.alert-blue .alert-icon svg{stroke:var(--blue);}
+.alert-green .alert-icon svg{stroke:var(--teal);}
+.alert-amber .alert-icon svg{stroke:var(--amber);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+.pill{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:.77rem;font-weight:600;}
+.pill-purple{background:var(--purple-light);color:var(--purple);}
+.pill-teal{background:var(--teal-light);color:var(--teal);}
+.pill-red{background:var(--red-light);color:var(--red);}
+.pill-amber{background:var(--amber-light);color:var(--amber);}
+.pill-blue{background:var(--blue-light);color:var(--blue);}
+.pill-coral{background:var(--coral-light);color:var(--coral);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+th{background:#f3f4f6;font-weight:700;padding:7px 10px;text-align:left;border:.5px solid var(--border);}
+td{padding:6px 10px;border:.5px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:#fafafa;}
+.kv-table{width:100%;border-collapse:collapse;font-size:.84rem;}
+.kv-row td{padding:5px 8px;border-bottom:.5px solid var(--border);}
+.kv-row:last-child td{border-bottom:none;}
+.kv-row td:first-child{font-weight:600;color:var(--text-sec);width:55%;}
+.kv-row td:last-child{font-weight:700;color:var(--text);}
+ul.clist{padding-left:16px;font-size:.84rem;line-height:1.7;}
+ul.clist li{margin-bottom:2px;}
+hr{border:none;border-top:1.5px solid var(--border);margin:18px 0;}
+.bc{border-left:3px solid var(--purple);padding:8px 12px;border-radius:0 8px 8px 0;background:#fafafa;margin-bottom:8px;font-size:.84rem;}
+.bc.red{border-left-color:var(--red);} .bc.teal{border-left-color:var(--teal);} .bc.blue{border-left-color:var(--blue);} .bc.amber{border-left-color:var(--amber);} .bc.coral{border-left-color:var(--coral);}
+.bc h4{font-weight:700;font-size:.83rem;margin-bottom:3px;}
+.sub{font-size:.81rem;color:var(--text-sec);margin-top:3px;}
+.sec-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;margin-top:10px;}
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:12px;font-size:.75rem;font-weight:700;}
+.badge-red{background:var(--red);color:#fff;} .badge-amber{background:var(--amber);color:#fff;} .badge-blue{background:var(--blue);color:#fff;} .badge-teal{background:var(--teal);color:#fff;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 13</div>
+  <h1>Certificats médicaux &mdash; Décès et législation</h1>
+  <div class="header-desc">Rédaction de certificat &mdash; ITT &mdash; Lésions traumatiques &mdash; Violences faites aux femmes &mdash; Signalement &mdash; Diagnostic de la mort &mdash; Autopsies</div>
+</div>
+
+<div class="intro-box">
+  <strong>Vue d'ensemble :</strong> Ce chapitre est double. <strong>Partie 1 — Certificat médical et violences :</strong> règles de rédaction, définition juridique de l'ITT, description des lésions traumatiques élémentaires, épidémiologie des violences conjugales, situations de vulnérabilité, signalement judiciaire. <strong>Partie 2 — Mort :</strong> définitions (mort, suspecte, inhabituelle, violente), diagnostic clinique, signes post-mortem, certificat de décès (notamment la case OML) et les deux types d'autopsies.
+</div>
+
+<!-- PARTIE 1 : CERTIFICAT MÉDICAL -->
+
+<!-- RÈGLES DE RÉDACTION -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Règles générales de rédaction d'un certificat médical (Art. R.4127-76 CSP)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--purple);">Obligations formelles</div>
+      <ul class="clist">
+        <li>Médecin rédacteur ayant <strong>examiné personnellement</strong> le patient</li>
+        <li>Rédigé en français, clair et lisible</li>
+        <li>Identité du patient + identité + tampon + signature du médecin</li>
+        <li>Date de rédaction (et date d'examen si différentes)</li>
+        <li>Double conservé dans le dossier médical</li>
+        <li>Remis en mains propres (sauf dérogations légales)</li>
+        <li>Se renseigner sur l'usage — pouvoir dire non aux demandes abusives</li>
+      </ul>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--coral);">Règles de contenu</div>
+      <div class="bc coral">
+        <h4>Objectivité stricte</h4>
+        <div class="sub">Constatations médicales cliniques et para-cliniques uniquement (positives ou négatives). Propos rapportés au conditionnel ou entre guillemets. Non interprétatif.</div>
+      </div>
+      <div class="bc coral">
+        <h4>Exemple de formulation correcte</h4>
+        <div class="sub">
+          <span style="color:var(--red);">NON :</span> "Mme X est victime de violence conjugale"<br>
+          <span style="color:var(--teal);">OUI :</span> "Mme X rapporte des violences de la part d'un individu de sexe masculin qu'elle décrit comme son conjoint"<br><br>
+          <span style="color:var(--red);">NON :</span> "trace de morsure"<br>
+          <span style="color:var(--teal);">OUI :</span> "ecchymose bleutée arrondie de 4,5 cm, pouvant être compatible avec le mécanisme allégué 'morsure'"
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Attention :</strong> Plus de 20% des plaintes au Conseil de l'Ordre concernent des certificats médicaux. Le certificat engage la responsabilité du médecin rédacteur.</div>
+  </div>
+
+  <div class="sec-label" style="color:var(--blue);">Certificats médicaux obligatoires</div>
+  <div class="pills">
+    <span class="pill pill-blue">Décès</span>
+    <span class="pill pill-blue">Constatation de violences (CMI)</span>
+    <span class="pill pill-blue">Accident du travail / maladie professionnelle</span>
+    <span class="pill pill-blue">MDPH</span>
+    <span class="pill pill-blue">Vaccinations obligatoires</span>
+    <span class="pill pill-blue">Santé enfant (J8, 9 mois, 24 mois)</span>
+    <span class="pill pill-blue">Certains certificats scolaires / sportifs</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ITT ET QUALIFICATIONS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Coups et blessures — ITT — Qualifications pénales
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="bc amber">
+        <h4>CBV — Coups et blessures volontaires</h4>
+        <div class="sub">Violences infligées <strong>intentionnellement</strong> (même si non prémédité). Violences physiques ET psychologiques sanctionnées de la même manière.</div>
+      </div>
+      <div class="bc blue">
+        <h4>CBI — Coups et blessures involontaires</h4>
+        <div class="sub">Violences <strong>non intentionnelles</strong> — résultant d'une maladresse ou d'un manquement à une obligation légale de sécurité.</div>
+      </div>
+    </div>
+    <div>
+      <div class="bc red">
+        <h4>ITT — Incapacité Temporaire de Travail</h4>
+        <div class="sub"><strong>Terme juridique et pénal</strong> (NON médical). = Nombre de jours d'incapacité physique et/ou psychologique d'accomplir <em>seul</em> les actes ordinaires et essentiels de la vie quotidienne (s'habiller, se déplacer, s'alimenter, se laver…). <br><strong>Différente</strong> de la durée d'arrêt de travail et de la durée de soins.</div>
+      </div>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Durée ITT</th><th>Infractions volontaires</th><th>Infractions involontaires</th></tr></thead>
+    <tbody>
+      <tr><td><strong>0 jour</strong></td><td>Contravention (4e classe)</td><td>—</td></tr>
+      <tr><td><strong>&le; 8 jours</strong></td><td>Contravention (5e classe)</td><td>Contravention</td></tr>
+      <tr><td><strong>&gt; 8 jours</strong></td><td>Délit (tribunal correctionnel)</td><td>Délit</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> L'ITT peut être <strong>modifiée à la hausse</strong> par le magistrat selon les circonstances aggravantes : violence sur mineur &lt;15 ans, sur conjoint, par ascendant, avec arme, en réunion…</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- LÉSIONS TRAUMATIQUES -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Lésions traumatiques élémentaires de médecine légale
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Chaque lésion doit être décrite selon : <strong>type, couleur, taille, forme, localisation</strong> (repères anatomiques). Ne jamais dater précisément une contusion sur la seule description clinique.</div>
+  </div>
+  <table>
+    <thead><tr><th>Lésion</th><th>Description</th><th>Mécanisme</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Érythème</strong></td>
+        <td>Rougeur fugace, quelques heures. Vasodilatation sans suffusion hémorragique.</td>
+        <td>Contondant plat (ex : gifle)</td>
+      </tr>
+      <tr>
+        <td><strong>Ecchymose</strong></td>
+        <td>Suffusion hémorragique sous-cutanée <em>sans</em> cavité néoformée. Œdème mou à la palpation. Peut reproduire la forme de l'objet.<br><span style="font-size:.79rem; color:var(--text-sec);">Récente = bleutée/rouge/violacée &mdash; Ancienne = jaunâtre/verdâtre/brunâtre</span></td>
+        <td>Contondant, écrasement, broiement</td>
+      </tr>
+      <tr>
+        <td><strong>Hématome</strong></td>
+        <td>Suffusion hémorragique sous-cutanée <em>avec</em> cavité néoformée palpable.</td>
+        <td>Contondant, écrasement, broiement</td>
+      </tr>
+      <tr>
+        <td><strong>Abrasion / excoriation</strong></td>
+        <td>Perte de la partie superficielle du revêtement cutané. Peut devenir crouteuse en quelques heures.</td>
+        <td>Fine et linéaire : objet piquant/tranchant — Étendue : frottement</td>
+      </tr>
+      <tr>
+        <td><strong>Plaie à berges nettes</strong></td>
+        <td>Rupture de continuité du revêtement cutané. Berges franches.</td>
+        <td>Piquant, tranchant, coupant</td>
+      </tr>
+      <tr>
+        <td><strong>Plaie à berges contuses</strong></td>
+        <td>Berges irrégulières, contuses.</td>
+        <td>Contondant, écrasement, déchirement</td>
+      </tr>
+      <tr>
+        <td><strong>Plaie balistique</strong></td>
+        <td>Orifice d'entrée + orifice de sortie classiquement.</td>
+        <td>Arme à feu</td>
+      </tr>
+      <tr>
+        <td><strong>Cicatrice</strong></td>
+        <td>Évolution des plaies/abrasions. Rosée (début) &rarr; hyper/hypopigmentée, plane ou chéloïde.</td>
+        <td>Importante dans les violences chroniques</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ÉPIDÉMIOLOGIE VIOLENCES FEMMES -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie et particularités des violences faites aux femmes
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--blue);">Prévalence (VIRAGE 2015)</div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Violence conjugale / 12 mois</td><td>5% femmes vs 3% hommes</td></tr>
+        <tr class="kv-row"><td>Violence conjugale vie entière (F)</td><td>22%</td></tr>
+        <tr class="kv-row"><td>Violence conjugale — prévalence mondiale (OMS)</td><td>26% au cours de la vie</td></tr>
+        <tr class="kv-row"><td>Taux de dépôt de plainte</td><td>&lt;18% (VS conjugales : &lt;11%)</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--red);">Particularités des violences conjugales</div>
+      <div class="pills">
+        <span class="pill pill-purple">Psychologiques (humiliations)</span>
+        <span class="pill pill-purple">Verbales (insultes, menaces)</span>
+        <span class="pill pill-red">Physiques</span>
+        <span class="pill pill-coral">Sexuelles</span>
+        <span class="pill pill-amber">Économiques (contrôle argent)</span>
+        <span class="pill pill-blue">Administratives (retrait papiers)</span>
+        <span class="pill pill-teal">Sanitaires (refus consultation)</span>
+      </div>
+      <div style="font-size:.82rem; margin-top:8px;">Cycle : tension &rarr; agression &rarr; justification &rarr; réconciliation (avec accélération possible). Chronicité, récurrence. Conséquences sur la santé physique, psychologique, sociale et économique toute la vie.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- VULNÉRABILITÉ ET SIGNALEMENT -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Situations de vulnérabilité et signalement judiciaire
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--amber);">Situations de vulnérabilité (violences conjugales)</div>
+      <div class="bc amber"><h4>Médicales</h4><div class="sub">Handicap physique ou psychique — grossesse — trouble de l'usage de substances — âges extrêmes (adolescentes, personnes âgées)</div></div>
+      <div class="bc amber"><h4>Sociales et économiques</h4><div class="sub">Précarité sociale/économique/familiale — difficultés d'accès aux soins — non-maîtrise du français — situation irrégulière sur le territoire</div></div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--purple);">Signalement judiciaire</div>
+      <div class="bc">
+        <h4>Définition</h4>
+        <div class="sub">Porter à la connaissance des autorités des faits graves nécessitant des mesures appropriées. <strong>Dérogation légale au secret médical.</strong> Médecin non poursuivi sauf mauvaise foi.</div>
+      </div>
+      <div class="bc">
+        <h4>Modalités pratiques</h4>
+        <div class="sub">Procureur de la République (téléphone puis mail en urgence) + copie CRIP si mineur. Rédaction objective, sans mise en cause nominative.</div>
+      </div>
+      <div class="bc red">
+        <h4>Spécificités violences conjugales (Loi 30/07/2020)</h4>
+        <div class="sub">Signalement possible sans accord de la victime majeure si : violences mettant la vie en danger de façon immédiate + victime sous emprise. S'efforcer d'obtenir l'accord + informer la victime en cas d'impossibilité.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- RETENTISSEMENT PSYCHOLOGIQUE -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Retentissement psychologique des violences
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--blue);">Violences en général</div>
+      <div class="bc blue">
+        <h4>Immédiat</h4>
+        <div class="sub">Peur, anxiété, troubles du sommeil, troubles alimentaires, majoration des addictions (tabac, alcool, cannabis)</div>
+      </div>
+      <div class="bc blue">
+        <h4>ESPT</h4>
+        <div class="sub">Reviviscences (intrusions involontaires), évitement, émoussement affectif, perte d'intérêt, hypervigilance, troubles concentration, troubles du sommeil</div>
+      </div>
+      <div class="bc blue">
+        <h4>Psychiatrique</h4>
+        <div class="sub">Dépression, trouble anxieux, troubles du comportement, conduites suicidaires</div>
+      </div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--red);">Violences conjugales — en plus</div>
+      <div class="bc red">
+        <h4>Troubles émotionnels spécifiques</h4>
+        <div class="sub">Honte, culpabilité, impuissance, auto-dévalorisation</div>
+      </div>
+      <div class="bc red">
+        <h4>Troubles sommeil</h4>
+        <div class="sub">Difficultés d'endormissement, réveils nocturnes, cauchemars</div>
+      </div>
+      <div class="bc red">
+        <h4>Autres</h4>
+        <div class="sub">Troubles alimentaires (anorexie/boulimie) — troubles cognitifs (concentration, mémoire) — troubles psychosomatiques (douleurs diffuses, abdominales)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 2 : MORT -->
+
+<!-- DÉFINITIONS DE LA MORT -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--text);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définitions médicales et médico-légales de la mort
+  </div>
+  <table>
+    <thead><tr><th>Terme</th><th>Définition</th><th>Conséquence pratique</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Mort</strong></td>
+        <td>Arrêt complet et définitif des fonctions vitales, suivi de la destruction progressive des tissus. Repose sur la constatation <em>simultanée</em> de signes négatifs de vie et de signes positifs de mort.</td>
+        <td>Certificat de décès obligatoire</td>
+      </tr>
+      <tr>
+        <td><strong>Mort suspecte</strong></td>
+        <td>Décès pour lequel il n'est pas possible d'exclure l'intervention d'un tiers.</td>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Cocher la case OML</strong> sur le certificat de décès</td>
+      </tr>
+      <tr>
+        <td><strong>Mort inhabituelle</strong></td>
+        <td>Décès pour lequel au moins un élément est inhabituel : circonstances, mode de découverte, âge de la victime.</td>
+      </tr>
+      <tr>
+        <td><strong>Mort violente</strong></td>
+        <td>Tout décès par accident, suicide ou homicide.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- DIAGNOSTIC DE LA MORT -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic de la mort — Signes post-mortem
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--purple);">Signes négatifs de vie</div>
+      <ul class="clist">
+        <li>Absence de pouls carotidien et fémoral</li>
+        <li>Absence de bruits cardiaques et respiratoires</li>
+        <li>ECG DII long en ligne isoélectrique</li>
+        <li>Absence des réflexes du tronc cérébral</li>
+      </ul>
+
+      <div class="sec-label" style="color:var(--blue);margin-top:10px;">Signes positifs précoces</div>
+      <div class="bc blue">
+        <h4>Décroissance thermique</h4>
+        <div class="sub">Égalisation température corporelle / température extérieure. Dépend du poids, habillement, température extérieure.</div>
+      </div>
+      <div class="bc blue">
+        <h4>Lividités</h4>
+        <div class="sub">Zones rouges violacées déclives, épargnant les zones d'appui. Apparaissent dans la 1re heure. Partiellement modifiables si déplacement dans les 12 premières heures. Fixées ensuite.</div>
+      </div>
+      <div class="bc blue">
+        <h4>Rigidité cadavérique</h4>
+        <div class="sub">Épuisement des stocks d'ATP musculaires. Débute après ~3h (articulations temporo-mandibulaires d'abord, puis descend). Résolution entre 2 et 4 jours avec variations importantes.</div>
+      </div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--amber);">Signes positifs tardifs (décomposition)</div>
+      <table class="kv-table">
+        <tr class="kv-row"><td>Tache verte abdominale</td><td>~48h en fosse iliaque droite (cæcum)</td></tr>
+        <tr class="kv-row"><td>Circulation collatérale posthume</td><td>~48-72h (colonisation microbienne vasculaire)</td></tr>
+        <tr class="kv-row"><td>Phlyctènes, liquides organiques</td><td>Tardif</td></tr>
+        <tr class="kv-row"><td>Colonisation par insectes</td><td>Tardif</td></tr>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Lividités et rigidité ne permettent <em>jamais</em> de dater précisément le décès — importantes variations individuelles selon contexte (température, hygrométrie).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- CERTIFICAT DE DÉCÈS ET AUTOPSIES -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Certificat de décès et autopsies
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sec-label" style="color:var(--coral);">Règles de rédaction du certificat de décès</div>
+      <ul class="clist">
+        <li>Certificat obligatoire (papier ou électronique)</li>
+        <li>2 modèles : décès néo-natal (≤27e jour de vie) et décès à partir du 28e jour</li>
+        <li>Examen complet du corps — s'assurer du caractère réel et constant de la mort</li>
+        <li>2 volets à remplir : <strong>administratif</strong> et <strong>médical</strong></li>
+      </ul>
+      <div class="alert alert-red" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Cocher OML (obstacle médico-légal) devant :</strong> mort suspecte, inhabituelle, violente, posant un problème de responsabilité médicale / accident du travail, ou corps non identifié.</div>
+      </div>
+      <div style="font-size:.82rem; margin-top:6px;">Opérations funéraires possibles si : absence d'OML + absence d'obligation de mise en bière + respect du délai légal.</div>
+    </div>
+    <div>
+      <div class="sec-label" style="color:var(--purple);">Types d'autopsies</div>
+      <div class="bc">
+        <h4>Autopsie médico-légale</h4>
+        <div class="sub">Demandée par un <strong>magistrat</strong> — régie par le Code de Procédure Pénale — suite à un OML. But : rechercher l'intervention d'un tiers. <strong>La famille ne peut s'y opposer.</strong></div>
+      </div>
+      <div class="bc teal">
+        <h4>Autopsie médicale</h4>
+        <div class="sub">Demandée par un <strong>médecin</strong> — régie par le Code de Santé Publique. But : comprendre la cause médicale du décès. <strong>La famille peut s'y opposer</strong> (ou le défunt de son vivant sur le Registre National des Refus).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>ITT = terme <strong>juridique</strong>, pas médical. Correspond aux actes ordinaires de la vie quotidienne, pas à l'arrêt de travail.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Certificat médical : constatations médicales objectives uniquement. Propos rapportés au conditionnel. Jamais de mise en cause nominative.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Lividités : fixées après 12h. Tache verte abdominale : fosse iliaque droite (cæcum), ~48h.</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> La case OML bloque les opérations funéraires. À cocher devant tout décès suspect, inhabituel, violent ou posant un problème de responsabilité.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Autopsie médico-légale = décision du magistrat, la famille ne peut s'y opposer. Autopsie médicale = décision du médecin, la famille PEUT s'y opposer.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Contusion ne se date pas précisément par sa couleur — il existe d'importantes variations interindividuelles.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

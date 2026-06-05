@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Item 278 – Ictère de l'adulte et de l'enfant</title>
+  <style>
+    :root {
+      --purple: #534AB7;
+      --teal: #1D9E75;
+      --coral: #D85A30;
+      --blue: #378ADD;
+      --red: #E24B4A;
+      --amber: #E8A020;
+      --rank-a: #D85A30;
+      --rank-b: #378ADD;
+      --bg: #f4f5f8;
+      --card-bg: #ffffff;
+      --text: #1a1a2e;
+      --text-muted: #555570;
+      --border: rgba(0,0,0,0.09);
+      --shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12121e;
+        --card-bg: #1e1e30;
+        --text: #e8e8f4;
+        --text-muted: #9999bb;
+        --border: rgba(255,255,255,0.08);
+        --shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px 60px;
+    }
+    .page-header { text-align: center; margin-bottom: 32px; }
+    .page-header h1 { font-size: 1.7rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+    .page-header p { color: var(--text-muted); font-size: 0.9rem; }
+    .section { margin-bottom: 28px; }
+    .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .section-title .icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0; }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .oic-label { font-size: 0.7rem; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+    .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
+    .card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; color: #fff; margin-left: 8px; vertical-align: middle; }
+    .badge-a { background: var(--rank-a); }
+    .badge-b { background: var(--rank-b); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+    .pill { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; margin: 3px 3px 3px 0; }
+    .pill-green  { background: #d4f0e5; color: #0f6e4a; }
+    .pill-red    { background: #fde8e8; color: #b91c1c; }
+    .pill-blue   { background: #dbeafe; color: #1e40af; }
+    .pill-amber  { background: #fef3c7; color: #92400e; }
+    .pill-purple { background: #ede9fe; color: #5b21b6; }
+    .pill-teal   { background: #d1fae5; color: #065f46; }
+    @media (prefers-color-scheme: dark) {
+      .pill-green  { background: #064e35; color: #6ee7b7; }
+      .pill-red    { background: #4c1111; color: #fca5a5; }
+      .pill-blue   { background: #1e3a6e; color: #93c5fd; }
+      .pill-amber  { background: #4d2d00; color: #fcd34d; }
+      .pill-purple { background: #2e1b6e; color: #c4b5fd; }
+      .pill-teal   { background: #064e35; color: #6ee7b7; }
+    }
+    .alert { border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; border-left: 4px solid; font-size: 0.88rem; }
+    .alert-red   { background: #fff5f5; border-color: var(--red);   color: #7f1d1d; }
+    .alert-blue  { background: #eff6ff; border-color: var(--blue);  color: #1e3a5f; }
+    .alert-green { background: #f0fdf4; border-color: var(--teal);  color: #14532d; }
+    .alert-amber { background: #fffbeb; border-color: var(--amber); color: #78350f; }
+    @media (prefers-color-scheme: dark) {
+      .alert-red   { background: #2d0808; border-color: var(--red);   color: #fca5a5; }
+      .alert-blue  { background: #0c1d3d; border-color: var(--blue);  color: #93c5fd; }
+      .alert-green { background: #052e16; border-color: var(--teal);  color: #6ee7b7; }
+      .alert-amber { background: #1c0f00; border-color: var(--amber); color: #fcd34d; }
+    }
+    .alert strong { font-weight: 700; display: block; margin-bottom: 4px; }
+    .compl-card { border-left: 4px solid; border-radius: 0 12px 12px 0; padding: 10px 14px; margin-bottom: 8px; background: var(--card-bg); border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); font-size: 0.87rem; }
+    .compl-card strong { display: block; font-weight: 700; margin-bottom: 2px; }
+    .steps { list-style: none; padding: 0; }
+    .steps li { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; font-size: 0.88rem; }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; background: #e5e5f0; color: var(--text); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
+    @media (prefers-color-scheme: dark) { .step-num { background: #2a2a45; } }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    th { background: var(--bg); font-weight: 700; padding: 9px 12px; text-align: left; border-bottom: 2px solid var(--border); }
+    td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .kv-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 0.5px solid var(--border); font-size: 0.87rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { font-weight: 600; min-width: 180px; color: var(--text-muted); flex-shrink: 0; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    svg { display: block; }
+    .text-sm { font-size: 0.85rem; }
+    .text-muted { color: var(--text-muted); }
+    ul.dot-list { padding-left: 18px; margin-top: 6px; }
+    ul.dot-list li { margin-bottom: 4px; font-size: 0.87rem; }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Item 278 — Ictère de l'adulte et de l'enfant</h1>
+  <p>IC-278 · Hépato-gastro-entérologie &amp; Pédiatrie</p>
+</div>
+
+<!-- PARTIE 1 — BASES COMMUNES -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#ede9fe;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div>
+      <h2>Bases — Physiologie de la bilirubine</h2>
+      <div class="oic-label">OIC-278-05-A · OIC-278-01-A</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue">
+    <strong>Définition commune adulte / enfant</strong>
+    Coloration jaune des téguments et des conjonctives liée à une <strong>hyperbilirubinémie</strong>. Visible cliniquement à partir de ~50 µmol/L chez l'adulte.
+  </div>
+
+  <div class="card">
+    <h3>Métabolisme de la bilirubine — fil conducteur</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Étape</th><th>Lieu</th><th>Produit</th><th>Si bloqué…</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dégradation de l'hémoglobine</td>
+            <td>Système réticulo-endothélial</td>
+            <td>Bilirubine <strong>libre</strong> (non conjuguée)</td>
+            <td>Ictère à bilirubine <em>libre</em> (hémolyse, Gilbert)</td>
+          </tr>
+          <tr>
+            <td>Glucurono-conjugaison</td>
+            <td>Hépatocyte (UGT1A1)</td>
+            <td>Bilirubine <strong>conjuguée</strong> (hydrosoluble)</td>
+            <td>Ictère <em>mixte</em> (IHC)</td>
+          </tr>
+          <tr>
+            <td>Excrétion biliaire</td>
+            <td>Canalicules → voies biliaires</td>
+            <td>Bile → duodénum</td>
+            <td>Ictère à bilirubine <em>conjuguée</em> = cholestase</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Ictère à bilirubine libre <span class="badge badge-a">A</span></h3>
+      <ul class="dot-list">
+        <li>Bilirubine libre &gt; 70 % de la bilirubine totale</li>
+        <li>Urines <strong>claires</strong></li>
+        <li>Selles <strong>normales</strong></li>
+        <li>Causes : hémolyse, Gilbert, dysérythropoïèse</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ictère à bilirubine conjuguée <span class="badge badge-a">A</span></h3>
+      <ul class="dot-list">
+        <li>Urines <strong>foncées</strong></li>
+        <li>Selles <strong>décolorées</strong></li>
+        <li>PAL + GGT élevées → cholestase</li>
+        <li>Causes : obstruction VBP, pathologie canaliculaire</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 2 — ICTÈRE DU NOUVEAU-NÉ -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#fef3c7;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E8A020" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+    </div>
+    <div>
+      <h2>Ictère du nouveau-né</h2>
+      <div class="oic-label">OIC-278-01-A · OIC-278-02-A · OIC-278-03-A · OIC-278-04-B</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Types d'ictère néonatal <span class="badge badge-a">A</span></h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Début</th><th>Durée</th><th>Bilirubine</th><th>Traitement</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Ictère simple</strong> (physiologique)</td>
+            <td>Après H24</td>
+            <td>Disparition avant J10</td>
+            <td>&lt; 75e percentile</td>
+            <td><span class="pill pill-green">Aucun</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ictère au lait de mère</strong></td>
+            <td>J5–J6</td>
+            <td>4 à 6 semaines</td>
+            <td>&lt; 75e percentile</td>
+            <td><span class="pill pill-green">Aucun</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ictère pathologique</strong></td>
+            <td>Variable</td>
+            <td>Variable</td>
+            <td>≥ 95e percentile</td>
+            <td><span class="pill pill-red">Bilan + traitement</span></td>
+          </tr>
+          <tr>
+            <td><strong>Ictère sévère</strong></td>
+            <td>Variable</td>
+            <td>—</td>
+            <td>&gt; 340 µmol/L (&lt;96h) ou &gt;420 µmol/L (&gt;96h)</td>
+            <td><span class="pill pill-red">Urgence</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Facteurs de risque d'hyperbilirubinémie <span class="badge badge-a">A</span></h3>
+    <p style="font-size:0.84rem;margin-bottom:8px;color:var(--text-muted)">Anamnestiques :</p>
+    <span class="pill pill-amber">AG &lt; 38 SA</span>
+    <span class="pill pill-amber">Incompatibilité ABO</span>
+    <span class="pill pill-amber">RAI maternelles +</span>
+    <span class="pill pill-amber">Hémolyse familiale</span>
+    <span class="pill pill-amber">Ictère traité dans la fratrie</span>
+    <span class="pill pill-amber">Origine Asie/Afrique/Antilles</span>
+    <p style="font-size:0.84rem;margin: 10px 0 8px;color:var(--text-muted)">Cliniques :</p>
+    <span class="pill pill-red">Début avant H24</span>
+    <span class="pill pill-red">Durée &gt; 10 jours</span>
+    <span class="pill pill-red">Ictère jusqu'à la plante des pieds</span>
+    <span class="pill pill-red">Examen neurologique anormal</span>
+    <span class="pill pill-red">Hépato-splénomégalie</span>
+    <span class="pill pill-red">Selles décolorées / urines foncées</span>
+  </div>
+
+  <div class="alert alert-red">
+    <strong>3 situations urgentes — OIC-278-02-A</strong>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div class="compl-card" style="border-color: var(--red);">
+        <strong>1. Ictère nucléaire (encéphalopathie hyperbilirubinémique)</strong>
+        Bilirubine libre neurotoxique → lésions des noyaux gris centraux<br>
+        <span class="pill pill-red">Léthargie</span><span class="pill pill-red">Hypertonie extrapyramidale</span><br>
+        Séquelles : mouvements anormaux, surdité
+      </div>
+      <div class="compl-card" style="border-color: var(--amber);">
+        <strong>2. Hémolyse à évolutivité rapide</strong>
+        Incompatibilité ABO (mère O, enfant A ou B) ou Rhésus<br>
+        Constitutionnelle : G6PD, sphérocytose héréditaire<br>
+        <span class="pill pill-amber">Risque niveau neurotoxique</span><span class="pill pill-amber">Anémie</span>
+      </div>
+    </div>
+    <div>
+      <div class="compl-card" style="border-color: var(--blue);">
+        <strong>3. Ictère conjugué = atrésie des voies biliaires</strong>
+        <span class="pill pill-blue">Hépatomégalie ferme</span><span class="pill pill-blue">Urines foncées</span><span class="pill pill-blue">Selles décolorées</span><br>
+        Traitement : <strong>vitamine K</strong> + <strong>chirurgie précoce</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Stratégie diagnostique — OIC-278-03-A <span class="badge badge-a">A</span></h3>
+    <div class="alert alert-green" style="margin-bottom:10px">
+      <strong>Ictère simple → pas de bilan</strong>
+      Toutes les autres situations : confirmer par bilirubinémie totale sanguine
+    </div>
+    <p style="font-size:0.84rem;font-weight:700;margin-bottom:6px">1ère intention :</p>
+    <span class="pill pill-blue">Bilirubine totale + conjuguée</span>
+    <span class="pill pill-blue">NFS + réticulocytes</span>
+    <span class="pill pill-blue">Groupe sanguin enfant</span>
+    <span class="pill pill-blue">Test de Coombs direct</span>
+    <span class="pill pill-blue">CRP + hémoculture</span>
+    <p style="font-size:0.84rem;font-weight:700;margin: 10px 0 6px">Selon contexte :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>Examens</th></tr></thead>
+        <tbody>
+          <tr><td>Ictère après J7</td><td>ECBU (E.coli)</td></tr>
+          <tr><td>Cholestase (selles décolorées)</td><td>Bilan hépatique + échographie abdominale → atrésie biliaire ?</td></tr>
+          <tr><td>Ictère libre non expliqué</td><td>G6PD, pyruvate kinase, frottis (sphérocytose), T4/TSH</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Principes de traitement — OIC-278-04-B <span class="badge badge-b">B</span></h3>
+    <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:10px">Objectif : réduire la bilirubinémie pour prévenir la neurotoxicité</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div><strong>Photothérapie</strong> (lumière bleue) — traitement de base. Convertit la bilirubine en produits hydrosolubles.<br><span class="text-sm text-muted">Prévenir : déshydratation, hyperthermie, complications oculaires (lunettes) et gonadiques (couche)</span></div></li>
+      <li><span class="step-num">2</span><div><strong>Exsanguino-transfusion</strong> — si ictère très sévère ne répondant pas à la photothérapie</div></li>
+      <li><span class="step-num">3</span><div><strong>Perfusion d'albumine</strong> — nouveau-nés vulnérables ou en attente d'exsanguino-transfusion</div></li>
+      <li><span class="step-num">4</span><div><strong>Immunoglobulines IV</strong> — incompatibilité ABO ou allo-immunisation materno-fœtale</div></li>
+      <li><span class="step-num">5</span><div><strong>Chirurgie</strong> (anastomose porto-entérique) — atrésie des voies biliaires extra-hépatiques</div></li>
+    </ol>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 3 — ÉTIOLOGIES ADULTE + CLINIQUE -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#dbeafe;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#378ADD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+    </div>
+    <div>
+      <h2>Étiologies et tableaux cliniques — Adulte</h2>
+      <div class="oic-label">OIC-278-05-A · OIC-278-06-B · OIC-278-07-A · OIC-278-08-B · OIC-278-09-A</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tableau comparatif des ictères de l'adulte <span class="badge badge-a">A</span></h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Mécanisme</th><th>Urines</th><th>Selles</th><th>Biologie spécifique</th><th>Principales causes</th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(232,160,32,0.07)">
+            <td><strong>Libre</strong><br><small>Bili libre &gt; 70%</small></td>
+            <td>↑ production ou ↓ conjugaison</td>
+            <td>Claires</td>
+            <td>Normales</td>
+            <td>↑ LDH, ↑ réticulocytes, ↓ haptoglobine</td>
+            <td>Gilbert, hémolyse, dysérythropoïèse</td>
+          </tr>
+          <tr style="background:rgba(55,138,221,0.07)">
+            <td><strong>Conjuguée</strong><br><small>Cholestase</small></td>
+            <td>Obstruction ou pathologie canaliculaire</td>
+            <td>Foncées</td>
+            <td>Décolorées</td>
+            <td>↑ PAL (&gt;2N) + ↑ GGT</td>
+            <td>Lithiase VBP, K pancréas, cholangiocarcinome, CBP, CSP</td>
+          </tr>
+          <tr style="background:rgba(83,74,183,0.07)">
+            <td><strong>Mixte</strong><br><small>IHC</small></td>
+            <td>Insuffisance hépatocellulaire</td>
+            <td>Variables</td>
+            <td>Variables</td>
+            <td>↑ transaminases, ↓ TP, ↓ facteur V, ↓ albumine</td>
+            <td>Cirrhose, hépatite aiguë grave</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3>Syndrome de Gilbert <span class="badge badge-b">B</span></h3>
+      <div class="alert alert-green" style="padding:10px 12px;margin-bottom:8px">
+        <strong>Bénin — 5 à 8 % de la population — pas de suivi</strong>
+      </div>
+      <ul class="dot-list">
+        <li>Transmission AR (mutation UGT1A1)</li>
+        <li>Hyperbilirubinémie libre, fluctuante (&lt; 80 µmol/L)</li>
+        <li>Facteurs déclenchants : fatigue, jeûne, infection</li>
+        <li><strong>Bilan hépatique normal</strong> (pas de cytolyse, cholestase ni hémolyse)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Ictère hémolytique <span class="badge badge-a">A</span></h3>
+      <ul class="dot-list">
+        <li>Urines claires ou "coca-cola" (hémoglobinurie)</li>
+        <li>Selles normales</li>
+        <li>↑ réticulocytes</li>
+        <li>↑ LDH</li>
+        <li>↓ haptoglobine</li>
+        <li>Anémie possible</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Ictère cholestatique — signes cliniques <span class="badge badge-a">A</span></h3>
+    <div class="grid-2">
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Signes cardinaux</p>
+        <span class="pill pill-blue">Urines foncées</span>
+        <span class="pill pill-blue">Selles décolorées</span>
+        <span class="pill pill-blue">Prurit (CBP++)</span>
+        <span class="pill pill-blue">↑ PAL + GGT</span>
+      </div>
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Selon étiologie</p>
+        <span class="pill pill-amber">Grosse vésicule (obstacle tumoral bas)</span>
+        <span class="pill pill-amber">Douleur biliaire (lithiase)</span>
+        <span class="pill pill-purple">Ac anti-mitochondries (CBP)</span>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Si cholestase prolongée :</p>
+      <span class="pill pill-red">Carences vit. A, D, E, K</span>
+      <span class="pill pill-red">TP bas (facteur V normal)</span>
+      <span class="pill pill-red">Stéatorrhée</span>
+      <span class="pill pill-red">Ostéopénie</span>
+      <span class="pill pill-red">Cirrhose biliaire secondaire (rare)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Causes d'obstruction de la voie biliaire principale <span class="badge badge-b">B</span></h3>
+    <div class="alert alert-amber"><strong>3 causes principales à connaître</strong></div>
+    <div class="grid-2">
+      <div>
+        <div class="compl-card" style="border-color:var(--red)">
+          <strong>Cancer du pancréas</strong>
+          Compression extrinsèque — grosse vésicule (signe de Courvoisier-Terrier)
+        </div>
+        <div class="compl-card" style="border-color:var(--coral)">
+          <strong>Cholangiocarcinome</strong>
+          Cancer primitif de la voie biliaire principale
+        </div>
+        <div class="compl-card" style="border-color:var(--teal)">
+          <strong>Lithiase de la VBP</strong>
+          Douleur biliaire typique ± fièvre (angiocholite)
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.84rem;font-weight:700;margin-bottom:6px;color:var(--text-muted)">Causes moins fréquentes :</p>
+        <span class="pill pill-amber">Sténose post-opératoire</span>
+        <span class="pill pill-amber">Pancréatite chronique calcifiante</span>
+        <span class="pill pill-amber">Compression adénopathique</span>
+        <span class="pill pill-amber">Cholangite sclérosante primitive (CSP)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 4 — IHC GRAVE -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#fde8e8;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div>
+      <h2>Insuffisance hépatocellulaire grave</h2>
+      <div class="oic-label">OIC-278-10-A · OIC-278-11-A</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <strong>Critères de gravité de l'IHC — OIC-278-10-A</strong>
+    TP + facteur V &lt; 50 % <strong>ET</strong> encéphalopathie hépatique <strong>ET</strong> ictère intense (bilirubine mixte ou conjuguée)
+  </div>
+
+  <div class="card">
+    <h3>Signes d'IHC grave <span class="badge badge-a">A</span></h3>
+    <ul class="dot-list">
+      <li>Hyperbilirubinémie <strong>mixte</strong> ou à prédominance conjuguée — plus intense si IHC sévère (scores Child-Pugh, MELD)</li>
+      <li><strong>↓ TP et facteur V &lt; 50 %</strong> — marqueur clé de sévérité</li>
+      <li><strong>Encéphalopathie hépatique</strong> — astérixis, confusion, coma</li>
+      <li>↓ Albumine (IHC chronique)</li>
+      <li>↑ Transaminases très élevées si hépatite aiguë (&gt; 20× N)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Complications de l'IHC grave — par système <span class="badge badge-a">A</span></h3>
+    <div class="grid-2">
+      <div>
+        <div class="compl-card" style="border-color:var(--red)">
+          <strong>Hémodynamiques</strong>
+          Vasodilatation généralisée, hypotension, tachycardie, troubles du rythme
+        </div>
+        <div class="compl-card" style="border-color:var(--purple)">
+          <strong>Neurologiques</strong>
+          Encéphalopathie sévère, coma<br>
+          <span class="pill pill-red">Œdème cérébral</span> (IHC aiguë uniquement — pas en IHC chronique)
+        </div>
+        <div class="compl-card" style="border-color:var(--blue)">
+          <strong>Respiratoires</strong>
+          Hypoxie, hypocapnie, SDRA
+        </div>
+      </div>
+      <div>
+        <div class="compl-card" style="border-color:var(--teal)">
+          <strong>Rénales</strong>
+          IRA fonctionnelle ou organique (IHC aiguë)<br>
+          Syndrome hépatorénal (cirrhose)
+        </div>
+        <div class="compl-card" style="border-color:var(--amber)">
+          <strong>Métaboliques</strong>
+          Hypoglycémie, hyponatrémie, acidose métabolique, hyperlactatémie
+        </div>
+        <div class="compl-card" style="border-color:var(--coral)">
+          <strong>Infectieuses</strong>
+          Pneumopathie, septicémie — bactériennes et/ou fungiques
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;margin-bottom:0">
+      <strong>Prise en charge précoce en soins intensifs / réanimation dès le stade sévère et/ou évolutif</strong>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 5 — DÉMARCHE DIAGNOSTIQUE ADULTE -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#d1fae5;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1D9E75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div>
+      <h2>Démarche diagnostique — Adulte</h2>
+      <div class="oic-label">OIC-278-12-A · OIC-278-13-B · OIC-278-15-B</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Examens de 1ère intention <span class="badge badge-a">A</span> — OIC-278-12</h3>
+    <div class="grid-2">
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Biologie</p>
+        <span class="pill pill-blue">Bilirubine totale + conjuguée</span>
+        <span class="pill pill-blue">ASAT, ALAT</span>
+        <span class="pill pill-blue">GGT, PAL</span>
+        <span class="pill pill-blue">NFS + plaquettes</span>
+      </div>
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Imagerie</p>
+        <span class="pill pill-teal">Échographie hépato-biliaire</span>
+        <p style="font-size:0.82rem;margin-top:6px;color:var(--text-muted)">→ Chercher une <strong>dilatation des voies biliaires</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Examens de 2ème intention <span class="badge badge-b">B</span> — OIC-278-13</h3>
+    <div style="margin-bottom:14px">
+      <div class="kv-row">
+        <span class="kv-key">Bilirubine libre</span>
+        <span>Bilan hépatique normal, pas d'hémolyse → <strong>Syndrome de Gilbert — pas de suivi</strong><br>Hémolyse → LDH, haptoglobine, réticulocytes + <span class="pill pill-purple">avis hématologie</span></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Bilirubine mixte</span>
+        <span>TP, facteur V, albuminémie<br>Bilan cirrhose (item 279) ou hépatite aiguë (item 167)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Bilirubine conjuguée</span>
+        <span>Voir algorithme ci-dessous</span>
+      </div>
+    </div>
+    <p style="font-weight:700;font-size:0.87rem;margin-bottom:8px">Algorithme ictère conjugué :</p>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div><strong>Échographie abdominale</strong> → voies biliaires dilatées ?</div></li>
+      <li>
+        <span class="step-num">2</span>
+        <div>
+          <strong>Si VB non dilatées :</strong><br>
+          → Ac anti-mitochondries (<strong>CBP</strong> ?)<br>
+          → Cholangio-IRM (<strong>CSP</strong> ?)<br>
+          → Si négatif : <span class="pill pill-purple">Ponction-biopsie hépatique</span>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div>
+          <strong>Si VB dilatées :</strong> identifier le siège de l'obstacle<br>
+          <span class="pill pill-teal">TDM injecté</span>
+          <span class="pill pill-teal">Bili-IRM / IRM hépatique</span>
+          <span class="pill pill-blue">Écho-endoscopie</span>
+          <span class="pill pill-blue">CPRE</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Place de l'échographie dans l'ictère conjugué <span class="badge badge-b">B</span> — OIC-278-15</h3>
+    <div class="grid-2">
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Avantages</p>
+        <span class="pill pill-green">Non invasif</span>
+        <span class="pill pill-green">Sans danger</span>
+        <span class="pill pill-green">Peu coûteux</span>
+      </div>
+      <div>
+        <p style="font-weight:700;font-size:0.87rem;margin-bottom:6px">Limites</p>
+        <span class="pill pill-amber">Opérateur-dépendant</span>
+        <span class="pill pill-amber">Habitus du patient</span>
+        <span class="pill pill-amber">Sensibilité/spécificité variables</span>
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <p style="font-weight:700;font-size:0.87rem;margin-bottom:4px">Objectif principal :</p>
+      <p style="font-size:0.87rem">Chercher une <strong>dilatation des voies biliaires</strong> par obstruction de la VBP et/ou de la convergence des conduits hépatiques droit et gauche</p>
+      <p style="font-weight:700;font-size:0.87rem;margin: 8px 0 4px">Objectifs secondaires :</p>
+      <span class="pill pill-blue">Calculs vésiculaires</span>
+      <span class="pill pill-blue">Masse hépatique</span>
+      <span class="pill pill-blue">Masse ganglionnaire</span>
+      <span class="pill pill-blue">Masse pancréatique</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 6 — URGENCES ADULTE -->
+<div class="section">
+  <div class="section-title">
+    <div class="icon" style="background:#fde8e8;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E24B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </div>
+    <div>
+      <h2>Situations d'urgence — Adulte</h2>
+      <div class="oic-label">OIC-278-14-A</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="alert alert-red">
+      <strong>1. Angiocholite</strong>
+      Triade de Charcot : <span class="pill pill-red">Fièvre</span><span class="pill pill-red">Ictère</span><span class="pill pill-red">Douleur biliaire</span><br>
+      Lithiase VBP infectée → sepsis<br>
+      <span style="font-size:0.82rem">Voir item 277 — identifiant 2C-277-DP-A06</span>
+    </div>
+    <div class="alert alert-red">
+      <strong>2. Insuffisance hépatique aiguë grave</strong>
+      Transaminases &gt; 20× N + ↓ TP/facteur V &lt; 50% + encéphalopathie<br>
+      <strong>Mortalité spontanée ~80 %</strong><br>
+      <span class="pill pill-red">Rapprochement centre de transplantation hépatique</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Ictère chez un cirrhotique — facteurs aggravants à rechercher</h3>
+    <span class="pill pill-red">Exacerbation hépatite virale</span>
+    <span class="pill pill-red">Hépatite auto-immune</span>
+    <span class="pill pill-red">Hépatite alcoolique aiguë</span>
+    <span class="pill pill-red">Cancer primitif du foie</span>
+    <span class="pill pill-red">Infection bactérienne</span>
+    <p style="font-size:0.82rem;margin-top:8px;color:var(--text-muted)">Voir item 279 — Cirrhose et complications</p>
+  </div>
+
+  <div class="alert alert-green">
+    <strong>Mnémotechnique — Ictère conjugué = 3 C</strong>
+    <ul class="dot-list" style="margin-top:4px">
+      <li><strong>C</strong>alcul (lithiase VBP)</li>
+      <li><strong>C</strong>ancer (pancréas, cholangiocarcinome)</li>
+      <li><strong>C</strong>ircuit biliaire inflammatoire (CBP, CSP)</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

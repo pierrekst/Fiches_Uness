@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 88 — Trouble aigu de la parole, Dysphonie</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d23;
+    --text2: #4b5563;
+    --border: #e2e6ea;
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --purple-light: #edeafc;
+    --teal-light: #d0f4ea;
+    --coral-light: #fce8e0;
+    --blue-light: #ddeeff;
+    --red-light: #fde8e8;
+    --amber-light: #fef3c7;
+    --radius: 14px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117; --card: #1c1f2a; --text: #e8eaf0; --text2: #9aa3b2; --border: #2d3240;
+      --purple-light: #2a2560; --teal-light: #0d4a36; --coral-light: #5c2510;
+      --blue-light: #153a6b; --red-light: #5a1a1a; --amber-light: #4a2e00;
+      --shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13.5px; line-height: 1.5; padding: 24px 16px 48px; }
+  
+  .page { max-width: 920px; margin: 0 auto; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px 24px; color: #fff; margin-bottom: 24px; }
+  .header-item { font-size:.78rem; font-weight:600; letter-spacing:.08em; opacity:.82; text-transform:uppercase; margin-bottom:6px; }
+  .header-title { font-size:1.65rem; font-weight:800; line-height:1.2; margin-bottom:14px; }
+  .header-summary { font-size:.88rem; opacity:.92; line-height:1.6; max-width:780px; }
+
+  /* VISION GLOBALE */
+  .vision-box { background:var(--purple-light); border:.5px solid var(--border); border-radius:14px; padding:18px 22px; margin-bottom:24px; }
+  .vision-box strong { color:var(--purple); }
+
+  /* SECTION STRUCTURE */
+  .section-block { margin-bottom: 0; }
+  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .section-badge { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-badge svg { width:17px; height:17px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .section-title-text { font-size:1.05rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+
+  hr { border:none; border-top:1.5px solid var(--border); margin:26px 0; }
+
+  /* GRID SYSTEM */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  @media(max-width:768px) { .grid2,.grid3 { grid-template-columns:1fr; } }
+
+  /* CARDS */
+  .card { background:var(--card); border:.5px solid var(--border); border-radius:14px; padding:16px 18px; height: 100%; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* KEY-VALUE ROW */
+  .kv-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:.5px solid var(--border); gap:12px; }
+  .kv-row:last-child { border-bottom:none; }
+  .kv-key { color:var(--text2); font-size:.82rem; flex:1; }
+  .kv-val { font-weight:700; font-size:.85rem; text-align:right; }
+
+  /* PILLS & BADGES */
+  .pill-wrap { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.78rem; font-weight:600; white-space:nowrap; }
+  .pill-green { background:var(--teal-light); color:var(--teal); }
+  .pill-red { background:var(--red-light); color:var(--red); }
+  .pill-blue { background:var(--blue-light); color:var(--blue); }
+  .pill-amber { background:var(--amber-light); color:var(--amber); }
+  .pill-purple { background:var(--purple-light); color:var(--purple); }
+  .pill-coral { background:var(--coral-light); color:var(--coral); }
+  
+  .pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+
+  /* ALERTES */
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert-icon { flex-shrink:0; margin-top:1px; }
+  .alert-icon svg { width:15px; height:15px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red { background:var(--red-light); color:var(--red); border-left:3px solid var(--red); }
+  .alert-red .alert-icon svg { stroke:var(--red); }
+  .alert-blue { background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-blue .alert-icon svg { stroke:var(--blue); }
+  .alert-green { background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-green .alert-icon svg { stroke:var(--teal); }
+  .alert-teal { background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-teal .alert-icon svg { stroke:var(--teal); }
+  .alert-amber { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert-purple { background:var(--purple-light); color:var(--purple); border-left:3px solid var(--purple); }
+  .alert-purple .alert-icon svg { stroke:var(--purple); }
+  .alert strong { font-weight:800; }
+
+  /* COMPLICATIONS CARD (LEFT BORDER COLOR) */
+  .left-card { background:var(--card); border:.5px solid var(--border); border-radius:12px; padding:12px 14px; border-left:4px solid var(--border); margin-bottom:10px; }
+  .left-card:last-child { margin-bottom: 0; }
+  .left-card.purple { border-left-color:var(--purple); }
+  .left-card.teal { border-left-color:var(--teal); }
+  .left-card.coral { border-left-color:var(--coral); }
+  .left-card.blue { border-left-color:var(--blue); }
+  .left-card.red { border-left-color:var(--red); }
+  .left-card.amber { border-left-color:var(--amber); }
+  .left-card h4 { font-size:.84rem; font-weight:700; margin-bottom:4px; }
+  .left-card p { font-size:.82rem; color:var(--text2); }
+
+  /* TABLES */
+  table { width:100%; border-collapse:collapse; font-size:.82rem; margin-bottom: 10px; }
+  th { background:var(--bg); color:var(--text2); font-weight:700; padding:8px 10px; text-align:left; border-bottom:1px solid var(--border); font-size:.73rem; text-transform:uppercase; }
+  td { padding:8px 10px; border-bottom:.5px solid var(--border); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(83, 74, 183, 0.02); }
+
+  /* LISTS */
+  ul.list { list-style:none; padding:0; }
+  ul.list li { padding:3px 0 3px 14px; font-size:.83rem; position:relative; }
+  ul.list li::before { content:'—'; position:absolute; left:0; color:var(--text2); }
+
+  .badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:.75rem; font-weight:700; margin-left:4px; }
+  .badge-red { background:var(--red-light); color:var(--red); }
+  .badge-blue { background:var(--blue-light); color:var(--blue); }
+  .badge-amber { background:var(--amber-light); color:var(--amber); }
+  .badge-teal { background:var(--teal-light); color:var(--teal); }
+
+  .tag-title { font-size:.72rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; margin-bottom:7px; color:var(--text2); margin-top: 10px; }
+  
+  /* CHRONOLOGY STEPS */
+  .step-wrap { display:flex; flex-direction:column; gap:8px; }
+  .step-row { display:flex; gap:10px; align-items:flex-start; font-size:.83rem; }
+  .step-num { width:22px; height:22px; border-radius:50%; background:var(--bg); border:.5px solid var(--border); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.75rem; flex-shrink:0; color:var(--text2); }
+  .step-content { flex:1; padding-top:2px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-item">Item 88 — ORL / Neurologie</div>
+    <div class="header-title">Trouble aigu de la parole, Dysphonie</div>
+    <div class="header-summary">
+      Fiche ultra-dense ECNi : anatomie laryngée, diagnostic différentiel des troubles de la parole/voix, élimination systématique du cancer du larynx, étiologies des immobilités laryngées et urgences obstructives.
+    </div>
+  </div>
+
+  <!-- VISION GLOBALE -->
+  <div class="vision-box">
+    <strong>Vue d'ensemble clinique (ECNi)</strong>
+    <ul class="list" style="margin-top: 6px;">
+      <li><strong>Dysphonie :</strong> Anomalie de la vibration des plis vocaux.</li>
+      <li><strong>Règle d'or :</strong> Toute dysphonie traînante <strong>> 15 jours</strong> = <strong>Cancer du larynx</strong> à exclure par nasofibroscopie ORL.</li>
+      <li><strong>Immobilité unilatérale :</strong> Blocage mécanique (cancer, intubation) ou paralysie récurrentielle (nerf récurrent) &rarr; <strong>TDM injecté base du crâne au médiastin</strong>.</li>
+      <li><strong>Immobilité bilatérale en fermeture :</strong> Urgence obstructive vitale (bradypnée inspiratoire, tirage, cornage) &rarr; <strong>Trachéotomie transitoire</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== PARTIE 1 : ANATOMIE ET PHYSIOLOGIE ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--purple)">1. Anatomie, Physiologie du Larynx &amp; Émission du son</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Fonctions et structure du larynx -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--purple)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          Fonctions &amp; Structure du Larynx
+        </div>
+        <div class="left-card purple">
+          <h4>3 Fonctions Physiologiques</h4>
+          <ul class="list">
+            <li><strong>Phonation :</strong> Vibration des plis vocaux à l'expiration.</li>
+            <li><strong>Déglutition (protection VAI) :</strong> Sphincter empêchant les fausses routes + réflexe de toux.</li>
+            <li><strong>Ventilation :</strong> Ouverture forcée (abduction) à l'inspiration.</li>
+          </ul>
+        </div>
+        <div class="left-card blue">
+          <h4>Structure Anatomique</h4>
+          <ul class="list">
+            <li><strong>Plis vocaux :</strong> Structures musculo-membraneuses paires.</li>
+            <li><strong>Cartilages :</strong> Cricoïde (anneau de base) et thyroïde (bouclier protecteur).</li>
+            <li><strong>Mobilité :</strong> Assurée par des muscles intrinsèques d'ouverture/fermeture.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Le nerf récurrent et l'émission du son -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--purple)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+          </div>
+          Innervation &amp; Émission Acoustique
+        </div>
+        <div class="left-card purple">
+          <h4>Nerf Laryngé Inférieur (Récurrent)</h4>
+          <ul class="list">
+            <li>Contrôle de la motricité des cordes vocales.</li>
+            <li><strong>Origine :</strong> Branche collatérale du nerf vague (X).</li>
+            <li><strong>Noyau bulbaire :</strong> Proche des noyaux du IX et du XII (déglutition).</li>
+            <li><strong>Trajet descendant puis ascendant (récurrentiel) :</strong>
+              <br>— <em>À gauche :</em> Contourne la crosse de l'aorte (thorax).
+              <br>— <em>À droite :</em> Contourne l'artère sous-clavière (base du cou).
+              <br>— <em>Rapports étroits :</em> Glande thyroïde (face profonde) et œsophage cervical.
+            </li>
+          </ul>
+        </div>
+        <div class="left-card teal">
+          <h4>Physiologie de la Phonation</h4>
+          <div class="step-wrap" style="margin-top: 8px;">
+            <div class="step-row"><div class="step-num">1</div><div class="step-content">Plis vocaux en adduction (contact) pendant l'expiration.</div></div>
+            <div class="step-row"><div class="step-num">2</div><div class="step-content">Pression d'air sous-glottique augmente.</div></div>
+            <div class="step-row"><div class="step-num">3</div><div class="step-content">Pression dépasse la force de fermeture glottique.</div></div>
+            <div class="step-row"><div class="step-num">4</div><div class="step-content">Échappement d'air forcé provoquant la vibration passive des cordes.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 2 : DÉFINITIONS ET D. DIFFÉRENTIELS ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--blue)">2. Définitions &amp; Diagnostics Différentiels</div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Sémiologie : Distinctions cliniques des troubles de la parole et de la voix
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:25%">Trouble</th>
+            <th style="width:40%">Mécanisme &amp; Définition</th>
+            <th style="width:35%">Exemple / Causes typiques</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Dysphonie</strong></td>
+            <td>Anomalie de la vibration des cordes vocales (trouble de la voix).</td>
+            <td>Laryngite, paralysie récurrentielle, cancer du larynx.</td>
+          </tr>
+          <tr>
+            <td><strong>Dysarthrie</strong></td>
+            <td>Trouble de l'articulation de la parole par atteinte motrice/neurologique du conduit aérodigestif. Le langage reste intact.</td>
+            <td>Maladie de Parkinson (voix monotone, monocorde), AVC, SLA.</td>
+          </tr>
+          <tr>
+            <td><strong>Voix faible</strong></td>
+            <td>Déficit de pression d'air sous-glottique sans anomalie des cordes vocales.</td>
+            <td>Insuffisance respiratoire sévère, altération majeure de l'état général (AEG).</td>
+          </tr>
+          <tr>
+            <td><strong>Rhinolalie</strong></td>
+            <td>Anomalie de résonance nasale de la voix.
+              <br>— <strong>Fermée :</strong> Obstruction nasale.
+              <br>— <strong>Ouverte :</strong> Fuite d'air par insuffisance du voile du palais.
+            </td>
+            <td>Rhinopharyngite, hypertrophie des végétations adenoides, division palatine.</td>
+          </tr>
+          <tr>
+            <td><strong>Voix pharyngée</strong></td>
+            <td>Modification du timbre de la voix par obstruction de l'oropharynx. Voix dite de « patate chaude ».</td>
+            <td>Tumeur de la base de la langue ou de l'oropharynx, phlegmon amygdalien.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-purple" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Syndrome Parkinsonien :</strong> Au premier plan, on retrouve une <strong>dysarthrie</strong> avec une voix typiquement monocorde, monotone et hypophonique (faible intensité).</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 3 : DÉMARCHE DIAGNOSTIQUE ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--teal)">3. Démarche Diagnostique &amp; Investigations ORL</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Examen clinique ORL -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--teal)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          Examen Clinique Systématique
+        </div>
+        <div class="left-card teal">
+          <h4>1. Recherche des Facteurs de Risque de Cancer</h4>
+          <div class="pill-wrap">
+            <span class="pill pill-red">Âge > 50 ans</span>
+            <span class="pill pill-red">Tabac / Alcool</span>
+            <span class="pill pill-amber">Profession à risque vocal (enseignants)</span>
+            <span class="pill pill-blue">RGO chronique</span>
+            <span class="pill pill-purple">Chirurgie cervicale/thoracique</span>
+            <span class="pill pill-coral">Intubation récente</span>
+          </div>
+        </div>
+        <div class="left-card red">
+          <h4>2. Signes de Gravité</h4>
+          <div class="pill-wrap">
+            <span class="pill pill-red">Dyspnée laryngée (inspiratoire)</span>
+            <span class="pill pill-red">Fausses routes (liquides)</span>
+            <span class="pill pill-amber">Dysphagie progressive</span>
+          </div>
+        </div>
+        <div class="left-card blue">
+          <h4>3. Atteinte Bulbaire Associée</h4>
+          <ul class="list">
+            <li><strong>IX (Glossopharyngien) &amp; X (Vague) :</strong> Trouble du voile et de la paroi pharyngée (<strong>signe du rideau</strong> : déviation du voile côté sain).</li>
+            <li><strong>XII (Hypoglosse) :</strong> Paralysie hémi-langue (déviation du côté lésé à la protraction).</li>
+          </ul>
+        </div>
+        <div class="left-card purple">
+          <h4>4. Palpation Cervicale</h4>
+          <ul class="list">
+            <li><strong>Aires ganglionnaires :</strong> Adénopathies suspectes.</li>
+            <li><strong>Glande thyroïde :</strong> Goitre, nodule suspect.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Examens complémentaires et imagerie -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--blue)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+          </div>
+          Laryngoscopie &amp; Bilan d'Imagerie
+        </div>
+        <div class="left-card blue">
+          <h4>Laryngoscopie de Première Intention</h4>
+          <ul class="list">
+            <li><strong>Fibroscopie nasopharyngée (transnasale) :</strong> Examen de référence indispensable en première intention. Permet d'analyser la mobilité et l'aspect des plis vocaux.</li>
+            <li><strong>Épipharyngoscope / Miroir laryngé (laryngoscopie indirecte) :</strong> Voie transorale (moins pratiquée).</li>
+          </ul>
+        </div>
+        <div class="left-card red">
+          <h4>Laryngoscopie en Suspension (LES) sous AG</h4>
+          Indispensable en cas de <strong>lésion suspecte</strong> ou de doute diagnostique. Permet l'exposition directe du larynx pour réalisation de <strong>biopsies</strong> ou traitement.
+        </div>
+        <div class="left-card teal">
+          <h4>Indications Strictes de l'Imagerie</h4>
+          <ul class="list">
+            <li><strong>Paralysie laryngée (uni- ou bilatérale) :</strong> Échographie cervicale (thyroïde) ET <strong>TDM (Scanner) injecté de la base du crâne au médiastin</strong> (visualisation de l'ensemble du trajet des nerfs vagues et récurrents).</li>
+            <li><strong>Lésion maligne laryngée infiltrante :</strong> TDM cervico-thoracique injecté pour le bilan d'extension TNM.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 4 : DIAGNOSTICS ÉTIOLOGIQUES ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--coral)">4. Diagnostics Étiologiques</div>
+    </div>
+
+    <!-- Les 4 orientations de la nasofibroscopie -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Orientations diagnostiques selon les constatations de la fibroscopie
+      </div>
+      <div class="grid2">
+        <div class="left-card teal">
+          <h4>1. Cordes normales mais immobiles</h4>
+          Trouble de la mobilité unilatéral ou bilatéral. Orientation : <strong>blocage mécanique</strong> ou <strong>paralysie nerveuse</strong>.
+        </div>
+        <div class="left-card red">
+          <h4>2. Cordes suspectes (Lésion maligne)</h4>
+          Plaque blanche, bourgeon, polype irrégulier. Diagnostic : indication de <strong>LES sous AG pour biopsies</strong>.
+        </div>
+        <div class="left-card amber">
+          <h4>3. Cordes avec lésion d'allure bénigne</h4>
+          Nodules, granulome, papillome. Diagnostic : surveillance étroite ou LES au moindre doute.
+        </div>
+        <div class="left-card green">
+          <h4>4. Cordes normales et mobiles</h4>
+          Troubles dysfonctionnels ou psychogènes. Diagnostic : avis auprès d'un <strong>phoniatre</strong>.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Blocage mécanique vs Paralysie récurrentielle -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--coral)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+          </div>
+          Immobilité Laryngée : Diagnostic différentiel
+        </div>
+        <div class="tag-title">Blocages mécaniques (immobilité non neurologique)</div>
+        <div class="left-card red">
+          <h4>Cancer du larynx / sinus piriforme</h4>
+          - Blocage mécanique de l'articulation crico-aryténoïdienne par infiltration.<br>
+          - <strong>Piège ECNi :</strong> Immobilité laryngée unilatérale tumorale = <strong>stade T3</strong> (TNM).
+        </div>
+        <div class="left-card amber">
+          <h4>Lésions post-traumatiques d'intubation</h4>
+          Dysphonie immédiate au réveil après intubation difficile ou urgente. Fibroscopie : aryténoïde inflammatoire ou luxé.
+        </div>
+
+        <div class="tag-title">Paralysies nerveuses (atteinte récurrentielle / vague)</div>
+        <div class="left-card coral">
+          <h4>Causes Tumoral / Malignes (Scanner obligatoire)</h4>
+          Lésion infiltrante sur le trajet du nerf vague ou récurrent :
+          <ul class="list">
+            <li>Cancer thyroïdien (rapport direct avec le récurrent).</li>
+            <li>Cancer pulmonaire (surtout gauche : trajet sous la crosse aortique, mais bilatéral possible).</li>
+            <li>Cancer œsophagien.</li>
+          </ul>
+        </div>
+        <div class="left-card blue">
+          <h4>Traumatismes chirurgicaux</h4>
+          Chirurgie thyroïdienne, cervicale (voie antérieure), ou thoracique.
+        </div>
+        <div class="left-card purple">
+          <h4>Neurologique &amp; Vasculaire</h4>
+          - Guillain-Barré, AVC bulbaire, SEP, syringomyélie, neuropathie diabétique (la paralysie laryngée est rarement isolée).<br>
+          - <strong>Syndrome d'Ortner (cardiaque) :</strong> Compression du nerf récurrent gauche par dilatation de l'oreillette gauche (rétrécissement mitral) ou coarctation aortique.
+        </div>
+        <div class="left-card green">
+          <h4>Paralysie Idiopathique (20%)</h4>
+          Diagnostic d'élimination. Récupération spontanée dans 50% des cas en 6 à 8 mois. Étiologie virale suspectée.
+        </div>
+      </div>
+
+      <!-- Dysphonie traînante : suspecte vs bénigne -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Dysphonie Traînante : Lésions Organiques
+        </div>
+        <div class="left-card red">
+          <h4>1. Lésion Suspecte (Cancer du larynx)</h4>
+          <div class="pill-wrap" style="margin-bottom:8px;">
+            <span class="pill pill-red">Tabac + Alcool</span>
+            <span class="pill pill-red">Homme > 50 ans</span>
+            <span class="pill pill-amber">Dysphonie progressive</span>
+          </div>
+          <ul class="list">
+            <li><strong>Signes d'alarme :</strong> Otalgie réflexe unilatérale, dyspnée inspiratoire, adénopathie cervicale.</li>
+            <li><strong>Fibroscopie :</strong> Plaques blanchâtres (leucoplasie), bourgeonnement, polype suspect, ulcération.</li>
+            <li><strong>Conduite à tenir :</strong> <strong>LES sous AG pour biopsies</strong>. Si biopsie négative mais doute persistant &rarr; surveillance étroite et nouvelles biopsies.</li>
+          </ul>
+        </div>
+        <div class="left-card teal">
+          <h4>2. Lésions d'Allure Bénigne</h4>
+          <ul class="list">
+            <li><strong>Nodules :</strong> Lésions cornées bilatérales symétriques (tiers moyen/antérieur). Cause : forçage vocal chronique (enseignants, enfants). Traitement : orthophonie.</li>
+            <li><strong>Granulome :</strong> Lésion inflammatoire du tiers postérieur (aryténoïde). Cause : traumatisme d'intubation.</li>
+            <li><strong>Papillomatose laryngée :</strong> Excroissances verruqueuses liées à l'HPV. Risque obstructif.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 5 : LARYNGITE AIGUE ET URGENCES VITALES ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--red)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--red)">5. Laryngite Aiguë &amp; Risque Vital d'Immobilité Laryngée</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Laryngite Aiguë -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Laryngite Aiguë (Dysphonie &lt; 48h)
+        </div>
+        <div class="left-card red">
+          <h4>Clinique &amp; Terrain</h4>
+          <div class="pill-wrap" style="margin-bottom:8px;">
+            <span class="pill pill-red">Installation rapide &lt; 48h</span>
+            <span class="pill pill-blue">Syndrome infectieux</span>
+            <span class="pill pill-amber">Odynophagie intense</span>
+            <span class="pill pill-coral">Otalgie réflexe</span>
+          </div>
+          <ul class="list">
+            <li><strong>Fibroscopie :</strong> Érythème et œdème diffus des structures supraglottiques et de la glotte.</li>
+            <li><strong>Danger :</strong> Risque d'obstruction respiratoire aiguë (surtout chez le jeune enfant).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Risque Vital Immobilité Laryngée -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Paralysies Récurrentielles : Positions &amp; Risques
+        </div>
+        <div class="left-card blue">
+          <h4>Paralysie Unilatérale</h4>
+          <ul class="list">
+            <li><strong>Position ouverte :</strong> Corde immobile écartée &rarr; voix très faible et soufflée (fuite d'air).</li>
+            <li><strong>Position fermée :</strong> Corde immobile médiane &rarr; voix quasi normale (compensation par l'autre corde).</li>
+          </ul>
+        </div>
+        <div class="left-card red">
+          <h4>Paralysie Bilatérale (URGENCE SOMATIQUE)</h4>
+          <ul class="list">
+            <li><strong>En fermeture (Adduction) : Asphyxie (voix normale)</strong>
+              <br>— Bradypnée inspiratoire avec <strong>tirage</strong> et <strong>cornage</strong>.
+              <br>— Traitement : <strong>Trachéotomie transitoire</strong> de sauvetage ou cordopexie.
+            </li>
+            <li><strong>En ouverture (Abduction) : Fausses routes massives (voix inaudible)</strong>
+              <br>— Béance glottique persistante.
+              <br>— Danger : Inhalation bronchique systématique des liquides (pneumopathie d'inhalation).
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== POINTS-CLÉS A RETENIR ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--teal)">6. Points-clés à retenir (Zéro Blabla — Spécial ECNi)</div>
+    </div>
+
+    <div class="card" style="margin-bottom:0;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Points de Synthèse Clinique Critiques
+      </div>
+
+      <div class="left-card red">
+        <h4>1. Dysphonie traînante (&gt; 15 jours) = Cancer du larynx jusqu'à preuve du contraire</h4>
+        Toute dysphonie traînante de plus de 15 jours impose une consultation ORL pour examen des cordes vocales par <strong>nasofibroscopie</strong> nasopharyngée. Si lésion macroscopique suspecte (plaque blanche, bourgeon) &rarr; laryngoscopie en suspension sous AG pour biopsies.
+      </div>
+
+      <div class="left-card amber">
+        <h4>2. Bilan d'imagerie systématique devant une paralysie récurrentielle</h4>
+        Toute paralysie ou immobilité inexpliquée d'une corde vocale impose une échographie cervicale et un <strong>Scanner (TDM) injecté de la base du crâne au médiastin</strong> pour explorer l'ensemble du trajet du nerf vague et récurrent (recherche de cancer pulmonaire à gauche, cancer œsophagien ou thyroïdien).
+      </div>
+
+      <div class="left-card red">
+        <h4>3. Urgence vitale : Paralysie laryngée bilatérale en fermeture</h4>
+        Engage le pronostic vital par défaillance respiratoire aiguë. Dyspnée obstructive haute (bradypnée inspiratoire, tirage, cornage) avec voix quasi normale. Nécessite une <strong>trachéotomie transitoire</strong> de sauvetage en urgence.
+      </div>
+
+      <div class="left-card blue">
+        <h4>4. Diagnostic ECNi d'immobilité d'origine tumorale unilatérale</h4>
+        Une immobilité d'un pli vocal causée par une infiltration tumorale classe d'emblée la tumeur en stade <strong>T3</strong> (TNM).
+      </div>
+
+      <div class="left-card purple">
+        <h4>5. Paralysie bilatérale en ouverture</h4>
+        Engendre un risque vital par <strong>fausses routes majeures et massives aux liquides</strong> et une voix presque inaudible (incompétence de fermeture sphinctérienne).
+      </div>
+
+      <div class="left-card green">
+        <h4>6. Dysarthrie vs Dysphonie (Parkinson)</h4>
+        Ne pas confondre la dysphonie (anomalie de vibration glottique) et la dysarthrie (trouble d'articulation motrice). Dans le syndrome parkinsonien, la dysarthrie est au premier plan, caractérisée par une <strong>voix monocorde et monotone</strong>.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 284 — Colopathie fonctionnelle (Syndrome de l'intestin irritable)</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #E9A23B;
+    --bg: transparent;
+    --body-bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --text-muted: #5a5a7a;
+    --border: #e0e4ef;
+    --shadow: 0 2px 12px rgba(83,74,183,0.05);
+    --border-radius: 16px;
+    --inner-radius: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --body-bg: #13131f;
+      --card-bg: #1e1e30;
+      --text: #e8e8f4;
+      --text-muted: #9090b8;
+      --border: #2e2e48;
+      --shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--body-bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 24px 16px 48px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  
+  /* Titre principal */
+  .page-header { text-align: center; margin-bottom: 24px; }
+  .page-header h1 { font-size: 1.85rem; font-weight: 800; color: var(--purple); letter-spacing: -0.5px; margin-bottom: 6px; }
+  .page-header .subtitle { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+  
+  /* Objectifs globaux */
+  .intro-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--purple);
+  }
+  .intro-card p { font-size: 0.92rem; color: var(--text); margin-bottom: 12px; line-height: 1.6; }
+  .intro-objectives-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: var(--purple); letter-spacing: 0.8px; margin-bottom: 8px; }
+  .intro-objectives-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 600px) { .intro-objectives-grid { grid-template-columns: 1fr; } }
+  .intro-obj-item { display: flex; gap: 8px; align-items: flex-start; font-size: 0.85rem; color: var(--text-muted); }
+  .intro-obj-bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); margin-top: 7px; flex-shrink: 0; }
+
+  /* Sections */
+  .section-container { margin-bottom: 32px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 28px 0 16px; }
+  .section-icon-outer {
+    width: 34px; height: 34px; border-radius: 10px; background: var(--card-bg);
+    border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow); flex-shrink: 0;
+  }
+  .section-icon-outer svg { width: 18px; height: 18px; stroke: var(--purple); stroke-width: 1.8; fill: none; }
+  .section-title { font-size: 1.12rem; font-weight: 700; color: var(--text); }
+  
+  /* Cartes */
+  .card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .card-title {
+    font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-icon {
+    width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  
+  /* Badges section */
+  .card-icon.purple { background-color: var(--purple); }
+  .card-icon.teal { background-color: var(--teal); }
+  .card-icon.coral { background-color: var(--coral); }
+  .card-icon.blue { background-color: var(--blue); }
+  .card-icon.red { background-color: var(--red); }
+  .card-icon.amber { background-color: var(--amber); }
+
+  .card-content h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin: 14px 0 6px; }
+  .card-content h4:first-of-type { margin-top: 0; }
+  .card-content p { font-size: 0.88rem; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+  .card-content ul { padding-left: 18px; margin-bottom: 8px; }
+  .card-content ul li { font-size: 0.88rem; color: var(--text); margin-bottom: 5px; }
+  .card-content ul li strong { color: var(--text); }
+  
+  /* Grilles */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; gap: 12px; } }
+  
+  /* Complications (Bordure gauche colorée) */
+  .compl-card {
+    border: 0.5px solid var(--border);
+    border-left: 4.5px solid;
+    border-radius: var(--inner-radius);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    font-size: 0.88rem;
+  }
+  .compl-card strong { display: block; font-size: 0.92rem; margin-bottom: 4px; color: var(--text); }
+  .compl-card p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.4; }
+  .compl-red { border-left-color: var(--red); }
+  .compl-amber { border-left-color: var(--amber); }
+  .compl-blue { border-left-color: var(--blue); }
+  .compl-purple { border-left-color: var(--purple); }
+  .compl-teal { border-left-color: var(--teal); }
+
+  /* Étapes (Cercles gris) */
+  .steps { list-style: none; padding: 0; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; font-size: 0.88rem; }
+  .steps li:last-child { margin-bottom: 0; }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%; background: #eef1f6;
+    color: var(--text-muted); font-weight: 700; font-size: 0.78rem;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  @media (prefers-color-scheme: dark) {
+    .step-num { background: #2b2b3f; color: #a0a0c0; }
+  }
+  .step-content { flex: 1; }
+  .step-content strong { color: var(--text); }
+  .step-content p { font-size: 0.85rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* Pills colorées */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+  .pill { padding: 3px 10px; border-radius: 20px; font-size: 0.76rem; font-weight: 600; display: inline-flex; align-items: center; }
+  .pill-green { background: #e8f7f2; color: #1D9E75; border: 0.5px solid #b6e8d8; }
+  .pill-red { background: #fdeaea; color: #E24B4A; border: 0.5px solid #f5baba; }
+  .pill-blue { background: #e8f2fd; color: #378ADD; border: 0.5px solid #b6d4f5; }
+  .pill-amber { background: #fef6e8; color: #d08a00; border: 0.5px solid #f5dba0; }
+  .pill-purple { background: #eeecfc; color: #534AB7; border: 0.5px solid #c4bfef; }
+  .pill-coral { background: #fdeee8; color: #D85A30; border: 0.5px solid #f5c4b0; }
+  @media (prefers-color-scheme: dark) {
+    .pill-green { background: #0c2d20; color: #5eead4; border-color: #115e59; }
+    .pill-red { background: #3c1212; color: #fca5a5; border-color: #991b1b; }
+    .pill-blue { background: #0f2d4a; color: #93c5fd; border-color: #1e3a8a; }
+    .pill-amber { background: #38250c; color: #fcd34d; border-color: #78350f; }
+    .pill-purple { background: #201a4f; color: #c084fc; border-color: #581c87; }
+    .pill-coral { background: #3d1b11; color: #fdba74; border-color: #7c2d12; }
+  }
+
+  /* Tableaux */
+  .table-wrap { overflow-x: auto; border: 0.5px solid var(--border); border-radius: var(--inner-radius); margin-bottom: 16px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; background: var(--card-bg); }
+  thead tr { background: var(--purple); color: #ffffff; }
+  thead th { padding: 12px 14px; font-weight: 600; }
+  thead th:first-child { border-radius: var(--inner-radius) 0 0 0; }
+  thead th:last-child { border-radius: 0 var(--inner-radius) 0 0; }
+  tbody tr { border-bottom: 0.5px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:nth-child(even) { background: rgba(83,74,183,0.02); }
+  tbody td { padding: 11px 14px; vertical-align: top; color: var(--text); }
+  
+  /* Lignes clé-valeur */
+  .kv-table { width: 100%; font-size: 0.86rem; border-collapse: collapse; }
+  .kv-table tr { border-bottom: 0.5px solid var(--border); }
+  .kv-table tr:last-child { border-bottom: none; }
+  .kv-table tr td { padding: 8px 4px; vertical-align: middle; }
+  .kv-table tr td:first-child { font-weight: 600; color: var(--text-muted); width: 35%; padding-right: 12px; }
+  .kv-table tr td:last-child { color: var(--text); }
+
+  /* Alertes */
+  .alert {
+    border-radius: var(--inner-radius); padding: 14px 18px; margin-bottom: 16px;
+    font-size: 0.88rem; display: flex; gap: 12px; align-items: flex-start; border-left: 4px solid;
+    box-shadow: var(--shadow);
+  }
+  .alert-icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1; }
+  .alert-red { background: #fdeaea; border-color: var(--red); color: #7a1a1a; }
+  .alert-blue { background: #e8f2fd; border-color: var(--blue); color: #0e2e58; }
+  .alert-green { background: #e8f7f2; border-color: var(--teal); color: #0a3d28; }
+  .alert-amber { background: #fef6e8; border-color: var(--amber); color: #5a3a00; }
+  @media (prefers-color-scheme: dark) {
+    .alert-red { background: #2a1111; color: #fca5a5; }
+    .alert-blue { background: #0c1c38; color: #93c5fd; }
+    .alert-green { background: #08281b; color: #5eead4; }
+    .alert-amber { background: #281a0b; color: #fcd34d; }
+  }
+
+  /* Fil conducteur / Mémo */
+  .mnemo {
+    background: linear-gradient(135deg, rgba(83,74,183,0.05) 0%, rgba(29,158,117,0.05) 100%);
+    border: 0.5px solid var(--purple); border-radius: var(--border-radius); padding: 18px 20px; margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .mnemo-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+  .mnemo-title svg { width: 14px; height: 14px; fill: none; stroke: var(--purple); stroke-width: 2; }
+  .mnemo p { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+
+  /* Lignes de séparation */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0 16px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- EN-TÊTE PRINCIPAL -->
+  <div class="page-header">
+    <h1>Item 284 — Colopathie fonctionnelle</h1>
+    <div class="subtitle">Fiche de Synthèse Pédagogique · Syndrome de l'intestin Irritable (SII)</div>
+  </div>
+
+  <!-- INTRODUCTION & VISION D'ENSEMBLE -->
+  <div class="intro-card">
+    <p>
+      Le <strong>Syndrome de l'Intestin Irritable (SII)</strong>, anciennement nommé colopathie fonctionnelle, est une pathologie digestive <strong>bénigne mais chronique</strong> à fort impact sur la qualité de vie. L'enjeu de ce chapitre est d'adopter une démarche clinique structurée permettant de poser un diagnostic positif rigoureux selon les <strong>critères de Rome IV</strong>, de prescrire des examens complémentaires de manière rationnelle pour exclure une pathologie organique sous-jacente sans surcharger le système de santé, et d'établir une relation de confiance thérapeutique afin d'accompagner durablement le patient.
+    </p>
+    <div class="intro-objectives-title">Objectifs clés de l'apprentissage</div>
+    <div class="intro-objectives-grid">
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Définir le syndrome de l'intestin irritable (SII) et ses 4 sous-types majeurs.</span>
+      </div>
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Maîtriser les critères diagnostiques de Rome IV (chronique, douleur et lien avec le transit).</span>
+      </div>
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Reconnaître les caractéristiques sémiologiques typiques et les comorbidités fonctionnelles.</span>
+      </div>
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Identifier les signes cliniques et biologiques d'alarme imposant une coloscopie.</span>
+      </div>
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Connaître le diagnostic différentiel et la place des examens de biologie et d'endoscopie.</span>
+      </div>
+      <div class="intro-obj-item">
+        <div class="intro-obj-bullet"></div>
+        <span>Assimiler les principes de prise en charge thérapeutique globale (relationnelle, diététique, médicale).</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ========================================== -->
+  <!-- 1. DÉFINITION ET ÉPIDÉMIOLOGIE -->
+  <!-- ========================================== -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-icon-outer">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <div class="section-title">Définition et Données Épidémiologiques</div>
+    </div>
+
+    <div class="grid-2">
+      <!-- DÉFINITION & SOUS-TYPES -->
+      <div class="card" style="border-top: 3px solid var(--purple);">
+        <div class="card-title">
+          <div class="card-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Le Syndrome de l'Intestin Irritable (SII)</span>
+        </div>
+        <div class="card-content">
+          <p>Le SII est un <strong>diagnostic clinique</strong> défini par l'association de douleurs abdominales chroniques et de troubles du transit, <strong>en l'absence de toute anomalie organique</strong> visible aux examens standards.</p>
+          
+          <h4>Les 4 sous-types cliniques de SII (selon le profil de transit) :</h4>
+          <div class="pills">
+            <span class="pill pill-purple">SII-D : Diarrhée prédominante</span>
+            <span class="pill pill-purple">SII-C : Constipation prédominante</span>
+            <span class="pill pill-purple">SII-A : Alternance (diarrhée / constipation)</span>
+            <span class="pill pill-purple">SII-I : Indéterminé (hors critères précédents)</span>
+          </div>
+          <div class="alert alert-blue" style="margin-top: 14px; margin-bottom: 0;">
+            <span class="alert-icon">ℹ️</span>
+            <div><strong>Bénignité constitutionnelle :</strong> Malgré son caractère invalidant au quotidien, il n'expose à aucune complication grave (pas de cancer, pas de MICI, pas de dénutrition).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉPIDÉMIOLOGIE & RETENTISSEMENT -->
+      <div class="card" style="border-top: 3px solid var(--teal);">
+        <div class="card-title">
+          <div class="card-icon teal">
+            <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+          </div>
+          <span>Épidémiologie & Impact sur la vie</span>
+        </div>
+        <div class="card-content">
+          <table class="kv-table" style="margin-bottom: 12px;">
+            <tr>
+              <td>Prévalence mondiale</td>
+              <td>Environ <strong>4 %</strong> de la population générale.</td>
+            </tr>
+            <tr>
+              <td>Gastroentérologie</td>
+              <td><strong>1er motif</strong> de consultation en spécialité digestive.</td>
+            </tr>
+            <tr>
+              <td>Profil patient type</td>
+              <td>Plus fréquente chez les <strong>femmes</strong> et les <strong>sujets jeunes</strong>.</td>
+            </tr>
+          </table>
+          
+          <h4>Un problème de santé publique majeur :</h4>
+          <ul>
+            <li><strong>Altération majeure de la qualité de vie</strong>, comparable à celle de maladies organiques chroniques (diabète, insuffisance rénale).</li>
+            <li><strong>Retentissement socio-économique :</strong> Absentéisme, baisse de la productivité au travail et recours excessif aux soins (nomadisme médical).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ========================================== -->
+  <!-- 2. DIAGNOSTIC POSITIF ET CLINIQUE -->
+  <!-- ========================================== -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-icon-outer">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      <div class="section-title">Diagnostic Positif : Clinique et Critères de Rome IV</div>
+    </div>
+
+    <!-- Fil conducteur physiopathologique -->
+    <div class="mnemo">
+      <div class="mnemo-title">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        <span>Mécanismes physiopathologiques sous-jacents</span>
+      </div>
+      <p>
+        La genèse des symptômes repose sur une association intriquée de :
+        <br>• <strong>Perturbation de l'axe intestin-cerveau</strong> (hypersensibilité viscérale avec perception douloureuse de stimuli digestifs normaux).
+        <br>• <strong>Troubles de la motricité intestinale</strong> (accélération ou ralentissement du transit).
+        <br>• <strong>Micro-inflammation locale et dysbiose intestinale</strong> (déséquilibre du microbiote favorisant fermentation et ballonnement).
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- SÉMIOLOGIE TYPIQUE -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon purple">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span>Symptômes clés & Sémiologie typique</span>
+        </div>
+        <div class="card-content">
+          <h4>1. La Douleur Abdominale</h4>
+          <ul>
+            <li><strong>Type :</strong> Spasmodique (crampes).</li>
+            <li><strong>Siège :</strong> Fosse iliaque gauche ou hypogastre (peut toucher tout le cadre colique).</li>
+            <li><strong>Rythme :</strong> Intermittente (par crises), <strong>exclusivement diurne</strong> (ne réveille jamais la nuit), souvent déclenchée par l'alimentation ou le <strong>stress</strong>.</li>
+            <li><strong>Lien avec le transit :</strong> Soulagement ou aggravation après la défécation ou l'émission de gaz.</li>
+          </ul>
+
+          <h4>2. Le Trouble du Transit</h4>
+          <ul>
+            <li><strong>Constipation :</strong> &lt; 3 selles par semaine, selles dures (scybales), efforts de poussée.</li>
+            <li><strong>Diarrhée :</strong> ≥ 3 selles par jour, molles à liquides, souvent impérieuses et post-prandiales matinales. Parfois associées à un <em>syndrome de recherche des toilettes</em>.</li>
+          </ul>
+
+          <h4>3. Ballonnement Abdominal</h4>
+          <ul>
+            <li>Sensation subjective de plénitude, météorisme abdominal perceptible, majoré en fin de journée ou après les repas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CRITÈRES DE ROME IV -->
+      <div class="card" style="border-top: 3px solid var(--purple);">
+        <div class="card-title">
+          <div class="card-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Critères Diagnostiques de Rome IV</span>
+        </div>
+        <div class="card-content">
+          <p>Le diagnostic de SII est posé devant une <strong>douleur abdominale récurrente</strong> survenant au moins <strong>1 jour par semaine</strong> au cours des <strong>3 derniers mois</strong>, associée à au moins <strong>deux</strong> des critères suivants :</p>
+          
+          <ul class="steps" style="margin-top: 14px; margin-bottom: 14px;">
+            <li>
+              <div class="step-num">1</div>
+              <div class="step-content">Douleur en relation avec la <strong>défécation</strong>.</div>
+            </li>
+            <li>
+              <div class="step-num">2</div>
+              <div class="step-content">Douleur associée à une modification de la <strong>fréquence des selles</strong>.</div>
+            </li>
+            <li>
+              <div class="step-num">3</div>
+              <div class="step-content">Douleur associée à une modification de l'<strong>aspect (forme) des selles</strong>.</div>
+            </li>
+          </ul>
+
+          <div class="alert alert-amber" style="margin-bottom: 0;">
+            <span class="alert-icon">⚠️</span>
+            <div><strong>Ancienneté requise :</strong> Le début des symptômes doit dater d'<strong>au moins 6 mois</strong> avant de pouvoir poser définitivement le diagnostic de SII.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comorbidités fonctionnelles -->
+    <div class="compl-card compl-purple">
+      <strong>Syndromes Fonctionnels Extra-Intestinaux Associés</strong>
+      <p>Le SII fait partie d'une vulnérabilité fonctionnelle plus globale et s'associe très fréquemment à :
+        <br>• <strong>La dyspepsie fonctionnelle :</strong> satiété précoce, pesanteur épigastrique, pyrosis.
+        <br>• <strong>La fibromyalgie :</strong> myalgies et arthralgies diffuses chroniques sans lésion organique.
+        <br>• <strong>Le syndrome de fatigue chronique (SFC) :</strong> épuisement physique et intellectuel inexpliqué.
+      </p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ========================================== -->
+  <!-- 3. DIAGNOSTIC DIFFÉRENTIEL ET BILAN -->
+  <!-- ========================================== -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-icon-outer">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="section-title">Diagnostic Différentiel et Bilan Biologique</div>
+    </div>
+
+    <!-- Règle d'or en Soins Primaires -->
+    <div class="alert alert-green">
+      <span class="alert-icon">✅</span>
+      <div>
+        <strong>Règle d'or clinique :</strong>
+        <span>Chez un patient de moins de 50 ans présentant des symptômes cliniques typiques de SII <strong>sans aucun signe d'alarme</strong>, aucun examen d'imagerie n'est nécessaire. Un bilan biologique simple suffit à exclure une pathologie organique.</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- LE BILAN BIOLOGIQUE DE PREMIÈRE LIGNE -->
+      <div class="card" style="border-top: 3px solid var(--blue);">
+        <div class="card-title">
+          <div class="card-icon blue">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span>Bilan Biologique Simple d'Élimination</span>
+        </div>
+        <div class="card-content">
+          <p>Le bilan biologique vise à éliminer de façon simple et peu coûteuse une maladie organique. Il comporte systématiquement :</p>
+          <table class="kv-table" style="margin-bottom: 12px;">
+            <tr>
+              <td>NFS</td>
+              <td>Exclut une anémie (saignement occulte ou carence).</td>
+            </tr>
+            <tr>
+              <td>CRP</td>
+              <td>Recherche un syndrome inflammatoire (MICI).</td>
+            </tr>
+          </table>
+
+          <h4>Spécificité du sous-type diarrhéique (SII-D) :</h4>
+          <p>Devant une diarrhée chronique, il est recommandé d'élargir le bilan :</p>
+          <ul>
+            <li><strong>TSH :</strong> Écarte une hyperthyroïdie.</li>
+            <li><strong>Sérologie de la maladie cœliaque :</strong> Dosage des anticorps anti-transglutaminase IgA (avec dosage des IgA totales).</li>
+            <li><strong>Examen parasitologique des selles :</strong> Écarte une parasitose chronique (ex : lambliase / giardias).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DIAGNOSTICS DIFFÉRENTIELS -->
+      <div class="card" style="border-top: 3px solid var(--coral);">
+        <div class="card-title">
+          <div class="card-icon coral">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Diagnostics Différentiels Majeurs</span>
+        </div>
+        <div class="card-content">
+          <p>Ce sont les pathologies organiques mimant le SII, qu'il faut éliminer formellement :</p>
+          
+          <div class="compl-card compl-red" style="padding: 10px; margin-bottom: 8px;">
+            <strong>1. Maladies Inflammatoires Chroniques de l'Intestin (MICI)</strong>
+            <p>Maladie de Crohn ou Rectocolite Hémorragique (RCH). À suspecter si CRP élevée, diarrhée glaireuse/sanglante ou manifestations extra-digestives.</p>
+          </div>
+
+          <div class="compl-card compl-amber" style="padding: 10px; margin-bottom: 8px;">
+            <strong>2. Maladie Cœliaque</strong>
+            <p>Intolérance au gluten. Diagnostic par anticorps IgA anti-transglutaminase positifs puis biopsies duodénales.</p>
+          </div>
+
+          <div class="compl-card compl-blue" style="padding: 10px; margin-bottom: 8px;">
+            <strong>3. Colites Microscopiques (lymphocytaire ou collagène)</strong>
+            <p>Sujet plus âgé, diarrhée aqueuse chronique abondante sans anomalie endoscopique visible. Diagnostic uniquement sur biopsies coliques étagées.</p>
+          </div>
+
+          <div class="compl-card compl-purple" style="padding: 10px; margin-bottom: 0;">
+            <strong>4. Cause Iatrogène</strong>
+            <p>Transit perturbé par des médicaments : <em>metformine</em> (diarrhée), <em>colchicine</em>, <em>AINS</em> (douleurs et colite), opiacés ou fer (constipation).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ========================================== -->
+  <!-- 4. SIGNES D'ALARME ET COLOSCOPIE -->
+  <!-- ========================================== -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-icon-outer">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="section-title">Signes d'Alarme et Place de la Coloscopie</div>
+    </div>
+
+    <!-- Alerte rouge : Signes d'alarme -->
+    <div class="alert alert-red">
+      <span class="alert-icon">🚨</span>
+      <div>
+        <strong>Signes d'Alarme Cliniques et Biologiques :</strong>
+        <p style="margin-top: 6px; font-size: 0.85rem; line-height: 1.45;">
+          La présence d'un seul de ces éléments impose la réalisation d'une <strong>coloscopie</strong> pour exclure un cancer colorectal ou une autre organicité :
+          <br>• <strong>Âge supérieur à 50 ans</strong> lors de l'apparition des premiers symptômes.
+          <br>• <strong>Sang dans les selles</strong> (rectorragies ou méléna).
+          <br>• <strong>Symptômes nocturnes</strong> (douleurs ou diarrhée interrompant le sommeil).
+          <br>• <strong>Amaigrissement inexpliqué</strong> et involontaire.
+          <br>• Apparition récente ou <strong>modification récente</strong> d'une symptomatologie ancienne.
+          <br>• Terrain à risque de <strong>néoplasie colique</strong> (antécédents familiaux de cancer colorectal au premier degré).
+          <br>• Anomalie à l'examen clinique (masse abdominale, anomalie au toucher rectal).
+          <br>• Anomalie biologique (anémie ferriprive, syndrome inflammatoire / CRP élevée).
+          <br>• Résistance au traitement médical bien conduit.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <!-- INDICATIONS & MODALITÉS DE LA COLOSCOPIE -->
+      <div class="card" style="border-top: 3px solid var(--red);">
+        <div class="card-title">
+          <div class="card-icon red">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>Modalités Pratiques de la Coloscopie</span>
+        </div>
+        <div class="card-content">
+          <h4>Indications à retenir :</h4>
+          <div class="pills">
+            <span class="pill pill-red">Présence de signes d'alarme</span>
+            <span class="pill pill-red">Forme diarrhéique chronique</span>
+            <span class="pill pill-red">Anomalie clinique ou biologique</span>
+          </div>
+
+          <h4>Modalités de réalisation :</h4>
+          <ul>
+            <li>Réalisée sous <strong>anesthésie générale</strong>.</li>
+            <li>Nécessite une <strong>préparation colique orale</strong> rigoureuse la veille et le matin (lavage pour nettoyer le côlon).</li>
+            <li>Information préalable obligatoire du patient sur l'intérêt du geste et ses risques (perforation colique, saignement post-biopsie).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- LES BIOPSIES SYSTÉMATIQUES -->
+      <div class="card" style="border-top: 3px solid var(--blue);">
+        <div class="card-title">
+          <div class="card-icon blue">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span>Rôle des Biopsies Endoscopiques</span>
+        </div>
+        <div class="card-content">
+          <h4>En cas de coloscopie pour diarrhée (SII-D) :</h4>
+          <p>L'aspect visuel de la muqueuse peut être strictement normal, mais le clinicien doit réaliser des <strong>biopsies étagées</strong> :</p>
+          <ul>
+            <li><strong>Dans tous les segments coliques :</strong> À la recherche d'une <strong>colite microscopique</strong> (collagène ou lymphocytaire).</li>
+            <li><strong>Dans l'iléon terminal :</strong> Permet d'éliminer de façon certaine une <strong>maladie de Crohn iléale isolée</strong>.</li>
+          </ul>
+
+          <h4 style="margin-top: 12px;">Place de l'Endoscopie Haute (EGD) :</h4>
+          <p>Une endoscopie œso-gastro-duodénale avec biopsies duodénales est indiquée uniquement si :</p>
+          <ul>
+            <li>Dyspepsie fonctionnelle associée.</li>
+            <li>Anémie ferriprive (recherche d'une maladie cœliaque ou d'une atrophie duodénale).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ========================================== -->
+  <!-- 5. PRISE EN CHARGE THÉRAPEUTIQUE -->
+  <!-- ========================================== -->
+  <div class="section-container">
+    <div class="section-header">
+      <div class="section-icon-outer">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      <div class="section-title">Prise en Charge Thérapeutique Globale</div>
+    </div>
+
+    <!-- Fil conducteur de la relation médecin-malade -->
+    <div class="mnemo">
+      <div class="mnemo-title">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span>La Relation Médecin-Malade : Clé de Voûte du Traitement</span>
+      </div>
+      <p>
+        La thérapeutique est <strong>centrée sur le patient</strong>. Expliquer la bénignité du SII tout en légitimant la douleur est capital pour désamorcer l'anxiété. Poser le diagnostic (mettre des mots sur les maux) évite le nomadisme médical. Il faut s'abstenir de toute formulation minimisante type <em>« Vous n'avez rien »</em> ou <em>« C'est dans la tête »</em>. Fixer des <strong>objectifs réalistes</strong> : les traitements améliorent les symptômes et la qualité de vie, mais ne guérissent pas définitivement la maladie.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- HYGIÈNE & DIÉTÉTIQUE -->
+      <div class="card" style="border-top: 3px solid var(--teal);">
+        <div class="card-title">
+          <div class="card-icon teal">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <span>Prise en Charge Diététique</span>
+        </div>
+        <div class="card-content">
+          <h4>1. Première intention : Conseils simples</h4>
+          <ul>
+            <li>Prendre 3 repas par jour, à heures régulières.</li>
+            <li>Manger lentement dans le calme, bien mastiquer.</li>
+            <li>Assurer une bonne hydratation hydrique.</li>
+            <li>Limiter les repas trop copieux ou trop gras, modérer l'alcool et le café.</li>
+          </ul>
+
+          <h4 style="margin-top: 12px;">2. Seconde intention : Régime pauvre en FODMAPs</h4>
+          <p>FODMAPs = carbohydrates fermentescibles mal absorbés par l'intestin grêle, provoquant distension et gaz.</p>
+          <ul>
+            <li><strong>Durée stricte :</strong> Phase d'éviction de <strong>4 à 8 semaines</strong>, suivie d'une phase de réintroduction progressive et personnalisée.</li>
+            <li><strong>Encadrement :</strong> Fortement recommandé d'être <strong>suivi par une diététicienne</strong> afin d'éviter toute carence nutritionnelle ou exclusion sociale.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PHARMACO & COMPLÉMENTAIRES -->
+      <div class="card" style="border-top: 3px solid var(--purple);">
+        <div class="card-title">
+          <div class="card-icon purple">
+            <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+          </div>
+          <span>Traitements Médicaux & Approches Associées</span>
+        </div>
+        <div class="card-content">
+          <h4>1. Médicaments de Première Intention</h4>
+          <p>Ciblent le symptôme prédominant :</p>
+          <ul>
+            <li><strong>Contre la douleur (spasmes) :</strong> prescription d'<strong>antispasmodiques musculotropes ou anticholinergiques</strong> (ex : Phloroglucinol, Trimébutine, Pinavérium, Alvérine + Siméthicone).</li>
+            <li><strong>Contre la constipation :</strong> laxatifs osmotiques (Macrogol) ou de lest (Ispaghul).</li>
+            <li><strong>Contre la diarrhée :</strong> ralentisseur de transit (Lopéramide).</li>
+          </ul>
+
+          <h4 style="margin-top: 12px;">2. Médicaments de Seconde Intention</h4>
+          <ul>
+            <li><strong>Antidépresseurs tricycliques à faible dose :</strong> (ex : <strong>Amitriptyline</strong> / Laroxyl, 2 à 10 gouttes/j). Indiqués pour leur effet <strong>antalgique viscéral</strong> (et non pour leur action psychiatrique !). Parfois, utilisation d'ISRS.</li>
+          </ul>
+
+          <h4 style="margin-top: 12px;">3. Traitements Non Médicamenteux efficaces</h4>
+          <ul>
+            <li><strong>Probiotiques :</strong> Peuvent restaurer l'équilibre de la barrière muqueuse et réguler les gaz.</li>
+            <li><strong>Hypnose & Thérapies Cognitivo-Comportementales (TCC) :</strong> Efficacité robuste démontrée sur la régulation de l'axe intestin-cerveau et l'hypersensibilité.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLEAU DE SYNTHÈSE DES MOLÉCULES -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%">Classe thérapeutique</th>
+            <th style="width: 25%">Dénomination Commune (DCI)</th>
+            <th style="width: 50%">Indications & Remarques cliniques</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Antispasmodiques</strong></td>
+            <td>Phloroglucinol, Trimébutine, Pinavérium, Alvérine + Siméthicone</td>
+            <td>Traitements de première intention de la <strong>douleur abdominale spasmodique</strong>. L'association avec la siméthicone cible spécifiquement la composante gaz/ballonnement.</td>
+          </tr>
+          <tr>
+            <td><strong>Laxatifs</strong></td>
+            <td>Macrogol (osmotique), Ispaghul (lest)</td>
+            <td>Indiqués dans le sous-type <strong>SII-C</strong> (constipation). Le Macrogol est à privilégier pour sa tolérance et son efficacité à long terme.</td>
+          </tr>
+          <tr>
+            <td><strong>Ralentisseur du transit</strong></td>
+            <td>Lopéramide</td>
+            <td>Indiqué dans le sous-type <strong>SII-D</strong> (diarrhée) à la demande. Ajuster les doses pour éviter l'effet rebond de constipation.</td>
+          </tr>
+          <tr>
+            <td><strong>Antidépresseurs</strong></td>
+            <td>Amitriptyline (Laroxyl)</td>
+            <td>Indiqué à <strong>très faible dose</strong> en seconde intention pour traiter la douleur réfractaire par son effet de modulation de la douleur viscérale centrale.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

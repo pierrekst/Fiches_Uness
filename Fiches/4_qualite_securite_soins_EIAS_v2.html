@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 4 – Qualité et sécurité des soins</title>
+  <style>
+    :root {
+      --bg: #f8f9fb; --card: #ffffff; --text: #1a1a2e; --muted: #6b7280; --border: #e5e7eb;
+      --purple: #534AB7; --purple-light: #ede9f8;
+      --teal: #1D9E75; --teal-light: #d1f0e5;
+      --coral: #D85A30; --coral-light: #fce8e0;
+      --blue: #378ADD; --blue-light: #ddeeff;
+      --red: #E24B4A; --red-light: #fde8e8;
+      --amber: #D97706; --amber-light: #fef3c7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .88rem; line-height: 1.55; }
+    .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+    /* Header */
+    .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: #fff; margin-bottom: 28px; }
+    .header-num { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: .75; margin-bottom: 6px; }
+    .header-title { font-size: 1.3rem; font-weight: 800; line-height: 1.3; margin-bottom: 14px; }
+    .header-intro { font-size: .84rem; opacity: .9; line-height: 1.6; }
+
+    hr { border: none; border-top: 1.5px solid var(--border); margin: 22px 0; }
+
+    /* Section title */
+    .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .section-icon { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .section-icon svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Cards */
+    .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .card-red    { border-left: 4px solid var(--red);    }
+    .card-blue   { border-left: 4px solid var(--blue);   }
+    .card-teal   { border-left: 4px solid var(--teal);   }
+    .card-amber  { border-left: 4px solid var(--amber);  }
+    .card-purple { border-left: 4px solid var(--purple); }
+
+    /* Grids */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    /* Alerts */
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+    .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+    /* KV rows */
+    .kv-row { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .84rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--muted); min-width: 180px; flex-shrink: 0; font-size: .8rem; }
+    .kv-val { font-weight: 600; color: var(--text); }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 99px; font-size: .78rem; font-weight: 600; }
+    .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+    .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+    .pill-red    { background: var(--red-light);    color: var(--red);    }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    th { background: var(--bg); color: var(--text); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* Steps */
+    .steps { list-style: none; }
+    .step { display: flex; gap: 12px; margin-bottom: 8px; align-items: flex-start; }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; color: var(--muted); flex-shrink: 0; }
+    .step-content { font-size: .84rem; padding-top: 3px; }
+
+    /* Badge */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: .75rem; font-weight: 700; }
+    .badge-teal   { background: var(--teal-light);   color: var(--teal);   }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .badge-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .badge-red    { background: var(--red-light);    color: var(--red);    }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+    ul { padding-left: 1.2em; }
+    li { margin-bottom: 3px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 4</div>
+  <div class="header-title">Qualité et sécurité des soins — EIAS — Gestion des risques — Démarche qualité et EPP</div>
+  <div class="header-intro">
+    Ce chapitre couvre les fondements de la culture sécurité en médecine : définir et classifier les événements indésirables (EIAS, EIG, EPR, aléa thérapeutique), maîtriser les règles d'hygiène hospitalière (SHA, antisepsie, précautions standard et complémentaires), connaître les infections associées aux soins (IAS), leur épidémiologie, leur diagnostic et leur prévention par site, comprendre les structures nationales de qualité et les outils d'amélioration continue (PDCA, certification HAS, EPP, DPC).
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 1 — DÉFINITIONS FONDAMENTALES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  Définitions fondamentales
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Qualité des soins — 7 dimensions
+    </div>
+    <div class="pills">
+      <span class="pill pill-purple">Sécurité (innocuité)</span>
+      <span class="pill pill-blue">Pertinence (approprié)</span>
+      <span class="pill pill-teal">Efficacité (objectifs)</span>
+      <span class="pill pill-green">Efficience (coût)</span>
+      <span class="pill pill-amber">Accessibilité</span>
+      <span class="pill pill-amber">Continuité</span>
+      <span class="pill pill-red">Acceptabilité</span>
+    </div>
+    <p style="margin-top:8px;font-size:.8rem;color:var(--muted)">Principe fondamental : <em>écrire ce qu'on fait</em> (traçabilité) et <em>faire ce qu'on écrit</em> (respect des procédures).</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Sécurité des patients (OMS 2009)
+    </div>
+    <p style="font-size:.84rem"><em>"Absence pour un patient d'atteinte inutile ou potentielle associée aux soins de santé."</em></p>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:8px">Repose sur : maximisation des bénéfices <strong>ET</strong> minimisation des risques liés à toute intervention de santé.</p>
+  </div>
+</div>
+
+<!-- Tableau EIAS / EPR / EIG / Aléa -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    EIAS — EPR — EIG — Aléa thérapeutique — Évitabilité
+  </div>
+  <table>
+    <tr>
+      <th>Terme</th>
+      <th>Définition clé</th>
+      <th>Point critique</th>
+    </tr>
+    <tr>
+      <td><strong>EIAS</strong></td>
+      <td>Événement ayant entraîné ou pouvant entraîner un préjudice au patient lors d'un acte de prévention, d'investigation ou de traitement (décret 2010-1408)</td>
+      <td>Modèle <strong>fromage suisse de Reason</strong> : alignement de plusieurs failles successives</td>
+    </tr>
+    <tr>
+      <td><strong>EPR</strong><br><span style="color:var(--muted);font-size:.78rem">Événement Porteur de Risque</span></td>
+      <td>EIAS potentiel évité grâce à un verrou de sécurité<br><em>Ex : oubli compresse rattrapé par comptage systématique</em></td>
+      <td>Quasi-accident = source d'apprentissage, à analyser méthodiquement</td>
+    </tr>
+    <tr>
+      <td><strong>EIG</strong><br><span style="color:var(--muted);font-size:.78rem">Événement Indésirable Grave</span></td>
+      <td>EIAS inattendu entraînant : décès, pronostic vital, déficit fonctionnel permanent, malformation congénitale (décret 2016-1606)</td>
+      <td>1 EIG / 5 jours dans un service de 30 lits<br>9,2 EIG / 1000 j en chirurgie, 4,7 en médecine</td>
+    </tr>
+    <tr>
+      <td><strong>Aléa thérapeutique</strong></td>
+      <td>Dommage accidentel lié à l'acte médical, certain, sans faute établie, sans lien avec la maladie sous-jacente</td>
+      <td>Indemnisable par solidarité nationale (loi 4 mars 2002) via CRCI ou Tribunal</td>
+    </tr>
+    <tr>
+      <td><strong>Évitabilité</strong></td>
+      <td>Jugement de valeur : résulte d'une erreur et/ou d'une faille des dispositifs de sécurité</td>
+      <td><strong>40–50% des EIAS évitables</strong><br>15 000 décès/an évitables en France</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card" style="padding:12px 20px">
+  <div class="kv-row"><span class="kv-key">EIAS en médecine générale</span><span class="kv-val">1 patient tous les 2 jours</span></div>
+  <div class="kv-row"><span class="kv-key">EIAS en hospitalisation</span><span class="kv-val">10% des patients hospitalisés</span></div>
+  <div class="kv-row"><span class="kv-key">EIG par an en France</span><span class="kv-val">270 000–390 000 dont 95–175 000 évitables → 15 000 décès/an</span></div>
+  <div class="kv-row"><span class="kv-key">1 hospitalisation sur…</span><span class="kv-val">20 est causée par un EIG</span></div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 2 — NIVEAUX DE GRAVITÉ
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red)">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Niveaux de gravité des EIAS (5 niveaux)
+</div>
+
+<div class="card">
+  <table>
+    <tr>
+      <th style="width:10%">Niveau</th>
+      <th style="width:18%">Nom</th>
+      <th>Description</th>
+      <th>Exemple</th>
+    </tr>
+    <tr>
+      <td><span class="badge badge-teal">1</span></td>
+      <td>Mineur</td>
+      <td>Désagrément simple, pas d'interruption de la prise en charge</td>
+      <td>Erreur d'identification rattrapée avant administration</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-blue">2</span></td>
+      <td>Intermédiaire</td>
+      <td>Impact sans mise en jeu de la sécurité, pas d'interruption</td>
+      <td>Oubli jeûne → report court d'une intervention réglée</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-amber">3</span></td>
+      <td>Majeur</td>
+      <td>Nécessite prise en charge spécifique, sans interruption de la prise en charge initiale</td>
+      <td>Chute avec plaie nécessitant points de suture</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-red">4</span></td>
+      <td>Critique</td>
+      <td>Prise en charge spécifique + interruption de la PEC initiale, conséquences <strong>réversibles</strong></td>
+      <td>Bétabloquant chez asthmatique → insuffisance respiratoire aiguë</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-red">5</span></td>
+      <td>Catastrophique</td>
+      <td>Prise en charge spécifique + interruption de la PEC initiale, conséquences <strong>irréversibles</strong></td>
+      <td>Erreur de côté → ablation du rein fonctionnel</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 3 — 3 GRANDES CAUSES + IMPACT ÉCONOMIQUE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--coral)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  3 grandes causes de risque lié aux soins
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Actes invasifs
+    </div>
+    <p style="font-size:.82rem">Chirurgicaux, interventionnels, gestuels. <strong>4,3/6,2 EIG</strong> pour 1000 j d'hospitalisation liés à une procédure.</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Infections nosocomiales
+    </div>
+    <p style="font-size:.82rem">1/20 en médecine, 1/20 en chirurgie, <strong>1/5 en réanimation</strong>. Prolongation séjour, séquelles, surmortalité.</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Effets indésirables médicamenteux
+    </div>
+    <p style="font-size:.82rem">5% des consultations, 5–10% des hospitalisations. 4e–6e cause de décès. Prévisibles (pharmacodyn.) ou imprévisibles.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Erreur médicamenteuse et effets indésirables — points clés
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">Erreur médicamenteuse</p>
+      <ul style="font-size:.81rem">
+        <li>Survient à toute étape du circuit : prescription, préparation, dispensation, administration, surveillance</li>
+        <li>Par définition <strong>évitable</strong></li>
+        <li>Souvent liée à des dysfonctionnements collectifs</li>
+        <li>Doit être déclarée qu'elle ait eu des conséquences ou non</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">EIM prévisibles vs imprévisibles</p>
+      <table>
+        <tr><th></th><th>Prévisibles</th><th>Imprévisibles</th></tr>
+        <tr><td>Mécanisme</td><td>Pharmacodynamique</td><td>Non pharmacodyn.</td></tr>
+        <tr><td>Dose</td><td>Doses-dépendant</td><td>Non doses-dépendant</td></tr>
+        <tr><td>Fréquence</td><td>Fréquents (connus avant AMM)</td><td>Rares (découverts après AMM)</td></tr>
+        <tr><td>Évitabilité</td><td>Souvent évitables</td><td>Souvent non évitables</td></tr>
+        <tr><td>Exemple</td><td>Hypoglycémie sous insuline</td><td>Anaphylaxie</td></tr>
+      </table>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:6px">Déclaration pharmacovigilance : obligatoire pour prescripteurs et pharmaciens (en ligne).</p>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="padding:12px 20px">
+  <div style="font-size:.82rem;font-weight:700;margin-bottom:8px">Impact économique des IAS</div>
+  <div class="kv-row"><span class="kv-key">Coût global IAS (Europe)</span><span class="kv-val">~760 millions €/an</span></div>
+  <div class="kv-row"><span class="kv-key">Coût par infection (USA)</span><span class="kv-val">~2 000 €</span></div>
+  <div class="kv-row"><span class="kv-key">Coût par infection (Europe)</span><span class="kv-val">610–1 370 € (jusqu'à 27 340 € selon germe)</span></div>
+  <div class="kv-row"><span class="kv-key">Surcoût SARM vs SASM</span><span class="kv-val">30 225 € vs 19 281 € vs 11 888 € (témoin)</span></div>
+  <div class="kv-row"><span class="kv-key">Prolongation séjour</span><span class="kv-val">+6 à +20 jours selon site et germe</span></div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 4 — IAS : ÉPIDÉMIOLOGIE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  Infections Associées aux Soins (IAS) — Définitions et épidémiologie
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>IAS :</strong> infection survenant au cours ou au décours d'une prise en charge (diagnostique, thérapeutique, palliative, préventive ou éducative), ni présente ni en incubation au début. Peut être nosocomiale (en ES) ou communautaire (domicile, EHPAD, cabinet).<br><strong>Infection nosocomiale (IN) :</strong> acquise en ES. Si statut initial inconnu → IN si survenue <strong>au-delà de 48h</strong> d'hospitalisation (sous réserve incubation).</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Prévalence et sites (ENP 2017)
+    </div>
+    <div class="kv-row"><span class="kv-key">Prévalence globale</span><span class="kv-val"><strong>5%</strong> (1/20 hospitalisés un jour J)</span></div>
+    <div class="kv-row"><span class="kv-key">Infections urinaires</span><span class="kv-val"><strong>30%</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Infections site opératoire</span><span class="kv-val"><strong>15%</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Pneumopathies</span><span class="kv-val"><strong>15%</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Bactériémies</span><span class="kv-val"><strong>10%</strong></span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Microorganismes principaux (ENP 2017)
+    </div>
+    <div class="kv-row"><span class="kv-key">E. coli</span><span class="kv-val">25% (1er rang toutes IAS)</span></div>
+    <div class="kv-row"><span class="kv-key">S. aureus</span><span class="kv-val">15% (SARM = 27% des souches)</span></div>
+    <div class="kv-row"><span class="kv-key">P. aeruginosa</span><span class="kv-val">6,5% (résistance ceftazidime 19%)</span></div>
+    <div class="kv-row"><span class="kv-key">Enterococcus faecalis</span><span class="kv-val">6,5%</span></div>
+    <div class="kv-row"><span class="kv-key">K. pneumoniae</span><span class="kv-val">5% (BLSE 32%)</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Microorganismes par site anatomique
+  </div>
+  <table>
+    <tr><th>Site</th><th>Germe principal</th></tr>
+    <tr><td>Infections urinaires</td><td><strong>E. coli</strong> (47%)</td></tr>
+    <tr><td>Infections du site opératoire</td><td><strong>S. aureus</strong> (23%) puis variable selon site</td></tr>
+    <tr><td>Pneumopathies</td><td><strong>S. aureus</strong> (15%), <strong>P. aeruginosa</strong> (14%)</td></tr>
+    <tr><td>Bactériémies</td><td><strong>S. aureus</strong> (16%), E. coli (14%), S. epidermidis (14%) — variable selon porte d'entrée</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 5 — BMR / BHR
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red)">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  BMR / BHR — Résistances bactériennes
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      BMR — Bactéries Multi-Résistantes
+    </div>
+    <p style="font-size:.82rem;margin-bottom:8px">Résistances acquises à plusieurs familles d'antibiotiques → impasse thérapeutique <em>partielle</em>.</p>
+    <div class="pills">
+      <span class="pill pill-amber">SARM (Staph. aureus Résistant Méthicilline)</span>
+      <span class="pill pill-amber">Entérobactéries BLSE (E. coli, K. pneumoniae)</span>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Réservoirs : peau (SARM), tube digestif (BLSE).</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      BHR / BHRe — Bactéries Hautement Résistantes
+    </div>
+    <p style="font-size:.82rem;margin-bottom:8px">Résistance totale ou quasi-totale → impasse thérapeutique <em>majeure</em>.</p>
+    <div class="pills">
+      <span class="pill pill-red">EPC (Entérobactéries Productrices de Carbapénémases)</span>
+      <span class="pill pill-red">ERV / ERG (Entérocoque Résistant Vancomycine)</span>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Rapatriés sanitaires de l'étranger = très haut risque BHRe. Réservoir digestif.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Mécanismes de résistance aux antibiotiques
+  </div>
+  <table>
+    <tr>
+      <th style="width:20%">Mécanisme</th>
+      <th>Mutation chromosomique</th>
+      <th>Plasmides / Transposons</th>
+    </tr>
+    <tr>
+      <td>Fréquence</td>
+      <td>Rare</td>
+      <td><strong>Fréquent (80–90%)</strong></td>
+    </tr>
+    <tr>
+      <td>Transfert</td>
+      <td>Vertical (bactérie → descendance)</td>
+      <td>Horizontal entre bactéries (même espèce ou non)</td>
+    </tr>
+    <tr>
+      <td>Familles AB</td>
+      <td>1 famille d'antibiotique</td>
+      <td>Plusieurs familles (plasmide multi-résistant)</td>
+    </tr>
+    <tr>
+      <td>Stabilité</td>
+      <td>Stable, spontanée, sans pression sélective</td>
+      <td>Instable, dépend de la pression de sélection des antibiotiques</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Transmission BMR :</strong> Contact ++ (manuportage direct ou indirect via matériel/environnement — lavage des mains des soignants = mesure clé). Voie aéroportée : gouttelettes &gt;5µm (infection respiratoire à BMR avec toux), voie aérienne &lt;5µm (tuberculose). Lutte BMR = précautions standard + précautions complémentaires Contact. Lutte BHRe = idem + cohorting + personnel dédié + dépistage des contacts.</span>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 6 — HYGIÈNE DES MAINS + ANTISEPSIE
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Hygiène des mains, antisepsie et techniques de désinfection
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Friction Hydro-Alcoolique (SHA) — technique de référence
+    </div>
+    <div class="kv-row"><span class="kv-key">Technique</span><span class="kv-val">7 étapes, durée 20–30 secondes minimum</span></div>
+    <div class="kv-row"><span class="kv-key">Quand</span><span class="kv-val">Avant ET après chaque soin (y compris après retrait des gants)</span></div>
+    <div class="kv-row"><span class="kv-key">Prérequis soignant</span><span class="kv-val">Avant-bras dégagés (manches courtes), ongles courts, sans bijoux ni résine</span></div>
+    <div class="kv-row"><span class="kv-key">Gants</span><span class="kv-val">Ne dispensent pas de l'hygiène des mains</span></div>
+    <div class="alert alert-amber" style="margin-top:10px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Exceptions SHA :</strong> Gale et <em>Clostridioides difficile</em> → lavage savon doux <strong>puis</strong> SHA (spores résistantes aux SHA).</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définitions : du nettoyage à la stérilisation
+    </div>
+    <table>
+      <tr><th>Terme</th><th>Définition condensée</th><th>Cible</th></tr>
+      <tr><td><strong>Antisepsie</strong></td><td>Antiseptique sur tissus vivants → inactiver microorganismes</td><td>Peau, muqueuses, plaies</td></tr>
+      <tr><td><strong>Asepsie</strong></td><td>Empêcher tout apport exogène de microorganismes (matériel stérile, tenue, air)</td><td>Environnement/matériel</td></tr>
+      <tr><td><strong>Détersion</strong></td><td>Nettoyage préalable retirant matières organiques avant désinfection</td><td>Surfaces/peau</td></tr>
+      <tr><td><strong>Désinfection</strong></td><td>Réduction des microorganismes sur surfaces inertes (nettoyage + désinfectant)</td><td>Surfaces inertes</td></tr>
+      <tr><td><strong>Décontamination</strong></td><td>1er traitement d'objets souillés pour diminuer le risque infectieux et protéger le personnel</td><td>Instruments</td></tr>
+      <tr><td><strong>Stérilisation</strong></td><td>Élimination de TOUS les microorganismes → état de stérilité</td><td>Instruments réutilisables</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Antiseptiques majeurs et règles d'utilisation
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="pills" style="margin-bottom:8px">
+        <span class="pill pill-blue">Chlorhexidine (biguanide)</span>
+        <span class="pill pill-amber">Povidone iodée (dérivé iodé)</span>
+        <span class="pill pill-purple">Hypochlorite de sodium</span>
+        <span class="pill pill-teal">Alcools (éthanol)</span>
+      </div>
+      <ul style="font-size:.81rem">
+        <li>Solutions alcooliques privilégiées pour actes invasifs (sauf peau lésée ou muqueuse)</li>
+        <li><strong>Chlorhexidine 2% alcoolique</strong> = pose cathéter vasculaire</li>
+        <li>Antiseptiques sur plaies = médicaments avec AMM</li>
+      </ul>
+    </div>
+    <div>
+      <ul style="font-size:.81rem">
+        <li>Contrôler les incompatibilités entre produits</li>
+        <li>Éviter l'inactivation par matières organiques → détersion préalable si nécessaire</li>
+        <li>Respecter le délai d'action (temps de contact)</li>
+        <li>Respecter concentrations et mode d'emploi (éviter résistances)</li>
+        <li><strong>NE PAS</strong> utiliser d'antiseptique pour désinfecter le matériel inerte</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 7 — PRÉCAUTIONS STANDARD ET COMPLÉMENTAIRES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Précautions standard et complémentaires
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Précautions standard — applicables à TOUS les patients quel que soit leur statut infectieux
+  </div>
+  <ul style="font-size:.83rem">
+    <li><strong>SHA</strong> avant et après tout contact patient/environnement (y compris après retrait des gants)</li>
+    <li><strong>Gants</strong> uniquement si risque de contact avec sang/liquide biologique ou peau lésée du soignant ; changer entre deux patients</li>
+    <li><strong>Protection face/corps</strong> (surblouse imperméable, masque chirurgical, lunettes) si risque de projection de liquides biologiques</li>
+    <li><strong>Masque chirurgical</strong> pour toute personne suspecte d'infection respiratoire (toux ± fièvre)</li>
+    <li><strong>Décontamination/stérilisation</strong> du matériel souillé ; conditionnement DASRI (déchets d'activité de soins à risque infectieux)</li>
+    <li>Précautions AES : collecteurs sécurisés pour objets piquants/tranchants, matériel à aiguille rétractable</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Précautions complémentaires (en plus des précautions standard)
+  </div>
+  <table>
+    <tr>
+      <th style="width:12%">Type</th>
+      <th style="width:35%">Protection soignant/visiteur</th>
+      <th style="width:20%">Chambre</th>
+      <th>Indications principales</th>
+    </tr>
+    <tr>
+      <td><strong>Contact</strong></td>
+      <td>SHA ++ ; tablier imperméable UU ; masque chirurgical si infection respiratoire du patient ; matériel dédié ou désinfecté</td>
+      <td>Individuelle si possible</td>
+      <td>BMR (SARM, BLSE), BHRe, gastro-entérites<br><span style="color:var(--amber);font-size:.78rem">Gale + C. difficile : lavage mains + SHA (spores résistantes)</span></td>
+    </tr>
+    <tr>
+      <td><strong>Gouttelettes</strong></td>
+      <td>Masque chirurgical dès entrée dans la chambre</td>
+      <td>Individuelle si possible ; patient porte masque chirurgical si sortie</td>
+      <td>Grippe saisonnière, coqueluche, VRS, SARS-CoV-2</td>
+    </tr>
+    <tr>
+      <td><strong>Air</strong></td>
+      <td>Masque FFP2 avant entrée dans la chambre</td>
+      <td>Individuelle obligatoire, porte fermée ; patient reste en chambre ; masque chirurgical si sortie indispensable</td>
+      <td>Tuberculose, rougeole, varicelle</td>
+    </tr>
+  </table>
+  <p style="font-size:.78rem;color:var(--muted);margin-top:8px">Les précautions complémentaires relèvent d'une <strong>prescription médicale tracée</strong> dans le dossier. Patient, entourage et professionnels doivent être informés. Cohorting possible si plusieurs cas dans une même unité.</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 8 — DIAGNOSTICS DES PRINCIPALES IAS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--blue)">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  Critères diagnostiques des principales IAS
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Infection Urinaire Nosocomiale
+    </div>
+    <p style="font-size:.82rem;font-weight:700">Au moins 1 signe clinique :</p>
+    <p style="font-size:.82rem;margin:4px 0">Fièvre &gt;38°C, impériosités mictionnelles, pollakiurie, brûlures, douleur sus-pubienne — sans autre cause</p>
+    <p style="font-size:.82rem;font-weight:700;margin-top:6px">ET ECBU positif :</p>
+    <div class="kv-row"><span class="kv-key">Avec sondage</span><span class="kv-val">&gt;10³ UFC/mL, ≤2 microorganismes</span></div>
+    <div class="kv-row"><span class="kv-key">Sans sondage</span><span class="kv-val">leucocyturie &gt;10/mL + ECBU &gt;10³/mL, ≤2 microorganismes</span></div>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> Bactériurie asymptomatique ≠ infection urinaire nosocomiale (ne pas traiter, ne pas comptabiliser).</span>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Pneumopathie Nosocomiale
+    </div>
+    <p style="font-size:.82rem;font-weight:700">Image radiologique évocatrice de pneumonie</p>
+    <p style="font-size:.82rem;color:var(--muted);font-size:.78rem">(2 radios si antécédents cardio-respiratoires)</p>
+    <p style="font-size:.82rem;font-weight:700;margin-top:6px">ET au moins 1 parmi :</p>
+    <p style="font-size:.82rem">Hyperthermie &gt;38°C, leucopénie &lt;4000/mm³ ou hyperleucocytose &gt;12 000</p>
+    <p style="font-size:.82rem;font-weight:700;margin-top:6px">ET au moins 1 parmi :</p>
+    <p style="font-size:.82rem">Sécrétions purulentes, toux/dyspnée/tachypnée, auscultation évocatrice, désaturation ou besoin accru d'O₂</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:6px">Documentation micro recommandée : LBA (&gt;10⁴ UFC/mL), brosse/PDP (&gt;10³ UFC/mL) ou hémoculture.</p>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Infection du Site Opératoire (ISO)
+    </div>
+    <div class="kv-row"><span class="kv-key">Délai superficielle</span><span class="kv-val"><strong>30 jours</strong> après l'intervention</span></div>
+    <div class="kv-row"><span class="kv-key">Délai profonde</span><span class="kv-val"><strong>30 jours</strong>, ou <strong>1 an</strong> si implant/prothèse</span></div>
+    <p style="font-size:.82rem;font-weight:700;margin-top:8px">Superficielle :</p>
+    <p style="font-size:.82rem">Pus sur incision OU micro-organismes + PNN sur prélèvement aseptique OU avis chirurgien</p>
+    <p style="font-size:.82rem;font-weight:700;margin-top:6px">Profonde :</p>
+    <p style="font-size:.82rem">Pus profond OU ouverture incision + micro-organismes OU abcès à l'imagerie/réintervention/anapath</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Infection Liée au Cathéter (ILC)
+    </div>
+    <p style="font-size:.82rem;font-weight:700">Locale :</p>
+    <p style="font-size:.82rem">Signe clinique au site d'insertion (érythème, induration, pus) + prélèvement micro positif (extrémité CVC ou point insertion)</p>
+    <p style="font-size:.82rem;font-weight:700;margin-top:6px">Systémique :</p>
+    <p style="font-size:.82rem">Signes généraux + hémoculture positive + lien cathéter prouvé par : culture extrémité CVC &gt;10³ UFC/mL OU hémocultures différentielles (délai positivité CVC vs périphérie)</p>
+    <div class="kv-row" style="margin-top:6px"><span class="kv-key">Colonisation</span><span class="kv-val">Extrémité CVC &gt;10³ sans signes cliniques</span></div>
+    <div class="kv-row"><span class="kv-key">Contamination</span><span class="kv-val">&lt;10³ UFC/mL</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Facteurs de risque d'ISO — Altemeier + Score ASA
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">Classification Altemeier (contamination opératoire)</p>
+      <div class="kv-row"><span class="kv-key">Classe 1</span><span class="kv-val">Propre (pas d'ouverture de muqueuse)</span></div>
+      <div class="kv-row"><span class="kv-key">Classe 2</span><span class="kv-val">Propre-contaminé</span></div>
+      <div class="kv-row"><span class="kv-key">Classe 3</span><span class="kv-val">Contaminé</span></div>
+      <div class="kv-row"><span class="kv-key">Classe 4</span><span class="kv-val">Sale (infection préexistante)</span></div>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">Autres facteurs de risque ISO</p>
+      <ul style="font-size:.81rem">
+        <li>Patient : obésité, diabète, dénutrition, âge, comorbidités, immunodépression</li>
+        <li>Intervention : durée prolongée, hypothermie, mauvaise oxygénation/glycémie, hémostase</li>
+        <li>Prévention : défaut de préparation cutanée, absence d'antibioprophylaxie adaptée</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 9 — PRÉVENTION DES IAS
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Prévention des principales IAS par site
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention — Infections urinaires
+    </div>
+    <ul style="font-size:.82rem">
+      <li>Asepsie rigoureuse lors de la pose de sonde</li>
+      <li>Système de sondage <strong>clos</strong></li>
+      <li>Éviter le sondage (alternatives : étui pénien)</li>
+      <li>Réévaluation <strong>quotidienne</strong> de l'utilité du sondage</li>
+      <li>Bonne hydratation du patient</li>
+      <li><strong>Pas</strong> de changement systématique, ni d'antibioprophylaxie, ni de lavages vésicaux, ni d'antiseptiques intravésicaux</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention — Pneumopathies
+    </div>
+    <ul style="font-size:.82rem">
+      <li>Préférer la VNI, limiter la durée d'intubation</li>
+      <li>Position <strong>semi-assise</strong> (prévention micro-inhalations)</li>
+      <li>Aspiration régulière/continue des sécrétions, soins de bouche réguliers</li>
+      <li>Filtres antibactériens sur respirateur</li>
+      <li>SHA avant manipulation des circuits du respirateur</li>
+      <li>Légionellose : purge régulière des points d'eau, filtre si immunodéprimé (PN &lt;500/mm³ &gt;10 j)</li>
+      <li>Aspergillose : isoler zones de travaux des zones de soins</li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention — ISO
+    </div>
+    <ul style="font-size:.82rem">
+      <li>Hospitalisation préopératoire &lt;24h</li>
+      <li>Arrêt tabac (idéalement 6 semaines avant)</li>
+      <li>Contrôle HbA1c ; traitement des foyers infectieux à distance</li>
+      <li>En chirurgie cardiaque : décolonisation systématique S. aureus (sans dépistage)</li>
+      <li>Douche au savon simple ou antiseptique avant bloc</li>
+      <li><strong>Dépilation :</strong> tondeuse ou crème uniquement — <strong>rasoir proscrit</strong> — interdite en salle d'opération</li>
+      <li>Friction SHA chirurgicale des opérateurs</li>
+      <li>Tenue stérile : casaque imperméable, gants stériles, masque, calot/cagoule</li>
+      <li>Antibioprophylaxie selon indications (SFAR 2018)</li>
+      <li>Normothermie peropératoire + glycémie &lt;2g/L postop précoce</li>
+      <li>Salle en surpression, portes fermées, limitation des allées-venues</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention — Infections cathéter
+    </div>
+    <ul style="font-size:.82rem">
+      <li>Indication indispensable + réévaluation quotidienne</li>
+      <li>Choix du type adapté (périphérique, PICC, midline, chambre implantable)</li>
+      <li>Pose aseptique ; CVC : <strong>asepsie chirurgicale</strong> (friction SHA, tenue, champs larges)</li>
+      <li><strong>Chlorhexidine 2% en solution alcoolique</strong> pour antisepsie cutanée</li>
+      <li>Pansement transparent, retrait immédiat si complication locale</li>
+      <li>Changement lignes veineuses : tous les <strong>4–7 jours</strong> maximum</li>
+      <li>Produits sanguins / émulsion lipidique : changement dans les <strong>24h</strong></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 10 — STRUCTURES ORGANISATIONNELLES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  </div>
+  Structures organisationnelles
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Dispositif de prévention des IAS — 3 niveaux
+  </div>
+  <table>
+    <tr><th>Niveau</th><th>Structure</th><th>Rôle</th></tr>
+    <tr>
+      <td><strong>Local</strong> (ES)</td>
+      <td><strong>EOHH</strong> (Équipe Opérationnelle d'Hygiène Hospitalière)<br><strong>CLIN</strong> (obligatoire en établissement privé ; remplacé par CME en public)</td>
+      <td>Surveillance et prévention des IAS dans l'établissement. Coordonnateur de gestion des risques désigné conjointement par directeur + président CME.</td>
+    </tr>
+    <tr>
+      <td><strong>Régional</strong></td>
+      <td><strong>CPIAS</strong> (Centres régionaux d'Appui à la Prévention des IAS)</td>
+      <td>Appui régional à la prévention, analyse des signalements, expertise méthodologique</td>
+    </tr>
+    <tr>
+      <td><strong>National</strong></td>
+      <td><strong>PROPIAS</strong> (programme national) + <strong>Santé Publique France</strong></td>
+      <td>Programme national couvrant ES, médico-social et soins de ville</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    5 Agences nationales d'évaluation et de vigilance sanitaire
+  </div>
+  <table>
+    <tr><th>Agence</th><th>Domaine principal</th></tr>
+    <tr><td><strong>ANSM</strong></td><td>Sécurité des produits de santé (médicaments, DM) ; accès et balance bénéfice/risque ; coordonne 8 vigilances sanitaires</td></tr>
+    <tr><td><strong>ASN</strong></td><td>Sûreté nucléaire et radioprotection ; réglementation et contrôle des activités médicales (autorisations)</td></tr>
+    <tr><td><strong>Santé Publique France</strong></td><td>Surveillance état de santé des populations, veille/alerte sanitaire (SPF, ex-ANSP), prévention, réponse aux crises</td></tr>
+    <tr><td><strong>ANSES</strong></td><td>Veille et expertise alimentation, travail, environnement ; AMM médicaments vétérinaires, produits phytosanitaires</td></tr>
+    <tr><td><strong>ABM</strong></td><td>Prélèvements/greffes organes-tissus, moelle, AMP, génétique médicale, diagnostic prénatal et préimplantatoire</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    HAS — Missions dans la qualité et la sécurité des soins
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:4px">Évaluation</p>
+      <ul style="font-size:.81rem;margin-bottom:8px">
+        <li>Médicaments, DM, actes professionnels (remboursement SS)</li>
+        <li>Établissements sociaux et médico-sociaux</li>
+        <li>Logiciels d'aide à la prescription</li>
+      </ul>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:4px">Recommandations</p>
+      <ul style="font-size:.81rem">
+        <li>Bonnes pratiques, santé publique, vaccination</li>
+        <li>Parcours et pertinence des soins</li>
+        <li>Outils sécurité des patients</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:4px">Mesure et amélioration</p>
+      <ul style="font-size:.81rem;margin-bottom:8px">
+        <li><strong>Certification</strong> ES publics et privés</li>
+        <li><strong>Accréditation</strong> médecins et équipes à spécialité à risque</li>
+        <li><strong>IQSS</strong> (indicateurs qualité et sécurité des soins)</li>
+        <li>Information des usagers sur la qualité</li>
+      </ul>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:4px">Déclarations EPR</p>
+      <ul style="font-size:.81rem">
+        <li>EPR déclarés à l'ARS → anonymisés → HAS → retour d'expérience national → préconisations</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Vigilances sanitaires — mémo exhaustif (12 vigilances)
+  </div>
+  <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">8 vigilances coordonnées par l'ANSM :</p>
+  <div class="pills" style="margin-bottom:12px">
+    <span class="pill pill-blue">Pharmacovigilance (médicaments humains)</span>
+    <span class="pill pill-blue">Addictovigilance (substances psychoactives)</span>
+    <span class="pill pill-blue">Hémovigilance (chaîne transfusionnelle)</span>
+    <span class="pill pill-blue">Matériovigilance (DM)</span>
+    <span class="pill pill-blue">Réactovigilance (DM diagnostic in vitro)</span>
+    <span class="pill pill-blue">Biovigilance (organes, cellules, lait)</span>
+    <span class="pill pill-blue">Cosmétovigilance</span>
+    <span class="pill pill-blue">Vigilance produits tatouage</span>
+  </div>
+  <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">4 vigilances supplémentaires :</p>
+  <div class="pills">
+    <span class="pill pill-teal">Toxicovigilance (ANSES)</span>
+    <span class="pill pill-teal">Infectiovigilance/RAISIN (nosocomiales)</span>
+    <span class="pill pill-teal">AMP-vigilance (ABM — gamètes, embryons)</span>
+    <span class="pill pill-teal">Radiovigilance (ASN)</span>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>Signalement externe des IAS :</strong> réglementaire à l'ARS (signalement.sante.gouv.fr) sans délai pour IAS rares, graves, épidémiques, liées à un décès. Complément dans les <strong>3 mois</strong> (analyse approfondie, retour d'expérience, mesures correctives). ARS transmet à Santé Publique France. Patient doit être informé + mention dans le dossier.</span>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 11 — QUALITÉ ET GESTION DES RISQUES
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  Qualité et gestion des risques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Roue de Deming — Méthode PDCA
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">P</div><div class="step-content"><strong>Plan</strong> — Prévoir : écrire ce qu'on va faire (procédures)</div></div>
+      <div class="step"><div class="step-num">D</div><div class="step-content"><strong>Do</strong> — Faire : faire ce qu'on a écrit</div></div>
+      <div class="step"><div class="step-num">C</div><div class="step-content"><strong>Check</strong> — Vérifier : mesurer et contrôler ce qu'on a fait</div></div>
+      <div class="step"><div class="step-num">A</div><div class="step-content"><strong>Act</strong> — Réagir : corriger, améliorer, relancer un cycle</div></div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:6px">La <em>cale</em> = système de management de la qualité (empêche la roue de redescendre = régression).</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Culture sécurité — 4 composantes
+    </div>
+    <div class="kv-row"><span class="kv-key">Reporting culture</span><span class="kv-val">Signalement des EIAS sans punition</span></div>
+    <div class="kv-row"><span class="kv-key">Learning culture</span><span class="kv-val">Retour d'expérience collectif, apprendre de ses erreurs d'équipe</span></div>
+    <div class="kv-row"><span class="kv-key">Flexible culture</span><span class="kv-val">Travail en équipe, adaptation au changement</span></div>
+    <div class="kv-row"><span class="kv-key">Just culture</span><span class="kv-val">Management équitable : dysfonctionnement organisationnel &gt; faute individuelle → signalement non punitif</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Prévention a priori vs a posteriori
+  </div>
+  <table>
+    <tr>
+      <th style="width:15%"></th>
+      <th>A priori (proactive)</th>
+      <th>A posteriori (réactive)</th>
+    </tr>
+    <tr>
+      <td><strong>Objectif</strong></td>
+      <td>Identifier les risques potentiels pour <em>en éviter la survenue</em></td>
+      <td>Analyser un EIAS survenu pour <em>en éviter la récidive</em></td>
+    </tr>
+    <tr>
+      <td><strong>Méthodes</strong></td>
+      <td>Cartographie des processus, audit qualité, visite de risque, analyse de scénario, indicateurs validés</td>
+      <td>Grille <strong>ALARM</strong> (7 rubriques), arbre des causes</td>
+    </tr>
+    <tr>
+      <td><strong>Étapes</strong></td>
+      <td>1. Sélection · 2. Analyse · 3. Évaluation/hiérarchisation · 4. Traitement · 5. Suivi</td>
+      <td>1. Analyse ALARM (pilote désigné) · 2. Rapport en équipe · 3. Plan d'amélioration et suivi</td>
+    </tr>
+  </table>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:8px"><strong>CREX</strong> (Comité de Retour d'EXpérience) = boucle courte mensuelle de gestion des risques, équipe pluri-professionnelle. Signalement → choix d'un événement prioritaire → investigation ALARM → rapport → plan d'amélioration.</p>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Principe de précaution
+    </div>
+    <p style="font-size:.82rem"><strong>3 conditions :</strong> risque grave et irréversible + incertitude scientifique + nécessité de mesures immédiates.</p>
+    <p style="font-size:.82rem;margin-top:6px">Inscrit dans la Constitution française (2005) — domaine initial : environnement. Distinct de la <em>prévention</em> (risques avérés, probabilisables, assurables).</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Principe d'indépendance — Liens d'intérêt
+    </div>
+    <p style="font-size:.82rem">Art. 5 code déontologie : indépendance professionnelle absolue. Tout avantage d'une entreprise pharmaceutique ou de DM doit être : proportionné, soumis au contrôle de l'Ordre, déclaré publiquement.</p>
+    <p style="font-size:.82rem;margin-top:4px">Lien d'intérêt ≠ conflit d'intérêt (conflit = lien corrompant l'indépendance). Sites publics : transparence.sante.gouv.fr / eurosfordocs.fr</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 12 — CERTIFICATION, IQSS, EPP, DPC
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Évaluation et amélioration des pratiques
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Certification des établissements de santé (HAS)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Qui évalue</span><span class="kv-val">Experts-visiteurs (professionnels de santé formés et mandatés par la HAS)</span></div>
+      <div class="kv-row"><span class="kv-key">Référentiel</span><span class="kv-val">15 objectifs → Patient / Équipes de soin / Établissement</span></div>
+      <div class="kv-row"><span class="kv-key">Critères totaux</span><span class="kv-val">141 (90 génériques + 41 spécifiques)</span></div>
+      <div class="kv-row"><span class="kv-key">Critères impératifs</span><span class="kv-val"><strong>15</strong> — non-validation → refus de certification</span></div>
+      <div class="kv-row"><span class="kv-key">Critères standards</span><span class="kv-val"><strong>111</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Critères avancés</span><span class="kv-val"><strong>5</strong> (non encore exigibles)</span></div>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">5 méthodes d'évaluation</p>
+      <div class="pills" style="margin-bottom:10px">
+        <span class="pill pill-purple">Patient traceur</span>
+        <span class="pill pill-purple">Traceur ciblé</span>
+        <span class="pill pill-purple">Audit de processus</span>
+        <span class="pill pill-purple">Observation</span>
+        <span class="pill pill-purple">Entretiens</span>
+      </div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px">4 décisions possibles HAS</p>
+      <div class="pills">
+        <span class="pill pill-green">Certifié</span>
+        <span class="pill pill-blue">Certifié avec engagement</span>
+        <span class="pill pill-amber">Sursis</span>
+        <span class="pill pill-red">Non certifié</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      IQSS — Indicateurs de Qualité et Sécurité des Soins
+    </div>
+    <p style="font-size:.82rem">Développés par la HAS, auto-évaluation annuelle ou biennale par les ES. Résultats <strong>publics</strong> sur le site de la HAS. Peuvent moduler le financement des ES.</p>
+    <p style="font-size:.82rem;margin-top:6px"><strong>Exemples actuels :</strong> consommation SHA, incidence ISO, vaccination antigrippale du personnel, durée d'antibiothérapie des infections respiratoires basses.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      EPP — Évaluation des Pratiques Professionnelles
+    </div>
+    <p style="font-size:.82rem;margin-bottom:6px">Analyse de l'activité clinique par rapport aux recommandations, avec plan d'amélioration. Individuel ou collectif.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content">Mesure et analyse de l'écart avec la pratique de référence</div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content">Élaboration des actions de correction</div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content">Mise en œuvre</div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content">Suivi et pérennisation</div></div>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:4px">Critères : précis, concis, observables, en nombre limité. Piège = exhaustivité → se concentrer sur les recommandations principales.</p>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Groupes de pairs
+    </div>
+    <ul style="font-size:.82rem">
+      <li>Médecins de <strong>même spécialité</strong>, sans hiérarchie</li>
+      <li>Réunions régulières en climat de confiance</li>
+      <li>Analyse argumentée de la pratique quotidienne</li>
+      <li>Centrée sur des cas cliniques, expertise collective</li>
+      <li>Objectif : amélioration des pratiques professionnelles</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      DPC — Développement Professionnel Continu
+    </div>
+    <div class="kv-row"><span class="kv-key">Obligatoire depuis</span><span class="kv-val">1er janvier 2013 (loi HPST 2009)</span></div>
+    <div class="kv-row"><span class="kv-key">Obligation</span><span class="kv-val">Triennale (sur 3 ans)</span></div>
+    <div class="kv-row"><span class="kv-key">3 types d'actions</span><span class="kv-val">1. Cognitives · 2. Analyse des pratiques · 3. Gestion des risques</span></div>
+    <div class="kv-row"><span class="kv-key">Exigence</span><span class="kv-val">2 actions sur 3 requis, dont au moins 1 orientation prioritaire</span></div>
+    <div class="kv-row"><span class="kv-key">Contrôle</span><span class="kv-val">Ordres professionnels (libéraux) / Employeur (autres)</span></div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:6px">Formation diplômante universitaire peut remplacer l'une des actions. Offre validée par l'Agence nationale du DPC.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION FINALE — POINTS-CLÉS ET PIÈGES ECNi
+     ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés à retenir — Pièges et tombables ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège SHA :</strong> la SHA est la technique de référence SAUF pour la Gale et <em>C. difficile</em> → lavage savon doux <strong>puis</strong> SHA obligatoirement. Les gants ne dispensent jamais de l'hygiène des mains.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège ISO :</strong> délai de survenue = 30 jours après chirurgie, mais <strong>1 an</strong> si implant ou prothèse. La bactériurie asymptomatique n'est pas une infection urinaire nosocomiale (ne pas traiter, ne pas notifier).</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège dépilation :</strong> le rasoir est <strong>proscrit</strong> pour la préparation cutanée préopératoire. Utiliser tondeuse ou crème dépilatoire. Dépilation interdite en salle d'opération.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège EIG/EIAS :</strong> l'aléa thérapeutique (sans faute) est indemnisable par la solidarité nationale depuis 2002 — il ne relève pas d'une action en justice contre le soignant. 40–50% des EIAS sont évitables. 1 EIG = au moins : décès OU pronostic vital OU déficit fonctionnel permanent.</span>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Chiffres indispensables à mémoriser :</strong> IAS prévalence <strong>5%</strong> (1/20) ENP 2017 — 40–50% EIAS évitables — 15 000 décès/an évitables — 1 EIG/5 jours dans service 30 lits — SHA : 7 étapes, 20–30 s — IN : au-delà de 48h si statut initial inconnu — ISO sans implant : 30 jours — ISO avec implant : 1 an — DPC obligatoire depuis 2013, obligation triennale.</span>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <span><strong>À retenir — Modèle de Reason :</strong> un EIAS résulte de l'alignement de plusieurs failles successives (tous les trous du fromage suisse sont alignés). Un EPR = une faille isolée rattrapée par un verrou de sécurité resté en place. La culture sécurité repose sur 4 composantes : reporting, learning, flexible, just culture.</span>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <span><strong>À retenir — Certification HAS :</strong> 15 objectifs, 141 critères (15 impératifs / 111 standards / 5 avancés). Experts-visiteurs = professionnels de santé mandatés, 5 méthodes d'évaluation (patient traceur, traceur ciblé, audit de processus, observation, entretiens). 4 décisions : certifié / certifié avec engagement / sursis / non certifié.</span>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <span><strong>À retenir — BMR vs BHR :</strong> BMR = SARM + EBLSE ; BHR = EPC + ERV. Résistance par plasmides/transposons (80–90%) : transfert horizontal entre bactéries, plusieurs familles d'AB, instable selon pression sélective. Transmission = contact manuporté ++ → précautions standard + précautions complémentaires Contact. Usage raisonné des AB = pierre angulaire de la lutte.</span>
+</div>
+
+</div>
+</body>
+</html>

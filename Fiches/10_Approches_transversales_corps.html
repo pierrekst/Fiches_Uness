@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 10 – Approches transversales du corps</title>
+  
+  <!-- Polices Google Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --card-bg: #ffffff;
+      --border-color: rgba(148, 163, 184, 0.15);
+      --border-color-strong: rgba(148, 163, 184, 0.3);
+      --hr-color: rgba(148, 163, 184, 0.2);
+      
+      --purple: #534AB7;
+      --purple-light: rgba(83, 74, 183, 0.08);
+      --teal: #1D9E75;
+      --teal-light: rgba(29, 158, 117, 0.08);
+      --coral: #D85A30;
+      --coral-light: rgba(216, 90, 48, 0.08);
+      --blue: #378ADD;
+      --blue-light: rgba(55, 138, 221, 0.08);
+      --red: #E24B4A;
+      --red-light: rgba(226, 75, 74, 0.08);
+      --amber: #D97706;
+      --amber-light: rgba(217, 119, 6, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --text-muted: #94a3b8;
+        --card-bg: #1e293b;
+        --border-color: rgba(255, 255, 255, 0.08);
+        --border-color-strong: rgba(255, 255, 255, 0.15);
+        --hr-color: rgba(255, 255, 255, 0.12);
+        
+        --purple-light: rgba(83, 74, 183, 0.2);
+        --teal-light: rgba(29, 158, 117, 0.2);
+        --coral-light: rgba(216, 90, 48, 0.2);
+        --blue-light: rgba(55, 138, 221, 0.2);
+        --red-light: rgba(226, 75, 74, 0.2);
+        --amber-light: rgba(217, 119, 6, 0.2);
+      }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-wrapper {
+      padding: 24px 16px 64px 16px;
+      min-height: 100vh;
+    }
+    .page {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--blue) 0%, #205c9b 50%, var(--teal) 100%);
+      color: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 30px rgba(55, 138, 221, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 140%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .header-tag {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+    .header-subtitle {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.45;
+    }
+
+    .objectifs-box {
+      background: var(--blue-light);
+      border: 1px dashed var(--blue);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .objectifs-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .objectifs-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .objectifs-list li {
+      margin-bottom: 4px;
+    }
+
+    hr {
+      border: none;
+      height: 0.5px;
+      background-color: var(--hr-color);
+      margin: 24px 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 0.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 12px var(--border-color);
+    }
+
+    .card-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 0;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-icon svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .bg-purple { background-color: var(--purple); }
+    .bg-teal { background-color: var(--teal); }
+    .bg-coral { background-color: var(--coral); }
+    .bg-blue { background-color: var(--blue); }
+    .bg-red { background-color: var(--red); }
+    .bg-amber { background-color: var(--amber); }
+
+    .alert {
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-size: 0.84rem;
+      margin-bottom: 12px;
+      line-height: 1.55;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alert strong {
+      font-weight: 800;
+    }
+    .alert-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .alert-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .alert-content {
+      flex-grow: 1;
+    }
+
+    .alert-red {
+      background: var(--red-light);
+      color: var(--red);
+      border-left: 3px solid var(--red);
+    }
+    .alert-blue {
+      background: var(--blue-light);
+      color: var(--blue);
+      border-left: 3px solid var(--blue);
+    }
+    .alert-green, .alert-teal {
+      background: var(--teal-light);
+      color: var(--teal);
+      border-left: 3px solid var(--teal);
+    }
+    .alert-amber {
+      background: var(--amber-light);
+      color: var(--amber);
+      border-left: 3px solid var(--amber);
+    }
+
+    .alert-red .alert-icon svg { stroke: var(--red); }
+    .alert-blue .alert-icon svg { stroke: var(--blue); }
+    .alert-green .alert-icon svg { stroke: var(--teal); }
+    .alert-teal .alert-icon svg { stroke: var(--teal); }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 768px) {
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 20px;
+      line-height: 1;
+    }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+
+    .kv-container {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      background: var(--card-bg);
+    }
+    .kv-row:last-child {
+      border-bottom: none;
+    }
+    .kv-key {
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .kv-val {
+      font-weight: 800;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      border: 0.5px solid var(--border-color-strong);
+      border-radius: 10px;
+      margin: 16px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    th {
+      background: var(--purple-light);
+      color: var(--purple);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 10px 14px;
+      border-bottom: 0.5px solid var(--border-color-strong);
+      border-right: 0.5px solid var(--border-color-strong);
+      color: var(--text);
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) td {
+      background: rgba(148, 163, 184, 0.03);
+    }
+
+    .text-dense {
+      font-size: 0.84rem;
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+    }
+    .text-dense:last-child {
+      margin-bottom: 0;
+    }
+    ul.dense-list {
+      margin: 8px 0;
+      padding-left: 20px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+    ul.dense-list li {
+      margin-bottom: 4px;
+    }
+    .sub-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue);
+      margin: 12px 0 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="page">
+      
+      <!-- HEADER -->
+      <div class="header">
+        <div class="header-tag">ITEM 10</div>
+        <h1>Approches Transversales du Corps</h1>
+        <p class="header-subtitle">Dimensions anthropo-sociales et représentations corporelles. Expérience subjective de la maladie, douleur existentielle et dualisme clinique.</p>
+      </div>
+
+      <!-- OBJECTIFS -->
+      <div class="objectifs-box">
+        <div class="objectifs-title">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Objectifs pédagogiques (EDN)</span>
+        </div>
+        <ul class="objectifs-list">
+          <li><strong>Dimensions humaines :</strong> Rôle de l'alimentation, de l'activité physique, du genre et de la procréation.</li>
+          <li><strong>Bourdieu & Habitus :</strong> Le corps comme mémoire et marqueur de position sociale.</li>
+          <li><strong>Expérience de la maladie :</strong> Impact sur l'identité subjective et décalage soignant/soigné.</li>
+          <li><strong>Clinique du corps :</strong> Dualisme Conceptuel (Corps-objet vs Corps-sujet) et écueils du réductionnisme.</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 1 : LE CORPS COMME HABITUS ET CONSTRUCTION SOCIALE -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-blue">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          <span>Le Corps, Habitus & Construction Sociale</span>
+        </div>
+        
+        <p class="text-dense">
+          Le corps n'est pas qu'une réalité biologique objective ; c'est un objet d'étude multidimensionnel façonné par la culture, les traditions et les structures sociales.
+        </p>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--blue);">La Sociologie de Pierre Bourdieu</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              Pour Bourdieu, le corps exerce <strong>trois fonctions fondamentales</strong> majeures :
+              <br>&bull; <strong>Mémoire corporelle :</strong> Le corps intériorise les expériences.
+              <br>&bull; <strong>Apprentissage des habitudes :</strong> Intériorisation inconsciente d'habitudes de classe (l'<strong>habitus</strong>).
+              <br>&bull; <strong>Marqueur social :</strong> Le corps témoigne physiquement d'inégalités de classe (habitudes de nutrition, stigmates de travaux physiques, etc.).
+            </p>
+          </div>
+          
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--teal);">Normes esthétiques & nutritionnelles</strong>
+            <p class="text-dense" style="margin-top:6px;">
+              Les représentations du "corps sain" évoluent selon les époques :
+              <br>&bull; <em>Alimentation :</em> Au cœur d'interdits religieux, de marqueurs d'identité de groupes ou de contraintes symboliques.
+              <br>&bull; <em>Exemple historique :</em> L'embonpoint (synonyme de santé et de richesse à la Renaissance) s'est mué sous l'effet de l'industrialisation, de la sédentarité et de la mode en un problème de santé publique majeur (obésité).
+            </p>
+          </div>
+        </div>
+
+        <div class="alert alert-blue" style="margin-top:12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Identité de Genre (Item 58) :</strong> L'assignation corporelle d'un individu s'envisage sous le prisme de la construction sociale du <strong>genre</strong> (rapports sociaux, rôles) et non uniquement sous l'angle exclusif de la <strong>différenciation biologique (le sexe)</strong>.
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 2 : IMPACT DE LA MALADIE ET EXPERIENCES DE LA DOULEUR -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-purple">
+            <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+          </div>
+          <span>Maladie, Identité Subjective & Douleur Existientielle</span>
+        </div>
+
+        <p class="text-dense">
+          L'<strong>expérience corporelle</strong> est la conscience immédiate et intime que nous avons de notre propre corps, vécu de l'intérieur, par opposition aux corps d'autrui que nous percevons de l'extérieur.
+        </p>
+
+        <div class="grid2">
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--purple);">Dissension Soignant / Soigné</strong>
+            <ul class="dense-list">
+              <li><strong>Soignants (bien-portants) :</strong> Tendent à aborder la maladie comme un fait purement physique objectif nécessitant une correction technique rationnelle.</li>
+              <li><strong>Patients :</strong> Vivent la maladie comme un bouleversement global de leur existence, déclenchant une quête de sens, de la honte, de la peur, altérant l'estime de soi.</li>
+            </ul>
+          </div>
+          <div style="border: 0.5px solid var(--border-color); padding: 12px; border-radius: 8px;">
+            <strong style="color:var(--coral);">La Douleur comme Fait d'Existence</strong>
+            <p class="text-dense">
+              La douleur n'est pas réductible à un message nociceptif neurophysiologique. Elle est un <strong>phénomène existentiel</strong>.
+              <br>&bull; Ce n'est pas le corps seul qui souffre, c'est l'<strong>individu entier</strong> dans sa dignité.
+              <br>&bull; La douleur altère en profondeur le sentiment d'identité (la personne ne se reconnaît plus).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SECTION 3 : LE CORPS DANS LES PRATIQUES CLINIQUES -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon bg-teal">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span>Le Corps dans la Pratique Clinique & Écueil Réductionniste</span>
+        </div>
+
+        <p class="text-dense">
+          L'avènement des dispositifs techniques modernes (thermomètre, stéthoscope, imagerie, biomarqueurs) a interposé un <strong>artéfact technologique</strong> entre l'observateur soignant et le patient observé. Il transforme le corps vivant en un ensemble de variables froides chiffrées, induisant une mise à distance.
+        </p>
+
+        <div class="sub-label">Dualisme Conceptuel : Corps-Objet vs Corps-Sujet</div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Concept</th>
+                <th>Définition Philosophique</th>
+                <th>Place dans le système de soins</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:700; color:var(--purple);">Le Corps-Objet<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Körper</span></td>
+                <td>Corps physique matériel, impersonnel, régi par les seules lois biologiques et physiques naturelles. Sans singularité humaine.</td>
+                <td>Objet d'investigations techniques standardisées (biologie, imagerie, chirurgie). Utile pour l'objectivation clinique quantitative.</td>
+              </tr>
+              <tr>
+                <td style="font-weight:700; color:var(--teal);">Le Corps-Sujet<br><span style="font-size:0.7rem; font-weight:400; color:var(--text-muted);">Leib</span></td>
+                <td>Substrat psychophysiologique subjectif de l'expérience vécue individuelle et intime. Siège de l'action intentionnelle et de l'autonomie.</td>
+                <td>Nécessite d'être écouté, accompagné et respecté (co-décision). C'est le corps de la relation thérapeutique et de l'humanisme.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="alert alert-amber" style="margin-top:12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>L'écueil du Réductionnisme :</strong> La médecine contemporaine ne doit jamais réduire le patient à une simple batterie d'organes défaillants ou à un ensemble de chiffres de laboratoire. Soigner exige de lier indissociablement le <strong>corps-objet</strong> (technique objective) et le <strong>corps-sujet</strong> (vécu intime).
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- SYNTHESE FINALE -->
+      <div class="card" style="border-left: 4px solid var(--blue); background: var(--blue-light);">
+        <div class="card-title">
+          <div class="card-icon bg-blue">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <span>Points-clés à retenir (Synthèse EDN)</span>
+        </div>
+        
+        <ul class="dense-list">
+          <li><strong>Multidimensionnalité :</strong> Le corps est une construction sociale, culturelle et historique (alimentation, esthétique, genre).</li>
+          <li><strong>Pierre Bourdieu :</strong> Le corps est un <strong>habitus</strong> (mémoire physique des apprentissages de classe) et un marqueur fort de position sociale.</li>
+          <li><strong>Genre vs Sexe :</strong> Distinction fondamentale entre le <em>sexe biologique</em> (différenciation physique) et le <em>genre social</em> (rôles et identités construits).</li>
+          <li><strong>Maladie subjective :</strong> Décalage entre le soignant (maladie physique objective) et le soigné (bouleversement intime existentiel).</li>
+          <li><strong>Douleur :</strong> Ce n'est pas un simple signal nociceptif, c'est une altération de l'identité et du projet de vie de l'individu entier.</li>
+          <li><strong>Dualisme :</strong> <strong>Corps-objet</strong> (matériel, biologique) vs <strong>Corps-sujet</strong> (subjectif, siège de l'autonomie).</li>
+          <li><strong>Danger :</strong> Le réductionnisme technique qui dépersonnalise le patient en le réduisant à des images et chiffres.</li>
+        </ul>
+
+        <div class="alert alert-amber" style="margin-top: 12px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="alert-content">
+            <strong>Piège classique ECNi :</strong> Une plainte douloureuse ne peut <strong>jamais être réduite</strong> à une anomalie somatique objective (corps-objet). L'absence de lésion objective n'invalide pas la réalité subjective de la souffrance (corps-sujet).
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

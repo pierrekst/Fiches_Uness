@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IC-358 — Pancréatite aiguë</title>
+<style>
+  :root {
+    --bg: #f5f6fa; --card: #ffffff; --text: #1e1e2e; --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08); --purple: #534AB7; --teal: #1D9E75;
+    --coral: #D85A30; --blue: #378ADD; --red: #E24B4A; --amber: #D97706;
+    --green: #16a34a; --rank-a: #D85A30; --rank-b: #378ADD;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f0f1a; --card: #1a1a2e; --text: #e2e8f0; --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.08); --shadow: 0 1px 4px rgba(0,0,0,0.3); }
+    .step-num { background: #2d2d4e !important; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: transparent; color: var(--text); font-family: system-ui,-apple-system,sans-serif;
+    font-size: 14px; line-height: 1.6; padding: 16px; max-width: 960px; margin: 0 auto; }
+
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    border-radius: 16px; padding: 24px; color: #fff; margin-bottom: 24px; }
+  .page-header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+  .page-header p { opacity: .85; font-size: .9rem; }
+  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .header-tag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px;
+    font-size: .78rem; font-weight: 600; }
+
+  .section-title { display: flex; align-items: center; gap: 10px; font-size: 1.05rem;
+    font-weight: 700; margin: 24px 0 14px; color: var(--text); }
+  .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.8; }
+
+  .oic-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .oic-badge { display: inline-flex; align-items: center; gap: 4px; border-radius: 20px;
+    padding: 2px 10px; font-size: .72rem; font-weight: 700; letter-spacing: .03em; }
+  .oic-a { background: rgba(216,90,48,.12); color: var(--rank-a); border: 1px solid rgba(216,90,48,.3); }
+  .oic-b { background: rgba(55,138,221,.12); color: var(--rank-b); border: 1px solid rgba(55,138,221,.3); }
+
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px;
+    padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: .75rem; font-weight: 600; }
+  .pill-green { background: rgba(22,163,74,.12); color: var(--green); border: 1px solid rgba(22,163,74,.25); }
+  .pill-red { background: rgba(226,75,74,.12); color: var(--red); border: 1px solid rgba(226,75,74,.25); }
+  .pill-blue { background: rgba(55,138,221,.12); color: var(--blue); border: 1px solid rgba(55,138,221,.25); }
+  .pill-amber { background: rgba(217,119,6,.12); color: var(--amber); border: 1px solid rgba(217,119,6,.25); }
+  .pill-purple { background: rgba(83,74,183,.12); color: var(--purple); border: 1px solid rgba(83,74,183,.25); }
+  .pill-teal { background: rgba(29,158,117,.12); color: var(--teal); border: 1px solid rgba(29,158,117,.25); }
+  .pill-coral { background: rgba(216,90,48,.12); color: var(--coral); border: 1px solid rgba(216,90,48,.25); }
+
+  .alert { border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
+    display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; }
+  .alert svg { width:18px; height:18px; flex-shrink:0; margin-top:1px; fill:none; stroke-width:2; }
+  .alert-red { background: rgba(226,75,74,.1); border: 1px solid rgba(226,75,74,.3); color: #b91c1c; }
+  .alert-red svg { stroke: #b91c1c; }
+  .alert-blue { background: rgba(55,138,221,.1); border: 1px solid rgba(55,138,221,.3); color: var(--blue); }
+  .alert-blue svg { stroke: var(--blue); }
+  .alert-green { background: rgba(22,163,74,.1); border: 1px solid rgba(22,163,74,.3); color: var(--green); }
+  .alert-green svg { stroke: var(--green); }
+  .alert-amber { background: rgba(217,119,6,.1); border: 1px solid rgba(217,119,6,.3); color: var(--amber); }
+  .alert-amber svg { stroke: var(--amber); }
+
+  .compl-card { background: var(--card); border: 0.5px solid var(--border); border-left: 4px solid;
+    border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .compl-title { font-weight: 700; font-size: .85rem; margin-bottom: 4px; }
+
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .84rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb;
+    color: var(--text-muted); font-weight: 700; font-size: .75rem;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  .tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); padding: 8px 10px; text-align: left; font-weight: 700;
+    border-bottom: 1.5px solid var(--border); font-size: .78rem; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--text-muted); }
+  td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .kv { display: flex; flex-direction: column; gap: 6px; }
+  .kv-row { display: flex; gap: 8px; font-size: .83rem; }
+  .kv-key { font-weight: 700; min-width: 160px; flex-shrink: 0; color: var(--text-muted); }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  ul { padding-left: 18px; } li { margin-bottom: 3px; }
+  .text-muted { color: var(--text-muted); font-size: .82rem; }
+  .mt8 { margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>IC-358 — Pancréatite aiguë</h1>
+  <p>Diagnostic · Gravité · Étiologies · Prise en charge · Complications</p>
+  <div class="header-tags">
+    <span class="header-tag">Définition</span>
+    <span class="header-tag">Diagnostic positif</span>
+    <span class="header-tag">Gravité &amp; CTSI</span>
+    <span class="header-tag">Étiologies</span>
+    <span class="header-tag">PEC</span>
+    <span class="header-tag">Complications</span>
+    <span class="header-tag">Pronostic</span>
+  </div>
+</div>
+
+<!-- DÉFINITION -->
+<div class="oic-row"><span class="oic-badge oic-a">OIC-358-01 A</span></div>
+
+<div class="card">
+  <div class="card-title">📖 Définition &amp; Formes</div>
+  <p style="font-size:.84rem; margin-bottom:12px;">Inflammation aiguë du pancréas associant <strong>œdème interstitiel</strong> et <strong>cytostéatonécrose</strong>.<br>Mécanisme : <strong>autodigestion pancréatique</strong> par activation des enzymes protéolytiques.</p>
+  <div class="grid2">
+    <div class="compl-card" style="border-left-color:var(--green);">
+      <div class="compl-title" style="color:var(--green);">PA bénigne œdémateuse — 80%</div>
+      <p style="font-size:.83rem;">Pas de défaillance d'organe, pas de nécrose.<br>Mortalité <strong>&lt; 1%</strong>. Évolution favorable rapide.</p>
+    </div>
+    <div class="compl-card" style="border-left-color:var(--red);">
+      <div class="compl-title" style="color:var(--red);">PA sévère nécrosante — 20%</div>
+      <p style="font-size:.83rem;">≥ 1 défaillance d'organe <strong>ET/OU</strong> complication locale (nécrose, abcès, pseudokyste).<br>Mortalité <strong>~10%</strong> (plus élevée si nécrose infectée).</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- DIAGNOSTIC POSITIF -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+  Diagnostic positif
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-358-03 A</span>
+  <span class="oic-badge oic-a">OIC-358-04 A</span>
+</div>
+
+<div class="alert alert-green">
+  <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span><strong>Diagnostic = Douleur évocatrice + Lipasémie &gt; 3N.</strong> Si ces 2 critères sont réunis, aucun autre examen n'est nécessaire au diagnostic positif.</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">🩺 Douleur pancréatique typique (&gt;90% des cas)</div>
+    <div class="pills">
+      <span class="pill pill-red">Localisation épigastrique (déborde rarement vers les hypochondres)</span>
+      <span class="pill pill-red">Début rapide, se majorant en quelques heures</span>
+      <span class="pill pill-red">Très intense</span>
+      <span class="pill pill-red">Irradiation dorsale transfixiante</span>
+      <span class="pill pill-red">Inhibition de l'inspiration</span>
+      <span class="pill pill-red">Position antalgique "chien de fusil"</span>
+    </div>
+    <p style="font-size:.83rem; margin-top:10px;"><strong>Signes associés :</strong> vomissements (iléus réflexe), météorisme sonore, fièvre, tachycardie, hypotension.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">🧪 Lipasémie</div>
+    <div class="kv">
+      <div class="kv-row"><span class="kv-key">Seuil diagnostique</span><span>&gt; 3 fois la normale (3N)</span></div>
+      <div class="kv-row"><span class="kv-key">Pic</span><span>24-48h après le début de la douleur</span></div>
+      <div class="kv-row"><span class="kv-key">⚠️ Piège</span><span>Après 48h, peut passer sous 3N → patient vu tardivement = diagnostic difficile</span></div>
+      <div class="kv-row"><span class="kv-key">Valeur pronostique</span><span><strong>Aucune</strong> — le taux n'est pas corrélé à la gravité</span></div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span><strong>Lipasémie ≠ gravité.</strong> Ne pas utiliser pour évaluer le pronostic.</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">⚖️ Diagnostics différentiels · <span class="oic-badge oic-a">OIC-358-04 A</span></div>
+  <div class="pills">
+    <span class="pill pill-amber">IDM inférieur</span>
+    <span class="pill pill-amber">Ulcère GD (perforé ou non)</span>
+    <span class="pill pill-amber">Cholécystite aiguë</span>
+    <span class="pill pill-amber">Infarctus mésentérique</span>
+    <span class="pill pill-amber">Péritonite</span>
+    <span class="pill pill-amber">Rupture d'anévrisme de l'aorte abdominale</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- GRAVITÉ -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  Évaluation de la gravité
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-358-02 A</span>
+  <span class="oic-badge oic-b">OIC-358-07 A</span>
+  <span class="oic-badge oic-b">OIC-358-08 B</span>
+</div>
+
+<div class="card">
+  <div class="card-title">⚠️ Critères de gravité — Vue d'ensemble</div>
+  <div class="grid2">
+    <div>
+      <p style="font-weight:700; font-size:.84rem; color:var(--red); margin-bottom:8px;">Gravité immédiate (OIC-358-02 A)</p>
+      <div class="pills">
+        <span class="pill pill-red">SRIS présent</span>
+        <span class="pill pill-red">État de choc</span>
+        <span class="pill pill-red">Insuffisance rénale aiguë</span>
+        <span class="pill pill-red">Détresse respiratoire aiguë</span>
+        <span class="pill pill-red">CIVD</span>
+        <span class="pill pill-red">Troubles de la conscience</span>
+        <span class="pill pill-amber">Décompensation d'une maladie chronique</span>
+      </div>
+      <div class="alert alert-red" style="margin-top:10px;">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span><strong>Soins intensifs</strong> (sans défaillance) ou <strong>Réanimation</strong> (≥ 1 défaillance)</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-weight:700; font-size:.84rem; color:var(--purple); margin-bottom:8px;">Critères de gravité globaux (OIC-358-08 B)</p>
+      <div class="kv">
+        <div class="kv-row"><span class="kv-key">Clinique</span><span>Défaillance(s) d'organe d'emblée ou évolutive · SRIS persistant &gt; 48h</span></div>
+        <div class="kv-row"><span class="kv-key">Biologique</span><span>CRP &gt; 150 mg/L à 48h</span></div>
+        <div class="kv-row"><span class="kv-key">Radiologique</span><span>Score CTSI ≥ 4 au scanner à 72h</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGERIE -->
+<div class="oic-row"><span class="oic-badge oic-a">OIC-358-07 A</span></div>
+<div class="card">
+  <div class="card-title">🖼️ Imagerie — Indications et objectifs</div>
+  <div class="tbl-wrap" style="margin-bottom:12px;">
+    <table>
+      <thead><tr><th>Examen</th><th>Indication</th><th>Délai</th><th>Objectif principal</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Échographie abdominale</strong></td>
+          <td>Systématique</td>
+          <td><strong>&lt; 48h</strong> (risque de sludge par jeûne prolongé)</td>
+          <td>Bilan <strong>étiologique</strong> : lithiase vésiculaire, dilatation VBP, lithiase VBP (sensibilité faible)</td>
+        </tr>
+        <tr>
+          <td><strong>Scanner AP injecté</strong></td>
+          <td>Si doute diagnostic ou évaluation de gravité</td>
+          <td><strong>72h après le début de la douleur</strong> (trop précoce → sous-estime la nécrose) · Après dosage créatinine</td>
+          <td>Bilan de <strong>gravité</strong> (score CTSI) · Nécrose · Collections · Complications</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-amber">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Échographie et scanner sont <strong>complémentaires</strong>. Le scanner ne remplace pas l'écho pour rechercher une lithiase biliaire (moins performant).</span>
+  </div>
+</div>
+
+<div class="card" style="background:rgba(83,74,183,.05); border:1px solid rgba(83,74,183,.2);">
+  <div class="card-title" style="color:var(--purple);">📐 Score CTSI (Computed-Tomography Severity Index) à 72h</div>
+  <div class="grid2">
+    <div>
+      <p style="font-weight:700; font-size:.83rem; margin-bottom:8px;">Inflammation pancréatique</p>
+      <div class="kv" style="font-size:.82rem;">
+        <div class="kv-row"><span class="kv-key">Pancréas normal</span><span>0 pt</span></div>
+        <div class="kv-row"><span class="kv-key">Élargissement focal/diffus</span><span>1 pt</span></div>
+        <div class="kv-row"><span class="kv-key">Infiltration graisse péri-pancréatique</span><span>2 pt</span></div>
+        <div class="kv-row"><span class="kv-key">1 collection péri-pancréatique</span><span>3 pt</span></div>
+        <div class="kv-row"><span class="kv-key">≥ 2 collections ou bulles de gaz</span><span>4 pt</span></div>
+      </div>
+    </div>
+    <div>
+      <p style="font-weight:700; font-size:.83rem; margin-bottom:8px;">Nécrose pancréatique</p>
+      <div class="kv" style="font-size:.82rem;">
+        <div class="kv-row"><span class="kv-key">Aucune</span><span>0 pt</span></div>
+        <div class="kv-row"><span class="kv-key">&lt; 30%</span><span>2 pt</span></div>
+        <div class="kv-row"><span class="kv-key">30–50%</span><span>4 pt</span></div>
+        <div class="kv-row"><span class="kv-key">&gt; 50%</span><span>6 pt</span></div>
+      </div>
+      <p style="font-weight:700; font-size:.83rem; margin-top:10px; margin-bottom:6px;">Classification :</p>
+      <div class="pills">
+        <span class="pill pill-green">0-3 = peu sévère</span>
+        <span class="pill pill-amber">4-6 = modérément sévère</span>
+        <span class="pill pill-red">7-10 = grave</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ÉTIOLOGIES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+  Étiologies
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-a">OIC-358-10 A</span>
+  <span class="oic-badge oic-b">OIC-358-06 B</span>
+  <span class="oic-badge oic-b">OIC-358-11 B</span>
+</div>
+
+<div class="alert alert-blue">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+  <span><strong>2 causes principales = 80% des cas :</strong> Alcool (~40%) et Lithiase biliaire (~40%). Au-delà de 50 ans, en l'absence de cause alcoolique ou biliaire → toujours évoquer en 1er une <strong>cause tumorale</strong>.</span>
+</div>
+
+<div class="tbl-wrap">
+  <table>
+    <thead><tr><th></th><th>PA Alcoolique</th><th>PA Biliaire</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Terrain</strong></td>
+        <td>Éthylisme chronique &gt;10 ans · Consommation &gt;100g éthanol/j · Homme 40-50 ans · ATCD maladies liées à l'alcool</td>
+        <td>Surcharge pondérale · Grossesse · Multiparité · ATCD familiaux de lithiase · Femme &gt;50 ans</td>
+      </tr>
+      <tr>
+        <td><strong>Clinique</strong></td>
+        <td>Signes d'éthylisme chronique</td>
+        <td>Possibles signes d'angiocholite (fièvre + ictère)</td>
+      </tr>
+      <tr>
+        <td><strong>Biologie</strong></td>
+        <td>Macrocytose · Élévation γ-GT · Anomalies <em>pré-existantes</em></td>
+        <td><strong>Pic précoce de transaminases</strong> (ALAT &gt; 3N souvent &gt;10N) · PAL, γ-GT, bilirubine · Anomalies <em>transitoires</em> (OIC-358-06 B)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">📋 Autres causes · <span class="oic-badge oic-b">OIC-358-11 B</span></div>
+  <div class="pills">
+    <span class="pill pill-purple">Tumorale (1ère à évoquer &gt;50 ans, non alco-biliaire)</span>
+    <span class="pill pill-amber">Médicamenteuse (&gt;100 médicaments — IEC ++)</span>
+    <span class="pill pill-blue">Hypertriglycéridémie &gt; 10 mmol/L (doser systématiquement)</span>
+    <span class="pill pill-blue">Hypercalcémie &gt; 3 mmol/L (doser systématiquement)</span>
+    <span class="pill pill-teal">Traumatique (choc épigastrique, AVP)</span>
+    <span class="pill pill-teal">Iatrogène : CPRE (5% des cas)</span>
+    <span class="pill pill-coral">Infectieuse : oreillons, CMV, EBV, coxsackie · ascaridiose</span>
+    <span class="pill pill-coral">Auto-immune (IgG4 ++) · aspect pseudo-tumoral</span>
+    <span class="pill pill-red">Ischémique (bas débit en réa — très grave)</span>
+    <span class="pill pill-amber">Génétique (récidives dès l'enfance)</span>
+    <span class="pill pill-green">Idiopathique (15% malgré enquête complète)</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- COMPLICATION INFECTIEUSE -->
+<div class="oic-row"><span class="oic-badge oic-b">OIC-358-05 B</span></div>
+<div class="card">
+  <div class="card-title">🦠 Complication infectieuse secondaire — Surinfection de nécrose</div>
+  <div class="alert alert-red">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Complication grave de la PA sévère, associée à une <strong>surmortalité</strong>.</span>
+  </div>
+  <div class="kv">
+    <div class="kv-row"><span class="kv-key">Délai de survenue</span><span>2 à 4 semaines après le début</span></div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span>Translocation bactérienne à point de départ digestif</span></div>
+    <div class="kv-row"><span class="kv-key">Signes cliniques</span><span>Hyperthermie · Apparition ou majoration d'un SRIS</span></div>
+    <div class="kv-row"><span class="kv-key">Signes biologiques</span><span>Élévation de la CRP · Syndrome inflammatoire aigu</span></div>
+    <div class="kv-row"><span class="kv-key">Signe radiologique</span><span>Bulles d'air dans les coulées de nécrose au scanner (inconstant)</span></div>
+    <div class="kv-row"><span class="kv-key">Diagnostics différentiels</span><span>Autres foyers infectieux → prélèvements bactériologiques multi-sites à la phase initiale (ECBU, cathéter, poumon)</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PRISE EN CHARGE -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  Prise en charge
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-b">OIC-358-12 B</span>
+  <span class="oic-badge oic-b">OIC-358-13 B</span>
+  <span class="oic-badge oic-b">OIC-358-14 B</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title" style="color:var(--green);">PA bénigne (80%)</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div><strong>Hospitalisation en service de médecine</strong></div></li>
+      <li><span class="step-num">2</span><div><strong>Analgésie multimodale</strong> : antalgiques palier 1-2, ± morphiniques si besoin</div></li>
+      <li><span class="step-num">3</span><div><strong>Réhydratation hydroélectrolytique</strong> IV adaptée</div></li>
+      <li><span class="step-num">4</span><div><strong>Alimentation orale précoce</strong> dès que possible (pas de jeûne systématique)</div></li>
+      <li><span class="step-num">5</span><div>Traitement étiologique</div></li>
+    </ol>
+  </div>
+  <div class="card">
+    <div class="card-title" style="color:var(--red);">PA sévère (20%)</div>
+    <ol class="steps">
+      <li><span class="step-num">1</span><div><strong>Transfert en soins intensifs / réanimation</strong></div></li>
+      <li><span class="step-num">2</span><div><strong>Réanimation hydroélectrolytique</strong> intensive</div></li>
+      <li><span class="step-num">3</span><div><strong>Nutrition entérale</strong> précoce (préférée à la nutrition parentérale)</div></li>
+      <li><span class="step-num">4</span><div>Analgésie multimodale</div></li>
+      <li><span class="step-num">5</span><div>Traitement des complications (nécrose infectée)</div></li>
+    </ol>
+  </div>
+</div>
+
+<div class="card" style="background:rgba(29,158,117,.05); border:1px solid rgba(29,158,117,.2);">
+  <div class="card-title">🪨 PEC étiologique — PA biliaire · <span class="oic-badge oic-b">OIC-358-13 B</span></div>
+  <ol class="steps">
+    <li><span class="step-num">1</span><div><strong>Échographie systématique</strong> dans les 48h (recherche lithiase vésiculaire)</div></li>
+    <li><span class="step-num">2</span>
+      <div><strong>Si angiocholite associée → CPRE + sphinctérotomie endoscopique en urgence (&lt;24h)</strong><br>
+      <span style="font-size:.81rem; color:var(--text-muted);">+ Antibiothérapie probabiliste après hémocultures</span></div>
+    </li>
+    <li><span class="step-num">3</span><div>Si pas d'angiocholite → CPRE à distance (80% des calculs cholédociens s'évacuent spontanément)</div></li>
+    <li><span class="step-num">4</span>
+      <div><strong>Cholécystectomie systématique</strong> (prévient récidive de gravité imprévisible) :<br>
+      <span style="font-size:.82rem;">— PA non sévère : au cours de la même hospitalisation (avant reprise alimentaire orale)<br>
+      — PA sévère : différée 3-6 semaines selon état clinique</span></div>
+    </li>
+  </ol>
+</div>
+
+<div class="card" style="background:rgba(226,75,74,.05); border:1px solid rgba(226,75,74,.2);">
+  <div class="card-title">🧫 PEC de la nécrose infectée · <span class="oic-badge oic-b">OIC-358-14 B</span></div>
+  <ol class="steps">
+    <li><span class="step-num">1</span><div><strong>Ponction-drainage</strong> percutanée radio-guidée ou endoscopique (uniquement si suspicion de surinfection) → documentation bactériologique + traitement</div></li>
+    <li><span class="step-num">2</span><div><strong>Antibiothérapie</strong> adaptée aux prélèvements (probabiliste si sepsis sévère en attente)</div></li>
+    <li><span class="step-num">3</span><div><strong>Nécrosectomie chirurgicale</strong> en dernier recours (échec du drainage)</div></li>
+  </ol>
+  <p class="text-muted" style="font-size:.81rem; margin-top:6px;"><strong>Complications possibles :</strong> pseudo-anévrysme (risque de rupture) · thrombose porte ou mésentérique</p>
+</div>
+
+<hr>
+
+<!-- PRONOSTIC & COMPLICATIONS TARDIVES -->
+<div class="section-title">
+  <div class="section-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+  Pronostic &amp; Complications tardives
+</div>
+
+<div class="oic-row">
+  <span class="oic-badge oic-b">OIC-358-15 B</span>
+  <span class="oic-badge oic-b">OIC-358-16 B</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">📈 Mortalité</div>
+    <div class="kv">
+      <div class="kv-row"><span class="kv-key">Globale</span><span><strong>&lt; 5%</strong></span></div>
+      <div class="kv-row"><span class="kv-key">PA bénigne</span><span><strong>&lt; 1%</strong></span></div>
+      <div class="kv-row"><span class="kv-key">PA sévère</span><span><strong>~10%</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Nécrose infectée</span><span>Mortalité plus élevée</span></div>
+    </div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <span>Pronostic initial = complications immédiates (choc, SDRA, défaillance multiviscérale). Pronostic retardé = surinfection de nécrose (S2–S4).</span>
+    </div>
+    <p class="text-muted" style="font-size:.82rem; margin-top:6px;">À long terme : insuffisance pancréatique exocrine ou <strong>diabète</strong> — surtout si PA sévère.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏰ 2 Complications tardives principales · <span class="oic-badge oic-b">OIC-358-16 B</span></div>
+    <div class="compl-card" style="border-left-color:var(--purple);">
+      <div class="compl-title" style="color:var(--purple);">Pseudokyste pancréatique</div>
+      <p style="font-size:.82rem;">Collection de liquide pancréatique par <strong>fistule pancréatique</strong>. Asymptomatique ou douloureux. Régression spontanée &lt;50%. Complications : rupture, hémorragie, compression d'organes voisins.</p>
+    </div>
+    <div class="compl-card" style="border-left-color:var(--coral);">
+      <div class="compl-title" style="color:var(--coral);">Collection nécrotique organisée</div>
+      <p style="font-size:.82rem;">Organisation/liquéfaction des foyers de nécrose. Même évolution possible. Diagnostiquée à l'échographie ou au scanner.</p>
+    </div>
+    <p class="text-muted" style="font-size:.81rem; margin-top:4px;">Identifiées par <strong>échographie abdominale ou scanner</strong>. Peuvent disparaître spontanément (moins de 50% des cas).</p>
+  </div>
+</div>
+
+<!-- SYNTHÈSE -->
+<hr>
+<div class="card" style="background:linear-gradient(135deg,rgba(83,74,183,.08),rgba(55,138,221,.08)); border:1px solid rgba(83,74,183,.2);">
+  <div class="card-title" style="font-size:1rem;">🧠 Points clés à retenir — IC-358</div>
+  <ul style="font-size:.84rem;">
+    <li>Diagnostic = <strong>douleur évocatrice + lipase &gt;3N</strong> → aucun autre examen nécessaire.</li>
+    <li><strong>La lipasémie ne prédit pas la gravité</strong> (ni son taux, ni son évolution).</li>
+    <li>Écho systématique &lt;48h (étiologie) · Scanner à 72h (gravité, score CTSI).</li>
+    <li>Alcool + Biliaire = <strong>80%</strong> des causes. Au-delà de 50 ans sans ces causes → cause tumorale en 1er.</li>
+    <li>Doser systématiquement <strong>triglycérides et calcémie</strong> au bilan initial.</li>
+    <li>PA biliaire + angiocholite → <strong>CPRE en urgence &lt;24h</strong> + cholécystectomie systématique.</li>
+    <li>Nécrose infectée (S2–S4) → <strong>ponction-drainage + ATB</strong> (pas d'ATB préventif).</li>
+    <li>Complications tardives : pseudokyste et collection nécrotique organisée.</li>
+    <li>À long terme : surveiller <strong>insuffisance pancréatique exocrine et diabète</strong>.</li>
+  </ul>
+</div>
+
+<p style="text-align:center; font-size:.75rem; color:var(--text-muted); margin-top:20px;">
+  Fiche générée à partir des ressources UNESS.fr / CNCEM · IC-358
+</p>
+
+</body>
+</html>

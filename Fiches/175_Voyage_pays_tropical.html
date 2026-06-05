@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 175 – Voyage en pays tropical</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --bg: #f8f9fb;
+    --card-bg: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117;
+      --card-bg: #1a1d27;
+      --text: #e8eaf0;
+      --text-light: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.6; }
+  .page { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #1D9E75 0%, #378ADD 50%, #534AB7 100%); border-radius: var(--radius); padding: 28px 28px 22px; margin-bottom: 24px; color: white; }
+  .header .item-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.85; margin-bottom: 6px; }
+  .header h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+  .header .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .header .tag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; }
+
+  /* OVERVIEW */
+  .overview { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 20px; border-left: 4px solid var(--blue); }
+  .overview-title { font-size: 0.82rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .overview p { font-size: 12.5px; color: var(--text-light); line-height: 1.65; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 22px 0; }
+
+  /* SECTION TITLE */
+  .section-title { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* CARDS */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600; }
+  .pill-red { background: #fef2f2; color: #b91c1c; }
+  .pill-green { background: #f0fdf4; color: #166534; }
+  .pill-blue { background: #eff6ff; color: #1d4ed8; }
+  .pill-amber { background: #fffbeb; color: #92400e; }
+  .pill-purple { background: #f5f3ff; color: #4c1d95; }
+  .pill-teal { background: #f0fdfa; color: #134e4a; }
+  @media (prefers-color-scheme: dark) {
+    .pill-red { background: #450a0a; color: #fca5a5; }
+    .pill-green { background: #052e16; color: #86efac; }
+    .pill-blue { background: #0c1a3a; color: #93c5fd; }
+    .pill-amber { background: #451a03; color: #fcd34d; }
+    .pill-purple { background: #1e1b4b; color: #c4b5fd; }
+    .pill-teal { background: #042f2e; color: #5eead4; }
+  }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 11px 14px; margin-bottom: 10px; font-size: 12.5px; border-left-width: 3px; border-left-style: solid; }
+  .alert strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 3px; }
+  .alert-red { background: #fef2f2; border-color: #E24B4A; color: #7f1d1d; }
+  .alert-amber { background: #fffbeb; border-color: #D97706; color: #78350f; }
+  .alert-blue { background: #eff6ff; border-color: #378ADD; color: #1e3a5f; }
+  .alert-green { background: #f0fdf4; border-color: #1D9E75; color: #14532d; }
+  @media (prefers-color-scheme: dark) {
+    .alert-red { background: #450a0a; color: #fca5a5; }
+    .alert-amber { background: #451a03; color: #fcd34d; }
+    .alert-blue { background: #0c1a3a; color: #93c5fd; }
+    .alert-green { background: #052e16; color: #86efac; }
+  }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: 12.5px; gap: 8px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-light); flex-shrink: 0; max-width: 55%; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  /* NUMBERED STEPS */
+  .steps { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; }
+  .step-num { background: #e5e7eb; color: var(--text); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+  @media (prefers-color-scheme: dark) { .step-num { background: #374151; color: #e5e7eb; } }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: var(--bg); padding: 7px 10px; text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-light); border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* BORDER-LEFT CARDS */
+  .complication-card { border-left: 3px solid; border-radius: 10px; padding: 10px 14px; background: var(--card-bg); margin-bottom: 8px; font-size: 12.5px; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+
+  ul { padding-left: 18px; }
+  li { margin-bottom: 4px; font-size: 12.5px; }
+
+  .badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+  .badge-red { background: #E24B4A; color: white; }
+  .badge-amber { background: #D97706; color: white; }
+  .badge-blue { background: #378ADD; color: white; }
+  .badge-green { background: #1D9E75; color: white; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="item-num">Item IC-175</div>
+  <h1>Voyage en pays tropical de l'adulte et de l'enfant<br>Conseils avant le départ — Pathologies du retour</h1>
+  <div class="tags">
+    <span class="tag">Fièvre au retour</span>
+    <span class="tag">Diarrhée du voyageur</span>
+    <span class="tag">Dermatoses d'importation</span>
+    <span class="tag">Prévention</span>
+    <span class="tag">Vaccinations</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="overview">
+  <div class="overview-title">Vue d'ensemble</div>
+  <p>Cet item couvre deux volets indissociables : <strong>avant le départ</strong> (identifier les risques, vacciner, prescrire une prophylaxie, éduquer) et <strong>au retour</strong> (diagnostiquer efficacement une fièvre, une diarrhée ou une lésion cutanée d'importation). Le fil conducteur est la hiérarchisation : toute fièvre au retour = paludisme à éliminer en urgence. La dengue est le 2e diagnostic à évoquer. La diarrhée et les lésions cutanées ont chacune une démarche structurée par l'interrogatoire, l'incubation et le contexte géographique.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 1 : POPULATIONS ET RISQUES -->
+<div class="section-title"><span class="dot" style="background:var(--teal)"></span><span style="color:var(--teal)">Populations, destinations et situations à risque</span></div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Populations à risque
+    </div>
+    <ul>
+      <li>Voyageurs itinérants, séjour &gt; 1 mois</li>
+      <li><strong>Emigrants retournant au pays</strong> (sous-estimation du risque palustre)</li>
+      <li>Personnes âgées &gt; 65 ans, immunodéprimés</li>
+      <li>Femmes enceintes</li>
+      <li>Jeunes enfants &lt; 5 ans</li>
+      <li>Porteurs de maladies chroniques</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Situations à risque
+    </div>
+    <ul>
+      <li>Hébergement camping / bivouac / milieu familial rural</li>
+      <li>Absence de prophylaxie antipalustre</li>
+      <li>Crudités, glaçons, eau non capsulée</li>
+      <li>Conduites sexuelles à risque</li>
+      <li>Baignade en eau douce, marche pieds nus</li>
+      <li>Vaccinations non à jour</li>
+      <li>Promiscuité quotidienne avec les locaux</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Destinations à risque — cartographie épidémique
+  </div>
+  <table>
+    <thead><tr><th>Risque</th><th>Régions</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge badge-red">Paludisme</span></td><td>Afrique sub-saharienne (80 % des cas importés en France), Inde, bassin amazonien, Asie du Sud-Est</td></tr>
+      <tr><td><span class="badge badge-amber">Fièvres hémorragiques</span></td><td>Afrique</td></tr>
+      <tr><td><span class="badge badge-blue">Arboviroses</span></td><td>Afrique, Asie du Sud-Est, Pacifique, Antilles, bassin amazonien</td></tr>
+      <tr><td><span class="badge badge-green">Tuberculose</span></td><td>Afrique, Europe de l'Est, Asie</td></tr>
+      <tr><td><span class="pill pill-purple">Helminthoses</span></td><td>Toute la ceinture intertropicale (et plus)</td></tr>
+      <tr><td><span class="pill pill-teal">Risque global élevé</span></td><td>Afrique, Inde, Asie du Sud-Est, Amérique du Sud</td></tr>
+      <tr><td><span class="pill pill-green">Risque faible</span></td><td>Australie, Nouvelle-Zélande, Nouvelle-Calédonie</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : MESURES PRÉVENTIVES -->
+<div class="section-title"><span class="dot" style="background:var(--purple)"></span><span style="color:var(--purple)">Mesures préventives avant le départ</span></div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Hygiène et comportements
+    </div>
+    <ul>
+      <li>Lavage fréquent des mains (SHA <strong>inefficaces sur parasites</strong>)</li>
+      <li>Eau en bouteille capsulée, pas de glaçons</li>
+      <li>Pas de crudités (sauf lavage eau bouillie), fruits lavés/pelés</li>
+      <li>Viandes/poissons/crustacés bien cuits</li>
+      <li>Ne pas marcher pieds nus, ne pas se coucher à même le sol</li>
+      <li>Éviter les bains en eau douce</li>
+      <li>Préservatifs (IST)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Prévention anti-vectorielle
+    </div>
+    <ul>
+      <li>Répulsifs cutanés adaptés (zone tropicale, enfant, grossesse)</li>
+      <li>Moustiquaire imprégnée (surtout si zone infestée)</li>
+      <li>Insecticides domiciliaires</li>
+      <li>Vêtements longs et clairs</li>
+    </ul>
+    <div style="margin-top:10px">
+      <strong style="font-size:12px">Gestion maladies chroniques :</strong>
+      <ul style="margin-top:4px">
+        <li>Stock médicaments suffisant + ordonnance DCI</li>
+        <li>Traitement de réserve sur soi (pas en soute)</li>
+        <li>Vérifier interactions avec prophylaxie antipalustre</li>
+        <li>Attention aux traitements photosensibilisants</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Trousse médicale du voyageur
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="pills">
+        <span class="pill pill-blue">Paracétamol</span>
+        <span class="pill pill-blue">Racecadotril (antidiarrhéique)</span>
+        <span class="pill pill-blue">Antiémétique (si terrain)</span>
+        <span class="pill pill-blue">ATB large spectre (si isolé)</span>
+        <span class="pill pill-blue">Antipaludique de réserve (si isolé)</span>
+        <span class="pill pill-blue">Antiseptique cutané</span>
+        <span class="pill pill-blue">Crème solaire indice 50</span>
+        <span class="pill pill-blue">Répulsifs</span>
+      </div>
+    </div>
+    <div>
+      <div class="pills">
+        <span class="pill pill-purple">Compresses stériles</span>
+        <span class="pill pill-purple">Sutures adhésives</span>
+        <span class="pill pill-purple">Trousse matériel à usage unique (aiguilles, seringues)</span>
+        <span class="pill pill-purple">Thermomètre</span>
+        <span class="pill pill-purple">Préservatifs</span>
+        <span class="pill pill-purple">Bande de contention</span>
+        <span class="pill pill-purple">Traitements habituels (ordonnance DCI)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : VACCINATIONS -->
+<div class="section-title"><span class="dot" style="background:var(--teal)"></span><span style="color:var(--teal)">Vaccinations spécifiques du voyageur</span></div>
+
+<div class="alert alert-amber" style="margin-bottom:12px">
+  <strong>Piège</strong>
+  Les vaccins du voyageur ne sont pas pris en charge par la Sécurité Sociale. Ils sont modulés selon : épidémie mondiale, lieu/durée du séjour, conditions sanitaires et état du patient (âge, grossesse, immunité, antécédents).
+</div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Vaccins obligatoires
+    </div>
+    <div class="kv-row"><span class="kv-key">Fièvre jaune (anti-amaril)</span><span class="kv-val">Afrique intertropicale, bassin amazonien</span></div>
+    <div class="kv-row"><span class="kv-key">Méningocoque (A,B,C,Y,W135)</span><span class="kv-val">Pèlerinage Arabie Saoudite / ceinture méningite Afrique (saison sèche)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Vaccins recommandés
+    </div>
+    <div class="kv-row"><span class="kv-key">Hépatite A</span><span class="kv-val">Zones à bas niveau d'hygiène</span></div>
+    <div class="kv-row"><span class="kv-key">Typhoïde</span><span class="kv-val">Séjour prolongé zones bas niveau hygiène (sous-continent indien ++)</span></div>
+    <div class="kv-row"><span class="kv-key">Antirabique</span><span class="kv-val">Zones haut risque PED — pré et post-exposition ; enfant bas âge ++</span></div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Sérologie Hépatite A avant vaccination
+  </div>
+  <p style="font-size:12.5px">Recherche des <strong>IgG anti-VHA</strong> indiquée avant vaccination chez les personnes à risque d'exposition antérieure :</p>
+  <div class="pills" style="margin-top:8px">
+    <span class="pill pill-blue">Nées avant 1945</span>
+    <span class="pill pill-blue">Ayant vécu en zone d'endémie</span>
+    <span class="pill pill-blue">Antécédent d'ictère</span>
+  </div>
+  <p style="font-size:12px; color:var(--text-light); margin-top:8px">IgM = infection aiguë (disparaissent à 8-12 semaines) / IgG = immunité acquise (persistante, après maladie ou vaccination)</p>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : FIÈVRE AU RETOUR -->
+<div class="section-title"><span class="dot" style="background:var(--red)"></span><span style="color:var(--red)">Pathologie du retour — Fièvre</span></div>
+
+<div class="alert alert-red" style="margin-bottom:12px">
+  <strong>Urgence absolue</strong>
+  Toute fièvre dans les 3 mois après retour d'une zone d'endémie palustre = rechercher un paludisme en URGENCE, même si un autre diagnostic est probable. Tout retard = risque de décès.
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Durées d'incubation — orientation étiologique
+  </div>
+  <table>
+    <thead><tr><th>Incubation</th><th>Durée</th><th>Étiologies</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-green">Courte</span></td>
+        <td>&lt; 7 jours</td>
+        <td>Arboviroses (dengue, chikungunya, zika, fièvre jaune), diarrhées infectieuses (shigellose, salmonellose, choléra)</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Intermédiaire</span></td>
+        <td>7 – 14 jours</td>
+        <td>Paludisme, typhoïde, borrélioses, leptospirose, rickettsioses, VIH</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">Longue</span></td>
+        <td>&gt; 14 jours</td>
+        <td>Paludisme, hépatites virales, amoebose, bilharziose</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0">
+    <strong>Piège</strong>
+    Le paludisme peut avoir une incubation courte (P. falciparum : 7-14j) ou longue (P. vivax/ovale : mois à années). Il figure dans les 3 catégories.
+  </div>
+</div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Courbe thermique — orientation
+    </div>
+    <div class="kv-row"><span class="kv-key">Fièvre récurrente tierce (J1-J3)</span><span class="kv-val">Paludisme P. vivax/ovale</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre récurrente quarte (J1-J4)</span><span class="kv-val">Paludisme P. malariae</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre récurrente par poussées</span><span class="kv-val">Borréliose (fièvres récurrentes)</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre en plateau (3e septénaire)</span><span class="kv-val">Typhoïde</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre en plateau (courte durée)</span><span class="kv-val">Arboviroses (dengue, chikungunya, zika)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Démarche diagnostique fièvre au retour
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div><strong>Interrogatoire :</strong> pays visités, dates, conditions de vie, activités à risque, statut vaccinal, chimioprophylaxie, chronologie des symptômes</div></div>
+      <div class="step"><div class="step-num">2</div><div><strong>Éliminer paludisme en urgence</strong> (GE/TDR) même si autre diagnostic évident</div></div>
+      <div class="step"><div class="step-num">3</div><div><strong>Approche syndromique :</strong> fièvre + exanthème → arbovirose ; fièvre + ictère &gt; 2 sem. Afrique subsaharienne → paludisme ± hépatite A</div></div>
+      <div class="step"><div class="step-num">4</div><div><strong>Ne pas oublier</strong> les maladies cosmopolites : pyélonéphrite, pneumopathie, grippe, TVP, néoplasie</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPHOÏDE -->
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Fièvre typhoïde — éléments diagnostiques clés
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Agent</span><span class="kv-val">Salmonella Typhi / Paratyphi A, B, C</span></div>
+      <div class="kv-row"><span class="kv-key">Transmission</span><span class="kv-val">Féco-orale, réservoir humain strict</span></div>
+      <div class="kv-row"><span class="kv-key">Incubation</span><span class="kv-val">10 jours – 3 semaines</span></div>
+      <div class="kv-row"><span class="kv-key">Fièvre (1er sept.)</span><span class="kv-val">Progressive, vespérale, dissociation pouls (signe ++)</span></div>
+      <div class="kv-row"><span class="kv-key">Phase d'état (2e-3e sept.)</span><span class="kv-val">Plateau &gt; 40°C, tuphos, diarrhée (2/3)</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Angine de Duguet</span><span class="kv-val">10 % — ulcérations piliers/voile</span></div>
+      <div class="kv-row"><span class="kv-key">Exanthème lenticulaire</span><span class="kv-val">1/3 des cas — tronc</span></div>
+      <div class="kv-row"><span class="kv-key">Splénomégalie</span><span class="kv-val">Inconstante (30 %)</span></div>
+      <div class="kv-row"><span class="kv-key">Biologie</span><span class="kv-val">CRP élevée + <strong>leuconeutropénie</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Diagnostic micro</span><span class="kv-val">Hémocultures (1er sept.) — coproculture (2e sept.)</span></div>
+    </div>
+  </div>
+  <div style="margin-top:10px">
+    <strong style="font-size:12px">Complications :</strong>
+    <div class="pills" style="margin-top:5px">
+      <span class="pill pill-red">Perforations digestives</span>
+      <span class="pill pill-red">Hémorragies digestives</span>
+      <span class="pill pill-amber">Myocardite</span>
+      <span class="pill pill-amber">Encéphalite</span>
+      <span class="pill pill-amber">Localisations septiques</span>
+    </div>
+  </div>
+</div>
+
+<!-- FIÈVRES HÉMORRAGIQUES -->
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Fièvre hémorragique virale — conduite à tenir
+  </div>
+  <p style="font-size:12.5px; margin-bottom:8px">Devant <strong>fièvre + signes hémorragiques</strong> au retour :</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div>Éliminer le paludisme en URGENCE (1re cause de fièvre hémorragique au retour)</div></div>
+    <div class="step"><div class="step-num">2</div><div>Autres causes : hépatite fulminante, leptospirose ictéro-hémorragique, dengue hémorragique, fièvre jaune</div></div>
+    <div class="step"><div class="step-num">3</div><div>Suspicion FHV (Ebola, Marburg, Lassa) = séjour en zone de circulation + contact cas suspect → <strong>mesures d'isolement immédiates + CNR FHV + Santé Publique France + ESR</strong></div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : DIARRHÉE AU RETOUR -->
+<div class="section-title"><span class="dot" style="background:var(--blue)"></span><span style="color:var(--blue)">Pathologie du retour — Diarrhée</span></div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Étiologies des diarrhées d'importation
+    </div>
+    <div style="margin-bottom:8px"><strong style="font-size:12px">Bactériennes :</strong>
+      <div class="pills" style="margin-top:5px">
+        <span class="pill pill-blue">Shigella</span>
+        <span class="pill pill-blue">Campylobacter</span>
+        <span class="pill pill-blue">Salmonella</span>
+        <span class="pill pill-blue">E. coli entéropathogènes</span>
+      </div>
+    </div>
+    <div><strong style="font-size:12px">Parasitaires :</strong>
+      <div class="pills" style="margin-top:5px">
+        <span class="pill pill-purple">Paludisme (gastro-entérite fébrile)</span>
+        <span class="pill pill-purple">Amoebose intestinale</span>
+        <span class="pill pill-purple">Cryptosporidiose</span>
+        <span class="pill pill-purple">Giardiose</span>
+        <span class="pill pill-purple">Helminthoses intestinales</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Démarche diagnostique diarrhée au retour
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div>Interrogatoire : lieu séjour, durée, date retour, conditions de vie, traitements en cours</div></div>
+      <div class="step"><div class="step-num">2</div><div>Coproculture standard (bactéries)</div></div>
+      <div class="step"><div class="step-num">3</div><div>EPS x 3 (à 3-4 jours d'intervalle min.) + à distance (2-3 mois)</div></div>
+      <div class="step"><div class="step-num">4</div><div>Recherches spécifiques nommément prescrites : cryptosporidies, anguillules</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Diagnostic orienté par le tableau clinique
+  </div>
+  <table>
+    <thead><tr><th>Tableau</th><th>Évoquer</th><th>Examen clé</th></tr></thead>
+    <tbody>
+      <tr><td>Diarrhées glairo-sanglantes <strong>non fébriles</strong> (« crachats rectaux »)</td><td>Amoebose intestinale (quelle que soit la date de retour)</td><td>EPS rapide au labo (formes végétatives hématophages) ± PCR</td></tr>
+      <tr><td>Diarrhées aqueuses 5-10/j, retour &lt; 2 semaines</td><td>Cryptosporidiose, coccidiose intestinale</td><td>Prescription spécifique cryptosporidies (oocystes, techniques spéciales)</td></tr>
+      <tr><td>Épisodes discontinus ± constipation, ballonnements</td><td>Giardiose, helminthoses intestinales</td><td>EPS standard + sérologie anguillulose + répéter à 3 mois</td></tr>
+      <tr><td>Éosinophilie + fébricule + démangeaisons, phase invasion</td><td>Schistosomose (phase d'invasion)</td><td>Sérologie schistosomose, EPS urines</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Prescription des recherches parasitologiques — mémo
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="kv-row"><span class="kv-key">EPS standard</span><span class="kv-val">3× à 3-4j d'intervalle + à 2-3 mois ; ne détecte PAS anguillules ni cryptosporidies</span></div>
+      <div class="kv-row"><span class="kv-key">Cryptosporidies</span><span class="kv-val">Prescription spécifique obligatoire (diarrhée persistante &gt; 1 sem. ou immunodéprimé)</span></div>
+      <div class="kv-row"><span class="kv-key">Anguillules</span><span class="kv-val">Technique d'enrichissement spéciale — prescription spécifique / sérologie possible</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">EPS urines (schistosomose)</span><span class="kv-val">Hématurie + zone endémique (Afrique, Corse) — miction matinale après effort / urines 24h</span></div>
+      <div class="kv-row"><span class="kv-key">Sérologie schistosomose</span><span class="kv-val">Contexte évocateur : bain eau douce, démangeaisons, hématurie — répéter si négative</span></div>
+      <div class="kv-row"><span class="kv-key">Sérologie amoebose</span><span class="kv-val">Clé pour abcès hépatique amibien</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : DERMATOSES -->
+<div class="section-title"><span class="dot" style="background:var(--coral)"></span><span style="color:var(--coral)">Pathologie du retour — Lésions cutanées</span></div>
+
+<div class="card" style="margin-bottom:12px">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Démarche diagnostique lésion cutanée au retour
+  </div>
+  <table>
+    <thead><tr><th>Type de lésion</th><th>Diagnostic à évoquer</th><th>Examen</th></tr></thead>
+    <tbody>
+      <tr><td>Lésion ulcérée ou croûteuse</td><td>Leishmaniose cutanée, pyodermite bactérienne</td><td>Prélèvement bactério + grattage bord inflammatoire (examen direct + PCR leishmanies)</td></tr>
+      <tr><td>Papules/vésicules prurigineuses + sillons</td><td>Gale (Sarcoptes scabiei)</td><td>Prélèvement de gale / dermoscopie (sarcoptes). Penser aussi piqûres de punaises de lit</td></tr>
+      <tr><td>Lésions circinées squameuses ± vésicules en bordure</td><td>Dermatophytose (teigne, mycose)</td><td>Prélèvement mycologique (cultures)</td></tr>
+      <tr><td><strong>Cordon serpigineux rose-violacé MOBILE</strong></td><td>Larva migrans cutanée (pieds, fesses, bras) ou larva currens (anguillulose)</td><td>Clinique suffit — pas de prélèvement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="complication-card" style="border-color:var(--purple)">
+    <strong style="font-size:12px; color:var(--purple)">Leishmaniose cutanée</strong><br>
+    Piqûre phlébotome → développement dans macrophages au site d'inoculation. Lésion évolutive (ulcérée, croûteuse). Extension lymphangitique ou métastatique possible (Amérique du Sud, immunodéprimé). Cicatrice souvent indélébile.
+  </div>
+  <div class="complication-card" style="border-color:var(--teal)">
+    <strong style="font-size:12px; color:var(--teal)">Larva migrans cutanée (larbish)</strong><br>
+    Larves d'helminthes de chien (déjections sol/plage) → pénétration transcutanée (marche pieds nus, repos à même le sol). Impasse parasitaire → migration erratique. Prurit intense. Régression spontanée en quelques semaines.
+  </div>
+  <div class="complication-card" style="border-color:var(--coral)">
+    <strong style="font-size:12px; color:var(--coral)">Gale</strong><br>
+    Cosmopolite, transmission cutanée directe ou objets (literie, serviettes). Prurit intense, nocturne. Sillons pathognomoniques. SHA inefficaces.
+  </div>
+  <div class="complication-card" style="border-color:var(--blue)">
+    <strong style="font-size:12px; color:var(--blue)">Mycoses cutanées/muqueuses</strong><br>
+    Favorisées par chaleur, contacts interhumains ou animaux, effraction cutanée. Agents : dermatophytes, levures, mycoses exotiques.
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : PRÉVENTION PARASITOSES -->
+<div class="section-title"><span class="dot" style="background:var(--teal)"></span><span style="color:var(--teal)">Prévention des parasitoses — féco-orale et transcutanée</span></div>
+
+<div class="grid-2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Prévention féco-orale
+    </div>
+    <ul>
+      <li>Lavage des mains eau + savon (<strong>SHA inefficaces sur parasites</strong>)</li>
+      <li>Eau capsulée / bouillie / filtrée</li>
+      <li>Pas de crudités / glaçons</li>
+      <li>Plats cuits (destruction œufs/kystes)</li>
+      <li>Fruits lavés/pelés</li>
+      <li>Aliments non laissés à l'air libre</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Prévention transcutanée
+    </div>
+    <ul>
+      <li><strong>Schistosomoses :</strong> éviter tout contact eau douce (bains, lessive, vaisselle, marche)</li>
+      <li><strong>Anguillule / ankylostomes :</strong> chaussures obligatoires sur sol humide, ne pas s'asseoir à même le sol</li>
+      <li><strong>Larva migrans :</strong> serviette/natte à la plage et en pique-nique</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS CLÉS -->
+<div class="section-title"><span class="dot" style="background:var(--purple)"></span><span style="color:var(--purple)">Points-clés à retenir — Pièges ECNi</span></div>
+
+<div class="alert alert-red" style="margin-bottom:8px">
+  <strong>Urgence — Ne jamais oublier</strong>
+  Toute fièvre au retour (dans les 3 mois) d'une zone d'endémie palustre = frottis sanguin / GE + TDR paludisme en URGENCE, même si un autre diagnostic semble certain.
+</div>
+<div class="alert alert-amber" style="margin-bottom:8px">
+  <strong>Piège n°1 — Emigrants retournant au pays</strong>
+  Sous-estiment leur risque palustre (immunité partielle et résidence en France). Représentent ~70 % des cas de paludisme d'importation diagnostiqués en France.
+</div>
+<div class="alert alert-amber" style="margin-bottom:8px">
+  <strong>Piège n°2 — SHA inefficaces sur les parasites</strong>
+  Pour les parasitoses (amoebose, helminthoses...) : lavage eau + savon obligatoire. Les SHA ne tuent pas les œufs, kystes, larves.
+</div>
+<div class="alert alert-amber" style="margin-bottom:8px">
+  <strong>Piège n°3 — Cryptosporidies et anguillules non détectées par EPS standard</strong>
+  Doivent être prescrites spécifiquement et nommément sur l'ordonnance.
+</div>
+<div class="alert alert-amber" style="margin-bottom:8px">
+  <strong>Piège n°4 — Amoebose possible des années après le retour</strong>
+  Portage asymptomatique prolongé possible. Évoquer une amoebose intestinale devant toute diarrhée glairo-sanglante non fébrile quelle que soit la date de retour.
+</div>
+<div class="alert alert-amber" style="margin-bottom:8px">
+  <strong>Piège n°5 — Leuconeutropénie dans la typhoïde</strong>
+  La typhoïde donne un syndrome inflammatoire biologique (CRP élevée) mais avec leuconeutropénie — à l'inverse des infections bactériennes communes.
+</div>
+<div class="alert alert-blue" style="margin-bottom:8px">
+  <strong>A retenir — Cordon serpigineux mobile = diagnostic clinique</strong>
+  Larva migrans / larva currens : diagnostic clinique, aucun prélèvement nécessaire.
+</div>
+<div class="alert alert-green">
+  <strong>Sources officielles à connaître</strong>
+  BEH hors-série "Recommandations sanitaires pour les voyageurs" (parution annuelle mai/juin, santepubliquefrance.fr) — Ministère des affaires étrangères (diplomatie.gouv.fr) — Institut Pasteur de Lille (pasteur-lille.fr)
+</div>
+
+</div>
+</body>
+</html>

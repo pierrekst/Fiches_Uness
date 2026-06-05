@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 5 – Responsabilités médicales v2</title>
+<style>
+  :root {
+    --bg: #f4f4f8;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --purple: #534AB7;
+    --purple-light: #ede8ff;
+    --teal: #1D9E75;
+    --teal-light: #e0f5ed;
+    --coral: #D85A30;
+    --coral-light: #fdeee8;
+    --blue: #378ADD;
+    --blue-light: #e5f1ff;
+    --red: #E24B4A;
+    --red-light: #fde8e8;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --gray-light: #f3f4f6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f0f1a; --card: #1a1a2e; --text: #e8e8f0; --text-muted: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2460; --teal-light: #0d3d2e; --coral-light: #4a200f;
+      --blue-light: #142540; --red-light: #3d1010; --amber-light: #3d2800; --gray-light: #252535;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.6; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px 24px; margin-bottom: 24px; color: #fff; }
+  .header-num { font-size: .78rem; font-weight: 700; letter-spacing: .12em; opacity: .8; text-transform: uppercase; margin-bottom: 6px; }
+  .header-title { font-size: 1.45rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+  .header-sub { font-size: .82rem; opacity: .85; }
+
+  /* OBJECTIFS */
+  .objectifs { background: var(--blue-light); border-radius: 12px; padding: 14px 18px; margin-bottom: 24px; border-left: 4px solid var(--blue); }
+  .objectifs-title { font-size: .75rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  .objectifs p { font-size: .83rem; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 24px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .section-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .section-title { font-size: 1.02rem; font-weight: 800; }
+
+  /* CARDS */
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 15px 17px; }
+  .card + .card { margin-top: 10px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* GRID */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: .81rem; }
+  th { background: var(--gray-light); font-weight: 700; padding: 7px 9px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 6px 9px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.012); }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 11px 14px; font-size: .83rem; margin-bottom: 8px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   .alert-icon svg { stroke: var(--red); }
+  .alert-blue  .alert-icon svg { stroke: var(--blue); }
+  .alert-green .alert-icon svg { stroke: var(--teal); }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal); }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pill { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: .77rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .81rem; gap: 8px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); flex-shrink: 0; }
+  .kv-val { font-weight: 700; text-align: right; }
+
+  /* STEPS */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 7px; font-size: .82rem; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--gray-light); font-weight: 700; font-size: .74rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  /* BORDER LEFT */
+  .bleft-purple { border-left: 3px solid var(--purple); }
+  .bleft-blue   { border-left: 3px solid var(--blue); }
+  .bleft-teal   { border-left: 3px solid var(--teal); }
+  .bleft-red    { border-left: 3px solid var(--red); }
+  .bleft-coral  { border-left: 3px solid var(--coral); }
+  .bleft-amber  { border-left: 3px solid var(--amber); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+  /* BADGE */
+  .badge { display: inline-block; padding: 2px 7px; border-radius: 5px; font-size: .72rem; font-weight: 700; }
+  .badge-coral  { background: var(--coral);  color: #fff; }
+  .badge-blue   { background: var(--blue);   color: #fff; }
+  .badge-purple { background: var(--purple); color: #fff; }
+  .badge-teal   { background: var(--teal);   color: #fff; }
+
+  /* SYNTH */
+  .synth { background: linear-gradient(120deg, var(--teal-light), var(--blue-light)); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px 17px; }
+
+  /* SANCTIONS LIST */
+  .sanc-list { list-style: none; }
+  .sanc-list li { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--border); font-size: .81rem; }
+  .sanc-list li:last-child { border-bottom: none; }
+  .sanc-num { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 5 — ECNi / R2C</div>
+  <div class="header-title">Responsabilités médicales pénale, civile, administrative et disciplinaire<br>Gestion des erreurs et des plaintes — Aléa thérapeutique</div>
+  <div class="header-sub">Loi du 4 mars 2002 · CSP L.1142-1 · Code pénal · Code de déontologie médicale</div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <div class="objectifs-title">Vue d'ensemble du chapitre</div>
+  <p>Deux axes indissociables : <strong>(1) les 5 types de responsabilité juridique du médecin</strong> (pénale, civile, administrative, disciplinaire, sans faute) avec leurs juridictions et faits générateurs ; <strong>(2) la sécurité des soins</strong> — maîtriser les définitions (erreur, aléa, IN, iatrogène, EIG), les facteurs humains d'erreur, les barrières de sécurité et la culture positive de l'erreur. Le triptyque <em>dommage / fait générateur / lien de causalité</em> conditionne toute mise en jeu de responsabilité.</p>
+</div>
+
+<!-- PARTIE 1 : TABLEAU COMPARATIF DES 5 RESPONSABILITÉS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    <div class="section-title">Les 5 types de responsabilité médicale</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Tableau comparatif
+    </div>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Juridiction</th>
+        <th>Fait générateur</th>
+        <th>Conséquence</th>
+        <th>Qui est mis en cause ?</th>
+      </tr>
+      <tr>
+        <td><span class="badge badge-coral">Pénale</span></td>
+        <td>Tribunal correctionnel (délits) · Cour d'assises (crimes)</td>
+        <td>Infraction pénale (contravention / délit / crime)</td>
+        <td>Emprisonnement ± sursis, amende</td>
+        <td>Tous médecins (y compris internes) + personnes morales</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">Civile</span></td>
+        <td>TGI → Cour d'appel → Cour de cassation</td>
+        <td>Faute prouvée</td>
+        <td>Indemnisation du patient</td>
+        <td>Médecin libéral · Établissement privé · Employeur du salarié</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">Administrative</span></td>
+        <td>Tribunal administratif → CAA → Conseil d'État</td>
+        <td>Faute de service</td>
+        <td>Indemnisation par l'établissement public</td>
+        <td>Établissement public de santé (pas le médecin directement)</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-purple">Disciplinaire</span></td>
+        <td>Chambre disciplinaire — Ordre des médecins</td>
+        <td>Manquement déontologique</td>
+        <td>Avertissement → Radiation</td>
+        <td>Tous médecins inscrits à l'Ordre + internes en remplacement</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-teal">Sans faute</span></td>
+        <td>CCI (amiable) / ONIAM</td>
+        <td>Aléa thérapeutique · Infection nosocomiale grave</td>
+        <td>Indemnisation solidarité nationale</td>
+        <td>Patient victime d'EIAS sans faute identifiable</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Médecin salarié privé → c'est l'<strong>employeur</strong> qui est civilement responsable (sauf faute détachable du service). Médecin hospitalier public → c'est l'<strong>établissement</strong> qui est mis en cause devant le tribunal administratif, pas le médecin personnellement.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 2 : TRIPTYQUE DE LA RESPONSABILITÉ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="section-title">Triptyque de la responsabilité — conditions d'indemnisation</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card bleft-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Les 3 conditions cumulatives
+      </div>
+      <div class="kv-row"><span class="kv-key">1. Dommage</span><span class="kv-val">Actuel et certain (futur si certain)</span></div>
+      <div class="kv-row"><span class="kv-key">2. Fait générateur</span><span class="kv-val">Faute prouvée (par le patient)</span></div>
+      <div class="kv-row"><span class="kv-key">3. Lien de causalité</span><span class="kv-val">Certain — pas nécessairement direct ni exclusif</span></div>
+      <div style="margin-top:8px; font-size:.77rem; color:var(--text-muted);">Le lien de causalité est le plus difficile à prouver. Le juge admet la <strong>perte de chance</strong> (indemnisation proportionnelle à la probabilité perdue).</div>
+    </div>
+    <div class="card bleft-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Formes de dommage indemnisable
+      </div>
+      <div class="pills">
+        <span class="pill pill-blue">Atteinte physique ou psychique</span>
+        <span class="pill pill-blue">Perte de chance de survie/guérison</span>
+        <span class="pill pill-blue">Perte de chance (défaut d'info)</span>
+        <span class="pill pill-blue">Préjudice d'impréparation</span>
+      </div>
+      <div style="margin-top:9px; font-size:.77rem; color:var(--text-muted);"><strong>Préjudice d'impréparation</strong> : troubles subis parce que le patient n'a pas pu se préparer à la réalisation d'un risque non communiqué. Distinct de la perte de chance.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège perte de chance :</strong> Si l'acte était indispensable, le juge considère que le patient n'aurait pas renoncé même informé → perte de chance <strong>nulle</strong> → pas d'indemnisation pour défaut d'information.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 3 : RESPONSABILITÉ PÉNALE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="section-title">Responsabilité pénale — infractions médicales</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Principales infractions reprochées aux médecins
+    </div>
+    <table>
+      <tr><th>Catégorie</th><th>Infractions</th><th>Articles CP</th></tr>
+      <tr>
+        <td><span class="pill pill-coral">Devoir d'humanisme</span></td>
+        <td>Faux certificats · Violation du secret professionnel · Non-assistance à personne en péril</td>
+        <td>441-7 · 226-13 · 226-3</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Involontaire (majorité)</span></td>
+        <td>Homicide/blessures involontaires — maladresse, imprudence, inattention, négligence, manquement à une obligation de sécurité</td>
+        <td>221-6 · 222-19 · 222-20</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Volontaire (rare)</span></td>
+        <td>Euthanasie · Défaut de consentement · Non-respect licéité IVG, stérilisation, prélèvements d'organes, recherche biomédicale</td>
+        <td>—</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card bleft-coral">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        Fautes qualifiées (lien indirect)
+      </div>
+      <div class="kv-row"><span class="kv-key">Délibérée</span><span class="kv-val">Violation <em>consciente</em> d'une règle de prudence/sécurité légale ou réglementaire</span></div>
+      <div class="kv-row"><span class="kv-key">Caractérisée</span><span class="kv-val">Imprudence exposant à un risque d'une particulière gravité que le médecin ne peut ignorer</span></div>
+    </div>
+    <div class="card bleft-coral">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Juridictions pénales
+      </div>
+      <div class="kv-row"><span class="kv-key">Contraventions</span><span class="kv-val">Tribunal de police → amendes</span></div>
+      <div class="kv-row"><span class="kv-key">Délits (majorité médicale)</span><span class="kv-val">Tribunal correctionnel → emprisonnement ± sursis</span></div>
+      <div class="kv-row"><span class="kv-key">Crimes</span><span class="kv-val">Cour d'assises → réclusion criminelle</span></div>
+      <div style="margin-top:8px; font-size:.77rem; color:var(--text-muted);">Poursuites à l'initiative du <strong>procureur de la République</strong>. Le patient peut se constituer partie civile pour obtenir une indemnisation dans le même procès.</div>
+    </div>
+  </div>
+
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège classique :</strong> Le défaut d'information <strong>n'est PAS une infraction pénale</strong> — c'est une cause de responsabilité civile (ou administrative) uniquement. La responsabilité pénale est <strong>toujours personnelle</strong>, y compris pour les internes.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 4 : RESPONSABILITÉ DISCIPLINAIRE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    <div class="section-title">Responsabilité disciplinaire — Ordre des médecins</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card bleft-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        Sanctions (par ordre croissant de gravité)
+      </div>
+      <ul class="sanc-list">
+        <li><div class="sanc-num" style="background:var(--teal);">1</div>Avertissement</li>
+        <li><div class="sanc-num" style="background:var(--blue);">2</div>Blâme</li>
+        <li><div class="sanc-num" style="background:var(--amber);">3</div>Interdiction temporaire fonctions rémunérées par l'État/collectivités</li>
+        <li><div class="sanc-num" style="background:var(--coral);">4</div>Interdiction temporaire d'exercice (max 3 ans) ± sursis révocable en cas de nouvelle faute dans les 5 ans</li>
+        <li><div class="sanc-num" style="background:var(--red);">5</div>Radiation du tableau — relèvement possible après 3 ans</li>
+      </ul>
+    </div>
+    <div class="card bleft-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Procédure disciplinaire
+      </div>
+      <div class="kv-row"><span class="kv-key">1re instance</span><span class="kv-val">Chambre disciplinaire — conseil régional Ordre</span></div>
+      <div class="kv-row"><span class="kv-key">Appel</span><span class="kv-val">Chambre disciplinaire — conseil national Ordre</span></div>
+      <div class="kv-row"><span class="kv-key">Cassation</span><span class="kv-val">Conseil d'État</span></div>
+      <div class="kv-row"><span class="kv-key">Plainte patient</span><span class="kv-val">→ Conseil départemental → tentative de conciliation (obligatoire) → si échec : chambre régionale</span></div>
+      <div class="kv-row"><span class="kv-key">Audience</span><span class="kv-val">Publique et contradictoire · Avocat autorisé pour les deux parties</span></div>
+      <div style="margin-top:8px; font-size:.77rem; color:var(--text-muted);">L'action disciplinaire est <strong>indépendante</strong> des actions civile et pénale — elles peuvent se cumuler.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 5 : DÉFINITIONS CLÉS -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    <div class="section-title">Définitions clés — à maîtriser absolument</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Tableau différentiel des événements indésirables
+    </div>
+    <table>
+      <tr><th>Terme</th><th>Définition clé</th><th>Erreur ?</th><th>Responsabilité ?</th></tr>
+      <tr>
+        <td><span class="pill pill-coral">Accident médical</span></td>
+        <td>EIAS avec dommage anormal lors d'un soin/diagnostic/prévention — peut être erreur ou aléa</td>
+        <td>Possible ou non</td>
+        <td>Selon la cause</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Affection iatrogène</span></td>
+        <td>Effets néfastes d'un traitement/acte médical (nouveaux symptômes distincts de la maladie traitée)</td>
+        <td><strong>Non obligatoirement</strong></td>
+        <td>Non si bonne indication + posologie correcte</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Infection nosocomiale</span></td>
+        <td>Contractée en établissement de santé, absente à l'admission. Présumée nosocomiale si apparition &gt; 48h</td>
+        <td>Non</td>
+        <td><strong>Sans faute</strong> → ONIAM (solidarité nationale)</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-teal">Aléa thérapeutique</span></td>
+        <td>Risque inhérent à l'acte, soins conformes aux bonnes pratiques, sans erreur ni faute — <em>inévitable</em></td>
+        <td><strong>Non</strong></td>
+        <td><strong>Sans faute</strong> → ONIAM</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Erreur médicale</span></td>
+        <td>Action involontaire et évitable (omission / commission / exécution / violation) — peut ou non entraîner un dommage</td>
+        <td><strong>Oui</strong></td>
+        <td>Faute si dommage + lien causal prouvés</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">EIG</span></td>
+        <td>Événement indésirable grave = décès, complication grave, ou prolongation d'hospit. ≥ 1 jour</td>
+        <td>Possible</td>
+        <td>Selon la cause</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grid2" style="margin-top:10px;">
+    <div class="card bleft-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        4 types d'erreurs médicales
+      </div>
+      <div class="kv-row"><span class="kv-key">Omission</span><span class="kv-val">Action nécessaire non faite</span></div>
+      <div class="kv-row"><span class="kv-key">Commission</span><span class="kv-val">Action inutile réalisée</span></div>
+      <div class="kv-row"><span class="kv-key">Exécution</span><span class="kv-val">Action nécessaire mais mal réalisée</span></div>
+      <div class="kv-row"><span class="kv-key">Violation</span><span class="kv-val">Non-respect d'une règle (routinière / intentionnelle / contextuelle)</span></div>
+    </div>
+    <div class="card bleft-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Infection nosocomiale — règle des 48h
+      </div>
+      <div class="kv-row"><span class="kv-key">Délai discriminant</span><span class="kv-val">&gt; 48h d'hospitalisation</span></div>
+      <div class="kv-row"><span class="kv-key">Si &lt; 48h</span><span class="kv-val">Considérée en incubation à l'admission → pas nosocomiale</span></div>
+      <div class="kv-row"><span class="kv-key">État infectieux inconnu</span><span class="kv-val">Présumée nosocomiale si apparition &gt; 48h</span></div>
+      <div class="kv-row"><span class="kv-key">Synonyme</span><span class="kv-val">Infection associée aux soins (IAS)</span></div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Affection iatrogène <strong>≠</strong> erreur médicale. On peut être victime d'une affection iatrogène sans aucune erreur (bonne indication, bonne posologie) — et sans aucune responsabilité médicale.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 6 : FAUTE — TYPES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    <div class="section-title">Faute médicale — définition et types (loi 4 mars 2002)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      CSP L.1142-1 — la faute doit être prouvée par le patient
+    </div>
+    <table>
+      <tr><th>Type de faute</th><th>Description</th><th>Référentiel</th></tr>
+      <tr>
+        <td><span class="pill pill-blue">Faute technique</span></td>
+        <td>Violation des connaissances médicales avérées / données acquises de la science au moment de l'acte</td>
+        <td>Littérature · Recommandations HAS/sociétés savantes</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Violation d'humanisme</span></td>
+        <td>Atteinte au secret professionnel · Défaut d'information ne permettant pas un consentement libre et éclairé</td>
+        <td>Droits du patient (loi 4 mars 2002)</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Défaut produit</span></td>
+        <td>Produit de santé défectueux n'offrant pas la sécurité attendue</td>
+        <td>Directive UE produits défectueux</td>
+      </tr>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Le juge apprécie la faute par rapport aux connaissances médicales <strong>au moment de l'acte litigieux</strong> — pas par rapport aux connaissances actuelles.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 7 : FACTEURS HUMAINS + BARRIÈRES -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    <div class="section-title">Facteurs humains, prévention et barrières de sécurité</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card bleft-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Facteurs favorisant les erreurs
+      </div>
+      <div style="font-size:.78rem; font-weight:700; color:var(--blue); margin-bottom:4px;">INDIVIDUELS</div>
+      <div class="kv-row"><span class="kv-key">Connaissances/compétences</span><span class="kv-val">Manque d'expérience · Mémorisation limitée</span></div>
+      <div class="kv-row"><span class="kv-key">Stress, fatigue, maladie</span><span class="kv-val">Performance diminuée</span></div>
+      <div class="kv-row"><span class="kv-key">Facteurs linguistiques/culturels</span><span class="kv-val">Mauvaise compréhension</span></div>
+      <div style="font-size:.78rem; font-weight:700; color:var(--purple); margin-top:8px; margin-bottom:4px;">COLLECTIFS</div>
+      <div class="kv-row"><span class="kv-key">Communication d'équipe</span><span class="kv-val">Briefing avant · Débriefing après</span></div>
+      <div class="kv-row"><span class="kv-key">Leadership clair</span><span class="kv-val">Rôles définis · Conscience d'équipe</span></div>
+    </div>
+    <div class="card bleft-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        3 types de barrières de sécurité
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="pill pill-teal">1. Prévention</span></span>
+        <span class="kv-val">Empêcher l'erreur<br><small style="font-weight:400;">Check-list HAS · Prescription informatisée avec alertes</small></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="pill pill-blue">2. Récupération</span></span>
+        <span class="kv-val">Corriger avant dommage<br><small style="font-weight:400;">Infirmière détecte allergie pénicilline avant admin.</small></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="pill pill-amber">3. Atténuation</span></span>
+        <span class="kv-val">Limiter les conséquences<br><small style="font-weight:400;">MCE immédiat après erreur voie d'administration</small></span>
+      </div>
+      <div style="margin-top:8px; font-size:.77rem; color:var(--text-muted);">Nature : <strong>immatérielle</strong> (protocoles, formation, procédures) ou <strong>matérielle</strong> (détrompeur physique — ex: bagues colorées gaz médicaux).</div>
+    </div>
+  </div>
+
+  <!-- Check-list HAS -->
+  <div class="card" style="margin-top:10px;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Check-list HAS au bloc opératoire — 3 temps (barrière de prévention immatérielle)
+    </div>
+    <table>
+      <tr><th>Temps</th><th>Moment</th><th>Points-clés vérifiés</th></tr>
+      <tr>
+        <td><span class="pill pill-blue">1</span></td>
+        <td><strong>Avant induction anesthésique</strong></td>
+        <td>Identité · Site et intervention · Documentation · Installation · Préparation cutanée · Matériel · Risques : allergie, intubation difficile, inhalation, saignement</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">2</span></td>
+        <td><strong>Avant incision — Time Out</strong></td>
+        <td>Vérification croisée identité + site + installation en présence de toute l'équipe · Partage des risques chirurgicaux et anesthésiques · Antibioprophylaxie · Champ opératoire</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-teal">3</span></td>
+        <td><strong>Avant sortie de salle</strong></td>
+        <td>Intervention enregistrée · Compte compresses/aiguilles/instruments · Étiquetage prélèvements · Signalement EIAS si survenus · Prescriptions post-op conjointes chir + anesthésie</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 8 : CAUSES RACINES + CULTURE POSITIVE -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    <div class="section-title">Analyse des causes racines et culture positive de l'erreur</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card bleft-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Méthodes ALARM / Orion — 6 étapes
+      </div>
+      <ol class="steps">
+        <li><div class="step-num">1</div><div>Collecte des données (entretiens semi-directifs, dossiers)</div></li>
+        <li><div class="step-num">2</div><div>Reconstitution de la chronologie</div></li>
+        <li><div class="step-num">3</div><div>Identification des écarts vs. pratiques recommandées (sans jugement)</div></li>
+        <li><div class="step-num">4</div><div>Identification des facteurs contributifs (immédiats + causes racines profondes)</div></li>
+        <li><div class="step-num">5</div><div>Proposition d'actions d'amélioration + plan d'action</div></li>
+        <li><div class="step-num">6</div><div>Rédaction du rapport d'analyse</div></li>
+      </ol>
+    </div>
+    <div class="card bleft-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Culture positive de l'erreur
+      </div>
+      <div class="kv-row"><span class="kv-key">Principe fondateur</span><span class="kv-val">Non-culpabilisation du dernier maillon</span></div>
+      <div class="kv-row"><span class="kv-key">RMM</span><span class="kv-val">Revue Morbidité-Mortalité — analyse interne neutre</span></div>
+      <div class="kv-row"><span class="kv-key">Coordinateur risques</span><span class="kv-val">Fonction obligatoire dans chaque établissement</span></div>
+      <div class="kv-row"><span class="kv-key">Signalement EIG</span><span class="kv-val">Obligatoire (loi HPST 2009) — actif + passif (volontariat)</span></div>
+      <div class="kv-row"><span class="kv-key">Charte sécurité</span><span class="kv-val">Anonymat · Objectivité · Non-sanction · Exhaustivité</span></div>
+    </div>
+  </div>
+
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Seconde victime :</strong> Soignant traumatisé par un EIAS dont il se sent responsable — risque de syndrome anxio-dépressif, burnout voire suicide. La culture de non-culpabilisation est essentielle. La culpabilisation → erreurs cachées → analyse impossible → récidive.</div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-top:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Modèle de Reason (fromage suisse) :</strong> L'erreur est la résultante de défauts organisationnels profonds (causes latentes), pas uniquement de l'individu en bout de chaîne. L'organisation apprenante = identifier + analyser + prévenir les erreurs à tous les niveaux.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PARTIE 9 : POINTS CLÉS À RETENIR -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="section-title">Points-clés à retenir — Pièges ECNi</div>
+  </div>
+
+  <div class="synth">
+    <div class="card-title" style="margin-bottom:12px;">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse critique
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 1 :</strong> Défaut d'information = responsabilité <strong>civile</strong> uniquement (pas pénale). Génère une perte de chance et/ou un préjudice d'impréparation. Si acte indispensable → perte de chance nulle.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 2 :</strong> Hôpital public → <strong>tribunal administratif</strong> (responsabilité de l'établissement). Libéral/privé → <strong>tribunal judiciaire</strong> (TGI). Ne pas confondre les deux ordres de juridiction.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 3 :</strong> Aléa thérapeutique ≠ erreur. L'aléa = soins conformes + risque inhérent + sans faute → indemnisation par <strong>ONIAM</strong> (solidarité nationale), sans mise en cause de la responsabilité médicale.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 4 :</strong> Affection iatrogène ≠ erreur médicale. Possible en l'absence de toute faute (bonne indication, bonne posologie). Ne pas confondre avec l'erreur.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège 5 :</strong> Infection nosocomiale → délai &gt; 48h → responsabilité <strong>sans faute</strong>. Si état infectieux inconnu à l'admission : présumée nosocomiale si apparition &gt; 48h.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>À retenir :</strong> Responsabilité pénale = toujours personnelle (internes inclus). Triptyque incontournable : dommage + fait générateur + lien de causalité (certain mais ni direct ni exclusif). Lien de causalité = élément le plus difficile à prouver pour le patient.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>À retenir :</strong> 3 barrières de sécurité : <strong>prévention</strong> (empêcher) → <strong>récupération</strong> (corriger avant dommage) → <strong>atténuation</strong> (limiter après dommage). Un système robuste doit avoir les 3. Ne jamais négliger récupération et atténuation.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>À retenir :</strong> Sanctions disciplinaires = avertissement → blâme → interdiction temporaire fonctions rémunérées → interdiction temporaire d'exercice (max 3 ans) → radiation. Relèvement possible après 3 ans.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

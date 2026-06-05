@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 91 — Déficit neurologique récent</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EDE9FB;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F2;
+    --coral: #D85A30;
+    --coral-light: #FDEEE8;
+    --blue: #378ADD;
+    --blue-light: #E8F2FB;
+    --red: #E24B4A;
+    --red-light: #FDE8E8;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1a1a2e;
+    --text-secondary: #555;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --border: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e8f0;
+      --text-secondary: #aaa;
+      --bg: #14141f;
+      --card-bg: #1e1e2e;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2660;
+      --teal-light: #0f3d2e;
+      --coral-light: #4a2010;
+      --blue-light: #162d4a;
+      --red-light: #4a1010;
+      --amber-light: #3d2a00;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-tag { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+  .header-intro { font-size: .84rem; opacity: .9; line-height: 1.6; }
+  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .header-badge { background: rgba(255,255,255,0.18); border-radius: 20px; padding: 4px 12px; font-size: .75rem; font-weight: 600; }
+
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 28px 0 14px; }
+  .section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+
+  .card { background: var(--card-bg); border: .5px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .card-left-red    { border-left: 4px solid var(--red);   }
+  .card-left-teal   { border-left: 4px solid var(--teal);  }
+  .card-left-coral  { border-left: 4px solid var(--coral); }
+  .card-left-amber  { border-left: 4px solid var(--amber); }
+  .card-left-blue   { border-left: 4px solid var(--blue);  }
+  .card-left-purple { border-left: 4px solid var(--purple); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);    color: var(--red);    border-left: 3px solid var(--red);    }
+  .alert-blue   { background: var(--blue-light);   color: var(--blue);   border-left: 3px solid var(--blue);   }
+  .alert-green  { background: var(--teal-light);   color: var(--teal);   border-left: 3px solid var(--teal);   }
+  .alert-amber  { background: var(--amber-light);  color: var(--amber);  border-left: 3px solid var(--amber);  }
+  .alert-purple { background: var(--purple-light); color: var(--purple); border-left: 3px solid var(--purple); }
+  .alert-red    .alert-icon svg { stroke: var(--red);    }
+  .alert-blue   .alert-icon svg { stroke: var(--blue);   }
+  .alert-green  .alert-icon svg { stroke: var(--teal);   }
+  .alert-amber  .alert-icon svg { stroke: var(--amber);  }
+  .alert-purple .alert-icon svg { stroke: var(--purple); }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--bg); font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: .5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .steps { }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); font-weight: 700; font-size: .8rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); }
+  .step-content { flex: 1; padding-top: 2px; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  p { margin-bottom: 8px; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-tag">Item 91 — Neurologie</div>
+    <h1>Déficit neurologique récent</h1>
+    <div class="header-intro">
+      Démarche diagnostique face à un déficit neurologique d'installation récente. L'enjeu est de distinguer une atteinte focale d'une souffrance diffuse, d'orienter vers une origine centrale ou périphérique (radiculaire, tronculaire, jonctionnelle, musculaire), d'éliminer les diagnostics différentiels (ostéoarticulaires, vasculaires périphériques, somatoformes), d'indiquer les examens d'imagerie (IRM/Scanner) et examens fonctionnels (EMG, EEG, PL) appropriés, et d'assurer la prise en charge immédiate des urgences vitales.
+    </div>
+    <div class="header-badges">
+      <span class="header-badge">Focal vs Diffus</span>
+      <span class="header-badge">Central vs Périphérique</span>
+      <span class="header-badge">Algorithme d'Imagerie</span>
+      <span class="header-badge">Urgences vitales (AVC, Guillain-Barré, Myasthénie)</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--purple)"></div>
+    <span class="section-label" style="background:var(--purple-light);color:var(--purple)">Définitions &amp; Diagnostics Différentiels</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Déficit focal vs Souffrance diffuse
+      </div>
+      <div class="alert alert-purple">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Déficit focal :</strong> Perte de fonction d'une région précise du système nerveux.<br>Peut être temporaire (transitoire) ou lésionnel (permanent).</div>
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Souffrance diffuse :</strong> Altération globale du fonctionnement cérébral.<br>Exemples : pertes de connaissance, comas, syndromes confusionnels.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Déficits d'origine non neurologique
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Impotence fonctionnelle pure</div>
+      <ul>
+        <li><strong>Origine ostéoarticulaire :</strong> Fracture, entorse, arthrite, rupture de coiffe. Douleur au premier plan. Diagnostic par examen clinique locorégional et imagerie osseuse/articulaire.</li>
+        <li><strong>Origine vasculaire périphérique :</strong> Occlusion artérielle aiguë. Membre très douloureux, froid, blanc ou cyanose, avec abolition du pouls périphérique.</li>
+        <li><strong>Troubles d'organe locaux :</strong> Origine ORL pour les vertiges/équilibre et la phonation, ou ophtalmologique pour la vision.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Déficit somatoforme (trouble de conversion / psychogène)
+    </div>
+    <div class="pills" style="margin-bottom:10px;">
+      <span class="pill pill-amber">Territoire non anatomique aberrant</span>
+      <span class="pill pill-amber">Discordance clinique à l'examen</span>
+      <span class="pill pill-amber">Belle indifférence du patient</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège diagnostique :</strong> Toujours éliminer une étiologie organique avant de conclure à un trouble somatoforme. S'inscrit fréquemment dans des contextes de conversion hystérique, de simulation ou de syndrome dépressif.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--blue)"></div>
+    <span class="section-label" style="background:var(--blue-light);color:var(--blue)">Orientation Topographique</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Atteinte du Système Nerveux Central
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Arguments cliniques majeurs</div>
+      <ul>
+        <li><strong>Lésion corticale :</strong> Aphasie, troubles gnosiques, apraxie, hémianopsie latérale homonyme (HLH).</li>
+        <li><strong>Atteinte hémicorporelle :</strong> Déficit moteur ou sensitif touchant un hémicorps complet.</li>
+        <li><strong>Syndromes alternés (tronc cérébral) :</strong> Atteinte d'une paire crânienne associée à un déficit des voies longues controlatérales.</li>
+        <li><strong>Signes pyramidaux :</strong> Hyperréflexie, signe de Babinski (sauf phase flasque initiale).</li>
+        <li><strong>Niveau sensitif net :</strong> Abdominal ou thoracique, signant une atteinte médullaire.</li>
+        <li><strong>Signes d'accompagnement :</strong> Troubles de vigilance associés, crise d'épilepsie inaugurale.</li>
+      </ul>
+    </div>
+
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Atteinte du Système Nerveux Périphérique
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Arguments cliniques majeurs</div>
+      <ul>
+        <li><strong>Topographie systématisée :</strong> Déficit moteur ou sensitif limité à une racine (radiculaire) ou à un tronc nerveux (tronculaire).</li>
+        <li><strong>Signes neurogènes périphériques :</strong> Amyotrophie (tardive), fasciculations.</li>
+        <li><strong>Réflectivité :</strong> Diminution ou abolition sélective des réflexes ostéotendineux (ROT) dans le territoire atteint.</li>
+        <li><strong>Atteinte distale isolée :</strong> Déficit moteur et sensitif distal des membres inférieurs sans troubles sphinctériens (hors syndrome de la queue de cheval).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-left-coral">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Atteinte de la Jonction Neuromusculaire ou du Muscle
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Jonction Neuromusculaire (Myasthénie)</div>
+        <ul>
+          <li>Déficit moteur pur, sans trouble sensitif ni sphinctérien.</li>
+          <li><strong>Caractère fluctuant</strong>, aggravé par l'effort (fatigabilité) et en fin de journée.</li>
+          <li>Atteinte fréquente de l'oculomotricité (diplopie, ptosis), de la déglutition et de la phonation.</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Atteinte Musculaire (Myopathie)</div>
+        <ul>
+          <li>Déficit moteur bilatéral et symétrique à prédominance <strong>proximale</strong> (ceintures).</li>
+          <li><strong>ROT conservés</strong>, réflexes cutanés plantaires (RCP) normaux en flexion (pas de Babinski).</li>
+          <li>Myalgies ou modification de consistance musculaire possibles.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--coral)"></div>
+    <span class="section-label" style="background:var(--coral-light);color:var(--coral)">Démarche Clinique &amp; Examens Complémentaires</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Mode d'installation et profils évolutifs
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Modes d'installation</div>
+        <ul>
+          <li><strong>Brutal (secondes/minutes) :</strong> Mécanisme vasculaire +++ (déficit d'emblée maximal), marche épileptique (secondes) ou marche migraineuse (minutes).</li>
+          <li><strong>Aigu/Subaigu (heures/jours) :</strong> Mécanisme inflammatoire, infectieux ou toxique.</li>
+          <li><strong>Progressif (semaines) :</strong> Processus expansif (tumoral, abcès, hématome sous-dural chronique), métabolique ou carentiel.</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Profils évolutifs</div>
+        <ul>
+          <li><strong>Transitoire :</strong> Résolution complète rapide (souvent d'origine centrale). Examen clinique normal lors de la consultation. Anamnèse clé.</li>
+          <li><strong>Amélioration spontanée :</strong> Évocateur de cause vasculaire (AIT/AVC) ou inflammatoire (poussée de SEP).</li>
+          <li><strong>Aggravation "en tache d'huile" :</strong> Oriente fortement vers un processus expansif.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Indications et délais de l'imagerie
+    </div>
+    <table>
+      <thead>
+        <tr><th>Suspicion clinique</th><th>Examen de choix</th><th>Délai</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Atteinte supramédullaire (accident vasculaire cérébral suspecté)</strong></td>
+          <td>IRM cérébrale (séquence diffusion) + Angio-IRM (ou scanner sans et avec injection + Angioscanner)</td>
+          <td>Urgence immédiate (recherche d'occlusion pour thrombolyse/thrombectomie)</td>
+        </tr>
+        <tr>
+          <td><strong>Traumatisme crânien avec déficit focal</strong></td>
+          <td>Scanner cérébral sans injection</td>
+          <td>Urgence immédiate (recherche d'hématome extra/sous-dural ou contusion)</td>
+        </tr>
+        <tr>
+          <td><strong>Processus infectieux encéphalique avec déficit focal</strong></td>
+          <td>Scanner ou IRM cérébrale sans et avec injection</td>
+          <td>Urgence immédiate (obligatoire avant réalisation d'une ponction lombaire)</td>
+        </tr>
+        <tr>
+          <td><strong>Syndrome médullaire ou de la queue de cheval</strong></td>
+          <td>IRM médullaire (ou lombaire)</td>
+          <td>Urgence immédiate (éliminer une compression chirurgicale)</td>
+        </tr>
+        <tr>
+          <td><strong>Déficit progressif sans signes de gravité</strong></td>
+          <td>IRM ou scanner cérébral</td>
+          <td>Délai rapide (&lt; 24 heures)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Hiérarchisation des examens non radiologiques
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Électromyogramme (EMG) :</strong> Indispensable si suspicion d'atteinte périphérique (radiculaire, plexique, tronculaire), de la jonction neuromusculaire ou du muscle.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Électroencéphalogramme (EEG) :</strong> Indiqué si suspicion de crise d'épilepsie, d'état de mal infraclinique ou d'encéphalopathie.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Ponction Lombaire (PL) :</strong> Étude du LCS si suspicion de méningite/méningo-encéphalite, polyradiculonévrite (Guillain-Barré) ou poussée inflammatoire. Réalisée obligatoirement après imagerie cérébrale/médullaire en cas de déficit neurologique focal pour écarter un risque d'engagement.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Examens biologiques et ECG :</strong> Glycémie capillaire (éliminer hypoglycémie), biologie standard, CPK (atteinte musculaire), toxiques. ECG à la recherche de fibrillation atriale (source embolique d'AVC).</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--red)"></div>
+    <span class="section-label" style="background:var(--red-light);color:var(--red)">Urgences &amp; Principes de Prise en Charge</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        AVC (Fiche 340)
+      </div>
+      <ul>
+        <li><strong>Infarctus cérébral :</strong> Thrombolyse IV (&lt; 4h30) et/ou thrombectomie mécanique (&lt; 6h-24h selon imagerie). Aspirine à dose antiagrégante si non éligible aux traitements de revascularisation.</li>
+        <li><strong>Hémorragie intraparenchymateuse :</strong> Contrôle tensionnel strict, antagonisation rapide des anticoagulants.</li>
+        <li><strong>Thrombose veineuse cérébrale :</strong> Anticoagulation efficace par héparine (même en cas de foyer hémorragique).</li>
+        <li><strong>Hémorragie méningée :</strong> Prise en charge chirurgicale ou endovasculaire en urgence pour exclure l'anévrisme.</li>
+      </ul>
+    </div>
+
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Syndrome de Guillain-Barré (Fiche 97)
+      </div>
+      <ul>
+        <li>Déficit sensitivomoteur ascendant symétrique avec aréflexie ostéotendineuse.</li>
+        <li><strong>Signes de gravité (réanimation) :</strong> Troubles de déglutition (risque de fausses routes), détresse respiratoire (dyspnée, toux inefficace), instabilité neurovégétative (tension, rythme cardiaque).</li>
+        <li><strong>Traitement spécifique :</strong> Immunoglobulines intraveineuses (IgIV) ou plasmaphérèse en urgence.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Crise myasthénique (Fiche 98)
+      </div>
+      <ul>
+        <li>Urgence vitale majeure chez un patient myasthénique connu (ou inaugural).</li>
+        <li><strong>Risques :</strong> Paralysie des muscles respiratoires et troubles de déglutition sévères.</li>
+        <li><strong>Prise en charge :</strong> Transfert immédiat en réanimation, assistance ventilatoire si nécessaire, IgIV ou échanges plasmatiques.</li>
+      </ul>
+    </div>
+
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Infections du SNC &amp; Médullaire aiguë
+      </div>
+      <ul>
+        <li><strong>Déficit neurologique fébrile :</strong> Urgence absolue. Méningo-encéphalite ou abcès. Imagerie cérébrale avant PL en raison du déficit focal. Antibiothérapie probabiliste immédiate (Cefotaxime/Ceftriaxone IV) + Aciclovir/Amoxicilline selon LCS.</li>
+        <li><strong>Syndrome médullaire aigu :</strong> IRM médullaire en urgence. Avis neurochirurgical immédiat si compression médullaire ou de la queue de cheval. Si absence de compression, myélite (PL, corticoïdes IV).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Urgences carentielles et métaboliques
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Encéphalopathie hypoglycémique</div>
+        <ul>
+          <li>Troubles de vigilance, confusion, sueurs profuses, crises convulsives et déficit focal chez un patient diabétique traité.</li>
+          <li><strong>Prise en charge :</strong> Glycémie capillaire immédiate et correction par resucrage en urgence (Glucosé G30% IV).</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;color:var(--text);">Encéphalopathie de Gayet-Wernicke</div>
+        <ul>
+          <li>Syndrome cérébelleux, ophtalmoplégie/nystagmus et confusion mentale liés à une carence sévère en vitamine B1 (ex: alcoolisme chronique, dénutrition).</li>
+          <li><strong>Prise en charge :</strong> Recharge parentérale urgente en vitamine B1.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Règle d'or thérapeutique :</strong> Ne jamais administrer de sérum glucosé avant d'avoir injecté la vitamine B1 chez un patient dénutri ou éthylique chronique, sous peine de précipiter ou d'aggraver l'encéphalopathie de Gayet-Wernicke.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--purple)"></div>
+    <span class="section-label" style="background:var(--purple-light);color:var(--purple)">Déficits Neurologiques Récents Transitoires</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Diagnostic différentiel des 3 causes principales
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Caractéristique</th>
+          <th>AIT (Accident Ischémique Transitoire)</th>
+          <th>Crise d'épilepsie focalisée</th>
+          <th>Aura migraineuse</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Terrain</strong></td>
+          <td>Age &gt; 50 ans, facteurs de risque cardio-vasculaires.</td>
+          <td>Tous âges, antécédent d'épilepsie ou épisodes stéréotypés.</td>
+          <td>Age &lt; 50 ans, antécédents personnels/familiaux de migraine.</td>
+        </tr>
+        <tr>
+          <td><strong>Installation</strong></td>
+          <td>Brutal, d'emblée maximal (en quelques secondes).</td>
+          <td>Rapide : propagation de proche en proche en quelques secondes (marche épileptique).</td>
+          <td>Progressive : marche migraineuse s'étendant sur quelques dizaines de minutes.</td>
+        </tr>
+        <tr>
+          <td><strong>Symptômes</strong></td>
+          <td><strong>« Négatifs » :</strong> Amputation du champ visuel (amaurose unilatérale, HLH), déficit moteur ou sensitif, aphasie.</td>
+          <td><strong>« Positifs » :</strong> Paresthésies initiant la crise, clonies motrices focalisées, hallucinations visuelles.</td>
+          <td><strong>« Positifs » puis « Négatifs » :</strong> Scotome scintillant (phénomène visuel lumineux), paresthésies ascendantes.</td>
+        </tr>
+        <tr>
+          <td><strong>Signes associés</strong></td>
+          <td>Souffle vasculaire, cardiopathie emboligène.</td>
+          <td>Rupture de contact, amnésie de l'épisode, clonies.</td>
+          <td>Céphalée migraineuse (hémicrânie pulsatile, photo-phonophobie, nausées).</td>
+        </tr>
+        <tr>
+          <td><strong>Durée &amp; Résolution</strong></td>
+          <td>Résolution rapide, durée classique &lt; 1 heure (souvent &lt; 15 min).</td>
+          <td>Résolution rapide. Déficit moteur post-critique possible (paralysie de Todd).</td>
+          <td>Résolution progressive en 20 à 60 minutes.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Autres causes de déficits transitoires</div>
+    <div class="pills">
+      <span class="pill pill-purple">Hypoglycémie</span>
+      <span class="pill pill-purple">Hématome sous-dural chronique</span>
+      <span class="pill pill-purple">Tumeur cérébrale</span>
+      <span class="pill pill-purple">Malformation vasculaire</span>
+      <span class="pill pill-purple">Compression tronculaire périphérique positionnelle (radial)</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--teal)"></div>
+    <span class="section-label" style="background:var(--teal-light);color:var(--teal)">Points-clés à retenir</span>
+  </div>
+
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Essentiels ECNi
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Diagnostic différentiel non neuro :</strong> Toujours éliminer une cause ostéoarticulaire (douleur mécanique locale) ou vasculaire périphérique (ischémie de membre).</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Orientation topographique :</strong> L'atteinte centrale associe signes corticaux, pyramidaux ou niveau sensitif net. L'atteinte périphérique est radiculaire ou tronculaire avec diminution de ROT. L'atteinte de la jonction est motrice pure et fluctuante. L'atteinte musculaire est proximale et bilatérale avec ROT conservés.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Règle de sécurité de la Ponction Lombaire :</strong> En présence d'un déficit neurologique focal, la ponction lombaire est formellement contre-indiquée avant d'avoir réalisé une imagerie cérébrale (ou médullaire) préalable excluant un processus expansif et un risque d'engagement.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Urgences vitales à identifier immédiatement :</strong> AVC (recherche d'occlusion en urgence pour revascularisation), syndrome médullaire aigu / queue de cheval (compression chirurgicale), Guillain-Barré (risques respiratoires/fausses routes), et crise myasthénique (paralysie respiratoire).</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Un déficit moteur ou sensitif transitoire d'installation brutale d'emblée maximale doit être considéré comme un AIT et faire l'objet d'un bilan d'urgence (FDRV, ECG, imagerie) pour prévenir un infarctus cérébral constitué.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège Thérapeutique Gayet-Wernicke :</strong> Ne jamais perfuser de sérum glucosé avant d'avoir injecté de la vitamine B1 parentérale chez un patient suspect de carence (dénutri, alcoolique chronique), au risque de déclencher une crise aiguë irréversible.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

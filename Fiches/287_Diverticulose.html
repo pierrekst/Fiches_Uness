@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+:root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #f59e0b;
+    --bg-color: transparent;
+    --text-color: #333;
+    --card-bg: #fff;
+    --border-color: #e5e7eb;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #f3f4f6;
+        --card-bg: #1f2937;
+        --border-color: #374151;
+    }
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.complication-card {
+    border-left: 4px solid var(--purple);
+}
+
+.badge-a {
+    background-color: var(--coral);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.badge-b {
+    background-color: var(--blue);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 12px;
+    vertical-align: middle;
+}
+
+.oic-code {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 4px;
+    margin-bottom: 16px;
+    font-family: monospace;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    color: var(--purple);
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+h2 svg {
+    margin-right: 10px;
+    width: 28px;
+    height: 28px;
+}
+
+h3 {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.alert {
+    padding: 16px;
+    border-radius: 12px;
+    margin: 16px 0;
+    font-size: 0.95rem;
+}
+
+.alert-urgence { 
+    background-color: rgba(226, 75, 74, 0.1); 
+    color: var(--red); 
+    border-left: 4px solid var(--red); 
+}
+
+.alert-info { 
+    background-color: rgba(55, 138, 221, 0.1); 
+    color: var(--blue); 
+    border-left: 4px solid var(--blue); 
+}
+
+.alert-synthese { 
+    background-color: rgba(29, 158, 117, 0.1); 
+    color: var(--teal); 
+    border-left: 4px solid var(--teal); 
+}
+
+.alert-piege { 
+    background-color: rgba(245, 158, 11, 0.1); 
+    color: #b45309; 
+    border-left: 4px solid var(--amber); 
+}
+
+@media (prefers-color-scheme: dark) {
+    .alert-urgence { color: #fca5a5; }
+    .alert-info { color: #93c5fd; }
+    .alert-synthese { color: #6ee7b7; }
+    .alert-piege { color: #fcd34d; }
+}
+
+.pill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin: 4px 4px 4px 0;
+    color: white;
+}
+.pill-red { background-color: var(--red); }
+.pill-blue { background-color: var(--blue); }
+.pill-green { background-color: var(--teal); }
+.pill-amber { background-color: var(--amber); }
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+}
+th, td {
+    border: 0.5px solid var(--border-color);
+    padding: 10px 14px;
+    text-align: left;
+}
+th {
+    background-color: rgba(0,0,0,0.03);
+    font-weight: 600;
+}
+@media (prefers-color-scheme: dark) {
+    th { background-color: rgba(255,255,255,0.03); }
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.step-number {
+    width: 26px;
+    height: 26px;
+    background-color: #9ca3af;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-right: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.step-content {
+    flex-grow: 1;
+}
+
+ul {
+    padding-left: 20px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 40px 0;
+}
+
+.key-value {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border-color);
+    padding: 8px 0;
+}
+.key-value:last-child {
+    border-bottom: none;
+}
+.key { font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="card alert-info" style="border: 0.5px solid var(--border-color); border-left: 4px solid var(--blue);">
+    <h3 style="margin-top:0;">Objectifs OIC - Item 287</h3>
+    <ul>
+        <li><b>OIC-287-01-A :</b> Connaître la définition d'un diverticule, de la diverticulose, de la diverticulite, de la diverticulite compliquée (abcès, péritonite, fistule, hémorragie, sténose)</li>
+        <li><b>OIC-287-02-B :</b> Connaître l'incidence de la diverticulose et son histoire naturelle</li>
+        <li><b>OIC-287-03-B :</b> Connaître la physiopathologie de la maladie diverticulaire et de ses complications</li>
+        <li><b>OIC-287-04-A :</b> Connaître les modalités du diagnostic d'un diverticule, d'une diverticulose, d'une diverticulite, d'une diverticulite compliquée</li>
+        <li><b>OIC-287-05-A :</b> Connaître le diagnostic différentiel d'une diverticule, d'une diverticulose, d'une diverticulite, d'une diverticulite compliquée</li>
+        <li><b>OIC-287-06-A :</b> Identifier les signes de gravité des deux urgences compliquant une maladie diverticulaire : une péritonite perforée et une hémorragie diverticulaire</li>
+        <li><b>OIC-287-07-B :</b> Connaître les facteurs de risque de complication</li>
+        <li><b>OIC-287-08-B :</b> Connaître l'indication des examens d'imagerie dans la maladie diverticulaire et ses complications</li>
+        <li><b>OIC-287-09-B :</b> Connaître la sémiologie radiologique de la diverticulose et de ses complications</li>
+        <li><b>OIC-287-10-A :</b> Connaître les principes de la prise en charge médicale d'une diverticulite aiguë non compliquée</li>
+        <li><b>OIC-287-11-B :</b> Connaître la prise en charge médicale initiale d'une diverticulite aiguë compliquée</li>
+        <li><b>OIC-287-12-A :</b> Connaître les indications d'une prise en charge chirurgicale d'une maladie diverticulaire et de ses complications</li>
+    </ul>
+</div>
+
+<hr>
+
+<div class="card">
+    <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+            <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+            <line x1="3" y1="6" x2="3" y2="19"></line>
+            <line x1="12" y1="6" x2="12" y2="19"></line>
+            <line x1="21" y1="6" x2="21" y2="19"></line>
+        </svg>
+        1. Généralités (Définitions, Épidémiologie, Physiopathologie)
+    </h2>
+
+    <h3>Définitions <span class="badge-a">Rang A</span></h3>
+    <span class="oic-code">OIC-287-01-A</span>
+    
+    <div class="grid-2">
+        <div>
+            <p><b>Diverticule colique :</b> Hernie acquise de la muqueuse et sous-muqueuse à travers une zone de faiblesse de la paroi musculeuse du côlon.</p>
+            <p><b>Diverticulose du côlon :</b> État asymptomatique (présence de plusieurs diverticules).</p>
+        </div>
+        <div>
+            <p><b>Maladie diverticulaire</b>, inclut :</p>
+            <ul>
+                <li>Diverticulite (inflammation/infection)</li>
+                <li>Diverticulite compliquée : abcès, fistule, péritonite, sténose</li>
+                <li>Hémorragie d'origine diverticulaire</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Incidence et physiopathologie <span class="badge-b">Rang B</span></h3>
+    <span class="oic-code">OIC-287-02-B | OIC-287-03-B</span>
+
+    <div class="key-value">
+        <span class="key">Prévalence globale</span>
+        <span>20-35 % (augmente avec l'âge : 50% à 50 ans, 60-80% après 85 ans)</span>
+    </div>
+    <div class="key-value">
+        <span class="key">Localisation préférentielle</span>
+        <span>Sigmoïde (tout le cadre colique possible sauf rectum)</span>
+    </div>
+    
+    <div class="alert alert-info">
+        <b>Mécanisme :</b> Régime pauvre en fibres ➔ troubles moteurs ➔ contractions excessives & pressions fortes (faible volume du bol fécal).
+    </div>
+
+    <p><b>Facteurs favorisants de la diverticulose :</b> <span class="pill pill-amber">Tabac</span> <span class="pill pill-amber">Obésité</span> <span class="pill pill-amber">Constipation</span> <span class="pill pill-amber">Sédentarité</span></p>
+</div>
+
+<hr>
+
+<div class="card">
+    <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-stethoscope" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5h0a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1"></path>
+            <path d="M8 15a6 6 0 1 0 12 0v-3"></path>
+            <path d="M11 3v2"></path>
+            <path d="M6 3v2"></path>
+            <circle cx="20" cy="10" r="2"></circle>
+        </svg>
+        2. Démarche Diagnostique
+    </h2>
+
+    <h3>Diagnostic clinique <span class="badge-a">Rang A</span></h3>
+    <span class="oic-code">OIC-287-04-A</span>
+    
+    <ul>
+        <li><b>Diverticulose :</b> Asymptomatique (découverte fortuite colo/scanner).</li>
+        <li><b>Diverticulite :</b> Douleur Fosse Iliaque Gauche (FIG), fièvre, troubles du transit.</li>
+        <li><b>Diverticulite compliquée :</b> Défense/douleur décompression (abcès), contracture (péritonite), signes urinaires (fistule), rectorragie/hématochézie (hémorragie).</li>
+    </ul>
+
+    <h3>Diagnostic différentiel <span class="badge-a">Rang A</span></h3>
+    <span class="oic-code">OIC-287-05-A</span>
+    <p>Toutes causes de douleurs en FIG :</p>
+    <div class="grid-2">
+        <div>
+            <b>Coliques :</b>
+            <br><span class="pill pill-blue">Appendicite ectopique</span> <span class="pill pill-blue">Cancer du côlon</span> <span class="pill pill-blue">Colite (ischémique, bactérienne)</span> <span class="pill pill-blue">MICI</span>
+        </div>
+        <div>
+            <b>Extra-coliques :</b>
+            <br><span class="pill pill-blue">Salpingite</span> <span class="pill pill-blue">GEU</span>
+        </div>
+    </div>
+
+    <h3>Imagerie et Sémiologie <span class="badge-b">Rang B</span></h3>
+    <span class="oic-code">OIC-287-08-B | OIC-287-09-B</span>
+
+    <div class="alert alert-urgence">
+        <b>Contre-indication absolue :</b> Coloscopie précoce pendant la phase aiguë d'une diverticulite sigmoïdienne.
+    </div>
+
+    <table>
+        <tr>
+            <th>Examen de référence</th>
+            <td><b>Scanner abdomino-pelvien avec injection</b> (à discuter à chaque épisode)</td>
+        </tr>
+        <tr>
+            <th>Signes Scanner (Non compliquée)</th>
+            <td>Épaississement paroi + infiltration graisse péri-diverticulaire</td>
+        </tr>
+        <tr>
+            <th>Exploration Hémorragie</th>
+            <td>Éliminer d'abord cause haute/ano-périnéale. Coloscopie totale dans les 72h si hémodynamique stable. Angio-TDM rare.</td>
+        </tr>
+    </table>
+
+    <div class="card complication-card">
+        <h4>Classification de Hinchey (Gravité radioclinique)</h4>
+        <ul>
+            <li><b>Stade I :</b> Phlegmon ou abcès péricolique</li>
+            <li><b>Stade II :</b> Abcès pelvien, abdominal ou rétropéritonéal (péritonite localisée)</li>
+            <li><b>Stade III :</b> Péritonite généralisée purulente</li>
+            <li><b>Stade IV :</b> Péritonite fécale</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
+
+<div class="card complication-card">
+    <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alert-triangle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 9v2m0 4v.01"></path>
+            <path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75"></path>
+        </svg>
+        3. Complications et Signes de Gravité
+    </h2>
+
+    <h3>Signes de gravité des urgences <span class="badge-a">Rang A</span></h3>
+    <span class="oic-code">OIC-287-06-A</span>
+
+    <div class="grid-2">
+        <div>
+            <b>Péritonite perforée</b>
+            <ul>
+                <li>Signe essentiel : <b>Contracture abdominale</b>.</li>
+                <li>Péritonite en 2 temps : (1) Abcès localisé (2) Péritonite généralisée avec sepsis/choc (stercorale) et iléus.</li>
+            </ul>
+        </div>
+        <div>
+            <b>Hémorragie diverticulaire</b>
+            <ul>
+                <li>Souvent abondante, sang rouge avec caillots.</li>
+                <li>Tachycardie initiale puis <b>Choc hémodynamique</b> (hypotension, marbrures, oligurie, obnubilation).</li>
+                <li>Cède spontanément dans 80% des cas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Facteurs de risque de complication <span class="badge-b">Rang B</span></h3>
+    <span class="oic-code">OIC-287-07-B</span>
+    
+    <div class="alert alert-piege">
+        Certains médicaments peuvent masquer la clinique initiale !
+    </div>
+    
+    <p>Médicaments dits « diverticulo-toxiques » favorisant les complications :</p>
+    <p>
+        <span class="pill pill-red">AINS</span>
+        <span class="pill pill-red">Corticoïdes</span>
+        <span class="pill pill-red">Immunodépresseurs</span>
+    </p>
+    <p>Facteurs de risque de l'hémorragie :</p>
+    <p>
+        <span class="pill pill-red">AINS</span>
+        <span class="pill pill-red">Antiagrégants</span>
+        <span class="pill pill-red">Anticoagulants</span>
+    </p>
+</div>
+
+<hr>
+
+<div class="card">
+    <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pill" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M4.5 12.5l8 -8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1 -7 -7"></path>
+            <line x1="8.5" y1="8.5" x2="15.5" y2="15.5"></line>
+        </svg>
+        4. Prise en charge Thérapeutique
+    </h2>
+
+    <h3>Traitement Médical <span class="badge-a">Rang A</span> <span class="badge-b">Rang B</span></h3>
+    <span class="oic-code">OIC-287-10-A | OIC-287-11-B</span>
+
+    <div class="grid-2">
+        <div class="card" style="margin-bottom:0; box-shadow:none;">
+            <h4>Non compliquée (Ambulatoire)</h4>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content"><b>Symptomatique pur :</b> si patient sans comorbidité, sans critères de gravité, sans immunosuppression, ASA ≤ 3. Alimentation non restrictive tolérée.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content"><b>Antibiothérapie PO (7j max) :</b> si échec symptomatique. <br>Amox-Ac. clavulanique <i>ou</i> FQ + Métronidazole.</div>
+            </div>
+        </div>
+        
+        <div class="card" style="margin-bottom:0; box-shadow:none; border-left: 4px solid var(--purple)">
+            <h4>Compliquée ou à risque (Hospitalisation)</h4>
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content"><b>Antibiothérapie IV (7 à 15j) :</b> Amox-Ac. clavulanique + Gentamicine <i>ou</i> C3G + Métronidazole.</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content"><b>Drainage radio :</b> des abcès si faisable.</div>
+            </div>
+        </div>
+    </div>
+
+    <h3>Prise en charge Chirurgicale <span class="badge-a">Rang A</span></h3>
+    <span class="oic-code">OIC-287-12-A</span>
+
+    <table>
+        <tr>
+            <th>Chirurgie en Urgence</th>
+            <td>
+                <ul>
+                    <li>Péritonite diverticulaire ou échec du traitement médical.</li>
+                    <li><b>Intervention de Hartmann</b> (colectomie G + colostomie) UNIQUEMENT si : instabilité hémodynamique ou comorbidité sévère (insuffisance rénale terminale, ASA > 3, immunosuppression).</li>
+                    <li>Sinon : résection sigmoïdienne élective + anastomose protégée (iléostomie).</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Chirurgie Élective ("à froid")</th>
+            <td>
+                Discutée si symptômes persistants, récidives fréquentes, après complication (abcès), fistule, sténose, ou chez patient immunodéprimé/IRC. <br><i>(À réaliser au moins 2 mois après la dernière poussée).</i>
+            </td>
+        </tr>
+        <tr>
+            <th>Hémorragie</th>
+            <td>Colectomie segmentaire (si site identifié) ou subtotale (en cas d'échec endoscopique/radio).</td>
+        </tr>
+    </table>
+
+    <div class="alert alert-synthese">
+        <b>Suivi et Prévention :</b><br>
+        - Coloscopie au décours d'un épisode <b>compliqué</b> recommandée (ou si chirurgie à froid indiquée).<br>
+        - Pas d'imagerie ni de coloscopie systématique de contrôle pour les formes non compliquées avec évolution favorable.<br>
+        - Aucun régime ou probiotique n'est recommandé pour prévenir les récidives.
+    </div>
+</div>
+
+</body>
+</html>

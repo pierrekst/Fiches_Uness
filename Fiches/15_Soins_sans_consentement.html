@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 15 — Soins psychiatriques sans consentement</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1a1d23;
+    --text2: #4b5563;
+    --border: #e2e6ea;
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --purple-light: #edeafc;
+    --teal-light: #d0f4ea;
+    --coral-light: #fce8e0;
+    --blue-light: #ddeeff;
+    --red-light: #fde8e8;
+    --amber-light: #fef3c7;
+    --radius: 14px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1117; --card: #1c1f2a; --text: #e8eaf0; --text2: #9aa3b2; --border: #2d3240;
+      --purple-light: #2a2560; --teal-light: #0d4a36; --coral-light: #5c2510;
+      --blue-light: #153a6b; --red-light: #5a1a1a; --amber-light: #4a2e00;
+      --shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13.5px; line-height: 1.5; padding: 24px 16px 48px; }
+  
+  .page { max-width: 920px; margin: 0 auto; }
+
+  /* HEADER */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px 24px; color: #fff; margin-bottom: 24px; }
+  .header-item { font-size:.78rem; font-weight:600; letter-spacing:.08em; opacity:.82; text-transform:uppercase; margin-bottom:6px; }
+  .header-title { font-size:1.65rem; font-weight:800; line-height:1.2; margin-bottom:14px; }
+  .header-summary { font-size:.88rem; opacity:.92; line-height:1.6; max-width:780px; }
+
+  /* VISION GLOBALE */
+  .vision-box { background:var(--purple-light); border:.5px solid var(--border); border-radius:14px; padding:18px 22px; margin-bottom:24px; }
+  .vision-box strong { color:var(--purple); }
+
+  /* SECTION STRUCTURE */
+  .section-block { margin-bottom: 0; }
+  .section-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+  .section-badge { width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .section-badge svg { width:17px; height:17px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .section-title-text { font-size:1.05rem; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+
+  hr { border:none; border-top:1.5px solid var(--border); margin:26px 0; }
+
+  /* GRID SYSTEM */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  @media(max-width:768px) { .grid2,.grid3 { grid-template-columns:1fr; } }
+
+  /* CARDS */
+  .card { background:var(--card); border:.5px solid var(--border); border-radius:14px; padding:16px 18px; height: 100%; display: flex; flex-direction: column; box-shadow: var(--shadow); }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* KEY-VALUE ROW */
+  .kv-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:.5px solid var(--border); gap:12px; }
+  .kv-row:last-child { border-bottom:none; }
+  .kv-key { color:var(--text2); font-size:.82rem; flex:1; }
+  .kv-val { font-weight:700; font-size:.85rem; text-align:right; }
+
+  /* PILLS & BADGES */
+  .pill-wrap { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+  .pill { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.78rem; font-weight:600; white-space:nowrap; }
+  .pill-green { background:var(--teal-light); color:var(--teal); }
+  .pill-red { background:var(--red-light); color:var(--red); }
+  .pill-blue { background:var(--blue-light); color:var(--blue); }
+  .pill-amber { background:var(--amber-light); color:var(--amber); }
+  .pill-purple { background:var(--purple-light); color:var(--purple); }
+  .pill-coral { background:var(--coral-light); color:var(--coral); }
+
+  /* ALERTES */
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert-icon { flex-shrink:0; margin-top:1px; }
+  .alert-icon svg { width:15px; height:15px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red { background:var(--red-light); color:var(--red); border-left:3px solid var(--red); }
+  .alert-red .alert-icon svg { stroke:var(--red); }
+  .alert-blue { background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-blue .alert-icon svg { stroke:var(--blue); }
+  .alert-green { background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-green .alert-icon svg { stroke:var(--teal); }
+  .alert-teal { background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-teal .alert-icon svg { stroke:var(--teal); }
+  .alert-amber { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert strong { font-weight:800; }
+
+  /* COMPLICATIONS CARD (LEFT BORDER COLOR) */
+  .left-card { background:var(--card); border:.5px solid var(--border); border-radius:12px; padding:12px 14px; border-left:4px solid var(--border); margin-bottom:10px; }
+  .left-card:last-child { margin-bottom: 0; }
+  .left-card.purple { border-left-color:var(--purple); }
+  .left-card.teal { border-left-color:var(--teal); }
+  .left-card.coral { border-left-color:var(--coral); }
+  .left-card.blue { border-left-color:var(--blue); }
+  .left-card.red { border-left-color:var(--red); }
+  .left-card.amber { border-left-color:var(--amber); }
+  .left-card h4 { font-size:.84rem; font-weight:700; margin-bottom:4px; }
+  .left-card p { font-size:.82rem; color:var(--text2); }
+
+  /* TABLES */
+  table { width:100%; border-collapse:collapse; font-size:.82rem; margin-bottom: 10px; }
+  th { background:var(--bg); color:var(--text2); font-weight:700; padding:8px 10px; text-align:left; border-bottom:1px solid var(--border); font-size:.73rem; text-transform:uppercase; }
+  td { padding:8px 10px; border-bottom:.5px solid var(--border); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(83, 74, 183, 0.02); }
+
+  /* LISTS */
+  ul.list { list-style:none; padding:0; }
+  ul.list li { padding:3px 0 3px 14px; font-size:.83rem; position:relative; }
+  ul.list li::before { content:'—'; position:absolute; left:0; color:var(--text2); }
+
+  .badge { display:inline-block; padding:2px 8px; border-radius:6px; font-size:.75rem; font-weight:700; margin-left:4px; }
+  .badge-red { background:var(--red-light); color:var(--red); }
+  .badge-blue { background:var(--blue-light); color:var(--blue); }
+  .badge-amber { background:var(--amber-light); color:var(--amber); }
+  .badge-teal { background:var(--teal-light); color:var(--teal); }
+
+  .tag-title { font-size:.72rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; margin-bottom:7px; color:var(--text2); margin-top: 10px; }
+  
+  /* CHRONOLOGY STEPS */
+  .step-wrap { display:flex; flex-direction:column; gap:8px; }
+  .step-row { display:flex; gap:10px; align-items:flex-start; font-size:.83rem; }
+  .step-num { width:22px; height:22px; border-radius:50%; background:var(--bg); border:.5px solid var(--border); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.75rem; flex-shrink:0; color:var(--text2); }
+  .step-content { flex:1; padding-top:2px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-item">Item 15 — Psychiatrie / Médecine Légale</div>
+    <div class="header-title">Soins psychiatriques sans consentement (SPSC)</div>
+    <div class="header-summary">
+      Fiche de révision ultra-dense couvrant le cadre légal (lois de 2011/2013), les conditions d'admission (SPDT, SPDTu, SPPI, SPDRE), le suivi et la surveillance chronologique (JLD, certificats de 24h/72h), les droits des patients et l'Ordonnance de Placement Provisoire (OPP) pour les mineurs.
+    </div>
+  </div>
+
+  <!-- VISION GLOBALE -->
+  <div class="vision-box">
+    <strong>Vue d'ensemble pédagogique</strong><br>
+    En psychiatrie, le recueil du <strong>consentement libre et éclairé</strong> est le principe fondamental commun à toutes les spécialités médicales. Toutefois, les troubles mentaux peuvent altérer gravement la capacité de jugement et le rapport à la réalité. La loi du <strong>5 juillet 2011</strong> (modifiée par celle du 27 septembre 2013) régit les situations d'exception où des soins psychiatriques peuvent être imposés sans le consentement du patient, sous un contrôle judiciaire strict garantissant la protection des libertés individuelles. Ces procédures concernent environ <strong>95 000 personnes par an</strong> (25% des hospitalisations en psychiatrie).
+  </div>
+
+  <!-- ==================== PARTIE 1 : PRINCIPES ET CADRE GÉNÉRAL ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--purple)">1. Principes généraux et cadre légal</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Les Certificats Médicaux -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--purple)">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          Règles d'or des certificats médicaux
+        </div>
+        <div class="alert alert-red" style="margin-bottom:10px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><strong>Règle absolue d'incompatibilité :</strong> Le médecin certificateur ne doit avoir aucun lien de parenté ou d'alliance au <strong>4ème degré inclusivement</strong> avec : le directeur de l'établissement d'accueil, le tiers demandeur, le patient lui-même, ou l'autre médecin certificateur.</div>
+        </div>
+        <ul class="list">
+          <li><strong>Examen réel obligatoire :</strong> Le certificat doit découler d'un examen clinique direct du patient, être signé et <strong>explicitement horodaté</strong>.</li>
+          <li><strong>Description clinique :</strong> Doit détailler de façon précise et circonstanciée l'état mental du patient et la justification de la mesure.</li>
+          <li><strong>Secret médical préservé :</strong> Il n'est <strong>pas nécessaire</strong> (ni recommandé) de mentionner un diagnostic nosographique précis (ex. schizophrénie) mais plutôt de décrire les troubles comportementaux et cliniques.</li>
+          <li><strong>Titres requis :</strong> Les certificats initiaux peuvent être faits par tout médecin thésé inscrit à l'Ordre. Les certificats suivants de suivi doivent obligatoirement être établis par un <strong>psychiatre thésé</strong>.</li>
+          <li><strong>Établissements agréés :</strong> Seuls les hôpitaux autorisés par l'ARS à assurer des soins psychiatriques sans consentement peuvent accueillir ces patients.</li>
+        </ul>
+      </div>
+
+      <!-- Droits des patients -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--blue)">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          Préservation des libertés et droits
+        </div>
+        <div class="alert alert-blue" style="margin-bottom:10px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div><strong>Principe de proportionnalité :</strong> Seules les restrictions de liberté strictement nécessaires, adaptées et proportionnées à l'état du patient et aux exigences de soins sont autorisées.</div>
+        </div>
+        <p style="font-size:.82rem;color:var(--text2);margin-bottom:8px;">Le patient conserve l'intégralité des droits civiques et individuels suivants :</p>
+        <div class="left-card blue">
+          <h4>Droits juridiques et de communication</h4>
+          <ul class="list">
+            <li>Consulter le médecin ou l'<strong>avocat de son choix</strong> (avocat obligatoire lors des audiences du JLD).</li>
+            <li>Communiquer avec les parlementaires (députés, sénateurs), le CGLPL (Contrôleur général des lieux de privation de liberté), la CDSP ou le défenseur des droits.</li>
+            <li>Émettre et recevoir du courrier sans aucun contrôle de l'établissement.</li>
+            <li>Voter aux élections et pratiquer la religion de son choix.</li>
+          </ul>
+        </div>
+        <div class="left-card purple">
+          <h4>Droit à l'information et avis</h4>
+          <ul class="list">
+            <li>Être informé de toute décision administrative concernant sa mesure (transmission de copies des arrêtés et décisions).</li>
+            <li>Recherche de son avis et de son consentement aux soins (à tracer obligatoirement dans le dossier médical).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 2 : LES 4 PROCÉDURES SPSC ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--teal)">2. Les 4 procédures d'admission sans consentement</div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Tableau comparatif des mesures d'admission (Loi de juillet 2011)
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:20%">Procédure</th>
+            <th style="width:25%">Conditions cliniques</th>
+            <th style="width:30%">Pièces réglementaires requises</th>
+            <th style="width:25%">Décision administrative</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>SPDT</strong><br><span style="font-size:.73rem;color:var(--text2);">Demande de tiers classique (Art. L3212-1-II-1)</span></td>
+            <td>
+              1. Troubles mentaux rendant <strong>impossible le consentement</strong> aux soins.<br>
+              2. État imposant des <strong>soins immédiats</strong> assortis d'une surveillance médicale constante.
+            </td>
+            <td>
+              - <strong>2 Certificats Médicaux (CM)</strong> de moins de 15 jours : le 1er fait par un médecin n'exerçant pas dans l'établissement d'accueil, le 2ème confirmant le premier.<br>
+              - <strong>Demande de tiers manuscrite</strong> signée + copie de sa pièce d'identité.
+            </td>
+            <td style="vertical-align:middle; text-align:center;">
+              <strong>Directeur d'établissement</strong> (après vérification d'identité et de la validité des pièces).
+            </td>
+          </tr>
+          <tr>
+            <td><strong>SPDTu</strong><br><span style="font-size:.73rem;color:var(--text2);">Demande de tiers en Urgence (Art. L3212-3)</span></td>
+            <td>
+              Mêmes conditions que le SPDT + existence d'un <strong>risque grave d'atteinte à l'intégrité</strong> de la personne (justifié par le médecin).
+            </td>
+            <td>
+              - <strong>1 seul Certificat Médical</strong> (médecin pouvant appartenir à l'établissement).<br>
+              - <strong>Demande de tiers manuscrite</strong> + pièce d'identité.
+            </td>
+            <td style="vertical-align:middle; text-align:center;">
+              <strong>Directeur d'établissement</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>SPPI</strong><br><span style="font-size:.73rem;color:var(--text2);">Péril Imminent (Art. L3212-1-II-2)</span></td>
+            <td>
+              Troubles mentaux rendant le consentement impossible, soins immédiats requis + existence d'un <strong>péril imminent</strong> pour la vie ou la santé du patient. Impossible de trouver un tiers (proches introuvables).
+            </td>
+            <td>
+              - <strong>1 seul Certificat Médical</strong> par un médecin n'exerçant pas dans l'établissement d'accueil.<br>
+              - <strong>Relevé obligatoire des démarches</strong> entreprises pour rechercher et informer la famille/proches.
+            </td>
+            <td style="vertical-align:middle; text-align:center;">
+              <strong>Directeur d'établissement</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>SPDRE</strong><br><span style="font-size:.73rem;color:var(--text2);">Décision du Représentant de l'État (Art. L3213-1)</span></td>
+            <td>
+              Troubles mentaux nécessitant des soins immédiats ET <strong>compromettant la sûreté des personnes</strong> ou portant atteinte, de façon grave, à l'<strong>ordre public</strong>.
+            </td>
+            <td>
+              - <strong>1 Certificat Médical</strong> par un médecin n'exerçant pas dans l'établissement d'accueil.<br>
+              - <em>Si danger imminent :</em> avis médical (CM) d'un médecin justifiant la mesure pour le maire.
+            </td>
+            <td style="vertical-align:middle; text-align:center;">
+              <strong>Arrêté du Préfet</strong> (ou arrêté du Maire si danger imminent, avec obligation de confirmation préfectorale sous 48h).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-blue" style="margin-top:8px;">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+        <div><strong>Définition du tiers :</strong> Membre de la famille du patient ou personne ayant des relations antérieures à la demande de soins (voisin, ami, tuteur), <strong>à l'exclusion formelle</strong> de tout membre du personnel soignant de l'établissement d'accueil. Il est tenu informé des décisions d'orientation ou de sortie de courte durée.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 3 : DÉROULEMENT ET SURVEILLANCE ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--coral)">3. Déroulement chronologique et surveillance</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Les premières 72h -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--coral)">
+            <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          La période initiale d'observation
+        </div>
+        <div class="alert alert-amber" style="margin-bottom:10px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div>Toutes les admissions SPSC débutent obligatoirement par <strong>72 heures d'hospitalisation complète continue</strong>. Aucun programme de soins ambulatoires ne peut être mis en place durant cette période d'observation.</div>
+        </div>
+        <div class="step-wrap">
+          <div class="step-row">
+            <div class="step-num">24h</div>
+            <div class="step-content">
+              <strong>Certificat de 24h &amp; Examen somatique :</strong><br>
+              Un médecin thésé doit réaliser un <strong>examen clinique somatique complet</strong> dans les 24h (tracé au dossier). Un psychiatre de l'établissement d'accueil rédige le CM de 24h confirmant ou non la nécessité du maintien.
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">72h</div>
+            <div class="step-content">
+              <strong>Certificat des 72h :</strong><br>
+              Rédigé par un psychiatre. Il décide de l'orientation : soit poursuite de l'hospitalisation complète, soit proposition d'un <strong>Programme de soins (PS)</strong> ambulatoire (soins à domicile, hôpital de jour, consultations régulières, hospitalisations séquentielles).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Le suivi au long cours -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--blue)">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2l4 -4M7.5 8H16.5M7.5 12H16.5M7.5 16H16.5"/></svg>
+          </div>
+          Suivi médico-légal et maintien
+        </div>
+        <div class="step-wrap">
+          <div class="step-row">
+            <div class="step-num">J8</div>
+            <div class="step-content">
+              <strong>Avis motivé de J6 à J8 :</strong> Rédigé par un psychiatre de l'établissement pour faire le point sur la nécessité de maintenir la mesure avant l'audience.
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">J12</div>
+            <div class="step-content">
+              <strong>Audience obligatoire du JLD :</strong> Le Juge des Libertés et de la Détention contrôle le bien-fondé de la privation de liberté. Il statue sur le maintien de l'hospitalisation complète. <strong>Avocat obligatoire</strong> (commis d'office si besoin).
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">M1</div>
+            <div class="step-content">
+              <strong>Certificat mensuel :</strong> Chaque mois, un psychiatre de l'établissement doit rédiger un CM de maintien de la mesure, faute de quoi elle est levée de plein droit.
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">M6</div>
+            <div class="step-content">
+              <strong>JLD à 6 mois :</strong> Renouvellement de l'audience obligatoire du JLD tous les 6 mois en cas d'hospitalisation complète prolongée.
+            </div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">1an</div>
+            <div class="step-content">
+              <strong>Collège pluridisciplinaire :</strong> Au bout d'un an, maintien décidé après avis obligatoire d'un collège composé de 3 personnes (dont 1 psychiatre, 1 soignant et 1 membre administratif).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- La Levée des mesures -->
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Modalités de levée de la mesure
+      </div>
+      <div class="grid3">
+        <div class="left-card teal">
+          <h4>Levée médicale</h4>
+          <ul class="list">
+            <li><strong>Par le psychiatre :</strong> Un certificat médical de levée rédigé par un psychiatre de l'établissement d'accueil met fin immédiatement à la mesure (adresse au directeur ou préfet).</li>
+          </ul>
+        </div>
+        <div class="left-card blue">
+          <h4>Levée judiciaire et CDSP</h4>
+          <ul class="list">
+            <li><strong>Par le JLD :</strong> Peut prononcer la mainlevée à tout moment s'il estime la mesure non justifiée (saisi par le patient, sa famille, ou d'office).</li>
+            <li><strong>Par la CDSP :</strong> Commission Départementale des Soins Psychiatriques, peut demander la levée de la mesure après examen du dossier.</li>
+          </ul>
+        </div>
+        <div class="left-card coral">
+          <h4>À la demande d'un tiers</h4>
+          <ul class="list">
+            <li><strong>En SPDT / SPDTu :</strong> Le tiers demandeur peut solliciter par écrit la levée de la mesure.</li>
+            <li><strong>Droit d'opposition :</strong> Le psychiatre peut s'opposer à cette levée si l'arrêt des soins présente un <strong>péril imminent</strong> pour la vie du patient (la mesure est alors requalifiée).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== PARTIE 4 : OPP MINEURS ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--amber)">4. Ordonnance de placement provisoire (OPP) pour mineurs</div>
+    </div>
+
+    <div class="grid2" style="margin-bottom:14px">
+      <!-- Définition et cadre -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--amber)">
+            <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          </div>
+          Principes de l'OPP
+        </div>
+        <div class="left-card amber">
+          <h4>Définition et cadre légal</h4>
+          L'Ordonnance de Placement Provisoire (OPP) est régie par les articles <strong>375 et suivants du Code civil</strong> relatifs à l'assistance éducative. Elle permet le placement d'un mineur non émancipé dans une structure adaptée pour sa sécurité ou sa santé.
+        </div>
+        <div class="left-card blue">
+          <h4>Lieu de placement</h4>
+          Peut être prononcée auprès d'une personne de confiance, d'un service d'Aide Sociale à l'Enfance (ASE) ou d'un <strong>service de pédopsychiatrie</strong> hospitalier à des fins d'évaluation et de soins spécialisés.
+        </div>
+        <div class="left-card red">
+          <h4>Indications principales</h4>
+          Santé, sécurité ou moralité du mineur en danger physique ou psychologique immédiat, ou conditions d'éducation gravement compromises.
+        </div>
+      </div>
+
+      <!-- Procédures et parents -->
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--teal)">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          Modalités d'application et droits parentaux
+        </div>
+        <div class="alert alert-red" style="margin-bottom:10px">
+          <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div>En cas d'<strong>urgence extrême</strong>, le procureur de la République peut prendre la décision d'OPP de façon conservatoire, à charge de saisir le juge des enfants dans un délai strict de <strong>8 jours</strong> pour validation.</div>
+        </div>
+        <div class="left-card teal">
+          <h4>Procédure d'instauration</h4>
+          <ul class="list">
+            <li>Décidée par le <strong>juge des enfants</strong>.</li>
+            <li>Nécessite obligatoirement un <strong>avis médical préalable</strong> (Certificat médical circonstancié) établi par un médecin extérieur à la structure d'accueil.</li>
+            <li>Durée initiale de la mesure : <strong>moins de 15 jours</strong>.</li>
+            <li>Renouvelable par le juge pour une durée d'<strong>un mois renouvelable</strong> après obtention d'un certificat médical d'un psychiatre de l'établissement d'accueil.</li>
+          </ul>
+        </div>
+        <div class="left-card purple">
+          <h4>Droits des parents</h4>
+          <ul class="list">
+            <li>Les parents conservent leur <strong>autorité parentale</strong>.</li>
+            <li>Ils gardent un droit de correspondance, de visite et d'hébergement.</li>
+            <li>Le juge peut toutefois aménager ces droits dans l'intérêt du mineur (ex. visites médiatisées, suspension provisoire en cas de danger, anonymat du lieu d'accueil).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ==================== POINTS-CLÉS A RETENIR ==================== -->
+  <div class="section-block">
+    <div class="section-header">
+      <div class="section-badge" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="section-title-text" style="color:var(--teal)">5. Points-clés à retenir (Pièges ECNi)</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Synthèse pour le jour J
+      </div>
+      <div class="left-card red">
+        <h4>Incompatibilités médicales (Piège ECNi classique)</h4>
+        Ne jamais se porter certificateur pour un membre de sa famille, ni pour un patient si l'on a un lien de parenté/alliance avec le tiers demandeur ou le directeur de l'établissement.
+      </div>
+      <div class="left-card amber">
+        <h4>72 heures d'hospitalisation complète obligatoires</h4>
+        Aucun programme de soins (PS) ambulatoire ne peut être prescrit dès l'admission. La période de 72h en hospitalisation complète continue est <strong>d'ordre public</strong> et ne souffre aucune dérogation. Le PS n'est envisageable qu'à l'issue de ces 72h (CM des 72h).
+      </div>
+      <div class="left-card blue">
+        <h4>Avocat obligatoire</h4>
+        Toute personne faisant l'objet de soins sans consentement en hospitalisation complète doit être représentée par un avocat lors des audiences devant le JLD (à J12 et tous les 6 mois). C'est une obligation légale, la procédure est nulle sans avocat.
+      </div>
+      <div class="left-card purple">
+        <h4>Ordonnance de placement provisoire (OPP)</h4>
+        L'OPP est une décision de justice du Juge des enfants (ou Procureur en urgence avec saisine sous 8j), exigeant un certificat médical initial fait par un médecin extérieur, pour une durée de départ inférieure à 15 jours, puis renouvelable par périodes de 1 mois.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

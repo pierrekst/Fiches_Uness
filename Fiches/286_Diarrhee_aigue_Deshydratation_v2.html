@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 286 — Diarrhée aiguë et déshydratation</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --teal: #1D9E75;
+    --coral: #D85A30;
+    --blue: #378ADD;
+    --red: #E24B4A;
+    --amber: #D97706;
+    --bg: #f7f8fc;
+    --card-bg: #ffffff;
+    --text: #1a1d2e;
+    --text-muted: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --radius: 14px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111318;
+      --card-bg: #1c1f2a;
+      --text: #e8eaf0;
+      --text-muted: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+      --shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.87rem; line-height: 1.55; padding: 20px 16px 48px; max-width: 960px; margin: 0 auto; }
+
+  /* HEADER */
+  .page-header { background: linear-gradient(135deg, var(--purple) 0%, #7B6FD4 100%); border-radius: var(--radius); padding: 22px 24px 20px; margin-bottom: 6px; color: #fff; }
+  .page-header .item-tag { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .page-header h1 { font-size: 1.35rem; font-weight: 800; line-height: 1.25; margin-bottom: 10px; }
+  .page-header .overview { font-size: .82rem; opacity: .92; line-height: 1.6; background: rgba(255,255,255,0.12); border-radius: 9px; padding: 11px 14px; }
+
+  /* HR */
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 18px 0; }
+
+  /* CARDS */
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* COLOR VARIANTS */
+  .icon-purple { background: var(--purple); }
+  .icon-teal { background: var(--teal); }
+  .icon-coral { background: var(--coral); }
+  .icon-blue { background: var(--blue); }
+  .icon-red { background: var(--red); }
+  .icon-amber { background: var(--amber); }
+
+  /* SECTION HEADERS */
+  .section-title { font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); margin: 20px 0 10px; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 620px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* PILLS */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { display: inline-block; font-size: .74rem; font-weight: 600; border-radius: 20px; padding: 3px 10px; }
+  .pill-green { background: #d1fae5; color: #065f46; }
+  .pill-red { background: #fee2e2; color: #991b1b; }
+  .pill-blue { background: #dbeafe; color: #1e40af; }
+  .pill-amber { background: #fef3c7; color: #92400e; }
+  .pill-purple { background: #ede9fe; color: #4c1d95; }
+  .pill-coral { background: #ffedd5; color: #9a3412; }
+  @media (prefers-color-scheme: dark) {
+    .pill-green { background: #064e3b; color: #6ee7b7; }
+    .pill-red { background: #7f1d1d; color: #fca5a5; }
+    .pill-blue { background: #1e3a5f; color: #93c5fd; }
+    .pill-amber { background: #78350f; color: #fcd34d; }
+    .pill-purple { background: #3b0764; color: #c4b5fd; }
+    .pill-coral { background: #7c2d12; color: #fdba74; }
+  }
+
+  /* ALERTS */
+  .alert { border-radius: 9px; padding: 10px 13px; font-size: .82rem; margin: 8px 0; display: flex; gap: 9px; align-items: flex-start; }
+  .alert svg { flex-shrink: 0; margin-top: 1px; }
+  .alert-red { background: #fee2e2; color: #991b1b; border-left: 3px solid var(--red); }
+  .alert-blue { background: #dbeafe; color: #1e40af; border-left: 3px solid var(--blue); }
+  .alert-green { background: #d1fae5; color: #065f46; border-left: 3px solid var(--teal); }
+  .alert-amber { background: #fef3c7; color: #92400e; border-left: 3px solid var(--amber); }
+  @media (prefers-color-scheme: dark) {
+    .alert-red { background: #450a0a; color: #fca5a5; }
+    .alert-blue { background: #0c1e3d; color: #93c5fd; }
+    .alert-green { background: #052e16; color: #6ee7b7; }
+    .alert-amber { background: #3d1a00; color: #fcd34d; }
+  }
+
+  /* KV ROWS */
+  .kv-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .82rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); font-weight: 500; min-width: 140px; }
+  .kv-val { font-weight: 600; text-align: right; flex: 1; }
+
+  /* TABLE */
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  th { background: var(--bg); font-weight: 700; padding: 7px 9px; text-align: left; border-bottom: 1.5px solid var(--border); font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  td { padding: 6px 9px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(83,74,183,0.04); }
+
+  /* STEPS */
+  .steps { list-style: none; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: #e5e7eb; color: var(--text); font-weight: 800; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  @media (prefers-color-scheme: dark) { .step-num { background: #374151; } }
+  .step-content { padding-top: 3px; font-size: .83rem; }
+  .step-content strong { display: block; margin-bottom: 2px; }
+
+  /* COMPLICATION CARDS */
+  .compl-card { border-left: 3px solid var(--red); border-radius: 0 9px 9px 0; background: var(--card-bg); padding: 10px 13px; margin-bottom: 8px; border-top: 0.5px solid var(--border); border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .compl-card.amber { border-left-color: var(--amber); }
+  .compl-card.blue { border-left-color: var(--blue); }
+  .compl-card.teal { border-left-color: var(--teal); }
+  .compl-card-title { font-weight: 700; font-size: .84rem; margin-bottom: 4px; }
+
+  /* BULLET LIST */
+  ul.ul-clean { list-style: none; }
+  ul.ul-clean li { padding: 3px 0 3px 14px; position: relative; font-size: .83rem; }
+  ul.ul-clean li::before { content: ''; position: absolute; left: 0; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="item-tag">Item 286 · Gastro-entérologie · Pédiatrie</div>
+  <h1>Diarrhée aiguë et déshydratation<br>chez le nourrisson, l'enfant et l'adulte</h1>
+  <div class="overview">
+    <strong>Vision globale du chapitre :</strong> Savoir définir et classer une diarrhée aiguë (liquidienne vs dysentérique), identifier le mécanisme (entéro-invasif vs toxinique) à l'interrogatoire et à l'examen, connaître les germes des TIAC et leurs délais d'incubation, gérer les deux catégories de diarrhée aux antibiotiques (bénigne vs colite à <em>C. difficile</em>), reconnaître et quantifier une déshydratation (adulte + enfant), et mettre en place une réhydratation et une antibiothérapie ciblée — avec une vigilance particulière chez le nourrisson où la déshydratation sévère est une urgence vitale.
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 1. DÉFINITIONS ==================== -->
+<div class="section-title">Définitions fondamentales</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-purple">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Diarrhée aiguë
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">&gt; 3 selles/j, très molles à liquides</span></div>
+    <div class="kv-row"><span class="kv-key">Début</span><span class="kv-val">Brutal</span></div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">&lt; 14 jours</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-coral">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Syndrome dysentérique
+    </div>
+    <ul class="ul-clean">
+      <li>Lésions de la muqueuse colique/iléo-colique (ulcérations)</li>
+      <li>Évacuations <strong>afécales</strong> : glaireuses, sanglantes, mucus, pus</li>
+      <li><strong>Ténesme</strong> : tension douloureuse anale péri-évacuatoire</li>
+      <li><strong>Épreintes</strong> (si sigmoïde) : spasmes FIG soulagés à l'évacuation</li>
+      <li>Faux besoins constants</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 2. ÉPIDÉMIOLOGIE ==================== -->
+<div class="section-title">Épidémiologie</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-blue">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Chiffres-clés
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Consultations/an (France)</span><span class="kv-val">3 millions (5% des Français)</span></div>
+      <div class="kv-row"><span class="kv-key">Gastroentérites/an (France)</span><span class="kv-val">~20 millions de cas</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Turista (diarrhée du voyageur)</span><span class="kv-val">50 à 200 millions/an</span></div>
+      <div class="kv-row"><span class="kv-key">Évolution</span><span class="kv-val">Spontanément résolutive dans la majorité des cas</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 3. MÉCANISMES ET ORIENTATION ==================== -->
+<div class="section-title">Mécanismes et orientation étiologique</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Les 2 mécanismes principaux
+  </div>
+  <div class="grid-2">
+    <div class="compl-card blue">
+      <div class="compl-card-title">Mécanisme sécrétoire / toxinique</div>
+      <ul class="ul-clean">
+        <li>Entérotoxine stimulant la sécrétion intestinale</li>
+        <li>Diarrhée liquidienne abondante, <strong>afébrile</strong></li>
+        <li>Sans syndrome dysentérique</li>
+        <li>Germes : <em>E. coli</em> entérotoxinogène, <em>S. aureus</em>, <em>Cl. perfringens</em>, <em>C. difficile</em></li>
+      </ul>
+    </div>
+    <div class="compl-card">
+      <div class="compl-card-title">Mécanisme entéro-invasif</div>
+      <ul class="ul-clean">
+        <li>Invasion de la muqueuse par le germe</li>
+        <li>Syndrome dysentérique + <strong>fièvre</strong></li>
+        <li>Germes : <em>Salmonella</em>, <em>Shigella</em>, <em>Campylobacter</em>, <em>Yersinia</em>, <em>E. coli</em> EI</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-purple">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Orientation à l'interrogatoire
+  </div>
+  <table>
+    <thead><tr><th>Contexte</th><th>Étiologie à évoquer</th></tr></thead>
+    <tbody>
+      <tr><td>Épidémique, saisonnier + vomissements</td><td>Gastroentérite virale (rotavirus, norovirus, astrovirus)</td></tr>
+      <tr><td>Stress, écart alimentaire, &lt; 24h, isolée</td><td>Diarrhée brève, fonctionnelle — aucun examen</td></tr>
+      <tr><td>Post-antibiothérapie (7j–8 semaines)</td><td><em>Clostridioides difficile</em> ou effet pharmacologique</td></tr>
+      <tr><td>Retour de voyage en zone endémique</td><td>Turista (<em>E. coli</em> ETEC), <em>Shigella</em>, amibes, Giardia</td></tr>
+      <tr><td>Repas en commun, cas groupés</td><td>TIAC — déclaration ARS obligatoire</td></tr>
+      <tr><td>Immunodépression</td><td><em>Campylobacter</em>, <em>C. difficile</em>, cryptosporidies, CMV</td></tr>
+      <tr><td>Rectite / proctite</td><td>IST : Chlamydia, gonocoque, syphilis, HSV</td></tr>
+      <tr><td>Introduction récente médicament</td><td>Diarrhée médicamenteuse (&gt; 700 molécules impliquées)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ==================== 4. GERMES TIAC ==================== -->
+<div class="section-title">Principaux germes des TIAC</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-coral">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Tableau des germes — TIAC (à mémoriser)
+  </div>
+  <table>
+    <thead><tr><th>Germe</th><th>Incubation</th><th>Mécanisme</th><th>Tableau clinique</th><th>Aliments suspects</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Staphylococcus aureus</strong></td>
+        <td><span class="pill pill-red">2–4h</span></td>
+        <td>Toxine préformée</td>
+        <td>Vomissements ++, douleurs, diarrhée <strong>sans fièvre</strong></td>
+        <td>Laitages, plats préparés (porteur panaris), réfrigération insuffisante</td>
+      </tr>
+      <tr>
+        <td><strong>Bacillus cereus</strong></td>
+        <td><span class="pill pill-red">1–10h</span></td>
+        <td>Toxine</td>
+        <td>Vomissements, douleurs, diarrhée sans fièvre</td>
+        <td>Riz cuisiné réchauffé ++, plats préparés</td>
+      </tr>
+      <tr>
+        <td><strong>Clostridium perfringens</strong></td>
+        <td><span class="pill pill-amber">8–24h</span></td>
+        <td>Toxine</td>
+        <td>Douleurs abdominales, diarrhée <strong>sans fièvre</strong>, vomissements rares</td>
+        <td>Plats préparés, cuisson/réfrigération insuffisante</td>
+      </tr>
+      <tr>
+        <td><strong>Salmonella</strong> (enteritidis, typhimurium)</td>
+        <td><span class="pill pill-amber">12–24h</span></td>
+        <td>Entéro-invasif</td>
+        <td>Syndrome dysentérique, <strong>fièvre</strong>, sepsis possible</td>
+        <td>Viande, volaille, œufs, fruits de mer, pâtisserie</td>
+      </tr>
+      <tr>
+        <td><strong>Norovirus</strong></td>
+        <td><span class="pill pill-amber">24–48h</span></td>
+        <td>Toxinique</td>
+        <td>Vomissements ++, douleurs, diarrhée rarement fébrile</td>
+        <td>Crustacés, coquillages</td>
+      </tr>
+      <tr>
+        <td><strong>Campylobacter jejuni</strong></td>
+        <td><span class="pill pill-blue">2–3j</span></td>
+        <td>Entéro-invasif</td>
+        <td>Diarrhée ± dysentérique, céphalées, myalgies, fièvre</td>
+        <td>Laitages, pâtisserie, volaille</td>
+      </tr>
+      <tr>
+        <td><strong>Yersinia enterocolitica</strong></td>
+        <td><span class="pill pill-blue">7j</span></td>
+        <td>Entéro-invasif</td>
+        <td>Diarrhée ± dysentérique, iléite, érythème noueux</td>
+        <td>Viande (porc), légumes crus</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Piège STEC (E. coli entérohémorragique) :</strong> mécanisme toxinique-ischémiant mais tableau dysentérique — risque de SHU (syndrome hémolytique et urémique). <strong>Ne pas donner d'antibiotiques.</strong></span>
+  </div>
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong>TIAC :</strong> minimum 2 cas, temporalité proche, même origine alimentaire — <strong>déclaration ARS obligatoire</strong> pour enquête épidémiologique et sanitaire.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 5. DIARRHÉE AUX ANTIBIOTIQUES ==================== -->
+<div class="section-title">Diarrhée des antibiotiques — 2 catégories</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-amber">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Catégorie 1 — Bénigne (fréquente)
+    </div>
+    <div class="kv-row"><span class="kv-key">Fréquence</span><span class="kv-val">5–10% des prescriptions</span></div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Effet moteur direct (amox-clavulanate, érythromycine) ou dysbiose du microbiote</span></div>
+    <div class="kv-row"><span class="kv-key">Délai</span><span class="kv-val">Quelques jours après introduction</span></div>
+    <div class="kv-row"><span class="kv-key">Évolution</span><span class="kv-val">Cède à l'arrêt — spontanément résolutive</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-red">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Catégorie 2 — Colite post-ATB (grave)
+    </div>
+    <div class="compl-card" style="margin-top:4px;">
+      <div class="compl-card-title"><em>Clostridioides difficile</em></div>
+      <div class="kv-row"><span class="kv-key">Délai</span><span class="kv-val">7j après début ATB → 8 semaines après arrêt</span></div>
+      <div class="kv-row"><span class="kv-key">Tableau</span><span class="kv-val">Diarrhée, douleurs, fièvre, hyperleucocytose</span></div>
+      <div class="kv-row"><span class="kv-key">Grave</span><span class="kv-val">Colite pseudomembraneuse, perforation, sepsis</span></div>
+      <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">PCR selles + ELISA toxines libres si PCR+</span></div>
+      <div class="kv-row"><span class="kv-key">Contagiosité</span><span class="kv-val">Sporulé — résiste au SHA, lavage savon obligatoire</span></div>
+    </div>
+    <div class="compl-card amber" style="margin-top:6px;">
+      <div class="compl-card-title"><em>Klebsiella oxytoca</em></div>
+      <ul class="ul-clean">
+        <li>Diarrhée hémorragique, lésions ischémiques</li>
+        <li>Quelques jours après ATB</li>
+        <li>Diagnostic : coproculture orientée</li>
+        <li>Spontanément résolutif à l'arrêt de l'ATB</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Diarrhée nosocomiale -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-blue">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Diarrhée nosocomiale
+  </div>
+  <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Diarrhée survenant dans les <strong>3 jours d'hospitalisation</strong></span></div>
+  <div class="kv-row"><span class="kv-key">Causes principales</span><span class="kv-val">Virus +++ · <em>C. difficile</em> · Covid-19</span></div>
+  <div class="kv-row"><span class="kv-key">Facteurs de risque</span><span class="kv-val">Séjour prolongé · âge avancé · poly-antibiothérapie</span></div>
+</div>
+
+<hr>
+
+<!-- ==================== 6. EXAMENS COMPLÉMENTAIRES ==================== -->
+<div class="section-title">Examens complémentaires — Indications</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-purple">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Indications chez l'adulte
+    </div>
+    <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:8px;">Examens requis si <strong>au moins 1 critère</strong> :</p>
+    <div class="pills">
+      <span class="pill pill-red">Évolution &gt; 3 jours</span>
+      <span class="pill pill-red">Fièvre &gt; 38,5°C</span>
+      <span class="pill pill-red">Sang / pus dans les selles</span>
+      <span class="pill pill-red">Déshydratation importante</span>
+      <span class="pill pill-amber">Terrain fragile (âgé, valvulopathie, ID)</span>
+      <span class="pill pill-amber">Nosocomial / post-ATB / TIAC</span>
+    </div>
+    <p style="font-size:.8rem; color:var(--text-muted); margin-top:8px;">Examens à demander :</p>
+    <ul class="ul-clean" style="margin-top:4px;">
+      <li><strong>Coproculture ou PCR multiplex</strong> (Salmonella, Shigella, Yersinia, Campylobacter + <em>C. difficile</em> selon contexte)</li>
+      <li><strong>Hémocultures</strong> si fièvre (sepsis, typhoïde)</li>
+      <li><strong>EPS × 3j ou PCR parasites</strong> si retour zone endémique &lt; 1 mois</li>
+      <li><strong>Ionogramme, créatinine, gaz du sang</strong> si déshydratation</li>
+      <li><strong>Scanner abdomino-pelvien</strong> si fièvre + défense (colite sévère compliquée)</li>
+      <li><strong>Coloscopie + biopsies</strong> selon contexte (persistance, MICI, iléite)</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Rectite ou proctosigmoïdite : évoquer IST (Chlamydia, gonocoque, syphilis, HSV) — écouvillon rectal + sérologies. Si +, dépister VIH et VHB.</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-teal">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Indications chez l'enfant
+    </div>
+    <div class="alert alert-green" style="margin-bottom:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Grande majorité spontanément résolutive — <strong>examens très limités</strong>. Cause virale quasi-exclusive (rotavirus).</span>
+    </div>
+    <ul class="ul-clean">
+      <li><strong>Ionogramme sanguin + créatinine</strong> — si déshydratation</li>
+      <li><strong>NFS, hémocultures, CRP</strong> — si fièvre mal tolérée</li>
+      <li><strong>Échographie abdominale</strong> — si suspicion chirurgicale</li>
+      <li><strong>Coproculture</strong> — indications très restreintes : voyage zone endémique, état septique grave, immunodépression, TIAC, absence d'amélioration</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span><strong>Mesure du poids OBLIGATOIRE</strong> — comparaison au dernier poids connu.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 7. DÉSHYDRATATION ==================== -->
+<div class="section-title">Déshydratation — Diagnostic et quantification</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-red">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Signes cliniques — Adulte
+  </div>
+  <div class="grid-2">
+    <div>
+      <p style="font-size:.78rem; font-weight:700; text-transform:uppercase; color:var(--blue); margin-bottom:6px;">Déshydratation intracellulaire</p>
+      <ul class="ul-clean">
+        <li>Soif intense</li>
+        <li>Sécheresse des muqueuses</li>
+        <li>Fièvre, troubles de conscience</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.78rem; font-weight:700; text-transform:uppercase; color:var(--red); margin-bottom:6px;">Déshydratation extracellulaire (gravité)</p>
+      <ul class="ul-clean">
+        <li>Tachycardie, hypotension, oligurie</li>
+        <li>Pli cutané persistant</li>
+        <li>Cernes, yeux creusés</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Adulte : <strong>perte de poids = meilleur marqueur de déshydratation sévère.</strong> Sujets âgés et nourrissons — haut risque si vomissements associés.</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-red">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Quantification chez l'enfant — Perte de poids
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:4px;">
+    <div class="compl-card teal" style="text-align:center;">
+      <div class="compl-card-title" style="color:var(--teal);">Légère</div>
+      <div style="font-size:1.4rem; font-weight:800; color:var(--teal);">&lt; 5%</div>
+      <div style="font-size:.75rem; color:var(--text-muted);">Domicile + SRO</div>
+    </div>
+    <div class="compl-card amber" style="text-align:center;">
+      <div class="compl-card-title" style="color:var(--amber);">Modérée</div>
+      <div style="font-size:1.4rem; font-weight:800; color:var(--amber);">5–10%</div>
+      <div style="font-size:.75rem; color:var(--text-muted);">SRO ± hosp. si critères</div>
+    </div>
+    <div class="compl-card" style="text-align:center;">
+      <div class="compl-card-title" style="color:var(--red);">Sévère</div>
+      <div style="font-size:1.4rem; font-weight:800; color:var(--red);">&gt; 10%</div>
+      <div style="font-size:.75rem; color:var(--text-muted);">Hospitalisation urgente</div>
+    </div>
+  </div>
+  <div class="alert alert-red" style="margin-top:8px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Urgence vitale — Choc hypovolémique :</strong> tachycardie, extrémités froides, TRC allongé, marbrures, oligurie, hypotension. Remplissage vasculaire immédiat.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 8. TRAITEMENT ==================== -->
+<div class="section-title">Prise en charge thérapeutique</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement général — Adulte
+  </div>
+  <ol class="steps">
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Réhydratation — toujours en premier</strong>
+        Voie orale (SRO/OMS) en priorité. IV si vomissements, perte de poids importante, déshydratation sévère, collapsus, troubles ioniques (hypokaliémie, dysnatrémie, IRA). Surveillance pondérale quotidienne.
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Mesures hygiéno-diététiques</strong>
+        Lavage mains + désinfection sanitaires (transmission oro-fécale). Isolement contact en milieu hospitalier. <strong>Attention C. difficile : résiste au SHA — lavage au savon obligatoire.</strong>
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Traitements symptomatiques</strong>
+        Régime sans résidus tant que selles liquides. <strong>Lopéramide : CI absolue si syndrome dysentérique et/ou fièvre élevée.</strong> Racécadotril (antisécrétoire) : efficacité très limitée.
+      </div>
+    </li>
+    <li class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Antibiothérapie — non systématique</strong>
+        Indiquée si mécanisme invasif (syndrome dysentérique) + signes de gravité. Débutée rapidement (&lt; 48h) après examens microbiologiques. Molécules : <span class="pill pill-blue">Azithromycine (macrolide)</span> ou <span class="pill pill-blue">C3G IV si hospitalisation</span>.
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement chez l'enfant — Selon degré de déshydratation
+  </div>
+  <table>
+    <thead><tr><th>Sévérité</th><th>Lieu de soin</th><th>Traitement</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-green">Légère (&lt; 5%)</span></td>
+        <td>Domicile</td>
+        <td>SRO à volonté, petites quantités, renutrition précoce et diversifiée</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Modérée (5–10%)</span></td>
+        <td>Domicile ou hospitalisation</td>
+        <td>SRO à volonté + réévaluation clinique. Hospitalisation si : troubles hémodynamiques/neurologiques, vomissements incoercibles, impossible de boire le SRO</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Sévère (&gt; 10%)</span></td>
+        <td>Hospitalisation</td>
+        <td>Remplissage vasculaire si choc. Réhydratation IV ou entérale continue. Relais SRO dès que possible.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>SRO : composition précise en électrolytes + sucres, osmolarité adaptée. Prise précoce, à volonté, petites quantités. Efficacité des traitements médicamenteux (racécadotril) très limitée chez l'enfant.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== 9. C. DIFFICILE — TRAITEMENT SPÉCIFIQUE ==================== -->
+<div class="section-title">Traitement spécifique — Clostridioides difficile (adulte)</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-red">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Algorithme de traitement
+  </div>
+  <div class="grid-2">
+    <div class="compl-card teal">
+      <div class="compl-card-title" style="color:var(--teal);">Sans signe de sévérité — Domicile</div>
+      <ol class="steps" style="margin-top:6px;">
+        <li class="step"><div class="step-num" style="background:var(--teal); color:#fff;">1</div><div class="step-content">Arrêt de l'antibiotique responsable si possible</div></li>
+        <li class="step"><div class="step-num" style="background:var(--teal); color:#fff;">2</div><div class="step-content">Hydratation orale + mesures hygiène. <strong>Lopéramide CI.</strong></div></li>
+        <li class="step"><div class="step-num" style="background:var(--teal); color:#fff;">3</div><div class="step-content"><strong>Fidaxomicine orale 10j</strong> (1ère intention) ou Vancomycine PO 10j. Métronidazole seulement si indisponibilité des autres.</div></li>
+        <li class="step"><div class="step-num" style="background:var(--teal); color:#fff;">4</div><div class="step-content">Pas de contrôle de coproculture post-traitement.</div></li>
+      </ol>
+    </div>
+    <div class="compl-card">
+      <div class="compl-card-title" style="color:var(--red);">Avec signes de sévérité — Hospitalisation</div>
+      <ol class="steps" style="margin-top:6px;">
+        <li class="step"><div class="step-num">1</div><div class="step-content">Arrêt ATB responsable si possible</div></li>
+        <li class="step"><div class="step-num">2</div><div class="step-content">Hydratation IV + correction hydroélectrolytique</div></li>
+        <li class="step"><div class="step-num">3</div><div class="step-content">Isolement de contact. Lopéramide CI.</div></li>
+        <li class="step"><div class="step-num">4</div><div class="step-content"><strong>Vancomycine PO 10j</strong> ± métronidazole. Alternative : fidaxomicine PO 10j.</div></li>
+        <li class="step"><div class="step-num">5</div><div class="step-content">Chirurgie (colectomie subtotale) si colectasie, mégacôlon toxique, perforation — <strong>mortalité 50%.</strong></div></li>
+      </ol>
+    </div>
+  </div>
+
+  <p style="font-size:.8rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin: 12px 0 6px;">Gestion des récidives (10–20% des cas)</p>
+  <table>
+    <thead><tr><th>Récidive</th><th>Traitement</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>1ère récidive (2ème épisode)</strong></td>
+        <td>Fidaxomicine 10j + Bezlotoxumab (anti-toxine B) si 1er ttt = fidaxomicine. Sinon fidaxomicine seule 10j.</td>
+      </tr>
+      <tr>
+        <td><strong>2ème récidive et au-delà</strong></td>
+        <td><strong>Transplantation de microbiote fécal</strong> — succès &gt; 85%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ==================== 10. SUIVI ENFANT ==================== -->
+<div class="section-title">Suivi chez l'enfant</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-purple">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Si hospitalisé
+    </div>
+    <ul class="ul-clean">
+      <li>Constantes + poids réguliers</li>
+      <li>Quantité de selles et vomissements</li>
+      <li>Surveillance biologique selon évolution</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-teal">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Si renvoyé à domicile
+    </div>
+    <p style="font-size:.82rem; margin-bottom:6px;"><strong>Consignes de reconsultation aux parents :</strong></p>
+    <ul class="ul-clean">
+      <li>Réhydratation orale impossible</li>
+      <li>Intensification de la diarrhée</li>
+      <li>Rectorragies</li>
+      <li>Altération de l'état général, signes de choc</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SYNTHÈSE ==================== -->
+<div class="section-title">Points-clés à retenir</div>
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon icon-teal">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Pièges et réflexes
+  </div>
+  <div class="alert alert-green">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span>La grande majorité des diarrhées aiguës est spontanément résolutive et ne nécessite <strong>ni examen ni ATB</strong> — réhydratation orale suffit.</span>
+  </div>
+  <div class="alert alert-red" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Lopéramide = CI absolue</strong> si syndrome dysentérique ou fièvre élevée (risque de rétention de germes invasifs et de mégacôlon).</span>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>C. difficile :</strong> sporulé — gel hydroalcoolique inefficace, lavage au savon obligatoire. Traitement de 1ère intention = fidaxomicine (pas le métronidazole). À partir de la 2ème récidive = transplantation de microbiote fécal.</span>
+  </div>
+  <div class="alert alert-red" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Nourrisson :</strong> pesée obligatoire — perte &gt; 10% = urgence vitale. Choc hypovolémique = remplissage immédiat. Cause quasi-exclusivement virale (rotavirus).</span>
+  </div>
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span><strong>TIAC :</strong> déclaration ARS obligatoire dès 2 cas liés à la même source alimentaire — enquête épidémiologique et sanitaire déclenchée.</span>
+  </div>
+  <div class="alert alert-amber" style="margin-top:6px;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span><strong>Diarrhée + fièvre au retour de zone d'endémie :</strong> éliminer un <strong>paludisme</strong> en premier, surtout si troubles neurologiques.</span>
+  </div>
+</div>
+
+</body>
+</html>
