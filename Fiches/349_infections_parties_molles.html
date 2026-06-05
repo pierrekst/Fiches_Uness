@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 349 - Infections aiguës des parties molles</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --purple-light: #EEEDFA;
+      --teal: #1D9E75;
+      --teal-light: #E8F7F2;
+      --coral: #D85A30;
+      --coral-light: #FAEEE9;
+      --blue: #378ADD;
+      --blue-light: #EAF3FC;
+      --red: #E24B4A;
+      --red-light: #FDEAEA;
+      --amber: #D97706;
+      --amber-light: #FEF3C7;
+      --text: #1a1a2e;
+      --text-light: #666;
+      --bg: #f7f8fc;
+      --card-bg: #ffffff;
+      --border: rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 20px 16px 40px;
+    }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #D85A30 0%, #E24B4A 55%, #534AB7 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      color: white;
+    }
+    .header-tag { font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.8; margin-bottom:6px; }
+    .header h1 { font-size:1.55rem; font-weight:800; line-height:1.2; margin-bottom:8px; }
+    .header-sub { font-size:.88rem; opacity:.88; }
+    .header-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .header-pill { background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 12px; font-size:.75rem; font-weight:600; }
+
+    /* Cards */
+    .card { background:var(--card-bg); border:0.5px solid var(--border); border-radius:14px; padding:16px 18px; margin-bottom:12px; }
+    .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* Grilles */
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; }
+
+    /* KV rows */
+    .kv-row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid var(--border); font-size:.83rem; }
+    .kv-row:last-child { border-bottom:none; }
+    .kv-key { color:var(--text-light); }
+    .kv-val { font-weight:700; }
+
+    /* Pills */
+    .pills { display:flex; flex-wrap:wrap; gap:6px; }
+    .pill { border-radius:20px; padding:3px 11px; font-size:.78rem; font-weight:600; }
+    .pill-red    { background:var(--red-light);    color:var(--red);    }
+    .pill-blue   { background:var(--blue-light);   color:var(--blue);   }
+    .pill-teal   { background:var(--teal-light);   color:var(--teal);   }
+    .pill-amber  { background:var(--amber-light);  color:var(--amber);  }
+    .pill-purple { background:var(--purple-light); color:var(--purple); }
+    .pill-coral  { background:var(--coral-light);  color:var(--coral);  }
+
+    /* Alertes */
+    .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+    .alert strong { font-weight:800; }
+    .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+    .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+    .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+    .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-icon { flex-shrink:0; margin-top:1px; }
+    .alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .alert-red   .alert-icon svg { stroke:var(--red);   }
+    .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+    .alert-green .alert-icon svg { stroke:var(--teal);  }
+    .alert-amber .alert-icon svg { stroke:var(--amber); }
+    .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+
+    /* Tableaux */
+    table { width:100%; border-collapse:collapse; font-size:.82rem; }
+    th { background:var(--bg); font-weight:700; padding:8px 10px; text-align:left; border-bottom:1.5px solid var(--border); color:var(--text-light); font-size:.76rem; text-transform:uppercase; letter-spacing:.04em; }
+    td { padding:7px 10px; border-bottom:1px solid var(--border); vertical-align:top; }
+    tr:last-child td { border-bottom:none; }
+
+    /* Étapes numérotées */
+    .steps { list-style:none; padding:0; }
+    .step { display:flex; gap:12px; align-items:flex-start; margin-bottom:9px; font-size:.84rem; }
+    .step-num { width:24px; height:24px; border-radius:50%; background:#eee; color:var(--text); font-weight:700; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .step-content { flex:1; padding-top:3px; }
+
+    /* Phases */
+    .phase { display:flex; align-items:flex-start; gap:12px; padding:8px 0; border-bottom:1px solid var(--border); font-size:.83rem; }
+    .phase:last-child { border-bottom:none; }
+    .phase-num { width:26px; height:26px; border-radius:6px; font-weight:800; font-size:.78rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; color:white; }
+    .phase-name { font-weight:700; }
+    .phase-desc { color:var(--text-light); font-size:.80rem; margin-top:2px; }
+
+    /* Bordures latérales */
+    .card-left-purple { border-left:4px solid var(--purple); }
+    .card-left-teal   { border-left:4px solid var(--teal);   }
+    .card-left-red    { border-left:4px solid var(--red);    }
+    .card-left-blue   { border-left:4px solid var(--blue);   }
+    .card-left-amber  { border-left:4px solid var(--amber);  }
+    .card-left-coral  { border-left:4px solid var(--coral);  }
+
+    /* Section title */
+    .section-title { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text-light); margin-bottom:10px; }
+
+    /* Badges */
+    .badge { display:inline-block; border-radius:5px; padding:2px 7px; font-size:.72rem; font-weight:700; }
+    .badge-red    { background:var(--red-light);    color:var(--red);    }
+    .badge-teal   { background:var(--teal-light);   color:var(--teal);   }
+    .badge-blue   { background:var(--blue-light);   color:var(--blue);   }
+    .badge-amber  { background:var(--amber-light);  color:var(--amber);  }
+    .badge-purple { background:var(--purple-light); color:var(--purple); }
+
+    hr { border:none; border-top:1px solid var(--border); margin:22px 0; }
+    ul { padding-left:18px; }
+    li { margin-bottom:4px; font-size:.83rem; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e8e8f0; --text-light: #9999bb;
+        --bg: #13131f; --card-bg: #1e1e30; --border: rgba(255,255,255,0.1);
+        --purple-light: #2a2650; --teal-light: #0e3329; --coral-light: #3d2218;
+        --blue-light: #162a40; --red-light: #3d1a1a; --amber-light: #3d2e0a;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Item 349 — Chirurgie</div>
+    <h1>Infections aiguës des parties molles</h1>
+    <div class="header-sub">Abcès · Panaris · Phlegmon des gaines</div>
+    <div class="header-pills">
+      <span class="header-pill">S. aureus 60%</span>
+      <span class="header-pill">Diagnostic clinique pur</span>
+      <span class="header-pill">Phlegmon = urgence chirurgicale</span>
+      <span class="header-pill">ATB rarement nécessaire</span>
+    </div>
+  </div>
+
+  <!-- VUE D'ENSEMBLE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Vue d'ensemble
+    </div>
+    Trois entités à maîtriser : <strong>abcès</strong> (collection purulente localisée, peut survenir partout), <strong>panaris</strong> (infection d'un doigt — péri-unguéale, pulpaire ou dorsale — spécifique de la main) et <strong>phlegmon des gaines</strong> (infection des gaines tendineuses = urgence chirurgicale au pronostic fonctionnel engagé). Germe dominant : <em>Staphylococcus aureus</em>. Prise en charge avant tout <strong>chirurgicale</strong> dès la phase collectée ; l'antibiothérapie reste l'exception, jamais la règle seule.
+  </div>
+
+  <hr>
+
+  <!-- DÉFINITIONS -->
+  <section>
+    <div class="section-title">Définitions</div>
+    <div class="grid3">
+      <div class="card card-left-coral">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--coral)">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          Abcès
+        </div>
+        <div style="font-size:.82rem">
+          Accumulation localisée de pus dans une cavité. Parois formées du tissu voisin modifié/refoulé.<br><br>
+          Peut survenir <strong>à tout niveau</strong> (main : éminences thénar/hypothénar, médio-palmaire, interdigital, sous-aponévrotique dorsal).
+        </div>
+      </div>
+      <div class="card card-left-blue">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--blue)">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          Panaris
+        </div>
+        <div style="font-size:.82rem">
+          Infection aiguë des parties molles <strong>d'un doigt</strong>.<br><br>
+          Localisations : péri-unguéale, pulpaire, face dorsale d'une phalange.<br><br>
+          <span class="badge badge-blue">Anthracoïde</span> : superficiel, centré sur un follicule pileux au dos d'une phalange.
+        </div>
+      </div>
+      <div class="card card-left-red">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+          </div>
+          Phlegmon des gaines
+        </div>
+        <div style="font-size:.82rem">
+          Infection de l'espace des <strong>gaines des tendons fléchisseurs</strong> (doigt et main).<br><br>
+          <span class="badge badge-red">URGENCE chirurgicale</span><br>
+          Pronostic fonctionnel de la main engagé.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- MICROBIOLOGIE -->
+  <section>
+    <div class="section-title">Microbiologie</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--teal)">
+            <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+          </div>
+          Germe principal
+        </div>
+        <div class="kv-row">
+          <span class="kv-key">Staphylococcus aureus</span>
+          <span class="kv-val" style="color:var(--red)">60% des cas</span>
+        </div>
+        <div class="pills" style="margin-top:10px">
+          <span class="pill pill-red">Gram positif</span>
+          <span class="pill pill-amber">Cocci en amas</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--amber)">
+            <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+          </div>
+          Morsures — spécificités
+        </div>
+        <table>
+          <tr><th>Contexte</th><th>Germe principal</th><th>Particularités</th></tr>
+          <tr>
+            <td>Chat / Chien</td>
+            <td><strong>Pasteurella multocida</strong><br><span style="color:var(--text-light);font-size:.75rem">Bacille Gram –</span></td>
+            <td>Inoculation &lt; 24h<br>Amoxicilline efficace</td>
+          </tr>
+          <tr>
+            <td>Humaine / Animale</td>
+            <td>Polymicrobienne</td>
+            <td>Aérobies + anaérobies</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- INOCULATION + TERRAINS -->
+  <section>
+    <div class="section-title">Physiopathologie &amp; Terrains à risque</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--purple)">
+            <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+          </div>
+          Mode d'inoculation
+        </div>
+        <div class="phase">
+          <div class="phase-num" style="background:var(--purple)">1</div>
+          <div>
+            <div class="phase-name">Directe <span class="badge badge-purple" style="margin-left:4px">+++ Fréquent</span></div>
+            <div class="phase-desc">Plaie, traumatisme pénétrant, morsure</div>
+          </div>
+        </div>
+        <div class="phase">
+          <div class="phase-num" style="background:#aaa">2</div>
+          <div>
+            <div class="phase-name">Hématogène</div>
+            <div class="phase-desc">Possible mais rare</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Terrains à risque
+        </div>
+        <div class="pills" style="margin-bottom:10px">
+          <span class="pill pill-red">Diabète</span>
+          <span class="pill pill-red">VIH / Immunodépression</span>
+          <span class="pill pill-red">Corticothérapie / Immunosuppresseurs</span>
+          <span class="pill pill-red">Toxicomanie IV</span>
+          <span class="pill pill-red">IRC</span>
+          <span class="pill pill-amber">Prise d'AINS</span>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Les AINS masquent les signes inflammatoires et retardent le diagnostic.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 4 PHASES ÉVOLUTIVES -->
+  <section>
+    <div class="section-title">4 phases évolutives</div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Évolution naturelle
+      </div>
+      <div class="phase">
+        <div class="phase-num" style="background:#aaa">1</div>
+        <div>
+          <div class="phase-name">Invasion</div>
+          <div class="phase-desc">Asymptomatique — multiplication bactérienne silencieuse</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num" style="background:var(--amber)">2</div>
+        <div>
+          <div class="phase-name">Inflammatoire (phlegmasique)</div>
+          <div class="phase-desc">Douleur, rougeur, chaleur, oedème — <strong>sans réveil nocturne</strong></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num" style="background:var(--coral)">3</div>
+        <div>
+          <div class="phase-name">Collectée</div>
+          <div class="phase-desc">Zone circonscrite, douleur <strong>pulsatile et insomniante</strong> → fluctuation palpable</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num" style="background:var(--red)">4</div>
+        <div>
+          <div class="phase-name">Complications</div>
+          <div class="phase-desc">Fistulisation, phlegmon, arthrite, nécrose tendineuse, sepsis</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Clé :</strong> douleur <strong>pulsatile + insomniante</strong> = phase collectée = indication chirurgicale.</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- COMPLICATIONS -->
+  <section>
+    <div class="section-title">Complications</div>
+    <div class="grid2">
+      <div class="card card-left-red">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Locales et à distance
+        </div>
+        <ul>
+          <li>Fistulisation</li>
+          <li>Phlegmon des gaines</li>
+          <li>Cellulite, arthrite, ostéite</li>
+          <li>Lymphangite, septicémie</li>
+          <li>Récidive</li>
+        </ul>
+      </div>
+      <div class="card card-left-amber">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--amber)">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Pronostic fonctionnel
+        </div>
+        <ul>
+          <li>Nécrose tendineuse</li>
+          <li>Raideur séquellaire</li>
+          <li>Dystrophie unguéale</li>
+          <li>Amputation (infection non contrôlée)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- DIAGNOSTIC CLINIQUE -->
+  <section>
+    <div class="section-title">Diagnostic clinique</div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Tableau comparatif
+      </div>
+      <table>
+        <tr><th>Entité</th><th>Signes cliniques clés</th><th>Bilan</th></tr>
+        <tr>
+          <td><strong>Abcès</strong></td>
+          <td>Cellulite avec <strong>zone fluctuante centrale</strong>. À la main : espaces profonds (thénar, hypothénar, médio-palmaire, interdigital).</td>
+          <td rowspan="2" style="vertical-align:middle; text-align:center;">Clinique +++<br><br>Rx F+P si corps étranger ou suspicion d'ostéite</td>
+        </tr>
+        <tr>
+          <td><strong>Panaris</strong></td>
+          <td>Identifier la zone (pulpaire et péri-unguéale = ++ fréquentes). Rechercher lymphangite, adénopathies, fièvre.</td>
+        </tr>
+        <tr>
+          <td><strong>Phlegmon des gaines</strong></td>
+          <td>Doigt chaud, oedématié, <strong>douleur à l'extension passive</strong>. Douleur au cul-de-sac de la gaine : MCP palmaire (D2-D4) ou pli du poignet (P1, D5).</td>
+          <td style="vertical-align:middle; text-align:center;">Clinique +++<br>IRM si doute</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Phlegmon des gaines — 3 présentations cliniques
+      </div>
+      <table>
+        <tr><th>Présentation</th><th>Signification</th><th>Gravité</th></tr>
+        <tr>
+          <td>Douleur typique sans attitude vicieuse</td>
+          <td>Phase débutante</td>
+          <td><span class="badge badge-amber">Modérée</span></td>
+        </tr>
+        <tr>
+          <td>Douleur + <strong>doigt en crochet</strong></td>
+          <td>Contracture de protection tendineuse</td>
+          <td><span class="badge badge-red">Grave</span></td>
+        </tr>
+        <tr>
+          <td>Douleur + <strong>perte du crochet</strong></td>
+          <td><strong>Rupture tendineuse</strong></td>
+          <td><span class="badge badge-red">Très grave</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Pas d'examens biologiques ni d'imagerie pour confirmer abcès ou panaris non compliqué. La <strong>radiographie est réservée</strong> à la recherche d'un corps étranger ou d'une ostéite (évolution lente, terrain à risque).</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- CRITÈRES DE GRAVITÉ -->
+  <section>
+    <div class="section-title">Critères de gravité &amp; Indications d'hospitalisation</div>
+    <div class="grid2">
+      <div class="card card-left-red">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red)">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Signes de gravité
+        </div>
+        <div style="font-size:.80rem;font-weight:700;color:var(--text-light);margin-bottom:6px">Généraux</div>
+        <div class="pills" style="margin-bottom:10px">
+          <span class="pill pill-red">Fièvre élevée</span>
+          <span class="pill pill-red">Hypotension</span>
+          <span class="pill pill-red">Tachycardie</span>
+          <span class="pill pill-red">Désaturation</span>
+          <span class="pill pill-red">Trouble de la vigilance</span>
+        </div>
+        <div style="font-size:.80rem;font-weight:700;color:var(--text-light);margin-bottom:6px">Locaux</div>
+        <div class="pills">
+          <span class="pill pill-red">Lymphangite</span>
+          <span class="pill pill-red">Cellulite étendue</span>
+          <span class="pill pill-red">Exposition osseuse/tendineuse</span>
+          <span class="pill pill-amber">Cinétique rapide</span>
+          <span class="pill pill-amber">Terrain à risque</span>
+        </div>
+      </div>
+      <div class="card card-left-amber">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--amber)">
+            <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+          </div>
+          Indications chirurgicales / hospitalisation
+        </div>
+        <div class="pills" style="margin-bottom:12px">
+          <span class="pill pill-red">Abcès collecté</span>
+          <span class="pill pill-red">Panaris collecté</span>
+          <span class="pill pill-red">Phlegmon des gaines</span>
+          <span class="pill pill-red">Morsure</span>
+          <span class="pill pill-red">Ostéite / arthrite</span>
+          <span class="pill pill-red">Exposition tendineuse / osseuse / articulaire</span>
+          <span class="pill pill-red">Fasciite nécrosante</span>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Fasciite nécrosante :</strong> infection sévère sur terrain à risque — peut nécessiter réanimation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- PRISE EN CHARGE -->
+  <section>
+    <div class="section-title">Prise en charge médico-chirurgicale</div>
+
+    <div class="alert alert-blue" style="margin-bottom:14px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Systématique (toutes infections de la main) :</strong> vérifier statut antitétanique, statut tabagique, profession (accident du travail ?), et éviction du secteur alimentaire jusqu'à guérison complète.</div>
+    </div>
+
+    <!-- Abcès -->
+    <div class="card card-left-coral" style="margin-bottom:12px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Abcès — traitement
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-light);margin-bottom:6px">Phase inflammatoire (non collecté)</div>
+          <ul>
+            <li>Surveillance + discuter antibiotique</li>
+            <li>Si pas d'amélioration à 48h : chirurgie</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-light);margin-bottom:6px">Phase collectée</div>
+          <ol class="steps">
+            <li class="step"><div class="step-num">1</div><div class="step-content">Incision + prélèvements bactériologiques</div></li>
+            <li class="step"><div class="step-num">2</div><div class="step-content">Évidement des cloisons, excision des tissus nécrotiques</div></li>
+            <li class="step"><div class="step-num">3</div><div class="step-content">Lavage — <strong>pas de fermeture cutanée</strong></div></li>
+            <li class="step"><div class="step-num">4</div><div class="step-content">Abcès profond : méchage ou drainage</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="alert alert-green" style="margin-top:10px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Antibiothérapie <strong>rarement nécessaire</strong> après drainage — sauf extension ou localisation à risque.</div>
+      </div>
+    </div>
+
+    <!-- Panaris -->
+    <div class="card card-left-blue" style="margin-bottom:12px">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Panaris — traitement
+      </div>
+      <table>
+        <tr><th>Phase</th><th>Traitement</th><th>ATB</th></tr>
+        <tr>
+          <td>Invasion / Inflammatoire</td>
+          <td>Soins locaux antiseptiques (chlorhexidine ou Bétadine). <strong>Dakin CI</strong> (risque brûlure). Si pas d'amélioration à 48h : chirurgie.</td>
+          <td><span class="badge badge-red">Aucun</span></td>
+        </tr>
+        <tr>
+          <td>Collectée / Compliquée</td>
+          <td>Excision du panaris ± ablation partielle ou totale de la tablette unguéale (formes sous-unguéales). Pansements quotidiens 1 semaine puis tous les 2 jours.</td>
+          <td><span class="badge badge-red">Aucun</span></td>
+        </tr>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège classique :</strong> Dakin = proscrit (brûlures). <strong>Aucun antibiotique</strong> aux phases d'invasion et inflammatoire.</div>
+      </div>
+    </div>
+
+    <!-- Phlegmon -->
+    <div class="card card-left-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Phlegmon des gaines — URGENCE chirurgicale
+      </div>
+      <div class="alert alert-red" style="margin-bottom:12px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Hospitalisation immédiate en milieu spécialisé — pronostic fonctionnel de la main engagé.</strong></div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-light);margin-bottom:8px">Chirurgie systématique</div>
+          <ol class="steps">
+            <li class="step"><div class="step-num">1</div><div class="step-content">Excision de la porte d'entrée</div></li>
+            <li class="step"><div class="step-num">2</div><div class="step-content">Incision proximale + distale de la gaine (voire gaine entière)</div></li>
+            <li class="step"><div class="step-num">3</div><div class="step-content">Prélèvements bactériologiques</div></li>
+            <li class="step"><div class="step-num">4</div><div class="step-content">Lavage abondant au sérum physiologique</div></li>
+            <li class="step"><div class="step-num">5</div><div class="step-content">Excision des tissus nécrotiques si présents</div></li>
+            <li class="step"><div class="step-num">6</div><div class="step-content">Cicatrisation dirigée</div></li>
+          </ol>
+        </div>
+        <div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--text-light);margin-bottom:8px">Médical + Rééducation</div>
+          <ul style="margin-bottom:12px">
+            <li>Antibiothérapie <strong>probabiliste</strong>, secondairement adaptée aux prélèvements</li>
+            <li>Kinésithérapie précoce : mobilisation des doigts</li>
+          </ul>
+          <div class="kv-row">
+            <span class="kv-key">Objectif</span>
+            <span class="kv-val" style="color:var(--teal)">Récupération fonctionnelle maximale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- SYNTHÈSE -->
+  <section>
+    <div class="card" style="border:1.5px solid var(--teal)">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Points-clés à retenir
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="alert alert-green" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>S. aureus</strong> = germe n°1 (60%). <strong>Pasteurella</strong> = morsures chat/chien (BGN, amoxicilline).</div>
+          </div>
+          <div class="alert alert-green" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Diagnostic clinique pur. Rx uniquement si corps étranger ou suspicion d'ostéite.</div>
+          </div>
+          <div class="alert alert-green" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Douleur <strong>pulsatile + insomniante</strong> = phase collectée = chirurgie.</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>Phlegmon = URGENCE chirurgicale. Antibiothérapie probabiliste systématique (seul cas).</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-amber" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Pas d'ATB pour panaris aux phases d'invasion et inflammatoire.</div>
+          </div>
+          <div class="alert alert-amber" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Dakin proscrit (brûlures) → chlorhexidine ou Bétadine.</div>
+          </div>
+          <div class="alert alert-amber" style="margin-bottom:8px">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Pas de fermeture cutanée après incision d'abcès.</div>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> <strong>Perte du crochet</strong> au phlegmon = rupture tendineuse = signe de gravité extrême.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

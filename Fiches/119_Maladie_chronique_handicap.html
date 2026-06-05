@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 119 — Maladie chronique et handicap</title>
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EDE9FB;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F2;
+    --coral: #D85A30;
+    --coral-light: #FDEEE8;
+    --blue: #378ADD;
+    --blue-light: #E8F2FB;
+    --red: #E24B4A;
+    --red-light: #FDE8E8;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1a1a2e;
+    --text-secondary: #555;
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --border: rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e8f0;
+      --text-secondary: #aaa;
+      --bg: #14141f;
+      --card-bg: #1e1e2e;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2660;
+      --teal-light: #0f3d2e;
+      --coral-light: #4a2010;
+      --blue-light: #162d4a;
+      --red-light: #4a1010;
+      --amber-light: #3d2a00;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-tag { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+  .header-intro { font-size: .84rem; opacity: .9; line-height: 1.6; }
+  .header-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .header-badge { background: rgba(255,255,255,0.18); border-radius: 20px; padding: 4px 12px; font-size: .75rem; font-weight: 600; }
+
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 28px 0 14px; }
+  .section-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .section-label { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+
+  .card { background: var(--card-bg); border: .5px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .card-left-red    { border-left: 4px solid var(--red);   }
+  .card-left-teal   { border-left: 4px solid var(--teal);  }
+  .card-left-coral  { border-left: 4px solid var(--coral); }
+  .card-left-amber  { border-left: 4px solid var(--amber); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red    { background: var(--red-light);    color: var(--red);    border-left: 3px solid var(--red);    }
+  .alert-blue   { background: var(--blue-light);   color: var(--blue);   border-left: 3px solid var(--blue);   }
+  .alert-green  { background: var(--teal-light);   color: var(--teal);   border-left: 3px solid var(--teal);   }
+  .alert-teal   { background: var(--teal-light);   color: var(--teal);   border-left: 3px solid var(--teal);   }
+  .alert-amber  { background: var(--amber-light);  color: var(--amber);  border-left: 3px solid var(--amber);  }
+  .alert-purple { background: var(--purple-light); color: var(--purple); border-left: 3px solid var(--purple); }
+  
+  .alert-red    .alert-icon svg { stroke: var(--red);    }
+  .alert-blue   .alert-icon svg { stroke: var(--blue);   }
+  .alert-green  .alert-icon svg { stroke: var(--teal);   }
+  .alert-teal   .alert-icon svg { stroke: var(--teal);   }
+  .alert-amber  .alert-icon svg { stroke: var(--amber);  }
+  .alert-purple .alert-icon svg { stroke: var(--purple); }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 600; }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--bg); font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: .5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  
+  .kv-row { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 6px 0; font-size: .85rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-secondary); font-weight: 600; }
+  .kv-val { font-weight: 700; text-align: right; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+  p { margin-bottom: 8px; }
+  ul { padding-left: 18px; margin-bottom: 8px; }
+  li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-tag">Item 119 — Maintien de l'autonomie</div>
+    <h1>Soins et accompagnement dans la maladie chronique et le handicap</h1>
+    <div class="header-intro">
+      L'accompagnement du patient chronique ou en situation de handicap impose de dépasser l'approche purement biomédicale. L'enjeu est d'intégrer l'expérience du patient, ses savoirs expérientiels, et les répercussions identitaires et sociales de la maladie. L'objectif global du soin devient l'adaptation de la prise en charge à la temporalité et à la norme de vie individuelle du patient, en partenariat avec les réseaux et les aidants.
+    </div>
+    <div class="header-badges">
+      <span class="header-badge">Sociologie de la santé</span>
+      <span class="header-badge">Savoirs expérientiels</span>
+      <span class="header-badge">Empowerment</span>
+      <span class="header-badge">Rupture biographique</span>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--purple)"></div>
+    <span class="section-label" style="background:var(--purple-light);color:var(--purple)">Définitions &amp; Épidémiologie</span>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Maladie Chronique
+      </div>
+      <div class="alert alert-purple">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>OMS :</strong> Affection de longue durée (≥ 6 mois).<br><strong>HCSP :</strong> État pathologique (physique, psychologique, cognitif) appelé à durer, avec un retentissement majeur sur la vie quotidienne.</div>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prévalence France</span>
+        <span class="kv-val">20 millions (1/3 population)</span>
+      </div>
+      <p style="margin-top:10px;font-size:.82rem;color:var(--text-secondary);">Entraîne des complications médicales, invalidités, altération sévère de la qualité de vie et souffrances physiques/morales.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Handicap
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prévalence France (2020)</span>
+        <span class="kv-val">12 millions</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Proportion handicap invisible</span>
+        <span class="kv-val">80 %</span>
+      </div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.06em;margin-top:12px;margin-bottom:6px;">6 Catégories majeures</div>
+      <div class="pills">
+        <span class="pill pill-purple">Moteur</span>
+        <span class="pill pill-purple">Visuel</span>
+        <span class="pill pill-purple">Auditif</span>
+        <span class="pill pill-purple">Psychique</span>
+        <span class="pill pill-purple">Déficience intellectuelle</span>
+        <span class="pill pill-purple">Maladies invalidantes</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--blue)"></div>
+    <span class="section-label" style="background:var(--blue-light);color:var(--blue)">Sociologie et Vécu de la Maladie</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      La maladie comme « Travail »
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Concept</th>
+          <th>Auteur</th>
+          <th>Signification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Acteur social</strong></td>
+          <td>Strauss</td>
+          <td>Le malade est un acteur à part entière de la co-production du travail médical.</td>
+        </tr>
+        <tr>
+          <td><strong>Construction sociale négociée</strong></td>
+          <td>Baszanger</td>
+          <td>Désorganisations multiples exigeant un travail constant d'intégration des transformations pour maintenir une vie sociale.</td>
+        </tr>
+        <tr>
+          <td><strong>Travail de contrôle</strong></td>
+          <td>Strauss</td>
+          <td>Contrôle des émotions, des relations et de l'information pour faire reconnaître le statut de malade <strong>sans être stigmatisé</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Tâche pratique</strong></td>
+          <td>Mol</td>
+          <td>Kyrielle de microdécisions et d'activités quotidiennes d'ajustement.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Savoirs expérientiels :</strong> L'approche médicale doit impérativement s'appuyer sur le savoir du patient (vécu quotidien, relation au soin) et les ressources communautaires (aidants, associations, patients experts).</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Identité et Temporalité
+      </div>
+      <ul>
+        <li><strong>Rupture biographique (Bury) :</strong> changements affectant les valeurs et représentations.</li>
+        <li><strong>Stigmatisation :</strong> danger de réduire l'identité complète d'un individu à son identité de malade.</li>
+        <li><strong>Temporalité :</strong> modification des rythmes de vie, appréhension de l'avenir, temps imposé par les traitements.</li>
+      </ul>
+    </div>
+    
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Norme et Adaptation (Canguilhem)
+      </div>
+      <ul>
+        <li><strong>Normativité :</strong> réduction des capacités d'adaptation au milieu (norme devenue précaire).</li>
+        <li>La notion de "normal" ou "pathologique" varie selon l'expérience intime du sujet, et non par comparaison stricte à un standard collectif.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--coral)"></div>
+    <span class="section-label" style="background:var(--coral-light);color:var(--coral)">Objectifs du Soin et Accompagnement</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Terminologie et Posture soignante
+    </div>
+    <div class="grid2">
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Care vs Cure :</strong><br>Le <em>Care</em> (prendre soin de la personne) et le <em>Cure</em> (traiter la maladie) sont deux registres constitutifs et <strong>indissociables</strong> de la médecine.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Empowerment :</strong><br>Processus par lequel le patient apprend à vivre avec sa maladie et développe sa capacité à reprendre le pouvoir sur son existence.</div>
+      </div>
+    </div>
+    
+    <div style="font-size:.88rem;font-weight:700;color:var(--text);margin-top:14px;margin-bottom:8px;">Adaptation de la pratique médicale</div>
+    <ul>
+      <li><strong>Individuer et inclure :</strong> la maladie doit devenir une <em>partie</em> de l'identité, non la totalité. Objectif : restituer la place sociale du patient.</li>
+      <li><strong>Temporalité du soin :</strong> se remémorer l'histoire pour éviter la répétition au patient, être disponible dans le moment présent, et garantir un engagement continu.</li>
+      <li><strong>Bricolage partagé (Mol) :</strong> ajustement décisionnel continu entre la <em>norme individuelle</em> du patient et la <em>prescription médicale sociale</em>, pour s'adapter à l'imprévisible.</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <div class="section-header">
+    <div class="section-dot" style="background:var(--teal)"></div>
+    <span class="section-label" style="background:var(--teal-light);color:var(--teal)">Points-clés à retenir</span>
+  </div>
+
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse ECNi
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Épidémiologie massive :</strong> 20 millions de maladies chroniques, 12 millions de handicaps (dont 80% invisibles).</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Co-production du soin :</strong> Le patient est un acteur social qui accomplit un "travail" de contrôle émotionnel et informatif pour éviter la stigmatisation.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Savoirs expérientiels :</strong> La prise en charge ne peut se faire qu'en s'appuyant sur le vécu du patient (Empowerment) et l'aide des réseaux sociaux/associatifs.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Rupture et Norme :</strong> La maladie entraîne une rupture biographique et modifie la normativité du patient. L'objectif du soin (Care + Cure) est de réinsérer cette nouvelle norme dans la société sans réduire le patient à sa maladie.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
