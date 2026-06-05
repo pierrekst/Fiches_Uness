@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 109 – Troubles de la marche et de l'équilibre</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --purple-light: #EEF0FB;
+      --teal: #1D9E75;
+      --teal-light: #E6F7F2;
+      --coral: #D85A30;
+      --coral-light: #FAF0EB;
+      --blue: #378ADD;
+      --blue-light: #EBF4FC;
+      --red: #E24B4A;
+      --red-light: #FDEAEA;
+      --amber: #D97706;
+      --amber-light: #FEF3C7;
+      --text: #1a1a2e;
+      --text-muted: #5e6a7d;
+      --border: rgba(0,0,0,0.08);
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e8eaf0;
+        --text-muted: #9aa3b0;
+        --border: rgba(255,255,255,0.1);
+        --bg: #111827;
+        --card-bg: #1e2535;
+        --purple-light: #2a2665;
+        --teal-light: #0d3d2d;
+        --coral-light: #4a2218;
+        --blue-light: #1a3a5c;
+        --red-light: #4a1818;
+        --amber-light: #3d2a08;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; line-height: 1.55; padding: 20px 12px; }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    /* HEADER */
+    .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: #fff; margin-bottom: 24px; }
+    .header-badge { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: rgba(255,255,255,.2); border-radius: 20px; padding: 3px 12px; display: inline-block; margin-bottom: 10px; }
+    .header h1 { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .header-summary { font-size: .85rem; opacity: .92; line-height: 1.6; }
+
+    /* CARDS */
+    .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* GRIDS */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+    /* ALERTS */
+    .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+    .alert strong { font-weight:800; }
+    .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+    .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+    .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+    .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-red   .alert-icon svg { stroke:var(--red);   }
+    .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+    .alert-green .alert-icon svg { stroke:var(--teal);  }
+    .alert-amber .alert-icon svg { stroke:var(--amber); }
+    .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+    .alert-icon { flex-shrink:0; padding-top:1px; }
+    .alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* PILLS */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .pill { font-size: .76rem; font-weight: 600; border-radius: 20px; padding: 3px 10px; }
+    .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .pill-red    { background: var(--red-light);    color: var(--red);    }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+    /* KV ROWS */
+    .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px dashed var(--border); font-size: .83rem; gap: 8px; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-muted); flex-shrink: 0; max-width: 50%; }
+    .kv-val { font-weight: 700; text-align: right; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    th { background: var(--bg); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* HR */
+    hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+
+    /* BORDERED LEFT CARDS */
+    .card-left-red    { border-left: 4px solid var(--red); }
+    .card-left-amber  { border-left: 4px solid var(--amber); }
+    .card-left-blue   { border-left: 4px solid var(--blue); }
+    .card-left-teal   { border-left: 4px solid var(--teal); }
+    .card-left-purple { border-left: 4px solid var(--purple); }
+
+    /* SECTION TITLE */
+    .section-title { font-size: 1.05rem; font-weight: 800; margin: 20px 0 12px; display: flex; align-items: center; gap: 10px; color: var(--text); }
+    .section-title-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title-icon svg { width: 17px; height: 17px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    ul.dense { padding-left: 16px; font-size: .83rem; }
+    ul.dense li { margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-badge">Item 109 — Neurologie</div>
+  <h1>Troubles de la marche et de l'équilibre</h1>
+  <div class="header-summary">
+    Mener l'interrogatoire et l'examen d'un trouble de la marche. Reconnaître les grands syndromes (parkinsonien, pyramidal, cérébelleux, proprioceptif, vestibulaire, myopathique). Identifier une boiterie. Diagnostiquer le syndrome post-chute. Évoquer une cause psychogène. Prescrire le bilan d'imagerie et biologique approprié.
+  </div>
+</div>
+
+<!-- SECTION 1 : INTERROGATOIRE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--blue);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  1. Interrogatoire
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Caractérisation du trouble
+    </div>
+    <div class="kv-row"><span class="kv-key">Début / installation</span><span class="kv-val">Aigu vs progressif</span></div>
+    <div class="kv-row"><span class="kv-key">Plainte principale</span><span class="kv-val">Douleur, faiblesse, instabilité, petits pas, raideur</span></div>
+    <div class="kv-row"><span class="kv-key">Instabilité vs vertige</span><span class="kv-val">Bien différencier !</span></div>
+    <div class="kv-row"><span class="kv-key">Regard de l'entourage</span><span class="kv-val">Ralentissement, perte du ballant des bras</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Sévérité et autonomie
+    </div>
+    <div class="kv-row"><span class="kv-key">Chutes / presque-chutes</span><span class="kv-val">Fréquence, fractures, hospitalisations</span></div>
+    <div class="kv-row"><span class="kv-key">Escaliers</span><span class="kv-val">Montée (force) vs descente (équilibre)</span></div>
+    <div class="kv-row"><span class="kv-key">Périmètre de marche</span><span class="kv-val">Chiffrer en mètres</span></div>
+    <div class="kv-row"><span class="kv-key">Aide technique</span><span class="kv-val">Canne, déambulateur, fauteuil roulant</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Relever la <strong>liste complète des médicaments</strong> — 1er facteur de risque de chute du sujet âgé. Évaluer également les <strong>capacités cognitives</strong>.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : EXAMEN CLINIQUE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  2. Examen clinique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen de la marche
+    </div>
+    <ul class="dense">
+      <li>Pieds nus, MI dénudés, <strong>à l'insu du patient</strong> (entrée en consultation)</li>
+      <li>Taille et vitesse des pas, symétrie du ballant des bras</li>
+      <li>Posture du tronc (inclinaison ant/post/lat)</li>
+      <li>Transferts, demi-tour, escaliers (montée/descente)</li>
+      <li>Marche en tandem, yeux fermés</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen de l'équilibre
+    </div>
+    <ul class="dense">
+      <li>Yeux ouverts puis <strong>yeux fermés</strong></li>
+      <li>Appui bipodal pieds joints ou écartés</li>
+      <li>Appui monopodal</li>
+      <li>Manœuvres de résistance à la rétropulsion / antépulsion</li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen neurologique
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Déficit moteur</span>
+      <span class="pill pill-blue">ROT + CPC</span>
+      <span class="pill pill-blue">Amyotrophie</span>
+      <span class="pill pill-green">Syndrome cérébelleux</span>
+      <span class="pill pill-purple">Syndrome vestibulaire</span>
+      <span class="pill pill-purple">Syndrome parkinsonien</span>
+      <span class="pill pill-red">Sensibilité profonde</span>
+      <span class="pill pill-amber">Troubles cognitifs</span>
+      <span class="pill pill-amber">Troubles vésico-sphinctériens</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen général
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Dermatologie (cicatrices, trophique)</span>
+      <span class="pill pill-blue">Ostéoarticulaire (douleur, mobilité)</span>
+      <span class="pill pill-red">Cardio-vasculaire (HAO, rythme, AOMI)</span>
+      <span class="pill pill-amber">Ophtalmologie (BAV)</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : ÉCHELLES -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  </div>
+  3. Échelles et tests standardisés
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Tests à connaître
+  </div>
+  <table>
+    <thead><tr><th>Test</th><th>Ce qu'il mesure</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Romberg</strong></td><td>Ataxie proprioceptive (aggravation yeux fermés)</td></tr>
+      <tr><td><strong>Get Up and Go</strong></td><td>Lever, marche 3 m, demi-tour, retour asseoir — risque de chute</td></tr>
+      <tr><td><strong>Test de marche 6 min</strong></td><td>Capacité locomotrice globale, endurance</td></tr>
+      <tr><td><strong>Échelle de Berg</strong></td><td>Équilibre statique/dynamique (14 items, 56 pts max)</td></tr>
+      <tr><td><strong>FAC</strong> (Functional Ambulation Classification)</td><td>Niveau de dépendance ambulatoire (0–5)</td></tr>
+      <tr><td><strong>Marche en tandem</strong></td><td>Syndrome cérébelleux, instabilité frontale</td></tr>
+      <tr><td><strong>Tests posturaux</strong></td><td>Plans frontal et sagittal</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : ÉTIOLOGIES -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--coral);">
+    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  </div>
+  4. Étiologies — tableau synoptique
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Les grandes étiologies
+  </div>
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Sémiologie clé</th><th>Étiologies types</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-red">Douloureuse</span></td>
+        <td>Boiterie d'esquive, claudication intermittente, myalgies d'effort (Mc Ardle : 2e souffle)</td>
+        <td>Arthrose, AOMI, pathologie lombaire, glycogénose</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Ataxique cérébelleuse</span></td>
+        <td>Élargissement polygone, instabilité tous sens, dyschronométrie — pire yeux ouverts</td>
+        <td>Alcool, SEP, AVC cérébelleux, dégénératif</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Ataxique vestibulaire</span></td>
+        <td>Déviation à la marche vers le côté lésé, vertiges rotatoires</td>
+        <td>Névrite vestibulaire, Ménière, AVC fosse postérieure</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Ataxique proprioceptive</span></td>
+        <td><strong>Marche talonnante</strong>, Romberg vrai +, hypopallesthésie</td>
+        <td>Neuropathie sensitive, myélopathie cervicale, tabès</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Centrale (pyramidale)</span></td>
+        <td><strong>Fauchage</strong> + MS homolatéral fixé en adduction/rotation interne</td>
+        <td>AVC hémisphérique (hémiparésie/hémiplégie), SEP</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Périphérique distale</span></td>
+        <td><strong>Steppage</strong> : élévation du genou, claquement du pied au sol</td>
+        <td>Neuropathie péronière, Guillain-Barré, CMT</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Périphérique proximale</span></td>
+        <td><strong>Démarche dandinante</strong>, hyperlordose, bascule du bassin</td>
+        <td>Myopathies (Duchenne, Becker, métabolique, inflammatoire)</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Parkinsonienne</span></td>
+        <td><strong>Petits pas</strong>, festination, freezing, perte du ballant bras</td>
+        <td>Maladie de Parkinson, marche lacunaire, HCA</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-coral">Dystonique</span></td>
+        <td>Pied varus équin douloureux, marche en héron, marche de dromadaire — tester dopa-sensibilité</td>
+        <td>Dystonie primaire ou secondaire</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-coral">Choréique</span></td>
+        <td>Mouvements involontaires, démarche irrégulière</td>
+        <td>Huntington, chorée de Sydenham</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-coral">Tremblement orthostatique</span></td>
+        <td>Tremblement des MI debout, soulagé à la marche</td>
+        <td>Tremblement orthostatique primaire</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : BOITERIES -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  </div>
+  5. Les 3 boiteries à reconnaître
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="card card-left-blue" style="margin-bottom:14px;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Boiterie d'esquive (antalgique)
+      </div>
+      <ul class="dense">
+        <li>Réduction du temps d'appui côté <strong>douloureux</strong></li>
+        <li>Transfert rapide du poids vers le côté sain</li>
+        <li>Douleur articulaire (hanche, genou, cheville) ou vasculaire</li>
+      </ul>
+    </div>
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Boiterie de salutation
+      </div>
+      <ul class="dense">
+        <li>Inclinaison du tronc <strong>du côté atteint</strong> lors de l'appui</li>
+        <li>Déplace le centre de gravité pour décharger le MI douloureux</li>
+        <li>Coxarthrose typiquement</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Boiterie de Trendelenburg
+    </div>
+    <ul class="dense">
+      <li><strong>Abaissement du bassin du côté oscillant</strong> (non en charge) lors de l'appui monopodal</li>
+      <li>Mécanisme : déficit des <strong>abducteurs de hanche</strong> (moyen fessier)</li>
+      <li>Causes : coxarthrose, luxation congénitale de hanche, paralysie du nerf glutéal supérieur, myopathie</li>
+      <li>Signe de Trendelenburg positif à l'examen statique</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> le tronc <strong>s'incline du côté sain</strong> (vers l'appui) — ne pas confondre avec la boiterie de salutation.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : ASTASIE-ABASIE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  6. Astasie-abasie
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Définition et étiologies
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Peur panique de marcher</strong> — si poussé à faire quelques pas, s'agrippe à l'examinateur / meubles / murs, postures hasardeuses, haut risque de chute. Toute tentative de lâcher déclenche une anxiété majeure.</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px; color:var(--red);">Psychogène</div>
+      <ul class="dense">
+        <li>Syndrome dépressif</li>
+        <li>Syndrome de glissement</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px; color:var(--blue);">Secondaire (non psychogène)</div>
+      <ul class="dense">
+        <li>Apraxie de la marche (lésion frontale)</li>
+        <li>Ataxie frontale</li>
+        <li>HCA (hydrocéphalie chronique de l'adulte)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : DÉMARCHE DANDINANTE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--blue);">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  7. Démarche dandinante
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Mécanisme et présentation
+  </div>
+  <ul class="dense">
+    <li>Déficit moteur des muscles <strong>racines des MI et ceinture pelvienne</strong></li>
+    <li>Hyperlordose + bascule du bassin en avant, tronc et tête rejetés en arrière</li>
+    <li>Démarche <strong>caractéristique des myopathies</strong></li>
+    <li>Associée à myalgies / crampes si myopathie métabolique ou inflammatoire</li>
+  </ul>
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-amber">Duchenne</span>
+    <span class="pill pill-amber">Becker</span>
+    <span class="pill pill-amber">Mc Ardle (glycogénose)</span>
+    <span class="pill pill-amber">Dermato/polymyosite</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : SYNDROME POST-CHUTE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--red);">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  8. Syndrome post-chute
+</div>
+
+<div class="grid2">
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Composante motrice
+    </div>
+    <ul class="dense">
+      <li><strong>Au fauteuil :</strong> rétropulsion, impossibilité d'antépulsion</li>
+      <li><strong>Debout :</strong> marche talonnante, élargissement polygone de sustentation, flexion des genoux</li>
+    </ul>
+  </div>
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Composante psychologique
+    </div>
+    <ul class="dense">
+      <li>Anxiété majeure, peur du vide antérieur</li>
+      <li>Au maximum : <strong>astasie-abasie</strong></li>
+      <li>Syndrome dépressif</li>
+    </ul>
+  </div>
+</div>
+<div class="card card-left-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Syndrome de régression psychomotrice
+  </div>
+  <p style="font-size:.83rem;">Complication évolutive : clinophilie, incontinence, aide aux repas — recherche active de dépendance, perte totale d'autonomie.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 9 : PSYCHOGÈNE -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--purple);">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  </div>
+  9. Étiologie somato-fonctionnelle / psychogène
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Indices évocateurs d'un trouble psychogène / conversif
+  </div>
+  <div class="grid2">
+    <ul class="dense">
+      <li>Début <strong>soudain</strong>, rémission spontanée, survenue paroxystique</li>
+      <li><strong>Inconstance</strong> dans le temps</li>
+      <li>Discordance avec un trouble neurologique organique</li>
+      <li>Modification spontanée incompatible avec l'anomalie initiale</li>
+    </ul>
+    <ul class="dense">
+      <li><strong>Disparition</strong> par manœuvres de distraction</li>
+      <li><strong>Aggravation</strong> quand l'attention se porte sur la marche</li>
+      <li>Réponse au placebo, à la suggestion, à la psychothérapie</li>
+      <li>Marche bondissante, robotique (conversif)</li>
+    </ul>
+  </div>
+  <div class="alert alert-amber" style="margin-top:8px; margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> ne jamais étiqueter « psychogène » sans examen complet. Le diagnostic exige une parfaite connaissance de l'expression clinique des troubles organiques.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 10 : BILAN -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--blue);">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </div>
+  10. Bilan complémentaire
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imagerie
+    </div>
+    <div class="kv-row"><span class="kv-key">Déficit aigu brutal</span><span class="kv-val">IRM + diffusion + angioIRM Willis — URGENCE</span></div>
+    <div class="kv-row"><span class="kv-key">CI à l'IRM</span><span class="kv-val">Scanner + angioscanner</span></div>
+    <div class="kv-row"><span class="kv-key">Symptômes non aigus</span><span class="kv-val">IRM : HCA, processus lésionnel, HSD</span></div>
+    <div class="kv-row"><span class="kv-key">Parkinson clinique typique</span><span class="kv-val">Imagerie inutile</span></div>
+    <div class="kv-row"><span class="kv-key">Syndrome parkinsonien atypique</span><span class="kv-val">IRM cérébrale</span></div>
+    <div class="alert alert-amber" style="margin-top:10px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> IRM inutile si tableau de Parkinson typique.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Hors imagerie
+    </div>
+    <div style="font-weight:700; font-size:.79rem; color:var(--text-muted); margin-bottom:5px;">Biologie</div>
+    <div class="pills">
+      <span class="pill pill-blue">Glycémie</span>
+      <span class="pill pill-blue">Ionogramme (K+, Ca++, Na+)</span>
+      <span class="pill pill-blue">NFS (anémie)</span>
+      <span class="pill pill-blue">Gaz du sang</span>
+      <span class="pill pill-blue">Radiographie pulmonaire (EP)</span>
+    </div>
+    <div style="font-weight:700; font-size:.79rem; color:var(--text-muted); margin:10px 0 5px;">Cardio</div>
+    <div class="pills">
+      <span class="pill pill-red">ECG (troubles du rythme)</span>
+    </div>
+    <div style="font-weight:700; font-size:.79rem; color:var(--text-muted); margin:10px 0 5px;">Scanner sans injection</div>
+    <div class="pills">
+      <span class="pill pill-amber">HSD / HED</span>
+      <span class="pill pill-amber">AVC hémorragique</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="section-title">
+  <div class="section-title-icon" style="background:var(--teal);">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  Points-clés à retenir
+</div>
+
+<div class="card" style="border: 2px solid var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse ECNi
+  </div>
+  <div class="grid2">
+    <ul class="dense">
+      <li>Médicaments = <strong>1er facteur de risque de chute</strong> du sujet âgé</li>
+      <li><strong>Fauchage</strong> = syndrome pyramidal (AVC hémisphérique)</li>
+      <li><strong>Steppage</strong> = atteinte périphérique <strong>distale</strong></li>
+      <li><strong>Dandinement</strong> = myopathie (<strong>proximale</strong>)</li>
+      <li>Petits pas + festination + freezing = <strong>syndrome parkinsonien</strong></li>
+      <li>Marche talonnante + Romberg + = ataxie <strong>proprioceptive</strong></li>
+    </ul>
+    <ul class="dense">
+      <li>Trendelenburg = déficit <strong>abducteurs de hanche</strong> (moyen fessier)</li>
+      <li>Syndrome post-chute = moteur + psychologique + régression psychomotrice</li>
+      <li>Astasie-abasie = peur panique (psychogène OU frontale/HCA)</li>
+      <li>IRM urgente si déficit aigu brutal — AVC ischémique à éliminer</li>
+      <li>Parkinson typique → <strong>pas d'imagerie</strong> systématique</li>
+      <li>HCA = triade : petits pas + troubles cognitifs + incontinence</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges classiques ECNi :</strong> (1) Confondre instabilité et vertige. (2) Étiqueter psychogène sans examen organique complet. (3) Prescrire une IRM devant un Parkinson clinique typique. (4) Omettre les médicaments dans le bilan étiologique d'une chute du sujet âgé.</div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>
