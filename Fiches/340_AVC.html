@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 340 – Accidents vasculaires cérébraux</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --teal: #1D9E75;
+      --coral: #D85A30;
+      --blue: #378ADD;
+      --red: #E24B4A;
+      --amber: #D97706;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --red-light: #fef2f2;
+      --blue-light: #eff6ff;
+      --teal-light: #f0fdf4;
+      --amber-light: #fffbeb;
+      --purple-light: #f5f3ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --border: #374151;
+        --bg: #111827;
+        --card: #1f2937;
+        --red-light: #3b0000;
+        --blue-light: #0c1a2e;
+        --teal-light: #0a1f15;
+        --amber-light: #1c1200;
+        --purple-light: #1a1040;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+    .page { max-width: 920px; margin: 0 auto; padding: 20px 16px; }
+
+    /* HEADER */
+    .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 50%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: white; }
+    .header-item { font-size: .78rem; font-weight: 600; opacity: .8; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 6px; }
+    .header-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 10px; line-height: 1.2; }
+    .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag { background: rgba(255,255,255,.2); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+    /* INTRO */
+    .intro-box { background: var(--purple-light); border-left: 4px solid var(--purple); border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; font-size: .84rem; color: var(--text); line-height: 1.6; }
+
+    /* CARDS */
+    .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+    .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* GRID */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+    /* ALERTS */
+    .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+    .alert strong { font-weight:800; }
+    .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+    .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+    .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+    .alert-red   .alert-icon svg { stroke:var(--red);   }
+    .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+    .alert-green .alert-icon svg { stroke:var(--teal);  }
+    .alert-amber .alert-icon svg { stroke:var(--amber); }
+    .alert-icon { flex-shrink: 0; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* PILLS */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .pill { border-radius: 20px; padding: 3px 10px; font-size: .76rem; font-weight: 600; }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+    /* KV ROWS */
+    .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; gap: 8px; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--muted); flex-shrink: 0; }
+    .kv-val { font-weight: 700; text-align: right; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 8px; }
+    th { background: var(--bg); padding: 8px 10px; text-align: left; font-weight: 700; font-size: .78rem; border-bottom: 2px solid var(--border); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* STEPS */
+    .steps { list-style: none; }
+    .step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; font-size: .83rem; }
+    .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--border); color: var(--muted); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .75rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* SECTION HEADERS */
+    .section-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; margin-top: 20px; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* BORDER-LEFT CARDS */
+    .bl-card { border-left: 4px solid; border-radius: 0 10px 10px 0; padding: 10px 14px; margin-bottom: 10px; font-size: .83rem; }
+    .bl-red { border-color: var(--red); background: var(--red-light); }
+    .bl-blue { border-color: var(--blue); background: var(--blue-light); }
+    .bl-teal { border-color: var(--teal); background: var(--teal-light); }
+    .bl-amber { border-color: var(--amber); background: var(--amber-light); }
+    .bl-purple { border-color: var(--purple); background: var(--purple-light); }
+    .bl-card strong { font-weight: 700; }
+
+    /* BADGE */
+    .badge { display: inline-block; border-radius: 5px; padding: 2px 8px; font-size: .72rem; font-weight: 700; }
+    .badge-red { background: var(--red); color: white; }
+    .badge-blue { background: var(--blue); color: white; }
+    .badge-teal { background: var(--teal); color: white; }
+    .badge-amber { background: var(--amber); color: white; }
+    .badge-purple { background: var(--purple); color: white; }
+    .badge-gray { background: var(--border); color: var(--muted); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-item">Item 340</div>
+    <div class="header-title">Accidents vasculaires cérébraux</div>
+    <div class="header-tags">
+      <span class="tag">Urgence absolue</span>
+      <span class="tag">Neurologie</span>
+      <span class="tag">Imagerie cérébrale</span>
+      <span class="tag">Thrombolyse / Thrombectomie</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <strong>Vision globale :</strong> L'AVC est une urgence neurovasculaire absolue nécessitant une filière spécialisée activée dès le pré-hospitalier. Maîtriser : (1) distinguer cliniquement AVC ischémique / hémorragique / AIT ; (2) identifier les signes de gravité et les étiologies (athérosclérose, cardio-embolique, lacunaire, dissection, thrombophlébite) ; (3) connaître les indications et délais de thrombolyse et thrombectomie ; (4) organiser bilan étiologique et prévention secondaire ; (5) énoncer le pronostic.
+  </div>
+
+  <hr>
+
+  <!-- SECTION 1 : DÉFINITION & CLASSIFICATION -->
+  <div class="section-label">Définition &amp; Classification</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition &amp; Classification
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span><strong>Déficit neurologique focal d'apparition brutale</strong> — définition clinique commune à tous les AVC.</span>
+    </div>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Fréquence</th>
+        <th>Sous-types</th>
+      </tr>
+      <tr>
+        <td><strong>Ischémie cérébrale artérielle</strong></td>
+        <td><span class="badge badge-blue">80%</span></td>
+        <td>AIT (transitoire) / Infarctus cérébral (constitué)</td>
+      </tr>
+      <tr>
+        <td><strong>Hémorragie intraparenchymateuse</strong></td>
+        <td><span class="badge badge-red">20%</span></td>
+        <td>Dont 5% de tous les AVC = hémorragie sous-arachnoïdienne (prise en charge différente : neurochirurgie / RI)</td>
+      </tr>
+      <tr>
+        <td><strong>Thrombose veineuse cérébrale</strong></td>
+        <td><span class="badge badge-gray">&lt;2%</span></td>
+        <td>Rare, contexte particulier (état prothrombotique, méningite, trauma)</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 2 : ÉPIDÉMIO & FDR -->
+  <div class="section-label">Épidémiologie &amp; Facteurs de risque</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Épidémiologie
+      </div>
+      <div class="kv-row"><span class="kv-key">Incidence France</span><span class="kv-val">150 000/an</span></div>
+      <div class="kv-row"><span class="kv-key">Âge moyen</span><span class="kv-val">~73 ans</span></div>
+      <div class="kv-row"><span class="kv-key">Mortalité 1 mois</span><span class="kv-val">20%</span></div>
+      <div class="kv-row"><span class="kv-key">Mortalité 1 an</span><span class="kv-val">40%</span></div>
+      <div class="kv-row"><span class="kv-key">Récidive à 5 ans</span><span class="kv-val">30%</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Facteurs de risque
+      </div>
+      <div style="font-size:.81rem; margin-bottom:6px; color:var(--muted); font-weight:600;">NON MODIFIABLES</div>
+      <div class="pills" style="margin-bottom:10px;">
+        <span class="pill pill-blue">Âge</span>
+        <span class="pill pill-blue">Sexe masculin</span>
+        <span class="pill pill-blue">ATCD familiaux</span>
+      </div>
+      <div style="font-size:.81rem; margin-bottom:6px; color:var(--muted); font-weight:600;">MODIFIABLES</div>
+      <div class="pills">
+        <span class="pill pill-red">HTA (N°1)</span>
+        <span class="pill pill-red">Diabète</span>
+        <span class="pill pill-red">Dyslipidémie</span>
+        <span class="pill pill-red">Tabac</span>
+        <span class="pill pill-red">Obésité</span>
+        <span class="pill pill-red">Sédentarité</span>
+        <span class="pill pill-amber">FA</span>
+        <span class="pill pill-amber">Sténose carotidienne</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège :</strong> Pour l'hémorragie cérébrale, FDR spécifiques = HTA, alcoolisme chronique, anticoagulants, âge avancé. Les anticoagulants sont un facteur favorisant, pas une étiologie (15% des hémorragies surviennent sous anticoagulant).</span>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 3 : PHYSIOPATHOLOGIE -->
+  <div class="section-label">Physiopathologie de l'ischémie cérébrale</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Zone centrale vs Zone de pénombre
+    </div>
+    <div class="grid2">
+      <div class="bl-card bl-red">
+        <strong>Zone centrale (nécrose)</strong><br>
+        Nécrose immédiate — irréversible.<br>
+        Source des séquelles neurologiques définitives.
+      </div>
+      <div class="bl-card bl-amber">
+        <strong>Zone de pénombre</strong><br>
+        Perturbations <strong>réversibles</strong> si recanalisation rapide.<br>
+        Cible des traitements d'urgence (thrombolyse / thrombectomie).
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 4 : CLINIQUE -->
+  <div class="section-label">Diagnostic clinique</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Syndromes cliniques par territoire artériel
+    </div>
+    <table>
+      <tr>
+        <th>Circulation</th>
+        <th>Artère</th>
+        <th>Tableau clinique</th>
+      </tr>
+      <tr>
+        <td rowspan="4" style="vertical-align:middle; text-align:center;"><strong>Antérieure<br>(carotidienne)</strong></td>
+        <td>Ophtalmique</td>
+        <td>Cécité monoculaire</td>
+      </tr>
+      <tr>
+        <td>Cérébrale antérieure</td>
+        <td>Déficit moteur à prédominance <strong>crurale</strong>, syndrome frontal</td>
+      </tr>
+      <tr>
+        <td>ACM superficielle</td>
+        <td>Déficit moteur <strong>brachiofacial</strong>, aphasie ou héminégligence</td>
+      </tr>
+      <tr>
+        <td>ACM profonde</td>
+        <td><strong>Hémiplégie proportionnelle</strong></td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Postérieure<br>(vertébrobasilaire)</strong></td>
+        <td>Cérébrale postérieure</td>
+        <td>HLH, hémianesthésie</td>
+      </tr>
+      <tr>
+        <td>Vertébrobasilaire</td>
+        <td>Syndrome alterne (Wallenberg), syndrome cérébelleux, infarctus médullaire cervical</td>
+      </tr>
+      <tr>
+        <td>Tronc basilaire</td>
+        <td>Troubles de vigilance, coma</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- AIT -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      AIT — Diagnostic clinique
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.81rem; font-weight:700; color:var(--purple); margin-bottom:6px;">AIT PROBABLE</div>
+        <div class="bl-card bl-purple" style="margin-bottom:6px;">
+          <strong>Carotidien :</strong><br>
+          Cécité monoculaire, aphasie, déficit moteur/sensitif unilatéral face + membres. Installation &lt;2 min.
+        </div>
+        <div class="bl-card bl-purple">
+          <strong>Vertébrobasilaire :</strong><br>
+          Déficit moteur/sensitif bilatéral ou à bascule, HLH ou cécité corticale.
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.81rem; font-weight:700; color:var(--muted); margin-bottom:6px;">AIT POSSIBLE (si isolé)</div>
+        <div class="pills" style="margin-bottom:10px;">
+          <span class="pill pill-blue">Vertige</span>
+          <span class="pill pill-blue">Diplopie</span>
+          <span class="pill pill-blue">Dysarthrie</span>
+          <span class="pill pill-blue">Dysphagie</span>
+          <span class="pill pill-blue">Trouble équilibre</span>
+          <span class="pill pill-blue">Drop-attack</span>
+        </div>
+        <div style="font-size:.81rem; font-weight:700; color:var(--muted); margin-bottom:6px;">DIAGNOSTICS DIFFÉRENTIELS</div>
+        <div class="pills">
+          <span class="pill pill-amber">Aura migraineuse (marche progressive)</span>
+          <span class="pill pill-amber">Crise épileptique / déficit post-critique</span>
+          <span class="pill pill-amber">Hypoglycémie</span>
+          <span class="pill pill-amber">Hyponatrémie</span>
+          <span class="pill pill-amber">Vertige paroxystique bénin</span>
+          <span class="pill pill-amber">Lipothymie</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> Les signes "possibles" (vertige, diplopie…) deviennent <strong>probables</strong> s'ils s'associent entre eux ou aux signes probables — ne pas rejeter le diagnostic d'AIT si plusieurs signes "possibles" coexistent.</span>
+    </div>
+  </div>
+
+  <!-- Dissection & TVC -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Dissection artérielle cervicale
+      </div>
+      <div class="kv-row"><span class="kv-key">Contexte clé</span><span class="kv-val">AVC du sujet &lt;50 ans</span></div>
+      <div class="kv-row"><span class="kv-key">FDR unique</span><span class="kv-val">HTA</span></div>
+      <div style="margin-top:8px; font-size:.8rem; font-weight:700; color:var(--coral); margin-bottom:4px;">TRIADE CLINIQUE (inconstante)</div>
+      <ol class="steps">
+        <li class="step"><span class="step-num">1</span><span>Déficit neurologique focal brutal</span></li>
+        <li class="step"><span class="step-num">2</span><span>Céphalée / cervicalgies</span></li>
+        <li class="step"><span class="step-num">3</span><span>Paralysie paire crânienne ou CBH (Claude Bernard Horner)</span></li>
+      </ol>
+      <div style="font-size:.8rem; color:var(--muted); margin-top:4px;"><strong>Survenue :</strong> spontanée, trauma mineur (toux, vomissement) ou majeur (trauma crânien/rachidien)<br><strong>Imagerie :</strong> Écho-Doppler TSA, angioscanner/angio-IRM TSA, séquence T1-spir</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Thrombophlébite cérébrale (TVC)
+      </div>
+      <div class="kv-row"><span class="kv-key">Fréquence</span><span class="kv-val">&lt;2% des AVC</span></div>
+      <div style="margin-top:8px; font-size:.8rem; font-weight:700; color:var(--teal); margin-bottom:4px;">TRIADE CLINIQUE</div>
+      <ol class="steps">
+        <li class="step"><span class="step-num">1</span><span>Céphalées (HTIC)</span></li>
+        <li class="step"><span class="step-num">2</span><span>Déficit neurologique focal aigu ou subaigu</span></li>
+        <li class="step"><span class="step-num">3</span><span>Crises comitiales focales ou généralisées</span></li>
+      </ol>
+      <div style="font-size:.8rem; color:var(--muted); margin-top:4px;"><strong>Évocateur :</strong> symptômes déficitaires ou crises à bascule<br><strong>Causes :</strong> méningite, trauma crânien, état prothrombotique<br><strong>Imagerie :</strong> Scanner ou IRM (infarctus veineux, hémorragie, oedème, hydrocéphalie)</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 5 : GRAVITÉ -->
+  <div class="section-label">Signes de gravité</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Signes de gravité — recherche systématique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span><strong>Trouble de vigilance</strong> (Glasgow, confusion, coma)</span>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span><strong>Détresse respiratoire aiguë</strong></span>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span><strong>Instabilité hémodynamique</strong> (hypotension, trouble du rythme)</span>
+        </div>
+      </div>
+      <div>
+        <div class="kv-row"><span class="kv-key">Score NIHSS</span><span class="kv-val">Évalue déficit moteur, parole, conscience</span></div>
+        <div class="kv-row"><span class="kv-key">SMUR déclenché</span><span class="kv-val">Si signe de gravité présent</span></div>
+        <div class="kv-row"><span class="kv-key">Hémicraniectomie</span><span class="kv-val">&lt;60 ans, NIHSS &gt;16 + troubles vigilance</span></div>
+        <div class="kv-row"><span class="kv-key">Dérivation ventriculaire</span><span class="kv-val">Si AVC cérébelleux + hydrocéphalie obstructive</span></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 6 : ÉTIOLOGIES -->
+  <div class="section-label">Étiologies</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes d'AVC ischémiques — Classification TOAST
+    </div>
+    <table>
+      <tr>
+        <th>Étiologie</th>
+        <th>%</th>
+        <th>Mécanisme clé</th>
+      </tr>
+      <tr>
+        <td><strong>Athérosclérose</strong></td>
+        <td><span class="badge badge-blue">30%</span></td>
+        <td>Sténose &gt;50% en amont, macroangiopathie, FDR vasculaires multiples</td>
+      </tr>
+      <tr>
+        <td><strong>Lacunaire (petites artères)</strong></td>
+        <td><span class="badge badge-blue">20%</span></td>
+        <td>Infarctus profond &lt;20mm, lipohyalinose, HTA +++ (microangiopathie)</td>
+      </tr>
+      <tr>
+        <td><strong>Cardio-embolique</strong></td>
+        <td><span class="badge badge-blue">20%</span></td>
+        <td><strong>FA dans 50% des cas</strong>, valvulopathie, IDM récent, cathétérisme</td>
+      </tr>
+      <tr>
+        <td><strong>Indéterminé</strong></td>
+        <td><span class="badge badge-gray">25%</span></td>
+        <td>Bilan exhaustif négatif</td>
+      </tr>
+      <tr>
+        <td><strong>Autres causes identifiées</strong></td>
+        <td><span class="badge badge-teal">5%</span></td>
+        <td>Dissection cervicale (~20% chez sujet jeune), vascularites, hémato, génétique (CADASIL…)</td>
+      </tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes d'AVC hémorragiques
+    </div>
+    <table>
+      <tr>
+        <th>Mécanisme</th>
+        <th>Topographie</th>
+        <th>Caractéristiques</th>
+      </tr>
+      <tr>
+        <td><strong>Maladie des petites artères / HTA</strong></td>
+        <td>Profonde (capsulothalamique…)</td>
+        <td>La plus fréquente, lipohyalinose, traitement médical</td>
+      </tr>
+      <tr>
+        <td><strong>Angiopathie amyloïde cérébrale</strong></td>
+        <td>Lobaire</td>
+        <td>Sujet âgé, risque de récidive élevé</td>
+      </tr>
+      <tr>
+        <td><strong>Malformation vasculaire</strong> (MAV, cavernome)</td>
+        <td>Variable</td>
+        <td>Sujet jeune, traitement interventionnel possible</td>
+      </tr>
+      <tr>
+        <td><strong>Tumeur cérébrale</strong></td>
+        <td>Variable</td>
+        <td>Souvent révélatrice de la tumeur</td>
+      </tr>
+      <tr>
+        <td><strong>Anticoagulants</strong></td>
+        <td>Variable</td>
+        <td>15% des hémorragies — facteur favorisant, pas étiologie principale</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 7 : IMAGERIE -->
+  <div class="section-label">Imagerie cérébrale</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        IRM — AVC ischémique
+      </div>
+      <div class="kv-row"><span class="kv-key">Séquence clé</span><span class="kv-val">Diffusion (DWI) = hypersignal</span></div>
+      <div class="kv-row"><span class="kv-key">FLAIR</span><span class="kv-val">Normal si &lt;4,5h</span></div>
+      <div class="kv-row"><span class="kv-key">Mismatch FLAIR-DWI</span><span class="kv-val">Horaire inconnu → guide thrombolyse</span></div>
+      <div class="kv-row"><span class="kv-key">Hémorragie</span><span class="kv-val">T2* (hyposignal)</span></div>
+      <div class="kv-row"><span class="kv-key">Vaisseaux</span><span class="kv-val">Angio-IRM (occlusion proximale)</span></div>
+      <div class="kv-row"><span class="kv-key">Paroi artérielle</span><span class="kv-val">T1-spir (dissection : hématome pariétal)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Scanner — AVC hémorragique
+      </div>
+      <div class="kv-row"><span class="kv-key">Hémorragie</span><span class="kv-val">Hyperdensité spontanée</span></div>
+      <div class="kv-row"><span class="kv-key">Infarctus</span><span class="kv-val">Hypodensité (parfois tardive)</span></div>
+      <div class="kv-row"><span class="kv-key">Vaisseaux</span><span class="kv-val">Angioscanner (occlusion proximale)</span></div>
+      <div class="kv-row"><span class="kv-key">Avantage</span><span class="kv-val">Rapide, disponible, élimine l'hémorragie</span></div>
+      <div class="alert alert-blue" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <span>Topographie profonde = HTA/maladie des petites artères. Topographie lobaire = angiopathie amyloïde (sujet âgé) ou MAV (sujet jeune).</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 8 : PEC AIGUË -->
+  <div class="section-label">Prise en charge aiguë</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Phase pré-hospitalière — filière AVC
+    </div>
+    <ol class="steps">
+      <li class="step"><span class="step-num">1</span><span><strong>Alerte :</strong> éducation grand public — déformation visage, trouble parole, perte de force → appel 15 immédiat</span></li>
+      <li class="step"><span class="step-num">2</span><span><strong>Régulation SAMU-Centre 15 :</strong> confirmer alerte AVC, heure du début des symptômes, signes de gravité, ATCD, traitements (anticoagulants +++), CI à la thrombolyse → déclencher filière neurovasculaire</span></li>
+      <li class="step"><span class="step-num">3</span><span><strong>Transport :</strong> SMUR si signe de gravité. Orientation vers UNV ou centre télé-AVC si pas de signe de gravité</span></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Recanalisation — délais absolus
+    </div>
+    <div class="grid2">
+      <div class="bl-card bl-blue">
+        <strong>Thrombolyse IV — rt-PA (altéplase)</strong><br>
+        Fenêtre : <strong>&lt;4h30</strong> après début des symptômes<br>
+        Lieu : UNV ou centre de télé-AVC<br>
+        Mismatch FLAIR-DWI → possible en horaire inconnu
+      </div>
+      <div class="bl-card bl-teal">
+        <strong>Thrombectomie mécanique endovasculaire</strong><br>
+        Fenêtre : <strong>&lt;6h</strong> (extensible si pénombre ischémique)<br>
+        Indication : occlusion proximale artère intracrânienne<br>
+        En complément de la thrombolyse ou seule si CI
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> La présence d'une pénombre ischémique (mismatch DWI/perfusion) peut étendre les délais thérapeutiques au-delà des fenêtres standards, sous contrôle neuroradiologique.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Mesures générales — ACSOS &amp; surveillance
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--coral); margin-bottom:6px;">CONTRÔLE DES ACSOS</div>
+        <div class="pills">
+          <span class="pill pill-red">PA : éviter hypo et hypertension</span>
+          <span class="pill pill-red">SpO2 : éviter hypoxémie</span>
+          <span class="pill pill-red">T° : éviter hyperthermie</span>
+          <span class="pill pill-red">Glycémie : éviter hyperglycémie</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--muted); margin-bottom:6px;">SURVEILLANCE RÉPÉTÉE</div>
+        <div class="pills">
+          <span class="pill pill-blue">Score NIHSS</span>
+          <span class="pill pill-blue">Score Glasgow</span>
+          <span class="pill pill-blue">Pupilles</span>
+          <span class="pill pill-blue">Déglutition</span>
+          <span class="pill pill-blue">ECG + troponine</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.8rem; color:var(--muted); margin-top:10px;">
+      <strong>Antithrombotiques :</strong> dès l'arrivée ou après imagerie de contrôle à 24h si thrombolyse.<br>
+      <strong>Neurochirurgie :</strong> hémicraniectomie si infarctus malin (&lt;60 ans, NIHSS &gt;16) — décision collégiale au cas par cas.
+    </div>
+  </div>
+
+  <!-- Bilan étiologique -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan étiologique de 1re ligne
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.81rem; font-weight:700; color:var(--blue); margin-bottom:6px;">INFARCTUS CÉRÉBRAL</div>
+        <div class="bl-card bl-blue" style="font-size:.8rem;">
+          <strong>Imagerie vasculaire :</strong> Écho-Doppler TSA + angioscanner/angio-IRM (athérome, dissection)<br>
+          <strong>Cardio :</strong> ECG + troponine + ETT (FA, IDM, valvulopathie, souffle cardiaque)<br>
+          <strong>Bio :</strong> NFS-plaquettes, TP/TCA, glycémie, bilan lipidique<br>
+          <strong>Si fièvre/souffle :</strong> hémocultures, CRP, PL (endocardite)
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.81rem; font-weight:700; color:var(--red); margin-bottom:6px;">HÉMORRAGIE CÉRÉBRALE</div>
+        <div class="bl-card bl-red" style="font-size:.8rem;">
+          <strong>Imagerie :</strong> angioscanner/angio-IRM (MAV, cavernome, tumeur)<br>
+          <strong>Bio :</strong> NFS-plaquettes, TP/TCA (coagulopathie, anticoagulants)<br>
+          <strong>Contexte :</strong> trauma crânien, anticoagulants en cours<br>
+          <strong>Topographie lobaire :</strong> chercher angiopathie amyloïde (sujet âgé) ou MAV (sujet jeune)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 9 : PRÉVENTION -->
+  <div class="section-label">Prévention primaire &amp; secondaire</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention
+    </div>
+    <div class="grid2">
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--teal); margin-bottom:6px;">CONTRÔLE FDR MODIFIABLES (primaire &amp; secondaire)</div>
+        <div class="pills">
+          <span class="pill pill-green">HTA (traitement + éducation)</span>
+          <span class="pill pill-green">Diabète</span>
+          <span class="pill pill-green">Dyslipidémie (statines)</span>
+          <span class="pill pill-green">Obésité</span>
+          <span class="pill pill-green">Tabac / Alcool (arrêt)</span>
+          <span class="pill pill-green">SAOS</span>
+          <span class="pill pill-green">Activité physique</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--blue); margin-bottom:6px;">PRÉVENTION SECONDAIRE SPÉCIFIQUE</div>
+        <div class="kv-row" style="font-size:.8rem;"><span class="kv-key">FA → infarctus cérébral</span><span class="kv-val">Anticoagulants</span></div>
+        <div class="kv-row" style="font-size:.8rem;"><span class="kv-key">Athérosclérose / lacunaire</span><span class="kv-val">Antiplaquettaires + statines</span></div>
+        <div class="kv-row" style="font-size:.8rem;"><span class="kv-key">Sténose carotidienne &gt;70%</span><span class="kv-val">Endartériectomie</span></div>
+        <div class="kv-row" style="font-size:.8rem;"><span class="kv-key">Dissection</span><span class="kv-val">Anticoagulants ou antiplaquettaires</span></div>
+      </div>
+    </div>
+    <div style="font-size:.8rem; color:var(--muted); margin-top:10px;">
+      <strong>Suivi :</strong> évaluation séquelles, observance, tolérance (antithrombotiques → saignement ; statines → transaminases), adaptation au terrain (IR, grossesse, PA). Kinésithérapie et orthophonie si handicap moteur/phasique.
+    </div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Troubles post-AVC :</strong> troubles cognitifs (80%), dépression/anxiété (30%), handicap moteur/phasique, épilepsie vasculaire, douleurs neuropathiques — évaluation systématique.</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 10 : PRONOSTIC -->
+  <div class="section-label">Pronostic</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Pronostic vital &amp; fonctionnel
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="kv-row"><span class="kv-key">Mortalité à 1 mois</span><span class="kv-val" style="color:var(--red)">20%</span></div>
+        <div class="kv-row"><span class="kv-key">Mortalité à 1 an</span><span class="kv-val" style="color:var(--red)">40%</span></div>
+        <div class="kv-row"><span class="kv-key">Récidive à 5 ans</span><span class="kv-val">30%</span></div>
+        <div style="margin-top:10px; font-size:.82rem;">
+          <div class="bl-card bl-red" style="margin-bottom:6px;"><strong>1/3</strong> des survivants : dépendants</div>
+          <div class="bl-card bl-amber" style="margin-bottom:6px;"><strong>1/3</strong> des survivants : séquelles mais indépendants</div>
+          <div class="bl-card bl-teal"><strong>1/3</strong> des survivants : retrouvent leur état antérieur</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--muted); margin-bottom:6px;">COMPLICATIONS POST-AVC</div>
+        <div class="pills">
+          <span class="pill pill-red">Troubles cognitifs / démence vasculaire (80%)</span>
+          <span class="pill pill-amber">Troubles de l'humeur — dépression, anxiété (30%)</span>
+          <span class="pill pill-blue">Handicap moteur / phasique</span>
+          <span class="pill pill-blue">Spasticité</span>
+          <span class="pill pill-blue">Épilepsie vasculaire</span>
+          <span class="pill pill-blue">Douleurs neuropathiques</span>
+          <span class="pill pill-blue">Troubles vésicosphinctériens</span>
+          <span class="pill pill-blue">Syndrome régional complexe</span>
+        </div>
+        <div class="alert alert-amber" style="margin-top:8px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Mortalité à la phase aiguë <strong>plus élevée dans l'hémorragie intraparenchymateuse</strong> vs infarctus cérébral.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION FINALE : POINTS CLÉS -->
+  <div class="section-label">Points-clés à retenir</div>
+  <div class="card" style="border: 1.5px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      À retenir pour l'ECNi
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Urgence absolue :</strong> appeler le 15, activer filière AVC, transport vers UNV — "Time is Brain"</span>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span><strong>Imagerie obligatoire :</strong> seule l'imagerie différencie ischémie et hémorragie. IRM = DWI pour ischémie ; Scanner = hyperdensité spontanée pour hémorragie.</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> AIT = urgence diagnostique même si résolution complète des symptômes. Risque de récidive immédiat élevé → bilan étiologique urgent en UNV.</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> Dissection = AVC du sujet jeune (&lt;50 ans). Triade : déficit focal + céphalées/cervicalgies + CBH/paralysie crânienne. Contexte : trauma même mineur (toux, vomissement).</span>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>Délais à retenir :</strong> Thrombolyse IV (rt-PA) &lt;<strong>4h30</strong> ; Thrombectomie mécanique &lt;<strong>6h</strong> si occlusion proximale (extensible avec pénombre ischémique).</span>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>FA :</strong> 1re cause cardio-embolique (50% de cette catégorie) → ECG systématique à la phase aiguë, anticoagulation en prévention secondaire.</span>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span><strong>HTA :</strong> premier FDR modifiable des AVC ischémiques ET hémorragiques. Contrôle tensionnel = pierre angulaire de la prévention primaire et secondaire.</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 108 — Confusion, Démences</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7; --purple-light: #EEF0FF;
+    --teal: #1D9E75;   --teal-light: #E6F7F2;
+    --coral: #D85A30;  --coral-light: #FDF0EB;
+    --blue: #378ADD;   --blue-light: #EBF4FF;
+    --red: #E24B4A;    --red-light: #FFF0F0;
+    --amber: #D97706;  --amber-light: #FFFBEB;
+    --text: #1A1A2E; --text-light: #6B7280;
+    --border: #E5E7EB; --bg: #F9FAFB; --card-bg: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #E5E7EB; --text-light: #9CA3AF;
+      --border: #374151; --bg: #111827; --card-bg: #1F2937;
+      --purple-light: #2D2660; --teal-light: #0D3D2C;
+      --coral-light: #4A1F10; --blue-light: #1A3A5C;
+      --red-light: #4A1010; --amber-light: #422A02;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 48px; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; color: white; margin-bottom: 24px; }
+  .header-tag { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: .8; margin-bottom: 6px; }
+  .header h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; }
+  .header-sub { font-size: .9rem; opacity: .9; }
+
+  .objectifs { background: var(--purple-light); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; border-left: 4px solid var(--purple); }
+  .objectifs-title { font-size: .78rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+  .objectifs p { font-size: .85rem; color: var(--text); line-height: 1.6; }
+
+  .section-title { font-size: 1.05rem; font-weight: 800; color: var(--text); margin: 28px 0 16px; display: flex; align-items: center; gap: 10px; }
+  .section-badge { display: inline-flex; align-items: center; justify-content: center; background: var(--red); color: white; font-size: .68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 24px 0; }
+
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px 18px; margin-bottom: 14px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue  { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke:var(--red);   }
+  .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+  .alert-green .alert-icon svg { stroke:var(--teal);  }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  .kv-row { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { font-weight: 700; color: var(--text-light); min-width: 170px; flex-shrink: 0; }
+  .kv-val { color: var(--text); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .table-purple th { border-bottom-color: var(--purple); }
+  .table-blue th   { border-bottom-color: var(--blue);   }
+  .table-teal th   { border-bottom-color: var(--teal);   }
+
+  .steps { list-style: none; counter-reset: step; }
+  .steps li { counter-increment: step; display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: .84rem; }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before { content: counter(step); display: flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 2px solid var(--border); font-size: .75rem; font-weight: 800; color: var(--text-light); flex-shrink: 0; margin-top: 1px; }
+
+  .card-red    { border-left: 4px solid var(--red);    }
+  .card-blue   { border-left: 4px solid var(--blue);   }
+  .card-teal   { border-left: 4px solid var(--teal);   }
+  .card-amber  { border-left: 4px solid var(--amber);  }
+  .card-purple { border-left: 4px solid var(--purple); }
+
+  ul.bullet { padding-left: 18px; font-size: .84rem; }
+  ul.bullet li { margin-bottom: 4px; }
+
+  .phase { display:inline-block; color:white; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:6px; margin-bottom:6px; }
+  .phase-prod { background: var(--teal); }
+  .phase-mod  { background: var(--amber); }
+  .phase-sev  { background: var(--red); }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">Item 108 · Neurologie / Gériatrie</div>
+  <h1>Confusion &amp; Démences</h1>
+  <div class="header-sub">Syndrome confusionnel — Maladie d'Alzheimer — Diagnostics différentiels — Imagerie</div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <div class="objectifs-title">Vue d'ensemble pédagogique</div>
+  <p>Cet item articule deux entités cognitives distinctes : la <strong>confusion mentale</strong> (urgence médicale aiguë, fluctuante, potentiellement réversible) et les <strong>syndromes démentiels</strong> (chroniques, progressifs, avec retentissement sur l'autonomie). Il faut savoir les distinguer, en identifier les causes (neurologiques vs non-neurologiques), conduire une imagerie raisonnée, maîtriser la maladie d'Alzheimer dans ses trois phases évolutives, et appliquer le raisonnement topographique devant tout trouble cognitif.</p>
+</div>
+
+<!-- ============================= -->
+<!-- PARTIE 1 : CONFUSION MENTALE -->
+<!-- ============================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Partie 1 — Confusion mentale
+  <span class="section-badge">URGENCE</span>
+</div>
+
+<!-- Définitions confusion / démence -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition — Confusion mentale
+    </div>
+    <ul class="bullet">
+      <li><strong>Trouble attentionnel sévère</strong> lié à une altération modérée de la vigilance</li>
+      <li><strong>Aigu ou subaigu, fluctuant</strong> (inversion rythme nycthéméral)</li>
+      <li>Désorganisation de la pensée + troubles du comportement (agitation, apathie, hallucinations, idées délirantes)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition — Démence (TNC majeur)
+    </div>
+    <ul class="bullet">
+      <li><strong>Altération durable et acquise</strong> d'une ou plusieurs fonctions cognitives/comportementales</li>
+      <li><strong>Retentissement sur l'autonomie</strong> dans la vie quotidienne (et non expliqué par un autre trouble)</li>
+      <li>Hors épisode confusionnel ou trouble mental (retard, psychiatrie)</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Confusion ≠ démence mais la confusion peut révéler une démence — réévaluer cognition à 6 mois</div>
+    </div>
+  </div>
+</div>
+
+<!-- Physiopathologie + facteurs de risque -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Physiopathologie &amp; Facteurs de risque
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div class="kv-row"><span class="kv-key">Mécanisme central</span><span class="kv-val">Altération vigilance → troubles attention → désorganisation globale de la pensée</span></div>
+      <div class="kv-row"><span class="kv-key">Facteur déclenchant</span><span class="kv-val">Neurologique ou non-neuro — parfois minime si terrain fragile</span></div>
+      <div class="kv-row"><span class="kv-key">Continuum</span><span class="kv-val">Troubles attention → confusion → coma (selon degré d'atteinte vigilance)</span></div>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px">Principaux facteurs de risque :</div>
+      <div class="pills">
+        <span class="pill pill-amber">Troubles neurosensoriels</span>
+        <span class="pill pill-amber">Pathologie psychiatrique chronique</span>
+        <span class="pill pill-amber">Alcool / psychotropes</span>
+        <span class="pill pill-amber">Immobilisation / hospitalisation</span>
+        <span class="pill pill-amber">Polymorbidité / polymédication</span>
+        <span class="pill pill-red">TNC sous-jacent +++</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- Causes neurologiques / non-neurologiques -->
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Causes neurologiques
+    </div>
+    <ul class="bullet">
+      <li>Hémorragie méningée</li>
+      <li>Méningite / méningo-encéphalite (bact., virale, parasitaire [neuropaludisme], prions)</li>
+      <li>Processus expansif intracrânien (tumeur, abcès, hématome)</li>
+      <li>Traumatisme crânien (HSD, HED, hématome intraparenchymateux)</li>
+      <li>Infarctus cérébral (tronc, ganglions de la base, grande taille)</li>
+      <li>Épilepsie (phase post-critique, état de mal non convulsivant)</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Toute pathologie neurologique chronique (SEP, Parkinson, MA) peut également se compliquer de confusion sur stress physique intercurrent</div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Causes non-neurologiques
+    </div>
+    <table class="table-blue">
+      <tr><th>Catégorie</th><th>Étiologies</th></tr>
+      <tr><td><strong>Toxiques</strong></td><td>Alcool (ivresse/DT sevrage), drogues, médicaments (psychotropes, <strong>anticholinergiques +++</strong>), CO, solvants</td></tr>
+      <tr><td><strong>Métaboliques</strong></td><td>Dysnatrémie, hypokaliémie, hypercalcémie, hypoglycémie, déshydratation, décompensation diabète, ISA, hypothyroïdie</td></tr>
+      <tr><td><strong>Carences</strong></td><td>Thiamine → Gayet-Wernicke/Korsakoff ; PP → pellagre ; B12/folates</td></tr>
+      <tr><td><strong>Défaillances</strong></td><td>Rénale, hépatique, cardiorespiratoire (aigues ou décompensées)</td></tr>
+      <tr><td><strong>Infectieuses</strong></td><td>Toute fièvre (IU +++, pneumonie) — amplifiée si TNC sous-jacent</td></tr>
+      <tr><td><strong>Autres</strong></td><td>Fécalome, rétention aiguë d'urines, douleur aiguë non traitée</td></tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- Démarche diagnostique -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Démarche diagnostique
+  </div>
+  <ol class="steps">
+    <li><strong>Examen clinique général :</strong> constantes (SAT O2, <strong>glycémie capillaire +++</strong>), morsure latérale de langue, plaies, traces d'injection, globe urinaire, fécalome</li>
+    <li><strong>Examen neurologique :</strong> vigilance, pupilles, syndrome méningé, signe de focalisation, astérixis, clonies</li>
+    <li><strong>Anamnèse auprès des proches / MT / secouristes :</strong> traitements, alcool, toxiques, TNC préexistant, traumatisme</li>
+    <li><strong>Bilan biologique systématique :</strong> NFS, ionogramme, urée, créatinine + clairance, calcémie +++, CRP, BU (nitrites/leucocytes), ECG — + ECBU, bilan hépatique</li>
+    <li>
+      <div><strong>Scanner cérébral sans injection</strong> — non systématique, indiqué si :</div>
+      <ul class="bullet" style="margin-top:4px">
+        <li>Signe de focalisation neurologique</li>
+        <li>Anticoagulants ou traumatisme crânien récent</li>
+        <li>Trouble de conscience (contre-indication à PL sans imagerie)</li>
+        <li>Début brutal (suspicion AVC)</li>
+      </ul>
+    </li>
+    <li>
+      <div><strong>Ponction lombaire</strong> — indiquée si :</div>
+      <ul class="bullet" style="margin-top:4px">
+        <li>Fièvre sans point d'appel évident</li>
+        <li>Syndrome méningé</li>
+        <li>Suspicion encéphalite (après TDM/IRM)</li>
+      </ul>
+    </li>
+    <li><strong>Examens 2e intention :</strong> EEG (état de mal non convulsivant), gaz du sang, ammoniémie, toxicologie, dosages médicamenteux, IRM (signe focal + TDM normale), échographie abdo-pelvienne</li>
+  </ol>
+</div>
+
+<!-- PEC thérapeutique -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge thérapeutique — Urgence médicale
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Hospitalisation quasi-systématique.</strong> 1. Traiter les troubles vitaux (choc, hypothermie) — 2. Rechercher la cause (indissociable du traitement) — 3. Mesures non spécifiques</div>
+  </div>
+  <div class="grid2" style="margin-top:10px">
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px">Mesures générales</div>
+      <ul class="bullet">
+        <li>Réhydratation PO ou IV + maintien nutrition</li>
+        <li>Surveillance constantes et conscience régulière</li>
+        <li>Retirer médicaments non indispensables — <strong>anticholinergiques +++ en priorité</strong></li>
+        <li>Évaluation et PEC douleur aiguë</li>
+        <li>Chambre individuelle, lumière tamisée, porte ouverte</li>
+        <li>Éviter la contention physique (aggrave agitation/angoisse)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px">Psychotropes (si indispensables)</div>
+      <ul class="bullet">
+        <li><strong>BZD anxiolytique à demi-vie courte</strong> (oxazépam) — 1re intention si agitation</li>
+        <li>Neuroleptiques réservés à l'agitation majeure faisant courir un risque</li>
+        <li>Pas de sevrage brutal des BZD (risque de rebond convulsif)</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>La régression peut être lente — ne pas conclure trop vite à l'échec thérapeutique</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ================================= -->
+<!-- PARTIE 2 : SYNDROMES DÉMENTIELS   -->
+<!-- ================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Partie 2 — Syndromes démentiels &amp; Maladie d'Alzheimer
+</div>
+
+<!-- Raisonnement topographique -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Raisonnement topographique devant un syndrome démentiel
+  </div>
+  <table class="table-purple">
+    <tr>
+      <th>Fonction cognitive</th>
+      <th>Topographie</th>
+      <th>Tests cliniques</th>
+      <th>Déficits observés</th>
+    </tr>
+    <tr>
+      <td><strong>Attention</strong></td>
+      <td>Systèmes de vigilance et éveil cortical</td>
+      <td>Répéter phrase longue, mois / jours à l'envers</td>
+      <td>Continuum attention → confusion → coma. À vérifier avant d'interpréter tout autre trouble cognitif</td>
+    </tr>
+    <tr>
+      <td><strong>Intégration temporale</strong></td>
+      <td>Lobe temporal</td>
+      <td>Compréhension d'ordres simples, désignation d'objets/visages</td>
+      <td>Aphasie (compréhension), agnosie visuelle (faces, objets, couleurs)</td>
+    </tr>
+    <tr>
+      <td><strong>Intégration pariétale</strong></td>
+      <td>Lobe pariétal</td>
+      <td>Copie figure géométrique, test horloge, gestes symboliques (salut militaire…)</td>
+      <td>Apraxie, négligence visuospatiale, trouble schéma corporel (gauche/droite)</td>
+    </tr>
+    <tr>
+      <td><strong>Mémoire épisodique</strong></td>
+      <td>Lobes temporaux internes — hippocampes</td>
+      <td>Épreuve des 5 mots (dépistage) ; RL/RI-16 (confirmation)</td>
+      <td>Trouble de consolidation : oubli à mesure, absence d'aide à l'indice, intrusions</td>
+    </tr>
+    <tr>
+      <td><strong>Fonctions exécutives</strong></td>
+      <td>Lobes frontaux, ganglions de la base</td>
+      <td>BREF (batterie rapide d'efficience frontale)</td>
+      <td>Syndrome dysexécutif : désinhibition, apathie, défaut planification, comportements stéréotypés</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- MA — Lésions + Troubles mémoire -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Maladie d'Alzheimer — Lésions neuropathologiques
+    </div>
+    <div class="kv-row"><span class="kv-key">Plaques amyloïdes</span><span class="kv-val">Dépôts extracellulaires de peptide Aβ-42 (fragment d'APP) — cortex associatifs (préfrontal, pariétal, temporal). Épargnent cortex visuel primaire et cortex moteur</span></div>
+    <div class="kv-row"><span class="kv-key">DNF</span><span class="kv-val">Protéine TAU hyperphosphorylée dans corps et prolongements neuronaux — temporaux internes (hippocampes +++)</span></div>
+    <div class="kv-row"><span class="kv-key">Perte neuronale</span><span class="kv-val">Atrophie des régions affectées (hippocampique prédominante)</span></div>
+    <div class="alert alert-blue" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Ces lésions expliquent les biomarqueurs LCR (Aβ42, TAU, pTAU) et la sémiologie IRM (atrophie hippocampique)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Profil des troubles mnésiques — MA
+    </div>
+    <div class="alert alert-blue" style="margin-bottom:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Trouble de consolidation</strong> en mémoire épisodique (atteinte hippocampique)</div>
+    </div>
+    <ul class="bullet">
+      <li>Encodage préservé (rappel immédiat intact)</li>
+      <li><strong>Effondrement du rappel différé</strong> (après quelques minutes)</li>
+      <li><strong>Absence d'aide à l'indice de catégorie</strong> — intrusions fréquentes (≠ trouble de récupération où l'indice suffit)</li>
+      <li>Anosognosie fréquente — la famille s'inquiète plus que le patient</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Trouble de consolidation = argument fort pour MA, mais ni indispensable (formes atypiques) ni pathognomonique</div>
+    </div>
+  </div>
+</div>
+
+<!-- Phases évolutives MA -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Histoire naturelle — Trois phases évolutives
+  </div>
+  <table class="table-teal">
+    <tr>
+      <th>Phase</th>
+      <th>Autonomie</th>
+      <th>Cognition dominante</th>
+      <th>Éléments caractéristiques</th>
+    </tr>
+    <tr>
+      <td><span class="phase phase-prod">Prédémentielle / prodromale</span></td>
+      <td><strong>TNC mineur</strong> — activités instrumentales préservées (téléphone, transport, médicaments, argent)</td>
+      <td>Trouble de consolidation en mémoire épisodique (oublis à mesure)</td>
+      <td>Plainte mnésique, anosognosie fréquente. Autonomie globalement conservée</td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-mod">Phase d'état (légère-modérée)</span></td>
+      <td><strong>TNC majeur</strong> — autonomie altérée pour activités instrumentales</td>
+      <td>Syndrome aphaso-apraxo-agnosique + atteinte exécutive (extension au-delà de la mémoire)</td>
+      <td>Retentissement fonctionnel significatif. Besoin d'aide extérieure</td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-sev">Démence sévère (~7-8 ans)</span></td>
+      <td><strong>TNC majeur sévère</strong> — perte autonomie instrumentale ET de base (toilette, alimentation, locomotion)</td>
+      <td>Troubles sévères, non-reconnaissance des proches possible, SPCD importants (agitation, hallucinations, déambulation)</td>
+      <td>Troubles marche/chutes, épilepsie, myoclonies, incontinence, dénutrition. Décès par complications (surinfection bronchique, fausse route, chute)</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- Diagnostics différentiels -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Principaux diagnostics différentiels de la MA
+  </div>
+  <div class="grid2" style="margin-top:8px">
+    <div>
+      <div style="font-weight:700; font-size:.84rem; margin-bottom:6px">Causes fonctionnelles</div>
+      <ul class="bullet">
+        <li><strong>Dépression / anxiété</strong> → pseudo-amnésie (trouble encodage/récupération ; l'indice est efficace)</li>
+        <li>Psychotropes (BZD, hypnotiques, antidépresseurs)</li>
+        <li>Troubles du sommeil (insomnie, SAHOS)</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Dépression/anxiété peuvent coexister avec MA — traitement d'épreuve par antidépresseurs + réévaluation à distance</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.84rem; margin-bottom:6px">Causes organiques (potentiellement curables)</div>
+      <ul class="bullet">
+        <li>Hypothyroïdie, carence B12/folates, syphilis, VIH, méningiome frontal</li>
+        <li><strong>Hydrocéphalie chronique adulte :</strong> triade marche à petits pas + TNC frontal/apathie + incontinence</li>
+        <li><strong>HSD chronique :</strong> ralentissement psychomoteur, apathie, syndrome frontal — post-traumatisme léger ou inaperçu</li>
+        <li>Démence alcoolique, encéphalopathie vasculaire</li>
+        <li>Encéphalopathies subaiguës (MCJ, encéphalite auto-immune/paranéoplasique) si évolution rapide (&lt;1 an)</li>
+      </ul>
+      <div style="font-weight:700; font-size:.84rem; margin-top:8px; margin-bottom:4px">Autres démences dégénératives</div>
+      <div class="pills">
+        <span class="pill pill-purple">DLFT</span>
+        <span class="pill pill-blue">Maladie à corps de Lewy</span>
+        <span class="pill pill-coral">Encéphalopathie vasculaire</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PEC non médicamenteuse MA -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    PEC non médicamenteuse de la MA — Réseaux ville-hôpital
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px">Stabilisation / compensation cognitive</div>
+      <ul class="bullet">
+        <li>Orthophonie (remédiation langage + cognitive)</li>
+        <li>Équipe spécialisée Alzheimer (ESA) : psychomotriciens, ergothérapeutes — stades léger à modéré</li>
+        <li>Accueil de jour médicalisé (stimulation + répit aidants)</li>
+        <li>Activité physique quotidienne (marche), sorties quotidiennes</li>
+      </ul>
+      <div style="font-weight:700; font-size:.83rem; margin-top:10px; margin-bottom:6px">Aides humaines &amp; institutionnalisation</div>
+      <ul class="bullet">
+        <li>Auxiliaire de vie, aide-soignant à domicile</li>
+        <li>MAIA (cas complexes, refus de soins)</li>
+        <li>EHPAD ou long séjour si maintien à domicile impossible</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:6px">Aides financières &amp; médico-légales</div>
+      <ul class="bullet">
+        <li>ALD-15 + prise en charge à 100% (stade démentiel)</li>
+        <li>APA (≥60 ans) ou PCH (&lt;60 ans)</li>
+        <li>Mesures protection : sauvegarde de justice, tutelle, habilitation familiale (non systématique)</li>
+      </ul>
+      <div style="font-weight:700; font-size:.83rem; margin-top:10px; margin-bottom:6px">Prévention de la iatrogénie &amp; soutien aidants</div>
+      <ul class="bullet">
+        <li><strong>Déprescription psychotropes +++</strong> (anticholinergiques cachés : antispasmodiques vésicaux)</li>
+        <li>Traitement déficiences sensorielles (vision, audition)</li>
+        <li>Surveillance nutritionnelle</li>
+        <li>Plateformes d'accompagnement et de répit, associations de familles</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========================= -->
+<!-- PARTIE 3 : IMAGERIE       -->
+<!-- ========================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Partie 3 — Imagerie et médecine nucléaire
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imagerie dans la confusion (TDM ++)
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Non systématique</strong> — TDM cérébrale sans injection indiquée au moindre doute de lésion neurologique</div>
+    </div>
+    <div style="font-weight:700; font-size:.83rem; margin-bottom:4px">Indications formelles :</div>
+    <ul class="bullet">
+      <li>Signe de focalisation neurologique</li>
+      <li>Anticoagulants ou traumatisme crânien récent (HSD)</li>
+      <li>Trouble de conscience (contre-indication à PL sans imagerie préalable)</li>
+      <li>Début brutal (suspicion AVC)</li>
+    </ul>
+    <div style="font-weight:700; font-size:.83rem; margin-top:8px; margin-bottom:4px">Ponction lombaire indiquée si :</div>
+    <ul class="bullet">
+      <li>Fièvre sans point d'appel</li>
+      <li>Syndrome méningé</li>
+      <li>Suspicion encéphalite (après TDM/IRM)</li>
+    </ul>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imagerie dans la démence (IRM ++)
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>IRM cérébrale indispensable</strong> au bilan de tout TNC — TDM si contre-indication</div>
+    </div>
+    <div style="font-weight:700; font-size:.83rem; margin-bottom:4px">Objectifs :</div>
+    <ul class="bullet">
+      <li>Éliminer cause curable : processus expansif, hydrocéphalie, lésions vasculaires (T2/FLAIR et T2 écho de gradient)</li>
+      <li>Évaluer atrophie corticale/sous-corticale et sa topographie (frontale, temporale, postérieure, globale)</li>
+      <li>Atrophie hippocampique : T1 coronal perpendiculaire au grand axe — <strong>échelle de Scheltens</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- HSD + Hydrocéphalie -->
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      HSD chronique — Sémiologie TDM
+    </div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Collection extraparenchymateuse (entre dure-mère et arachnoïde)</span></div>
+    <div class="kv-row"><span class="kv-key">Forme</span><span class="kv-val"><strong>Croissant de lune</strong> — concave en dedans, convexe en dehors — souvent bilatéral</span></div>
+    <div class="kv-row"><span class="kv-key">HSD chronique</span><span class="kv-val"><strong>Hypodense</strong> (collection ancienne)</span></div>
+    <div class="kv-row"><span class="kv-key">Resaignement récent</span><span class="kv-val">Zones <strong>hyperdenses</strong> au sein de l'hypodensité (sang frais)</span></div>
+    <div class="kv-row"><span class="kv-key">Facteurs favorisants</span><span class="kv-val">Déshydratation, éthylisme chronique, anticoagulants — traumatisme souvent léger ou inaperçu</span></div>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Présentation :</strong> ralentissement psychomoteur, apathie, syndrome frontal, confusion — tableau mimant une démence chez la personne âgée</div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Hydrocéphalie chronique adulte — Imagerie
+    </div>
+    <div class="kv-row"><span class="kv-key">Triade clinique</span><span class="kv-val">Marche à petits pas + TNC frontal/apathie + incontinence urinaire</span></div>
+    <div class="kv-row"><span class="kv-key">Scanner / IRM</span><span class="kv-val"><strong>Dilatation tétraventriculaire</strong> sans effet de masse (hydrocéphalie communicante)</span></div>
+    <div class="kv-row"><span class="kv-key">Signe spécifique</span><span class="kv-val">Suffusion périventriculaire (résorption transépendymaire) → <strong>hypodensité scanner / hypersignal T2 IRM</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Test diagnostique</span><span class="kv-val">Ponctions lombaires évacuatrices (amélioration clinique)</span></div>
+    <div class="kv-row"><span class="kv-key">Traitement curatif</span><span class="kv-val">Dérivation ventriculo-péritonéale si forte probabilité diagnostique</span></div>
+  </div>
+</div>
+
+<!-- Médecine nucléaire -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Médecine nucléaire dans les démences
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:4px">Scintigraphie de perfusion / TEP-FDG</div>
+      <div style="font-size:.82rem; color:var(--text-light); margin-bottom:8px">Indications : TNC mineur débutant, profil atypique, début précoce</div>
+      <table class="table-purple">
+        <tr><th>Pathologie</th><th>Topographie</th></tr>
+        <tr><td><strong>MA</strong></td><td>Cortex associatifs + temporaux internes</td></tr>
+        <tr><td><strong>DLFT</strong></td><td>Frontaux, temporaux antérieurs, cingulaires</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-weight:700; font-size:.83rem; margin-bottom:4px">DAT scan (scintigraphie transporteurs Dopamine)</div>
+      <div class="alert alert-blue" style="margin-top:4px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Indication unique :</strong> hésitation entre <strong>maladie à corps de Lewy</strong> (dénervation dopaminergique striatum — examen pathologique) et <strong>MA</strong> (examen normal)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ========================= -->
+<!-- POINTS-CLÉS               -->
+<!-- ========================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — ECNi
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Confusion = urgence médicale</strong> — hospitalisation quasi-systématique. La régression peut être lente.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège n°1 :</strong> Anticholinergiques = cause médicamenteuse fréquente et sous-reconnue (antispasmodiques vésicaux inclus)</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège n°2 :</strong> IU banale → confusion majeure si TNC sous-jacent. Réévaluer cognition à 6 mois après tout épisode confusionnel</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège n°3 :</strong> Dépression/anxiété peuvent mimer une MA et coexister avec elle — traitement d'épreuve avant de conclure</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Trouble de consolidation MA :</strong> effondrement rappel différé + absence aide à l'indice + intrusions — ni obligatoire ni pathognomonique</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>HSD chronique TDM :</strong> croissant de lune hypodense ± zones hyperdenses (resaignement) — bilatéral fréquent — traumatisme parfois inaperçu</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Hydrocéphalie chronique :</strong> triade marche + TNC frontal + incontinence — dilatation tétraventriculaire sans effet de masse — traitement : dérivation VP</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>DAT scan :</strong> uniquement pour distinguer maladie à corps de Lewy (patho.) de MA (normal)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- .page -->
+</body>
+</html>
