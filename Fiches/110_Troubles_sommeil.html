@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 110 – Troubles du sommeil</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --teal: #1D9E75;
+      --coral: #D85A30;
+      --blue: #378ADD;
+      --red: #E24B4A;
+      --amber: #D97706;
+      --purple-light: #EEEDF9;
+      --teal-light: #E6F7F2;
+      --blue-light: #EBF4FF;
+      --red-light: #FEF2F2;
+      --amber-light: #FFFBEB;
+      --coral-light: #FEF0EA;
+      --text: #1e293b;
+      --subtext: #64748b;
+      --border: rgba(0,0,0,0.08);
+      --bg: #f1f5f9;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; font-size: 0.88rem; }
+    .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+    /* Header */
+    .header { background: linear-gradient(135deg, #1D9E75 0%, #378ADD 60%, #534AB7 100%); border-radius: 16px; padding: 28px 32px; color: white; margin-bottom: 20px; }
+    .header-tag { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; margin-bottom: 6px; }
+    .header h1 { font-size: 1.55rem; font-weight: 800; margin-bottom: 8px; }
+    .header-subtitle { font-size: 0.87rem; opacity: 0.9; max-width: 720px; line-height: 1.6; }
+
+    /* Cards */
+    .card { background: var(--card); border-radius: 14px; border: 0.5px solid var(--border); padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Alerts */
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+    .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+    /* Grids */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+    /* KV rows */
+    .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--subtext); }
+    .kv-val { font-weight: 700; color: var(--text); text-align: right; max-width: 60%; }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .pill { display: inline-flex; align-items: center; font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .pill-red    { background: var(--red-light);    color: var(--red);    }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    th { background: var(--bg); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 1.5px solid var(--border); color: var(--subtext); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.05em; }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.45; }
+    tr:last-child td { border-bottom: none; }
+
+    /* Steps */
+    .step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 9px; }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: var(--subtext); flex-shrink: 0; margin-top: 1px; }
+    .step-text { font-size: 0.84rem; line-height: 1.55; }
+
+    /* Badges */
+    .badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .badge-teal   { background: var(--teal-light);   color: var(--teal);   }
+    .badge-red    { background: var(--red-light);    color: var(--red);    }
+    .badge-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .badge-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+    /* Section separator */
+    .section-title { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.10em; color: var(--subtext); margin: 22px 0 10px; display: flex; align-items: center; gap: 8px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+
+    /* Item list */
+    .item-list { list-style: none; padding: 0; }
+    .item-list li { padding: 4px 0 4px 14px; position: relative; font-size: 0.84rem; line-height: 1.5; border-bottom: 1px solid var(--border); }
+    .item-list li:last-child { border-bottom: none; }
+    .item-list li::before { content: '—'; position: absolute; left: 0; color: var(--subtext); }
+
+    /* Card border */
+    .card-border-teal  { border-left: 4px solid var(--teal);  }
+    .card-border-amber { border-left: 4px solid var(--amber); }
+    .card-border-red   { border-left: 4px solid var(--red);   }
+
+    /* IAH bar */
+    .iah-bar { display: flex; border-radius: 10px; overflow: hidden; margin: 10px 0 14px; }
+    .iah-seg { flex: 1; padding: 9px 10px; font-size: 0.78rem; font-weight: 700; text-align: center; line-height: 1.35; }
+
+    /* Sub-heading within card */
+    .sub-head { font-size: 0.75rem; font-weight: 700; color: var(--subtext); text-transform: uppercase; letter-spacing: 0.05em; margin: 8px 0 5px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <div class="header">
+    <div class="header-tag">Item 110 — ECNi</div>
+    <h1>Troubles du sommeil de l'enfant et de l'adulte</h1>
+    <div class="header-subtitle">
+      Maîtriser l'architecture normale du sommeil (adulte et enfant), identifier et classer les 6 grands troubles selon l'ICSD-3 (insomnie, SAS, hypersomnolences, troubles circadiens, parasomnies, SJSR), conduire le bilan clinique et paraclinique, et choisir la prise en charge adaptée — en particulier pour l'insomnie chronique (TCC en 1re intention) et le syndrome d'apnées obstructives (IAH, PPC, implications professionnelles et du permis).
+    </div>
+  </div>
+
+  <!-- ══════════════ ARCHITECTURE DU SOMMEIL ══════════════ -->
+  <div class="section-title">Architecture du sommeil</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Adulte — Stades du sommeil
+      </div>
+      <table>
+        <thead><tr><th>Stade</th><th>Type</th><th>EEG / Caractéristiques</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-blue">N1</span></td>
+            <td>Lent léger</td>
+            <td>Ondes thêta rapides — peut rester conscient</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-blue">N2</span></td>
+            <td>Lent léger</td>
+            <td>Thêta + grapho-éléments (fuseaux, K-complexes)</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-purple">N3</span></td>
+            <td>Lent profond</td>
+            <td>Delta synchronisé lent haute amplitude — inconscient</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-coral">SP</span></td>
+            <td>Paradoxal (REM)</td>
+            <td>MOC rapides, atonie musculaire, EEG rapide désynchronisé — rêves</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px;">
+        <div class="kv-row"><span class="kv-key">Durée d'un cycle</span><span class="kv-val">90 min</span></div>
+        <div class="kv-row"><span class="kv-key">Cycles par nuit</span><span class="kv-val">3 à 5</span></div>
+        <div class="kv-row"><span class="kv-key">Éveils nocturnes physiologiques</span><span class="kv-val">&lt; 10 min, augmentent avec l'âge</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Enfant — Spécificités pédiatriques
+      </div>
+      <table>
+        <thead><tr><th>Âge</th><th>Durée sommeil</th><th>Particularités</th></tr></thead>
+        <tbody>
+          <tr><td>&lt; 3 mois</td><td>14–16 h</td><td>Fractionné (3–4h), endormissement en "sommeil agité" (précurseur SP)</td></tr>
+          <tr><td>3–6 mois</td><td>~14 h</td><td>Période continue ~6 h/nuit se met en place</td></tr>
+          <tr><td>1 an</td><td>14 h</td><td>Cycles 50–60 min ; 8 éveils/nuit physiologiques</td></tr>
+          <tr><td>6 ans</td><td>11 h</td><td>Structure proche adulte, davantage de N3</td></tr>
+          <tr><td>12 ans</td><td>9–10 h</td><td>Grande variabilité inter-individuelle</td></tr>
+          <tr><td>Ado</td><td>8–9 h</td><td>Retard de phase physiologique, coucher/lever tardifs</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Siestes normales jusqu'à 5–6 ans, mais dès 2 ans, sieste longue = réduction du sommeil nocturne (corrélation négative).</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ CLASSIFICATION ICDS-3 ══════════════ -->
+  <div class="section-title">Classification ICDS-3 — 6 catégories de troubles</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Vue d'ensemble
+    </div>
+    <table>
+      <thead><tr><th>Catégorie</th><th>Exemples principaux</th><th>Prévalence</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-red">Insomnie</span></td><td>Difficultés endormissement / maintien / réveil précoce</td><td><strong>10%</strong> (femme et sujet âgé ++)</td></tr>
+        <tr><td><span class="badge badge-blue">Troubles respiratoires</span></td><td>SAS obstructif (le plus fréquent)</td><td><strong>5–10%</strong> adultes</td></tr>
+        <tr><td><span class="badge badge-purple">Hypersomnolences centrales</span></td><td>Narcolepsie type 1/2, hypersomnie idiopathique</td><td>Rares</td></tr>
+        <tr><td><span class="badge badge-amber">Troubles circadiens</span></td><td>Retard de phase (ado/adulte jeune), avance de phase (sujet âgé)</td><td>Variable</td></tr>
+        <tr><td><span class="badge badge-teal">Parasomnies</span></td><td>Somnambulisme, terreurs nocturnes (enfant) ; troubles comportementaux SP (adulte)</td><td>Fréquentes chez l'enfant</td></tr>
+        <tr><td><span class="badge badge-coral">Mouvements anormaux</span></td><td>SJSR, MPJS</td><td><strong>5–15%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ HYGIÈNE DU SOMMEIL ══════════════ -->
+  <div class="section-title">Hygiène du sommeil</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Règles universelles (adulte + enfant)
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-head" style="color:var(--teal)">Dans la journée</div>
+        <ul class="item-list">
+          <li>Horaires de lever/coucher réguliers</li>
+          <li>Exposition à la lumière naturelle</li>
+          <li>Repas réguliers ; éviter repas copieux le soir</li>
+          <li>Siestes : &lt; 1h et avant 16h</li>
+          <li>Pas de caféine après 13h ; pas d'alcool le soir ; pas de nicotine</li>
+          <li>Activité physique de préférence avant 17h</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Au coucher et la nuit</div>
+        <ul class="item-list">
+          <li>Limiter bruit, lumière, chaleur excessive dans la chambre</li>
+          <li>Réserver le lit au sommeil</li>
+          <li>Écarter les écrans (TV, téléphone, tablette)</li>
+          <li>En cas d'éveil nocturne : limiter lumière, ne pas regarder l'heure, activité calme</li>
+          <li><strong>Enfant :</strong> rituel positif du coucher ≤ 15 min (lecture, chanson)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ INSOMNIE ══════════════ -->
+  <div class="section-title">Insomnie</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définition
+      </div>
+      <ul class="item-list">
+        <li>Difficultés d'endormissement et/ou de maintien, ou réveil précoce, ou temps de sommeil &lt; 6h</li>
+        <li>Dans un contexte adéquat pour dormir</li>
+        <li><strong>Retentissement diurne obligatoire</strong> : fatigue, humeur, mémoire, somnolence, comportement</li>
+      </ul>
+      <div style="margin-top:10px;">
+        <div class="kv-row"><span class="kv-key">Aiguë</span><span class="kv-val">&lt; 3 mois</span></div>
+        <div class="kv-row"><span class="kv-key">Chronique</span><span class="kv-val">≥ 3×/sem depuis ≥ 3 mois</span></div>
+        <div class="kv-row"><span class="kv-key">Prévalence générale</span><span class="kv-val">10% — femme + sujet âgé ++</span></div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Diag. différentiels :</strong> Retard de phase (couche-tard ≠ insomnie d'endormissement) ; "court dormeur" (&lt; 6h sans aucun retentissement diurne = variant normal).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Facteurs étiologiques
+      </div>
+      <div class="sub-head">Prédisposants</div>
+      <div class="pills">
+        <span class="pill pill-red">Sexe féminin</span>
+        <span class="pill pill-red">Génétique</span>
+        <span class="pill pill-red">Faibles revenus</span>
+        <span class="pill pill-red">Personnalité perfectionniste</span>
+      </div>
+      <div class="sub-head">Déclenchants</div>
+      <div class="pills">
+        <span class="pill pill-amber">Deuil / séparation / chômage</span>
+        <span class="pill pill-amber">Décalage horaire</span>
+        <span class="pill pill-amber">Corticoïdes / bêtabloquants</span>
+        <span class="pill pill-amber">Caféine / nicotine</span>
+      </div>
+      <div class="sub-head">Comorbidités</div>
+      <div class="pills">
+        <span class="pill pill-blue">Dépression / anxiété</span>
+        <span class="pill pill-blue">SAS</span>
+        <span class="pill pill-blue">SJSR</span>
+        <span class="pill pill-blue">Douleurs chroniques</span>
+        <span class="pill pill-blue">RGO / asthme nocturne</span>
+        <span class="pill pill-blue">Traumatisme crânien</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan de l'insomnie
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Interrogatoire clé</div>
+        <ul class="item-list">
+          <li>Ancienneté, type (endormissement / maintien / réveil précoce)</li>
+          <li>Horaires coucher/réveil, siestes ; décalage semaine/weekend</li>
+          <li>Retentissement diurne (fatigue, humeur, performances)</li>
+          <li>Environnement : bruit, lumière, température</li>
+          <li>Alcool, tabac, cannabis, médicaments à risque (diurétiques le soir…)</li>
+          <li>Rechercher SAS et SJSR associés</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Outils paracliniques</div>
+        <ul class="item-list">
+          <li><strong>Agenda du sommeil ≥ 2 semaines</strong> — outil central pour évaluer et suivre l'insomnie sous traitement</li>
+          <li><strong>Polysomnographie</strong> — uniquement si suspicion de comorbidité (SAS, SJSR) ou mauvaise perception subjective du sommeil</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement de l'insomnie chronique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-head" style="color:var(--teal)">1re intention — Non médicamenteux</div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Hygiène du sommeil</strong> — règles universelles, agenda du sommeil, croyances réalistes</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>TCC (Thérapie Cognitivo-Comportementale)</strong> — validée en 1re intention : restructuration cognitive + approche comportementale + gestion des émotions</div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Médicaments (durée limitée)</div>
+        <table>
+          <thead><tr><th>Classe</th><th>Points clés</th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge badge-amber">BZD</span></td><td>Efficaces ; tolérance, sevrage, somnolence résiduelle, chutes PA++ ; modifient la structure du sommeil (réversible à l'arrêt)</td></tr>
+            <tr><td><span class="badge badge-amber">Z-drugs</span> <small>zopiclone, zolpidem</small></td><td>Limités à 28 j ; zolpidem sur ordonnance sécurisée</td></tr>
+            <tr><td><span class="badge badge-blue">Anti-H1</span> <small>doxylamine, doxépine</small></td><td>Pas de dépendance physique ; somnolence résiduelle (demi-vie longue) ; effets atropiniques</td></tr>
+            <tr><td><span class="badge badge-teal">Mélatonine</span></td><td>LI = endormissement ; LP = maintien du sommeil. Seul médicament chez l'enfant/ado</td></tr>
+          </tbody>
+        </table>
+        <div class="alert alert-blue" style="margin-top:8px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div>63% de l'effet des somnifères est lié à l'effet placebo (objectif et subjectif).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ INSOMNIE ENFANT ══════════════ -->
+  <div class="section-title">Insomnie de l'enfant et de l'adolescent</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Prévalences
+      </div>
+      <div class="kv-row"><span class="kv-key">&lt; 5 ans</span><span class="kv-val">25–50%</span></div>
+      <div class="kv-row"><span class="kv-key">6–12 ans</span><span class="kv-val">16–27%</span></div>
+      <div class="kv-row"><span class="kv-key">Adolescents</span><span class="kv-val">17–39%</span></div>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>&lt; 2 ans :</strong> trouble de maintien (éveils nocturnes fréquents)<br><strong>&gt; 2 ans :</strong> insomnie d'initiation (difficultés d'endormissement)</div>
+      </div>
+      <div class="alert alert-green" style="margin-top:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Traitement :</strong> TCC en priorité. Mélatonine si nécessaire. <strong>Pas de BZD ni Z-drugs</strong> chez l'enfant.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Causes chez l'enfant
+      </div>
+      <div class="sub-head" style="color:var(--coral)">1. Insomnie comportementale (70% chez le nourrisson)</div>
+      <ul class="item-list">
+        <li>Mode de vie familial : co-sleeping, écrans, horaires des parents</li>
+        <li><strong>Conditionnement anormal à l'endormissement</strong> : présence des parents, bercement, biberon, sein (cause n°1)</li>
+        <li>Absence de limites : opposition au coucher, éveils nocturnes</li>
+        <li>Erreurs alimentaires (quantitatives ou qualitatives : APLV, allaitement prolongé nocturne)</li>
+        <li>Mauvaise organisation des siestes (&gt; 2 ans)</li>
+      </ul>
+      <div class="sub-head" style="color:var(--blue)">2. Insomnies symptomatiques (organiques)</div>
+      <div class="pills" style="margin-bottom:4px;">
+        <span class="pill pill-blue">Douleur (otites, coliques, poussées dentaires)</span>
+        <span class="pill pill-blue">RGO</span>
+        <span class="pill pill-blue">SAOS</span>
+        <span class="pill pill-blue">Asthme</span>
+        <span class="pill pill-blue">SJSR (0,5% enfants)</span>
+        <span class="pill pill-blue">Allergie APLV</span>
+        <span class="pill pill-blue">Corticoïdes / Ritaline</span>
+        <span class="pill pill-blue">Anxiété / dépression</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-border-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Adolescent — Retard de phase
+    </div>
+    <div class="grid2">
+      <div>
+        <ul class="item-list">
+          <li>Retard de phase <strong>physiologique</strong> lié à la puberté (modifications psychosociales et émotionnelles)</li>
+          <li>Coucher tardif, lever tardif, dette de sommeil ~2h/nuit en semaine</li>
+          <li>Diminution du sommeil profond (N3), augmentation du sommeil lent léger</li>
+          <li>Récupération weekend (lever tardif) → renforce le retard de phase et la dette hebdomadaire</li>
+          <li><strong>Facteurs aggravants :</strong> écrans, excitants, pression scolaire, moins de contrôle familial</li>
+        </ul>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Physiologique au départ, peut devenir pathologique sans mesures d'hygiène du sommeil → conséquences neuropsychologiques et métaboliques de l'insuffisance de sommeil chronique.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ SOMNOLENCE DIURNE ══════════════ -->
+  <div class="section-title">Somnolence diurne excessive (SDE)</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Identifier la SDE
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-head">Définition et présentation</div>
+        <p style="font-size:0.84rem;line-height:1.55;margin-bottom:8px;">Éveil physiologique abaissé, propension anormale au sommeil en dehors des périodes habituelles.</p>
+        <ul class="item-list">
+          <li>Endormissements involontaires / irrésistibles : en activité, en conduisant, en conversation</li>
+          <li>Besoin de lutter contre le sommeil</li>
+          <li>Accidents liés à la somnolence (au volant ++)</li>
+        </ul>
+        <div class="alert alert-amber" style="margin-top:10px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>SDE ≠ Fatigue (récupère au repos) ≠ Apathie (absence de motivation)</div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-head">Causes</div>
+        <ul class="item-list">
+          <li>Privation chronique comportementale ou troubles circadiens (avance/retard de phase, travail posté)</li>
+          <li>SAS (cause organique la plus fréquente)</li>
+          <li>SJSR / narcolepsie / hypersomnie idiopathique</li>
+          <li>Médicaments sédatifs, alcool</li>
+          <li>Dépression</li>
+        </ul>
+        <div class="alert alert-red" style="margin-top:10px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Permis de conduire :</strong> La SDE figure parmi les affections incompatibles avec l'obtention ou le maintien du permis.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ SJSR + MPJS ══════════════ -->
+  <div class="section-title">SJSR et mouvements périodiques du sommeil</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        SJSR — Critères diagnostiques
+      </div>
+      <div class="alert alert-blue" style="margin-bottom:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Diagnostic <strong>purement clinique</strong> — vécu à l'éveil, interrogatoire</div>
+      </div>
+      <ul class="item-list">
+        <li><strong>Besoin impérieux de bouger les jambes</strong> +/- paresthésies</li>
+        <li>Débute ou s'aggrave au repos / inactivité</li>
+        <li>Prédominance vespérale et nocturne</li>
+        <li>Soulagé par le mouvement</li>
+        <li>Retentissement : difficultés d'endormissement, éveils nocturnes, conséquences psycho-sociales</li>
+      </ul>
+      <div style="margin-top:8px;">
+        <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">2% formes chroniques (France)</span></div>
+        <div class="kv-row"><span class="kv-key">Terrain</span><span class="kv-val">Femme, après 50 ans</span></div>
+        <div class="kv-row"><span class="kv-key">Enfant</span><span class="kv-val">Rare, ressemble au TDAH</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Formes secondaires et MPJS
+      </div>
+      <div class="sub-head" style="color:var(--coral)">Causes secondaires du SJSR</div>
+      <div class="pills">
+        <span class="pill pill-red">Carence martiale ++</span>
+        <span class="pill pill-red">Insuffisance rénale</span>
+        <span class="pill pill-red">Diabète / neuropathie</span>
+        <span class="pill pill-red">Grossesse</span>
+        <span class="pill pill-red">Antidépresseurs</span>
+        <span class="pill pill-red">Antihistaminiques</span>
+        <span class="pill pill-red">Neuroleptiques</span>
+      </div>
+      <div class="sub-head" style="color:var(--blue)">Mouvements périodiques du sommeil (MPJS)</div>
+      <ul class="item-list">
+        <li>Associé au SJSR dans <strong>80% des cas</strong></li>
+        <li>Mouvements répétés, bilatéraux asymétriques des MI (extension gros orteil, flexion pied/genou/hanche) pendant le sommeil</li>
+        <li>Provoquent des micro-éveils = fractionnement du sommeil</li>
+        <li><strong>Diagnostic :</strong> polysomnographie — ≥ 15 mouvements/heure</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ SAS ══════════════ -->
+  <div class="section-title">Syndrome d'apnées du sommeil (SAS)</div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Définition et critères diagnostiques
+    </div>
+    <div class="grid2">
+      <div>
+        <p style="font-size:0.84rem;line-height:1.55;margin-bottom:10px;">Interruptions partielles (hypopnées) ou totales (apnées) de la respiration durant le sommeil par obstruction des VAS ou (rare) défaut du contrôle central.</p>
+        <div class="sub-head">Critères cliniques (SAS obstructif)</div>
+        <ul class="item-list">
+          <li><strong>Somnolence diurne excessive</strong></li>
+          <li>+ au moins 2 parmi : ronflement sévère/quotidien, sensations d'étouffement, éveils répétés, sommeil non réparateur, fatigue diurne, difficultés de concentration, nycturie</li>
+        </ul>
+        <div class="sub-head">Physiopathologie</div>
+        <p style="font-size:0.83rem;line-height:1.5;">Apnées → micro-éveils → reprise de la respiration + fragmentation du sommeil + réduction du N3 → conséquences CV et métaboliques.</p>
+      </div>
+      <div>
+        <div class="sub-head">Données épidémiologiques</div>
+        <div class="kv-row"><span class="kv-key">France</span><span class="kv-val">~2 millions de personnes</span></div>
+        <div class="kv-row"><span class="kv-key">Prévalence 30–60 ans</span><span class="kv-val">2% femmes / 4% hommes</span></div>
+        <div class="kv-row"><span class="kv-key">Pic d'incidence</span><span class="kv-val">50–70 ans</span></div>
+        <div class="kv-row"><span class="kv-key">Critère polysomnographique</span><span class="kv-val">IAH ≥ 5/h</span></div>
+        <div class="kv-row"><span class="kv-key">Risque accident de la route</span><span class="kv-val">×6</span></div>
+        <div class="alert alert-amber" style="margin-top:10px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>Prédominance masculine, mais à la ménopause les femmes rejoignent le risque des hommes.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        Facteurs de risque et comorbidités CV
+      </div>
+      <div class="sub-head">Facteurs de risque anatomiques et constitutionnels</div>
+      <div class="pills">
+        <span class="pill pill-red">Obésité (30% obèses, 77% obésité morbide)</span>
+        <span class="pill pill-red">Âge 50–70 ans</span>
+        <span class="pill pill-red">Sexe masculin</span>
+        <span class="pill pill-red">Rétrognathie / micromandibule</span>
+        <span class="pill pill-red">Hypertrophie amygdalienne</span>
+        <span class="pill pill-red">Acromégalie / hypothyroïdie</span>
+      </div>
+      <div class="sub-head" style="color:var(--red)">Comorbidités cardiovasculaires et métaboliques</div>
+      <table>
+        <thead><tr><th>Comorbidité</th><th>Donnée clé</th></tr></thead>
+        <tbody>
+          <tr><td>HTA résistante</td><td><strong>80%</strong> ont un SAS associé</td></tr>
+          <tr><td>Insuffisance cardiaque</td><td><strong>50%</strong> des patients</td></tr>
+          <tr><td>AVC</td><td>Risque <strong>×2–3</strong></td></tr>
+          <tr><td>Diabète</td><td><strong>30%</strong> des diabétiques</td></tr>
+          <tr><td>Obésité ↔ SAS</td><td>70% des SAS en surpoids</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Clinique SAS adulte vs enfant
+      </div>
+      <table>
+        <thead><tr><th>Symptôme</th><th>Adulte</th><th>Enfant</th></tr></thead>
+        <tbody>
+          <tr><td>Somnolence diurne</td><td>Oui +++</td><td>Rare : plutôt hyperactivité, troubles du comportement</td></tr>
+          <tr><td>Ronflements</td><td>Sévères, quotidiens</td><td>Présents</td></tr>
+          <tr><td>Pauses respiratoires</td><td>Rapportées par le conjoint</td><td>Rapportées par les parents</td></tr>
+          <tr><td>Nycturie / mictions</td><td>Nycturie</td><td>Énurésie</td></tr>
+          <tr><td>Céphalée matinale</td><td>Oui</td><td>Oui</td></tr>
+          <tr><td>Croissance</td><td>—</td><td>Infléchissement staturo-pondéral</td></tr>
+          <tr><td>Signes spécifiques</td><td>Sueurs, baisse libido, troubles humeur</td><td>Respiration buccale, sommeil agité, faciès adénoïdien</td></tr>
+        </tbody>
+      </table>
+      <div class="sub-head">Facteurs de risque chez l'enfant</div>
+      <div class="pills">
+        <span class="pill pill-blue">Obésité</span>
+        <span class="pill pill-blue">Infections respiratoires hautes récurrentes</span>
+        <span class="pill pill-blue">Hypertrophie adéno-amygdalienne</span>
+        <span class="pill pill-blue">Trisomie 21</span>
+        <span class="pill pill-blue">Syndrome de Pierre Robin</span>
+        <span class="pill pill-blue">Maladie neuromusculaire</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan du SAS
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Évaluation clinique</div>
+        <ul class="item-list">
+          <li><strong>Échelle d'Epworth</strong> : 8 questions, évalue le risque d'endormissement en vie courante — validée pour le SAS</li>
+          <li><strong>Score de Mallampati</strong> (modifié chez l'enfant) : évalue l'obstruction oro-pharyngée</li>
+          <li><strong>Questionnaire de Berlin</strong> : Se 86%, Sp 77% pour IAH &gt; 5 (moins performant chez les PA)</li>
+          <li>Examen : IMC, PA, SaO2, examen ORL (obstruction nasale, rétrognathisme, langue)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-head" style="color:var(--blue)">Examens complémentaires</div>
+        <ul class="item-list">
+          <li><strong>Polygraphie ventilatoire nocturne (PVN)</strong> — examen de 1re intention en ambulatoire, enregistre uniquement la respiration</li>
+          <li><strong>Polysomnographie</strong> — examen de référence complet (architecture du sommeil) : si autre pathologie suspectée, ou pour objectiver la plainte</li>
+          <li>EFR + gazométrie : si fumeur ou dyspnée d'effort</li>
+          <li>Imagerie des VAS : généralement inutile</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement du SAS selon l'IAH
+    </div>
+    <div class="iah-bar">
+      <div class="iah-seg" style="background:var(--teal-light);color:var(--teal);">IAH 5–15<br><small>Léger</small></div>
+      <div class="iah-seg" style="background:var(--amber-light);color:var(--amber);">IAH 15–30<br><small>Modéré</small></div>
+      <div class="iah-seg" style="background:var(--red-light);color:var(--red);">IAH &gt; 30<br><small>Sévère</small></div>
+    </div>
+    <table style="margin-bottom:14px;">
+      <thead><tr><th>IAH</th><th>Sévérité</th><th>Conduite à tenir</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-teal">5–15</span></td>
+          <td>Léger</td>
+          <td>Pas de traitement sauf discordance clinique ou comorbidités → examen complémentaire</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-amber">15–30</span></td>
+          <td>Modéré</td>
+          <td>Traitement selon clinique et présence de comorbidités CV/métaboliques</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">&gt; 30</span></td>
+          <td>Sévère</td>
+          <td>Traitement d'emblée. Durée minimale valide de l'examen : 4h</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>PPC (Pression Positive Continue)</strong> — traitement de référence. Remboursement SS si IAH &gt; 30 ou SAS modéré documenté + comorbidités. ALD possible si comorbidités.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>OAM (Orthèse d'Avancée Mandibulaire)</strong> — alternative si difficultés avec la PPC, ou SAS modéré.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Traitement positionnel</strong> — si apnées positionnelles (prédominance décubitus dorsal) : balle de tennis dans le dos.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Chirurgie maxillo-faciale</strong> — patient jeune avec dysmorphie faciale.</div>
+    </div>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Permis de conduire :</strong> Inaptitude jusqu'à traitement efficace (arrêté 18/12/2015). Reprise possible 2 sem à 1 mois après évaluation d'efficacité. Aptitude délivrée au maximum pour 3 ans.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ ORL PÉDIATRIQUE ══════════════ -->
+  <div class="section-title">ORL pédiatrique — Végétations adénoïdes et amygdales</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Hypertrophie des végétations adénoïdes
+      </div>
+      <p style="font-size:0.84rem;color:var(--subtext);margin-bottom:8px;">Souvent asymptomatique. <strong>Toujours rechercher des signes de SAS.</strong></p>
+      <div class="pills">
+        <span class="pill pill-blue">Voix nasonnée</span>
+        <span class="pill pill-blue">Respiration buccale</span>
+        <span class="pill pill-blue">Otites récurrentes</span>
+        <span class="pill pill-blue">Faciès adénoïdien</span>
+      </div>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Faciès adénoïdien :</strong> face allongée et étroite, bouche ouverte, béance incisive, palais ogival.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Hypertrophie amygdalienne obstructive
+      </div>
+      <div class="sub-head">Grades de Friedman (volume amygdalien)</div>
+      <table>
+        <thead><tr><th>Grade</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><span class="badge badge-teal">0</span></td><td>Amygdales cachées dans la loge — luette et piliers visibles</td></tr>
+          <tr><td><span class="badge badge-blue">1</span></td><td>Amygdales dans la loge</td></tr>
+          <tr><td><span class="badge badge-amber">2</span></td><td>Dépassent la loge</td></tr>
+          <tr><td><span class="badge badge-coral">3</span></td><td>Dépassent largement sans atteindre la ligne médiane</td></tr>
+          <tr><td><span class="badge badge-red">4</span></td><td>Amygdales jointives au niveau de la luette</td></tr>
+        </tbody>
+      </table>
+      <div class="pills" style="margin-top:8px;">
+        <span class="pill pill-red">Dysphagie aux gros morceaux</span>
+        <span class="pill pill-red">Voix oropharyngée</span>
+        <span class="pill pill-red">Troubles orthodontiques</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ══════════════ POINTS-CLÉS À RETENIR ══════════════ -->
+  <div class="section-title">Points-clés à retenir</div>
+
+  <div class="card" style="border: 1.5px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Insomnie chronique :</strong> TCC en 1re intention. Somnifères = durée limitée, pas en 1re intention. BZD/Z-drugs à éviter chez le sujet âgé (chutes, tolérance). Mélatonine = seul traitement médicamenteux autorisé chez l'enfant.</div>
+        </div>
+        <div class="alert alert-green" style="margin-top:6px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>SJSR :</strong> diagnostic clinique (interrogatoire). Toujours chercher une carence martiale. Associé aux MPJS dans 80% des cas.</div>
+        </div>
+        <div class="alert alert-green" style="margin-top:6px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Insomnie de l'enfant &lt; 5 ans :</strong> cause comportementale dans 70% des cas. Le conditionnement anormal à l'endormissement est la cause n°1.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Retard de phase ≠ insomnie d'endormissement. "Court dormeur" (&lt; 6h sans aucun retentissement diurne) = variant normal, ne pas traiter.</div>
+        </div>
+        <div class="alert alert-amber" style="margin-top:6px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>SAS :</strong> 80% des HTA résistantes ont un SAS. Risque accident ×6. PPC = traitement de référence, remboursé si IAH &gt; 30 ou SAS modéré + comorbidités.</div>
+        </div>
+        <div class="alert alert-red" style="margin-top:6px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>SAS + conduite :</strong> inaptitude jusqu'à traitement efficace. Reprise 2 sem à 1 mois après évaluation. Validité du permis max 3 ans.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
