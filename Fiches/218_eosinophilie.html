@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Item 218 – Éosinophilie</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#EEF0FF;
+    --teal:#1D9E75;   --teal-light:#E6F7F2;
+    --coral:#D85A30;  --coral-light:#FDF0EA;
+    --blue:#378ADD;   --blue-light:#EAF3FD;
+    --red:#E24B4A;    --red-light:#FEF2F2;
+    --amber:#D97706;  --amber-light:#FFFBEB;
+    --text:#1A1A2E;   --text-light:#6B7280;
+    --border:rgba(0,0,0,.08);
+    --bg:#F8FAFC;     --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.87rem;line-height:1.55}
+  .page{max-width:920px;margin:0 auto;padding:20px 16px 48px}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 100%);border-radius:16px;padding:28px 32px;margin-bottom:22px;color:#fff}
+  .header .item-num{font-size:.78rem;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+  .header h1{font-size:1.65rem;font-weight:800;margin-bottom:12px}
+  .header .obj-box{background:rgba(255,255,255,.15);border-radius:10px;padding:14px 18px;font-size:.84rem;line-height:1.65}
+
+  /* CARDS */
+  .card{background:var(--white);border:.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ALERTS */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start}
+  .alert strong{font-weight:800}
+  .alert-icon{flex-shrink:0;margin-top:1px}
+  .alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red)}
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue)}
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal)}
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber)}
+  .alert-red   .alert-icon svg{stroke:var(--red)}
+  .alert-blue  .alert-icon svg{stroke:var(--blue)}
+  .alert-green .alert-icon svg{stroke:var(--teal)}
+  .alert-amber .alert-icon svg{stroke:var(--amber)}
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .pill{padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:600}
+  .pill-teal  {background:var(--teal-light);  color:var(--teal)}
+  .pill-blue  {background:var(--blue-light);  color:var(--blue)}
+  .pill-red   {background:var(--red-light);   color:var(--red)}
+  .pill-amber {background:var(--amber-light); color:var(--amber)}
+  .pill-purple{background:var(--purple-light);color:var(--purple)}
+  .pill-coral {background:var(--coral-light); color:var(--coral)}
+
+  /* GRID */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+  /* TABLES */
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th{background:#F1F5F9;font-weight:700;text-align:left;padding:7px 10px;color:var(--text)}
+  td{padding:7px 10px;border-bottom:.5px solid var(--border);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:.5px solid var(--border);font-size:.83rem}
+  .kv-row:last-child{border-bottom:none}
+  .kv-key{color:var(--text-light)}
+  .kv-val{font-weight:700;text-align:right}
+
+  /* STEPS */
+  .step{display:flex;gap:10px;margin-bottom:7px}
+  .step-num{width:22px;height:22px;border-radius:50%;background:#F1F5F9;color:var(--text-light);font-weight:700;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+
+  /* BORDERED LEFT */
+  .card-left-blue  {border-left:4px solid var(--blue)}
+  .card-left-red   {border-left:4px solid var(--red)}
+  .card-left-teal  {border-left:4px solid var(--teal)}
+  .card-left-amber {border-left:4px solid var(--amber)}
+  .card-left-purple{border-left:4px solid var(--purple)}
+
+  /* BADGE */
+  .badge{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.74rem;font-weight:700}
+  .badge-red   {background:var(--red-light);   color:var(--red)}
+  .badge-amber {background:var(--amber-light); color:var(--amber)}
+  .badge-teal  {background:var(--teal-light);  color:var(--teal)}
+  .badge-blue  {background:var(--blue-light);  color:var(--blue)}
+  .badge-purple{background:var(--purple-light);color:var(--purple)}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0}
+  ul{padding-left:16px}
+  li{margin-bottom:4px}
+  small{font-size:.78rem;color:var(--text-light)}
+  .sub-title{font-size:.82rem;font-weight:700;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="item-num">Item 218</div>
+    <h1>Éosinophilie</h1>
+    <div class="obj-box">
+      Ce chapitre porte sur une anomalie quantitative des leucocytes (PNE &gt; 500/mm³ persistant) dont la cause principale est parasitaire (helminthoses). L'enjeu est triple : <strong>(1) identifier la cause</strong> parmi les 4 grandes étiologies (parasitoses, atopie, médicaments, cancers) ; <strong>(2) dépister les retentissements viscéraux</strong> (cardiaques, neurologiques, thrombotiques) dans toute éosinophilie chronique ; <strong>(3) reconnaître les urgences</strong> : DRESS, anguillulose maligne sous corticoïdes, GEPA, défaillances d'organe.
+    </div>
+  </div>
+
+  <!-- 1. DÉFINITIONS -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définitions et seuils
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Éosinophilie sanguine (définition)</span>
+      <span class="kv-val">PNE &gt; 500/mm³ — persistant sur plusieurs NFS successives</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Éosinophilie modérée</span>
+      <span class="kv-val">500 – 1 500/mm³</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Hyperéosinophilie</span>
+      <span class="kv-val">&gt; 1 500/mm³</span>
+    </div>
+    <div style="margin-top:10px">
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège classique :</strong> le <em>pourcentage</em> de PNE est inutile — seul le <strong>nombre absolu</strong> compte pour le diagnostic et le suivi.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 2. PHYSIOPATHOLOGIE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Rôle délétère des PNE
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Rôle physiologique</div>
+        <ul>
+          <li>Libèrent des médiateurs inflammatoires dans les tissus</li>
+          <li>Cibles : larves parasitaires, virus, cellules tumorales</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-title">Effets pathologiques (excès)</div>
+        <ul>
+          <li>Cytotoxicité directe sur les tissus infiltrés</li>
+          <li>Effet prothrombotique → thromboses art. et vein.</li>
+          <li>Fibrose endomyocardique (cible cardiaque principale)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 3. ÉTIOLOGIES CLASSIQUES -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Les 4 causes classiques à maîtriser
+    </div>
+    <table>
+      <tr>
+        <th>Cause</th>
+        <th>Niveau d'éosinophilie</th>
+        <th>Points clés</th>
+      </tr>
+      <tr>
+        <td><span class="badge badge-teal">Parasitoses</span></td>
+        <td>Souvent &gt; 1 500/mm³ (phase invasive)</td>
+        <td><strong>Helminthoses exclusivement</strong> — les protozoaires intraluminaux (giardiose, amoebose, cryptosporidiose) ne donnent PAS d'éosinophilie</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">Atopie</span></td>
+        <td>&lt; 1 000/mm³ en général</td>
+        <td>Si &gt; 1 500 → chercher impérativement une autre cause. Contexte : asthme, dermatite atopique, rhinite, urticaire</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Médicaments / DRESS</span></td>
+        <td>Parfois massive</td>
+        <td>Délai 2–8 semaines. Tous médicaments possibles. Surveillance hépatique et rénale obligatoire jusqu'à résolution</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">Cancer / Hémopathie</span></td>
+        <td>Variable</td>
+        <td>Maladie de Hodgkin (éosinophilie + prurit), lymphomes T (Sézary), cancers solides. Contexte AEG, adénopathies, syndrome inflammatoire</td>
+      </tr>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Autres causes à évoquer : <strong>infection VIH</strong> (systématique), <strong>GEPA</strong>, pemphigoïde bulleuse, polyarthrite rhumatoïde, insuffisance surrénale.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 4. PARASITOSES TABLEAU -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Parasitoses — diagnostic selon contexte
+    </div>
+    <table>
+      <tr>
+        <th style="width:16%">Contexte</th>
+        <th style="width:16%">Niveau éosinophilie</th>
+        <th style="width:30%">Parasitoses</th>
+        <th>Signes évocateurs / diagnostic</th>
+      </tr>
+      <!-- FRANCE – hyperéo -->
+      <tr>
+        <td rowspan="2" style="vertical-align:middle;text-align:center"><strong>France</strong><br><small>métropolitaine</small></td>
+        <td style="vertical-align:middle;text-align:center"><span class="badge badge-red">&gt; 1 500</span><br><small>sérologies</small></td>
+        <td>
+          <strong>Toxocarose</strong> (T. canis/cati, bacs à sable)<br>
+          <strong>Distomatose hépatique</strong> (Fasciola, cresson)<br>
+          <strong>Trichinose</strong> (porc/sanglier/cheval mal cuit)<br>
+          <strong>Gale</strong>
+        </td>
+        <td>
+          Larva migrans viscérale, localisations oculaires/cérébrales (toxocarose)<br>
+          Angiocholite : fièvre, ictère (distomatose)<br>
+          Fièvre, oedèmes, myalgies — biopsie musculaire (trichinose)
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle;text-align:center"><span class="badge badge-blue">&lt; 1 500</span><br><small>EPS / séro</small></td>
+        <td>
+          <strong>Oxyurose</strong> (Enterobius) — scotch-test<br>
+          <strong>Taeniasis</strong> (Taenia saginata, viande de bœuf crue)<br>
+          <strong>Anisakiase</strong> (Anisakis, poissons crus)<br>
+          <strong>Hydatidose</strong>, <strong>Échinococcose alvéolaire</strong> (Est France)
+        </td>
+        <td>
+          Prurit anal (enfant) — oxyurose<br>
+          Dyspepsie — taeniasis<br>
+          Signes digestifs — anisakiase<br>
+          Kystes hépatiques — hydatidose (rupture → hyperéo possible)
+        </td>
+      </tr>
+      <!-- ZONE TROPICALE -->
+      <tr>
+        <td rowspan="4" style="vertical-align:middle;text-align:center"><strong>Zone tropicale</strong><br><small>/ voyage hors France</small></td>
+        <td rowspan="4" style="vertical-align:middle;text-align:center"><span class="badge badge-red">Variable</span><br><small>EPS + séro + examen spécialisé</small></td>
+        <td><strong>Bilharzioses</strong> (Schistosoma mansoni / haematobium)</td>
+        <td>Diarrhée + hépato-splénomégalie (digestive) / hématurie + atteinte urinaire</td>
+      </tr>
+      <tr>
+        <td><strong>Anguillulose</strong> (Strongyloides stercoralis)</td>
+        <td>Larva currens cutanée, éosinophilie oscillante cyclique. <strong>Anguillulose maligne si corticoïdes chez immunodéprimé</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Filarioses</strong></td>
+        <td>Oedèmes, nodules sous-cutanés, cécité ; microfilaires dans le sang/derme</td>
+      </tr>
+      <tr>
+        <td><strong>Distomatoses, Ascaridiose</strong></td>
+        <td>Angiocholite (distomatose) ; syndrome de Löffler, signes digestifs (ascaridiose)</td>
+      </tr>
+    </table>
+    <div class="alert alert-red" style="margin-top:10px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence absolue :</strong> chez tout patient revenu de zone tropicale devant recevoir des corticoïdes → <strong>traiter systématiquement l'anguillulose avant introduction</strong> pour éviter l'anguillulose maligne disséminée.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 5. DRESS -->
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      DRESS — Hypersensibilité médicamenteuse sévère
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Critères diagnostiques du DRESS</div>
+        <ul style="font-size:.83rem">
+          <li>Éruption cutanée (peut être simple érythème)</li>
+          <li>Hyperéosinophilie <strong>&gt; 1 500/mm³</strong></li>
+          <li>Signes généraux : fièvre, adénopathies</li>
+          <li>Atteinte viscérale sévère :<br>
+            — Hépatite fulminante<br>
+            — IRA (néphrite interstitielle immuno-allergique)</li>
+        </ul>
+        <div style="margin-top:10px">
+          <div class="kv-row">
+            <span class="kv-key">Délai d'apparition</span>
+            <span class="kv-val">2 – 8 semaines</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-title">Médicaments incriminés (fréquence)</div>
+        <div class="pills">
+          <span class="pill pill-amber">Béta-lactamines</span>
+          <span class="pill pill-amber">Sulfamides</span>
+          <span class="pill pill-amber">AINS</span>
+          <span class="pill pill-amber">Héparines</span>
+          <span class="pill pill-amber">Antiépileptiques</span>
+          <span class="pill pill-amber">Allopurinol</span>
+          <span class="pill pill-amber">Antirétroviraux</span>
+          <span class="pill pill-amber">Neuroleptiques</span>
+          <span class="pill pill-amber">Produits de contraste iodés</span>
+        </div>
+        <div class="alert alert-amber" style="margin-top:10px">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><strong>Tous médicaments peuvent être incriminés</strong> — évoquer devant toute éosinophilie, même asymptomatique</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:4px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Surveillance obligatoire</strong> jusqu'à disparition de l'éosinophilie : créatininémie + transaminases + TP — <em>même si l'éruption semble bénigne</em>.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 6. SHE + Asthme -->
+  <div class="grid2">
+    <div class="card card-left-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        Syndrome hyperéosinophilique (SHE)
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>HE &gt; 1 500 — <strong>depuis &gt; 6 mois</strong> — <strong>après exclusion</strong> de toutes les causes connues</div>
+      </div>
+      <div class="sub-title" style="color:var(--purple)">SHE myéloïde (clonal / myéloprolifératif)</div>
+      <ul style="font-size:.83rem;margin-bottom:10px">
+        <li>Anomalie clonale directe de la lignée éosinophile</li>
+        <li>Arguments : splénomégalie, <strong>&#8593; vitamine B12</strong>, <strong>&#8593; tryptase sérique</strong></li>
+        <li><strong>Cortico-résistance</strong></li>
+      </ul>
+      <div class="sub-title" style="color:var(--purple)">SHE lymphoïde</div>
+      <ul style="font-size:.83rem">
+        <li>Clones T → IL-5 → hyperéosinophilie induite</li>
+        <li>Arguments : <strong>&#8593; IgE totales</strong>, <strong>bonne réponse aux corticoïdes</strong></li>
+      </ul>
+    </div>
+
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Éosinophilie + Asthme
+      </div>
+      <div style="font-size:.83rem">
+        <div class="sub-title">Triade Fernand Widal</div>
+        <div style="margin-bottom:9px">Polypose naso-sinusienne + asthme + prise d'<strong>ASA / AINS</strong></div>
+
+        <div class="sub-title">GEPA (ex Churg-Strauss)</div>
+        <div style="margin-bottom:9px">Asthme sévère à début tardif, polypose, infiltrats TDM, vascularite systémique. ANCA anti-MPO (inconstants). Complications : myocardite, HAA, GN rapidement progressive</div>
+
+        <div class="sub-title">ABPA (Aspergillus)</div>
+        <div style="margin-bottom:9px">Hypersensibilité de type I à <em>A. fumigatus</em> chez asthmatique. <strong>IgE très élevées</strong>, hyperéosinophilie massive, moules bronchiques (bouchons mycéliens), IgE spécifiques anti-Aspergillus</div>
+
+        <div class="sub-title">Syndrome de Löffler</div>
+        <div>Migration de larves dans le parenchyme → asthme/dyspnée, infiltrats radiologiques <em>labiles</em> et périphériques, fébricule</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 7. RETENTISSEMENTS ET URGENCES -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Retentissements viscéraux chroniques
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Possibles <strong>quelle que soit la cause</strong> et <strong>quel que soit le chiffre</strong> → dépistage systématique dans toute éosinophilie chronique</div>
+      </div>
+      <div class="pills">
+        <span class="pill pill-red">Fibrose endomyocardique</span>
+        <span class="pill pill-coral">Thromboses art. et vein.</span>
+        <span class="pill pill-blue">Atteintes pulmonaires</span>
+        <span class="pill pill-blue">Atteintes digestives</span>
+        <span class="pill pill-purple">Atteintes neurologiques (centrales et périphériques)</span>
+        <span class="pill pill-teal">Atteintes cutanées</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Situations d'urgence
+      </div>
+      <div class="sub-title" style="color:var(--red)">Défaillances viscérales directes</div>
+      <ul style="font-size:.83rem;margin-bottom:10px">
+        <li>Détresse respiratoire aiguë</li>
+        <li>Défaillance neurologique (parfois d'origine thrombotique artérielle)</li>
+        <li>Défaillance cardiaque (fibrose endomyocardique)</li>
+      </ul>
+      <div class="sub-title" style="color:var(--red)">Causes à identifier rapidement</div>
+      <ul style="font-size:.83rem">
+        <li><strong>Anguillulose maligne</strong> — immunodéprimé + corticoïdes</li>
+        <li><strong>GEPA</strong> — myocardite, hémorragie intra-alvéolaire, GN rapidement progressive</li>
+        <li><strong>DRESS</strong> — hépatite fulminante, IRA</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 8. BILAN PARACLINIQUE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan paraclinique de 1ère intention
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Bilan biologique systématique</div>
+        <div class="step"><div class="step-num">1</div><div>NFS + <strong>frottis sanguin</strong> (blastes, myélémie, cellules de Sézary → hémopathie)</div></div>
+        <div class="step"><div class="step-num">2</div><div>Ionogramme / créatininémie</div></div>
+        <div class="step"><div class="step-num">3</div><div>Bilan hépatique complet + tests de coagulation (TP)</div></div>
+        <div class="step"><div class="step-num">4</div><div>CK (créatine kinase)</div></div>
+        <div class="step"><div class="step-num">5</div><div>Sérologie VIH</div></div>
+        <div class="step"><div class="step-num">6</div><div>EPS ×3 espacés de quelques jours</div></div>
+        <div class="step"><div class="step-num">7</div><div>Sérologie <strong>toxocarose</strong> + <strong>distomatose</strong> — systématique, même sans voyage ni signe clinique</div></div>
+      </div>
+      <div>
+        <div class="sub-title">Selon le contexte</div>
+        <div class="step"><div class="step-num">+</div><div>Séjour <strong>Afrique sub-saharienne</strong> → EPU (examen parasitologique des urines)</div></div>
+        <div class="step"><div class="step-num">+</div><div>Voyage en zone tropicale → IgE totales, microfilaires sang/derme, séros bilharziose / filariose / anguillulose</div></div>
+        <div class="step"><div class="step-num">+</div><div>Selon signes cliniques : ANCA, radiographie de thorax, écho abd, TDM TAP</div></div>
+        <div class="step"><div class="step-num">+</div><div>Myélogramme / BOM / biopsie ganglionnaire si suspicion hémopathie</div></div>
+        <div style="margin-top:12px">
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Retentissement viscéral (toujours) :</strong> <strong>ECG + échocardiographie</strong> dans toute éosinophilie chronique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 9. POINTS CLÉS -->
+  <div class="card" style="border:1.5px solid var(--teal)">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Points-clés à retenir — Pièges ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> % PNE = inutile. Toujours utiliser le nombre absolu.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Giardiose, amoebose, cryptosporidiose (protozoaires) → PAS d'éosinophilie.</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> Atopie &gt; 1 500/mm³ → chercher impérativement une autre cause (parasitose, hémopathie…).</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège DRESS :</strong> surveiller créat + bilan hépatique même si l'éruption est bénigne — une hépatite fulminante peut survenir.</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Urgence :</strong> Anguillulose maligne — traiter <em>avant</em> toute corticothérapie chez tout patient immunodéprimé revenu de zone tropicale.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>À retenir :</strong> ECG + écho cardiaque dans toute éosinophilie chronique — la fibrose endomyocardique peut être silencieuse.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>À retenir :</strong> SHE clonal = splénomégalie + &#8593; B12 + &#8593; tryptase + cortico-résistance vs SHE lymphoïde = &#8593; IgE + cortico-sensible.</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>À retenir :</strong> Sérologies toxocarose + distomatose systématiques, même sans voyage et sans signe clinique.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
