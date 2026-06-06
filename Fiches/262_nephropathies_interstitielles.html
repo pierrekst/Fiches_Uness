@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 262 — Néphropathies interstitielles</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --text: #1e2235;
+      --text-light: #6b7280;
+      --border: rgba(0,0,0,0.08);
+      --purple: #534AB7;
+      --purple-light: #ede9ff;
+      --teal: #1D9E75;
+      --teal-light: #d4f5ea;
+      --blue: #378ADD;
+      --blue-light: #dbeeff;
+      --red: #E24B4A;
+      --red-light: #fde8e8;
+      --amber: #C97A10;
+      --amber-light: #fef3cd;
+      --coral: #D85A30;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12141c;
+        --card: #1c1f2e;
+        --text: #e8eaf0;
+        --text-light: #9ca3af;
+        --border: rgba(255,255,255,0.08);
+        --purple-light: #2a2560;
+        --teal-light: #0d3d2c;
+        --blue-light: #162e4d;
+        --red-light: #3d1414;
+        --amber-light: #3d2800;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: .9rem; line-height: 1.6; padding: 20px 16px 60px; }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1D9E75 0%, #378ADD 60%, #534AB7 100%);
+      border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff;
+    }
+    .header-num { font-size: .75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: .8; margin-bottom: 4px; }
+    .header-title { font-size: 1.75rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .htag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+    /* INTRO BOX */
+    .intro-box { background: var(--blue-light); border-left: 4px solid var(--blue); border-radius: 12px; padding: 16px 20px; margin-bottom: 22px; color: var(--blue); font-size: .86rem; line-height: 1.6; }
+    .intro-box strong { font-weight: 800; display: block; margin-bottom: 6px; font-size: .9rem; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* CARDS */
+    .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ALERTS */
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+
+    /* GRILLES */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+    /* PILLS */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill { border-radius: 20px; padding: 3px 11px; font-size: .78rem; font-weight: 600; }
+    .pill-red    { background: var(--red-light);    color: var(--red);   }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);  }
+    .pill-teal   { background: var(--teal-light);   color: var(--teal);  }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+    .pill-purple { background: var(--purple-light); color: var(--purple);}
+
+    /* KV ROWS */
+    .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: .84rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-light); font-weight: 500; }
+    .kv-val { font-weight: 700; text-align: right; }
+
+    /* TABLES */
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: 10px; }
+    th { background: var(--purple); color: #fff; padding: 8px 10px; text-align: left; font-weight: 700; }
+    th:first-child { border-radius: 7px 0 0 0; }
+    th:last-child  { border-radius: 0 7px 0 0; }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: rgba(83,74,183,0.04); }
+
+    /* NUMBERED STEPS */
+    .steps { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .steps li { display: flex; gap: 12px; align-items: flex-start; font-size: .84rem; }
+    .step-num { background: var(--purple-light); color: var(--purple); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .75rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* SECTION TITLES */
+    .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin: 24px 0 12px; display: flex; align-items: center; gap: 10px; }
+    .section-title svg { width: 18px; height: 18px; fill: none; stroke: var(--purple); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* BORDERED LEFT CARDS */
+    .card-left-teal   { border-left: 4px solid var(--teal);   }
+    .card-left-blue   { border-left: 4px solid var(--blue);   }
+    .card-left-red    { border-left: 4px solid var(--red);    }
+    .card-left-amber  { border-left: 4px solid var(--amber);  }
+    .card-left-purple { border-left: 4px solid var(--purple); }
+
+    ul.list { padding-left: 16px; margin-top: 6px; }
+    ul.list li { margin-bottom: 4px; font-size: .84rem; }
+
+    .badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: .72rem; font-weight: 800; margin-left: 6px; vertical-align: middle; }
+    .badge-red    { background: var(--red-light);    color: var(--red);   }
+    .badge-teal   { background: var(--teal-light);   color: var(--teal);  }
+    .badge-amber  { background: var(--amber-light);  color: var(--amber); }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue);  }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 262</div>
+    <div class="header-title">Néphropathies interstitielles chroniques</div>
+    <div class="header-tags">
+      <span class="htag">NIC</span>
+      <span class="htag">Tubulo-interstitiel</span>
+      <span class="htag">IRC</span>
+      <span class="htag">Acidose tubulaire</span>
+      <span class="htag">Leucocyturie</span>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    <strong>Vision globale du chapitre</strong>
+    La néphropathie interstitielle chronique (NIC) est une cause fréquente d'IRC, caractérisée par son profil tubulaire : polyurie, protéinurie de bas poids moléculaire, leucocyturie, acidose tubulaire — sans HTA marquée ni protéinurie abondante. L'enjeu est triple : <em>reconnaître le tableau clinico-biologique évocateur</em>, <em>identifier l'étiologie parmi les causes urologiques, médicamenteuses et métaboliques</em> (les 3 grandes catégories à maîtriser), et <em>ne pas méconnaître une cause curable</em> (obstruction, médicament, désordre métabolique).
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : PRÉSENTATION CLINIQUE -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    Présentation clinique de la NIC
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Signes fonctionnels
+      </div>
+      <div class="kv-row"><span class="kv-key">Polyurie / nycturie</span><span class="kv-val" style="color:var(--teal);">fréquente</span></div>
+      <div class="kv-row"><span class="kv-key">Syndrome polyuro-polydipsique</span><span class="kv-val" style="color:var(--teal);">caractéristique</span></div>
+      <div class="kv-row"><span class="kv-key">Nécrose papillaire</span><span class="kv-val">hématurie ± colique</span></div>
+      <div class="kv-row"><span class="kv-key">HTA</span><span class="kv-val" style="color:var(--teal);">absente ou tardive (stade 4-5)</span></div>
+    </div>
+
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Éléments d'orientation
+      </div>
+      <ul class="list">
+        <li>Notion d'uropathie, d'infections urinaires répétées</li>
+        <li>Prises médicamenteuses (AINS, lithium, antinéoplasiques)</li>
+        <li>Signes extra-rénaux : sarcoïdose, Sjögren, drépanocytose</li>
+        <li>Découverte fortuite : protéinurie, hématurie microscopique, leucocyturie</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> l'absence d'HTA ou son apparition très tardive est caractéristique de la NIC — contrairement aux glomérulopathies. Une HTA précoce doit faire reconsidérer le diagnostic.</div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : SIGNES BIOLOGIQUES ET PARACLINIQUES -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    Signes biologiques et paracliniques évocateurs
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Urinaire (sédiment)
+      </div>
+      <div class="kv-row"><span class="kv-key">Leucocyturie</span><span class="kv-val" style="color:var(--red);">+++ (signe majeur)</span></div>
+      <div class="kv-row"><span class="kv-key">Hématurie</span><span class="kv-val" style="color:var(--teal);">absente ou microscopique</span></div>
+      <div class="kv-row"><span class="kv-key">Protéinurie</span><span class="kv-val">&lt; 1 g/24h</span></div>
+      <div class="kv-row"><span class="kv-key">Albuminurie (%)</span><span class="kv-val">&lt; 50 % (bas PM)</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Dysfonction tubulaire
+      </div>
+      <div class="kv-row"><span class="kv-key">Polyurie</span><span class="kv-val">trouble concentration</span></div>
+      <div class="kv-row"><span class="kv-key">Natriurèse obligatoire</span><span class="kv-val">perte de sel</span></div>
+      <div class="kv-row"><span class="kv-key">Acidose tubulaire</span><span class="kv-val">proximale / distale / hyperkaliémique</span></div>
+      <div class="kv-row"><span class="kv-key">Acidose hyperkaliémique</span><span class="kv-val">hyporéninisme-hypoaldostéronisme</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Échographie rénale
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:4px;">
+      <div class="pill pill-blue">Reins de petite taille</div>
+      <div class="pill pill-blue">Contours bosselés / encoches</div>
+      <div class="pill pill-blue">Asymétrie de taille</div>
+      <div class="pill pill-blue">Réduction épaisseur corticale</div>
+      <div class="pill pill-blue">Calcifications (néphrocalcinose)</div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Biopsie rénale :</strong> habituellement non réalisée (reins petits = risque hémorragique, contexte clinique souvent suffisant). Si réalisée : confirme le diagnostic de NIC mais identifie rarement la cause.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège :</strong> la protéinurie de NIC est &lt; 1 g/24h avec majorité de protéines de <em>bas poids moléculaire</em> (tubulaires), non dominée par l'albumine — à l'opposé des glomérulonéphrites. Une protéinurie &gt; 1 g/24h ou très albumineuse doit faire suspecter une composante glomérulaire associée (ex. RVU + HSF).</div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : MÉCANISMES ET ÉTIOLOGIES -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    Principales étiologies — Vue d'ensemble
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Classification des causes de NIC
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Catégorie</th>
+          <th>Principales causes à retenir</th>
+          <th>Point clé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Urologiques</strong></td>
+          <td>Uropathies obstructives/malformatives<br>Reflux vésico-urétéral (RVU)<br>Lithiases</td>
+          <td>L'infection urinaire joue un rôle amplificateur. RVU peut se compliquer de HSF (glomérulopathie secondaire)</td>
+        </tr>
+        <tr>
+          <td><strong>Médicamenteuses</strong></td>
+          <td>AINS / analgésiques / aspirine (long cours)<br>Lithium<br>Cisplatine<br>Inhibiteurs de la calcineurine</td>
+          <td>Causes curables si arrêt précoce. Cisplatine = antinéoplasique++</td>
+        </tr>
+        <tr>
+          <td><strong>Métaboliques</strong></td>
+          <td>Hypercalcémie chronique (néphrocalcinose)<br>Hypokaliémie chronique<br>Hyperuricémie</td>
+          <td>Rechercher la cause du désordre métabolique (hyperparathyroïdie, diurétiques, goutte…)</td>
+        </tr>
+        <tr>
+          <td><strong>Toxiques</strong></td>
+          <td>Plomb, Cadmium<br>Irradiation<br>Herbes chinoises / Néphropathie balkanique</td>
+          <td>Exposition professionnelle à rechercher</td>
+        </tr>
+        <tr>
+          <td><strong>Génétiques</strong></td>
+          <td>Maladies avec/sans kystes (mutations uromoduline…)</td>
+          <td>Contexte familial, début précoce</td>
+        </tr>
+        <tr>
+          <td><strong>Dysimmunitaires</strong></td>
+          <td>Syndrome de Sjögren<br>Sarcoïdose<br>Syndrome NITU<br>Maladie à hyper-IgG4</td>
+          <td>Signes extra-rénaux présents ; traitables (corticoïdes)</td>
+        </tr>
+        <tr>
+          <td><strong>Hématologiques</strong></td>
+          <td>Immunoglobuline monoclonale ± myélome<br>Drépanocytose</td>
+          <td>EPP et dosage des chaînes légères si suspicion</td>
+        </tr>
+        <tr>
+          <td><strong>Infectieuses</strong></td>
+          <td>Tuberculose rénale<br>Pyélonéphrite xanthogranulomateuse</td>
+          <td>Leucocyturie aseptique = tuberculose jusqu'à preuve du contraire</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : FOCUS CAUSES PRINCIPALES -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    Focus causes examinables
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        NIC urologiques
+      </div>
+      <ul class="list">
+        <li><strong>Uropathies obstructives</strong> : sténose de jonction, valves urétrales postérieures</li>
+        <li><strong>Reflux vésico-urétéral</strong> : lésions bilatérales, infection amplifie les lésions, complication HSF si protéinurie &gt; 1 g/24h</li>
+        <li><strong>Lithiases</strong> : obstruction récidivante, infections sur calcul</li>
+        <li>L'infection urinaire récidivante joue un rôle aggravant central</li>
+      </ul>
+    </div>
+
+    <div class="card card-left-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        NIC médicamenteuses
+      </div>
+      <div class="kv-row"><span class="kv-key">AINS / analgésiques</span><span class="kv-val" style="color:var(--amber);">nécrose papillaire</span></div>
+      <div class="kv-row"><span class="kv-key">Lithium</span><span class="kv-val">diabète insipide néphrogénique</span></div>
+      <div class="kv-row"><span class="kv-key">Cisplatine</span><span class="kv-val">cumul des cures</span></div>
+      <div class="kv-row"><span class="kv-key">Ciclosporine / Tacrolimus</span><span class="kv-val">inhibiteurs calcineurine</span></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        NIC métaboliques
+      </div>
+      <div class="kv-row"><span class="kv-key">Hypercalcémie chronique</span><span class="kv-val">néphrocalcinose</span></div>
+      <div class="kv-row"><span class="kv-key">Hypokaliémie chronique</span><span class="kv-val">abus diurétiques / laxatifs</span></div>
+      <div class="kv-row"><span class="kv-key">Hyperuricémie</span><span class="kv-val">dépôts urate</span></div>
+    </div>
+
+    <div class="card card-left-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        NIC dysimmunitaires à retenir
+      </div>
+      <ul class="list">
+        <li><strong>Sjögren</strong> : acidose tubulaire distale + hypokaliémie</li>
+        <li><strong>Sarcoïdose</strong> : hypercalciurie + granulomes</li>
+        <li><strong>NITU</strong> : Néphropathie Interstitielle + Uvéite (sujet jeune)</li>
+        <li><strong>IgG4</strong> : éosinophilie, corticosensible</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================================================ -->
+  <!-- SECTION SYNTHÈSE -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    Points-clés à retenir — Synthèse ECNi
+  </div>
+
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Tableau biologique signature de NIC
+    </div>
+    <div class="pills">
+      <div class="pill pill-red">Leucocyturie +++</div>
+      <div class="pill pill-teal">Protéinurie &lt; 1 g/24h (bas PM)</div>
+      <div class="pill pill-teal">Pas d'hématurie (ou micro)</div>
+      <div class="pill pill-blue">Polyurie / nycturie</div>
+      <div class="pill pill-amber">Acidose tubulaire</div>
+      <div class="pill pill-purple">Pas d'HTA / HTA tardive</div>
+      <div class="pill pill-blue">Reins petits à l'écho</div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège classique — Leucocyturie aseptique :</strong> devant une leucocyturie sans bactériurie, penser systématiquement à la <strong>tuberculose rénale</strong> avant de conclure à une NIC idiopathique. ECBU sur milieu de Löwenstein obligatoire.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div><strong>Piège — RVU et protéinurie :</strong> le reflux vésico-urétéral peut se compliquer de <strong>hyalinose segmentaire et focale (HSF)</strong> secondaire. Apparition d'une protéinurie &gt; 1 g/24h doit évoquer cette complication glomérulaire surajoutée.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div><strong>Retenir les 3 grandes catégories examinables :</strong> Urologiques (uropathie, RVU, lithiase) — Médicamenteuses (AINS, Lithium, Cisplatine, inhibiteurs calcineurine) — Métaboliques (hypercalcémie, hypokaliémie, hyperuricémie). Les causes dysimmunitaires (Sjögren, sarcoïdose) sont importantes car potentiellement curables sous corticoïdes.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div><strong>Biopsie rénale :</strong> non indiquée en routine (reins trop petits, diagnostic souvent clinico-biologique). Confirme la NIC histologiquement mais n'identifie généralement pas la cause.</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 205 – Hémoptysie</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --card: #ffffff;
+      --text: #1a1d2e;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --purple: #534AB7;
+      --purple-light: #ede9fb;
+      --teal: #1D9E75;
+      --teal-light: #d1f5e8;
+      --coral: #D85A30;
+      --coral-light: #fde8e0;
+      --blue: #378ADD;
+      --blue-light: #dbeafe;
+      --red: #E24B4A;
+      --red-light: #fde8e8;
+      --amber: #D97706;
+      --amber-light: #fef3c7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111827;
+        --card: #1f2937;
+        --text: #f9fafb;
+        --text-muted: #9ca3af;
+        --border: #374151;
+        --purple-light: #2d2960;
+        --teal-light: #0d3d2a;
+        --coral-light: #4a2010;
+        --blue-light: #1e3a5f;
+        --red-light: #4a1515;
+        --amber-light: #3d2800;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; font-size: .9rem; line-height: 1.5; padding: 20px; }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #E24B4A 0%, #D85A30 50%, #534AB7 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .header-num { font-size: .8rem; font-weight: 600; opacity: .8; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 4px; }
+    .header-title { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+    .header-sub { font-size: .88rem; opacity: .9; }
+    .header-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .header-pill { background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); border-radius: 20px; padding: 4px 12px; font-size: .78rem; font-weight: 600; }
+
+    /* Overview box */
+    .overview {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--blue);
+    }
+    .overview-title { font-size: .78rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
+    .overview p { font-size: .84rem; color: var(--text); line-height: 1.6; }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Grid */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    @media (max-width: 640px) { .grid3 { grid-template-columns: 1fr; } }
+
+    /* Alerts */
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 15px; height: 15px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+    .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+    /* KV rows */
+    .kv-row { display: flex; align-items: baseline; gap: 6px; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .84rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { font-weight: 600; color: var(--text-muted); min-width: 160px; flex-shrink: 0; }
+    .kv-val { color: var(--text); flex: 1; }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill { border-radius: 20px; padding: 3px 10px; font-size: .78rem; font-weight: 600; }
+    .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+    .pill-red    { background: var(--red-light);    color: var(--red);    }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-top: 10px; }
+    th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 1.5px solid var(--border); font-size: .8rem; }
+    td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    /* Steps */
+    .steps { list-style: none; padding: 0; }
+    .step { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
+    .step:last-child { border-bottom: none; }
+    .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); color: var(--text-muted); font-size: .8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1.5px solid var(--border); }
+    .step-body { font-size: .84rem; flex: 1; line-height: 1.5; }
+    .step-body strong { color: var(--text); }
+
+    /* Comp cards */
+    .comp-card { border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; border-left: 4px solid; }
+    .comp-card.blue  { border-color: var(--blue);  background: var(--blue-light);  }
+    .comp-card.red   { border-color: var(--red);   background: var(--red-light);   }
+    .comp-card.teal  { border-color: var(--teal);  background: var(--teal-light);  }
+    .comp-card.amber { border-color: var(--amber); background: var(--amber-light); }
+    .comp-title { font-size: .8rem; font-weight: 700; margin-bottom: 4px; }
+    .comp-body  { font-size: .82rem; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+    /* Section headers */
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    /* Badge */
+    .badge { display: inline-block; border-radius: 6px; padding: 2px 8px; font-size: .72rem; font-weight: 700; }
+    .badge-red    { background: var(--red-light);    color: var(--red);    }
+    .badge-amber  { background: var(--amber-light);  color: var(--amber);  }
+    .badge-blue   { background: var(--blue-light);   color: var(--blue);   }
+    .badge-green  { background: var(--teal-light);   color: var(--teal);   }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="header">
+    <div class="header-num">Item 205</div>
+    <div class="header-title">Hémoptysie</div>
+    <div class="header-sub">Urgence diagnostique et thérapeutique — même minime</div>
+    <div class="header-pills">
+      <span class="header-pill">Définition</span>
+      <span class="header-pill">Diagnostic différentiel</span>
+      <span class="header-pill">Signes de gravité</span>
+      <span class="header-pill">Traitement symptomatique</span>
+      <span class="header-pill">Bilan initial</span>
+      <span class="header-pill">Étiologies</span>
+    </div>
+  </div>
+
+  <!-- ═══ OVERVIEW ═══ -->
+  <div class="overview">
+    <div class="overview-title">Vue d'ensemble</div>
+    <p>L'hémoptysie est un symptôme-urgence : il faut d'abord confirmer l'origine sous-glottique (vs hématémèse, saignement ORL), puis évaluer la gravité pour décider du secteur de soins et de la stratégie thérapeutique. L'angioscanner thoracique est l'examen pivot : il localise, caractérise la lésion et guide l'artério-embolisation. Les étiologies majeures (cancer, tuberculose, DDB, infections nécrosantes) sont explorées en urgence en parallèle du traitement symptomatique.</p>
+  </div>
+
+  <!-- ═══ 1. DÉFINITION & DDx ═══ -->
+  <div class="section-label">Définition &amp; Diagnostic différentiel</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définition
+      </div>
+      <div class="kv-row"><span class="kv-key">Origine</span><span class="kv-val">Voies aériennes <strong>sous-glottiques</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Aspect</span><span class="kv-val">Sang <strong>rouge vif, aéré</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Contexte</span><span class="kv-val">Associé à un <strong>effort de toux</strong></span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Diagnostics différentiels
+      </div>
+      <div class="kv-row"><span class="kv-key">Hématémèse</span><span class="kv-val">Effort de <strong>vomissement</strong>, ATCD digestifs</span></div>
+      <div class="kv-row"><span class="kv-key">Saignement ORL</span><span class="kv-val">Épistaxis, pharynx, larynx</span></div>
+      <div style="margin-top:10px">
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          Si origine incertaine : fibroscopie bronchique ou ORL + TDM thoracique
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ 2. GRAVITÉ ═══ -->
+  <div class="section-label">Signes de gravité</div>
+
+  <div class="alert alert-red" style="margin-bottom:14px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Toute hémoptysie, même minime = urgence diagnostique et thérapeutique</strong> — une hémoptysie de faible abondance peut être suivie d'une hémoptysie massive</span>
+  </div>
+
+  <div class="grid3">
+    <div class="card" style="border-top: 3px solid var(--teal)">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Abondance
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="badge badge-green">Faible</span></span>
+        <span class="kv-val">&lt; 50 cc (~5 c. à soupe)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="badge badge-amber">Moyenne</span></span>
+        <span class="kv-val">50–200 cc (~½ à 2 verres)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key"><span class="badge badge-red">Grande</span></span>
+        <span class="kv-val">&gt; 200 cc (~1 bol)</span>
+      </div>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--coral)">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Terrain
+      </div>
+      <p style="font-size:.84rem">Risque d'asphyxie par inondation des VA (volume VA proximales ≈ 200 cc).<br><br>Mal tolérée si <strong>pathologie respiratoire sous-jacente</strong> (ex. IRC)</p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--red)">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Persistance
+      </div>
+      <p style="font-size:.84rem">Récidive sous <strong>terlipressine</strong> = critère de gravité</p>
+      <div style="margin-top:8px" class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        Cause étiologique (ex. lésion excavée) = facteur de gravité indépendant de l'abondance
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ 3. BILAN INITIAL & IMAGERIE ═══ -->
+  <div class="section-label">Bilan initial &amp; Sémiologie en imagerie</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Bilan initial
+      </div>
+      <div class="kv-row"><span class="kv-key">Évaluer gravité</span><span class="kv-val">Clinique + bio (hémostase) + <strong>GDS</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Localiser</span><span class="kv-val">Rx thorax + <strong>TDM thoracique</strong></span></div>
+      <div class="kv-row"><span class="kv-key">Identifier cause</span><span class="kv-val">Rx thorax + TDM étiologique</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Rx thorax vs Angioscanner thoracique
+      </div>
+      <table>
+        <tr>
+          <th></th>
+          <th>Rx thorax</th>
+          <th>TDM + injection</th>
+        </tr>
+        <tr>
+          <td><strong>Sensibilité</strong></td>
+          <td>Faible</td>
+          <td>Élevée</td>
+        </tr>
+        <tr>
+          <td><strong>Signes</strong></td>
+          <td>Infiltrats, condensation, atélectasie</td>
+          <td>Verre dépoli, condensation, lésion causale</td>
+        </tr>
+        <tr>
+          <td><strong>Normalité</strong></td>
+          <td>Possible</td>
+          <td>Rare</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>Angioscanner thoracique = examen pivot systématique en urgence</strong> — localise la lésion, cartographie les artères bronchiques pour guider l'artério-embolisation, oriente le traitement étiologique. Quelle que soit la gravité.</span>
+  </div>
+
+  <hr>
+
+  <!-- ═══ 4. ÉTIOLOGIES ═══ -->
+  <div class="section-label">Diagnostic étiologique</div>
+
+  <table style="margin-bottom:16px">
+    <thead>
+      <tr>
+        <th>Étiologie</th>
+        <th>Terrain / Clinique</th>
+        <th>Imagerie évocatrice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">Cancer broncho-pulmonaire</span></td>
+        <td>Tabac, AEG, syndrome paranéoplasique, sd cave sup., métastases</td>
+        <td>Masse, atélectasie, syndrome médiastinal</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Tuberculose</span></td>
+        <td>Contage, AEG, sueurs nocturnes, fièvre</td>
+        <td>Caverne, infiltrats des sommets</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">DDB / Mucoviscidose</span></td>
+        <td>Diagnostic souvent connu, toux/expecto chroniques, exacerbations récurrentes</td>
+        <td>Bronchectasies au scanner</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">Pneumonies nécrosantes / fongiques</span></td>
+        <td>Immunodéprimé, signes infectieux</td>
+        <td>Abcès, aspergillome</td>
+      </tr>
+      <tr>
+        <td><strong>Causes vasculaires</strong></td>
+        <td>EP, OAP cardiogénique, MAV (Rendu-Osler)</td>
+        <td>Variable selon étiologie</td>
+      </tr>
+      <tr>
+        <td><strong>Hémorragie intra-alvéolaire</strong></td>
+        <td>Vascularites, médicaments, infections (multiples causes)</td>
+        <td>Verre dépoli diffus — affirmée par LBA (retour rosé/hémorragique)</td>
+      </tr>
+      <tr>
+        <td><strong>Idiopathique</strong></td>
+        <td colspan="2">Jusqu'à <strong>25 %</strong> des cas — aucune cause identifiée</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- ═══ 5. TRAITEMENT ═══ -->
+  <div class="section-label">Traitement symptomatique &amp; Stratégie thérapeutique</div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement symptomatique initial
+      </div>
+      <ul class="steps">
+        <li class="step">
+          <span class="step-num">1</span>
+          <div class="step-body"><strong>Oxygénothérapie</strong> — objectif SpO2 &gt; 90% (lunettes, masque, haut débit selon débit nécessaire)</div>
+        </li>
+        <li class="step">
+          <span class="step-num">2</span>
+          <div class="step-body"><strong>Terlipressine IV</strong> (hors AMM) — CI : cardiopathie ischémique<br><em>Ou acide tranexamique inhalé ou IV</em></div>
+        </li>
+        <li class="step">
+          <span class="step-num">3</span>
+          <div class="step-body"><strong>Protection VA — hémoptysie massive uniquement :</strong><br>
+          Décubitus latéral <em>côté saignement</em> (protéger le poumon sain)<br>
+          Intubation ± sonde double lumière si nécessaire</div>
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitements spécifiques
+      </div>
+      <div class="comp-card teal">
+        <div class="comp-title" style="color:var(--teal)">Artério-embolisation bronchique</div>
+        <div class="comp-body" style="color:var(--text)">1re ligne si hémoptysie <strong>grave ou récidivante</strong> — repère et oblitère les artères bronchiques anormales</div>
+      </div>
+      <div class="comp-card blue">
+        <div class="comp-title" style="color:var(--blue)">Traitement endoscopique</div>
+        <div class="comp-body" style="color:var(--text)">Injection SSF froid ou vasoconstricteur local — peu utilisé en pratique courante (supplanté par artério-embolisation)</div>
+      </div>
+      <div class="comp-card red">
+        <div class="comp-title" style="color:var(--red)">Chirurgie</div>
+        <div class="comp-body" style="color:var(--text)">Dernier recours — exérèse de la lésion responsable. Exige : fonction respiratoire conservée + cause localisée</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Stratégie thérapeutique selon gravité
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Gravité</th>
+          <th>1re intention</th>
+          <th>Si persistance / récidive</th>
+          <th>Secteur</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-green">Non grave</span></td>
+          <td>O2 + terlipressine IV + bilan étiologique urgent</td>
+          <td>Artério-embolisation ou chirurgie selon bilan</td>
+          <td>Conventionnel</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">Grave</span></td>
+          <td>O2 + terlipressine + <strong>artério-embolisation d'emblée</strong></td>
+          <td>Chirurgie selon bilan étiologique</td>
+          <td><strong>Soins intensifs</strong><br>Centre spécialisé</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:12px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Le bilan étiologique est <strong>toujours conduit en parallèle</strong> du traitement symptomatique, en urgence, quelle que soit la gravité</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ 6. SYNTHÈSE / POINTS CLÉS ═══ -->
+  <div class="section-label">Points-clés à retenir</div>
+
+  <div class="card" style="border-left: 4px solid var(--purple)">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse ECNi
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> la gravité ne dépend <em>pas que</em> du volume — le terrain (IRC) et la cause (lésion excavée à risque de récidive massive) sont des critères de gravité indépendants de l'abondance</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> décubitus latéral = côté du <em>saignement</em> (pas du côté sain — pour protéger le poumon sain de l'inondation)</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> terlipressine = <strong>hors AMM</strong> dans l'hémoptysie — CI formelle si cardiopathie ischémique</span>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>À retenir :</strong> artério-embolisation bronchique = traitement de 1re ligne des formes graves — la chirurgie n'est qu'en dernier recours</span>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>À retenir :</strong> hémorragie intra-alvéolaire — seul le LBA (retour rosé ou hémorragique) l'affirme formellement</span>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>À retenir :</strong> jusqu'à 25 % des hémoptysies restent idiopathiques après bilan complet</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
