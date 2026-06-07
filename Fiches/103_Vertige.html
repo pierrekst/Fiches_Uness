@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 103 — Vertige</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EEF0FF;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F1;
+    --coral: #D85A30;
+    --coral-light: #FDEEE8;
+    --blue: #378ADD;
+    --blue-light: #E8F2FD;
+    --red: #E24B4A;
+    --red-light: #FDEEEE;
+    --amber: #C17A00;
+    --amber-light: #FFF5E0;
+    --text: #1A1A2E;
+    --text-light: #666;
+    --border: #E5E7EB;
+    --bg: #F8F9FA;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: .9rem;
+    line-height: 1.6;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #2256a6 0%, #378ADD 45%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    color: white;
+  }
+  .header .item-num {
+    font-size: .78rem;
+    font-weight: 600;
+    opacity: .8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .header h1 { font-size: 1.8rem; font-weight: 800; margin-bottom: 12px; }
+  .header .overview { font-size: .88rem; opacity: .92; line-height: 1.65; max-width: 820px; }
+
+  /* Cards */
+  .card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-icon {
+    width: 28px; height: 28px;
+    border-radius: 7px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-icon svg {
+    width: 15px; height: 15px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .ic-blue   { background: var(--blue); }
+  .ic-teal   { background: var(--teal); }
+  .ic-purple { background: var(--purple); }
+  .ic-coral  { background: var(--coral); }
+  .ic-red    { background: var(--red); }
+  .ic-amber  { background: var(--amber); }
+
+  /* Alerts */
+  .alert {
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-size: .84rem;
+    margin-bottom: 10px;
+    line-height: 1.55;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red); }
+  .alert-blue  .alert-icon svg { stroke: var(--blue); }
+  .alert-green .alert-icon svg { stroke: var(--teal); }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal); }
+
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg {
+    width: 16px; height: 16px;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Grids */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+  /* KV rows */
+  .kv-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+  .kv-row td { padding: 5px 8px; font-size: .84rem; border-bottom: 0.5px solid var(--border); }
+  .kv-row td:first-child { font-weight: 600; color: var(--text-light); width: 45%; }
+
+  /* Pills */
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: .78rem;
+    font-weight: 600;
+  }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+  .pill-red    { background: var(--red-light);    color: var(--red); }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-bottom: 10px; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Comparison table */
+  .vs-table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  .vs-table th { padding: 9px 12px; text-align: center; font-weight: 700; }
+  .vs-table td { padding: 7px 12px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+  .vs-table .feature-col { font-weight: 600; color: var(--text-light); background: var(--bg); }
+  .vs-table tr:last-child td { border-bottom: none; }
+
+  /* Numbered steps */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; font-size: .85rem; }
+  .step-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    font-size: .72rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    color: var(--text-light);
+  }
+
+  /* Card border variants */
+  .card-red    { border-left: 4px solid var(--red); }
+  .card-teal   { border-left: 4px solid var(--teal); }
+  .card-blue   { border-left: 4px solid var(--blue); }
+  .card-purple { border-left: 4px solid var(--purple); }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 20px 0; }
+  ul { padding-left: 18px; }
+  li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="item-num">Item 103</div>
+    <h1>Vertige</h1>
+    <div class="overview">
+      Maîtriser la démarche diagnostique devant un vertige : confirmer l'illusion de mouvement et écarter les diagnostics différentiels, différencier syndrome vestibulaire périphérique (harmonieux) et central (dysharmonieux), reconnaître et traiter un VPPB par manœuvres positionnelles, classer les étiologies selon le profil clinique (vertige unique / récurrent / avec atteinte otologique), et savoir évoquer un AVC vertébrobasilaire — urgence à ne jamais rater devant un grand vertige aigu.
+    </div>
+  </div>
+
+  <!-- DÉFINITION -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-blue">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définition du vertige
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Illusion de mouvement</strong> — du patient ou de l'environnement. Sensation de rotation ou de déplacement linéaire. Pas de trouble de la conscience.</div>
+      </div>
+      <div class="grid2" style="margin-top:10px; margin-bottom:0;">
+        <div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Signes végétatifs</td><td>Nausées, vomissements, sueurs</td></tr>
+            <tr class="kv-row"><td>Déclenchement</td><td>Spontané ou par mouvements de tête</td></tr>
+            <tr class="kv-row"><td>Conscience</td><td>Toujours conservée</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Diagnostics différentiels (ne sont pas des vertiges)</div>
+          <div class="pill-list">
+            <span class="pill pill-red">Lipothymie / malaise vagal</span>
+            <span class="pill pill-red">Syncope</span>
+            <span class="pill pill-amber">Hypotension orthostatique</span>
+            <span class="pill pill-amber">Éblouissements</span>
+            <span class="pill pill-purple">Anxiété / phobies (agoraphobie, acrophobie)</span>
+            <span class="pill pill-blue">Migraine (céphalées)</span>
+            <span class="pill pill-blue">Diplopie, astigmatisme</span>
+          </div>
+        </div>
+      </div>
+      <div class="alert alert-red" style="margin-top:10px; margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>La présence d'une <strong>perte de connaissance</strong> remet en cause l'origine vestibulaire</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SYNDROME VESTIBULAIRE : PÉRIPH VS CENTRAL -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-purple">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Syndrome vestibulaire : Périphérique vs Central
+      </div>
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th style="background:var(--bg); color:var(--text-light); text-align:left; width:22%;">Critère</th>
+            <th style="background:var(--blue-light); color:var(--blue);">PÉRIPHÉRIQUE — harmonieux</th>
+            <th style="background:var(--red-light); color:var(--red);">CENTRAL — dysharmonieux</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-col">Vertige</td>
+            <td>Rotatoire intense</td>
+            <td>Sensation brève ou déséquilibre permanent</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Nystagmus</td>
+            <td>Horizonto-rotatoire, sens constant quelle que soit la direction du regard</td>
+            <td>Peut changer de direction selon direction du regard ; vertical pur possible</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Fixation oculaire</td>
+            <td>Inhibe le nystagmus</td>
+            <td>N'inhibe pas le nystagmus</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Head Impulse Test</td>
+            <td>Positif (saccade de refixation vers le côté atteint)</td>
+            <td>Normal — signe d'alarme central +++</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Déviations posturales</td>
+            <td>Vers le côté déficitaire, harmonieuses dans toutes les épreuves</td>
+            <td>Absentes ou du côté du nystagmus (dysharmonie)</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Oculomotricité</td>
+            <td>Normale</td>
+            <td>Skew deviation (strabisme vertical), poursuite saccadique</td>
+          </tr>
+          <tr>
+            <td class="feature-col">Signes neurologiques</td>
+            <td>Absents</td>
+            <td>Syndrome cérébelleux, atteinte paires crâniennes, syndromes alternes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-amber" style="margin-bottom:6px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Toute présentation atypique par rapport au syndrome périphérique classique doit faire évoquer une cause centrale. HIT normal + grand vertige aigu = AVC à éliminer en urgence.</div>
+      </div>
+      <div style="font-size:.82rem; color:var(--text-light);">
+        <strong>Exemple périphérique droit :</strong> nystagmus horizonto-rotatoire gauche (phase lente vers la droite, phase rapide de rappel vers la gauche), déviation posturale vers la droite.
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- INTERROGATOIRE -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-blue">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Interrogatoire du patient vertigineux
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Durée = clé diagnostique</div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Quelques secondes</td><td>VPPB</td></tr>
+            <tr class="kv-row"><td>Minutes à heures (&gt; 20 min)</td><td>Maladie de Ménière</td></tr>
+            <tr class="kv-row"><td>5 min – 72 h</td><td>Migraine vestibulaire</td></tr>
+            <tr class="kv-row"><td>Plusieurs jours</td><td>Névrite vestibulaire, AVC</td></tr>
+            <tr class="kv-row"><td>Déclenché par position</td><td>VPPB</td></tr>
+            <tr class="kv-row"><td>Déclenché bruit/mouchage</td><td>Fistule (phénomène de Tullio)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Signes associés à rechercher</div>
+          <ul style="font-size:.84rem;">
+            <li>Hypoacousie, acouphènes, plénitude d'oreille → Ménière</li>
+            <li>Céphalées → HTIC, migraine</li>
+            <li>Cervicalgie intense unilatérale → dissection artère vertébrale</li>
+            <li>Diplopie, déficit moteur/sensitif → cause centrale</li>
+            <li>Otorrhée, anomalie otoscopique → labyrinthite, cholestéatome</li>
+            <li>Traitements ototoxiques, psychotropes</li>
+            <li>ATCD otologiques, cardiovasculaires, trauma crânien</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- VPPB -->
+  <div class="section">
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon ic-teal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        VPPB — Vertige Positionnel Paroxystique Bénin
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Présentation typique</div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Profil</td><td>Femme, souvent &gt; 60 ans</td></tr>
+            <tr class="kv-row"><td>Durée crise</td><td>Quelques secondes</td></tr>
+            <tr class="kv-row"><td>Déclencheur</td><td>Changement de position de la tête</td></tr>
+            <tr class="kv-row"><td>Nystagmus spontané</td><td>Absent entre les crises</td></tr>
+            <tr class="kv-row"><td>Signes auditifs</td><td>Absents</td></tr>
+            <tr class="kv-row"><td>Reproductible</td><td>Oui</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Canaux semi-circulaires</div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Postérieur</td><td><strong>85 %</strong> — Dix-Hallpike</td></tr>
+            <tr class="kv-row"><td>Latéral</td><td>5–15 %</td></tr>
+            <tr class="kv-row"><td>Antérieur</td><td>Exceptionnel</td></tr>
+          </table>
+          <div style="margin-top:10px;">
+            <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Manœuvres thérapeutiques</div>
+            <div class="pill-list">
+              <span class="pill pill-teal">Semont (rapide) — canal postérieur</span>
+              <span class="pill pill-teal">Epley (lente) — canal postérieur</span>
+              <span class="pill pill-blue">ORL ou kiné vestibulaire</span>
+              <span class="pill pill-blue">1 manœuvre suffit en général</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-weight:700; font-size:.84rem; color:var(--text-light); margin: 4px 0 8px; text-transform:uppercase;">Caractères du nystagmus provoqué (tous requis)</div>
+      <ul style="font-size:.84rem; margin-bottom:10px;">
+        <li>Latence à l'apparition (pas immédiat)</li>
+        <li>Intensité croissante puis décroissante — épuisable</li>
+        <li>Vertige précédant et accompagnant le nystagmus</li>
+        <li>Inversion du nystagmus au redressement</li>
+        <li>Disparaît après quelques manœuvres</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Si l'un de ces critères est absent → ne pas conclure à un VPPB typique — chercher une autre cause</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ARBRE ÉTIOLOGIQUE -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-coral">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Arbre étiologique selon présentation
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:38%;">Présentation</th>
+            <th>Étiologies principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Syndrome vestibulaire aigu isolé</strong></td>
+            <td>
+              <span class="pill pill-blue">Névrite vestibulaire</span>
+              <span class="pill pill-red">AVC fosse postérieure</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Syndrome vestibulaire aigu + signes otologiques</strong><br><small style="color:var(--text-light)">surdité, acouphène, otorrhée</small></td>
+            <td>
+              <span class="pill pill-purple">Ménière (1re crise)</span>
+              <span class="pill pill-amber">Labyrinthite infectieuse</span>
+              <span class="pill pill-amber">Cholestéatome / tumeur rocher</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Syndrome vestibulaire aigu + signes neurologiques</strong></td>
+            <td>
+              <span class="pill pill-red">AVC</span>
+              <span class="pill pill-red">Tumeur fosse postérieure</span>
+              <span class="pill pill-red">SEP</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Vertiges récurrents — minutes à heures</strong></td>
+            <td>
+              <span class="pill pill-purple">Maladie de Ménière</span>
+              <span class="pill pill-blue">Migraine vestibulaire</span>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Vertiges récurrents — quelques secondes</strong></td>
+            <td>
+              <span class="pill pill-teal">VPPB</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-amber" style="margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Le schwannome vestibulaire peut prendre <em>toutes</em> ces formes de présentation. Tout signe cochléo-vestibulaire unilatéral persistant impose une IRM de l'angle ponto-cérébelleux.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- CAUSES DÉTAILLÉES -->
+  <div class="section">
+
+    <!-- Vertige unique prolongé -->
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-coral">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Vertige unique prolongé
+      </div>
+      <div class="grid2">
+        <div class="card card-blue" style="margin-bottom:0;">
+          <div style="font-weight:700; font-size:.84rem; color:var(--blue); margin-bottom:8px;">Névrite vestibulaire</div>
+          <ul style="font-size:.83rem;">
+            <li>Déficit vestibulaire unilatéral aigu idiopathique (virale présumée)</li>
+            <li>Syndrome vestibulaire <strong>périphérique pur isolé</strong> — sans signes auditifs ni neurologiques</li>
+            <li>Aucune cause vasculaire, infectieuse, traumatique ou tumorale</li>
+            <li>Principal DD : infarctus cérébelleux (PICA)</li>
+          </ul>
+        </div>
+        <div class="card card-red" style="margin-bottom:0;">
+          <div style="font-weight:700; font-size:.84rem; color:var(--red); margin-bottom:8px;">AVC fosse postérieure</div>
+          <ul style="font-size:.83rem;">
+            <li>Ischémique ou hémorragique (artère vertébrale, tronc basilaire)</li>
+            <li>Syndrome vestibulaire <strong>central</strong> + signes neurologiques</li>
+            <li>Syndrome de Wallenberg (PICA), syndrome cérébelleux, dysarthrie</li>
+            <li>Le vertige peut être le <strong>seul</strong> signe initial — ne pas banaliser</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:6px;">
+        <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Autres causes</div>
+        <div class="pill-list">
+          <span class="pill pill-amber">Fracture du rocher translabyrinthique (contexte TC + cophose)</span>
+          <span class="pill pill-amber">Labyrinthite aiguë infectieuse (anomalie otoscopique +++)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vertige récurrent prolongé -->
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">
+        <div class="card-icon ic-purple">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Vertiges récurrents
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Pathologie</th>
+            <th>Durée crise</th>
+            <th>Signes spécifiques</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Maladie de Ménière</strong></td>
+            <td>&gt; 20 min</td>
+            <td>Triade : vertiges + surdité + acouphènes unilatéraux (s'aggravent pendant la crise) — hydrops endolymphatique</td>
+          </tr>
+          <tr>
+            <td><strong>Migraine vestibulaire</strong></td>
+            <td>5 min – 72 h</td>
+            <td>Symptômes vestibulaires récurrents, contexte migraineux, <em>pas</em> de signes auditifs</td>
+          </tr>
+          <tr>
+            <td><strong>VPPB</strong></td>
+            <td>&lt; 1 min</td>
+            <td>Positionnel, épuisable, pas de signe auditif</td>
+          </tr>
+          <tr>
+            <td><strong>Schwannome vestibulaire</strong></td>
+            <td>Variable</td>
+            <td>Surdité progressive unilatérale + acouphène unilatéral → IRM APC obligatoire</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Avec atteinte otologique -->
+    <div class="card" style="margin-top:14px;">
+      <div class="card-title">
+        <div class="card-icon ic-amber">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Vertiges avec atteinte otologique
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Labyrinthite infectieuse</div>
+          <ul style="font-size:.83rem;">
+            <li>Complication d'OMA ou cholestéatome</li>
+            <li>Séreuse → irritative, souvent réversible</li>
+            <li>Purulente → destruction labyrinthe, surdité totale + aréflexie vestibulaire</li>
+            <li>Diagnostic otoscopique +++</li>
+          </ul>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin: 8px 0 6px; text-transform:uppercase;">Fractures du rocher</div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Translabyrinthique</td><td>Cophose + grands vertiges ; compensation centrale en semaines</td></tr>
+            <tr class="kv-row"><td>Commotion</td><td>Atteinte cochléo-vestibulaire sans fracture visible</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Fistule labyrinthique</div>
+          <ul style="font-size:.83rem;">
+            <li>Post-traumatique (barotraumatisme, plongée, avion) ou cholestéatome</li>
+            <li><strong>Phénomène de Tullio</strong> : vertiges déclenchés par bruit, mouchage, éternuements, effort</li>
+            <li>Dégradation progressive audition (surdité de perception)</li>
+            <li>Mécanisme : rupture fenêtre ronde ou platine étrier → fuite périlymphe</li>
+            <li>Fistule sur cholestéatome : lyse os labyrinthique par matrice</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- AVC — DRAPEAUX ROUGES -->
+  <div class="section">
+    <div class="card card-red">
+      <div class="card-title">
+        <div class="card-icon ic-red">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Drapeaux rouges : évoquer un AVC vertébrobasilaire
+      </div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Devant un syndrome vestibulaire aigu, ces signes imposent une <strong>IRM en urgence</strong> pour éliminer un infarctus cérébelleux (territoire PICA — principal DD de la névrite)</div>
+      </div>
+      <ul style="font-size:.85rem; margin-bottom:10px;">
+        <li><strong>Facteurs de risque cardiovasculaire</strong></li>
+        <li><strong>Céphalées ou cervicalgie</strong> (dissection artère vertébrale)</li>
+        <li><strong>Head Impulse Test normal</strong> — drapeau rouge majeur +++</li>
+        <li><strong>Diplopie verticale</strong> et strabisme vertical (skew deviation)</li>
+        <li><strong>Nystagmus changeant de direction</strong> selon la direction du regard, ou nystagmus vertical pur</li>
+        <li>Syndrome cérébelleux cinétique homolatéral, dysarthrie</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> L'infarctus PICA peut se présenter comme un syndrome vestibulaire aigu <strong>isolé</strong> sans signe neurologique évident. Le HIT normal est le meilleur marqueur de centralité.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- IMAGERIE -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-blue">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Indications d'imagerie devant un vertige
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--red); margin-bottom:6px; text-transform:uppercase;">IRM en urgence</div>
+          <ul style="font-size:.83rem;">
+            <li>Drapeaux rouges AVC (cf. ci-dessus)</li>
+            <li>Syndrome vestibulaire dysharmonieux</li>
+            <li>Signes neurologiques associés</li>
+            <li>Céphalées atypiques</li>
+            <li>VPPB atypique ou persistant</li>
+            <li>1er vertige aigu atypique de l'enfant</li>
+          </ul>
+          <div style="font-weight:700; font-size:.82rem; color:var(--blue); margin: 8px 0 6px; text-transform:uppercase;">IRM sans urgence</div>
+          <ul style="font-size:.83rem;">
+            <li>Vertiges persistants non VPPB → éliminer schwannome, tumeur fosse postérieure</li>
+            <li>Tout signe cochléo-vestibulaire unilatéral → IRM APC + gadolinium</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--coral); margin-bottom:6px; text-transform:uppercase;">Scanner des rochers</div>
+          <ul style="font-size:.83rem; margin-bottom:10px;">
+            <li>Contexte traumatique → fracture du rocher, brèche ostéo-méningée</li>
+            <li>Signes otologiques évoquant un cholestéatome → scanner + IRM diffusion</li>
+          </ul>
+          <div style="background:var(--blue-light); border-left:3px solid var(--blue); border-radius:8px; padding:10px 12px; font-size:.83rem; color:var(--blue);">
+            <strong>Scanner rochers :</strong> os temporal, système tympano-ossiculaire, labyrinthe osseux — sans injection, haute résolution<br><br>
+            <strong>IRM :</strong> labyrinthe membraneux, méats acoustiques internes, angle ponto-cérébelleux — FLAIR, diffusion, ± gadolinium
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- TRAITEMENT -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-teal">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement symptomatique de la crise vertigineuse
+      </div>
+      <ul class="steps">
+        <li><div class="step-num">1</div><div>Repos au lit à la phase aiguë</div></li>
+        <li><div class="step-num">2</div><div>Anti-émétiques + antivertigineux (acétyl-leucine : mineur, peu sédatif) ± corticoïdes</div></li>
+        <li><div class="step-num">3</div><div>Hospitalisation + voie IV si vomissements importants</div></li>
+        <li><div class="step-num">4</div><div>Traitement aussi <strong>court que possible</strong></div></li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:6px; margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Dans les vertiges par destruction vestibulaire unilatérale, la reprise précoce de la marche et la suppression rapide des antivertigineux favorisent la compensation centrale. Un traitement prolongé retarde la guérison.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- NYSTAGMUS -->
+  <div class="section">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon ic-purple">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Nystagmus vestibulaire horizonto-rotatoire
+      </div>
+      <div class="grid2">
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Définition</div>
+          <table class="kv-table">
+            <tr class="kv-row"><td>Phase lente</td><td>Dérive oculaire (asymétrie activité noyaux vestibulaires)</td></tr>
+            <tr class="kv-row"><td>Phase rapide</td><td>Retour en position initiale — définit le <em>sens</em> du nystagmus</td></tr>
+            <tr class="kv-row"><td>Plans possibles</td><td>Horizontal, vertical, torsionnel</td></tr>
+            <tr class="kv-row"><td>Congruence</td><td>Les 2 yeux exécutent les mêmes mouvements (plan + sens)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700; font-size:.82rem; color:var(--text-light); margin-bottom:6px; text-transform:uppercase;">Nystagmus périphérique typique</div>
+          <ul style="font-size:.83rem;">
+            <li>Horizonto-rotatoire (composante rotatoire discrète)</li>
+            <li>Inhibé par la fixation oculaire</li>
+            <li>Ne change pas de sens selon la direction du regard</li>
+            <li>Visible sous lunettes de Frenzel / vidéonystagmoscopie</li>
+            <li>Nystagmus vertical pur ou rotatoire pur → rarement périphérique</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- POINTS-CLÉS -->
+  <div class="section">
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon ic-teal">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Points-clés à retenir
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Définition :</strong> illusion de mouvement sans perte de conscience — la PC remet en cause l'origine vestibulaire</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Périphérique :</strong> harmonieux, HIT positif, nystagmus H-R inhibé par fixation, ne change pas de sens</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>VPPB :</strong> vertige positionnel de quelques secondes, épuisable, traitement par Semont ou Epley</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Ménière :</strong> triade vertiges &gt; 20 min + surdité + acouphènes unilatéraux récurrents</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-red">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Urgence :</strong> HIT normal + grand vertige aigu = AVC PICA jusqu'à preuve du contraire → IRM urgente</div>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Schwannome vestibulaire = caméléon — tout signe cochléo-vestibulaire unilatéral → IRM APC</div>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Antivertigineux prolongés contre-productifs en cas de destruction vestibulaire — freinent la compensation centrale</div>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Tullio (vertiges déclenchés par le bruit/mouchage) = fistule labyrinthique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 102 — Diplopie</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #ede9ff;
+    --teal: #1D9E75;
+    --teal-light: #e0f5ee;
+    --coral: #D85A30;
+    --coral-light: #fde8df;
+    --blue: #378ADD;
+    --blue-light: #e5f0fb;
+    --red: #E24B4A;
+    --red-light: #fde9e9;
+    --amber: #C9861D;
+    --amber-light: #fef3e2;
+    --text: #1a1a2e;
+    --bg: #f4f5f9;
+    --card-bg: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --muted: #6b7280;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e5e7eb;
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --border: rgba(255,255,255,0.08);
+      --muted: #9ca3af;
+      --purple-light: #2a2460;
+      --teal-light: #0d3d2e;
+      --coral-light: #4a1f10;
+      --blue-light: #1a3558;
+      --red-light: #4a1a1a;
+      --amber-light: #4a3010;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: .9rem; line-height: 1.55; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  .header {
+    background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .header-num { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 10px; }
+  .header-sub { font-size: .85rem; opacity: .85; line-height: 1.5; }
+
+  .objectifs {
+    background: var(--purple-light);
+    border-radius: 12px;
+    border-left: 4px solid var(--purple);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: .84rem;
+    color: var(--text);
+  }
+  .objectifs strong { color: var(--purple); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+  .card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 15px; height: 15px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .pill { font-size: .76rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .pill-red    { background: var(--red-light);    color: var(--red); }
+  .pill-green  { background: var(--teal-light);   color: var(--teal); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-top: 8px; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .th-purple { background: var(--purple-light); color: var(--purple); }
+  .th-blue   { background: var(--blue-light);   color: var(--blue); }
+  .th-teal   { background: var(--teal-light);   color: var(--teal); }
+  .th-coral  { background: var(--coral-light);  color: var(--coral); }
+
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-label { color: var(--muted); }
+  .kv-value { font-weight: 700; text-align: right; }
+
+  .steps { list-style: none; padding: 0; }
+  .steps li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: .84rem; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--border); font-weight: 700; font-size: .75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+  ul.li-list { list-style: none; padding: 0; }
+  ul.li-list li { padding: 3px 0 3px 14px; position: relative; font-size: .84rem; }
+  ul.li-list li::before { content: "—"; position: absolute; left: 0; color: var(--muted); }
+
+  .card-left-purple { border-left: 4px solid var(--purple); }
+  .card-left-red    { border-left: 4px solid var(--red); }
+  .card-left-blue   { border-left: 4px solid var(--blue); }
+  .card-left-teal   { border-left: 4px solid var(--teal); }
+  .card-left-amber  { border-left: 4px solid var(--amber); }
+  .card-left-coral  { border-left: 4px solid var(--coral); }
+
+  .section-label { font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: .73rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+  .badge-red    { background: var(--red-light);    color: var(--red); }
+  .badge-amber  { background: var(--amber-light);  color: var(--amber); }
+  .badge-blue   { background: var(--blue-light);   color: var(--blue); }
+  .badge-green  { background: var(--teal-light);   color: var(--teal); }
+  .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+  .highlight-row { background: var(--red-light); }
+  .sub-label { font-weight: 700; font-size: .82rem; margin-bottom: 6px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 102 — Neurologie / Ophtalmologie</div>
+    <h1>Diplopie</h1>
+    <div class="header-sub">Vision double — paralysies oculomotrices des nerfs III, IV, VI — urgences neurovasculaires</div>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <div class="objectifs">
+    <strong>Vue d'ensemble :</strong> La diplopie est une vision double qui peut avoir une origine purement ophtalmologique (monoculaire) ou neurologique/systémique (binoculaire). La distinction mono/binoculaire est le premier réflexe diagnostique et conditionne toute la suite. Il faut maîtriser l'anatomie des nerfs III/IV/VI pour interpréter la topographie lésionnelle, reconnaître les tableaux de chaque paralysie oculomotrice, identifier les urgences vitales (paralysie III = anévrisme jusqu'à preuve du contraire), gérer l'imagerie et connaître les grands pièges (VI sans valeur localisatrice, myasthénie fluctuante).
+  </div>
+
+  <!-- ═══ SECTION 1 : MONO vs BINOCULAIRE ═══ -->
+  <div class="section-label">Premier réflexe diagnostique</div>
+  <div class="grid2">
+    <div class="card card-left-blue">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </span>
+        Diplopie BINOCULAIRE
+      </div>
+      <ul class="li-list">
+        <li>Présente <strong>les deux yeux ouverts</strong></li>
+        <li>Disparaît à l'occlusion <strong>de l'un ou l'autre</strong> oeil</li>
+        <li>Cause : déséquilibre oculomoteur (paralysie NC, myasthénie, atteinte orbitaire)</li>
+      </ul>
+      <div class="alert alert-blue" style="margin-top:10px; margin-bottom:0">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Bilan neuroradiologique indispensable</div>
+      </div>
+    </div>
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        Diplopie MONOCULAIRE
+      </div>
+      <ul class="li-list">
+        <li>Persiste à l'occlusion de <strong>l'oeil sain</strong></li>
+        <li>Disparaît à l'occlusion de <strong>l'oeil atteint</strong></li>
+        <li>Cause : trouble <strong>optique local</strong> de l'oeil (cornée, iris, cristallin)</li>
+      </ul>
+      <div class="alert alert-green" style="margin-top:10px; margin-bottom:0">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Aucune imagerie cérébrale</strong> — bilan ophtalmologique seul</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 2 : ANATOMIE ═══ -->
+  <div class="section-label">Anatomie — Nerfs III, IV, VI et FLM</div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Origine et trajet des nerfs oculomoteurs
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="th-purple">Nerf</th>
+          <th class="th-purple">Noyau (origine réelle)</th>
+          <th class="th-purple">Trajet cisternal</th>
+          <th class="th-purple">Sinus caverneux</th>
+          <th class="th-purple">Muscle(s) cible(s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>III — Oculomoteur</strong></td>
+          <td>Mésencéphale — colliculus <em>supérieur</em></td>
+          <td>Entre A. cérébrale post. et A. cérébelleuse sup. ; longe A. communicante post.</td>
+          <td>Paroi <em>latérale</em></td>
+          <td>Droits sup/inf/méd, oblique inf, releveur paupière ; sphincter pupillaire (fibres parasympath. intrinsèques)</td>
+        </tr>
+        <tr>
+          <td><strong>IV — Trochléaire</strong></td>
+          <td>Mésencéphale — colliculus <em>inférieur</em> (face <em>dorsale</em>)</td>
+          <td>Suit A. cérébelleuse sup., incisure tentorielle</td>
+          <td>Paroi <em>latérale</em></td>
+          <td>Oblique supérieur (abaissement en adduction)</td>
+        </tr>
+        <tr>
+          <td><strong>VI — Abducens</strong></td>
+          <td>Pont — plancher du 4e ventricule</td>
+          <td>Sulcus ponto-médullaire → face dorsale du clivus</td>
+          <td><strong>Intra-caverneux</strong> (au contact de la carotide interne)</td>
+          <td>Droit latéral (abduction)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-left-purple">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Faisceau Longitudinal Médial (FLM)
+    </div>
+    <ul class="li-list">
+      <li>En paramédian sur le plancher du 4e ventricule</li>
+      <li>Relie <strong>noyau du VI</strong> au <strong>noyau du III controlatéral</strong> : abduction d'un oeil = adduction automatique de l'oeil controlatéral</li>
+      <li>Lésion unilatérale → <strong>ophtalmoplégie internucléaire</strong> : diplopie horizontale, déficit d'adduction ipsilatéral + nystagmus abducteur controlatéral</li>
+      <li>Cause principale chez l'adulte jeune : <strong>sclérose en plaques</strong></li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 3 : SÉMIOLOGIE DES PARALYSIES ═══ -->
+  <div class="section-label">Sémiologie clinique des paralysies oculomotrices</div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Tableau comparatif III / IV / VI
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th class="th-coral">Paralysie du III</th>
+          <th class="th-blue">Paralysie du IV</th>
+          <th class="th-teal">Paralysie du VI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Type de diplopie</strong></td>
+          <td>Horizontale + verticale</td>
+          <td>Verticale et oblique</td>
+          <td>Horizontale</td>
+        </tr>
+        <tr>
+          <td><strong>Aggravation dans</strong></td>
+          <td>Variable</td>
+          <td>Bas et en dedans (lecture, escaliers)</td>
+          <td>Regard du côté atteint</td>
+        </tr>
+        <tr>
+          <td><strong>Position de l'oeil atteint</strong></td>
+          <td>Divergence marquée (droit lat. intact)</td>
+          <td>Normale au repos</td>
+          <td>Convergence (esotropie)</td>
+        </tr>
+        <tr>
+          <td><strong>Déficit moteur</strong></td>
+          <td>Paralysie élévation + abaissement</td>
+          <td>Déficit abaissement en adduction</td>
+          <td>Déficit abduction</td>
+        </tr>
+        <tr>
+          <td><strong>Signes associés</strong></td>
+          <td>Ptosis total, <strong>mydriase aréflective</strong>, perte accommodation</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Position compensatrice de la tête</strong></td>
+          <td>—</td>
+          <td>Inclinée côté <em>sain</em>, menton abaissé</td>
+          <td>Tournée côté <em>atteint</em></td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>Urgence</strong></td>
+          <td><span class="badge badge-red">URGENCE VITALE</span> — éliminer anévrisme intracrânien</td>
+          <td>Non</td>
+          <td><span class="badge badge-amber">Faible valeur localisatrice</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>URGENCE — Paralysie du III aiguë avec signes pupillaires (mydriase) + douleur :<br></strong>Anévrisme intracrânien (communicante postérieure, carotide supraclinoïdienne) → angioscanner ou angio-IRM en urgence. Si négatif avec forte suspicion clinique → artériographie cérébrale. Suspecter notamment chez le sujet jeune sans FDRCV.</div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 4 : TESTS CLINIQUES ═══ -->
+  <div class="section-label">Tests cliniques — Définitions</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Examen de la motilité
+      </div>
+      <ul class="steps">
+        <li><span class="step-num">1</span><div><strong>Inspection :</strong> attitude vicieuse de la tête, reflets cornéens (centré = normal)</div></li>
+        <li><span class="step-num">2</span><div><strong>Ductions :</strong> mouvements <em>monoculaires</em> — abduction (dehors) / adduction (dedans)</div></li>
+        <li><span class="step-num">3</span><div><strong>Versions :</strong> mouvements bilatéraux <em>conjugués</em> dans la même direction</div></li>
+        <li><span class="step-num">4</span><div><strong>Vergences :</strong> mouvements de sens <em>opposé</em> — convergence (vision de près) / divergence</div></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Tests spécialisés
+      </div>
+      <ul class="steps">
+        <li><span class="step-num">1</span><div><strong>Cover-test :</strong> occlusion alternée — mouvement de restitution si strabisme paralytique</div></li>
+        <li><span class="step-num">2</span><div><strong>Verre rouge :</strong> verre rouge OD + point blanc — 2 images séparées si déséquilibre oculomoteur</div></li>
+        <li><span class="step-num">3</span><div><strong>Test de Lancaster :</strong> localise le muscle déficitaire, suivi évolutif par relevés successifs</div></li>
+        <li><span class="step-num">4</span><div><strong>Motricité intrinsèque :</strong> anisocorie, RPM direct, RPM consensuel</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Définitions — Tropies (strabismes)
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Esotropie = déviation en dedans</span>
+      <span class="pill pill-coral">Exotropie = déviation en dehors</span>
+      <span class="pill pill-purple">Hypertropie = déviation vers le haut</span>
+      <span class="pill pill-amber">Hypotropie = déviation vers le bas</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ PIÈGE VI ═══ -->
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège classique — Paralysie du VI : faible valeur localisatrice<br></strong>Lors de toute HTIC, le VI peut être comprimé dans l'angle ponto-cérébelleux sans lésion directe du nerf. Paralysie du VI ≠ lésion pontique. En revanche, toute autre paralysie oculomotrice (III, IV) localise une lésion sur le trajet du nerf concerné.</div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 5 : MYASTHÉNIE ═══ -->
+  <div class="section-label">Myasthénie — Arguments cliniques en faveur</div>
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Diplopie + ptosis fluctuant à la fatigue
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-label">Signes évocateurs</div>
+        <ul class="li-list">
+          <li>Ptosis progressif, <strong>variable dans la journée</strong></li>
+          <li>Aggravation à la <strong>fatigue</strong></li>
+          <li>Diplopie <strong>fluctuante, non douloureuse</strong></li>
+          <li>Pas d'anomalie pupillaire</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-label">Bilan diagnostique</div>
+        <ul class="li-list">
+          <li>Test à la prostigmine (Reversol)</li>
+          <li>Ac anti-récepteur acétylcholine</li>
+          <li>EMG — décrément au bloc neuromusculaire</li>
+          <li><strong>TDM thorax</strong> — rechercher un thymome associé</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 6 : IMAGERIE ═══ -->
+  <div class="section-label">Imagerie — Indications</div>
+  <div class="grid2">
+    <div class="card card-left-red">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Diplopie binoculaire aiguë
+      </div>
+      <ul class="li-list">
+        <li>IRM / TDM cérébral systématique selon orientation</li>
+        <li>Suspicion anévrisme → <strong>angioscanner ou angio-IRM en urgence</strong></li>
+        <li>Résultat négatif + forte suspicion → <strong>artériographie cérébrale</strong></li>
+      </ul>
+    </div>
+    <div class="card card-left-teal">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        Diplopie monoculaire
+      </div>
+      <div class="alert alert-green" style="margin-top:4px; margin-bottom:0">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Aucune imagerie cérébrale</strong> — bilan ophtalmologique uniquement (cornée, iris, cristallin)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 7 : CAUSES MONOCULAIRES ═══ -->
+  <div class="section-label">Causes ophtalmologiques — Diplopie monoculaire</div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Atteintes locales de l'oeil (diffraction des rayons lumineux)
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-label">Cornée</div>
+        <ul class="li-list">
+          <li>Taie cornéenne (séquelle kératite / traumatisme)</li>
+          <li>Kératocône</li>
+          <li>Astigmatisme important</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-label">Iris / Cristallin</div>
+        <ul class="li-list">
+          <li>Iridodialyse traumatique</li>
+          <li>Cataracte nucléaire</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SECTION 8 : ÉTIOLOGIES ═══ -->
+  <div class="section-label">Principales étiologies — Diplopie binoculaire</div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Étiologies par mécanisme
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="th-purple">Mécanisme</th>
+          <th class="th-purple">Étiologies clés</th>
+          <th class="th-purple">Points particuliers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-red">Vasculaire</span></td>
+          <td>Anévrisme intracrânien (communicante post., carotide supraclinoïdienne), AVC ischémique/hémorragique, fistule carotido-caverneuse</td>
+          <td>III + mydriase + douleur + sujet jeune sans FDRCV → urgence</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-purple">Tumorale</span></td>
+          <td>HTIC → VI bilatéral sans valeur localisatrice ; tumeurs base du crâne (1/4 des paralysies oculomotrices)</td>
+          <td>Imagerie systématique</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-blue">SEP</span></td>
+          <td>Révélée par une POM dans 10% des cas — paralysie du VI ou ophtalmoplégie internucléaire (FLM)</td>
+          <td>Sujet jeune, tableau fluctuant possible</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-amber">Neuromusc.</span></td>
+          <td>Myasthénie — diplopie fluctuante, ptosis variable, aggravation à la fatigue</td>
+          <td>Rechercher thymome (TDM thorax)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-green">Orbitaire</span></td>
+          <td>Maladie de Basedow, tumeur orbitaire, fracture du plancher orbitaire</td>
+          <td>Exophtalmie associée souvent</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-blue">Métabolique</span></td>
+          <td><strong>Diabète</strong> = 1re cause de diplopie <em>douloureuse</em> ; HTA</td>
+          <td>Terrain vasculaire, sujet plus âgé</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-red">Vasculaire âgé</span></td>
+          <td>Maladie de Horton — céphalées fronto-orbitaires ± POM ± NOIA</td>
+          <td>Sujet > 50 ans, VS/CRP élevés</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SIGNES ASSOCIÉS -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Signes associés — Interrogatoire
+      </div>
+      <ul class="li-list">
+        <li>Terrain : âge, diabète, HTA, néoplasie, thyroïde</li>
+        <li>Traumatisme récent</li>
+        <li>Mode : brutal (vasculaire) vs progressif (tumeur, myasthénie)</li>
+        <li>Aggravation à la fatigue → myasthénie</li>
+        <li>Douleurs, céphalées associées</li>
+        <li>Type : horizontale / verticale / oblique, variation dans la journée</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Signes associés — Examen clinique
+      </div>
+      <ul class="li-list">
+        <li>Attitude vicieuse / compensatrice de la tête</li>
+        <li>Anomalie palpébrale : ptosis, rétraction</li>
+        <li><strong>Anisocorie</strong> (signe d'atteinte intrinsèque du III)</li>
+        <li>RPM direct + consensuel</li>
+        <li>Eruption dans le territoire du V (Zona)</li>
+        <li>Exophtalmie (Basedow, tumeur orbitaire)</li>
+        <li>Signes neurologiques focaux associés</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══ SYNTHÈSE FINALE ═══ -->
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Points-clés à retenir — ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>III aigu + mydriase = urgence vitale</strong> → angioscanner/angio-IRM immédiat pour éliminer un anévrisme (communicante post.)</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> paralysie du VI = <em>faible valeur localisatrice</em> — peut n'être qu'un signe d'HTIC sans lésion pontique</div>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Piège :</strong> diplopie monoculaire = cause ophtalmologique locale — pas d'imagerie cérébrale</div>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><strong>Diabète</strong> = 1re cause de diplopie <em>douloureuse</em> (atteinte ischémique des nerfs)</div>
+        </div>
+        <div class="alert alert-blue">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><strong>SEP</strong> révélée par une POM dans 10% des cas (VI ou ophtalmoplégie internucléaire par atteinte du FLM)</div>
+        </div>
+        <div class="alert alert-green">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div><strong>Myasthénie :</strong> ptosis + diplopie <em>fluctuante à la fatigue</em> → rechercher thymome (TDM thorax)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

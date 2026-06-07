@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 101 – Paralysie faciale</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeedf9;
+    --teal:#1D9E75;   --teal-light:#e6f6f0;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#e8f2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97A20;  --amber-light:#fdf3e3;
+    --text:#1a1a2e;   --text2:#555;
+    --border:#e2e4ea; --bg:#f7f8fc; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8e8f0; --text2:#aaa; --border:#2e2e3e;
+      --bg:#12121f; --card:#1c1c2e; --purple-light:#1e1b3a;
+      --teal-light:#0d2a1e; --coral-light:#2a1510; --blue-light:#112236;
+      --red-light:#2a0f0f; --amber-light:#2a1a05;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:.9rem;line-height:1.55;padding:20px 12px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* Header */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 28px 22px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;opacity:.8;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+  .header h1{font-size:1.7rem;font-weight:800;margin-bottom:10px;line-height:1.2;}
+  .header-obj{font-size:.83rem;opacity:.92;line-height:1.6;background:rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;}
+
+  /* Cards */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* Sections couleurs */
+  .section-purple .card-icon{background:var(--purple);}
+  .section-teal   .card-icon{background:var(--teal);}
+  .section-coral  .card-icon{background:var(--coral);}
+  .section-blue   .card-icon{background:var(--blue);}
+  .section-red    .card-icon{background:var(--red);}
+  .section-amber  .card-icon{background:var(--amber);}
+
+  /* Alertes */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);}
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue);}
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal);}
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal);}
+  .alert-red   .alert-icon svg{stroke:var(--red);}
+  .alert-blue  .alert-icon svg{stroke:var(--blue);}
+  .alert-green .alert-icon svg{stroke:var(--teal);}
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal);}
+
+  /* Pills */
+  .pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.78rem;font-weight:600;margin:2px 3px 2px 0;white-space:nowrap;}
+  .pill-red   {background:var(--red-light);  color:var(--red);}
+  .pill-blue  {background:var(--blue-light); color:var(--blue);}
+  .pill-teal  {background:var(--teal-light); color:var(--teal);}
+  .pill-amber {background:var(--amber-light);color:var(--amber);}
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+
+  /* Grilles */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+
+  /* Tableaux */
+  table{width:100%;border-collapse:collapse;font-size:.83rem;margin-bottom:8px;}
+  th{background:var(--bg);font-weight:700;padding:8px 10px;text-align:left;border-bottom:2px solid var(--border);}
+  td{padding:7px 10px;border-bottom:0.5px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  .td-center{text-align:center;vertical-align:middle;}
+
+  /* kv-rows */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid var(--border);font-size:.83rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--text2);}
+  .kv-val{font-weight:700;color:var(--text);}
+
+  /* Étapes numérotées */
+  .steps{list-style:none;display:flex;flex-direction:column;gap:8px;}
+  .step{display:flex;align-items:flex-start;gap:10px;}
+  .step-num{width:24px;height:24px;border-radius:50%;background:var(--bg);border:1.5px solid var(--border);font-size:.78rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2);}
+  .step-text{font-size:.84rem;padding-top:2px;}
+
+  /* Bordure gauche colorée */
+  .border-left-purple{border-left:4px solid var(--purple);padding-left:12px;}
+  .border-left-red{border-left:4px solid var(--red);padding-left:12px;}
+  .border-left-amber{border-left:4px solid var(--amber);padding-left:12px;}
+  .border-left-teal{border-left:4px solid var(--teal);padding-left:12px;}
+  .border-left-blue{border-left:4px solid var(--blue);padding-left:12px;}
+
+  /* Listes */
+  ul.styled{padding-left:16px;font-size:.84rem;}
+  ul.styled li{margin-bottom:4px;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:20px 0;}
+
+  /* Badge comparatif */
+  .badge-central{background:var(--blue-light);color:var(--blue);font-weight:800;font-size:.78rem;padding:2px 8px;border-radius:6px;}
+  .badge-periph{background:var(--coral-light);color:var(--coral);font-weight:800;font-size:.78rem;padding:2px 8px;border-radius:6px;}
+
+  /* Section title */
+  .section-title{font-size:1rem;font-weight:800;color:var(--text);margin:18px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title-bar{width:4px;height:18px;border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 101</div>
+  <h1>Paralysie faciale</h1>
+  <div class="header-obj">
+    Maîtriser l'anatomie fonctionnelle du nerf facial et savoir détecter une anomalie. Distinguer rapidement paralysie centrale (PFC) vs périphérique (PFP). Connaître les causes de PFP, diagnostiquer et traiter en urgence la paralysie a frigore. Savoir quand et quelle imagerie demander.
+  </div>
+</div>
+
+<!-- 1. FONCTIONS DU NERF FACIAL -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--purple);"></div>
+  Anatomie fonctionnelle du nerf facial
+</div>
+<div class="card section-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    4 fonctions du nerf facial (VII)
+  </div>
+  <table>
+    <thead><tr><th>Fonction</th><th>Territoire / cible</th><th>Test clinique</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-purple">Motrice (principale)</span></td>
+        <td>Muscles peauciers de la face, cou, muscle stapédien</td>
+        <td>Froncer/hausser sourcils, fermer yeux, gonfler joues, découvrir dents</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Végétative</span></td>
+        <td>Glandes lacrymales et salivaires</td>
+        <td>Test de Schirmer (larmes)</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-teal">Sensitive</span></td>
+        <td>Peau conque de l'oreille (zone de Ramsay-Hunt)</td>
+        <td>Test sensitif dans la zone de Ramsay-Hunt</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Sensorielle</span></td>
+        <td>Gustation 2/3 antérieurs de la langue</td>
+        <td>Solutions sucrées/salées/acides/amères sur hémi-langue</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- 2. PFC vs PFP -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--blue);"></div>
+  Centrale vs Périphérique — Diagnostic différentiel
+</div>
+<div class="card section-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Comparaison PFC / PFP
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Critère</th>
+        <th><span class="badge-central">Centrale (PFC)</span></th>
+        <th><span class="badge-periph">Périphérique (PFP)</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Facial supérieur</strong></td>
+        <td>Épargné (front et fermeture oeil normaux)</td>
+        <td><strong>Atteint</strong> — rides effacées, occlusion incomplète</td>
+      </tr>
+      <tr>
+        <td><strong>Facial inférieur</strong></td>
+        <td>Prédominance : effacement pli naso-génien, attraction bouche côté sain</td>
+        <td>Atteint (équivalent)</td>
+      </tr>
+      <tr>
+        <td><strong>Dissociation auto-volontaire</strong></td>
+        <td>Présente (asymétrie > mouvements volontaires)</td>
+        <td>Absente</td>
+      </tr>
+      <tr>
+        <td><strong>Signes associés</strong></td>
+        <td>Hémiplégie homolatérale fréquente</td>
+        <td>Hyperacousie, agueusie 2/3 ant. langue, tarissement larmes</td>
+      </tr>
+      <tr>
+        <td><strong>Signe de Charles Bell</strong></td>
+        <td>Absent</td>
+        <td>Globe oculaire bascule vers le haut lors occlusion incomplète</td>
+      </tr>
+      <tr>
+        <td><strong>Signe des cils de Souques</strong></td>
+        <td>Absent</td>
+        <td>Cils plus apparents côté paralysé à l'occlusion forcée</td>
+      </tr>
+      <tr>
+        <td><strong>Réflexe cornéen</strong></td>
+        <td>Présent</td>
+        <td>Aboli</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piege classique :</strong> La PFC <em>épargne le front</em> car les noyaux du facial supérieur reçoivent une double innervation corticale (bilatérale). La PFP atteint le front — c'est le signe cardinal de la périphéricité.</div>
+</div>
+
+<hr>
+
+<!-- 3. CAUSES DE PFP -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--coral);"></div>
+  Causes de PFP
+</div>
+<div class="grid2">
+  <div class="card section-coral">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Cause la plus fréquente
+    </div>
+    <div style="font-size:.84rem;border-left:4px solid var(--coral);padding-left:12px;">
+      <strong>Paralysie a frigore (idiopathique)</strong><br>
+      <span style="color:var(--text2);">Compression intrapétreuse inflammatoire/virale</span><br>
+      Voir section dédiée ci-dessous
+    </div>
+  </div>
+  <div class="card section-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Autres causes à ne pas manquer
+    </div>
+    <ul class="styled">
+      <li><span class="pill pill-red">Urgence</span> AVC tronc (syndrome alterne)</li>
+      <li><span class="pill pill-amber">Infectieux</span> Zona géniculé (Ramsay-Hunt)</li>
+      <li><span class="pill pill-amber">Infectieux</span> Lyme (méningoradiculite)</li>
+      <li><span class="pill pill-amber">Infectieux</span> ORL : mastoïdite, parotidite</li>
+      <li><span class="pill pill-blue">Neuro</span> SEP, Guillain-Barré (diplégie)</li>
+      <li><span class="pill pill-blue">Méta</span> Diabète, VIH (séroconversion)</li>
+      <li><span class="pill pill-purple">Inflam.</span> Sarcoïdose, Melkerson-Rosenthal</li>
+      <li><span class="pill pill-red">Tumeur</span> Angle ponto-cérébelleux, parotide</li>
+      <li><span class="pill pill-teal">Trauma</span> Fracture du rocher</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card section-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Tableaux cliniques caractéristiques des causes secondaires
+  </div>
+  <table>
+    <thead><tr><th>Cause</th><th>Signe orienteur</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Zona (Ramsay-Hunt)</strong></td><td>Eruption vésiculeuse dans la conque + douleurs + atteinte auditive. PFP sévère.</td></tr>
+      <tr><td><strong>Lyme</strong></td><td>Morsure de tique / placard érythémateux (érythème migrant)</td></tr>
+      <tr><td><strong>Mastoïdite</strong></td><td>Écoulement auriculaire purulent + fièvre</td></tr>
+      <tr><td><strong>Tumeur parotidienne</strong></td><td>Tuméfaction parotidienne — PFP = signe de malignité</td></tr>
+      <tr><td><strong>AVC tronc</strong></td><td>PFP + hémiplégie controlatérale respectant la face (syndrome alterne)</td></tr>
+      <tr><td><strong>Sarcoïdose</strong></td><td>PFP peut inaugurer la maladie (atteinte crânienne la plus fréquente)</td></tr>
+      <tr><td><strong>Melkerson-Rosenthal</strong></td><td>PFP récidivantes + infiltration cutanéo-muqueuse + langue plicaturée + ATCD familiaux</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- 4. PARALYSIE A FRIGORE -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--teal);"></div>
+  Paralysie faciale a frigore — Diagnostic
+</div>
+<div class="card section-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Arguments diagnostiques (diagnostic clinique, pas d'examen complémentaire)
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Mode d'installation</div>
+      <ul class="styled">
+        <li>Matin au réveil ou après exposition au froid</li>
+        <li>D'emblée maximale ou en quelques heures</li>
+        <li>Douleurs rétro-auriculaires précédant la paralysie</li>
+        <li>Sensation d'engourdissement de l'hémiface</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Caractères de la PFP</div>
+      <ul class="styled">
+        <li><strong>Isolée</strong> — autres nerfs crâniens indemnes</li>
+        <li>Sévère (paralysie totale possible)</li>
+        <li>Hyperacousie douloureuse (atteinte stapédien)</li>
+        <li>Pas de signe systémique associé</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piege :</strong> C'est un diagnostic d'élimination — il faut s'assurer de l'absence de signes atypiques (zona, atteinte d'autres nerfs crâniens, contexte infectieux, tuméfaction parotidienne) avant de conclure.</div>
+</div>
+
+<hr>
+
+<!-- 5. TRAITEMENT -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--purple);"></div>
+  Prise en charge — Paralysie a frigore
+</div>
+<div class="card section-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement en urgence
+  </div>
+  <ul class="steps">
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Corticothérapie orale</strong> — 1 mg/kg/j pendant 7 à 10 jours<br>
+      <span style="font-size:.8rem;color:var(--text2);">Instauration précoce (&lt; 72h) — augmente les chances de récupération</span></div>
+    </li>
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Protection oculaire systématique</strong> (prévention kératite)<br>
+      <span style="font-size:.8rem;color:var(--text2);">Larmes artificielles + pansement occlusif nocturne si occlusion palpébrale insuffisante</span></div>
+    </li>
+    <li class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Tarsorraphie provisoire</strong> — formes les plus sévères uniquement</div>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Urgence ophtalmologique :</strong> L'occlusion palpébrale incomplète expose à une kératite par dessiccation — complication la plus immédiate à prévenir activement.</div>
+</div>
+
+<hr>
+
+<!-- 6. EVOLUTION -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--teal);"></div>
+  Evolution de la paralysie a frigore
+</div>
+<div class="grid2">
+  <div class="card section-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Favorable (majorité)
+    </div>
+    <div style="font-size:.84rem;">
+      <div class="kv-row"><span class="kv-key">Récupération</span><span class="kv-val">8 à 15 jours</span></div>
+      <div class="kv-row"><span class="kv-key">Guérison complète</span><span class="kv-val">&lt; 2 mois</span></div>
+      <div class="kv-row"><span class="kv-key">Facteur favorable</span><span class="kv-val">Paralysie initialement incomplète</span></div>
+    </div>
+  </div>
+  <div class="card section-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Défavorable (5-10%)
+    </div>
+    <ul class="styled">
+      <li><strong>Mouvements syncinétiques</strong> résiduels</li>
+      <li><strong>Hémispasme facial post-paralytique</strong> — contractures brèves répétées paupières + joue<br><span style="color:var(--text2);font-size:.8rem;">Traitement : injections de toxine botulique</span></li>
+      <li><strong>Syndrome des larmes de crocodile</strong> — larmoiements lors des repas (réinnervation aberrante) — rare</li>
+      <li><strong>Déficit sévère persistant</strong> — discuter chirurgie esthétique si absence réinnervation à l'ENMG</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- 7. IMAGERIE -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--blue);"></div>
+  Indications de l'imagerie
+</div>
+<div class="card section-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Arbre décisionnel imagerie
+  </div>
+  <table>
+    <thead><tr><th>Situation</th><th>Examen</th><th>Indication</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge-central">PFC</span></td>
+        <td><strong>IRM cérébrale</strong> (sans et avec gadolinium)</td>
+        <td>Systématique — hors urgence neurovasculaire aiguë (TDM alors)</td>
+      </tr>
+      <tr>
+        <td><span class="badge-periph">PFP a frigore typique</span></td>
+        <td>Aucune imagerie</td>
+        <td>Diagnostic clinique suffisant</td>
+      </tr>
+      <tr>
+        <td><span class="badge-periph">PFP + atteinte autres nerfs crâniens</span></td>
+        <td><strong>IRM cérébrale</strong></td>
+        <td>SEP, AVC tronc, tumeur (angle ponto-cérébelleux, métastase base crâne)</td>
+      </tr>
+      <tr>
+        <td><span class="badge-periph">PFP post-traumatique</span></td>
+        <td><strong>Scanner cérébral</strong></td>
+        <td>Fracture du rocher</td>
+      </tr>
+      <tr>
+        <td><span class="badge-periph">PFP + écoulement auriculaire purulent</span></td>
+        <td><strong>Scanner cérébral</strong></td>
+        <td>Mastoïdite, envahissement osseux tumoral</td>
+      </tr>
+      <tr>
+        <td><span class="badge-periph">PFP + tuméfaction parotidienne</span></td>
+        <td><strong>Scanner/IRM cervical</strong> avec injection</td>
+        <td>Parotidite, tumeur parotidienne maligne</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- 8. POINTS CLES -->
+<div class="section-title">
+  <div class="section-title-bar" style="background:var(--teal);"></div>
+  Points-cles a retenir
+</div>
+<div class="card section-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthese — Ce qui tombe a l'ECNi
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-blue" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Règle des 3 points :</strong> PFP = front atteint + Bell + pas de dissociation automato-volontaire.</div>
+      </div>
+      <div class="alert alert-blue" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>A frigore :</strong> diagnostic clinique, pas d'examen complémentaire, traitement dans les 72h.</div>
+      </div>
+      <div class="alert alert-red" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Urgence :</strong> protéger l'oeil en priorité — kératite si occlusion insuffisante.</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piege :</strong> Tuméfaction parotidienne + PFP = tumeur maligne jusqu'a preuve du contraire.</div>
+      </div>
+      <div class="alert alert-amber" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piege :</strong> Zona de Ramsay-Hunt = PFP + vésicules dans la conque + douleurs + surdité. Ne pas confondre avec a frigore.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Séquelle classique :</strong> Hémispasme facial post-paralytique — toxine botulique.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
