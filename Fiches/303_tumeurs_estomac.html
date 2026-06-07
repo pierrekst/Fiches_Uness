@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 303 – Tumeurs de l'estomac</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --bg: #f7f8fc;
+    --card: #ffffff;
+    --text: #1a1d2e;
+    --muted: #6b7280;
+    --border: rgba(0,0,0,0.08);
+    --purple: #534AB7;
+    --purple-light: #ede9ff;
+    --teal: #1D9E75;
+    --teal-light: #e0f7ef;
+    --coral: #D85A30;
+    --coral-light: #fdeee8;
+    --blue: #378ADD;
+    --blue-light: #e8f3ff;
+    --red: #E24B4A;
+    --red-light: #fde8e8;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12141f;
+      --card: #1e2130;
+      --text: #e8eaf2;
+      --muted: #9ca3af;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2e2860;
+      --teal-light: #0d3d2d;
+      --coral-light: #4a2215;
+      --blue-light: #1a3558;
+      --red-light: #4a1515;
+      --amber-light: #3d2e08;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .92rem; line-height: 1.6; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 55%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+  .header-num { font-size: .78rem; font-weight: 600; opacity: .75; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+  .header-title { font-size: 1.75rem; font-weight: 800; margin-bottom: 8px; }
+  .header-sub { font-size: .86rem; opacity: .85; line-height: 1.5; }
+
+  /* Cards */
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Grid */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Alertes */
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke:var(--red);   }
+  .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+  .alert-green .alert-icon svg { stroke:var(--teal);  }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+  .alert-icon { flex-shrink:0; width:18px; height:18px; margin-top:1px; display:flex; align-items:center; justify-content:center; }
+  .alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+  /* KV rows */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .84rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--muted); }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; max-width: 60%; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--bg); font-weight: 700; padding: 7px 10px; text-align: left; border-bottom: 1.5px solid var(--border); }
+  td { padding: 6px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Steps */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 9px; font-size: .85rem; }
+  .step-num { min-width: 24px; height: 24px; border-radius: 50%; background: #e5e7ef; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .78rem; color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+
+  /* Bordered cards */
+  .card-left-purple { border-left: 4px solid var(--purple); }
+  .card-left-teal   { border-left: 4px solid var(--teal);   }
+  .card-left-coral  { border-left: 4px solid var(--coral);  }
+  .card-left-red    { border-left: 4px solid var(--red);    }
+  .card-left-blue   { border-left: 4px solid var(--blue);   }
+  .card-left-amber  { border-left: 4px solid var(--amber);  }
+
+  /* Section title */
+  .section-title { font-size: 1.02rem; font-weight: 800; color: var(--text); margin: 26px 0 14px; display: flex; align-items: center; gap: 10px; }
+  .section-title-bar { width: 4px; height: 20px; border-radius: 2px; flex-shrink: 0; }
+
+  hr { border: none; border-top: 1.5px solid var(--border); margin: 22px 0; }
+
+  /* Objectives */
+  .objectives { background: linear-gradient(135deg, var(--purple-light), var(--blue-light)); border-radius: 12px; padding: 16px 20px; margin-bottom: 22px; font-size: .86rem; line-height: 1.7; }
+  .objectives-title { font-weight: 800; font-size: .9rem; color: var(--purple); margin-bottom: 8px; }
+
+  /* Cascade */
+  .cascade { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin: 10px 0; }
+  .cascade-step { background: var(--purple-light); color: var(--purple); border-radius: 8px; padding: 4px 10px; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+  .cascade-arrow { color: var(--muted); font-size: .9rem; font-weight: 700; }
+  .cascade-end { background: var(--red-light); color: var(--red); border-radius: 8px; padding: 4px 10px; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+
+  ul.list { padding-left: 16px; font-size: .85rem; line-height: 1.75; }
+  ul.list li { margin-bottom: 3px; }
+
+  .tag-gene { display: inline-block; background: var(--purple-light); color: var(--purple); border-radius: 5px; padding: 1px 7px; font-size: .76rem; font-weight: 700; font-family: monospace; margin-right: 2px; }
+  .tag-oms  { display: inline-block; background: var(--red-light); color: var(--red); border-radius: 5px; padding: 1px 7px; font-size: .75rem; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 303</div>
+    <div class="header-title">Tumeurs de l'estomac</div>
+    <div class="header-sub">Adénocarcinome gastrique — Épidémiologie · Carcinogenèse · Diagnostic · Bilan d'extension · Diagnostics différentiels</div>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <div class="objectives">
+    <div class="objectives-title">Vue d'ensemble du chapitre</div>
+    Cet item porte principalement sur l'<strong>adénocarcinome gastrique</strong>, tumeur maligne la plus fréquente de l'estomac. Les points essentiels : maîtriser les facteurs de risque (Helicobacter pylori +++), comprendre la cascade de carcinogenèse, identifier les circonstances de découverte souvent tardives, et conduire le bilan diagnostique (EOGD + TDM indispensables). Les pièges classiques de l'ECNi — ulcère malin méconnu et linite gastrique — font l'objet d'une attention particulière. Les autres histologies (GIST, lymphome MALT, tumeur endocrine) ont des pronostics et traitements distincts.
+  </div>
+
+  <!-- SECTION 1 : DÉFINITION & TYPES HISTOLOGIQUES -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--blue)"></div>
+    Définition &amp; Types histologiques
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Tumeurs malignes de l'estomac
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Type histologique</th>
+          <th>Caractéristiques</th>
+          <th>Fréquence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Adénocarcinome</strong></td>
+          <td>Tumeur épithéliale — proximal (cardia/fundus) ou distal (antre-pylore). Marqueurs moléculaires : HER2, MSI, PD-L1</td>
+          <td><span class="pill pill-red">Le + fréquent</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lymphome du MALT</strong></td>
+          <td>Peu agressif — 1re intention : éradication HP (souvent curatif)</td>
+          <td><span class="pill pill-blue">Rare</span></td>
+        </tr>
+        <tr>
+          <td><strong>GIST</strong></td>
+          <td>Origine musculeuse — agressivité selon taille (&lt;1 cm : peu agressive)</td>
+          <td><span class="pill pill-blue">Rare</span></td>
+        </tr>
+        <tr>
+          <td><strong>Tumeur endocrine</strong></td>
+          <td>Bien différenciée, évolution lente, faiblement métastatique (Ki67 bas)</td>
+          <td><span class="pill pill-blue">Rare</span></td>
+        </tr>
+        <tr>
+          <td><strong>Métastases gastriques</strong></td>
+          <td>Primitif : cancer du sein (++), rein</td>
+          <td><span class="pill pill-teal">Exceptionnel</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-blue">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <div>Les tumeurs <strong>bénignes</strong> (polype glandulo-kystique, hyperplasique, adénomateux) sont <strong>majoritaires</strong> mais rarement confondues en endoscopie. Le polype adénomateux est une <strong>lésion précancéreuse</strong> rare. Le polype glandulo-kystique du fundus est associé aux <strong>IPP au long cours</strong> — sans risque cancéreux significatif.</div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 2 : ÉPIDÉMIOLOGIE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--teal)"></div>
+    Épidémiologie
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </span>
+      Données clés — Adénocarcinome gastrique
+    </div>
+    <div class="kv-row"><span class="kv-key">Incidence (France)</span><span class="kv-val">6 500 nouveaux cas/an — en diminution régulière</span></div>
+    <div class="kv-row"><span class="kv-key">Âge moyen de survenue</span><span class="kv-val">70 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Survie à 5 ans (opéré, maladie localisée)</span><span class="kv-val">~40%</span></div>
+    <div class="kv-row"><span class="kv-key">Survie médiane (métastatique)</span><span class="kv-val">12–16 mois (grandes variations individuelles)</span></div>
+    <div class="kv-row"><span class="kv-key">Formes du sujet jeune</span><span class="kv-val">&lt;40 ans — surtout en cas de prédisposition génétique</span></div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 3 : FACTEURS DE RISQUE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--coral)"></div>
+    Facteurs de risque
+  </div>
+
+  <div class="grid2">
+    <div class="card card-left-red">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        Facteurs extrinsèques
+      </div>
+      <ul class="list">
+        <li><strong>Helicobacter pylori</strong> <span class="tag-oms">Carcinogène OMS classe 1</span><br>Responsable de 65–80% des adénocarcinomes — moins impliqué dans les localisations proximales (cardia)<br><em>Contamination intrafamiliale — risque de dégénérescence &lt;1% des patients HP+</em></li>
+        <li>Alimentation salée (riche en nitrites)</li>
+        <li>Tabac</li>
+        <li>EBV (Epstein-Barr Virus)</li>
+      </ul>
+    </div>
+    <div class="card card-left-purple">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        Facteurs intrinsèques
+      </div>
+      <ul class="list">
+        <li>Gastrectomie partielle (risque élevé &gt;10 ans — mécanisme : reflux digestif sur moignon)</li>
+        <li>Ulcère gastrique</li>
+        <li>Gastrite atrophique auto-immune / Maladie de Biermer</li>
+        <li><strong>Prédispositions génétiques</strong> (sujet jeune &lt;40 ans) :<br>
+          <span class="tag-gene">MMR</span> Syndrome de Lynch<br>
+          <span class="tag-gene">APC</span> Polypose adénomateuse familiale<br>
+          <span class="tag-gene">CDH1</span> Cancer gastrique diffus héréditaire
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <div><strong>Indications de recherche d'HP :</strong> chez tout patient avec adénocarcinome ou lymphome gastrique + chez tous les <strong>apparentés au 1er degré</strong> d'un patient atteint — avec éradication systématique si positif.</div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 4 : CARCINOGENÈSE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--purple)"></div>
+    Carcinogenèse &amp; Classification de Lauren
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </span>
+        Cascade de Correa — Type intestinal
+      </div>
+      <div class="cascade">
+        <span class="cascade-step">Muqueuse normale</span>
+        <span class="cascade-arrow">&#8594;</span>
+        <span class="cascade-step">Gastrite chronique atrophique</span>
+        <span class="cascade-arrow">&#8594;</span>
+        <span class="cascade-step">Métaplasie intestinale</span>
+        <span class="cascade-arrow">&#8594;</span>
+        <span class="cascade-step">Dysplasie</span>
+        <span class="cascade-arrow">&#8594;</span>
+        <span class="cascade-end">Adénocarcinome</span>
+      </div>
+      <p style="font-size:.82rem;margin-top:10px;color:var(--muted)">Mécanisme : HP + sel + tabac + déficit antioxydants → hypochlorhydrie → pullulation bactérienne → production de nitrosamines</p>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </span>
+        Classification anatomopathologique de Lauren
+      </div>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Caractéristiques</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Intestinal glandulaire</strong></td>
+            <td>Bien différencié — suit la cascade Correa — fortement lié à HP</td>
+          </tr>
+          <tr>
+            <td><strong>Diffus à cellules indépendantes</strong></td>
+            <td>Cellules "en bague à chaton" — moins corrélé à HP — inclut la linite — pronostic plus sombre</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 5 : PRÉSENTATION CLINIQUE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--coral)"></div>
+    Présentation clinique
+  </div>
+
+  <div class="alert alert-amber">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <div><strong>Piège :</strong> Les tumeurs gastriques sont <strong>le plus souvent asymptomatiques au stade précoce</strong>. Diagnostic souvent tardif. Les symptômes dépendent du siège.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Symptômes selon la localisation de la tumeur
+    </div>
+    <table>
+      <thead>
+        <tr><th>Siège</th><th>Symptômes typiques</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill pill-blue">Cardia (jonction oeso-gastrique)</span></td>
+          <td>Dysphagie, régurgitations</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-teal">Corps / Fundus</span></td>
+          <td>Douleur épigastrique — souvent peu symptomatique</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-amber">Antre-Pylore</span></td>
+          <td>Syndrome occlusif haut : vomissements alimentaires — <strong>pas</strong> de niveaux hydro-aériques</td>
+        </tr>
+        <tr>
+          <td><span class="pill pill-red">Tout siège</span></td>
+          <td>Hémorragie digestive (anémie ferriprive ++)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        Signes généraux (stade évolué)
+      </div>
+      <ul class="list">
+        <li>Anorexie, asthénie, perte de poids</li>
+        <li>Thrombose veineuse profonde / embolie pulmonaire</li>
+        <li><strong>Ganglion de Troisier</strong> (sus-claviculaire gauche) — classique mais rare</li>
+        <li>Ascite néoplasique</li>
+        <li>Hépatomégalie tumorale métastatique</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Examen clinique
+      </div>
+      <ul class="list">
+        <li>Souvent <strong>normal</strong> si lésion localisée non compliquée</li>
+        <li>Abdomen : ascite (matité des flancs), masse épigastrique, hépatomégalie dure nodulaire, nodules de carcinose</li>
+        <li>Palpation <strong>sus-claviculaires +++</strong> (ganglion de Troisier)</li>
+        <li>Évaluation nutritionnelle : poids, perte de poids sur 6 mois</li>
+        <li>Recherche de co-morbidités</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 6 : BILAN DIAGNOSTIQUE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--blue)"></div>
+    Bilan diagnostique
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--blue)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        Biologie
+      </div>
+      <div class="alert alert-amber" style="margin-bottom:8px">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div><strong>ACE = aucune valeur diagnostique</strong> — aucun marqueur tumoral utile au diagnostic positif.</div>
+      </div>
+      <ul class="list">
+        <li>NFS : anémie ferriprive</li>
+        <li>Albuminémie : état nutritionnel</li>
+        <li>Bilan hépatique (si suspicion métastases)</li>
+        <li>Ionogramme, créatinine (bilan pré-thérapeutique)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <span class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </span>
+        Examens indispensables
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div><strong>EOGD avec biopsies</strong> — au moins 10 biopsies sur les berges de l'ulcère + biopsies antrales et fundiques non tumorales (recherche HP) — précise le siège exact</div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div><strong>Scanner TAP injecté</strong> (thoraco-abdomino-pelvien) — bilan d'extension indispensable</div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Examens complémentaires — Non systématiques
+    </div>
+    <table>
+      <thead><tr><th>Examen</th><th>Indication spécifique</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Échoendoscopie gastrique</strong></td>
+          <td>Petite tumeur superficielle (avant résection endoscopique) — suspicion GIST (lésion sous-muqueuse) — suspicion linite</td>
+        </tr>
+        <tr>
+          <td><strong>Cœlioscopie exploratrice</strong></td>
+          <td>Recherche de carcinose péritonéale</td>
+        </tr>
+        <tr>
+          <td><strong>TDM cérébral / scintigraphie osseuse</strong></td>
+          <td>Signe d'appel uniquement (non systématiques)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 7 : DIAGNOSTICS DIFFÉRENTIELS -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--red)"></div>
+    Diagnostics différentiels &amp; Pièges
+  </div>
+
+  <div class="card card-left-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Piège 1 — Adénocarcinome ulcéré vs ulcère gastrique bénin
+    </div>
+    <p style="font-size:.85rem;margin-bottom:8px">L'adénocarcinome ulcéré peut ressembler macroscopiquement à un ulcère bénin. Risque de méconnaitre le cancer si :</p>
+    <ul class="list">
+      <li>Biopsies en nombre insuffisant au pourtour de l'ulcère (&lt;10)</li>
+      <li>Absence de contrôle endoscopique de la cicatrisation à <strong>6–8 semaines</strong> avec nouvelles biopsies sur la zone cicatricielle</li>
+    </ul>
+  </div>
+
+  <div class="card card-left-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Piège 2 — Linite gastrique
+    </div>
+    <p style="font-size:.85rem;margin-bottom:8px">Forme d'adénocarcinome diffus à <strong>cellules indépendantes "en bague à chaton"</strong> — envahit toutes les couches de la paroi <em>en respectant la muqueuse</em> → <strong>biopsies superficielles faussement négatives</strong>.</p>
+    <table>
+      <thead><tr><th>Examen</th><th>Aspect caractéristique</th></tr></thead>
+      <tbody>
+        <tr><td>Endoscopie</td><td>Gros plis rigides, mauvaise insufflation à l'air</td></tr>
+        <tr><td>Échoendoscopie</td><td>Épaississement de la sous-muqueuse</td></tr>
+        <tr><td>Scanner</td><td>Épaississement diffus de la paroi gastrique</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-red" style="margin-top:8px;margin-bottom:0">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <div><strong>Pronostic très sombre</strong> — souvent associée à une extension péritonéale et lymphatique dès le diagnostic.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:#6b7280">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Autres diagnostics différentiels en endoscopie
+    </div>
+    <p style="font-size:.84rem;margin-bottom:8px">Les biopsies permettent généralement de trancher. À évoquer :</p>
+    <div class="pills">
+      <span class="pill pill-blue">Tumeur neuroendocrine</span>
+      <span class="pill pill-blue">GIST (sous-muqueuse — origine musculeuse)</span>
+      <span class="pill pill-blue">Lymphome MALT gastrique primitif</span>
+      <span class="pill pill-teal">Métastases gastriques (sein ++, rein)</span>
+      <span class="pill pill-teal">Polype glandulo-kystique (fundus + IPP)</span>
+      <span class="pill pill-teal">Polype hyperplasique</span>
+      <span class="pill pill-amber">Maladie de Ménétrier (gastrite à gros plis — exceptionnelle)</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 8 : ÉVOLUTION PAR HISTOLOGIE -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--teal)"></div>
+    Évolution naturelle par type histologique
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Pronostic comparatif
+    </div>
+    <table>
+      <thead><tr><th>Histologie</th><th>Pronostic / Évolution</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Adénocarcinome — localisé opéré</strong></td>
+          <td>Survie à 5 ans ~40%</td>
+        </tr>
+        <tr>
+          <td><strong>Adénocarcinome — métastatique</strong></td>
+          <td>Survie médiane 12–16 mois (grandes variations individuelles)</td>
+        </tr>
+        <tr>
+          <td><strong>Lymphome MALT</strong></td>
+          <td>Peu agressif — éradication HP souvent curative en 1re ligne. Formes agressives rares : traitement classique de lymphome</td>
+        </tr>
+        <tr>
+          <td><strong>GIST</strong></td>
+          <td>Agressivité selon la taille — &lt;1 cm : peu agressive. Évaluation histologique obligatoire</td>
+        </tr>
+        <tr>
+          <td><strong>Tumeur endocrine bien différenciée</strong></td>
+          <td>Évolution lente, faiblement métastatique (Ki67 bas)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION FINALE : POINTS-CLÉS -->
+  <div class="section-title">
+    <div class="section-title-bar" style="background:var(--teal)"></div>
+    Points-clés à retenir
+  </div>
+
+  <div class="card card-left-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Incontournables ECNi
+    </div>
+    <ul class="list">
+      <li><strong>HP = carcinogène OMS classe 1</strong> — 65–80% des adénocarcinomes gastriques. À éradiquer chez le patient ET ses apparentés au 1er degré.</li>
+      <li><strong>EOGD + biopsies (≥10 sur les berges)</strong> = examen diagnostic clé. <strong>TDM TAP injecté</strong> = bilan d'extension indispensable.</li>
+      <li><strong>ACE = aucune valeur diagnostique</strong> — piège classique de QCM.</li>
+      <li><strong>Ulcère gastrique = toujours biopsier</strong> + contrôle endoscopique à <strong>6–8 semaines</strong> pour éliminer un adénocarcinome ulcéré.</li>
+      <li><strong>Linite gastrique</strong> = biopsies superficielles souvent négatives (la muqueuse est respectée). Évoquer devant gros plis rigides + épaississement scanner. Pronostic très sombre.</li>
+      <li><strong>Lymphome MALT gastrique</strong> = 1re ligne : éradication HP — pas de chirurgie ni chimiothérapie d'emblée.</li>
+      <li>Prédispositions génétiques chez le sujet jeune &lt;40 ans : <span class="tag-gene">CDH1</span> cancer diffus héréditaire, <span class="tag-gene">MMR</span> Lynch, <span class="tag-gene">APC</span> FAP.</li>
+      <li>Surveillance endoscopique obligatoire si facteur de risque : gastrectomie (&gt;10 ans), gastrite atrophique, prédisposition génétique.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

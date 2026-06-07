@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 230 — Douleur thoracique aiguë</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #eeecfa;
+    --teal: #1D9E75;
+    --teal-light: #e0f5ee;
+    --coral: #D85A30;
+    --coral-light: #fceee8;
+    --blue: #378ADD;
+    --blue-light: #e5f1fb;
+    --red: #E24B4A;
+    --red-light: #fdeaea;
+    --amber: #C07000;
+    --amber-light: #fff3dc;
+    --text: #1a1a2e;
+    --text-muted: #6b7280;
+    --bg: #f8f9fb;
+    --card-bg: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --step-bg: #e9eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e8e8f0;
+      --text-muted: #9ca3af;
+      --bg: #111827;
+      --card-bg: #1f2937;
+      --border: rgba(255,255,255,0.08);
+      --purple-light: #2a2563;
+      --teal-light: #0d3d2e;
+      --coral-light: #4a1e0d;
+      --blue-light: #1a3a5c;
+      --red-light: #4a1515;
+      --amber-light: #3d2800;
+      --step-bg: #374151;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+  .page { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #D85A30 0%, #E24B4A 50%, #534AB7 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: #fff;
+    margin-bottom: 24px;
+  }
+  .header .item-num { font-size: .8rem; font-weight: 600; opacity: .75; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .header h1 { font-size: 1.7rem; font-weight: 800; margin-bottom: 10px; }
+  .header .tagline { font-size: .85rem; opacity: .88; }
+  .header .mnemo {
+    display: inline-block;
+    margin-top: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  /* Sections */
+  .section-title {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    margin: 24px 0 10px;
+  }
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Color borders */
+  .card-red    { border-left: 4px solid var(--red); }
+  .card-blue   { border-left: 4px solid var(--blue); }
+  .card-teal   { border-left: 4px solid var(--teal); }
+  .card-purple { border-left: 4px solid var(--purple); }
+  .card-amber  { border-left: 4px solid var(--amber); }
+  .card-coral  { border-left: 4px solid var(--coral); }
+
+  /* Grids */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 620px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* Pills */
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+  .pill-red    { background: var(--red-light);    color: var(--red); }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+  /* Alerts */
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-icon { flex-shrink:0; margin-top:1px; }
+  .alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke:var(--red);   }
+  .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+  .alert-green .alert-icon svg { stroke:var(--teal);  }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--step-bg); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.label { font-weight: 600; white-space: nowrap; }
+
+  /* KV rows */
+  .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); font-size: .8rem; }
+  .kv-val { font-weight: 700; text-align: right; }
+
+  /* Steps */
+  .steps { list-style: none; }
+  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .83rem; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--step-bg); color: var(--text); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .75rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* List */
+  ul.list { list-style: none; padding: 0; }
+  ul.list li { padding: 3px 0; font-size: .83rem; }
+  ul.list li::before { content: '—'; margin-right: 6px; color: var(--text-muted); }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 5px; font-size: .73rem; font-weight: 700; }
+  .badge-red    { background: var(--red);    color: #fff; }
+  .badge-blue   { background: var(--blue);   color: #fff; }
+  .badge-teal   { background: var(--teal);   color: #fff; }
+  .badge-amber  { background: var(--amber);  color: #fff; }
+  .badge-purple { background: var(--purple); color: #fff; }
+
+  /* Intro box */
+  .intro-box {
+    background: var(--purple-light);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: .83rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 16px;
+    border-left: 4px solid var(--purple);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="item-num">Item 230 · Urgences cardiovasculaires</div>
+    <h1>Douleur thoracique aiguë</h1>
+    <div class="tagline">Toute douleur/gêne dans la région thoracique (cou → ombilic) à début brutal</div>
+    <div class="mnemo">Mnémotechnique : P · I · E · D — Péricardite · Infarctus · Embolie · Dissection</div>
+  </div>
+
+  <!-- INTRO / OBJECTIFS -->
+  <div class="intro-box">
+    <strong>Vue d'ensemble :</strong> L'enjeu central est d'éliminer rapidement les <strong>4 urgences cardio-vasculaires vitales</strong> (PIED) avant d'explorer les causes non vitales. La démarche est séquentielle : détresse vitale ? → ECG + clinique → bilan biologique + imagerie ciblés → traitement en urgence si besoin. Maîtriser les sémiologies, les anomalies ECG, la place de chaque examen et les principes thérapeutiques (notamment les délais du SCA).
+  </div>
+
+  <hr>
+
+  <!-- DÉFINITION & DÉTRESSE VITALE -->
+  <div class="section-title">Définition &amp; Détresse vitale</div>
+  <div class="grid2">
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définition
+      </div>
+      <p style="font-size:.83rem">Douleur (ou gêne) dans la région thoracique (entre le cou et l'ombilic), de survenue <strong>brutale</strong>. Caractéristiques variables : intensité, localisation, irradiation, durée, facteurs déclenchants/soulageants.</p>
+    </div>
+    <div class="card card-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red)">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Signes de détresse vitale
+      </div>
+      <ul class="list">
+        <li><strong>Respiratoire :</strong> polypnée &gt;30/min ou bradypnée &lt;10/min, cyanose, SaO2 &lt;90%, tirage</li>
+        <li><strong>Hémodynamique :</strong> hypotension, marbrures, extrémités froides, oligurie</li>
+        <li><strong>Neurologique :</strong> troubles de conscience, confusion, agitation</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- LES 4 URGENCES PIED -->
+  <div class="section-title">Les 4 urgences cardio-vasculaires — PIED</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Tableau comparatif des 4 urgences
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Urgence</th>
+          <th>Douleur typique</th>
+          <th>Signes cliniques clés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label" style="color:var(--red)"><span class="badge badge-red">P</span> Péricardite / Tamponnade</td>
+          <td>Positionnelle (soulagée assis penché en avant), frotte péricardique</td>
+          <td>Turgescence jugulaire, choc obstructif si tamponnade</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--coral)"><span class="badge badge-amber">I</span> SCA (Infarctus)</td>
+          <td>Rétrosternale, constrictive, irradiation bras G / mâchoire, nitro-sensible</td>
+          <td>Facteurs de risque CV, diaphorèse, parfois ECG normal initialement</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--blue)"><span class="badge badge-blue">E</span> Embolie pulmonaire</td>
+          <td>Latérothoracique, pleurétique, dyspnée +++, parfois hémoptysie</td>
+          <td>Tachycardie, signes TVP, terrain à risque (cancer, alitement)</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--purple)"><span class="badge badge-purple">D</span> Dissection aortique</td>
+          <td>Brutale, intense, déchirante/coup de poignard, <strong>migratrice</strong> vers le dos/lombes</td>
+          <td>Asymétrie tensionnelle &gt;20 mmHg, abolition pouls, souffle IA, déficit neuro</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- DÉMARCHE DIAGNOSTIQUE -->
+  <div class="section-title">Démarche diagnostique</div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Séquence d'évaluation
+    </div>
+    <ul class="steps">
+      <li><span class="step-num">1</span><span><strong>Détresse vitale ?</strong> — constantes, conscience, SpO2, PA bilatérale</span></li>
+      <li><span class="step-num">2</span><span><strong>Anamnèse :</strong> terrain (FRCV, cancer, HTA), caractéristiques douleur (localisation, irradiation, nitro-sensibilité, lien effort)</span></li>
+      <li><span class="step-num">3</span><span><strong>Examen clinique :</strong> auscultation cardio-pulmonaire, pouls périphériques, PA bilatérale, turgescence jugulaire</span></li>
+      <li><span class="step-num">4</span><span><strong>ECG 12 dérivations</strong> — en urgence, systématique</span></li>
+      <li><span class="step-num">5</span><span><strong>Bilan biologique + imagerie</strong> orientés par les étapes précédentes</span></li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ECG -->
+  <div class="section-title">Anomalies ECG des 4 urgences</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      ECG — Territoires et anomalies
+    </div>
+    <div class="alert alert-blue" style="margin-bottom:12px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Territoires coronaires :</strong> V1-V4 = antéroseptoapical · DII-DIII-aVF = inférieur · DI-aVL = latéral haut · V5-V6 = latéral bas · V3R-V4R = VD · V7-V9 = postérieur</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Urgence</th>
+          <th>Anomalies ECG caractéristiques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label" style="color:var(--coral)">SCA ST+</td>
+          <td>Sus-décalage ST <strong>≥ 2 mm</strong> précordiales ou <strong>≥ 1 mm</strong> inférieur/latéral haut, dans ≥ 2 dérivations contiguës + miroir en sous-décalage.<br><em>Nouveau BBG = équivalent ST+ si tableau aigu évocateur</em></td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--coral)">SCA ST-</td>
+          <td>Sous-décalage ST (horizontal/descendant) ou ondes T négatives ou <strong>ECG normal</strong> (post-critique)</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--purple)">Dissection aortique</td>
+          <td>Généralement <strong>normal</strong>. Possible ST+ si extension à une artère coronaire</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--blue)">Embolie pulmonaire</td>
+          <td>Tachycardie sinusale · <strong>S1Q3</strong> · BBD · Ondes T négatives V1-V3 (voire V4)<br><em>Anomalies souvent absentes</em></td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--red)">Péricardite / Tamponnade</td>
+          <td>Sus-décalage <strong>diffus, concave, sans miroir, sans onde Q</strong> → sous-décalage PQ → T négatives diffuses → normalisation en semaines.<br>Tamponnade : <strong>microvoltage</strong>, alternance électrique (variation amplitude QRS 1 sur 2)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- RADIO THORACIQUE -->
+  <div class="section-title">Radiographie thoracique</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Anomalies radiographiques — réalisée systématiquement
+    </div>
+    <div class="alert alert-amber" style="margin-bottom:12px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>SCA :</strong> RP inutile à visée diagnostique. Utile pour éliminer un diagnostic différentiel (pneumothorax, pneumopathie).</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Urgence</th>
+          <th>Anomalie radiographique</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label" style="color:var(--purple)">Dissection aortique</td>
+          <td>Élargissement du médiastin, double contour aortique</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--blue)">Embolie pulmonaire</td>
+          <td>Souvent <strong>normale</strong> · hyperclarté pulmonaire · ascension coupole diaphragmatique · atélectasies en bandes</td>
+        </tr>
+        <tr>
+          <td class="label" style="color:var(--red)">Péricardite / Tamponnade</td>
+          <td>Cardiomégalie avec <strong>cœur en carafe</strong></td>
+        </tr>
+        <tr>
+          <td class="label">Diagnostics différentiels</td>
+          <td>Pneumothorax (hyperclarté sans trame), pneumopathie (opacité alvéolaire)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- BIOLOGIE -->
+  <div class="section-title">Examens biologiques</div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Bilan biologique orienté
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Examen</th>
+          <th>Indication / Interprétation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">NFS, iono, créat, TP/TCA</td>
+          <td>Bilan standard systématique</td>
+        </tr>
+        <tr>
+          <td class="label">Troponines Us</td>
+          <td>Élevées dans SCA (++) et EP (moindre), myocardite associée à péricardite.<br><strong>Cycle : 2 mesures à 1h ou 2h d'intervalle</strong> si première normale.<br><em>Élévation non spécifique du SCA → toujours contextualiser</em></td>
+        </tr>
+        <tr>
+          <td class="label">D-dimères</td>
+          <td>Seulement si probabilité EP <strong>faible ou modérée</strong> → si normaux : élimine EP et dissection aortique.<br><em>Ne confirment aucun diagnostic</em></td>
+        </tr>
+        <tr>
+          <td class="label">CRP</td>
+          <td>Syndrome inflammatoire → péricardite (non spécifique)</td>
+        </tr>
+        <tr>
+          <td class="label">Gaz du sang</td>
+          <td>Si détresse respiratoire, effet shunt évoquant une EP</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> La troponine élevée ne suffit pas à diagnostiquer un SCA — elle peut s'élever dans l'EP, la péricardite (myocardite), la dissection, etc.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- CORONAROGRAPHIE & PRISE EN CHARGE SCA -->
+  <div class="section-title">Coronarographie &amp; Prise en charge du SCA</div>
+  <div class="grid2">
+    <div class="card card-coral">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        SCA ST+ — Délais et stratégie
+      </div>
+      <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:8px">Identifie lésion coupable → angioplastie (stent) ± pontage. Examen invasif (consentement requis).</p>
+      <div>
+        <div class="kv-row"><span class="kv-key">Délai ECG → angioplastie</span><span class="kv-val" style="color:var(--teal)">≤ 120 min → angioplastie primaire</span></div>
+        <div class="kv-row"><span class="kv-key">Délai &gt; 120 min</span><span class="kv-val" style="color:var(--coral)">Fibrinolyse (sauf CI, sauf &gt;12h)</span></div>
+        <div class="kv-row"><span class="kv-key">Fibrinolyse sans reperfusion</span><span class="kv-val">Angioplastie de sauvetage</span></div>
+        <div class="kv-row"><span class="kv-key">Fibrinolyse avec reperfusion</span><span class="kv-val">Angioplastie différée 24h</span></div>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>&gt;12h :</strong> angioplastie si douleurs persistantes, instabilité hémo ou rythmique. Possible jusqu'à 48h ; au-delà → rechercher viabilité.</div>
+      </div>
+    </div>
+    <div class="card card-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber)">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        SCA ST- — Stratégie
+      </div>
+      <ul class="list">
+        <li>Coronarographie dans les <strong>24h</strong> (surtout si troponine élevée)</li>
+        <li>SCA ST- <strong>réfractaire</strong> (patient toujours douloureux) → coronarographie en urgence <strong>&lt; 2h</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- IMAGERIE DISSECTION AORTIQUE -->
+  <div class="section-title">Imagerie dans la dissection aortique</div>
+  <div class="grid3">
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        ETT
+      </div>
+      <p style="font-size:.82rem"><strong>1ère intention</strong> chez patient <strong>instable</strong>. Disponible au lit. Montre : flap aortique, dilatation Ao ascendante, hémopéricarde, IA. Permet diagnostics différentiels (SCA, CPA de l'EP).</p>
+    </div>
+    <div class="card" style="border-left:4px solid var(--purple)">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Angioscanner thoracique
+      </div>
+      <p style="font-size:.82rem"><strong>Examen de choix</strong> pour le diagnostic positif. Bilan d'extension pré-op (faux chenal, porte d'entrée). Réservé au patient <strong>stabilisé</strong>.</p>
+    </div>
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        ETO
+      </div>
+      <p style="font-size:.82rem">Complément ETT chez patient instable. <strong>Obligatoirement sous AG au bloc opératoire</strong> (pic tensionnel en vigile = catastrophique).</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ANGOR FONCTIONNEL -->
+  <div class="section-title">Angor fonctionnel (à l'effort)</div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Principales causes d'angor fonctionnel
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Rétrécissement aortique serré</span>
+      <span class="pill pill-purple">Cardiomyopathie hypertrophique</span>
+      <span class="pill pill-amber">Tachycardies (FA)</span>
+      <span class="pill pill-teal">Anémie</span>
+      <span class="pill pill-coral">Hyperthyroïdie</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- AUTRES CAUSES -->
+  <div class="section-title">Autres causes de douleur thoracique</div>
+  <div class="grid2">
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Causes thoraciques (hors urgences CV)
+      </div>
+      <div class="pills">
+        <span class="pill pill-blue">Pneumopathie infectieuse</span>
+        <span class="pill pill-blue">Pneumothorax</span>
+        <span class="pill pill-blue">Épanchement pleural</span>
+        <span class="pill pill-teal">Syndrome de Tietze</span>
+        <span class="pill pill-teal">Douleurs musculo-ligamentaires</span>
+        <span class="pill pill-teal">Fractures costales</span>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal)">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Causes extra-thoraciques
+      </div>
+      <div class="pills">
+        <span class="pill pill-amber">Pancréatite</span>
+        <span class="pill pill-amber">Cholécystite</span>
+        <span class="pill pill-amber">Ulcère gastro-duodénal</span>
+        <span class="pill pill-amber">RGO</span>
+        <span class="pill pill-amber">Spasme oesophagien</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- POINTS-CLÉS -->
+  <div class="section-title">Points-clés à retenir</div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Synthèse finale
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>PIED = 4 urgences vitales</strong> à toujours évoquer devant toute douleur thoracique aiguë : Péricardite, Infarctus, Embolie, Dissection.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> ECG normal n'élimine pas un SCA ST- (post-critique), ni une EP, ni une dissection aortique.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Troponine élevée ≠ SCA. Contextualiser toujours (EP, myocardite, dissection).</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> D-dimères : n'éliminent l'EP que si probabilité faible/modérée. Ne confirment aucun diagnostic.</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence absolue SCA ST+ :</strong> délai ECG → angioplastie ≤ 120 min = objectif. Au-delà → fibrinolyse (sauf CI ou &gt;12h sans douleur).</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>ETO dans la dissection :</strong> toujours sous AG au bloc opératoire (pic tensionnel en vigile = risque vital).</div>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Dissection aortique :</strong> asymétrie tensionnelle &gt;20 mmHg = signe clé à rechercher systématiquement. Douleur migratrice + absence/abolition de pouls = tableau typique.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

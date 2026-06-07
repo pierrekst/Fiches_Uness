@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 161 — Infections urinaires</title>
+  <link rel="icon" href="../favicon.svg">
+  <style>
+    :root {
+      --purple: #534AB7;
+      --teal: #1D9E75;
+      --coral: #D85A30;
+      --blue: #378ADD;
+      --red: #E24B4A;
+      --amber: #D97706;
+      --purple-light: #eeedfb;
+      --teal-light: #e3f7f0;
+      --coral-light: #fdeee8;
+      --blue-light: #e8f2fd;
+      --red-light: #fdeaea;
+      --amber-light: #fef3e2;
+      --text: #1e2432;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --bg-card: #ffffff;
+      --bg-page: #f3f4f6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border: #334155;
+        --bg-card: #1e293b;
+        --bg-page: #0f172a;
+        --purple-light: #2d2b6b;
+        --teal-light: #0d3d2d;
+        --coral-light: #4a2118;
+        --blue-light: #1a3a5c;
+        --red-light: #4a1a1a;
+        --amber-light: #4a3010;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg-page);
+      color: var(--text);
+      font-size: .875rem;
+      line-height: 1.6;
+    }
+    .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+    .header {
+      background: linear-gradient(135deg, #534AB7 0%, #378ADD 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      color: white;
+    }
+    .header-num { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+    .header h1 { font-size: 1.55rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+    .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .htag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px; font-size: .75rem; font-weight: 600; }
+
+    .card { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-purple { background: var(--purple); }
+    .icon-teal { background: var(--teal); }
+    .icon-blue { background: var(--blue); }
+    .icon-coral { background: var(--coral); }
+    .icon-red { background: var(--red); }
+    .icon-amber { background: var(--amber); }
+
+    .section-header { display: flex; align-items: center; gap: 10px; margin: 24px 0 12px; }
+    .section-badge { font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; padding: 4px 12px; border-radius: 20px; color: white; white-space: nowrap; }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    th { background: var(--bg-page); font-weight: 700; padding: 8px 10px; text-align: left; border-bottom: 1.5px solid var(--border); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); }
+    td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--border); gap: 12px; font-size: .82rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-muted); flex-shrink: 0; }
+    .kv-val { font-weight: 700; text-align: right; }
+
+    .pill { display: inline-block; border-radius: 12px; padding: 2px 9px; font-size: .75rem; font-weight: 600; margin: 2px; }
+    .pill-green { background: var(--teal-light); color: var(--teal); }
+    .pill-red { background: var(--red-light); color: var(--red); }
+    .pill-blue { background: var(--blue-light); color: var(--blue); }
+    .pill-amber { background: var(--amber-light); color: var(--amber); }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-coral { background: var(--coral-light); color: var(--coral); }
+
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red   .alert-icon svg { stroke: var(--red);   }
+    .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+    .alert-green .alert-icon svg { stroke: var(--teal);  }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+    .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+    .steps { list-style: none; }
+    .step { display: flex; gap: 12px; margin-bottom: 8px; align-items: flex-start; }
+    .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--bg-page); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 800; flex-shrink: 0; color: var(--text-muted); }
+    .step-content { flex: 1; font-size: .83rem; padding-top: 3px; }
+
+    ul.bullets { list-style: none; padding: 0; }
+    ul.bullets li { padding: 3px 0 3px 16px; position: relative; font-size: .83rem; }
+    ul.bullets li::before { content: "•"; position: absolute; left: 0; color: var(--text-muted); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    .card-left-red    { border-left: 4px solid var(--red); }
+    .card-left-amber  { border-left: 4px solid var(--amber); }
+    .card-left-teal   { border-left: 4px solid var(--teal); }
+    .card-left-blue   { border-left: 4px solid var(--blue); }
+    .card-left-purple { border-left: 4px solid var(--purple); }
+
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; font-size: .72rem; font-weight: 700; }
+    .badge-red    { background: var(--red-light);   color: var(--red);   }
+    .badge-green  { background: var(--teal-light);  color: var(--teal);  }
+    .badge-amber  { background: var(--amber-light); color: var(--amber); }
+    .badge-blue   { background: var(--blue-light);  color: var(--blue);  }
+
+    .res-r { color: var(--red);  font-weight: 800; font-size: .8rem; }
+    .res-s { color: var(--teal); font-weight: 700; font-size: .8rem; }
+
+    .sub-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin: 10px 0 6px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 161</div>
+    <h1>Infections urinaires de l'enfant et de l'adulte</h1>
+    <div class="header-tags">
+      <span class="htag">Infectiologie</span>
+      <span class="htag">Urologie</span>
+      <span class="htag">Pédiatrie</span>
+      <span class="htag">Gynécologie-Obstétrique</span>
+    </div>
+  </div>
+
+  <!-- VISION D'ENSEMBLE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Vision d'ensemble
+    </div>
+    <p style="font-size:.84rem; color:var(--text-muted); line-height:1.6;">
+      Cet item couvre l'ensemble des infections urinaires, de la cystite simple à la pyélonéphrite grave, en passant par l'IU masculine, gravidique, pédiatrique et les cystites récidivantes. L'enjeu est double : <strong>ne pas sur-traiter</strong> (colonisation ≠ infection) et <strong>ne pas sous-estimer la gravité</strong> (PNA obstructive = urgence médico-chirurgicale). La maîtrise des agents pathogènes, des seuils BU/ECBU, et des algorithmes thérapeutiques adaptés au terrain est indispensable.
+    </p>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 1 : DÉFINITIONS -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--purple);">Définitions &amp; Classification</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-purple">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Classification des infections urinaires
+    </div>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Définition</th><th>Fièvre</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cystite</strong></td>
+          <td>Infection du réservoir et de la muqueuse vésicale (IU basse)</td>
+          <td><span class="badge badge-green">Apyrétique</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pyélonéphrite</strong></td>
+          <td>Infection du bassinet et du parenchyme rénal (IU haute)</td>
+          <td><span class="badge badge-red">Fébrile</span></td>
+        </tr>
+        <tr>
+          <td><strong>IU masculine</strong></td>
+          <td>Prostatite aiguë (fébrile) ou "cystite-like" (SBAU sans fièvre)</td>
+          <td><span class="badge badge-amber">Variable</span></td>
+        </tr>
+        <tr>
+          <td><strong>Colonisation</strong></td>
+          <td>Bactériurie asymptomatique — ne PAS traiter (sauf exceptions)</td>
+          <td><span class="badge badge-blue">Asymptomatique</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cystites récidivantes</strong></td>
+          <td>≥ 4 épisodes / an</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-amber">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        IU à risque de complications
+      </div>
+      <ul class="bullets">
+        <li><span class="pill pill-amber">H</span> Homme</li>
+        <li><span class="pill pill-amber">G</span> Grossesse</li>
+        <li><span class="pill pill-amber">A</span> Anomalie de l'arbre urinaire</li>
+        <li><span class="pill pill-amber">A</span> Âge : &gt; 75 ans, ou &gt; 65 ans + ≥ 3 critères de Fried</li>
+        <li><span class="pill pill-amber">I</span> Insuffisance rénale (DFG &lt; 30 mL/min)</li>
+        <li><span class="pill pill-amber">I</span> Immunosuppression sévère</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> Le diabète n'est PLUS un facteur de risque de complication dans les recommandations actuelles.</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-red">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Critères de gravité
+      </div>
+      <div class="sub-title">qSOFA ≥ 2 (sepsis)</div>
+      <ul class="bullets">
+        <li>PAS ≤ 100 mmHg</li>
+        <li>Fréquence respiratoire ≥ 22/min</li>
+        <li>Glasgow ≤ 14</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">Autres critères</div>
+      <ul class="bullets">
+        <li>Choc septique</li>
+        <li>Obstacle des voies urinaires → <strong>PNA obstructive</strong> = colique néphrétique fébrile</li>
+        <li>Nécessité de drainage du haut appareil urinaire</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 2 : MICROBIOLOGIE -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--blue);">Microbiologie &amp; Résistances</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Principaux agents pathogènes
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Adulte (communautaire)</div>
+        <div class="kv-row"><span class="kv-key">E. coli</span><span class="kv-val">70–90%</span></div>
+        <div class="kv-row"><span class="kv-key">S. saprophyticus</span><span class="kv-val">Femme jeune, été</span></div>
+        <div class="kv-row"><span class="kv-key">Klebsiella</span><span class="kv-val">Groupe 2</span></div>
+        <div class="kv-row"><span class="kv-key">Enterobacter, Morganella</span><span class="kv-val">Groupe 3</span></div>
+      </div>
+      <div>
+        <div class="sub-title">Enfant</div>
+        <div class="kv-row"><span class="kv-key">E. coli</span><span class="kv-val">Prédominant</span></div>
+        <div class="kv-row"><span class="kv-key">Proteus mirabilis</span><span class="kv-val">2e rang</span></div>
+        <div class="kv-row"><span class="kv-key">Enterococcus faecalis</span><span class="kv-val">Fréquent</span></div>
+        <div class="kv-row"><span class="kv-key">Klebsiella</span><span class="kv-val">—</span></div>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>S. saprophyticus :</strong> Cocci Gram+, sans nitrate réductase → <strong>nitrites BU négatifs</strong> malgré une IU authentique. Ne pas éliminer l'IU sur cette base chez une femme jeune en été.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Résistances aux antibiotiques
+    </div>
+    <div class="sub-title">Résistances chromosomiques naturelles des entérobactéries</div>
+    <table>
+      <thead>
+        <tr><th>Groupe</th><th>Exemples</th><th>Amox</th><th>Amox-clav</th><th>C1G</th><th>C3G</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Groupe 1</strong></td>
+          <td>E. coli, P. mirabilis</td>
+          <td class="res-s">S</td><td class="res-s">S</td><td class="res-s">S</td><td class="res-s">S</td>
+        </tr>
+        <tr>
+          <td><strong>Groupe 2</strong></td>
+          <td>Klebsiella, P. vulgaris</td>
+          <td class="res-r">R</td><td class="res-s">S</td><td class="res-s">S</td><td class="res-s">S</td>
+        </tr>
+        <tr>
+          <td><strong>Groupe 3</strong></td>
+          <td>Enterobacter, Morganella, Serratia</td>
+          <td class="res-r">R</td><td class="res-r">R</td><td class="res-r">R</td><td class="res-s">S</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="sub-title" style="margin-top:14px;">Facteurs de risque de BLSE / résistance FQ</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+      <span class="pill pill-red">Infection/colonisation BLSE &lt; 3 mois</span>
+      <span class="pill pill-red">Amox-clav / C2G / C3G / FQ &lt; 3 mois</span>
+      <span class="pill pill-red">Voyage zone endémie BLSE</span>
+      <span class="pill pill-red">Hospit &lt; 3 mois</span>
+      <span class="pill pill-red">Long séjour en institution</span>
+    </div>
+    <div style="font-size:.77rem; color:var(--text-muted); margin-top:5px;">Zones endémie BLSE : sud Europe, bassin méditerranéen, Moyen-Orient, Inde, Asie du SE</div>
+    <div class="sub-title" style="margin-top:12px;">Impact de la BLSE sur les C3G</div>
+    <table style="margin-top:4px;">
+      <thead><tr><th>ATB</th><th>Pénicillinase bas niveau</th><th>BLSE</th></tr></thead>
+      <tbody>
+        <tr><td>Aminopénicillines</td><td class="res-r">R</td><td class="res-r">R</td></tr>
+        <tr><td>C3G (ceftriaxone)</td><td class="res-s">S</td><td class="res-r">R</td></tr>
+        <tr><td>Céfoxitine (C2G)</td><td class="res-s">S</td><td class="res-s">S</td></tr>
+        <tr><td>Carbapénèmes</td><td class="res-s">S</td><td class="res-s">S</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 3 : BU -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--teal);">Bandelette urinaire (BU)</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Réalisation et limites
+      </div>
+      <ul class="bullets">
+        <li>Valeur d'<strong>orientation uniquement</strong> — la clinique prime toujours</li>
+        <li>Contre-indiquée sur matériel endo-urinaire / IU nosocomiale</li>
+        <li>Vérifier date de péremption</li>
+        <li>Interférences : certains ATB, vitamine C, phénazopyridine</li>
+        <li>Nitrites nécessitent : nitrates alimentaires + bactérie avec nitrate réductase (entérobactéries)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Interprétation VPP / VPN
+      </div>
+      <table>
+        <thead><tr><th>Contexte</th><th>Valeur diagnostique</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Patient <strong>symptomatique</strong></td>
+            <td>
+              VPP excellente (confirme ce que la clinique a déjà posé)<br>
+              <span style="font-size:.75rem; color:var(--text-muted);">VPN nulle : BU négative n'exclut PAS l'IU</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Patient <strong>asymptomatique</strong></td>
+            <td>
+              VPN excellente (confirme l'absence d'IU)<br>
+              <span style="font-size:.75rem; color:var(--text-muted);">VPP nulle : BU positive ne fait pas le diagnostic</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 4 : ECBU + COLONISATION -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--blue);">ECBU &amp; Colonisation</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-blue">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Seuils diagnostiques ECBU
+      </div>
+      <div class="sub-title">Leucocyturie significative</div>
+      <div class="kv-row"><span class="kv-key">Seuil universel</span><span class="kv-val">≥ 10⁴/mL</span></div>
+      <div style="font-size:.76rem; color:var(--text-muted); margin-top:3px; margin-bottom:8px;">Leucocyturie faussement positive si : geste récent, matériel endo-urinaire, corps étranger (calcul, tumeur)</div>
+      <div class="sub-title">Bactériurie significative</div>
+      <div class="kv-row"><span class="kv-key">Homme</span><span class="kv-val">≥ 10³ UFC/mL</span></div>
+      <div class="kv-row"><span class="kv-key">Femme — E. coli, S. sap</span><span class="kv-val">≥ 10³ UFC/mL</span></div>
+      <div class="kv-row"><span class="kv-key">Femme — autres</span><span class="kv-val">≥ 10⁴ UFC/mL</span></div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span>10–15% des IU prouvées ont un ECBU négatif (ATB préalable, mauvais recueil). La clinique prime toujours.</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-purple">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Colonisation urinaire — ne PAS traiter
+      </div>
+      <p style="font-size:.82rem;">Bactériurie en l'absence de tout symptôme. Très fréquente (jusqu'à 80% en institution, systématique sur sonde à demeure).</p>
+      <div class="sub-title" style="margin-top:8px;">Exceptions — traiter la colonisation</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+        <span class="pill pill-green">Chirurgie urologique au contact des urines</span>
+        <span class="pill pill-green">Femme enceinte</span>
+      </div>
+      <div class="alert alert-red" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span>ECBU positif sans symptôme = colonisation → NE PAS TRAITER (sauf exceptions ci-dessus).</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 5 : BILAN SELON TYPE D'IU -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--blue);">Bilan selon type d'IU</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Examens complémentaires — récapitulatif
+    </div>
+    <table>
+      <thead>
+        <tr><th>Type d'IU</th><th>BU</th><th>ECBU</th><th>Biologie</th><th>Imagerie</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cystite simple</strong></td>
+          <td class="res-s">Oui</td>
+          <td class="res-r">Non</td>
+          <td class="res-r">Non</td>
+          <td class="res-r">Non</td>
+        </tr>
+        <tr>
+          <td><strong>Cystite à risque complication</strong></td>
+          <td>Possible</td>
+          <td class="res-s">Oui</td>
+          <td class="res-r">Non</td>
+          <td class="res-r">Non</td>
+        </tr>
+        <tr>
+          <td><strong>PNA simple</strong></td>
+          <td>Possible</td>
+          <td class="res-s">Oui</td>
+          <td class="res-r">Non</td>
+          <td>Si persistance 48–72h :<br>TDM AP ± injection</td>
+        </tr>
+        <tr>
+          <td><strong>PNA à risque complication</strong></td>
+          <td>Possible</td>
+          <td class="res-s">Oui</td>
+          <td>Urée, créat, CRP</td>
+          <td>TDM AP dans les 24h<br>(ou écho + ASP à défaut)</td>
+        </tr>
+        <tr>
+          <td><strong>PNA grave</strong></td>
+          <td>Possible</td>
+          <td class="res-s">Oui</td>
+          <td>NFS, CRP, urée, créat<br><span style="color:var(--red); font-weight:700;">+ Hémocultures</span></td>
+          <td><span style="color:var(--red); font-weight:700;">TDM AP EN URGENCE</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 6 : CYSTITE AIGUË -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--teal);">Cystite aiguë</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Diagnostic clinique
+      </div>
+      <div class="sub-title">SBAU de remplissage (apyrétique)</div>
+      <ul class="bullets">
+        <li><strong>Brûlures mictionnelles</strong> (maître symptôme)</li>
+        <li>Pollakiurie</li>
+        <li>Urgenturies</li>
+        <li>Dysurie (vessie vide — force inutilement)</li>
+        <li>Ténesme vésical, pesanteur pelvienne en fin de miction</li>
+        <li>Hématurie macroscopique discrète</li>
+      </ul>
+      <div class="alert alert-blue" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <span>Symptômes aigus obligatoires. SBAU anciens = très rarement infectieux même avec bactériurie.</span>
+      </div>
+      <div class="alert alert-amber" style="margin-top:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> La cystite simple n'évolue PAS vers une PNA (&lt; 1%). La PNA se présente d'emblée comme une douleur lombaire fébrile, sans SBAU.</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement cystite simple
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step-num">1</span><div class="step-content"><strong>Fosfomycine-trométamol</strong> — monodose (1ère intention)</div></li>
+        <li class="step"><span class="step-num">2</span><div class="step-content"><strong>Pivmécillinam</strong> — 5 jours</div></li>
+        <li class="step"><span class="step-num">3</span><div class="step-content">Si contre-indication aux 2 : réaliser ECBU avant choix ATB</div></li>
+      </ol>
+      <div class="alert alert-red" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Jamais de fluoroquinolones</strong> pour une cystite (quelque soit le terrain).</span>
+      </div>
+      <div class="sub-title">Suivi</div>
+      <ul class="bullets">
+        <li>Guérison attendue en &lt; 72h</li>
+        <li>Échec → ECBU (résistance ?) ou remettre en cause le diagnostic</li>
+      </ul>
+      <div class="sub-title" style="margin-top:6px;">Cystite à risque de complication</div>
+      <ul class="bullets">
+        <li>ECBU systématique avec antibiogramme</li>
+        <li>Même antibiothérapie en 1ère intention (adapter à l'antibiogramme)</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 7 : PNA -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--red);">Pyélonéphrite aiguë</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-red">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Clinique de la PNA
+    </div>
+    <ul class="bullets">
+      <li><strong>Douleur lombaire unilatérale fébrile</strong> — en dehors de tout SBAU</li>
+      <li>Nausées / vomissements (iléus réflexe)</li>
+      <li>Irradiation en colique = évoquer <strong>obstacle</strong> → urgence diagnostique et thérapeutique</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>PNA obstructive = PNA grave d'emblée :</strong> TDM AP en urgence + drainage immédiat du haut appareil urinaire + antibiothérapie simultanée.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-red">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement de la PNA selon la gravité
+    </div>
+    <table>
+      <thead>
+        <tr><th>Forme</th><th>Lieu de PEC</th><th>ATB 1ère intention</th><th>Durée totale</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>PNA simple</strong></td>
+          <td>Ambulatoire</td>
+          <td>Fluoroquinolone orale (ciprofloxacine, lévofloxacine)<br><span style="font-size:.74rem; color:var(--text-muted);">Sauf si FQ dans les 3 mois précédents</span></td>
+          <td>7 jours</td>
+        </tr>
+        <tr>
+          <td><strong>PNA à risque complication</strong></td>
+          <td>Hospitalisation</td>
+          <td>C3G IV (si hospit) ou FQ si pas FQ &lt; 3 mois<br><span style="font-size:.74rem; color:var(--text-muted);">Si CI : aminosides ou aztréonam</span></td>
+          <td>10 jours</td>
+        </tr>
+        <tr>
+          <td><strong>PNA grave</strong></td>
+          <td>Réanimation</td>
+          <td>
+            <strong>C3G IV + amikacine</strong><br>
+            <span style="font-size:.74rem; color:var(--text-muted);">Allergie péni → Aztréonam + amikacine</span><br>
+            <span style="font-size:.74rem; color:var(--text-muted);">FDR BLSE → Carbapénème + amikacine</span><br>
+            <span style="font-size:.74rem; color:var(--text-muted);">FDR BLSE sans choc → Pip-tazo + amikacine (si souche sensible)</span>
+          </td>
+          <td>10 jours</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Sepsis :</strong> +6% de mortalité par heure de retard à l'ATB. Démarrer immédiatement l'antibiothérapie — le drainage ne doit pas la retarder.</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 8 : IU MASCULINE -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--coral);">IU masculine (Prostatite)</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-coral">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Diagnostic
+      </div>
+      <div class="sub-title">Prostatite aiguë (typique)</div>
+      <ul class="bullets">
+        <li>Symptomatologie <strong>aiguë</strong></li>
+        <li>Fièvre ± frissons (<strong>indispensable</strong> au diagnostic)</li>
+        <li>SBAU de remplissage associés</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">"Cystite-like" masculine (atypique)</div>
+      <ul class="bullets">
+        <li>SBAU sans fièvre</li>
+        <li>Diagnostic prudent : terrain = homme avec SBAU préexistants (HBP…)</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">Complications urgentes</div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+        <span class="pill pill-red">Sepsis grave</span>
+        <span class="pill pill-red">Rétention aiguë d'urine</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-coral">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement
+      </div>
+      <div class="sub-title">Durées d'antibiothérapie</div>
+      <div class="kv-row"><span class="kv-key">FQ / C3G IV / cotrimoxazole</span><span class="kv-val">14 jours</span></div>
+      <div class="kv-row"><span class="kv-key">Autres molécules</span><span class="kv-val">21 jours</span></div>
+      <div class="sub-title" style="margin-top:10px;">Rétention aiguë d'urine</div>
+      <ul class="bullets">
+        <li>Drainage en urgence : sondage uréthral ou sus-pubien</li>
+        <li>Sondage vésical n'est plus une contre-indication (si geste atraumatique)</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">Toujours rechercher une cause sous-jacente</div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+        <span class="pill pill-amber">HBP symptomatique</span>
+        <span class="pill pill-amber">Sténose de l'urètre</span>
+        <span class="pill pill-amber">Acontractilité vésicale</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 9 : IU ET GROSSESSE -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--purple);">IU et grossesse</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-purple">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Cystite aiguë gravidique
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Diagnostic</div>
+        <ul class="bullets">
+          <li>Clinique inchangée — attention à la pollakiurie physiologique du T3</li>
+          <li>ECBU systématique avec antibiogramme</li>
+        </ul>
+        <div class="sub-title" style="margin-top:8px;">Seuils ECBU grossesse</div>
+        <div class="kv-row"><span class="kv-key">E. coli / S. saprophyticus</span><span class="kv-val">≥ 10³ UFC/mL</span></div>
+        <div class="kv-row"><span class="kv-key">Autres bactéries</span><span class="kv-val">≥ 10⁵ UFC/mL</span></div>
+        <div class="kv-row"><span class="kv-key">Leucocyturie</span><span class="kv-val">≥ 10⁴/mL</span></div>
+      </div>
+      <div>
+        <div class="sub-title">Traitement (probabiliste sans attendre l'ATBgramme)</div>
+        <ol class="steps">
+          <li class="step"><span class="step-num">1</span><div class="step-content"><strong>Fosfomycine-trométamol</strong> monodose</div></li>
+          <li class="step"><span class="step-num">2</span><div class="step-content"><strong>Pivmécillinam</strong> — 7 jours</div></li>
+        </ol>
+        <div class="sub-title" style="margin-top:8px;">Suivi obligatoire</div>
+        <ul class="bullets">
+          <li>ECBU de contrôle 8–10 jours après arrêt du traitement</li>
+          <li>Puis ECBU mensuel jusqu'à l'accouchement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon icon-red">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Colonisation urinaire chez la femme enceinte — TRAITER (exception)
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Exception absolue :</strong> Contrairement à la règle générale, la colonisation urinaire DOIT être traitée chez la femme enceinte (risque de PNA gravidique et complications obstétricales).</span>
+    </div>
+    <ul class="bullets">
+      <li><strong>Pas de traitement probabiliste</strong> — attendre et adapter à l'antibiogramme</li>
+      <li>Amoxicilline 7 jours en 1ère intention</li>
+      <li>Seuil : ≥ 10⁵ UFC/mL (toutes bactéries)</li>
+      <li>Suivi identique : ECBU de contrôle 8–10j + mensuel jusqu'à l'accouchement</li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 10 : PERSONNE ÂGÉE -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--amber);">Personne âgée</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-amber">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Spécificités de l'IU chez le sujet âgé
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Présentation atypique</div>
+        <ul class="bullets">
+          <li>Syndrome confusionnel aigu</li>
+          <li>Chutes</li>
+          <li>Dépendance aiguë</li>
+          <li>Altération de l'état général</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-title">Pièges diagnostiques</div>
+        <ul class="bullets">
+          <li>Colonisation très fréquente (<strong>jusqu'à 80%</strong> en institution)</li>
+          <li>ECBU positif + tableau atypique ≠ IU automatique</li>
+          <li>Chercher d'abord une autre cause avant d'imputer à l'IU</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-title" style="margin-top:10px;">Critères de Fried (fragilité — IU à risque de complication si ≥ 3 critères après 65 ans)</div>
+    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;">
+      <span class="pill pill-amber">Perte de poids &gt; 4,5 kg/an</span>
+      <span class="pill pill-amber">Asthénie (auto-évaluée)</span>
+      <span class="pill pill-amber">Vitesse de marche 4m &lt; 0,8 m/s</span>
+      <span class="pill pill-amber">Perte de force musculaire</span>
+      <span class="pill pill-amber">Sédentarité</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 11 : IU DE L'ENFANT -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--blue);">IU de l'enfant</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-blue">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Épidémiologie
+      </div>
+      <div class="kv-row"><span class="kv-key">Prévalence &lt; 2 ans</span><span class="kv-val">1%</span></div>
+      <div class="kv-row"><span class="kv-key">Prévalence &lt; 16 ans</span><span class="kv-val">11%</span></div>
+      <div class="kv-row"><span class="kv-key">Sexe &lt; 6 mois</span><span class="kv-val">Garçon &gt; Fille</span></div>
+      <div class="kv-row"><span class="kv-key">Sexe &gt; 6 mois</span><span class="kv-val">Fille &gt; Garçon</span></div>
+      <div class="sub-title" style="margin-top:8px;">Facteurs favorisants</div>
+      <ul class="bullets">
+        <li>Reflux vésico-urétéral (RVU) — fonctionnel ou malformatif</li>
+        <li>Immaturité + anomalie de vidange vésicale</li>
+        <li>Constipation</li>
+        <li>Prépuce chez le nourrisson garçon</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-blue">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Clinique — quand évoquer une IU ?
+      </div>
+      <div class="sub-title">PNA — évoquer si :</div>
+      <ul class="bullets">
+        <li>Fièvre isolée &lt; 3 mois</li>
+        <li>Fièvre ≥ 48h sans foyer identifié</li>
+        <li>Fièvre + uropathie connue ou ATCD IU</li>
+        <li>&lt; 3 mois : difficultés alimentaires, vomissements, ictère, mauvaise prise de poids</li>
+        <li>Grand enfant : lombalgies fébriles</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">Cystite</div>
+      <ul class="bullets">
+        <li>SBAU : dysurie, pollakiurie, brûlures, urgenturie, urines malodorantes, incontinence, hématurie, douleur sus-pubienne</li>
+        <li>Apyrétique, pas de douleur lombaire</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan chez l'enfant
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">BU</div>
+        <ul class="bullets">
+          <li>Utilisable après 1 mois (avant : ECBU systématique)</li>
+          <li>Met en évidence leucocyturie &gt; 10 000/mL et nitrites</li>
+        </ul>
+        <div class="sub-title" style="margin-top:8px;">Seuils ECBU selon recueil</div>
+        <div class="kv-row"><span class="kv-key">Milieu de jet / sondage A/R</span><span class="kv-val">≥ 10³ UFC/mL</span></div>
+        <div class="kv-row"><span class="kv-key">Poche collectrice</span><span class="kv-val">≥ 10⁴ UFC/mL</span></div>
+        <div class="kv-row"><span class="kv-key">Ponction sus-pubienne</span><span class="kv-val">≥ 10² UFC/mL</span></div>
+        <div style="font-size:.76rem; color:var(--text-muted); margin-top:4px;">Culture plurimicrobienne = contamination</div>
+      </div>
+      <div>
+        <div class="sub-title">Imagerie</div>
+        <ul class="bullets">
+          <li><strong>Échographie rénale</strong> : systématique au 1er épisode de PNA</li>
+          <li>Cystographie : si écho anormale ou PNA récidivantes</li>
+          <li>Scintigraphie / IRM : cas particuliers (avis spécialiste)</li>
+        </ul>
+        <div class="sub-title" style="margin-top:8px;">Biologie (PNA)</div>
+        <ul class="bullets">
+          <li>PCT (associé au risque de RVU), CRP</li>
+          <li>Hémocultures : &lt; 3 mois et/ou signes de sepsis</li>
+          <li>PL : si hémoculture+, indication large &lt; 6 semaines</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon icon-blue">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement de la PNA de l'enfant
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-title">Voie IV (si &lt; 3 mois, FDR, signes de sévérité, doute observance)</div>
+        <ul class="bullets">
+          <li>Ceftriaxone ou céfotaxime (seul)</li>
+          <li>+ amikacine si signes de sévérité</li>
+          <li>Relais PO après 2–4j (apyrexie + ATBgramme) : céfixime ou cotrimoxazole (&gt; 1 mois)</li>
+          <li>Durée totale : <strong>10–14 jours</strong></li>
+        </ul>
+        <div class="alert alert-amber" style="margin-top:8px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Cocci G+ à l'examen direct → Entérocoque → <strong>amoxicilline</strong> (+ gentamicine si sepsis).</span>
+        </div>
+      </div>
+      <div>
+        <div class="sub-title">Voie orale d'emblée (&gt; 3 mois, sans FDR, sans sévérité)</div>
+        <ul class="bullets">
+          <li>Céfixime (adapter à l'ATBgramme)</li>
+          <li>Relais cotrimoxazole si sensible</li>
+        </ul>
+        <div class="sub-title" style="margin-top:8px;">Critères d'hospitalisation</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:4px;">
+          <span class="pill pill-red">&lt; 3 mois</span>
+          <span class="pill pill-red">Signes de sévérité</span>
+          <span class="pill pill-red">Surveillance difficile</span>
+        </div>
+        <div class="sub-title" style="margin-top:8px;">Cystite de l'enfant</div>
+        <ul class="bullets">
+          <li>Oral : céfixime, cotrimoxazole ou amox-clav</li>
+          <li>Durée : 3–5 jours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Valves de l'urèthre postérieur</strong> (nourrisson garçon) = <strong>URGENCE MÉDICO-CHIRURGICALE</strong>. Y penser devant : anomalie écho (vessie de lutte, dilatation des voies urinaires), anomalie fonction rénale, jet mictionnel anormal. Vérifier aussi la région sacrée et l'examen neurologique.</span>
+    </div>
+    <div class="sub-title" style="margin-top:8px;">Suivi et complications PNA</div>
+    <div class="grid2">
+      <ul class="bullets">
+        <li>Court terme : abcès, sepsis</li>
+        <li>Long terme : HTA si PNA répétées non traitées (cicatrices rénales)</li>
+        <li>Avis néphro-pédiatrique si anomalies mictionnelles, infections répétées, anomalie écho</li>
+      </ul>
+      <ul class="bullets">
+        <li>PCT élevé → risque de RVU associé</li>
+        <li>Cystographie si écho anormale ou 2ème PNA</li>
+        <li>Rechercher constipation, instabilité vésicale</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 12 : CYSTITES RÉCIDIVANTES -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--teal);">Cystites récidivantes</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Démarche diagnostique
+      </div>
+      <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">≥ 4 épisodes/an</span></div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> Diagnostic souvent posé abusivement. Prouver le caractère infectieux par ECBU. Le "vrai" diagnostic est rare.</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Calendrier mictionnel</strong> +++ (exclut hyperactivité vésicale idiopathique)</li>
+        <li>Débitmétrie urinaire</li>
+        <li>Échographie VU + résidu post-mictionnel</li>
+        <li>Femme ménopausée + SBAU + hématurie → <strong>chercher une tumeur vésicale</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon icon-teal">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Traitement et prévention
+      </div>
+      <div class="sub-title">Facteurs de risque (OR)</div>
+      <div class="kv-row"><span class="kv-key">Fréquence des rapports sexuels</span><span class="kv-val">OR 5,8</span></div>
+      <div class="kv-row"><span class="kv-key">ATCD cystite à 15 ans</span><span class="kv-val">OR 3,9</span></div>
+      <div class="kv-row"><span class="kv-key">Nouveau partenaire</span><span class="kv-val">OR 1,9</span></div>
+      <div class="kv-row"><span class="kv-key">Spermicide <em>(seul modifiable)</em></span><span class="kv-val">OR 1,8</span></div>
+      <div class="sub-title" style="margin-top:10px;">Mesures efficaces (preuve)</div>
+      <ul class="bullets">
+        <li><strong>Hydratation orale</strong> : seule mesure avec preuve formelle d'efficacité</li>
+        <li>Miction post-coïtale (intéressante, non prouvée)</li>
+        <li>Cranberry oral : 36 mg/j proanthocyanidine type A (pas le jus)</li>
+        <li>Estrogénothérapie locale (efficace chez la femme ménopausée)</li>
+      </ul>
+      <div class="sub-title" style="margin-top:8px;">Antibioprophylaxie (si &gt; 1 épisode/mois, après échec mesures)</div>
+      <ul class="bullets">
+        <li>Triméthoprime en continu</li>
+        <li>Fosfomycine-trométamol 1 sachet/semaine</li>
+        <li>Prise péri-coïtale si rapports = facteur déclenchant</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION 13 : POINTS-CLÉS -->
+  <div class="section-header">
+    <span class="section-badge" style="background: var(--red);">Points-clés &amp; Pièges</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="card card-left-red">
+    <div class="card-title">
+      <div class="card-icon icon-red">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Points tombables à l'ECNi
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Jamais de FQ pour une cystite, quel que soit le terrain.</span>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Colonisation = ne PAS traiter (sauf grossesse + chirurgie urologique).</span>
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>PNA obstructive = urgence. ATB + drainage simultanés. Ne jamais attendre le drainage pour débuter l'ATB.</span>
+        </div>
+      </div>
+      <div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Diabète = plus un facteur de risque de complication (nouvelles recommandations).</span>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>S. saprophyticus = nitrites BU négatifs. Femme jeune en été + SBAU + BU négative → ne pas éliminer l'IU.</span>
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <span>Colonisation gravidique ≠ colonisation habituelle : traiter par amoxicilline, pas de traitement probabiliste.</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-green" style="margin-top:4px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>Résumé thérapeutique :</strong> Cystite simple → fosfomycine monodose. PNA simple → FQ 7j. PNA grave → C3G IV + amikacine (10j). Colonisation enceinte → amoxicilline (adapté ATBgramme). IU masculine → 14j (FQ/C3G) ou 21j. Enfant PNA → céfixime ou C3G IV selon terrain (10–14j).</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
