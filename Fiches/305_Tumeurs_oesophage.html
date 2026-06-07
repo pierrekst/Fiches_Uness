@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 305 — Tumeurs de l'œsophage</title>
+<link rel="icon" href="../favicon.svg">
+<style>
+  :root {
+    --bg: #f5f6fa;
+    --card-bg: #ffffff;
+    --text: #1a1d23;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --purple: #534AB7;
+    --purple-light: #ede9ff;
+    --teal: #1D9E75;
+    --teal-light: #d1f5ea;
+    --coral: #D85A30;
+    --coral-light: #fde8df;
+    --blue: #378ADD;
+    --blue-light: #dbeeff;
+    --red: #E24B4A;
+    --red-light: #fde8e8;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111318;
+      --card-bg: #1c1f27;
+      --text: #e8eaf0;
+      --text-muted: #9ca3af;
+      --border: #2e3240;
+      --purple-light: #2d2860;
+      --teal-light: #0e3d2e;
+      --coral-light: #4a2215;
+      --blue-light: #1a3456;
+      --red-light: #4a1a1a;
+      --amber-light: #3a2700;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .88rem; line-height: 1.6; padding: 20px 16px 48px; }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  .header {
+    background: linear-gradient(135deg, #D85A30 0%, #E24B4A 50%, #b03060 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .header-tag { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .header h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+  .header p { font-size: .84rem; opacity: .9; line-height: 1.5; }
+
+  .card { background: var(--card-bg); border: .5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 14px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+  th { background: var(--border); padding: 8px 10px; text-align: left; font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); }
+  td { padding: 8px 10px; border-bottom: .5px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: .76rem; font-weight: 700; margin: 2px 3px 2px 0; }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-teal   { background: var(--teal-light);   color: var(--teal);   }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: .5px solid var(--border); font-size: .83rem; gap: 12px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-muted); flex: 1; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  .steps { list-style: none; counter-reset: step; padding: 0; }
+  .steps li { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+  .step-num { min-width: 24px; height: 24px; border-radius: 50%; background: var(--border); color: var(--text-muted); font-weight: 700; font-size: .78rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  ul.list { list-style: none; padding: 0; }
+  ul.list li { padding: 4px 0 4px 16px; position: relative; font-size: .83rem; }
+  ul.list li::before { content: '—'; position: absolute; left: 0; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Item 305 · Oncologie digestive</div>
+    <h1>Tumeurs de l'œsophage</h1>
+    <p>Deux types histologiques aux facteurs de risque distincts. Diagnostic tardif (la dysphagie traduit déjà une lésion évoluée). Bilan d'extension guidé par le type histologique. Pronostic sévère.</p>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Ce qu'il faut maîtriser
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Distinguer les <strong>2 types histologiques</strong> et leurs facteurs de risque respectifs — identifier les <strong>lésions précancéreuses</strong> (EBO, achalasie...) — interpréter la <strong>clinique</strong> (dysphagie progressive) — construire le <strong>bilan diagnostique et d'extension</strong> selon le type — poser les <strong>indications de la fibroscopie</strong>.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ÉPIDÉMIOLOGIE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Incidence France</span><span class="kv-val">5 500 nouveaux cas/an (stable)</span></div>
+    <div class="kv-row"><span class="kv-key">Sex-ratio</span><span class="kv-val">3 hommes : 1 femme</span></div>
+    <div class="kv-row"><span class="kv-key">Tendance épidermoïde</span><span class="kv-val">Incidence en diminution</span></div>
+    <div class="kv-row"><span class="kv-key">Tendance adénocarcinome</span><span class="kv-val">Forte augmentation (obésité, RGO)</span></div>
+  </div>
+
+  <hr>
+
+  <!-- TYPES HISTOLOGIQUES — TABLEAU COMPARATIF -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Les 2 types histologiques
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Carcinome épidermoïde</th>
+          <th>Adénocarcinome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Origine</strong></td>
+          <td>Dégénérescence de la muqueuse malpighienne</td>
+          <td>Dégénérescence d'une muqueuse glandulaire métaplasique</td>
+        </tr>
+        <tr>
+          <td><strong>Localisation</strong></td>
+          <td>1/3 moyen et supérieur</td>
+          <td>1/3 inférieur de l'œsophage</td>
+        </tr>
+        <tr>
+          <td><strong>Facteurs de risque principaux</strong></td>
+          <td><span class="pill pill-red">Alcool</span> <span class="pill pill-red">Tabac</span></td>
+          <td><span class="pill pill-amber">RGO → EBO</span> <span class="pill pill-amber">Surpoids</span></td>
+        </tr>
+        <tr>
+          <td><strong>Lésions précancéreuses</strong></td>
+          <td>Œsophagite caustique, radiothérapie médiastinale, achalasie</td>
+          <td>Endobrachyœsophage (EBO) = muqueuse de Barrett</td>
+        </tr>
+        <tr>
+          <td><strong>Tendance</strong></td>
+          <td>En diminution</td>
+          <td>En forte augmentation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- FACTEURS DE RISQUE -->
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        FR Épidermoïde
+      </div>
+      <div style="margin-bottom:8px;"><span class="pill pill-red">Alcool</span><span class="pill pill-red">Tabac</span> <span style="font-size:.77rem; color:var(--text-muted);">(principaux)</span></div>
+      <ul class="list">
+        <li>Œsophagite caustique ou post-radique</li>
+        <li>Radiothérapie médiastinale</li>
+        <li>Achalasie</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        FR Adénocarcinome
+      </div>
+      <div style="margin-bottom:8px;"><span class="pill pill-amber">RGO chronique → EBO</span></div>
+      <ul class="list">
+        <li>Surpoids (IMC &gt; 25 kg/m²)</li>
+        <li>Sexe masculin</li>
+        <li>Tabac</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EBO / Barrett -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Endobrachyœsophage (EBO) — Muqueuse de Barrett
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Remplacement muqueuse malpighienne par métaplasie intestinale</span></div>
+    <div class="kv-row"><span class="kv-key">Fréquence / RGO chronique</span><span class="kv-val">10 — 20 %</span></div>
+    <div style="margin-top:12px;">
+      <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em;">Séquence de cancérisation</div>
+      <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:.82rem; font-weight:600;">
+        <span class="pill pill-blue">EBO</span>
+        <span style="color:var(--text-muted);">→</span>
+        <span class="pill pill-amber">Dysplasie</span>
+        <span style="color:var(--text-muted);">→</span>
+        <span class="pill pill-amber">Cancer in situ</span>
+        <span style="color:var(--text-muted);">→</span>
+        <span class="pill pill-red">Cancer invasif</span>
+      </div>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Surveillance EBO :</strong> EOGD tous les <strong>2 à 5 ans</strong> selon l'étendue de l'EBO.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- CLINIQUE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Circonstances de découverte et clinique
+    </div>
+    <div class="grid2" style="margin-bottom:8px;">
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Phase asymptomatique</div>
+        <ul class="list">
+          <li>EOGD de surveillance EBO (tous les 2—5 ans)</li>
+          <li>Dépistage chez sujets alcoolo-tabagiques</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Signe cardinal</div>
+        <div class="alert alert-red" style="margin-bottom:0;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Dysphagie progressive</strong> aux solides puis aux liquides</div>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin: 12px 0 8px;">Signes associés</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Signe clinique</th>
+          <th>Signification / mécanisme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Perte de poids &gt; 5—10 %</td>
+          <td>Altération de l'état général — fréquente</td>
+        </tr>
+        <tr>
+          <td>Dysphonie</td>
+          <td>Envahissement du nerf récurrent</td>
+        </tr>
+        <tr>
+          <td>Toux après déglutition</td>
+          <td>Fistule œso-trachéale ou œso-bronchique</td>
+        </tr>
+        <tr>
+          <td>Douleur thoracique / dorsale</td>
+          <td>Envahissement médiastinal</td>
+        </tr>
+        <tr>
+          <td>Ganglion de Troisier</td>
+          <td>Adénopathie sus-claviculaire gauche = métastase</td>
+        </tr>
+        <tr>
+          <td>Hématémèse / méléna</td>
+          <td>Hémorragie digestive tumorale</td>
+        </tr>
+        <tr>
+          <td>Symptômes à distance</td>
+          <td>Métastases (foie, poumon, os...)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-red" style="margin-top:12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Toux après déglutition = urgence —</strong> évoquer une fistule œso-trachéale ou œso-bronchique.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- BILAN DIAGNOSTIQUE ET D'EXTENSION -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan diagnostique et d'extension
+    </div>
+
+    <div class="alert alert-blue" style="margin-bottom:14px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Examen de référence :</strong> EOGD avec biopsies multiples (~10) — diagnostic histologique + statut <strong>PD-L1</strong> (tous types, y compris en situation métastatique) + statut <strong>MSI</strong> (adénocarcinome bas œsophage uniquement)</div>
+    </div>
+
+    <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Bilan général — commun aux 2 types</div>
+    <div class="grid2" style="margin-bottom:14px;">
+      <ul class="list">
+        <li>Performance status OMS</li>
+        <li>Cinétique de perte de poids</li>
+        <li>Albumine sérique</li>
+        <li>Fonction rénale et hépatique</li>
+      </ul>
+      <ul class="list">
+        <li>Échocardiographie (fraction d'éjection)</li>
+        <li>EFR (fonction respiratoire)</li>
+      </ul>
+    </div>
+
+    <div style="font-size:.78rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Bilan d'extension selon le type histologique</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Examen</th>
+          <th>Épidermoïde</th>
+          <th>Adénocarcinome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>TDM TAP avec injection</td>
+          <td><span class="pill pill-teal">Oui</span> (+ cervical si 1/3 sup)</td>
+          <td><span class="pill pill-teal">Oui</span></td>
+        </tr>
+        <tr>
+          <td>TEP-scan 18-FDG</td>
+          <td><span class="pill pill-teal">Oui</span> (avant tt curatif)</td>
+          <td><span class="pill pill-red">Non systématique</span></td>
+        </tr>
+        <tr>
+          <td>Écho-endoscopie œsophagienne</td>
+          <td><span class="pill pill-amber">Si lésion franchissable</span></td>
+          <td><span class="pill pill-amber">Si lésion franchissable</span></td>
+        </tr>
+        <tr>
+          <td>Bilan ORL + bronchoscopie</td>
+          <td><span class="pill pill-teal">Oui</span> (2e cancer ORL/bronchique)</td>
+          <td><span class="pill pill-red">Non</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert alert-amber" style="margin-top:12px; margin-bottom:6px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> L'écho-endoscopie est indiquée seulement si la lésion est <strong>franchissable</strong> — elle évalue le caractère superficiel (T1) et oriente vers résection endoscopique vs chirurgie ± traitement néoadjuvant.</div>
+    </div>
+    <div class="alert alert-amber" style="margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> TEP-scan et bilan ORL/bronchique = <strong>épidermoïde uniquement</strong> (mêmes FR alcool+tabac → second cancer ORL ou bronchique fréquent).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- INDICATIONS FIBROSCOPIE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Indications de la fibroscopie œso-gastroduodénale
+    </div>
+    <ol class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div><strong>Toute dysphagie</strong> — EOGD systématique, surtout chez sujet à risque</div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>
+          <strong>Surveillance des situations à risque :</strong>
+          <ul class="list" style="margin-top:4px;">
+            <li>EBO : EOGD tous les <strong>2 à 5 ans</strong> selon étendue</li>
+            <li>Dépistage : double intoxication <strong>alcool + tabac</strong></li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div><strong>Hématémèse, méléna</strong> ou <strong>anémie ferriprive</strong></div>
+      </li>
+    </ol>
+  </div>
+
+  <hr>
+
+  <!-- POINTS CLÉS -->
+  <div class="card" style="border-left: 3px solid var(--teal);">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Points-clés à retenir
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>2 types distincts :</strong> épidermoïde (alcool+tabac, 1/3 moyen/sup, en baisse) vs adénocarcinome (RGO→EBO, 1/3 inf, en hausse) — tendances inverses à connaître.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>EBO = état précancéreux :</strong> 10—20 % des RGO chroniques — surveillance EOGD tous les 2—5 ans — séquence EBO → dysplasie → cancer invasif.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Biopsies multiples (~10) indispensables :</strong> diagnostic + PD-L1 (tous types) + MSI (adénocarcinome bas œsophage uniquement).</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> la dysphagie progressive est le signe cardinal mais traduit une tumeur déjà évoluée (sténose &gt; 2/3 de la lumière).</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> TEP-scan 18-FDG et bilan ORL + bronchoscopie = <strong>épidermoïde seulement</strong> (second cancer ORL/bronchique sur mêmes FR).</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence :</strong> toux après déglutition = évoquer une <strong>fistule œso-trachéale ou œso-bronchique</strong>.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
