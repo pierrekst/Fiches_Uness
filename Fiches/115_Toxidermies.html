@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 115 — Toxidermies</title>
+  <link rel="icon" href="../Config/favicon.svg">
+  <style>
+    :root {
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --border: #e2e5ef;
+      --text: #1a1d2e;
+      --text-muted: #6b7280;
+      --purple: #534AB7;
+      --purple-light: #edeeff;
+      --teal: #1D9E75;
+      --teal-light: #e6f7f1;
+      --coral: #D85A30;
+      --coral-light: #fdf0eb;
+      --blue: #378ADD;
+      --blue-light: #eaf3fd;
+      --red: #E24B4A;
+      --red-light: #fdeaea;
+      --amber: #D97706;
+      --amber-light: #fef3cd;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12131a; --surface: #1e2030; --border: #2e3148; --text: #e8eaf6; --text-muted: #9ca3af;
+        --purple-light: #2a2760; --teal-light: #0d3d2b; --coral-light: #4a2518;
+        --blue-light: #1a3050; --red-light: #4a1515; --amber-light: #3d2a00;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; font-size: .9rem; line-height: 1.6; padding: 16px; }
+    .page { max-width: 920px; margin: 0 auto; }
+
+    .header { background: linear-gradient(135deg, #534AB7 0%, #D85A30 100%); border-radius: 16px; padding: 28px 32px; color: white; margin-bottom: 24px; }
+    .header-tag { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; opacity: .8; margin-bottom: 6px; }
+    .header h1 { font-size: 1.55rem; font-weight: 800; margin-bottom: 10px; }
+    .header .overview { font-size: .84rem; opacity: .92; line-height: 1.65; }
+
+    .card { background: var(--surface); border: .5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+    .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+    .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+    .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+    .alert strong { font-weight:800; }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+    .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+    .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+    .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+    .alert-red   .alert-icon svg { stroke:var(--red);   }
+    .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+    .alert-green .alert-icon svg { stroke:var(--teal);  }
+    .alert-amber .alert-icon svg { stroke:var(--amber); }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-bottom: 10px; }
+    th { background: var(--purple); color: white; padding: 7px 10px; text-align: left; font-weight: 700; font-size: .78rem; }
+    th:first-child { border-radius: 7px 0 0 0; }
+    th:last-child { border-radius: 0 7px 0 0; }
+    td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: rgba(83,74,183,.04); }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .pill { padding: 3px 10px; border-radius: 20px; font-size: .75rem; font-weight: 600; }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-red    { background: var(--red-light);    color: var(--red); }
+    .pill-green  { background: var(--teal-light);   color: var(--teal); }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+    .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+    .kv-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .83rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-muted); font-size: .78rem; }
+    .kv-val { font-weight: 700; color: var(--text); }
+
+    ul { padding-left: 18px; margin-bottom: 8px; }
+    li { margin-bottom: 4px; font-size: .84rem; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+    .card-grave  { border-left: 4px solid var(--red); }
+    .card-urgent { border-left: 4px solid var(--amber); }
+
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .section-header h2 { font-size: .95rem; font-weight: 800; color: var(--text); }
+    .text-sm { font-size: .78rem; color: var(--text-muted); }
+    .sub-label { font-size: .82rem; font-weight: 700; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Item 115 — Dermatologie</div>
+    <h1>Toxidermies</h1>
+    <div class="overview">
+      Ce chapitre couvre l'ensemble des réactions cutanées médicamenteuses : des plus fréquentes et bénignes (exanthème maculo-papuleux) aux plus graves et potentiellement mortelles (nécrolyse épidermique toxique, DRESS, anaphylaxie). L'enjeu clinique est triple : <strong>reconnaître</strong> la forme clinique, <strong>imputer</strong> le médicament responsable selon la chronologie, et <strong>décider</strong> de son arrêt urgent ou non.
+    </div>
+  </div>
+
+  <!-- DÉFINITION -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Définition
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Tout effet cutané secondaire</strong> des médicaments administrés à dose thérapeutique, quelle que soit la voie (topique, per os, SC, IV…). Tout médicament peut être responsable.</div>
+    </div>
+  </div>
+
+  <!-- MÉCANISMES -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Mécanismes — Non immunologique vs Immunologique
+    </div>
+    <table>
+      <tr>
+        <th>Caractéristique</th>
+        <th>Non immunologique</th>
+        <th>Immunologique</th>
+      </tr>
+      <tr>
+        <td>Mécanisme</td>
+        <td>Effet pharmacodynamique direct</td>
+        <td>Hypersensibilité IgE ou retardée</td>
+      </tr>
+      <tr>
+        <td>Dose-dépendant</td>
+        <td><span class="pill pill-green">Oui</span></td>
+        <td><span class="pill pill-red">Non</span></td>
+      </tr>
+      <tr>
+        <td>Fréquence</td>
+        <td>Fréquent</td>
+        <td>Peu fréquent</td>
+      </tr>
+      <tr>
+        <td>Prévisible</td>
+        <td><span class="pill pill-green">Oui</span></td>
+        <td><span class="pill pill-red">Non</span></td>
+      </tr>
+      <tr>
+        <td>Délai</td>
+        <td>Variable</td>
+        <td>Plusieurs jours à semaines</td>
+      </tr>
+      <tr>
+        <td>Mortalité</td>
+        <td>Faible</td>
+        <td>Jusqu'à <strong>25 %</strong> (nécrolyse épidermique)</td>
+      </tr>
+      <tr>
+        <td>Exemples</td>
+        <td>Chéilite sous rétinoïdes, alopécie post-antimitotiques</td>
+        <td>DRESS à l'allopurinol</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- ÉPIDÉMIOLOGIE -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </span>
+      Épidémiologie &amp; Pronostic
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="kv-row"><span class="kv-key">Prévalence hospitalière</span><span class="kv-val">0–8 % des patients exposés</span></div>
+        <div class="kv-row"><span class="kv-key">Formes bénignes</span><span class="kv-val">&gt; 90 %</span></div>
+        <div class="kv-row"><span class="kv-key">Formes graves</span><span class="kv-val">1/10 000 – 1/1 000 000</span></div>
+      </div>
+      <div>
+        <div class="kv-row"><span class="kv-key">Exanthème maculo-papuleux</span><span class="kv-val">40–60 % des toxidermies</span></div>
+        <div class="kv-row"><span class="kv-key">Urticaires</span><span class="kv-val">20–30 % des toxidermies</span></div>
+      </div>
+    </div>
+    <div class="sub-label">Facteurs favorisants</div>
+    <div class="pills">
+      <span class="pill pill-purple">Infection VIH</span>
+      <span class="pill pill-purple">Immunosuppression</span>
+      <span class="pill pill-amber">DRESS : réactivation HHV6, HHV7, EBV, CMV</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- FORMES CLINIQUES — TABLEAU CENTRAL -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Formes cliniques — Tableau de synthèse
+    </div>
+    <table>
+      <tr>
+        <th>Forme</th>
+        <th>Sémiologie clé</th>
+        <th>Délai</th>
+      </tr>
+      <tr>
+        <td><strong>Exanthème maculo-papuleux</strong></td>
+        <td>Macules + papules, morbilliforme (intervalles de peau saine) ou scarlatiniforme (sans intervalle). Pas d'énanthème.</td>
+        <td>4–14 j</td>
+      </tr>
+      <tr>
+        <td><strong>PEAG</strong><br><span class="text-sm">Pustulose exanthématique aiguë généralisée</span></td>
+        <td>Érythème scarlatiniforme dans les grands plis + pustules amicrobiennes. Fièvre, AEG. Muqueuses rarement atteintes.</td>
+        <td>1–11 j</td>
+      </tr>
+      <tr>
+        <td><strong>Urticaire</strong></td>
+        <td>Papules œdémateuses prurigineuses, labiles (disparaissent en 24–48 h sans séquelle).</td>
+        <td>Minutes–heures</td>
+      </tr>
+      <tr>
+        <td><strong>Nécrolyse épidermique toxique</strong><br><span class="text-sm">SJS / Lyell</span></td>
+        <td>Érosions muqueuses multifocales + bulles cutanées ± lambeaux. Signe de Nikolsky positif.<br>SJS &lt; 10 % — Lyell ≥ 30 % de surface décollée.</td>
+        <td>4–28 j</td>
+      </tr>
+      <tr>
+        <td><strong>Érythème pigmenté fixe</strong></td>
+        <td>1–10 macules érythémateuses arrondies, génitales ou labiales. <strong>Récidive au même endroit.</strong> Peut évoluer en bulle.</td>
+        <td>&lt; 48 h</td>
+      </tr>
+      <tr>
+        <td><strong>Phototoxicité</strong></td>
+        <td>Érythème solaire intense ± bulles, <em>strictement</em> photo-exposé. Dose-dépendant (médicament + UVA).</td>
+        <td>Quelques heures</td>
+      </tr>
+      <tr>
+        <td><strong>Photoallergie</strong></td>
+        <td>Eczéma prurigineux. Commence en zones exposées puis <em>déborde</em> sur zones photo-protégées.</td>
+        <td>7–21 j</td>
+      </tr>
+      <tr>
+        <td><strong>Réactions psoriasiformes</strong></td>
+        <td>Lésions érythémato-squameuses ± pustuleuses (anti-TNF-alpha, 5 % des patients). Palmoplantaires / cuir chevelu.</td>
+        <td>Semaines–mois</td>
+      </tr>
+      <tr>
+        <td><strong>Réactions acnéiformes</strong></td>
+        <td>Papulo-pustules visage/tronc. Toxicité spécifique des anti-EGFR.</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td><strong>Lupus médicamenteux</strong></td>
+        <td>Lupus subaigu annulaire érythémateux ± érosif, décolleté et dos.</td>
+        <td>Semaines–mois</td>
+      </tr>
+      <tr>
+        <td><strong>DRESS</strong></td>
+        <td>Exanthème infiltré ± érythrodermie + fièvre + éosinophilie + adénopathies + atteintes viscérales.</td>
+        <td>2–6 semaines</td>
+      </tr>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- PHOTOSENSIBILITÉ -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </span>
+      Photosensibilité — Phototoxicité vs Photo-allergie
+    </div>
+    <table>
+      <tr>
+        <th>Critère</th>
+        <th>Phototoxicité</th>
+        <th>Photo-allergie</th>
+      </tr>
+      <tr>
+        <td>Mécanisme</td>
+        <td>Toxique direct (non immunologique)</td>
+        <td>Immunologique retardée</td>
+      </tr>
+      <tr>
+        <td>Délai</td>
+        <td>Quelques <strong>heures</strong> après exposition</td>
+        <td><strong>7–21 jours</strong></td>
+      </tr>
+      <tr>
+        <td>Dose-dépendant</td>
+        <td><span class="pill pill-green">Oui (médicament + UVA)</span></td>
+        <td><span class="pill pill-red">Non — exposition minime suffisante</span></td>
+      </tr>
+      <tr>
+        <td>Localisation</td>
+        <td>Strictement photo-exposée</td>
+        <td>Débute en photo-exposé puis s'étend aux zones protégées</td>
+      </tr>
+      <tr>
+        <td>Aspect</td>
+        <td>Coup de soleil intense ± bulles</td>
+        <td>Eczéma prurigineux polymorphe</td>
+      </tr>
+    </table>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Lésions photo-distribuées = zones découvertes (visage, décolleté, extrémités). L'extension au-delà de ces zones oriente vers la photo-allergie.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SECTION FORMES GRAVES -->
+  <div class="section-header">
+    <div style="width:32px;height:32px;border-radius:8px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <svg viewBox="0 0 24 24" style="width:17px;height:17px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <h2>Formes Graves — à reconnaître en urgence</h2>
+  </div>
+
+  <!-- NET -->
+  <div class="card card-grave">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Nécrolyse Épidermique Toxique — SJS / Lyell
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="kv-row"><span class="kv-key">Délai de survenue</span><span class="kv-val">4–28 jours</span></div>
+        <div class="kv-row"><span class="kv-key">Stevens-Johnson (SJS)</span><span class="kv-val">&lt; 10 % surface décollée</span></div>
+        <div class="kv-row"><span class="kv-key">Overlap SJS-Lyell</span><span class="kv-val">10–30 %</span></div>
+        <div class="kv-row"><span class="kv-key">Lyell</span><span class="kv-val">≥ 30 % surface décollée</span></div>
+        <div class="kv-row"><span class="kv-key">Mortalité</span><span class="kv-val">Jusqu'à 25 %</span></div>
+        <div class="kv-row"><span class="kv-key">Ré-épithélialisation</span><span class="kv-val">10–30 jours</span></div>
+      </div>
+      <div>
+        <div class="sub-label" style="color:var(--red)">Signes initiaux (peu spécifiques)</div>
+        <ul>
+          <li>Fièvre, altération état général</li>
+          <li>Brûlures oculaires, pharyngite</li>
+          <li>Éruption érythémateuse douloureuse</li>
+        </ul>
+        <div class="sub-label" style="color:var(--red); margin-top:8px;">Phase d'état</div>
+        <ul>
+          <li><strong>Érosions muqueuses multifocales</strong></li>
+          <li><strong>Bulles cutanées ± lambeaux</strong></li>
+          <li><strong>Signe de Nikolsky</strong> — lambeaux d'épiderme se détachent au frottement de la peau saine</li>
+          <li>Atteintes viscérales possibles : nécrose épithélium bronchique ou intestinal</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Séquelles fréquentes :</strong> baisse de l'acuité visuelle, photophobie, troubles pigmentaires, cicatrices, syndrome de stress post-traumatique.</div>
+    </div>
+  </div>
+
+  <!-- DRESS -->
+  <div class="card card-grave">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      DRESS — Drug Reaction with Eosinophilia and Systemic Symptoms
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="kv-row"><span class="kv-key">Délai caractéristique</span><span class="kv-val">2–6 semaines</span></div>
+        <div class="kv-row"><span class="kv-key">Réactivation virale associée</span><span class="kv-val">HHV6, HHV7, EBV, CMV</span></div>
+        <div style="margin-top:10px;">
+          <div class="sub-label" style="color:var(--red)">Critères diagnostiques</div>
+          <div class="pills">
+            <span class="pill pill-red">Hyper-éosinophilie</span>
+            <span class="pill pill-red">Lymphocytose + sd mononucléosique</span>
+            <span class="pill pill-red">Exanthème infiltré ± érythrodermie</span>
+            <span class="pill pill-red">Fièvre élevée</span>
+            <span class="pill pill-red">Adénopathies diffuses</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sub-label" style="color:var(--red)">Atteintes viscérales potentiellement mortelles</div>
+        <div class="pills">
+          <span class="pill pill-coral">Hépatite</span>
+          <span class="pill pill-coral">Néphropathie interstitielle</span>
+          <span class="pill pill-coral">Pneumopathie interstitielle</span>
+          <span class="pill pill-coral">Myocardite</span>
+          <span class="pill pill-coral">Sd activation macrophagique</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Délai 2–6 semaines — incriminer un médicament introduit <em>longtemps avant</em> l'éruption. Le médicament responsable n'est pas forcément le plus récent.</div>
+    </div>
+  </div>
+
+  <!-- URTICAIRE / ANAPHYLAXIE -->
+  <div class="card card-urgent">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Urticaire — Angioœdème — Anaphylaxie
+    </div>
+    <table>
+      <tr>
+        <th>Critère</th>
+        <th>Urticaire non immunologique</th>
+        <th>Urticaire immunologique (IgE)</th>
+      </tr>
+      <tr>
+        <td>Mécanisme</td>
+        <td>Activation directe médiateurs de l'inflammation<br><span class="text-sm">AINS, aspirine, codéine…</span></td>
+        <td>Hypersensibilité immédiate IgE-médiée</td>
+      </tr>
+      <tr>
+        <td>Première prise possible ?</td>
+        <td>Oui — dose-dépendante, inconstante</td>
+        <td>Non — nécessite sensibilisation préalable</td>
+      </tr>
+      <tr>
+        <td>Contre-indication formelle</td>
+        <td><span class="pill pill-amber">Non systématique</span></td>
+        <td><span class="pill pill-red">Oui — risque anaphylaxie</span></td>
+      </tr>
+    </table>
+    <div class="sub-label" style="margin-top:8px;">Angioœdème = urticaire profonde touchant les muqueuses — signes d'anaphylaxie à rechercher systématiquement</div>
+    <div class="pills" style="margin-top:6px;">
+      <span class="pill pill-red">Hypersialorrhée, dysphonie, dyspnée, bronchospasme</span>
+      <span class="pill pill-red">Tachycardie, hypotension</span>
+      <span class="pill pill-red">Nausées, vomissements, diarrhées</span>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence :</strong> Toute réaction anaphylactique impose un traitement immédiat (items 187 &amp; 332).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- IMPUTABILITÉ -->
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Imputabilité médicamenteuse
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sub-label" style="color:var(--teal)">Imputabilité intrinsèque (patient)</div>
+        <ul>
+          <li>Chronologie compatible (délai caractéristique selon la forme)</li>
+          <li>Évolution favorable à l'arrêt du médicament suspect</li>
+          <li>Antécédent de toxidermie au même médicament</li>
+          <li>Sémiologie compatible avec la forme clinique</li>
+        </ul>
+      </div>
+      <div>
+        <div class="sub-label" style="color:var(--blue)">Imputabilité extrinsèque (médicament)</div>
+        <ul>
+          <li>Notoriété du médicament</li>
+          <li>Accidents identiques déjà rapportés pour ce médicament</li>
+        </ul>
+        <div class="alert alert-blue" style="margin-top:10px;">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div><strong>Conclusion :</strong> identifier le médicament suspect → contre-indication + remise d'une carte d'allergie.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- POINTS-CLÉS -->
+  <div class="card" style="border-left:4px solid var(--teal)">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Points-clés à retenir
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Forme la plus fréquente :</strong> exanthème maculo-papuleux (40–60 % des toxidermies). Plus de 90 % des toxidermies sont bénignes.</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Formes graves à reconnaître :</strong> NET (SJS/Lyell), DRESS, anaphylaxie — toutes imposent l'arrêt immédiat du médicament. Mortalité NET jusqu'à 25 %.</div>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>NET — signe de Nikolsky :</strong> lambeaux d'épiderme se détachant au frottement de la peau saine. SJS &lt; 10 % — Lyell ≥ 30 % de surface corporelle décollée.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège DRESS :</strong> délai 2–6 semaines. Le médicament responsable n'est pas forcément le plus récent — remonter toutes les introductions des 6 dernières semaines.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège urticaire :</strong> urticaire immunologique (IgE) = contre-indication formelle (risque anaphylaxie). Urticaire non immunologique = non systématique.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège érythème pigmenté fixe :</strong> récidive systématiquement au <em>même endroit</em> à chaque nouvelle prise. Délai &lt; 48 h. Localisation génitale ou labiale préférentielle.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Photosensibilité :</strong> phototoxicité = précoce (heures), dose-dépendante, strictement photo-exposée. Photoallergie = tardive (7–21 j), déborde en zones protégées.</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

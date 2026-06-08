@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 112 — Dermatose bulleuse</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #ede9fb;
+    --teal: #1D9E75;
+    --teal-light: #d4f5eb;
+    --coral: #D85A30;
+    --coral-light: #fce8e0;
+    --blue: #378ADD;
+    --blue-light: #dceeff;
+    --red: #E24B4A;
+    --red-light: #fde8e8;
+    --amber: #D97706;
+    --amber-light: #fef3c7;
+    --text: #1e293b;
+    --text2: #64748b;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .875rem; color: var(--text); background: var(--bg); padding: 16px; }
+  .page { max-width: 920px; margin: 0 auto; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: white; }
+  .header-num { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; opacity: .8; margin-bottom: 4px; }
+  .header-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+  .header-desc { font-size: .84rem; opacity: .92; line-height: 1.65; }
+
+  .card { background: var(--white); border: 0.5px solid var(--border); border-radius: 14px; padding: 18px 20px; margin-bottom: 16px; }
+  .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+  .alert strong { font-weight: 800; }
+  .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red);   }
+  .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue);  }
+  .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+  .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal);  }
+  .alert-red   .alert-icon svg { stroke: var(--red);   }
+  .alert-blue  .alert-icon svg { stroke: var(--blue);  }
+  .alert-green .alert-icon svg { stroke: var(--teal);  }
+  .alert-amber .alert-icon svg { stroke: var(--amber); }
+  .alert-teal  .alert-icon svg { stroke: var(--teal);  }
+  .alert-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .pill { padding: 3px 10px; border-radius: 20px; font-size: .78rem; font-weight: 600; }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+  th { background: var(--bg); font-weight: 700; padding: 8px 10px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 7px 10px; border: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  .td-label { font-weight: 700; background: var(--bg) !important; white-space: nowrap; }
+  .th-teal   { background: var(--teal-light)   !important; color: var(--teal);   }
+  .th-purple { background: var(--purple-light) !important; color: var(--purple); }
+  .th-blue   { background: var(--blue-light)   !important; color: var(--blue);   }
+
+  .kv-row { display: flex; align-items: baseline; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .82rem; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { font-weight: 700; min-width: 120px; flex-shrink: 0; color: var(--text2); }
+  .kv-val { color: var(--text); }
+
+  ul { padding-left: 18px; }
+  li { margin-bottom: 5px; line-height: 1.55; }
+
+  .steps { list-style: none; padding: 0; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e2e8f0; color: var(--text2); font-size: .78rem; font-weight: 800; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .step-body { flex: 1; font-size: .84rem; line-height: 1.55; }
+
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin: 24px 0 14px; display: flex; align-items: center; gap: 10px; }
+  .section-num { background: var(--purple); color: white; width: 26px; height: 26px; border-radius: 8px; font-size: .8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text: #e2e8f0; --text2: #94a3b8; --border: #334155; --bg: #0f172a; --white: #1e293b;
+    }
+    tr:nth-child(even) td { background: #253347; }
+    .td-label { background: #1e293b !important; }
+    th { background: #1e293b; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 112</div>
+  <div class="header-title">Dermatose bulleuse touchant la peau et/ou les muqueuses externes</div>
+  <div class="header-desc">
+    Maîtriser le diagnostic des dermatoses bulleuses auto-immunes (pemphigoïde bulleuse vs pemphigus vulgaire vs pemphigus superficiel) et non auto-immunes.
+    Savoir utiliser les deux biopsies cutanées — histologie standard et immunofluorescence directe — comme pivot diagnostique.
+    Connaître les arguments différentiels cliniques, biologiques, histologiques et immunologiques entre les deux grands groupes.
+    Identifier les autres causes de bulles (toxiques, thermiques, infectieuses, vascularites).
+  </div>
+</div>
+
+<!-- SECTION 1 : Définitions -->
+<div class="section-title">
+  <div class="section-num">1</div>
+  Définitions et physiopathologie
+</div>
+
+<div class="grid2">
+  <div class="card" style="border-left:3px solid var(--teal); margin-bottom:0;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Bulle sous-épidermique
+    </div>
+    <div class="kv-row"><span class="kv-key">Siège du clivage</span><span class="kv-val">Sous l'épiderme</span></div>
+    <div class="kv-row"><span class="kv-key">Toit / plancher</span><span class="kv-val">Épiderme entier / derme</span></div>
+    <div class="kv-row"><span class="kv-key">Aspect clinique</span><span class="kv-val"><strong>Tendue</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Groupe DBAI</span><span class="kv-val">Pemphigoïdes</span></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--purple); margin-bottom:0;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Bulle intra-épidermique
+    </div>
+    <div class="kv-row"><span class="kv-key">Siège du clivage</span><span class="kv-val">Dans l'épiderme</span></div>
+    <div class="kv-row"><span class="kv-key">Toit / plancher</span><span class="kv-val">Tous deux dans l'épiderme</span></div>
+    <div class="kv-row"><span class="kv-key">Aspect clinique</span><span class="kv-val"><strong>Flasque, fragile</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Groupe DBAI</span><span class="kv-val">Pemphigus</span></div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définition d'une DBAI
+  </div>
+  <p style="font-size:.84rem; line-height:1.65;">Présence d'<strong>immunoglobulines (auto-anticorps) déposées à la jonction dermo-épidermique (JDE)</strong> ou à la <strong>surface des kératinocytes</strong>. Lésions cutanées ou muqueuses bulleuses.</p>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Signes d'appel :</strong> bulles, érosions post-bulleuses, décollement en linge mouillé, <strong>signe de Nikolsky</strong> (détachement épidermique sur peau péri-lésionnelle saine au frottage). Aussi : plaques urticariennes, lésions eczématiformes, érosions muqueuses (buccale, génitale, anale, conjonctivale, nasale, ORL, œsophagienne).</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : Diagnostic -->
+<div class="section-title">
+  <div class="section-num">2</div>
+  Démarche diagnostique — les 2 biopsies indispensables
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Protocole biopsique
+  </div>
+  <ol class="steps">
+    <li class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Biopsie pour histologie standard :</strong> localise le clivage (intra-épidermique ou sous-épidermique) — ne précise <em>pas</em> le mécanisme auto-immun</div>
+    </li>
+    <li class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Biopsie pour immunofluorescence directe (IFD) :</strong> recherche les auto-anticorps in situ<br>— IFD <strong>positive → affirme</strong> la DBAI<br>— IFD <strong>négative → élimine formellement</strong> la DBAI</div>
+    </li>
+  </ol>
+</div>
+
+<div class="grid2">
+  <div class="card" style="margin-bottom:0;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      IFD — Pemphigoïde bulleuse
+    </div>
+    <p style="font-size:.84rem; line-height:1.55;">Dépôt <strong>linéaire</strong> IgG + C3 à la <strong>JDE</strong></p>
+    <div style="margin-top:8px;">
+      <div class="kv-row"><span class="kv-key">IFI</span><span class="kv-val">Ac anti-JDE circulants</span></div>
+      <div class="kv-row"><span class="kv-key">ELISA</span><span class="kv-val"><strong>BP180 + BP230</strong></span></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:0;">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      IFD — Pemphigus
+    </div>
+    <p style="font-size:.84rem; line-height:1.55;">IgG + C3 à la <strong>surface des kératinocytes</strong> (aspect inter-cellulaire / résille)</p>
+    <div style="margin-top:8px;">
+      <div class="kv-row"><span class="kv-key">IFI</span><span class="kv-val">Ac anti-substance intercellulaire</span></div>
+      <div class="kv-row"><span class="kv-key">ELISA</span><span class="kv-val"><strong>Desmogléine 3</strong> (PV) / <strong>Desmogléine 1</strong> (PS)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber" style="margin-top:14px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> L'IFI et la sérologie ELISA (anticorps circulants) sont des examens de <em>confirmation</em> — c'est l'<strong>IFD qui fait foi</strong> pour affirmer ou exclure le diagnostic de DBAI.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : Tableau comparatif -->
+<div class="section-title">
+  <div class="section-num">3</div>
+  Comparatif — Pemphigoïde bulleuse vs Pemphigus
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Tableau comparatif complet
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%"></th>
+        <th class="th-teal">Pemphigoïde bulleuse</th>
+        <th class="th-purple">Pemphigus vulgaire</th>
+        <th class="th-blue">Pemphigus superficiel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-label">Terrain</td>
+        <td><strong>&gt;70 ans</strong>, mauvais état général</td>
+        <td>~<strong>45 ans</strong></td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td class="td-label">Type de bulle</td>
+        <td>Sous-épidermique<br><strong>Tendue</strong></td>
+        <td>Intra-épidermique supra-basale<br><strong>Flasque</strong></td>
+        <td>Intra-épidermique sous-cornée<br>Squamo-croûteuse / kératosique</td>
+      </tr>
+      <tr>
+        <td class="td-label">Muqueuses</td>
+        <td><strong>Épargnées</strong> (+ tête et cou)</td>
+        <td><strong>Érosions douloureuses</strong> buccale, génitale, anale, nasale, conjonctivale</td>
+        <td><strong>Absentes</strong></td>
+      </tr>
+      <tr>
+        <td class="td-label">Peau</td>
+        <td>Racine des membres, faces de flexion ; précédée de lésions eczématiformes/urticariennes</td>
+        <td>Bulles sur peau non inflammatoire, Nikolsky +</td>
+        <td>Lésions squamo-croûteuses diffuses</td>
+      </tr>
+      <tr>
+        <td class="td-label">Prurit</td>
+        <td><strong>Intense</strong></td>
+        <td>Absent</td>
+        <td>Absent</td>
+      </tr>
+      <tr>
+        <td class="td-label">Biologie</td>
+        <td><strong>Hyperéosinophilie</strong></td>
+        <td>—</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="td-label">Histologie</td>
+        <td>Bulle sous-épidermique + infiltrat PNE</td>
+        <td>Bulle intra-épidermique + <strong>acantholyse</strong> (supra-basale)</td>
+        <td>Bulle intra-épidermique sous-cornée</td>
+      </tr>
+      <tr>
+        <td class="td-label">IFD</td>
+        <td>Dépôt <strong>linéaire</strong> IgG + C3 à la <strong>JDE</strong></td>
+        <td colspan="2" style="vertical-align:middle; text-align:center;">IgG + C3 surface des kératinocytes — aspect <strong>résille / inter-cellulaire</strong></td>
+      </tr>
+      <tr>
+        <td class="td-label">IFI</td>
+        <td>Ac circulants anti-JDE</td>
+        <td colspan="2" style="vertical-align:middle; text-align:center;">Ac circulants anti-substance intercellulaire</td>
+      </tr>
+      <tr>
+        <td class="td-label">Antigènes (ELISA)</td>
+        <td><strong>BP180 + BP230</strong></td>
+        <td><strong>Desmogléine 3</strong></td>
+        <td><strong>Desmogléine 1</strong></td>
+      </tr>
+      <tr>
+        <td class="td-label">Associations</td>
+        <td>Personne âgée polymédicamentée</td>
+        <td>Médicamenteux possible ; autre maladie auto-immune</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : Autres étiologies -->
+<div class="section-title">
+  <div class="section-num">4</div>
+  Autres étiologies des maladies bulleuses (IFD négative)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Causes non auto-immunes
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:40%">Étiologie</th>
+        <th>Éléments distinctifs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Toxidermie bulleuse</strong> (Lyell, Stevens-Johnson)</td>
+        <td>Prise médicamenteuse récente, décollement épidermique étendu → cf. item 115</td>
+      </tr>
+      <tr>
+        <td><strong>Érythème polymorphe bulleux</strong></td>
+        <td>Lésions en cibles ; souvent post-infectieux (HSV, mycoplasme) → cf. item 115</td>
+      </tr>
+      <tr>
+        <td><strong>Bulles thermiques</strong></td>
+        <td>Après froid, chaleur ou frottement intense (ex. : ampoule)</td>
+      </tr>
+      <tr>
+        <td><strong>Bulles caustiques</strong></td>
+        <td>Contact avec substance chimique (acide, base)</td>
+      </tr>
+      <tr>
+        <td><strong>Phytophotodermatose</strong></td>
+        <td>Lésions bulleuses sur zones de contact avec plante + exposition UV</td>
+      </tr>
+      <tr>
+        <td><strong>Coup de soleil</strong></td>
+        <td>Érythème → bulles après exposition solaire intense</td>
+      </tr>
+      <tr>
+        <td><strong>Piqûre d'insecte</strong></td>
+        <td>Bulles au centre de lésions violacées, surtout membres inférieurs</td>
+      </tr>
+      <tr>
+        <td><strong>Vascularite</strong></td>
+        <td>Contexte systémique, purpura vasculaire → cf. item 193</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence :</strong> Le syndrome de Lyell (toxidermie avec décollement &gt;30 % de la surface corporelle) est une urgence vitale — mortalité 30 %. Évoquer dès qu'un médicament introduit récemment est retrouvé.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : Points-clés -->
+<div class="section-title">
+  <div class="section-num">5</div>
+  Points-clés à retenir
+</div>
+
+<div class="card" style="border-left:3px solid var(--teal);">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse ECNi
+  </div>
+  <ul style="font-size:.84rem;">
+    <li><strong>Tendue = sous-épidermique = pemphigoïde ; flasque = intra-épidermique = pemphigus</strong></li>
+    <li>2 biopsies systématiques : histologie standard + IFD (peau péri-lésionnelle ou saine)</li>
+    <li><strong>IFD négative = élimine formellement toute DBAI</strong> — c'est l'examen pivot</li>
+    <li>Pemphigoïde bulleuse : &gt;70 ans, prurit intense, bulles tendues sur faces de flexion, <strong>hyperéosinophilie</strong>, muqueuses épargnées</li>
+    <li>Pemphigus vulgaire : ~45 ans, <strong>érosions buccales douloureuses en premier</strong>, bulles cutanées secondaires, Nikolsky +</li>
+    <li>Pemphigus superficiel : pas de muqueuse, lésions squamo-croûteuses uniquement</li>
+    <li>Antigènes cibles : <strong>BP180/BP230</strong> (pemphigoïde) — <strong>Desmogléine 3</strong> (PV) — <strong>Desmogléine 1</strong> (PS)</li>
+    <li>Pemphigus peut être médicamenteux ou associé à une autre maladie auto-immune</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="alert alert-amber" style="margin:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> La pemphigoïde bulleuse peut débuter par des lésions eczématiformes ou urticariennes <em>sans bulles visibles</em> — ne pas attendre la bulle pour biopsier.</div>
+  </div>
+  <div class="alert alert-amber" style="margin:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Dans le pemphigus superficiel, <em>absence totale de lésion muqueuse</em> — seul critère différenciant clinique fiable avec le pemphigus vulgaire.</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

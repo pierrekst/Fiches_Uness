@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item 118 — La personne handicapée</title>
+  <link rel="icon" href="../Config/favicon.svg">
+  <style>
+    :root {
+      --bg: #f7f8fc; --card: #ffffff; --text: #1a1d2e; --text-light: #6b7280;
+      --border: #e5e7eb; --purple: #534AB7; --purple-light: #ede9ff;
+      --teal: #1D9E75; --teal-light: #d1fae9; --coral: #D85A30; --coral-light: #fde8df;
+      --blue: #378ADD; --blue-light: #dbeeff; --red: #E24B4A; --red-light: #fee2e2;
+      --amber: #E5920A; --amber-light: #fef3c7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f1117; --card: #1a1d2e; --text: #e5e7eb; --text-light: #9ca3af;
+        --border: #2d3148; --purple-light: #2a255a; --teal-light: #0a3d2a;
+        --coral-light: #4a1f10; --blue-light: #0f2d4f; --red-light: #4a1515; --amber-light: #4a2d05;
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: .9rem; line-height: 1.6; }
+    .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 60px; }
+
+    .header { background: linear-gradient(135deg, #534AB7 0%, #378ADD 60%, #1D9E75 100%); border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; color: #fff; }
+    .header-num { font-size: .75rem; font-weight: 700; opacity: .75; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+    .header-title { font-size: 1.45rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+    .header-sub { font-size: .82rem; opacity: .85; line-height: 1.5; }
+
+    .obj-box { background: var(--card); border-radius: 14px; border: 0.5px solid var(--border); padding: 18px 22px; margin-bottom: 20px; }
+    .obj-box h3 { font-size: .82rem; font-weight: 700; color: var(--purple); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+    .obj-intro { font-size: .84rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.5; }
+    .obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .obj-item { background: var(--purple-light); color: var(--purple); border-radius: 8px; padding: 6px 11px; font-size: .79rem; font-weight: 600; }
+
+    hr { border: none; border-top: 1.5px solid var(--border); margin: 22px 0; }
+
+    .section-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 9px; }
+    .section-badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0; }
+    .section-badge svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .card { background: var(--card); border-radius: 14px; border: 0.5px solid var(--border); padding: 16px 18px; margin-bottom: 14px; }
+    .card-title { font-size: .88rem; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .card-icon { width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .alert { border-radius: 10px; padding: 11px 16px; font-size: .84rem; margin-bottom: 10px; line-height: 1.55; display: flex; gap: 10px; align-items: flex-start; }
+    .alert strong { font-weight: 800; }
+    .alert-red    { background: var(--red-light);   color: var(--red);   border-left: 3px solid var(--red); }
+    .alert-blue   { background: var(--blue-light);  color: var(--blue);  border-left: 3px solid var(--blue); }
+    .alert-green  { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal); }
+    .alert-amber  { background: var(--amber-light); color: var(--amber); border-left: 3px solid var(--amber); }
+    .alert-teal   { background: var(--teal-light);  color: var(--teal);  border-left: 3px solid var(--teal); }
+    .alert-icon { flex-shrink: 0; margin-top: 1px; }
+    .alert-icon svg { width: 16px; height: 16px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .alert-red   .alert-icon svg { stroke: var(--red); }
+    .alert-blue  .alert-icon svg { stroke: var(--blue); }
+    .alert-green .alert-icon svg { stroke: var(--teal); }
+    .alert-amber .alert-icon svg { stroke: var(--amber); }
+    .alert-teal  .alert-icon svg { stroke: var(--teal); }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .pill { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: .77rem; font-weight: 700; }
+    .pill-purple { background: var(--purple-light); color: var(--purple); }
+    .pill-teal   { background: var(--teal-light);   color: var(--teal); }
+    .pill-blue   { background: var(--blue-light);   color: var(--blue); }
+    .pill-red    { background: var(--red-light);    color: var(--red); }
+    .pill-amber  { background: var(--amber-light);  color: var(--amber); }
+    .pill-coral  { background: var(--coral-light);  color: var(--coral); }
+
+    table { width: 100%; border-collapse: collapse; font-size: .83rem; margin-top: 8px; }
+    th { background: var(--border); color: var(--text); font-weight: 700; padding: 7px 10px; text-align: left; font-size: .8rem; }
+    td { padding: 7px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--bg); }
+
+    .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: .84rem; }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-key { color: var(--text-light); font-size: .8rem; }
+    .kv-val { font-weight: 700; color: var(--text); }
+
+    .steps { list-style: none; }
+    .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .84rem; }
+    .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--border); color: var(--text); font-size: .75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+
+    ul.bl { list-style: none; padding: 0; }
+    ul.bl li { padding: 3px 0 3px 14px; position: relative; font-size: .84rem; }
+    ul.bl li::before { content: '–'; position: absolute; left: 0; color: var(--text-light); }
+
+    .blcard { border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; border-left: 4px solid; font-size: .84rem; }
+    .blcard-purple { background: var(--purple-light); border-color: var(--purple); }
+    .blcard-teal   { background: var(--teal-light);   border-color: var(--teal); }
+    .blcard-blue   { background: var(--blue-light);   border-color: var(--blue); }
+    .blcard-coral  { background: var(--coral-light);  border-color: var(--coral); }
+    .blcard-amber  { background: var(--amber-light);  border-color: var(--amber); }
+    .blcard strong { font-weight: 700; }
+
+    .synth { background: linear-gradient(135deg, var(--purple-light), var(--blue-light)); border-radius: 14px; border: 0.5px solid var(--border); padding: 18px 22px; }
+    .synth h3 { font-size: .92rem; font-weight: 800; color: var(--purple); margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 118</div>
+    <div class="header-title">La personne handicapée — Bases de l'évaluation fonctionnelle et thérapeutique</div>
+    <div class="header-sub">Cadre conceptuel et législatif · Évaluation motrice, sensorielle et cognitive · Retour au domicile et au travail · Structures d'hébergement</div>
+  </div>
+
+  <!-- OBJECTIFS -->
+  <div class="obj-box">
+    <h3>Vision d'ensemble</h3>
+    <p class="obj-intro">Cet item couvre tout le spectre du handicap : des définitions théoriques (modèle CIF/OMS) au bilan clinique des déficiences (motrice, sensorielle, cognitive), jusqu'aux dispositifs médico-sociaux concrets (MDPH, RQTH, AGEFIPH). Enjeu double : choisir la bonne échelle d'évaluation et identifier les bons acteurs institutionnels selon l'âge et la situation.</p>
+    <div class="obj-grid">
+      <div class="obj-item">Modèle bio-psycho-social (CIF/OMS)</div>
+      <div class="obj-item">Loi 2005 — MDPH · CDAPH · PCH · AAH</div>
+      <div class="obj-item">Évaluation déficience motrice + échelles</div>
+      <div class="obj-item">Surdité : types, classification en dB</div>
+      <div class="obj-item">Triade acoumétrique (Weber/Rinne)</div>
+      <div class="obj-item">Malvoyance et cécité — seuils réglementaires</div>
+      <div class="obj-item">Fonctions cognitives + MMSE + 5 mots Dubois</div>
+      <div class="obj-item">Négligence spatiale unilatérale (NSU)</div>
+      <div class="obj-item">Barthel · Rankin · MIF · IADL · AGGIR</div>
+      <div class="obj-item">RQTH · AGEFIPH · Médecin du travail</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 1. DÉFINITIONS -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définitions fondamentales — Modèle bio-psycho-social (CIF)
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Concepts OMS (Classification Internationale du Fonctionnement)
+      </div>
+      <table>
+        <tr><th>Terme</th><th>Définition</th></tr>
+        <tr><td><strong>Santé</strong></td><td>Bien-être physique, mental et social complet</td></tr>
+        <tr><td><strong>Fonctionnement</strong></td><td>Organe/anatomie + activité + participation sociale</td></tr>
+        <tr><td><strong>Déficience</strong></td><td>Altération d'une structure ou fonction organique</td></tr>
+        <tr><td><strong>Handicap</strong></td><td>Limitation d'activité <strong>+</strong> restriction de participation = <em>situation de handicap</em></td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Modèle bio-psycho-social
+      </div>
+      <div class="blcard blcard-purple">
+        <strong>3 dimensions interactives :</strong> Corps (déficiences) → Activités → Participation sociale<br>
+        <span style="font-size:.79rem; color:var(--text-light);">Facteurs environnementaux et personnels modulent chaque niveau</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Limitation d'activité</span>
+        <span class="kv-val" style="font-size:.82rem; font-weight:500;">Difficulté dans une tâche quotidienne</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Restriction de participation</span>
+        <span class="kv-val" style="font-size:.82rem; font-weight:500;">Restriction dans une activité sociale réelle</span>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Handicap ≠ déficience. Une déficience sévère peut n'entraîner qu'un handicap léger si l'environnement est adapté.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 2. CADRE LÉGISLATIF -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Cadre législatif et organisation médico-sociale
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Loi du 11 février 2005 — Égalité des droits et des chances
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="blcard blcard-blue">
+          <strong>Droit à la compensation</strong> pour toute personne handicapée<br>
+          <span style="font-size:.79rem;">Plan personnalisé de compensation (PPC)</span>
+        </div>
+        <ul class="bl">
+          <li><strong>CNSA</strong> — niveau national (Caisse Nationale Solidarité Autonomie)</li>
+          <li><strong>MDPH</strong> — niveau local, pour les <strong>&lt; 60 ans</strong> (Maison Départementale Personnes Handicapées)</li>
+          <li><strong>CDAPH</strong> — décisions d'attribution des droits (appartient à la MDPH)</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:.8rem; font-weight:700; color:var(--text-light); margin-bottom:8px; text-transform:uppercase; letter-spacing:.06em;">Aides attribuées par la MDPH</div>
+        <div class="blcard blcard-teal">
+          <strong>AAH</strong> — Allocation Adulte Handicapé<br>
+          <span style="font-size:.79rem;">Selon taux d'incapacité + réduction capacité de travail</span>
+        </div>
+        <div class="blcard blcard-blue">
+          <strong>PCH</strong> — Prestation de Compensation du Handicap<br>
+          <span style="font-size:.79rem;">Finance les aides humaines et/ou techniques</span>
+        </div>
+        <div class="blcard blcard-coral">
+          <strong>CMI</strong> — Carte Mobilité Inclusion<br>
+          <span style="font-size:.79rem;">Stationnement, transports, priorité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Partenariats avec les usagers
+    </div>
+    <div class="grid2">
+      <div>
+        <table>
+          <tr><th>Acteur</th><th>Définition / rôle</th></tr>
+          <tr><td><strong>Usager</strong></td><td>Toute personne utilisant ou susceptible d'utiliser les services de santé</td></tr>
+          <tr><td><strong>Personne de confiance</strong></td><td>Désignée par l'usager — accompagne, exprime sa volonté si incapacité</td></tr>
+          <tr><td><strong>Patient expert</strong></td><td>Maladie chronique + expertise du vécu quotidien → pair-aidance, ETP</td></tr>
+        </table>
+      </div>
+      <div>
+        <ul class="bl">
+          <li>ETP avec intervention de patients experts</li>
+          <li>Associations d'usagers agréées (solidarites-sante.gouv)</li>
+          <li>Engagement des personnes concernées recommandé par la HAS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 3. RETOUR AU DOMICILE / HÉBERGEMENT -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Retour au domicile et structures d'hébergement
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Aides humaines au domicile
+      </div>
+      <div class="pills">
+        <span class="pill pill-teal">Infirmier / aide-soignant</span>
+        <span class="pill pill-blue">Auxiliaire de vie</span>
+        <span class="pill pill-purple">Aidant familial</span>
+        <span class="pill pill-teal">Aide ménagère</span>
+        <span class="pill pill-blue">Portage de repas</span>
+        <span class="pill pill-coral">HAD</span>
+      </div>
+      <div class="blcard blcard-amber" style="margin-top:12px;">
+        <strong>Aidant :</strong> personne aidant à titre non professionnel, de façon régulière (permanente ou non), une personne dépendante de son entourage.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Structures d'hébergement (si domicile impossible)
+      </div>
+      <table>
+        <tr><th>Population</th><th>Structures (sur avis CDAPH)</th></tr>
+        <tr><td><strong>Adultes &lt; 60 ans</strong></td><td>MAS · FAM · ESAT · Foyers occupationnels</td></tr>
+        <tr><td><strong>Adultes &gt; 60 ans</strong></td><td>Foyer-logement · EHPAD</td></tr>
+      </table>
+      <p style="font-size:.77rem; color:var(--text-light); margin-top:8px;">MAS = Maison Accueil Spécialisée · FAM = Foyer Accueil Médicalisé · ESAT = Établissement Service Aide par le Travail</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 4. ÉVALUATION MOTRICE -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Évaluation des déficiences motrices
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Outils d'évaluation clinique
+    </div>
+    <table>
+      <tr><th>Domaine</th><th>Outil</th><th>Ce qu'il mesure</th></tr>
+      <tr><td><strong>Force musculaire</strong></td><td>Testing musculaire manuel</td><td>Cotation 0–5 par groupe musculaire</td></tr>
+      <tr><td><strong>Spasticité</strong></td><td>Échelle d'Ashworth modifiée</td><td>Tonus musculaire 0–4</td></tr>
+      <tr><td><strong>Amplitude articulaire</strong></td><td>Goniomètre</td><td>Limitation articulaire (degrés)</td></tr>
+      <tr><td><strong>Dextérité manuelle</strong></td><td>Box and Block Test</td><td>Manipulation grossière</td></tr>
+      <tr><td><strong>Coordination</strong></td><td>Tests cliniques cérébelleaux</td><td>Précision du mouvement</td></tr>
+      <tr><td><strong>Douleur</strong></td><td>EN, EVA, DN4, échelles comportementales</td><td>Intensité et type de douleur</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Échelles spécifiques par pathologie
+      </div>
+      <ul class="bl">
+        <li><strong>Score ASIA</strong> — lésions médullaires (American Spinal Injury Association)</li>
+        <li><strong>Indice algo-fonctionnel de Lequesne modifié</strong> — arthrose</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Évaluation limitation d'activité / participation
+      </div>
+      <ul class="bl">
+        <li>Interrogatoire + examen clinique</li>
+        <li>Échelles génériques et/ou spécifiques</li>
+        <li>Analyse instrumentale</li>
+        <li><strong>Évaluation écologique</strong> = en milieu réel (domicile ou centre de rééducation)</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 5. SENSORIEL -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Évaluation des déficiences sensorielles — Audition et Vision
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Types et classification des surdités
+    </div>
+    <div class="grid2">
+      <div>
+        <table>
+          <tr><th>Type</th><th>Siège lésionnel</th></tr>
+          <tr><td><strong>Transmission</strong></td><td>Oreille externe + moyenne</td></tr>
+          <tr><td><strong>Perception</strong></td><td>Oreille interne, nerf auditif, voies centrales</td></tr>
+          <tr><td><strong>Mixte</strong></td><td>Association transmission + perception</td></tr>
+        </table>
+      </div>
+      <div>
+        <table>
+          <tr><th>Grade</th><th>Perte</th><th>Perception</th></tr>
+          <tr><td><strong>Légère</strong></td><td>20–39 dB</td><td>Gêne voix basse</td></tr>
+          <tr><td><strong>Moyenne</strong></td><td>40–69 dB</td><td>Voix élevée seulement</td></tr>
+          <tr><td><strong>Sévère</strong></td><td>70–89 dB</td><td>Voix forte à l'oreille</td></tr>
+          <tr><td><strong>Profonde</strong></td><td>&gt; 90 dB</td><td>Aucune perception parole</td></tr>
+          <tr><td><strong>Totale (cophose)</strong></td><td>~120 dB</td><td>Aucun son perçu</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Triade acoumétrique (diapason)
+    </div>
+    <table>
+      <tr><th>Test</th><th>Technique</th><th>Normal</th><th>Transmission</th><th>Perception</th></tr>
+      <tr><td><strong>Weber</strong></td><td>Diapason sur vertex</td><td>Pas de latéralisation</td><td>Son dans l'<strong>oreille sourde</strong></td><td>Son dans l'<strong>oreille saine</strong></td></tr>
+      <tr><td><strong>Rinne</strong></td><td>Mastoïde → CAE</td><td>Positif (CA &gt; CO)</td><td><strong>Rinne négatif</strong> (CO &gt; CA)</td><td>Positif (CA &gt; CO)</td></tr>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège Weber :</strong> dans la surdité de transmission, le son est latéralisé vers l'oreille <em>pathologique</em> (contre-intuitif). Dans la surdité de perception, vers l'oreille saine.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Explorations audiométriques et dépistage pédiatrique
+    </div>
+    <div class="grid2">
+      <div>
+        <ul class="steps">
+          <li><div class="step-num">1</div><div><strong>Audiométrie tonale :</strong> sons purs (Hz et dB variables)</div></li>
+          <li><div class="step-num">2</div><div><strong>Audiométrie vocale :</strong> mots monosyllabiques, bisyllabiques, logatomes</div></li>
+          <li><div class="step-num">3</div><div><strong>Impédancemétrie :</strong> mesure impedance oreille moyenne</div></li>
+          <li><div class="step-num">4</div><div><strong>PEA automatisés :</strong> dépistage néonatal (maternité)</div></li>
+        </ul>
+      </div>
+      <div>
+        <table>
+          <tr><th>Âge</th><th>Test pédiatrique</th></tr>
+          <tr><td>Naissance</td><td>PEA automatisés (+ OEA)</td></tr>
+          <tr><td>&lt; 10 mois</td><td>Audiométrie comportementale</td></tr>
+          <tr><td>10 mois – 5 ans</td><td>Audiométrie par réflexe conditionné</td></tr>
+          <tr><td>&gt; 5 ans</td><td>Audiométrie classique</td></tr>
+          <tr><td>Tout âge</td><td>OEA, PEA, Impédancemétrie</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Signes d'appel de surdité selon l'âge
+    </div>
+    <table>
+      <tr><th>Age</th><th>Signes d'appel</th></tr>
+      <tr><td><strong>Nourrisson</strong></td><td>Anomalie dépistage néonatal, anomalie calendrier développemental</td></tr>
+      <tr><td><strong>Enfant pré-scolaire</strong></td><td>Retard d'acquisition du langage / retard de parole</td></tr>
+      <tr><td><strong>Enfant scolaire</strong></td><td>Retard scolaire, trouble de l'articulation</td></tr>
+      <tr><td><strong>Adulte</strong></td><td>Baisse audibilité (n'entend pas) et/ou intelligibilité (ne comprend pas) — surtout dans le bruit</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Prise en charge des troubles auditifs
+    </div>
+    <div class="grid2">
+      <div class="blcard blcard-blue">
+        <strong>Transmission :</strong> traitement chirurgical (ossiculaire, prothèse à ancrage osseux, OSM)
+      </div>
+      <div class="blcard blcard-teal">
+        <strong>Perception :</strong> appareillage dès <strong>30 dB</strong>, rééducation orthophonique, implant cochléaire si sévère/profonde
+      </div>
+    </div>
+    <ul class="bl" style="margin-top:8px;">
+      <li>Dossier MDPH systématique</li>
+      <li>Prévention : ototoxicité, traumatismes sonores, FRCV</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Déficiences visuelles — Seuils réglementaires
+    </div>
+    <table>
+      <tr><th>Déficience</th><th>Acuité visuelle (meilleur œil corrigé)</th><th>Champ visuel</th></tr>
+      <tr><td><strong>Malvoyance</strong></td><td>&gt; 1/20 et &lt; 3/10</td><td>≤ 20°</td></tr>
+      <tr><td><strong>Cécité</strong></td><td>≤ 1/20</td><td>Très réduit</td></tr>
+      <tr><td><strong>Non-voyant</strong></td><td>Absence totale de vision bilatérale</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- 6. COGNITIF -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Évaluation des déficiences cognitives
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définitions des fonctions cognitives
+    </div>
+    <table>
+      <tr><th>Fonction</th><th>Définition</th></tr>
+      <tr><td><strong>Attention</strong></td><td>Sélectionner une information et la maintenir dans le champ de la conscience</td></tr>
+      <tr><td><strong>Mémoire</strong></td><td>Enregistrer, conserver et restituer une information</td></tr>
+      <tr><td><strong>Langage</strong></td><td>Habiletés réceptives (compréhension oral/écrit) et expressives (parler/écrire)</td></tr>
+      <tr><td><strong>Gnosies</strong></td><td>Percevoir et reconnaître un objet via les différents sens</td></tr>
+      <tr><td><strong>Praxies</strong></td><td>Exécuter des mouvements simples ou séquences de mouvements volontairement</td></tr>
+      <tr><td><strong>Fonctions exécutives</strong></td><td>Gestion des comportements et organisation (planification, inhibition…)</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Tests de dépistage global
+      </div>
+      <div class="blcard blcard-purple">
+        <strong>MMSE (MMS)</strong> — Mini-Mental State Examination<br>
+        <span style="font-size:.79rem;">Score /30 · fonctions mnésiques · suspicion démence</span>
+      </div>
+      <div class="blcard blcard-blue">
+        <strong>MoCA</strong> — Montreal Cognitive Assessment<br>
+        <span style="font-size:.79rem;">Score /30 · plus sensible que MMSE pour troubles légers</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Épreuve des 5 mots de Dubois
+      </div>
+      <ul class="steps">
+        <li><div class="step-num">1</div><div>Présentation de 5 mots à voix haute</div></li>
+        <li><div class="step-num">2</div><div>Restitution par catégorie sémantique</div></li>
+        <li><div class="step-num">3</div><div>Rappel libre immédiat, puis indicé si nécessaire</div></li>
+        <li><div class="step-num">4</div><div>Épreuve d'interférence (test de l'horloge)</div></li>
+        <li><div class="step-num">5</div><div>Rappel libre différé, puis indicé si nécessaire</div></li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Clé :</strong> rappel indicé amélioré = trouble d'encodage · rappel indicé non amélioré = trouble de rappel (évoque lésion hippocampique / Alzheimer)</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 7. LANGAGE + NSU -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Évaluation du langage et Négligence spatiale unilatérale
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Évaluation du langage
+      </div>
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-light); margin-bottom:5px;">ORAL — Production</div>
+      <ul class="bl" style="margin-bottom:8px;">
+        <li>Expression spontanée : fluence verbale (débit)</li>
+        <li>Dénomination d'image ou objet</li>
+        <li>Répétition</li>
+      </ul>
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-light); margin-bottom:5px;">ORAL — Compréhension</div>
+      <ul class="bl" style="margin-bottom:8px;">
+        <li>Désignation d'image</li>
+        <li>Exécution d'ordre simple et complexe</li>
+      </ul>
+      <div style="font-size:.8rem; font-weight:700; color:var(--text-light); margin-bottom:5px;">ÉCRIT</div>
+      <ul class="bl">
+        <li>Lire, écrire, épeler : mots réguliers (livre), irréguliers (monsieur), non-mots (logatomes)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Négligence spatiale unilatérale (NSU)
+      </div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Définition :</strong> incapacité à prendre en compte les stimuli de l'hémi-espace <em>opposé</em> à la lésion cérébrale.</div>
+      </div>
+      <ul class="bl" style="margin-bottom:10px;">
+        <li>Secondaire à une lésion cérébrale (fréquente post-AVC)</li>
+        <li>Touche principalement l'<strong>hémisphère droit</strong></li>
+      </ul>
+      <table>
+        <tr><th>Type</th><th>Manifestations cliniques</th></tr>
+        <tr><td><strong>Personnelle</strong></td><td>Oubli rasage/coiffure hémiface, sous-utilisation MS</td></tr>
+        <tr><td><strong>Extra-personnelle proche</strong></td><td>Se cogner, ne pas trouver un objet côté négligé</td></tr>
+        <tr><td><strong>Extra-personnelle lointaine</strong></td><td>Désorientation spatiale</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 8. ÉCHELLES FONCTIONNELLES -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Échelles d'évaluation fonctionnelle (A retenir ++)
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Principales échelles — Limitations d'activité et de participation
+    </div>
+    <table>
+      <tr><th>Échelle</th><th>Domaine</th><th>Détail</th></tr>
+      <tr><td><strong>Indice de Barthel</strong></td><td>AVQ de base</td><td>10 items, score 0–100, indépendance fonctionnelle</td></tr>
+      <tr><td><strong>Échelle de Rankin</strong></td><td>AVQ + participation</td><td>0–6, très utilisée en neurologie vasculaire (AVC)</td></tr>
+      <tr><td><strong>MIF</strong></td><td>Indépendance fonctionnelle</td><td>18 items, 18–126, rééducation</td></tr>
+      <tr><td><strong>IADL</strong></td><td>Activités instrumentales</td><td>Téléphone, courses, cuisine, transports, médicaments, finances</td></tr>
+      <tr><td><strong>Grille AGGIR</strong></td><td>Perte d'autonomie (&gt; 60 ans)</td><td>Calcul GIR 1–6 → décide attribution APA</td></tr>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Évaluation écologique :</strong> en milieu réel (domicile ou centre de rééducation). La restriction de participation est évaluée principalement par l'interrogatoire.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> AGGIR → APA (sujets &gt; 60 ans, géré par Conseil Départemental) ≠ CDAPH → PCH (sujets &lt; 60 ans, géré par MDPH).</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 9. VIE SOCIALE -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Logement, conduite automobile et retour au travail
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        Logement et conduite automobile
+      </div>
+      <div class="blcard blcard-coral">
+        <strong>Transformation du logement :</strong><br>
+        Financement CDAPH (PCH) · Accessibilité intérieure et extérieure · Loi 2005
+      </div>
+      <div class="blcard blcard-amber">
+        <strong>Conduite automobile :</strong> Arrêté 31/08/2010<br>
+        Liste incapacités incompatibles avec le permis · Commission départementale ou médecin agréé · Aménagement véhicule · Aide MDPH/AGEFIPH si objectif professionnel
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Retour au travail — Acteurs clés
+      </div>
+      <table>
+        <tr><th>Organisme</th><th>Rôle principal</th></tr>
+        <tr><td><strong>MDPH / CDAPH</strong></td><td>Orientation professionnelle, attribution RQTH et AAH</td></tr>
+        <tr><td><strong>RQTH</strong></td><td>Maintien emploi, aménagement poste, concours FP, aide formation</td></tr>
+        <tr><td><strong>AGEFIPH</strong></td><td>Entreprises privées &gt;20 sal., quota 6% travailleurs handicapés</td></tr>
+        <tr><td><strong>FIPHFP</strong></td><td>Équivalent AGEFIPH pour la Fonction Publique</td></tr>
+        <tr><td><strong>Médecin du travail</strong></td><td>Aménagement de poste, information, inaptitude</td></tr>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> le titulaire d'une RQTH n'est <strong>pas tenu</strong> d'en informer son employeur.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- SYNTHÈSE -->
+  <div class="section-title">
+    <div class="section-badge" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+
+  <div class="synth">
+    <h3>Synthèse ECNi — Ce qui tombe</h3>
+    <div class="grid2">
+      <div>
+        <ul class="bl">
+          <li><strong>Loi 2005 :</strong> droit à la compensation, PCH, MDPH/CDAPH</li>
+          <li><strong>Handicap ≠ déficience :</strong> notion de situation de handicap (CIF)</li>
+          <li><strong>AAH ≠ PCH :</strong> allocation de revenus vs financement d'aides</li>
+          <li><strong>AGGIR → APA</strong> (>60 ans) · <strong>CDAPH → PCH</strong> (<60 ans)</li>
+          <li><strong>Weber transmission :</strong> son du côté sourd (contre-intuitif)</li>
+          <li><strong>Appareillage perception :</strong> dès 30 dB de perte</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="bl">
+          <li><strong>5 mots Dubois :</strong> rappel indicé non amélioré → Alzheimer</li>
+          <li><strong>NSU :</strong> hémi-espace opposé à la lésion, hémisphère droit +++</li>
+          <li><strong>RQTH :</strong> pas d'obligation d'information à l'employeur</li>
+          <li><strong>MAS/FAM :</strong> adultes &lt;60 ans lourdement handicapés (avis CDAPH)</li>
+          <li><strong>Cécité légale :</strong> AV ≤ 1/20 OU champ visuel très réduit</li>
+          <li><strong>AGEFIPH :</strong> quota 6% dans entreprises &gt;20 salariés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top:14px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Pièges récurrents :</strong> Confondre AGGIR (>60 ans, APA, Conseil Départemental) et IADL (outil d'évaluation fonctionnelle). Ne pas confondre MAS (hébergement médical lourd) et ESAT (aide par le travail, secteur protégé). La MDPH gère uniquement les moins de 60 ans.</div>
+  </div>
+
+</div>
+</body>
+</html>

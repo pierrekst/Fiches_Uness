@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 17 — Télémédecine, télésanté et téléservices en santé</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#EEEDFB;
+    --teal:#1D9E75;   --teal-light:#E6F7F2;
+    --coral:#D85A30;  --coral-light:#FCEEE9;
+    --blue:#378ADD;   --blue-light:#EAF3FC;
+    --red:#E24B4A;    --red-light:#FDEAEA;
+    --amber:#C87D0E;  --amber-light:#FEF3E0;
+    --text:#1A1A2E;   --sub:#5A5A7A;
+    --bg:#F5F6FA;     --card:#FFFFFF;
+    --border:#E2E4EF; --radius:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--text:#E8E9F3;--sub:#9090B0;--bg:#12121E;--card:#1E1E30;--border:#2E2E48;}
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:.88rem;line-height:1.55;}
+  .page{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 55%,#1D9E75 100%);border-radius:18px;padding:26px 28px 22px;margin-bottom:22px;color:#fff;}
+  .header .item-num{font-size:.78rem;font-weight:700;opacity:.75;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px;}
+  .header h1{font-size:1.45rem;font-weight:800;line-height:1.25;margin-bottom:10px;}
+  .header .overview{font-size:.83rem;opacity:.92;line-height:1.6;background:rgba(255,255,255,.13);border-radius:10px;padding:10px 14px;}
+
+  /* SECTION TITLES */
+  .section-title{display:flex;align-items:center;gap:10px;font-size:1rem;font-weight:800;color:#fff;padding:9px 14px;border-radius:10px;margin-bottom:14px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  .s-purple{background:var(--purple);}
+  .s-teal{background:var(--teal);}
+  .s-coral{background:var(--coral);}
+  .s-blue{background:var(--blue);}
+  .s-amber{background:var(--amber);}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .ci-purple{background:var(--purple);}
+  .ci-teal{background:var(--teal);}
+  .ci-blue{background:var(--blue);}
+  .ci-coral{background:var(--coral);}
+  .ci-amber{background:var(--amber);}
+  .ci-red{background:var(--red);}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border);font-size:.83rem;gap:12px;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-label{color:var(--sub);flex-shrink:0;max-width:48%;}
+  .kv-val{font-weight:700;text-align:right;}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:16px;height:16px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+  .alert-red .alert-icon svg{stroke:var(--red);}
+  .alert-blue{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue);}
+  .alert-blue .alert-icon svg{stroke:var(--blue);}
+  .alert-green{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+  .alert-green .alert-icon svg{stroke:var(--teal);}
+  .alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:600;}
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-teal{background:var(--teal-light);color:var(--teal);}
+  .pill-blue{background:var(--blue-light);color:var(--blue);}
+  .pill-coral{background:var(--coral-light);color:var(--coral);}
+  .pill-amber{background:var(--amber-light);color:var(--amber);}
+  .pill-red{background:var(--red-light);color:var(--red);}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  th{background:var(--border);padding:7px 10px;text-align:left;font-weight:700;}
+  td{padding:6px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td.center{text-align:center;}
+  .td-purple{background:var(--purple-light);color:var(--purple);font-weight:700;}
+  .td-teal{background:var(--teal-light);color:var(--teal);font-weight:700;}
+  .td-blue{background:var(--blue-light);color:var(--blue);font-weight:700;}
+
+  /* STEPS */
+  .steps{display:flex;flex-direction:column;gap:8px;}
+  .step{display:flex;align-items:flex-start;gap:12px;}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--border);color:var(--sub);font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-body{padding-top:3px;font-size:.83rem;}
+  .step-title{font-weight:700;margin-bottom:2px;}
+
+  /* BORDER LEFT CARDS */
+  .bl-purple{border-left:4px solid var(--purple);}
+  .bl-teal{border-left:4px solid var(--teal);}
+  .bl-blue{border-left:4px solid var(--blue);}
+  .bl-coral{border-left:4px solid var(--coral);}
+  .bl-amber{border-left:4px solid var(--amber);}
+
+  hr{border:none;border-top:1px solid var(--border);margin:20px 0;}
+  ul{padding-left:18px;margin-top:4px;}
+  li{margin-bottom:3px;}
+  p{margin-bottom:6px;}
+  .small{font-size:.78rem;color:var(--sub);}
+  .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.75rem;font-weight:700;}
+  .tag-A{background:#534AB7;color:#fff;}
+  .tag-B{background:#378ADD;color:#fff;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="item-num">Item 17 · IC-17</div>
+  <h1>Télémédecine, télésanté et téléservices en santé</h1>
+  <div class="overview">
+    Comprendre l'architecture du numérique en santé : définir les 5 actes de télémédecine et le télésoin, identifier les plateformes clés (Mon Espace Santé, Health Data Hub), maîtriser le cadre éthique (consentement, éligibilité, limite 20 %), savoir conduire un projet de télémédecine en 4 étapes et en évaluer les 9 dimensions.
+  </div>
+</div>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title s-purple">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions — Architecture de la télésanté
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Arborescence télésanté
+  </div>
+  <div style="background:var(--purple-light);border-radius:10px;padding:12px 16px;font-size:.84rem;">
+    <strong style="color:var(--purple);">TÉLÉSANTÉ</strong> = <span style="color:var(--purple);">TÉLÉMÉDECINE</span> (actes médicaux, art. L6316-1 CSP) + <span style="color:var(--teal);">TÉLÉSOIN</span> (auxiliaires médicaux + pharmaciens)
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Les 5 actes de télémédecine — art. R.6316-1 à 3
+  </div>
+  <table>
+    <thead>
+      <tr><th>Acte</th><th>Définition</th><th>Acteurs</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-purple">Téléconsultation</td>
+        <td>Patient consulte à distance un professionnel médical. Variante <em>assistée</em> : professionnel de santé auprès du patient (pharmacien, IDE, psychologue…)</td>
+        <td>Médecin ↔ Patient</td>
+      </tr>
+      <tr>
+        <td class="td-purple">Téléexpertise</td>
+        <td>Professionnel de santé sollicite à distance l'avis d'un ou plusieurs professionnels médicaux sur un dossier</td>
+        <td>Médecin ↔ Expert</td>
+      </tr>
+      <tr>
+        <td class="td-purple">Télésurveillance</td>
+        <td>Professionnel médical interprète à distance des données recueillies via un dispositif médical numérique sur le lieu de vie du patient</td>
+        <td>Médecin ↔ Patient (données)</td>
+      </tr>
+      <tr>
+        <td class="td-purple">Téléassistance</td>
+        <td>Professionnel médical assiste à distance un autre professionnel lors d'un acte (≠ téléassistance pour personnes âgées)</td>
+        <td>Médecin ↔ Soignant</td>
+      </tr>
+      <tr>
+        <td class="td-purple">Régulation médicale</td>
+        <td>Acte téléphonique par les médecins régulateurs : évaluation du patient, déclenchement de la réponse adaptée, orientation hospitalière</td>
+        <td>Médecin régulateur ↔ Patient</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Télésoin :</strong> acte réalisé par un auxiliaire médical (IDE, kiné, orthophoniste…) ou un pharmacien. Encadré séparément de la télémédecine mais inclus dans la télésanté.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : PLATEFORMES & IDENTITÉ NUMÉRIQUE -->
+<div class="section-title s-blue">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Plateformes & Référentiels d'identité numérique
+</div>
+
+<div class="grid2">
+  <div class="card bl-blue">
+    <div class="card-title">
+      <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Mon Espace Santé (MES)
+    </div>
+    <div class="kv-row"><span class="kv-label">DMP</span><span class="kv-val">Dossier médical partagé — alimenté patient/médecin</span></div>
+    <div class="kv-row"><span class="kv-label">Messagerie</span><span class="kv-val">MSSanté citoyenne — échanges sécurisés pro/patient</span></div>
+    <div class="kv-row"><span class="kv-label">Catalogue</span><span class="kv-val">Services/applis référencés — &gt;150 critères (sécurité, RGPD, éthique)</span></div>
+    <div class="kv-row"><span class="kv-label">Agenda médical</span><span class="kv-val">Centralise tous les RDV de santé</span></div>
+  </div>
+  <div class="card bl-blue">
+    <div class="card-title">
+      <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Health Data Hub (PDS)
+    </div>
+    <p>Plateforme des Données de Santé — arrêté 29/11/2019</p>
+    <div class="kv-row"><span class="kv-label">SNDS</span><span class="kv-val">Co-responsable avec la CNAM</span></div>
+    <div class="kv-row"><span class="kv-label">Objectif</span><span class="kv-val">Faciliter le partage de données pour la recherche</span></div>
+    <div class="kv-row"><span class="kv-label">Sources</span><span class="kv-val">Très variées (assurance maladie, hôpitaux…)</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Référentiels d'identité &amp; services socles
+  </div>
+  <table>
+    <thead><tr><th>Référentiel / Service</th><th>Contenu</th><th>Obligatoire depuis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-blue">INS (Identité Nationale de Santé)</td>
+        <td>Matricule INS (NIR ou NIA) + 5 traits : nom de naissance, prénom(s), date de naissance, sexe, lieu de naissance (INSEE)</td>
+        <td><strong>1er janvier 2021</strong></td>
+      </tr>
+      <tr>
+        <td class="td-blue">RPPS</td>
+        <td>Répertoire unique d'identification des professionnels de santé</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="td-blue">Pro Santé Connect / CPS / e-CPS</td>
+        <td>Fournisseur d'identité pour les professionnels. Authentification par carte CPS physique ou application e-CPS (mobile)</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="td-teal">Appli Carte Vitale</td>
+        <td>Dématérialisation de la carte vitale sur smartphone</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="td-teal">e-Prescription</td>
+        <td>Ordonnance numérique par QR code — favorise la coordination</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td class="td-teal">MSSanté</td>
+        <td>Messageries sécurisées entre professionnels sanitaires/sociaux. Règles sécurité définies par l'ANS.</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : INTÉRÊTS & CAS D'USAGE -->
+<div class="section-title s-teal">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Intérêts et cas d'usage cliniques
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    3 objectifs principaux
+  </div>
+  <div class="grid3">
+    <div style="background:var(--teal-light);border-radius:10px;padding:10px 12px;text-align:center;">
+      <div style="font-weight:800;color:var(--teal);margin-bottom:4px;">Inégalités d'accès</div>
+      <div class="small">Déserts médicaux — dérogation au parcours de soins si pas de médecin traitant</div>
+    </div>
+    <div style="background:var(--teal-light);border-radius:10px;padding:10px 12px;text-align:center;">
+      <div style="font-weight:800;color:var(--teal);margin-bottom:4px;">Qualité des soins</div>
+      <div class="small">Téléexpertise = avis spécialiste à distance</div>
+    </div>
+    <div style="background:var(--teal-light);border-radius:10px;padding:10px 12px;text-align:center;">
+      <div style="font-weight:800;color:var(--teal);margin-bottom:4px;">Continuité des soins</div>
+      <div class="small">Télésurveillance des pathologies chroniques</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card bl-teal">
+    <div class="card-title">
+      <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Prise en charge AVC — modèle type
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><span class="step-title">Téléconsultation</span> — score handicap, avis diagnostique neurologue/neuroradiologue</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><span class="step-title">Téléexpertise</span> — urgentiste + neurologue expert : conduite à tenir sur imagerie</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><span class="step-title">Téléassistance</span> — réalisation thrombolyse sous supervision neurologue vasculaire</div>
+      </div>
+    </div>
+  </div>
+  <div class="card bl-teal">
+    <div class="card-title">
+      <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Autres cas d'usage
+    </div>
+    <div style="margin-bottom:8px;"><strong>Maladies chroniques :</strong>
+      <div class="pills">
+        <span class="pill pill-teal">IC chronique</span><span class="pill pill-teal">IRC / télédialyse</span><span class="pill pill-teal">Diabète</span><span class="pill pill-teal">Rétinopathie</span><span class="pill pill-teal">HTA</span><span class="pill pill-teal">Apnée du sommeil</span><span class="pill pill-teal">Plaies chroniques</span>
+      </div>
+    </div>
+    <div style="margin-bottom:8px;"><strong>EHPAD / HAD :</strong>
+      <ul>
+        <li>Éviter déplacement des personnes fragiles aux urgences</li>
+        <li>Télésuivi plaies chroniques, grossesses à risque</li>
+        <li>Télésurveillance post-hospitalisation</li>
+      </ul>
+    </div>
+    <div><strong>Personnes détenues (UCSA) :</strong> téléconsultations spécialisées (infectiologie, psychiatrie), téléexpertises (dermatologie, imagerie), téléassistance</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card bl-teal">
+    <div class="card-title">
+      <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Téléradiologie
+    </div>
+    <ul>
+      <li><strong>Téléexpertise :</strong> 2e lecture, avis, confirmation diagnostique</li>
+      <li><strong>Télédiagnostic :</strong> acte radiologique à distance si pas de radiologue sur place (urgence ou régulier)</li>
+    </ul>
+  </div>
+  <div class="card bl-teal">
+    <div class="card-title">
+      <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Télépathologie
+    </div>
+    <ul>
+      <li>Support à la téléexpertise et au télédiagnostic en anatomopathologie</li>
+      <li>Répond à la complexité croissante des pathologies</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : CADRE ÉTHIQUE -->
+<div class="section-title s-coral">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Cadre éthique et déontologique
+</div>
+
+<div class="grid2">
+  <div class="card bl-coral">
+    <div class="card-title">
+      <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      Rôle du professionnel
+    </div>
+    <ul>
+      <li>Vérifier la <strong>pertinence</strong> de l'acte à distance</li>
+      <li><strong>Consentement éclairé</strong> obligatoire du patient</li>
+      <li>Former le patient à l'utilisation des outils</li>
+      <li>Orienter vers présentiel si examen physique indispensable</li>
+    </ul>
+  </div>
+  <div class="card bl-coral">
+    <div class="card-title">
+      <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      Bonnes pratiques HAS
+    </div>
+    <ul>
+      <li>Évaluer la capacité du patient (outils, compétences, environnement)</li>
+      <li>Vérifier la vidéotransmission fonctionnelle</li>
+      <li>Prévoir aidant ou professionnel accompagnant si besoin</li>
+      <li>Données médicales disponibles en amont</li>
+      <li>Informer sur le déroulement, recueillir le consentement</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — Limite 20 % :</strong> Un praticien conventionné ne peut consacrer plus de <strong>20 %</strong> de son volume d'activité à la télésanté (avenant 9 convention médicale). Exceptions : médecins salariés de plateformes de téléconsultation agréées ou situations dérogatoires.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Éligibilité HAS — critères :</strong> condition physique, état psychologique, capacités cognitives, maîtrise de la langue, maîtrise des technologies. Adapter si handicap (sous-titrage, auxiliaire médical).</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-coral"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Sociétés de téléconsultation — encadrement depuis 2024
+  </div>
+  <div class="kv-row"><span class="kv-label">Agrément</span><span class="kv-val">Obligatoire depuis 2024 — Ministère de la Santé</span></div>
+  <div class="kv-row"><span class="kv-label">SI</span><span class="kv-val">Référentiel interopérabilité, sécurité et éthique de l'ANS</span></div>
+  <div class="kv-row"><span class="kv-label">Facturation AM</span><span class="kv-val">Possible uniquement si agréé</span></div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : COMMUNICATION & COOPÉRATION -->
+<div class="section-title s-blue">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Communication à distance &amp; coopérations pluriprofessionnelles
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Déroulé d'un acte de télésanté
+  </div>
+  <table>
+    <thead><tr><th>Phase</th><th>Actions obligatoires</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-blue">Avant</td>
+        <td>Information du patient, recueil consentement libre et éclairé, vérification pertinence de l'acte, disponibilité des données médicales</td>
+      </tr>
+      <tr>
+        <td class="td-blue">Pendant</td>
+        <td>Vidéotransmission, vérification identité patient (INS), authentification professionnels de santé (CPS/e-CPS), vérification qualité son et image</td>
+      </tr>
+      <tr>
+        <td class="td-blue">Après</td>
+        <td>Enregistrement compte-rendu + actes + prescriptions dans dossier patient et DMP, enregistrement incidents techniques éventuels</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card bl-blue">
+    <div class="card-title">
+      <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Locaux &amp; matériels
+    </div>
+    <div class="kv-row"><span class="kv-label">Côté pro</span><span class="kv-val">Calme, confidentiel, bien éclairé, sans interruption</span></div>
+    <div class="kv-row"><span class="kv-label">Côté patient</span><span class="kv-val">Domicile ou lieu aménagé (borne, cabine)</span></div>
+    <div class="kv-row"><span class="kv-label">Outil vidéo</span><span class="kv-val">Voir, communiquer, évaluer — qualité son + image</span></div>
+    <div class="kv-row"><span class="kv-label">Données</span><span class="kv-val">RGPD + hébergement données santé + référentiel PGS-SIS</span></div>
+  </div>
+  <div class="card bl-blue">
+    <div class="card-title">
+      <div class="card-icon ci-blue"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Coopération interprofessionnelle
+    </div>
+    <ul>
+      <li>Ville ↔ Hôpital</li>
+      <li>Médical ↔ Paramédical</li>
+      <li>MG ↔ Spécialiste</li>
+      <li>Principes : <strong>interopérabilité</strong> des outils, partage sécurisé, accessibilité</li>
+      <li>Max <strong>20 %</strong> d'activité à distance pour praticien conventionné</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : MISE EN ŒUVRE -->
+<div class="section-title s-purple">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Mise en œuvre d'un projet de télémédecine — 4 étapes ANAP
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-purple"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Les 4 étapes ANAP
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:var(--purple);color:#fff;">1</div>
+      <div class="step-body">
+        <div class="step-title">Définir le projet médical</div>
+        S'inscrire dans un projet médical, tenir compte des besoins et de l'offre existante
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purple);color:#fff;">2</div>
+      <div class="step-body">
+        <div class="step-title">Concevoir l'organisation</div>
+        Acte ponctuel ou intégré dans un parcours de soins coordonné — définir le modèle organisationnel
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purple);color:#fff;">3</div>
+      <div class="step-body">
+        <div class="step-title">Décliner les processus de réalisation</div>
+        Formaliser l'enchaînement : demande → préparation → réalisation → conclusion. Détailler activités, procédures, protocoles.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purple);color:#fff;">4</div>
+      <div class="step-body">
+        <div class="step-title">Mettre en œuvre et pérenniser</div>
+        Gouvernance + déploiement + évaluation (indicateurs de pertinence et performance) + RH + formation + logistique + SI + communication
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : ÉVALUATION -->
+<div class="section-title s-teal">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Méthodes d'évaluation — 9 dimensions <span class="tag tag-B" style="margin-left:8px;">OIC B</span>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Principe :</strong> L'évaluation doit être <strong>continue</strong> (non ponctuelle). Aucun cadre unique — 9 dimensions à explorer. Objectifs : mesurer succès/échec, alternatives, effets indésirables, décision politique.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon ci-teal"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Les 9 dimensions d'évaluation
+  </div>
+  <table>
+    <thead><tr><th>#</th><th>Dimension</th><th>Ce qu'elle couvre</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="td-teal">Clinique</td><td>Qualité des soins, fiabilité des diagnostics, qualité de vie</td></tr>
+      <tr><td>2</td><td class="td-teal">Perception patients/professionnels</td><td>Acceptabilité de la technologie, changements professionnels, culture, taux de consultation</td></tr>
+      <tr><td>3</td><td class="td-teal">Organisationnelle</td><td>Distribution des tâches, communication pro/patients, impact sur processus opérationnels, formation</td></tr>
+      <tr><td>4</td><td class="td-teal">Éducationnelle</td><td>Qualité de formation, impact recrutement/rétention personnel, connaissances cliniques</td></tr>
+      <tr><td>5</td><td class="td-teal">Administrative</td><td>Amélioration accès aux soins, coût-efficacité, redistribution ressources humaines et financières</td></tr>
+      <tr><td>6</td><td class="td-teal">Économique</td><td>Viabilité économique des solutions</td></tr>
+      <tr><td>7</td><td class="td-teal">Technique</td><td>Fiabilité d'usage, qualité son et vidéo, fiabilité des technologies</td></tr>
+      <tr><td>8</td><td class="td-teal">Sociale</td><td>Différences géographiques et culturelles, questions éthiques, acceptation patient/professionnel</td></tr>
+      <tr><td>9</td><td class="td-teal">Déontologique</td><td>Respect droits et devoirs, clarté et fiabilité des contrats, recours</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS CLÉS -->
+<div class="section-title s-teal">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Télémédecine = 5 actes réglementés :</strong> Téléconsultation, Téléexpertise, Télésurveillance, Téléassistance, Régulation médicale. La télésanté ajoute le Télésoin (auxiliaires médicaux + pharmaciens).</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>INS obligatoire depuis le 1er janvier 2021</strong> pour référencer les données de santé (NIR ou NIA + 5 traits).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège ECNi :</strong> Confondre téléassistance médicale (acte de télémédecine professionnel ↔ professionnel) avec les dispositifs de téléassistance pour personnes âgées (bouton alerte). Ce sont deux choses distinctes !</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège ECNi :</strong> La limite des <strong>20 %</strong> s'applique au praticien conventionné en activité libérale. Ne pas confondre avec les médecins salariés de plateformes de téléconsultation agréées (exception).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège ECNi :</strong> L'évaluation d'un programme de télésanté doit être <strong>continue</strong> et explore <strong>9 dimensions</strong> (pas de cadre unique standardisé à ce jour).</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>AVC — les 3 actes dans l'ordre :</strong> Téléconsultation (diagnostic + score) → Téléexpertise (conduite à tenir) → Téléassistance (réalisation thrombolyse). Retenir cet ordre chronologique.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Projet de télémédecine (ANAP) — 4 étapes :</strong> Projet médical → Organisation → Processus → Mise en œuvre/pérennisation. L'évaluation par indicateurs est incluse dans l'étape 4.</div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

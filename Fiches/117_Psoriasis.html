@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 117 — Psoriasis</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75; --teal-light:#e6f7f2;
+    --coral:#D85A30; --coral-light:#fbeee9;
+    --blue:#378ADD; --blue-light:#eaf2fc;
+    --red:#E24B4A; --red-light:#fdeaea;
+    --amber:#C97B2A; --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* OBJECTIFS */
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+  .alert-blue{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue);}
+  .alert-green{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+  .alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-red .alert-icon svg{stroke:var(--red);}
+  .alert-blue .alert-icon svg{stroke:var(--blue);}
+  .alert-green .alert-icon svg{stroke:var(--teal);}
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red{background:var(--red-light);color:var(--red);}
+  .pill-blue{background:var(--blue-light);color:var(--blue);}
+  .pill-teal{background:var(--teal-light);color:var(--teal);}
+  .pill-amber{background:var(--amber-light);color:var(--amber);}
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral{background:var(--coral-light);color:var(--coral);}
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  /* LISTE */
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  /* BORDER LEFT CARDS */
+  .card-red{border-left:4px solid var(--red);}
+  .card-blue{border-left:4px solid var(--blue);}
+  .card-teal{border-left:4px solid var(--teal);}
+  .card-amber{border-left:4px solid var(--amber);}
+  .card-purple{border-left:4px solid var(--purple);}
+
+  /* SECTION TITLES */
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 117 — Dermatologie</div>
+  <h1>Psoriasis</h1>
+  <div class="header-tags">
+    <span class="htag">Dermatose inflammatoire chronique</span>
+    <span class="htag">2–4 % de la population</span>
+    <span class="htag">Diagnostic clinique</span>
+    <span class="htag">Traitement suspensif</span>
+    <span class="htag">Comorbidités systémiques</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Le psoriasis est une dermatose inflammatoire chronique fréquente, de diagnostic <em>essentiellement clinique</em>. L'enjeu est de savoir reconnaître ses multiples formes (plaques, plis, ongles, scalp, articulaire, enfant), identifier les <strong>3 formes graves</strong> (érythrodermique, pustuleuse, rhumatisme psoriasique) et maîtriser l'escalade thérapeutique (local → systémique → biothérapie) en tenant compte des comorbidités systémiques associées (syndrome métabolique, cardiovasculaire).
+</div>
+
+<!-- 1. ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+
+<div class="card">
+  <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">2–4 % de la population française adulte</span></div>
+  <div class="kv-row"><span class="kv-key">1er pic de survenue</span><span class="kv-val">~20 ans</span></div>
+  <div class="kv-row"><span class="kv-key">2e pic de survenue</span><span class="kv-val">~60 ans</span></div>
+  <div class="kv-row"><span class="kv-key">Début pédiatrique</span><span class="kv-val">Possible (napkin psoriasis, psoriasis en gouttes)</span></div>
+</div>
+
+<hr>
+
+<!-- 2. PHYSIOPATHOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>Terrain génétique
+    </div>
+    <ul class="lst">
+      <li>Multiples gènes de susceptibilité</li>
+      <li>Prédisposition familiale possible</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>Mécanismes immunitaires
+    </div>
+    <ul class="lst">
+      <li>Voies <strong>TH1 et TH17</strong> activées</li>
+      <li>Cytokines pro-inflammatoires (IL-17, IL-23, TNF-alpha)</li>
+      <li>Prolifération accrue et troubles de différentiation des kératinocytes</li>
+      <li>Néo-angiogénèse + recrutement de PNN</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>Facteurs déclenchants / aggravants
+  </div>
+  <div class="pills">
+    <span class="pill pill-amber">Koebner (traumatisme cutané)</span>
+    <span class="pill pill-red">Beta-bloquants</span>
+    <span class="pill pill-red">Lithium</span>
+    <span class="pill pill-red">Sartans / IEC</span>
+    <span class="pill pill-amber">Streptocoque</span>
+    <span class="pill pill-amber">VIH</span>
+    <span class="pill pill-blue">Stress affectif</span>
+    <span class="pill pill-red">Corticothérapie systémique (rebond)</span>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Les corticoïdes systémiques sont un facteur déclenchant de poussée sévère — ne jamais prescrire sans avis spécialisé dans un psoriasis.</div>
+</div>
+
+<hr>
+
+<!-- 3. DIAGNOSTIC CLINIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic — Psoriasis en plaques classique
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>Sémiologie typique — Diagnostic clinique (biopsie inutile si tableau typique)
+  </div>
+  <table>
+    <tr><th>Caractère</th><th>Description</th></tr>
+    <tr><td>Type de lésion</td><td>Plaques érythémato-squameuses, bien limitées, parfois épaissies/infiltrées</td></tr>
+    <tr><td>Squames</td><td>Blanches, épaisses, nacrées — se détachent facilement</td></tr>
+    <tr><td>Localisations préférentielles</td><td>Coudes, genoux, sacrum (zones de frottement)</td></tr>
+    <tr><td>Évolution</td><td>Chronique, poussées-rémissions — régression sans cicatrice (séquelles pigmentées possibles)</td></tr>
+    <tr><td>Prurit</td><td>Fréquent dans les formes inflammatoires</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>Atteintes unguéales
+    </div>
+    <ul class="lst">
+      <li>Ponctuations (dés à coudre)</li>
+      <li>Onycholyse, hyperkératose sous-unguéale</li>
+      <li>Déformations des ongles</li>
+      <li>S'associe souvent à l'atteinte IPS distale</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>Formes topographiques particulières
+    </div>
+    <ul class="lst">
+      <li><strong>Psoriasis inversé</strong> : grands/petits plis, organes génitaux — lésions peu squameuses</li>
+      <li><strong>Scalp</strong> : squames épaisses (casque), lisière frontale, chute de cheveux possible</li>
+      <li><strong>Palmo-plantaire</strong> : hyperkératose, fissures douloureuses, gêne fonctionnelle</li>
+      <li><strong>Visage</strong> : rare, ressemble à dermite séborrhéique</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- 4. FORMES GRAVES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Les 3 formes graves (à connaître absolument)
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>Érythrodermique
+    </div>
+    <ul class="lst">
+      <li>Érythème généralisé (&gt;90% SC)</li>
+      <li>Infiltration oedémateuse diffuse (peau drapée)</li>
+      <li>Squames inconstantes</li>
+      <li>AEG, fébricule, frissons</li>
+      <li><strong>Pronostic vital engagé</strong></li>
+      <li>Hospitalisation obligatoire</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>Pustuleuse généralisée
+    </div>
+    <ul class="lst">
+      <li>Pustules diffuses sur lésions très inflammatoires</li>
+      <li>AEG, hyperthermie, frissons</li>
+      <li>Sd inflammatoire, hyperleucocytose PNN</li>
+      <li>Cytolyse hépatique</li>
+      <li><strong>Pronostic vital engagé</strong></li>
+      <li>Hospitalisation obligatoire</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>Rhumatisme psoriasique
+    </div>
+    <ul class="lst">
+      <li>20–30 % des psoriasis en plaques</li>
+      <li>Peut précéder ou suivre les lésions cutanées</li>
+      <li>Pronostic fonctionnel (destructions articulaires)</li>
+      <li>Conditionne les choix thérapeutiques</li>
+      <li>Voir section dédiée ci-dessous</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence :</strong> Les formes érythrodermique et pustuleuse généralisée mettent en jeu le pronostic vital — hospitalisation immédiate. Peuvent survenir au décours d'une <strong>corticothérapie systémique</strong>.</div>
+</div>
+
+<hr>
+
+<!-- 5. RHUMATISME PSORIASIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Rhumatisme psoriasique — Diagnostic
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>Présentation clinique
+  </div>
+  <table>
+    <tr><th>Forme</th><th>Caractéristiques</th></tr>
+    <tr><td>Mono/oligoarthrite</td><td>Asymétrique, périphérique</td></tr>
+    <tr><td>Polyarthrite</td><td>Proche de la PAR mais séronégative</td></tr>
+    <tr><td>Dactylite</td><td>Ténosynovites — <strong>doigts en saucisse</strong></td></tr>
+    <tr><td>Atteinte axiale</td><td>Proche de la spondylarthrite ankylosante</td></tr>
+    <tr><td>IPS distales</td><td>Atteinte inter-phalangiennes distales + atteinte unguéale associée</td></tr>
+    <tr><td>Rythme inflammatoire</td><td>Douleurs nocturnes, dérouillage matinal</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- 6. DIAGNOSTICS DIFFÉRENTIELS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostics différentiels
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>Principaux diagnostics différentiels
+  </div>
+  <table>
+    <tr><th>Diagnostic</th><th>Arguments différentiels</th></tr>
+    <tr><td><strong>Pityriasis rosé de Gibert</strong></td><td>Sujet jeune, éruptif, saisonnier ; médaillon initial ; annulaire du tronc ; <em>pas de chronicisation</em></td></tr>
+    <tr><td><strong>Dermite séborrhéique</strong></td><td>Zones médianes du visage, sillons naso-géniens, squames grasses du scalp ; poussées stress/fatigue</td></tr>
+    <tr><td><strong>Eczéma chronique</strong></td><td>Terrain atopique ; difficile pour eczéma nummulaire et atteinte palmo-plantaire</td></tr>
+    <tr><td><strong>Dermatophyties</strong></td><td>Peau glabre ; prurit sévère ; s'aggravent sous dermocorticoïdes</td></tr>
+    <tr><td><strong>Lymphome cutané</strong></td><td>Biopsie au moindre doute (plaques chroniques atypiques, résistantes)</td></tr>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Les dermatophyties s'aggravent sous dermocorticoïdes — toujours évoquer ce diagnostic avant de prescrire (faire une mycologie si doute).</div>
+</div>
+
+<hr>
+
+<!-- 7. PSORIASIS CHEZ L'ENFANT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Psoriasis chez l'enfant
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>Napkin psoriasis (nourrisson)
+    </div>
+    <ul class="lst">
+      <li>Lésions érythémato-squameuses <strong>du siège</strong> (sous les langes)</li>
+      <li>Bien limitées, rouge vif</li>
+      <li>Résistantes aux traitements habituels des érythèmes fessiers</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>Psoriasis en gouttes (enfant/adolescent)
+    </div>
+    <ul class="lst">
+      <li>Éléments diffus de <strong>petite taille</strong> (gouttes), squames peu marquées</li>
+      <li>Caractère souvent éruptif, retour à peau normale entre poussées</li>
+      <li>Poussées souvent précédées d'une <strong>angine à streptocoque</strong></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- 8. COMORBIDITÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Comorbidités associées (dépistage systématique)
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Le psoriasis est une <strong>maladie inflammatoire systémique</strong>. Les comorbidités sont surtout présentes dans les formes graves et étendues — coopération multidisciplinaire indispensable.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>Comorbidités à rechercher
+    </div>
+    <ul class="lst">
+      <li><strong>Dépression / anxiété</strong> : stigmatisation, prurit, altération qualité de vie, handicap social</li>
+      <li><strong>Addictions</strong> : alcool, tabac (facteurs de gravité)</li>
+      <li><strong>Syndrome métabolique</strong> : obésité abdominale, diabète, HTA, dyslipémie</li>
+      <li><strong>Pathologies cardio-vasculaires</strong> : risque accru dès le jeune âge</li>
+      <li><strong>MICI</strong> (Maladies Inflammatoires Chroniques Intestinales)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>Facteurs de gravité (prise en charge)
+    </div>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-red">Obésité</span>
+      <span class="pill pill-amber">Tabagisme</span>
+      <span class="pill pill-amber">Alcool excessif</span>
+    </div>
+    <p style="font-size:.82rem;margin-top:10px;color:var(--muted);">Ces facteurs influencent la sévérité et la réponse aux traitements — prise en charge globale indispensable.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- 9. TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge thérapeutique
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Principe fondamental :</strong> Tous les traitements sont <strong>suspensifs</strong> (contrôlent les lésions mais ne guérissent pas). Adapter selon gravité, retentissement qualité de vie, atteinte articulaire, comorbidités.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>Traitements locaux — formes peu étendues ou complément des traitements généraux
+  </div>
+  <table>
+    <tr><th>Traitement</th><th>Indication / Particularités</th></tr>
+    <tr><td><strong>Dermocorticoïdes</strong></td><td>Référence — voir item 330 pour règles de prescription</td></tr>
+    <tr><td><strong>Analogues vitamine D topiques</strong></td><td>Calcipotriol — souvent en association avec dermocorticoïdes</td></tr>
+    <tr><td><strong>Combinaison DC + Vit D</strong></td><td>Meilleure efficacité et tolérance</td></tr>
+    <tr><td>Inhibiteurs de calcineurine topiques</td><td>Hors AMM — utiles pour les lésions du visage</td></tr>
+    <tr><td>Kératolytiques + Émollients</td><td>Traitements adjuvants (psoriasis épais, palmo-plantaire)</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>Traitements systémiques conventionnels — 1re ligne générale
+  </div>
+  <table>
+    <tr><th>Traitement</th><th>Indications / Limites</th></tr>
+    <tr>
+      <td><strong>Méthotrexate</strong></td>
+      <td>1re intention cutané ET articulaire. Surveillance hématologique + hépatique. Contraception obligatoire.</td>
+    </tr>
+    <tr>
+      <td><strong>Photothérapie UVB TL01</strong></td>
+      <td>20–30 séances/an. Max 200 séances dans la vie (carcinogénicité). Attention médicaments phototoxiques.</td>
+    </tr>
+    <tr>
+      <td><strong>Aprémilast</strong></td>
+      <td>2e intention, cutané ET articulaire. Contraception obligatoire.</td>
+    </tr>
+    <tr>
+      <td><strong>Ciclosporine</strong></td>
+      <td>Formes cutanées uniquement. Toxicité rénale au long cours — ne pas dépasser 2 ans.</td>
+    </tr>
+    <tr>
+      <td><strong>Rétinoïdes (acitrétine)</strong></td>
+      <td>Faible efficacité. Tératogène — programme de prévention grossesse, contraception 3 ans après arrêt. CI chez femme en âge de procréer.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>Biothérapies — 2e intention
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Indiquées après <strong>échec, contre-indication ou intolérance à au moins 2 traitements systémiques conventionnels.</strong></div>
+  </div>
+  <ul class="lst">
+    <li>Bilan pré-thérapeutique spécifique : exclure risques infectieux (tuberculose latente, hépatites), discuter antécédents néoplasiques récents</li>
+    <li>Voir item 202 pour règles de prescription des biothérapies</li>
+    <li>Cibles : anti-TNF-alpha, anti-IL-17, anti-IL-23, anti-IL-12/23</li>
+    <li>Certaines molécules actives sur l'atteinte cutanée <em>et</em> articulaire</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>Escalade thérapeutique — Synthèse
+  </div>
+  <ol class="steps">
+    <li><span class="step-num">1</span><div><strong>Formes légères/modérées :</strong> Traitements locaux (dermocorticoïdes ± analogue vitamine D)</div></li>
+    <li><span class="step-num">2</span><div><strong>Formes modérées/sévères ou retentissement QoL :</strong> Photothérapie UVB TL01 ou méthotrexate (1re intention systémique)</div></li>
+    <li><span class="step-num">3</span><div><strong>Échec 2 traitements systémiques :</strong> Biothérapies (anti-TNF, anti-IL-17, anti-IL-23)</div></li>
+    <li><span class="step-num">4</span><div><strong>Rhumatisme psoriasique :</strong> Méthotrexate ou biothérapie d'emblée selon sévérité articulaire</div></li>
+  </ol>
+</div>
+
+<hr>
+
+<!-- POINTS CLÉS -->
+<div class="card card-teal">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>Points-clés à retenir — ECNi
+  </div>
+  <ul class="lst">
+    <li><strong>Diagnostic clinique</strong> : lésions érythémato-squameuses bien limitées, coudes/genoux/sacrum, biopsie inutile si tableau typique</li>
+    <li><strong>3 formes graves</strong> : érythrodermique + pustuleuse généralisée (pronostic vital, hospitalisation), rhumatisme psoriasique (pronostic fonctionnel)</li>
+    <li><strong>Corticoïdes systémiques</strong> = facteur déclenchant de poussée grave (ne jamais prescrire sans avis spécialisé)</li>
+    <li><strong>Photothérapie</strong> : max 200 séances vie (carcinogénicité)</li>
+    <li><strong>Acitrétine</strong> : tératogène, contraception 3 ans après arrêt — jamais chez femme jeune sans programme prévention</li>
+    <li><strong>Ciclosporine</strong> : ne pas dépasser 2 ans (néphrotoxicité)</li>
+    <li><strong>Biothérapies</strong> : 2e intention après échec d'au moins 2 traitements systémiques conventionnels — bilan infectieux préalable obligatoire</li>
+    <li><strong>Comorbidités</strong> à dépister systématiquement : syndrome métabolique, cardiovasculaire, dépression, MICI</li>
+    <li><strong>Psoriasis en gouttes chez l'enfant</strong> : penser angine à streptocoque comme facteur déclenchant</li>
+    <li><strong>Rhumatisme psoriasique</strong> : 20–30 %, IPS distales + ongles, dactylites (doigts en saucisse) — conditionne le choix thérapeutique</li>
+  </ul>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

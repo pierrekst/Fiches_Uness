@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 116 — Prurit</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple: #534AB7;
+    --purple-light: #EEEDF9;
+    --teal: #1D9E75;
+    --teal-light: #E6F7F2;
+    --coral: #D85A30;
+    --coral-light: #FBF0EC;
+    --blue: #378ADD;
+    --blue-light: #EBF4FD;
+    --red: #E24B4A;
+    --red-light: #FDECEC;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text: #1A1A2E;
+    --text-secondary: #666;
+    --border: rgba(0,0,0,0.08);
+    --bg: #F5F6FA;
+    --card-bg: #fff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); font-size: .88rem; line-height: 1.5; }
+  .page { max-width: 920px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  .header { background: linear-gradient(135deg, #534AB7 0%, #1D9E75 100%); color: #fff; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px; }
+  .header-num { font-size: .73rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; opacity: .75; margin-bottom: 6px; }
+  .header-title { font-size: 1.9rem; font-weight: 800; margin-bottom: 10px; }
+  .header-subtitle { font-size: .86rem; opacity: .88; line-height: 1.65; }
+
+  .overview { background: linear-gradient(135deg, var(--purple-light) 0%, var(--teal-light) 100%); border-radius: 12px; padding: 15px 20px; margin-bottom: 20px; font-size: .84rem; line-height: 1.68; color: var(--text); }
+  .overview strong { color: var(--purple); }
+
+  .section { margin-bottom: 20px; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .section-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-icon svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .section-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+
+  .card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 14px; padding: 16px; margin-bottom: 12px; }
+  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .alert { border-radius:10px; padding:11px 16px; font-size:.84rem; margin-bottom:10px; line-height:1.55; display:flex; gap:10px; align-items:flex-start; }
+  .alert strong { font-weight:800; }
+  .alert-red    { background:var(--red-light);   color:var(--red);   border-left:3px solid var(--red);   }
+  .alert-blue   { background:var(--blue-light);  color:var(--blue);  border-left:3px solid var(--blue);  }
+  .alert-green  { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-amber  { background:var(--amber-light); color:var(--amber); border-left:3px solid var(--amber); }
+  .alert-teal   { background:var(--teal-light);  color:var(--teal);  border-left:3px solid var(--teal);  }
+  .alert-icon { flex-shrink: 0; margin-top: 1px; }
+  .alert-icon svg { width:16px; height:16px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .alert-red   .alert-icon svg { stroke:var(--red);   }
+  .alert-blue  .alert-icon svg { stroke:var(--blue);  }
+  .alert-green .alert-icon svg { stroke:var(--teal);  }
+  .alert-amber .alert-icon svg { stroke:var(--amber); }
+  .alert-teal  .alert-icon svg { stroke:var(--teal);  }
+
+  .kv-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid var(--border); font-size: .82rem; gap: 12px; }
+  .kv-row:last-child { border-bottom: none; }
+  .kv-key { color: var(--text-secondary); font-weight: 600; white-space: nowrap; }
+  .kv-val { font-weight: 700; color: var(--text); text-align: right; }
+
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: .74rem; font-weight: 700; margin: 2px 2px 2px 0; }
+  .pill-green  { background: var(--teal-light);   color: var(--teal);   }
+  .pill-red    { background: var(--red-light);    color: var(--red);    }
+  .pill-blue   { background: var(--blue-light);   color: var(--blue);   }
+  .pill-amber  { background: var(--amber-light);  color: var(--amber);  }
+  .pill-purple { background: var(--purple-light); color: var(--purple); }
+  .pill-coral  { background: var(--coral-light);  color: var(--coral);  }
+
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #E8E8F0; color: var(--text-secondary); display: flex; align-items: center; justify-content: center; font-size: .74rem; font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+  .step-label { font-weight: 700; font-size: .84rem; margin-bottom: 3px; }
+  .step-desc { font-size: .81rem; color: var(--text-secondary); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: var(--bg); padding: 8px 10px; text-align: left; font-weight: 700; font-size: .77rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1.5px solid var(--border); }
+  td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg); }
+
+  .card-lb { border-left: 3px solid var(--border); padding-left: 10px; margin-bottom: 6px; font-size: .82rem; }
+  .lb-blue   { border-left-color: var(--blue);   }
+  .lb-teal   { border-left-color: var(--teal);   }
+  .lb-red    { border-left-color: var(--red);    }
+  .lb-amber  { border-left-color: var(--amber);  }
+  .lb-purple { border-left-color: var(--purple); }
+  .lb-coral  { border-left-color: var(--coral);  }
+
+  ul.list { list-style: none; padding: 0; }
+  ul.list li { padding: 3px 0 3px 14px; position: relative; font-size: .82rem; line-height: 1.5; }
+  ul.list li::before { content: "—"; position: absolute; left: 0; color: var(--text-secondary); }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .sub-label { font-size: .77rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 7px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 116 — Dermatologie</div>
+    <div class="header-title">Prurit</div>
+    <div class="header-subtitle">
+      Symptôme fonctionnel universel — Distinguer prurit avec lésions vs sine materia — Bilan étiologique ciblé — 3 causes de prurit de la grossesse — Piège majeur : polyglobulie de Vaquez devant tout prurit aquagénique
+    </div>
+  </div>
+
+  <!-- VUE D'ENSEMBLE -->
+  <div class="overview">
+    <strong>Ce qu'il faut maîtriser :</strong> Définir prurit, sine materia et aquagénique · Appliquer l'arbre décisionnel (avec lésions vs sans, localisé vs diffus) · Connaître le bilan de 1re intention par cœur · Citer les 3 causes dermatologiques majeures, les causes systémiques du prurit sine materia, et les 3 causes propres à la grossesse · Maîtriser le traitement symptomatique de support.
+  </div>
+
+  <!-- DÉFINITIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <div class="section-title">Définitions</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Terminologie essentielle
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prurit</span>
+        <span class="kv-val">Sensation provoquant le besoin de se gratter (localisé ou diffus)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prurit sine materia</span>
+        <span class="kv-val">Prurit sans lésion cutanée spécifique (lésions de grattage possibles)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prurit aquagénique</span>
+        <span class="kv-val">Prurit survenant après contact avec l'eau</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Prurigo</span>
+        <span class="kv-val">Papules/nodules chroniques — cercle vicieux prurit → grattage → prurit (autonomisation)</span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Lichénification</span>
+        <span class="kv-val">Épaississement cutané avec quadrillage accentué secondaire au grattage répété</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PHYSIOPATHOLOGIE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      <div class="section-title">Physiopathologie</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Médiateurs et voies de transmission
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="sub-label">Origines</div>
+          <div class="card-lb lb-blue" style="margin-bottom:7px;"><strong>Cutanée</strong> (la plus fréquente) — fibres C non myélinisées de la peau</div>
+          <div class="card-lb lb-purple"><strong>Neurogène</strong> — centrale (maladies du SNC) ou périphérique (neuropathies)</div>
+        </div>
+        <div>
+          <div class="sub-label">Médiateurs</div>
+          <div class="card-lb lb-blue" style="margin-bottom:7px;"><strong>Histamine</strong> — surtout dans l'urticaire et les dermatoses histamino-dépendantes</div>
+          <div class="card-lb lb-purple"><strong>Nombreux autres</strong> — acides biliaires, opioïdes, cytokines, substance P… selon l'étiologie</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> L'histamine n'est pas le médiateur universel du prurit. Les antihistaminiques sont efficaces uniquement dans l'urticaire. Dans la cholestase, l'IRC ou les hémopathies, ils sont inefficaces en monothérapie.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- DIAGNOSTIC CLINIQUE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="section-title">Diagnostic clinique</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Démarche diagnostique
+      </div>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-label">Interrogatoire (diagnostic = clinique)</div>
+          <div class="step-desc">Ancienneté, caractère localisé/diffus, horaire (nocturne → gale), facteur déclenchant eau (→ aquagénique), médicaments, contexte grossesse ou voyage</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-label">Examen cutané complet</div>
+          <div class="step-desc">Lésions spécifiques d'une dermatose identifiable (urticaire, eczéma, gale…) ou seulement lésions de grattage → sine materia</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-label">Lésions secondaires au grattage à reconnaître</div>
+          <div class="step-desc">Excoriations, ulcérations, prurigo (papules/nodules), lichénification — signe l'ancienneté mais ne font pas le diagnostic étiologique</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Prurigo :</strong> Papules ou nodules chroniques induites par le cercle vicieux prurit/grattage. Témoin de l'ancienneté et de la sévérité.</div>
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Lichénification :</strong> Épaississement cutané avec quadrillage accentué — signe de grattage répété et prolongé.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ARBRE DÉCISIONNEL -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      <div class="section-title">Arbre décisionnel étiologique</div>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:22%;">Type de prurit</th>
+            <th style="width:38%;">Contexte clinique</th>
+            <th>Diagnostic à évoquer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="4" style="vertical-align:middle; text-align:center; font-weight:800; color:var(--blue); border-right:2px solid var(--border); background:var(--blue-light);">Avec lésions cutanées</td>
+            <td>Vésicules, suintement, érythème, plis</td>
+            <td><span class="pill pill-blue">Eczéma / DA</span></td>
+          </tr>
+          <tr>
+            <td>Sillons scabieux, espaces interdigitaux, prurit nocturne</td>
+            <td><span class="pill pill-red">Gale</span></td>
+          </tr>
+          <tr>
+            <td>Plaques urticariennes fugaces</td>
+            <td><span class="pill pill-amber">Urticaire</span></td>
+          </tr>
+          <tr>
+            <td>Bulles sur fond érythémateux, sujet âgé</td>
+            <td><span class="pill pill-purple">Pemphigoïde bulleuse</span></td>
+          </tr>
+          <tr>
+            <td rowspan="4" style="vertical-align:middle; text-align:center; font-weight:800; color:var(--teal); border-right:2px solid var(--border); background:var(--teal-light);">Sine materia diffus</td>
+            <td>Cholestase (ictère, phosphatases alk)</td>
+            <td><span class="pill pill-green">Pathologie hépatobiliaire</span></td>
+          </tr>
+          <tr>
+            <td>IRC, dialyse</td>
+            <td><span class="pill pill-green">Insuffisance rénale</span></td>
+          </tr>
+          <tr>
+            <td>AEG, sueurs nocturnes, adénopathies</td>
+            <td><span class="pill pill-red">Hémopathie (Hodgkin++)</span></td>
+          </tr>
+          <tr>
+            <td>Prurit déclenché par l'eau</td>
+            <td><span class="pill pill-red">Polyglobulie de Vaquez</span></td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="vertical-align:middle; text-align:center; font-weight:800; color:var(--coral); border-right:2px solid var(--border); background:var(--coral-light);">Localisé</td>
+            <td>Scalp</td>
+            <td><span class="pill pill-coral">Pédiculose du cuir chevelu</span></td>
+          </tr>
+          <tr>
+            <td>Plis, régions génitales</td>
+            <td><span class="pill pill-amber">Mycoses, gale, pédiculose</span></td>
+          </tr>
+          <tr>
+            <td>Retour de voyage tropical, lésions serpiginueuses</td>
+            <td><span class="pill pill-red">Larva migrans cutanée</span></td>
+          </tr>
+          <tr>
+            <td rowspan="3" style="vertical-align:middle; text-align:center; font-weight:800; color:var(--purple); border-right:2px solid var(--border); background:var(--purple-light);">Grossesse (3 causes)</td>
+            <td>Prurit diffus nu sévère + sels biliaires</td>
+            <td><span class="pill pill-red">Cholestase intra-hépatique grossesse</span></td>
+          </tr>
+          <tr>
+            <td>Bulles péri-ombilicales, IgG anti-MB</td>
+            <td><span class="pill pill-purple">Pemphigoïde de la grossesse</span></td>
+          </tr>
+          <tr>
+            <td>Papules urticariennes 3e trimestre, vergetures</td>
+            <td><span class="pill pill-blue">Éruption polymorphe grossesse</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ÉTIOLOGIES DÉTAILLÉES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      <div class="section-title">Étiologies en détail</div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--blue);">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          3 causes de prurit avec lésions (++)
+        </div>
+        <div class="card-lb lb-blue" style="margin-bottom:7px;"><strong>Urticaire</strong> — plaques rosées fugaces, angioedème, dermographisme</div>
+        <div class="card-lb lb-teal" style="margin-bottom:7px;"><strong>Eczéma / Dermatite atopique</strong> — vésicules, suintement, lichénification</div>
+        <div class="card-lb lb-red" style="margin-bottom:7px;"><strong>Gale</strong> — sillons scabieux, nodules scabieux, prurit nocturne, contage familial</div>
+        <div style="font-size:.77rem; color:var(--text-secondary); padding-top:6px; border-top:1px solid var(--border);">Autres : psoriasis, lichen plan, pemphigoïde bulleuse, lymphomes cutanés, piqûres d'insectes</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--teal);">
+            <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+          </div>
+          Prurit sine materia — Causes systémiques
+        </div>
+        <div class="kv-row"><span class="kv-key">Cholestase</span><span class="kv-val">1re cause à éliminer</span></div>
+        <div class="kv-row"><span class="kv-key">IRC / dialyse</span><span class="kv-val">Prurit urémique réfractaire</span></div>
+        <div class="kv-row"><span class="kv-key">Hémopathies</span><span class="kv-val">Lymphomes, syndromes myéloprolifératifs</span></div>
+        <div class="kv-row"><span class="kv-key">Dysthyroïdies</span><span class="kv-val">Hypo- et hyperthyroïdie</span></div>
+        <div class="kv-row"><span class="kv-key">Infections chroniques</span><span class="kv-val">VIH, hépatites B et C</span></div>
+        <div class="kv-row"><span class="kv-key">Carence martiale</span><span class="kv-val">Même sans anémie</span></div>
+        <div class="kv-row"><span class="kv-key">Médicaments</span><span class="kv-val">À éliminer systématiquement</span></div>
+        <div class="kv-row"><span class="kv-key">Psychogène</span><span class="kv-val">Diagnostic d'élimination</span></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card" style="border-left:3px solid var(--red);">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--red);">
+            <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          Prurit aquagénique — Évoquer d'emblée
+        </div>
+        <div class="alert alert-red">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Polyglobulie de Vaquez</strong> — à éliminer systématiquement<br>→ NFS : polyglobulie, thrombocytose, saturation O2 normale</div>
+        </div>
+      </div>
+
+      <div class="card" style="border-left:3px solid var(--amber);">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--amber);">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          Prurit du scalp — Toujours chercher
+        </div>
+        <div class="alert alert-amber">
+          <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><strong>Pédiculose du cuir chevelu</strong> — à rechercher systématiquement (lentes visibles sur les cheveux à l'examen à la loupe)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 causes grossesse -->
+    <div class="card" style="border-top:3px solid var(--purple);">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        3 Causes de prurit spécifiques de la grossesse
+      </div>
+      <div class="grid3">
+        <div class="card" style="border-left:3px solid var(--red); padding:12px; margin-bottom:0;">
+          <div style="font-size:.79rem; font-weight:800; color:var(--red); margin-bottom:8px;">1 — CHOLESTASE INTRA-HÉPATIQUE</div>
+          <div class="kv-row"><span class="kv-key">Prurit</span><span class="kv-val">Diffus, sévère, nu</span></div>
+          <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">↑ sels biliaires sanguins</span></div>
+          <div class="kv-row"><span class="kv-key">Biologie</span><span class="kv-val">± cytolyse hépatique</span></div>
+          <div style="font-size:.76rem; color:var(--red); margin-top:8px; font-weight:800; background:var(--red-light); padding:5px 8px; border-radius:6px;">Risque mort fœtale in utero</div>
+        </div>
+        <div class="card" style="border-left:3px solid var(--purple); padding:12px; margin-bottom:0;">
+          <div style="font-size:.79rem; font-weight:800; color:var(--purple); margin-bottom:8px;">2 — PEMPHIGOÏDE DE GROSSESSE</div>
+          <div class="card-lb lb-purple" style="margin-bottom:5px;">Dermatose bulleuse auto-immune</div>
+          <div class="card-lb lb-purple" style="margin-bottom:5px;">Bulles péri-ombilicales</div>
+          <div class="card-lb lb-purple">IgG anti-membrane basale</div>
+        </div>
+        <div class="card" style="border-left:3px solid var(--blue); padding:12px; margin-bottom:0;">
+          <div style="font-size:.79rem; font-weight:800; color:var(--blue); margin-bottom:8px;">3 — ÉRUPTION POLYMORPHE</div>
+          <div class="card-lb lb-blue" style="margin-bottom:5px;">Papules urticariennes 3e trimestre</div>
+          <div class="card-lb lb-blue" style="margin-bottom:5px;">Débute sur les vergetures abdominales</div>
+          <div style="font-size:.76rem; color:var(--text-secondary); margin-top:6px;">Bénigne — disparaît après accouchement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- BILAN DE 1re INTENTION -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      <div class="section-title">Bilan de 1re intention — Prurit sine materia</div>
+    </div>
+
+    <div class="card">
+      <div class="grid2">
+        <div>
+          <div class="sub-label">Biologie</div>
+          <div style="display:flex; flex-wrap:wrap; gap:3px;">
+            <span class="pill pill-blue">NFS — plaquettes</span>
+            <span class="pill pill-blue">γ-GT + phosphatases alcalines</span>
+            <span class="pill pill-blue">Créatininémie</span>
+            <span class="pill pill-blue">TSH</span>
+            <span class="pill pill-blue">Ferritine</span>
+            <span class="pill pill-blue">Électrophorèse des protéines plasmatiques</span>
+            <span class="pill pill-blue">Sérologie VIH</span>
+            <span class="pill pill-blue">Sérologies hépatites B et C</span>
+          </div>
+        </div>
+        <div>
+          <div class="sub-label">Imagerie / Morphologie</div>
+          <div style="display:flex; flex-wrap:wrap; gap:3px; margin-bottom:10px;">
+            <span class="pill pill-coral">Radiographie thorax</span>
+            <span class="pill pill-purple">Biopsie cutanée pour IFD (sujet âgé)</span>
+          </div>
+          <div class="alert alert-amber">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège :</strong> Sujet âgé prurigineux sans lésion → <strong>biopsie cutanée + IFD</strong> pour ne pas manquer une pemphigoïde bulleuse débutante.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- PRISE EN CHARGE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      <div class="section-title">Prise en charge</div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--teal);">
+            <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+          </div>
+          Traitement étiologique (prioritaire)
+        </div>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-label">Si dermatose spécifique identifiée</div>
+            <div class="step-desc">Traiter la dermatose en cause (scabécide → gale, dermocorticoïdes → eczéma, antihistaminiques → urticaire, corticothérapie → pemphigoïde)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-label">Si cause systémique identifiée</div>
+            <div class="step-desc">Traiter la cause — saignée/hydroxyurée (polyglobulie), dialyse optimisée (IRC), chimiothérapie (hémopathie), arrêt médicament suspect</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <div class="card-icon" style="background:var(--purple);">
+            <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+          </div>
+          Traitement symptomatique (toujours associé)
+        </div>
+        <ul class="list">
+          <li>Éviter les facteurs irritants : antiseptiques, savons détergents</li>
+          <li>Privilégier vêtements en coton — éviter synthétiques et laine</li>
+          <li>Nettoyants surgras à la place des savons classiques</li>
+          <li>Émollients après chaque douche courte et tiède</li>
+          <li>Couper les ongles courts — limiter les lésions de grattage</li>
+          <li>Antihistaminiques sédatifs si prurit nocturne invalidant</li>
+          <li>Photothérapie UVB si prurit réfractaire (urémique++)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- POINTS-CLÉS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="section-title">Points-clés à retenir</div>
+    </div>
+
+    <div class="card" style="border:1.5px solid var(--teal);">
+      <div class="grid2">
+        <div>
+          <div class="alert alert-green" style="margin-bottom:8px;">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Diagnostic clinique :</strong> Le prurit se diagnostique à l'interrogatoire. Prurigo et lichénification signent l'ancienneté, pas l'étiologie.</div>
+          </div>
+          <div class="alert alert-red" style="margin-bottom:8px;">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Prurit aquagénique = polyglobulie de Vaquez</strong> jusqu'à preuve du contraire → NFS en urgence.</div>
+          </div>
+          <div class="alert alert-red">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Cholestase intra-hépatique de grossesse :</strong> prurit nu sévère + ↑ sels biliaires → risque de mort fœtale in utero.</div>
+          </div>
+        </div>
+        <div>
+          <div class="alert alert-amber" style="margin-bottom:8px;">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Piège sujet âgé :</strong> prurit sine materia → toujours biopsie cutanée + IFD pour éliminer une pemphigoïde bulleuse débutante.</div>
+          </div>
+          <div class="alert alert-amber" style="margin-bottom:8px;">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div><strong>Prurit du scalp :</strong> toujours rechercher une pédiculose (lentes à la loupe).</div>
+          </div>
+          <div class="alert alert-green">
+            <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><strong>Histamine ≠ universel :</strong> antihistaminiques inefficaces dans les causes systémiques (cholestase, IRC, hémopathies).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
