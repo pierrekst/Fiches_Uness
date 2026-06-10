@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 123 — Vieillissement normal</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#1D9E75 60%,#378ADD 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">ITEM 123 &mdash; GÉRIATRIE</div>
+  <h1>Vieillissement normal</h1>
+  <div class="header-sub">Aspects biologiques, fonctionnels et relationnels &middot; Épidémiologie &middot; Prévention</div>
+  <div class="header-tags">
+    <span class="htag">Gérontologie</span>
+    <span class="htag">Gériatrie</span>
+    <span class="htag">Fragilité (Fried)</span>
+    <span class="htag">Bouchon 1-2-3</span>
+    <span class="htag">Prévention</span>
+    <span class="htag">Âgisme</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Cet item couvre le vieillissement physiologique sous trois angles : <strong>biologique</strong> (mécanismes moléculaires, modifications organe par organe), <strong>clinique</strong> (raisonnement gériatrique de Bouchon, fragilité selon Fried, déclin fonctionnel ADL/IADL) et <strong>sociétal</strong> (données épidémiologiques françaises, âgisme, prévention). Fil conducteur : le vieillissement n'est pas une maladie — c'est une diminution des réserves fonctionnelles qui rend le sujet âgé vulnérable au moindre facteur précipitant, sans être symptomatique en conditions basales.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions fondamentales
+</div>
+
+<div class="grid3">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Vieillissement
+    </div>
+    <p style="font-size:.83rem;">Ensemble des processus <strong>physiologiques</strong> modifiant structure et fonctions à partir de l'âge mûr.<br><br>Facteurs : génétiques + environnementaux + <strong>stochastiques</strong>.<br><br><span style="color:var(--red);font-weight:700;">Non pathologique</span> — aucun sujet ne devient symptomatique du seul fait du vieillissement.</p>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Gérontologie
+    </div>
+    <p style="font-size:.83rem;">Étude du vieillissement dans tous ses aspects :</p>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-blue">Biomédical</span>
+      <span class="pill pill-teal">Sociologique</span>
+      <span class="pill pill-purple">Économique</span>
+      <span class="pill pill-amber">Démographique</span>
+      <span class="pill pill-coral">Culturel</span>
+      <span class="pill pill-gray">Géographique</span>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Gériatrie
+    </div>
+    <p style="font-size:.83rem;">Médecine des personnes âgées : analyse l'état de santé en considérant <strong>vieillissement + séquelles + maladies chroniques/aiguës</strong>, avec priorité sur l'autonomie et les traitements.</p>
+    <p style="font-size:.83rem;margin-top:6px;"><strong>Biologie du vieillissement</strong> = étude des mécanismes in vitro (cellulaire, tissulaire) et in vivo (animal, Homme).</p>
+  </div>
+</div>
+
+<!-- Raisonnement Bouchon -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Raisonnement gériatrique &mdash; Schéma JP Bouchon <span class="badge badge-amber">Tombable</span>
+  </div>
+  <div class="grid3" style="margin-top:8px;">
+    <div style="background:var(--teal-light);border-radius:10px;padding:12px;text-align:center;">
+      <div class="phase phase-prod" style="margin-bottom:6px;">Facteur 1</div>
+      <div style="font-weight:700;font-size:.85rem;">Vieillissement physiologique</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Diminution des réserves d'organe — <strong>non modifiable</strong></div>
+    </div>
+    <div style="background:var(--amber-light);border-radius:10px;padding:12px;text-align:center;">
+      <div class="phase phase-mod" style="margin-bottom:6px;">Facteur 2</div>
+      <div style="font-weight:700;font-size:.85rem;">Maladie(s) chronique(s)</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:4px;">Maladie d'organe préexistante — partiellement modifiable</div>
+    </div>
+    <div style="background:var(--red-light);border-radius:10px;padding:12px;text-align:center;">
+      <div class="phase phase-sev" style="margin-bottom:6px;">Facteur 3</div>
+      <div style="font-weight:700;font-size:.85rem;">Facteur(s) précipitant(s)</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:4px;"><strong>Cible thérapeutique principale</strong> — prévenir la récidive</div>
+    </div>
+  </div>
+</div>
+
+<!-- Âge de la vieillesse -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+    </div>
+    Âge de la vieillesse <span class="badge badge-purple">Pas de consensus</span>
+  </div>
+  <table class="table-blue">
+    <tr><th>Seuil</th><th>Contexte / Institution</th></tr>
+    <tr><td><strong>60 ans</strong></td><td>Prestations sociales en France</td></tr>
+    <tr><td><strong>65 ans</strong></td><td>Organisation Mondiale de la Santé (OMS)</td></tr>
+    <tr><td><strong>75 ans</strong></td><td>Risque de perte d'autonomie et de fragilité</td></tr>
+    <tr><td><strong>75 ans</strong> (moyenne &gt;80 ans)</td><td>Critère d'admission en service de gériatrie</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Données épidémiologiques et sociologiques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Définitions démographiques
+    </div>
+    <div class="kv-row"><span class="kv-key">Longévité moyenne</span><span class="kv-val" style="font-size:.78rem;">Durée biologique en conditions idéales</span></div>
+    <div class="kv-row"><span class="kv-key">Longévité maximale</span><span class="kv-val" style="font-size:.78rem;">Durée de vie maximale observée</span></div>
+    <div class="kv-row"><span class="kv-key">Espérance de vie</span><span class="kv-val" style="font-size:.78rem;">Années moyennes pour une classe d'âge</span></div>
+    <div class="kv-row"><span class="kv-key">EV sans incapacité</span><span class="kv-val" style="font-size:.78rem;">Années sans handicap</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Espérance de vie en France (2020)
+    </div>
+    <table>
+      <tr><th></th><th>Femmes</th><th>Hommes</th></tr>
+      <tr><td>À la naissance</td><td><strong>85,2 ans</strong></td><td><strong>79,2 ans</strong></td></tr>
+      <tr><td>À 60 ans</td><td><strong>+27 ans</strong></td><td><strong>+23 ans</strong></td></tr>
+    </table>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Allongement de la vie + <strong>diminution du nombre d'années vécues en incapacité</strong></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="21" x2="21" y2="21"/><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 21v-4a2 2 0 0 1 4 0v4"/></svg>
+    </div>
+    Conséquences économiques et sociales
+  </div>
+  <div class="grid2" style="margin-top:8px;margin-bottom:0;">
+    <div>
+      <div style="font-weight:700;font-size:.84rem;color:var(--blue);margin-bottom:6px;">Conséquences économiques</div>
+      <ul class="lst">
+        <li>Forte consommation de soins et hospitalisations</li>
+        <li><strong>APA</strong> (allocation personnalisée d'autonomie)</li>
+        <li>Besoin de places en <strong>EHPAD</strong></li>
+        <li><strong>Silver économie</strong> : aides techniques, téléassistance, gérontotechnologies</li>
+        <li>Emplois : aide à domicile, médico-social</li>
+        <li>Enjeu retraites : cotisants jeunes → retraités âgés</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.84rem;color:var(--teal);margin-bottom:6px;">Conséquences sociales</div>
+      <ul class="lst">
+        <li>Familles 4-5 générations</li>
+        <li>Ainés finançant les générations plus jeunes</li>
+        <li>Génération de jeunes retraités en bonne santé</li>
+        <li>Engagement : associations, bénévolat, politique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : MÉCANISMES BIOLOGIQUES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Mécanismes biologiques du vieillissement
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Hallmarks of aging — 9 mécanismes
+  </div>
+  <table class="table-teal">
+    <tr><th>Mécanisme</th><th>Point clé</th></tr>
+    <tr>
+      <td><strong>Instabilité génomique</strong></td>
+      <td>Accumulation de lésions ADN nucléaire + mitochondrial ; déséquilibre agressions/réparation</td>
+    </tr>
+    <tr>
+      <td><strong>Raccourcissement des télomères</strong></td>
+      <td>Longueur initiale : <strong>9 kbases</strong> ; raccourcit à chaque réplication ; télomères courts → mortalité accrue et maladies dégénératives</td>
+    </tr>
+    <tr>
+      <td><strong>Altérations épigénétiques</strong></td>
+      <td>Méthylation de l'ADN altérée</td>
+    </tr>
+    <tr>
+      <td><strong>Perte de protéostasie</strong></td>
+      <td>Repliement des protéines altéré par les facteurs de stress</td>
+    </tr>
+    <tr>
+      <td><strong>Déréglementation nutriments (TOR)</strong></td>
+      <td>Protéine kinase TOR : déséquilibre nutrition/besoins → obésité, diabète, maladies métaboliques</td>
+    </tr>
+    <tr>
+      <td><strong>Dysfonction mitochondriale</strong></td>
+      <td>Production accrue de <strong>radicaux libres</strong> (agressions endogènes)</td>
+    </tr>
+    <tr>
+      <td><strong>Sénescence cellulaire</strong></td>
+      <td>Limite le nombre de divisions (<strong>théorie de Hayflick</strong>) ; altère réparation et favorise mutations</td>
+    </tr>
+    <tr>
+      <td><strong>Épuisement des cellules souches</strong></td>
+      <td>Diminution de la régénération tissulaire (ex : cellules souches hématopoïétiques)</td>
+    </tr>
+    <tr>
+      <td><strong>Communications intercellulaires altérées</strong></td>
+      <td>Difficultés de communication endocrinienne, neuronale, inflammatoire</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Physiopathologie générale :</strong> Déséquilibre progressif entre les agressions (endogènes + exogènes) et les capacités de réparation cellulaire/tissulaire, aboutissant à une diminution des réserves fonctionnelles.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : VIEILLISSEMENT DES ORGANES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Vieillissement des organes
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Modifications par système &mdash; mots-clés examinables
+  </div>
+  <table class="table-teal">
+    <tr><th>Système</th><th>Modification principale</th><th>Conséquence clinique clé</th></tr>
+    <tr>
+      <td><span class="pill pill-red">Cardio-vasculaire</span></td>
+      <td>Rigidité artérielle + trouble relaxation myocardique + HVG</td>
+      <td>HTA systolique ; FA → décompensation (perte systole atriale)</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-blue">Neurologique</span></td>
+      <td>Diminution attention, altération sommeil, diminution sensation de soif</td>
+      <td>Confusion, chutes, déshydratation</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-purple">Musculaire</span></td>
+      <td><strong>Sarcopénie</strong></td>
+      <td>Chutes, dénutrition, fragilité</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-teal">Rénal</span></td>
+      <td>Réduction néphronique</td>
+      <td>Adaptation réduite perte eau/sel ; dilution/concentration urinaire altérée</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-amber">Sensoriel</span></td>
+      <td>Cataracte, <strong>presbytie</strong>, <strong>presbyacousie</strong></td>
+      <td>Chutes, isolement social</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-coral">Pulmonaire</span></td>
+      <td>Diminution des capacités ventilatoires</td>
+      <td>Décompensation à l'effort ou lors d'infections</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-gray">Digestif</span></td>
+      <td>Ralentissement transit, diminution sécrétion salivaire</td>
+      <td>Constipation, dénutrition</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-blue">Métabolique</span></td>
+      <td>Diminution masse maigre, augmentation masse grasse</td>
+      <td>Sarcopénie, insulinorésistance</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-teal">Immunitaire</span></td>
+      <td>État pro-inflammatoire prolongé, moins bonne réponse vaccinale</td>
+      <td>Infections plus sévères, vaccination moins efficace</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    Focus cardio-vasculaire — Intrications <span class="badge badge-red">Examinable</span>
+  </div>
+  <div class="grid2" style="margin-top:8px;margin-bottom:0;">
+    <div class="bl-red">
+      <div style="font-weight:700;font-size:.84rem;margin-bottom:6px;">Niveau artériel</div>
+      <p style="font-size:.82rem;">Rigidité artérielle &rarr; <strong>HTA systolique</strong> &rarr; <strong>HVG</strong> par augmentation de la postcharge</p>
+    </div>
+    <div class="bl-red">
+      <div style="font-weight:700;font-size:.84rem;margin-bottom:6px;">Niveau cardiaque</div>
+      <p style="font-size:.82rem;">Trouble relaxation + HVG &rarr; défaut remplissage VG compensé par la <strong>systole atriale</strong><br><br>&rarr; <strong>FA</strong> = perte systole atriale = décompensation cardiaque<br>&rarr; Surcharge volémique rapide = même résultat</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : FRAGILITÉ ET VULNÉRABILITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Vulnérabilité, fragilité et déclin fonctionnel
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Critères de fragilité de Fried <span class="badge badge-amber">Tombable</span>
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><div class="step-title">Perte de poids involontaire</div><div class="step-content">Dans la dernière année</div></div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><div class="step-title">Fatigue subjective</div><div class="step-content">Impression de fatigue persistante</div></div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><div class="step-title">Réduction de l'activité physique</div><div class="step-content">Diminution des dépenses énergétiques</div></div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div><div class="step-title">Vitesse de marche diminuée</div><div class="step-content">Lenteur à la marche</div></div>
+      </li>
+      <li>
+        <span class="step-num">5</span>
+        <div><div class="step-title">Force musculaire diminuée</div><div class="step-content">Mesurée par hand grip</div></div>
+      </li>
+    </ul>
+    <div style="margin-top:10px;">
+      <div class="kv-row"><span class="kv-key"><span class="phase phase-sev">Fragile</span></span><span class="kv-val">&ge; 3 critères</span></div>
+      <div class="kv-row"><span class="kv-key"><span class="phase phase-mod">Pré-fragile</span></span><span class="kv-val">1 ou 2 critères</span></div>
+      <div class="kv-row"><span class="kv-key"><span class="phase phase-prod">Robuste</span></span><span class="kv-val">0 critère</span></div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+      </div>
+      Déclin fonctionnel — ADL &amp; IADL
+    </div>
+    <div class="kv-row"><span class="kv-key">Autonomie</span><span class="kv-val" style="font-size:.78rem;">Capacité à se gouverner soi-même</span></div>
+    <div class="kv-row"><span class="kv-key">Dépendance</span><span class="kv-val" style="font-size:.78rem;">Impossibilité d'effectuer seul les AVQ</span></div>
+    <div style="margin-top:10px;">
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>ADL</strong> — gestes élémentaires : habillage, toilette, marche, continence</div>
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>IADL</strong> — activités instrumentales : traitements, comptes, transports, téléphone</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> La fragilité est <strong>parfois réversible</strong> par interventions ciblées (nutrition, activité physique, activité sociale, traitements). Tous les sujets âgés ne sont pas fragiles. Fragilité &ne; vieillissement pathologique (abus de langage, pas de définition précise).</div>
+</div>
+
+<!-- Âgisme -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Âgisme <span class="badge badge-red">Définition examinable</span>
+  </div>
+  <p style="font-size:.84rem;"><strong>Toute forme de discrimination fondée sur l'âge</strong> envers les personnes âgées.<br><br>En pratique médicale : hypertrophie du poids de l'âge dans la décision médicale, sans évaluation objective des capacités de résilience &rarr; <strong>perte de chances</strong>.<br><br>Contextes à risque : soins lourds (réanimation, explorations invasives), tensions sanitaires.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : PRÉVENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1-8.5 18a12 12 0 0 1-8.5-18a12 12 0 0 0 8.5-3"/></svg>
+  Prévention du vieillissement pathologique
+</div>
+
+<div class="grid3">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      1. Nutrition
+    </div>
+    <ul class="lst">
+      <li><strong>Ni trop</strong> dans la jeunesse</li>
+      <li><strong>Ni trop peu</strong> chez la PA (éviter les régimes)</li>
+      <li>Restriction calorique : efficace chez nématodes/rongeurs, <strong>pas chez l'Homme</strong>, potentiellement délétère chez la PA</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      2. Activité physique
+    </div>
+    <ul class="lst">
+      <li>Lutte contre la <strong>sarcopénie</strong></li>
+      <li>Limite l'insulinorésistance</li>
+      <li>Préserve fonctions cardio-vasculaires, respiratoires et cognitives</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      3. Vitamine D
+    </div>
+    <ul class="lst">
+      <li>Supplémentation <strong>systématique</strong></li>
+      <li>Prévention de l'<strong>ostéoporose</strong></li>
+      <li>Prévention de la <strong>perte de masse musculaire</strong></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : ASPECTS SOCIOLOGIQUES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+  Aspects sociologiques et anthropologiques
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+    </div>
+    Représentation sociale de la personne âgée
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Représentation négative :</strong> "Affaibli", "inutile pour la société" &rarr; source d'âgisme</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Représentation positive :</strong> "Patriarche", "sage" &rarr; repère familial, transmission intergénérationnelle</div>
+    </div>
+  </div>
+  <p style="font-size:.83rem;margin-top:8px;">Représentation <strong>variable selon les sociétés, cultures et périodes historiques</strong>. Familles multigénérationnelles (4-5 générations) : les ainés aident financièrement les plus jeunes.</p>
+</div>
+
+<hr>
+
+<!-- SYNTHÈSE FINALE -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+  <div class="grid2" style="margin-top:8px;margin-bottom:0;">
+    <div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Vieillissement = physiologique, non pathologique.</strong> Sujet asymptomatique en conditions basales.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Bouchon F1-F2-F3 :</strong> âge (F1) + maladie chronique (F2) + précipitant (F3 = cible thérapeutique + prévention récidive)</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Fragilité de Fried :</strong> 5 critères, fragile &ge; 3, parfois réversible par intervention ciblée</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Prévention :</strong> nutrition adaptée + activité physique + vitamine D systématique</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège FA :</strong> FA &rarr; perte systole atriale &rarr; décompensation cardiaque chez le sujet âgé (trouble relaxation myocardique préexistant)</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Âgisme :</strong> discrimination par l'âge = perte de chances. À identifier lors de décisions de soins lourds ou en tensions sanitaires.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Restriction calorique :</strong> efficace chez nématodes/rongeurs, <strong>pas chez l'Homme</strong>, potentiellement délétère chez la PA &rarr; éviter les régimes</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

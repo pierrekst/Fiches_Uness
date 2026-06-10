@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 126 — Trouble de l'érection</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#D85A30 0%,#C97B2A 45%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 126</div>
+  <h1>Trouble de l'érection</h1>
+  <div class="header-sub">Dysfonction érectile · Maladie de Lapeyronie · Priapisme</div>
+  <div class="header-tags">
+    <span class="htag">Urologie</span>
+    <span class="htag">Endocrinologie</span>
+    <span class="htag">Urgence : priapisme</span>
+    <span class="htag">Marqueur CV</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vision d'ensemble :</strong> Cet item recouvre trois entités distinctes. (1) La <strong>dysfonction érectile</strong> (DE) chronique — classification étiologique psychogène/organique/mixte, exploration clinico-biologique, et son rôle de <strong>sentinelle cardiovasculaire</strong>. (2) La <strong>maladie de Lapeyronie</strong> — fibrose de l'albuginée, diagnostic purement clinique. (3) Le <strong>priapisme</strong> — urgence urologique ischémique à reconnaître et à distinguer du priapisme artériel non ischémique.
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : DÉFINITION & CLASSIFICATION ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Dysfonction érectile — Définition &amp; Classification
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définition
+  </div>
+  <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Incapacité à obtenir ou maintenir une érection depuis ≥ 3 mois</span></div>
+  <div class="kv-row"><span class="kv-key">Seuil fonctionnel</span><span class="kv-val">Érection insuffisante pour une activité sexuelle satisfaisante</span></div>
+</div>
+
+<div class="grid3">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Origine psychogène
+    </div>
+    <ul class="lst">
+      <li>Causes psychiatriques, psychologiques</li>
+      <li>Socio-affectives, situationnelles</li>
+      <li>Anxiété de performance</li>
+      <li><strong>Érections nocturnes conservées</strong></li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Origine organique
+    </div>
+    <ul class="lst">
+      <li>Neurologique, vasculaire</li>
+      <li>Hormonale (+ baisse de libido)</li>
+      <li>Caverneuse, iatrogène</li>
+      <li><strong>Érections nocturnes altérées</strong></li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Origine mixte
+    </div>
+    <ul class="lst">
+      <li>Fréquente en pratique</li>
+      <li>Éliminer toute cause organique</li>
+      <li>Évoquer anxiété de performance</li>
+      <li>Peut aggraver une cause organique</li>
+    </ul>
+  </div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr><th>Cause organique</th><th>Mécanisme / Exemples</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Vasculaire</strong> <span class="badge badge-red">+++ fréquent</span></td>
+      <td>Dysfonction endothéliale, athérosclérose — symptôme sentinelle cardiovasculaire</td>
+    </tr>
+    <tr>
+      <td><strong>Neurologique</strong></td>
+      <td>Chirurgie rectale, aortique, prostatique ; neuropathie diabétique</td>
+    </tr>
+    <tr>
+      <td><strong>Hormonale</strong></td>
+      <td>Hypogonadisme, hyperprolactinémie → baisse de libido associée</td>
+    </tr>
+    <tr>
+      <td><strong>Iatrogène</strong></td>
+      <td>Bêtabloquants, anti-HTA, inhibiteurs 5α-réductase</td>
+    </tr>
+    <tr>
+      <td><strong>Toxique</strong></td>
+      <td>Tabac, alcool, drogues</td>
+    </tr>
+    <tr>
+      <td><strong>Caverneuse</strong></td>
+      <td>Maladie de Lapeyronie, fibrose séquellaire post-priapisme</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SECTION 2 : ANATOMIE & MÉCANISMES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Anatomie et mécanismes de l'érection
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Mécanisme vasculaire
+    </div>
+    <ul class="lst">
+      <li>Afflux sanguin dans les <strong>espaces sinusoïdes</strong> des corps caverneux</li>
+      <li>Espaces tapissés de cellules endothéliales</li>
+      <li>Relâchement des cellules musculaires lisses caverneuses</li>
+      <li>En réponse à un influx nerveux végétatif</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Centres nerveux
+    </div>
+    <ul class="lst">
+      <li><strong>Centres médullaires</strong> : balance végétative</li>
+      <li>Parasympathique sacré → pro-érection</li>
+      <li>Sympathique thoraco-lombaire → inhibiteur</li>
+      <li>Plexus hypogastriques inf. → <strong>nerfs caverneux</strong></li>
+    </ul>
+  </div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr><th>Type d'érection</th><th>Mécanisme</th><th>Stimulus / Intérêt</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Réflexe</strong></td>
+      <td>Réponse médullaire</td>
+      <td>Stimulus sensitif génital</td>
+    </tr>
+    <tr>
+      <td><strong>Psychogène</strong></td>
+      <td>Supra-médullaire</td>
+      <td>Stimulus sensoriel ou fantasmatique</td>
+    </tr>
+    <tr>
+      <td><strong>Nocturne</strong></td>
+      <td>Accompagne le sommeil paradoxal</td>
+      <td><strong>Valeur diagnostique</strong> : absente → cause organique</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SECTION 3 : BILAN CLINIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan clinique de la dysfonction érectile
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Interrogatoire
+    </div>
+    <ul class="lst">
+      <li>Chronologie, circonstances de survenue</li>
+      <li>Érections nocturnes/matinales : absentes → cause organique</li>
+      <li>Baisse de libido → hypogonadisme (item 124)</li>
+      <li>Comorbidités : diabète (247), signes cardiovasculaires</li>
+      <li>Médicaments : bêtabloquants, anti-HTA, anti-5α-réductase</li>
+      <li>Antécédents chir. : rectale, aortique, prostatique (127, 310)</li>
+      <li>Tabac (75), alcool (76), drogues (77, 78)</li>
+      <li>Contexte psycho-affectif, vie de couple</li>
+      <li>Auto-questionnaire IIEF : objectiver la sévérité</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen physique
+    </div>
+    <ul class="lst">
+      <li><strong>Urogénital</strong> : verge, testicules, toucher rectal</li>
+      <li>Signes hypogonadisme : gynécomastie (246), atrophie testiculaire</li>
+      <li><strong>Cardiovasculaire</strong> : PA, pouls, auscultation</li>
+      <li><strong>Neurologique</strong> : réflexes périnéaux</li>
+      <li>Syndrome métabolique (222) : tour de taille, IMC</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Sentinelle cardiovasculaire :</strong> La dysfonction endothéliale est le mécanisme commun aux maladies cardiovasculaires et à la DE vasculaire. Une DE récente chez un homme avec FRCV ou syndrome métabolique impose un <strong>bilan cardiovasculaire avec avis cardiologique</strong> (dépistage coronaropathie).</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : BILAN DE PREMIÈRE INTENTION ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Bilan biologique de première intention
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Bilan à actualiser si &gt; 5 ans
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Examen</th><th>Indication / Condition</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NFS, ionogramme, créatininémie, bilan hépatique</td>
+        <td>Systématique si bilan &gt; 5 ans</td>
+      </tr>
+      <tr>
+        <td>Bilan lipidique, glycémie à jeun (± HbA1c)</td>
+        <td>FRCV — systématique</td>
+      </tr>
+      <tr>
+        <td><strong>Testostéronémie totale et biodisponible</strong></td>
+        <td>Suspicion déficit androgénique : asthénie, baisse libido, atrophie testiculaire, sueurs, gynécomastie</td>
+      </tr>
+      <tr>
+        <td>LH, FSH + prolactinémie</td>
+        <td>Si déficit androgénique confirmé / suspicion déficit hypophysaire</td>
+      </tr>
+      <tr>
+        <td>TSH</td>
+        <td>Si signes d'hypo- ou hyperthyroïdie</td>
+      </tr>
+      <tr>
+        <td>PSA</td>
+        <td>Si troubles mictionnels associés ou androgénothérapie envisagée</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 : MALADIE DE LAPEYRONIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Maladie de Lapeyronie
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition &amp; terrain
+    </div>
+    <div class="kv-row"><span class="kv-key">Lésion</span><span class="kv-val">Fibrose localisée de l'albuginée des corps caverneux</span></div>
+    <div class="kv-row"><span class="kv-key">Nature</span><span class="kv-val">Affection bénigne</span></div>
+    <div class="kv-row"><span class="kv-key">Terrain classique</span><span class="kv-val">Homme &gt; 50 ans</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Phases cliniques
+    </div>
+    <div class="kv-row">
+      <span class="kv-key"><span class="phase phase-mod">Inflammatoire</span></span>
+      <span class="kv-val">Douleur lors de l'érection</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key"><span class="phase phase-sev">Cicatricielle</span></span>
+      <span class="kv-val">Plaques palpables indolores + angulation</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic &amp; retentissement
+  </div>
+  <ul class="lst">
+    <li><strong>Diagnostic clinique</strong> : interrogatoire + palpation de plaques + mesure de l'angulation sur photographies du pénis en érection</li>
+    <li>Retentissement <strong>fonctionnel</strong> : dysfonction érectile, gêne ou impossibilité à l'intromission</li>
+    <li>Retentissement <strong>psychologique</strong> : à évaluer systématiquement</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 6 : PRIAPISME ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Priapisme
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Définition :</strong> Érection pathologique <strong>&gt; 4 heures</strong> en l'absence de toute stimulation sexuelle. Le priapisme veineux (bas débit) est une <strong>urgence urologique</strong> ischémique — risque de fibrose séquellaire et DE définitive.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Veineux / bas débit <span class="badge badge-red">+++ fréquent</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Veino-occlusif, ischémique</span></div>
+    <div class="kv-row"><span class="kv-key">Douleur</span><span class="kv-val">Oui, douloureux</span></div>
+    <div class="kv-row"><span class="kv-key">Gland</span><span class="kv-val">Flaccide</span></div>
+    <div class="kv-row"><span class="kv-key">Urgence</span><span class="kv-val">Oui — fibrose séquellaire → DE</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Artériel / haut débit <span class="badge badge-blue">rare</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Fistule artériocaverneuse</span></div>
+    <div class="kv-row"><span class="kv-key">Douleur</span><span class="kv-val">Non, typiquement indolore</span></div>
+    <div class="kv-row"><span class="kv-key">Aspect</span><span class="kv-val">Tumescence molle, inconfort</span></div>
+    <div class="kv-row"><span class="kv-key">Cause typique</span><span class="kv-val">Traumatisme pelvien</span></div>
+  </div>
+</div>
+
+<table class="table-red">
+  <thead>
+    <tr><th>Cause</th><th>Détails</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Iatrogène</strong> <span class="badge badge-red">+++ fréquent</span></td>
+      <td>Injections intracaverneuses (traitement de la DE)</td>
+    </tr>
+    <tr>
+      <td><strong>Hématologique</strong></td>
+      <td>Drépanocytose (crise vaso-occlusive), leucémies</td>
+    </tr>
+    <tr>
+      <td><strong>Toxique</strong></td>
+      <td>Antipsychotiques, cocaïne</td>
+    </tr>
+    <tr>
+      <td><strong>Traumatique</strong></td>
+      <td>Traumatisme pelvien → fistule artériocaverneuse (priapisme artériel)</td>
+    </tr>
+    <tr>
+      <td><strong>Tumoral</strong></td>
+      <td>Tumeurs pelviennes : prostate, vessie</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège — priapisme drépanocytaire :</strong> double urgence simultanée — <strong>urologique</strong> (ischémie caverneuse) ET <strong>hématologique</strong> (crise drépanocytaire). Prise en charge conjointe obligatoire.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 7 : POINTS-CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse ECNi
+  </div>
+  <ul class="lst">
+    <li><strong>DE = incapacité érectile ≥ 3 mois</strong> — psychogène : érections nocturnes conservées ; organique : érections nocturnes altérées</li>
+    <li><strong>Baisse libido + DE = hypogonadisme</strong> jusqu'à preuve du contraire → testostéronémie totale et biodisponible</li>
+    <li><strong>DE vasculaire = sentinelle CV</strong> : bilan cardiologique systématique si FRCV (dépistage coronaropathie)</li>
+    <li><strong>Lapeyronie</strong> : homme &gt; 50 ans, fibrose albuginée, diagnostic clinique (plaques + angulation sur photo en érection)</li>
+    <li><strong>Priapisme &gt; 4 h = urgence</strong> — veineux (bas débit, douloureux, gland flaccide, ischémique) est le plus fréquent</li>
+    <li><strong>Priapisme artériel</strong> (haut débit, indolore, fistule artériocaverneuse post-traumatique) : non urgence ischémique immédiate</li>
+    <li><strong>Priapisme drépanocytaire</strong> = double urgence urologique + hématologique</li>
+    <li>Médicaments à évoquer systématiquement : bêtabloquants, anti-HTA, anti-5α-réductase (DE), antipsychotiques (priapisme)</li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège classique :</strong> Ne pas confondre priapisme artériel (haut débit, indolore, fistule post-traumatique, traitement non urgent) et veineux (bas débit, douloureux, urgence ischémique). Le traitement est radicalement différent.</div>
+</div>
+
+</div>
+</body>
+</html>

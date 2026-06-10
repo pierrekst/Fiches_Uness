@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 121 — Le handicap psychique</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">ITEM 121 — PSYCHIATRIE</div>
+  <h1>Le handicap psychique</h1>
+  <div class="header-sub">Voir item 56 (réhabilitation psychosociale) et item 118 (soins sous contrainte)</div>
+  <div class="header-tags">
+    <span class="htag">Réhabilitation psychosociale</span>
+    <span class="htag">Rétablissement</span>
+    <span class="htag">Protection juridique</span>
+    <span class="htag">OIC-121-01 à 05</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vision d'ensemble :</strong> L'item 121 porte sur les conséquences fonctionnelles des troubles psychiatriques chroniques et sur leurs solutions. Il faut savoir définir et distinguer handicap psychique et handicap intellectuel (différences fondamentales), comprendre comment un trouble psychiatrique génère 3 niveaux de handicap, et maîtriser les 3 piliers de la réhabilitation : psychothérapeutique (3 méthodes à combiner), psychosociale (logement, travail, vie sociale) et juridique (mesures de protection civile).
+</div>
+
+<hr>
+
+<!-- SECTION 1 : Définitions -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions — Handicap psychique vs handicap intellectuel
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  <div><strong>Définition :</strong> Situation de handicap d'origine psychique = trouble psychiatrique entraînant une altération des capacités cognitives ou des <em>biais cognitifs</em> qui perturbent les relations sociales ou les activités quotidiennes.</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Critère distinctif</th>
+      <th>Handicap intellectuel</th>
+      <th>Handicap psychique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Origine</td>
+      <td>Déficience intellectuelle</td>
+      <td><strong>Trouble psychiatrique</strong></td>
+    </tr>
+    <tr>
+      <td>Présent dès la naissance</td>
+      <td><span class="badge badge-green">Oui</span></td>
+      <td><span class="badge badge-red">Non</span></td>
+    </tr>
+    <tr>
+      <td>Évolutivité</td>
+      <td>Stable</td>
+      <td><strong>Évolutif</strong></td>
+    </tr>
+    <tr>
+      <td>Soins médicaux nécessaires</td>
+      <td><span class="badge badge-red">Non</span></td>
+      <td><span class="badge badge-green">Oui</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 2 : 3 niveaux du handicap -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Les 3 niveaux du handicap (modèle CIF)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Du trouble psychiatrique à la restriction sociale — cascade en 3 niveaux
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <div>
+        <div class="step-title">Déficience</div>
+        <div class="step-content">Conséquence directe des atteintes cognitives ou de la motivation liées au trouble psychiatrique</div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <div>
+        <div class="step-title">Limitations de l'activité</div>
+        <div class="step-content">Difficultés à réaliser des activités concrètes (vie quotidienne, travail) — conséquence de la déficience</div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num">3</span>
+      <div>
+        <div class="step-title">Restrictions de participation</div>
+        <div class="step-content">Rôles sociaux non assurés — liés à la déficience <em>mais aussi</em> à l'environnement et aux facteurs sociétaux</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : Principes généraux de la PEC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Principes généraux de la prise en charge
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Objectif central : le rétablissement
+  </div>
+  <div class="kv-row"><span class="kv-key">But de la PEC</span><span class="kv-val">Aider la personne à se rétablir</span></div>
+  <div class="kv-row"><span class="kv-key">Outil principal</span><span class="kv-val">Techniques de réhabilitation psychosociale</span></div>
+  <div class="kv-row"><span class="kv-key">Rétablissement =</span><span class="kv-val">Développer des compétences pour vivre avec les 3 niveaux du handicap</span></div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : PEC psychothérapeutique -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Prise en charge psychothérapeutique — 3 méthodes
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Règle absolue :</strong> Les 3 méthodes doivent être <em>combinées</em> pour une efficacité globale, à la fois médicale ET sociale.</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Éducation thérapeutique
+    </div>
+    <ul class="lst">
+      <li>Patient et/ou famille</li>
+      <li>Informations sur le trouble et sa PEC</li>
+      <li>Apprentissage de méthodes de gestion des difficultés</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      TCC + Habiletés sociales
+    </div>
+    <ul class="lst">
+      <li>Thérapies cognitivo-comportementales (cf. item 73)</li>
+      <li>Entraînement aux habiletés sociales</li>
+      <li>Mieux gérer les relations interpersonnelles</li>
+      <li>Limiter l'impact des biais cognitifs</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Remédiation cognitive
+    </div>
+    <ul class="lst">
+      <li><strong>Après</strong> bilan neuropsychologique</li>
+      <li>Évalue : neurocognition, métacognition, cognition sociale</li>
+      <li>Restaure les fonctions altérées et/ou compense par les fonctions préservées</li>
+      <li>Efficace si transférable aux tâches quotidiennes / emploi</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : Réhabilitation psychosociale -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Réhabilitation psychosociale — dispositifs
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr>
+      <th>Domaine</th>
+      <th>Dispositif / Mesure</th>
+      <th>Condition / Précision</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4" style="vertical-align:middle; text-align:center;"><strong>Logement</strong></td>
+      <td>Logement autonome</td>
+      <td>Seul ou en famille si autonomie suffisante</td>
+    </tr>
+    <tr>
+      <td>Appartements thérapeutiques / associatifs</td>
+      <td>Soutien intermédiaire</td>
+    </tr>
+    <tr>
+      <td><strong>SAVS</strong> / <strong>SAMSAH</strong></td>
+      <td>Services d'aide à la vie sociale / d'accompagnement médico-social à domicile</td>
+    </tr>
+    <tr>
+      <td>Hébergement collectif</td>
+      <td>Foyer de vie, FAS (foyer d'accueil spécialisé), FAM (foyer d'accueil médicalisé)</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Travail</strong></td>
+      <td><span class="badge badge-blue">RQTH</span> Milieu ordinaire</td>
+      <td>Reconnaissance en qualité de travailleur handicapé — si milieu ordinaire possible</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-purple">ESAT</span> / Entreprise adaptée</td>
+      <td>Milieu protégé — si milieu ordinaire impossible</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-amber">AAH</span> / <span class="badge badge-amber">PI</span></td>
+      <td>AAH (allocation pour adultes handicapés) ou pension d'invalidité <em>si déjà travaillé</em> — si emploi impossible</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Vie sociale</strong></td>
+      <td><strong>GEM</strong> — Groupes d'entraide mutuelle</td>
+      <td>Lutte contre l'isolement — auto-gérés — financés par <strong>l'ARS</strong></td>
+    </tr>
+    <tr>
+      <td>Participation des usagers</td>
+      <td>Commissions et instances publiques</td>
+    </tr>
+    <tr>
+      <td>Pair-aidance</td>
+      <td>Patients avec expérience personnelle accompagnent d'autres patients (y compris en milieu hospitalier)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 6 : Protection juridique -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Protection juridique — mesures de protection civile
+</div>
+
+<div class="grid3">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Sauvegarde de justice
+    </div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val"><span class="pill pill-teal">Temporaire</span></span></div>
+    <div class="kv-row"><span class="kv-key">Indication</span><span class="kv-val">Protection urgente ou attente curatelle/tutelle</span></div>
+    <div class="kv-row"><span class="kv-key">Actes civils</span><span class="kv-val">Personne autonome</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Curatelle
+    </div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val"><span class="pill pill-blue">Durable</span></span></div>
+    <div class="kv-row"><span class="kv-key">Actes civils</span><span class="kv-val">Personne <strong>assistée</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Autonomie</span><span class="kv-val">Partielle</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Tutelle
+    </div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val"><span class="pill pill-amber">Durable — + restrictive</span></span></div>
+    <div class="kv-row"><span class="kv-key">Actes civils</span><span class="kv-val">Personne <strong>représentée</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Autonomie</span><span class="kv-val">Très réduite</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : Points-clés à retenir -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège classique — HP vs HI :</strong> Le handicap psychique n'est <em>pas</em> présent dès la naissance, il est évolutif et nécessite des soins médicaux. Le handicap intellectuel est lié à une déficience intellectuelle (et non à un trouble psychiatrique).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège — GEM :</strong> Les groupes d'entraide mutuelle sont financés par <em>l'ARS</em> (pas la MDPH, pas la CAF). Ils sont auto-gérés par les patients eux-mêmes.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège — Travail :</strong> RQTH = milieu <em>ordinaire</em> (aide à l'intégration professionnelle). ESAT = milieu <em>protégé</em> (si milieu ordinaire impossible). Ne pas inverser.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Remédiation cognitive :</strong> Nécessite impérativement un bilan neuropsychologique préalable (neurocognition + métacognition + cognition sociale). Efficace surtout si les compétences acquises peuvent être appliquées à des tâches quotidiennes ou professionnelles concrètes.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Protection juridique — graduation :</strong> Sauvegarde de justice (temporaire, autonomie conservée) &lt; Curatelle (assisté — autonomie partielle) &lt; Tutelle (représenté — autonomie très réduite). Graduation croissante de la protection et de la restriction d'autonomie.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>3 méthodes psychothérapeutiques :</strong> Éducation thérapeutique + TCC/habiletés sociales + remédiation cognitive — les 3 doivent être <em>combinées</em>, jamais isolées, pour une efficacité globale médicale et sociale.</div>
+</div>
+
+</div>
+</body>
+</html>
