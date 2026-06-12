@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 334 — Prise en charge du polytraumatisé, brûlé, traumatisé</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#E24B4A 0%,#C97B2A 40%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.6rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 334</div>
+  <h1>Prise en charge immédiate pré-hospitalière et à l'hôpital</h1>
+  <div class="header-sub">Brûlé · Polytraumatisé · Traumatisme thoracique · Abdominal · Membres/Bassin · Rachis · Crânien</div>
+  <div class="header-tags">
+    <span class="htag">Urgences vitales</span>
+    <span class="htag">Damage control</span>
+    <span class="htag">ABCDE</span>
+    <span class="htag">Golden hour</span>
+    <span class="htag">Score ASIA</span>
+    <span class="htag">Glasgow</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vision globale :</strong> Cet item couvre l'évaluation et la prise en charge initiale de toutes les grandes urgences traumatologiques.
+  Le fil conducteur est unique : identifier les détresses vitales (ABCDE), appliquer le <strong>damage control</strong> pour ne jamais retarder l'hémostase,
+  puis traiter chaque région lésée. Du polytraumatisé au brûlé grave, en passant par les fractures ouvertes, les lésions médullaires et le traumatisme crânien,
+  la logique est toujours la même : <strong>stabilisation, bilan, ne pas aggraver</strong>.
+</div>
+
+<!-- ===== PARTIE 1 : TRAUMATISÉ SÉVÈRE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisé sévère — Généralités
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Définition &amp; Mortalité
+    </div>
+    <div class="kv-row"><span class="kv-key">Traumatisé sévère</span><span class="kv-val" style="text-align:right;font-size:.78rem">Violence/mécanisme → pronostic vital engagé</span></div>
+    <table class="table-red" style="margin-top:8px">
+      <tr><th>Mortalité précoce</th><th>Mortalité tardive</th></tr>
+      <tr><td><strong>Hémorragie</strong> (1re cause)</td><td>Traumatisme crânien</td></tr>
+      <tr><td>Conséquences TC</td><td>Syndrome de défaillance multi-viscérale</td></tr>
+    </table>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Acronyme ABCDE
+    </div>
+    <table class="table-blue">
+      <tr><th>Lettre</th><th>Évaluation</th></tr>
+      <tr><td><strong>A</strong> — Airway</td><td>Obstruction voies aériennes</td></tr>
+      <tr><td><strong>B</strong> — Breathing</td><td>SpO₂, FR, cyanose, détresse respi</td></tr>
+      <tr><td><strong>C</strong> — Circulation</td><td>PA, FC, pouls, hémorragie active, choc</td></tr>
+      <tr><td><strong>D</strong> — Disability</td><td>Glasgow, pupilles, tonus sphincter anal (TR)</td></tr>
+      <tr><td><strong>E</strong> — Exposure</td><td>Plaies, fractures — examen de tête aux pieds</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Algorithme de Vittel — Critères de gravité
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--amber);margin-bottom:6px">Variables physiologiques</div>
+      <ul class="lst">
+        <li>Glasgow &lt; 14</li>
+        <li>PA systolique &lt; 90 mmHg</li>
+        <li>SpO₂ &lt; 90 %</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--amber);margin-bottom:6px">Cinétique (mécanisme)</div>
+      <ul class="lst">
+        <li>Éjection du véhicule</li>
+        <li>Décès dans le même véhicule</li>
+        <li>Chute &gt; 6 m</li>
+        <li>Blast, explosion, submersion</li>
+        <li>Piéton/cycliste renversé</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:8px">
+    <div style="font-size:.78rem;font-weight:700;color:var(--amber);margin-bottom:6px">Lésions anatomiques</div>
+    <div class="pills">
+      <span class="pill pill-red">TC grave</span>
+      <span class="pill pill-red">Traumatisme thoracique</span>
+      <span class="pill pill-red">Traumatisme abdomino-pelvien</span>
+      <span class="pill pill-red">Fractures membres/bassin</span>
+      <span class="pill pill-red">Traumatisme rachidien</span>
+      <span class="pill pill-red">Hémorragie active</span>
+      <span class="pill pill-red">Traumatisme de la face</span>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Damage Control — Principes
+    </div>
+    <ul class="lst">
+      <li><strong>Damage control resuscitation</strong> : thérapeutiques strictement nécessaires sans retarder l'hémostase</li>
+      <li><strong>Golden hour</strong> : tout retard = surmortalité</li>
+      <li><strong>Damage control surgery</strong> : gestes limités pour stopper saignement + contrôler coagulopathie</li>
+    </ul>
+    <div style="margin-top:10px;font-size:.8rem;font-weight:700;color:var(--muted)">Indications d'intubation oro-trachéale</div>
+    <div class="pills" style="margin-top:4px">
+      <span class="pill pill-red">Détresse respi</span>
+      <span class="pill pill-red">Détresse circulatoire</span>
+      <span class="pill pill-red">Glasgow ≤ 8</span>
+      <span class="pill pill-red">Douleur/chirurgie urgente</span>
+      <span class="pill pill-red">Agitation aiguë</span>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Complications du traumatisé sévère
+    </div>
+    <div class="phase phase-sev">Court terme</div>
+    <ul class="lst" style="margin-bottom:6px">
+      <li>Défaillance multi-viscérale (SDMV)</li>
+      <li>Complications infectieuses (fracture ouverte, perforation organe creux)</li>
+      <li>Hémorragiques, thromboemboliques</li>
+      <li>Mort encéphalique</li>
+    </ul>
+    <div class="phase phase-mod">Moyen terme</div>
+    <ul class="lst" style="margin-bottom:6px">
+      <li>Complications du décubitus (escarres, attitudes vicieuses)</li>
+      <li>Infections nosocomiales</li>
+      <li>Dénutrition, sarcopénie</li>
+    </ul>
+    <div class="phase phase-prod">Long terme</div>
+    <ul class="lst">
+      <li>Incapacité physique fonctionnelle</li>
+      <li>Syndromes anxio-dépressifs, PTSD</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 2 : BRÛLURES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Brûlures
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral)">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Classification selon la profondeur
+  </div>
+  <table class="table-red">
+    <tr><th>Degré</th><th>Aspect clinique</th><th>Sensibilité</th><th>Évolution</th></tr>
+    <tr>
+      <td><strong>1er degré</strong></td>
+      <td>Érythème douloureux, intra-épidermique</td>
+      <td>Douloureuse</td>
+      <td>Spontanée 2-3j, sans cicatrice</td>
+    </tr>
+    <tr>
+      <td><strong>2e superficiel</strong></td>
+      <td>Phlyctènes volumineuses, derme rouge souple</td>
+      <td>Très douloureuse, hémorragique à la scarification</td>
+      <td>Spontanée 10-15j, dyschromie possible</td>
+    </tr>
+    <tr>
+      <td><strong>2e profond</strong></td>
+      <td>Phlyctènes inconstantes, derme blanchâtre piqueté rouge, phanères adhérents</td>
+      <td>Anesthésie partielle</td>
+      <td>Aléatoire 21-35j, chirurgie souvent nécessaire</td>
+    </tr>
+    <tr>
+      <td><strong>3e degré</strong></td>
+      <td>Peau sèche, cartonnée, <strong>pas de blanchiment à la vitropression</strong>, phanères non adhérents</td>
+      <td>Indolore, insensible</td>
+      <td>Chirurgie obligatoire</td>
+    </tr>
+    <tr>
+      <td><strong>4e degré</strong> (carbonisation)</td>
+      <td>Destructions aponévrotiques, musculaires, osseuses</td>
+      <td>Anesthésie complète</td>
+      <td>Reconstruction obligatoire</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Évaluation de la surface brûlée (SCB)
+    </div>
+    <div class="kv-row"><span class="kv-key">Règle des 9 de Wallace (adulte)</span><span class="kv-val">Méthode simple à retenir</span></div>
+    <div class="kv-row"><span class="kv-key">Méthode de Lund &amp; Browder</span><span class="kv-val">Recommandée (SFAR 2019)</span></div>
+    <div class="kv-row"><span class="kv-key">Paume de la main</span><span class="kv-val">≈ 1 % SCB</span></div>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Chez l'enfant &lt;1 an — tête = 18%, membres inf = 14% (différent de l'adulte !)</div>
+    </div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Signes de gravité
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px">ADULTE — Brûlé grave à risque vital</div>
+    <ul class="lst" style="margin-bottom:8px">
+      <li>SCB &gt; 20 % ou SCB 3e degré &gt; 5 %</li>
+      <li>Syndrome d'inhalation de fumées</li>
+      <li>Localisation profonde : face, mains, pieds, périnée</li>
+      <li>Brûlure électrique haute tension</li>
+    </ul>
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px">ENFANT — Brûlé grave</div>
+    <ul class="lst">
+      <li>SCB &gt; 10 % ou SCB 3e degré &gt; 5 %</li>
+      <li>Nourrisson &lt; 1 an</li>
+      <li>Inhalation de fumées, brûlure circulaire</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge du brûlé — Soins locaux &amp; Réanimation
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:6px">Soins locaux</div>
+      <ol class="lst" style="padding-left:18px">
+        <li>Retirer les vêtements (pas les adhérents)</li>
+        <li>Refroidir la brûlure (eau 15°C, 15 min) <strong>si &lt;20% SCB</strong> — maintenir normothermie du patient</li>
+        <li>Toilette antiseptique (polyvidone iodée / chlorhexidine)</li>
+        <li>Pansement : <strong>sulfadiazine d'argent</strong> (CI grossesse, allergie sulfamides)</li>
+        <li>Escarrotomie si brûlure circulaire 3e degré (&lt; 6h)</li>
+        <li>Vérifier statut anti-tétanique</li>
+      </ol>
+      <div class="alert alert-amber" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Brûlure chimique :</strong> retirer vêtements, laver à grande eau &gt;30 min, sans refroidir — se protéger soi-même</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:6px">Réanimation (brûlé grave)</div>
+      <div class="kv-row"><span class="kv-key">Remplissage initial</span><span class="kv-val">20 ml/kg cristalloïdes en 1h</span></div>
+      <div class="kv-row"><span class="kv-key">Seuil adulte</span><span class="kv-val">SCB ≥ 20%</span></div>
+      <div class="kv-row"><span class="kv-key">Seuil enfant</span><span class="kv-val">SCB ≥ 10%</span></div>
+      <div class="kv-row"><span class="kv-key">Formule Parkland (H24)</span><span class="kv-val">4 ml/kg/% SCB</span></div>
+      <div class="kv-row"><span class="kv-key">H24–H48</span><span class="kv-val">Moitié des apports</span></div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-top:8px;margin-bottom:4px">Indications intubation chez le brûlé</div>
+      <div class="pills">
+        <span class="pill pill-red">Détresse respiratoire</span>
+        <span class="pill pill-red">Glasgow altéré</span>
+        <span class="pill pill-red">Brûlure profonde face/cou</span>
+        <span class="pill pill-red">Inhalation fumées</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Syndrome d'inhalation de fumées — Intoxications CO &amp; Cyanure
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px">Diagnostic clinique inhalation</div>
+      <ul class="lst">
+        <li>Incendie en espace clos</li>
+        <li>Suies oropharynx / expectorations</li>
+        <li>Toux sèche, dysphonie, wheezing</li>
+        <li>Brûlure visage + suies nez/bouche</li>
+        <li><strong>Fibroscopie bronchique</strong> = examen de référence</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px">Traitement</div>
+      <div class="kv-row"><span class="kv-key">O₂ 100 %</span><span class="kv-val">Systématique</span></div>
+      <div class="kv-row"><span class="kv-key">Intoxication HCN</span><span class="kv-val">Hydroxocobalamine IV (Cyanokit®)</span></div>
+      <div class="kv-row"><span class="kv-key">Caisson hyperbare (CO)</span><span class="kv-val">CI si brûlé grave (réa impossible)</span></div>
+      <div class="kv-row"><span class="kv-key">SDRA associé</span><span class="kv-val">Ventilation protectrice</span></div>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> La brûlure des vibrissses ou du visage NE SIGNE PAS l'inhalation mais doit faire évoquer le diagnostic.<br>
+    CO → troubles neurologiques (coma, convulsions) / HCN → atteinte cardiovasculaire (choc, arrêt circulatoire) + hyperlactatémie</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 3 : TRAUMATISME THORACIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisme thoracique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostic clinique
+    </div>
+    <ul class="lst">
+      <li>Douleur thoracique + dyspnée</li>
+      <li>"Signe de la ceinture", hémoptysie</li>
+      <li>Emphysème sous-cutané à la palpation</li>
+      <li>Asymétrie auscultatoire</li>
+      <li>Volet costal : mouvements paradoxaux</li>
+      <li>Signes de choc hémorragique</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Radiographie — Signes clés
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:4px">Pneumothorax</div>
+    <ul class="lst" style="margin-bottom:6px">
+      <li>Hyperclarté périphérique + liseré pleural visible</li>
+      <li>Grave (sous tension) : rétraction pulmonaire au hile, <strong>déviation médiastinale controlatérale</strong>, aplatissement coupole</li>
+    </ul>
+    <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:4px">Hémothorax</div>
+    <ul class="lst">
+      <li>Opacité déclive dense, bord supérieur concave (ligne de Damoiseau)</li>
+      <li>Grave (compressif) : déviation médiastinale controlatérale</li>
+      <li>Hémopneumothorax : niveau hydroaérique horizontal</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:4px">Surveillance USC si :</div>
+      <ul class="lst">
+        <li>&gt;2 fractures de côtes</li>
+        <li>Âge &gt;65 ans / cardiopulmonaire chronique</li>
+        <li>Détresse respiratoire / choc</li>
+      </ul>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-top:8px;margin-bottom:4px">Analgésie (prioritaire)</div>
+      <ul class="lst">
+        <li>Multimodale : morphinique + PCA + ALR (péridurale, blocs intercostaux)</li>
+      </ul>
+    </div>
+    <div>
+      <table class="table-blue">
+        <tr><th>Lésion</th><th>Traitement</th></tr>
+        <tr><td>Pneumothorax suffoquant</td><td>Exsufflation urgente</td></tr>
+        <tr><td>Hémothorax actif massif</td><td>Thoracotomie d'hémostase</td></tr>
+        <tr><td>Pneumo &lt;50%, hémothorax &lt;500ml</td><td>Drainage ou conservateur</td></tr>
+        <tr><td>Rupture isthme aortique</td><td>Endoprothèse aortique</td></tr>
+        <tr><td>Traumatisme pénétrant</td><td>Antibioprophylaxie 24-48h (amox-clav)</td></tr>
+      </table>
+      <div class="alert alert-amber" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> La ventilation mécanique risque de rendre compressif un pneumothorax non drainé</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 4 : TRAUMATISME ABDOMINAL ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisme abdominal
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan paraclinique
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num step-num-red">1</span>
+        <div><div class="step-title">Échographie FAST</div><div class="step-content">Épanchement : espace de Morrisson, récessus spléno-rénal, Douglas</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">2</span>
+        <div><div class="step-title">Radio bassin de face</div><div class="step-content">Fracture du bassin → artério-embolisation en urgence</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">3</span>
+        <div><div class="step-title">Body scan (TDM corps entier)</div><div class="step-content">Dès stabilisation hémodynamique — référence diagnostique</div></div>
+      </li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Laparotomie d'hémostase — Indications
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>TRIADE :</strong> Instabilité hémodynamique + FAST+ + Pas de fracture du bassin = laparotomie d'hémostase en urgence (damage control surgery)</div>
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-top:8px;margin-bottom:4px">Surveillance conservatrice si stable</div>
+    <ul class="lst">
+      <li><strong>Fractures de rate :</strong> traitement conservateur +++ — risque rupture différée jusqu'au 30e jour → hospitalisation 2 semaines</li>
+      <li>Mesure pression intra-abdominale (via pression intra-vésicale)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 5 : TRAUMATISME DES MEMBRES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisme des membres &amp; Fractures
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Classification fractures ouvertes
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--amber);margin-bottom:4px">Cauchoix</div>
+    <table class="table-amber" style="margin-bottom:8px">
+      <tr><th>Stade</th><th>Définition</th></tr>
+      <tr><td>1</td><td>Plaie punctiforme suturable sans tension</td></tr>
+      <tr><td>2</td><td>Large avec contusion, suturable avec risque de nécrose</td></tr>
+      <tr><td>3</td><td>Perte de substance, fermeture impossible</td></tr>
+    </table>
+    <div style="font-size:.78rem;font-weight:700;color:var(--amber);margin-bottom:4px">Gustilo (référence)</div>
+    <table class="table-amber">
+      <tr><th>Grade</th><th>Description</th></tr>
+      <tr><td>I</td><td>Plaie &lt; 1 cm, propre</td></tr>
+      <tr><td>II</td><td>Plaie 1-10 cm, pas de délabrement majeur</td></tr>
+      <tr><td>IIIa</td><td>&gt;10 cm, couverture osseuse possible</td></tr>
+      <tr><td>IIIb</td><td>Perte de substance cutanée, os à nu</td></tr>
+      <tr><td>IIIc</td><td>Lésion vasculaire nécessitant pontage</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Complications précoces à rechercher
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px">Locorégionales</div>
+    <ul class="lst" style="margin-bottom:8px">
+      <li><strong>Syndrome des loges</strong> : urgence &lt;6h — aponévrotomie de toutes les loges</li>
+      <li>Lésions vasculaires ischémiques : pâleur, abolition pouls, hématome expansif</li>
+      <li>Lésion nerf radial (fracture tiers moyen humérus)</li>
+    </ul>
+    <div style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px">Systémiques</div>
+    <ul class="lst">
+      <li><strong>Embolie graisseuse</strong> : triade de Gurd, fond d'œil</li>
+      <li><strong>Rhabdomyolyse</strong> : CPK, myoglobine — expansion volémique cristalloïdes 500 ml/h + alcalinisation urines (pH &gt; 6)</li>
+    </ul>
+    <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-top:8px;margin-bottom:4px">Pertes sanguines estimées</div>
+    <div class="kv-row"><span class="kv-key">Fracture fémur</span><span class="kv-val">≈ 2 000 ml</span></div>
+    <div class="kv-row"><span class="kv-key">Fracture tibia</span><span class="kv-val">≈ 1 000 ml</span></div>
+    <div class="kv-row"><span class="kv-key">Fractures complexes bassin</span><span class="kv-val">jusqu'à 5 000 ml</span></div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge des fractures
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:4px">Fracture fermée</div>
+      <ul class="lst">
+        <li>Non déplacée stable → plâtre (orthopédique)</li>
+        <li>Instable / déplacée → ostéosynthèse chirurgicale</li>
+      </ul>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-top:8px;margin-bottom:4px">Critères d'Ottawa (éviter radio inutile)</div>
+      <table class="table-blue">
+        <tr><th>Cheville/pied</th><th>Genou</th></tr>
+        <tr><td>Douleur malléole ou base 5e métatarse ou scaphoïde tarsien, ou impossibilité de faire 4 pas</td><td>Douleur patella ou tête fibula, flexion &lt;90°, impossibilité de faire 4 pas, âge &gt;55 ans</td></tr>
+      </table>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:4px">Fracture ouverte — Urgence &lt;6h</div>
+      <ul class="lst">
+        <li>Antibioprophylaxie IV : amox-clav / clindamycine+gentamycine si allergie péni</li>
+        <li>Durée : &lt;24h (Cauchoix 1/Gustilo I-II) → 24-48h (Gustilo IIIa) → &gt;48h (Gustilo IIIb-c)</li>
+        <li>Parage chirurgical + lavage itératif (toutes 48h si délabrement)</li>
+        <li>Pontage vasculaire si Gustilo IIIc</li>
+        <li>Vérifier statut anti-tétanique systématique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 6 : TRAUMATISME RACHIDIEN ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisme du rachis &amp; Lésions médullaires
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Score ASIA — Examen neurologique codifié
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div class="kv-row"><span class="kv-key">Moteur</span><span class="kv-val">10 muscles cotés 0-5 → score /100</span></div>
+      <div class="kv-row"><span class="kv-key">Sensitif</span><span class="kv-val">28 métamères, 2 modalités → /112 chacune</span></div>
+      <div class="kv-row"><span class="kv-key">Périnée</span><span class="kv-val">Sensibilité anale, contraction volontaire</span></div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-top:8px;margin-bottom:4px">Signes péjoratifs (atteinte complète)</div>
+      <div class="pills">
+        <span class="pill pill-red">Priapisme</span>
+        <span class="pill pill-red">Béance anale</span>
+        <span class="pill pill-red">Atonie sphincter</span>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:4px">Syndromes médullaires incomplets</div>
+      <table class="table-blue">
+        <tr><th>Syndrome</th><th>Déficit</th></tr>
+        <tr><td><strong>Brown-Séquard</strong> (hémi-moelle)</td><td>Moteur + cordonal post. homolatéral / thermo-algique controlatéral</td></tr>
+        <tr><td><strong>Contusion antérieure</strong></td><td>Moteur complet, sensibilité tactile préservée</td></tr>
+        <tr><td><strong>Contusion centrale</strong></td><td>Tétraplégie incomplète, MS &gt; MI (sujet âgé + arthrose)</td></tr>
+        <tr><td><strong>Cône médullaire</strong></td><td>Troubles sphinctériens, pyramidal + flasque</td></tr>
+        <tr><td><strong>Queue de cheval</strong></td><td>Pluriradiculaire flasque L2-S5, "anesthésie en selle"</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Conséquences hémodynamiques &amp; ventilatoires
+    </div>
+    <table class="table-red">
+      <tr><th>Niveau</th><th>Conséquences</th></tr>
+      <tr><td>C1-C2</td><td>Arrêt cardiaque possible au moment du traumatisme</td></tr>
+      <tr><td>&gt;C4</td><td>Paralysie diaphragmatique → ventilation contrôlée</td></tr>
+      <tr><td>C4-C7</td><td>Diaphragme conservé, pas d'intercostaux, toux inefficace</td></tr>
+      <tr><td>&gt;T6</td><td>Choc neurogénique (hypotension + bradycardie + tétraplégie)</td></tr>
+    </table>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Le choc spinal (sidération médullaire) peut masquer le caractère complet d'une atteinte — ne pas conclure avant sa résolution (qq jours)</div>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Prise en charge
+    </div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px">Pré-hospitalier</div>
+    <ul class="lst" style="margin-bottom:8px">
+      <li>Tout polytraumatisé = blessé médullaire jusqu'à preuve du contraire</li>
+      <li>Maintien axe tête-cou-tronc, minerve semi-rigide, matelas coquille</li>
+      <li>Objectifs : PAS ≥ 100 mmHg, PAM ≥ 85 mmHg (noradrénaline si besoin)</li>
+      <li>SpO₂ ≥ 94 %, normocapnie sous ventilation, normoglycémie, normothermie</li>
+    </ul>
+    <div style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px">Imagerie</div>
+    <ul class="lst">
+      <li>Scanner (1re intention) : reconstructions 3 plans, body-scan si polytraumatisé</li>
+      <li>IRM : éléments neurologiques, ligaments, disques — ne pas retarder si troubles neuro</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>La <strong>corticothérapie neuroprotectrice n'est pas recommandée</strong></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 7 : TRAUMATISME CRÂNIEN ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Traumatisme crânien
+</div>
+
+<div class="grid3">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Mineur
+    </div>
+    <div class="kv-row"><span class="kv-key">Glasgow</span><span class="kv-val">≥ 13</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Modéré
+    </div>
+    <div class="kv-row"><span class="kv-key">Glasgow</span><span class="kv-val">9 à 12</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Grave
+    </div>
+    <div class="kv-row"><span class="kv-key">Glasgow</span><span class="kv-val">≤ 8</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Classification dynamique — le stade peut changer selon la fluctuation de conscience. Rapporter chaque composante séparément (oculaire/verbale/motrice).</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Physiopathologie
+    </div>
+    <div class="kv-row"><span class="kv-key">PPC = PAM – PIC</span><span class="kv-val">Pression de perfusion cérébrale</span></div>
+    <div class="kv-row"><span class="kv-key">Lésions primaires</span><span class="kv-val">Au moment du traumatisme (contact ou inertie)</span></div>
+    <div class="kv-row"><span class="kv-key">Lésions secondaires</span><span class="kv-val">ACSOS — zone de pénombre viable</span></div>
+    <div style="font-size:.78rem;font-weight:700;color:var(--purple);margin-top:8px;margin-bottom:4px">ACSOS (agressions cérébrales secondaires)</div>
+    <div class="pills">
+      <span class="pill pill-red">Hypoxie</span>
+      <span class="pill pill-red">Hypotension</span>
+      <span class="pill pill-red">Hypercapnie</span>
+      <span class="pill pill-red">Hyperthermie</span>
+      <span class="pill pill-red">Hypoglycémie</span>
+    </div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Scanner cérébral — Lésions typiques
+    </div>
+    <table class="table-red">
+      <tr><th>Lésion</th><th>Image TDM</th></tr>
+      <tr><td><strong>Hématome extradural (HED)</strong></td><td>Hyperdensité biconvexe (lenticulaire)</td></tr>
+      <tr><td><strong>Hématome sous-dural (HSD)</strong></td><td>Hyperdensité en croissant, hémisphérique</td></tr>
+      <tr><td><strong>Contusions</strong></td><td>Hyperdensités hétérogènes frontales/temporales</td></tr>
+      <tr><td><strong>Lésions axonales diffuses</strong></td><td>Hyperdensités jonction cortico-sous-corticale</td></tr>
+      <tr><td><strong>HSA traumatique</strong></td><td>Hyperdensité espaces sous-arachnoïdiens</td></tr>
+    </table>
+    <div class="alert alert-red" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence :</strong> Mydriase unilatérale = engagement temporal ou baisse majeure DSC → neurochirurgie immédiate</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Principes de prise en charge — "Time is Brain"
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:4px">Critères d'évaluation spécialisée (TC mineur)</div>
+      <ul class="lst">
+        <li>Perte de connaissance &gt; 5 min</li>
+        <li>Déficit neurologique initial ou secondaire</li>
+        <li>Signe de focalisation ou anomalie pupillaire</li>
+        <li>Glasgow initial &lt; 14</li>
+        <li>Anticoagulants, alcool, psychotropes</li>
+        <li>Lésions extra-crâniennes associées</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--blue);margin-bottom:4px">Scanner cérébral (1re intention)</div>
+      <ul class="lst">
+        <li>Sans injection puis avec injection (polygone de Willis + troncs supra-aortiques)</li>
+        <li>Toujours associé à scanner rachis cervical</li>
+        <li>Doppler trans-crânien : dépistage HTIC à l'admission (FAST)</li>
+        <li>Renouveler si : scanner précoce, aggravation clinique, anticoagulants</li>
+      </ul>
+      <div class="alert alert-green" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Lutter contre toutes les ACSOS : objectifs SpO₂ &gt;95%, PAS &gt;120 mmHg (ou PAM), normoglycémie, normothermie</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SYNTHÈSE / POINTS CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges classiques
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse ECNi — Ce qui tombe
+  </div>
+  <div class="grid2" style="margin-bottom:0">
+    <div>
+      <ul class="lst">
+        <li><strong>ABCDE</strong> : évaluation universelle, identique à l'hôpital et en préhospitalier</li>
+        <li><strong>Damage control</strong> : ne jamais retarder l'hémostase (golden hour)</li>
+        <li><strong>Vittel</strong> : 3 catégories de critères (physiologique, cinétique, anatomique)</li>
+        <li><strong>IOT</strong> : Glasgow ≤ 8 = indication formelle</li>
+        <li><strong>Brûlure 3e degré</strong> : indolore, cartonnée, pas de vitropression, phanères non adhérents</li>
+        <li><strong>Règle des 9</strong> adulte vs enfant : tête = 9% adulte, 18% nourrisson</li>
+        <li><strong>Parkland</strong> : 4 ml/kg/% SCB en 24h</li>
+        <li><strong>Sulfadiazine d'argent</strong> = seul topique utilisable hors spécialiste</li>
+        <li><strong>Cyanokit</strong> (hydroxocobalamine) = antidote HCN</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="lst">
+        <li><strong>Laparotomie</strong> : FAST+ + instabilité hémodynamique + pas de fracture du bassin</li>
+        <li><strong>Rate</strong> : rupture différée possible jusqu'au J30 → hospitalisation 2 semaines</li>
+        <li><strong>Gustilo IIIc</strong> = pontage vasculaire obligatoire</li>
+        <li><strong>Syndrome des loges</strong> : urgence &lt;6h, aponévrotomie</li>
+        <li><strong>Tout polytraumatisé = blessé médullaire</strong> jusqu'à preuve du contraire</li>
+        <li><strong>ASIA</strong> : score neurologique de référence — réalisé avant tout geste</li>
+        <li><strong>Choc spinal</strong> ≠ atteinte médullaire complète — ne pas conclure avant résolution</li>
+        <li><strong>HED</strong> = biconvexe / <strong>HSD</strong> = croissant</li>
+        <li><strong>ACSOS</strong> : ennemi n°1 du TC grave — cibler normoxie, normotension, normoglycémie</li>
+        <li><strong>Corticothérapie rachidienne</strong> = NON recommandée</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Grand piège global :</strong> Ne pas retarder la prise en charge hémorragique pour compléter un bilan diagnostique. Le scanner n'est réalisé que sur un patient stable hémodynamiquement (sauf en extrême urgence).</div>
+</div>
+
+</div>
+</body>
+</html>
