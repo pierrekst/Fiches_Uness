@@ -3,13 +3,20 @@
 auto_fiches.py — Génère automatiquement les fiches HTML manquantes.
 
 Usage :
-  python3 auto_fiches.py                     # 5 fiches, pause 45s
-  python3 auto_fiches.py --count 3           # 3 fiches
+  python3 auto_fiches.py 283 284 285         # génère précisément ces items
+  python3 auto_fiches.py 283 --model claude-opus-4-8
+  python3 auto_fiches.py                      # mode auto : 5 fiches manquantes
+  python3 auto_fiches.py --count 3           # 3 fiches manquantes
   python3 auto_fiches.py --count 10 --delay 60
   python3 auto_fiches.py --start-from 280    # reprend à partir de l'item 280
-  python3 auto_fiches.py --model claude-opus-4-8
   python3 auto_fiches.py --dry-run           # simulation sans rien exécuter
   python3 auto_fiches.py --list              # affiche les items manquants
+
+Deux modes :
+  • Items explicites : on passe les numéros en argument → ces fiches-là, dans
+    l'ordre, qu'elles existent déjà (→ _v2) ou non.
+  • Auto (aucun numéro) : détecte les fiches manquantes et en fait --count.
+Dans les deux cas, update_avancement.py est lancé une seule fois à la fin.
 """
 import argparse
 import glob
@@ -81,6 +88,8 @@ def run_fiche(claude_bin, model, num):
         # --dangerously-skip-permissions requis pour le mode non-interactif (-p) :
         # sans lui, Claude demande confirmation à chaque outil (Read, Write, Bash).
         # Portée limitée : CLAUDE.md contraint les actions autorisées.
+        # CLAUDE.md (étape 6) interdit désormais à Claude de pousser lui-même :
+        # le push unique est fait par ce script à la fin du batch.
         [claude_bin, "--model", model, "--dangerously-skip-permissions",
          "--output-format", "json", "-p", prompt],
         cwd=BASE_DIR, capture_output=True, text=True
@@ -108,12 +117,34 @@ def fiche_exists(num):
     return bool(glob.glob(os.path.join(FICHES_DIR, f"{num}_*.html")))
 
 
+def newest_fiche_mtime(num):
+    """mtime de la fiche la plus récente pour cet item (0 si aucune)."""
+    files = glob.glob(os.path.join(FICHES_DIR, f"{num}_*.html"))
+    return max((os.path.getmtime(f) for f in files), default=0.0)
+
+
+def newest_fiche_name(num):
+    """Nom de la fiche la plus récente pour cet item ('?' si aucune)."""
+    files = glob.glob(os.path.join(FICHES_DIR, f"{num}_*.html"))
+    if not files:
+        return "?"
+    return os.path.basename(max(files, key=os.path.getmtime))
+
+
+def md_exists(num):
+    """Vérifie qu'un cours .md source existe pour cet item."""
+    return bool(glob.glob(os.path.join(MD_DIR, f"{num} *.md")))
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Génère les fiches HTML manquantes")
+    parser = argparse.ArgumentParser(description="Génère des fiches HTML (items demandés ou manquantes)")
+    parser.add_argument("items",        nargs="*", type=int,
+                        help="Numéros d'items à générer (si vide : mode auto sur les manquantes)")
     parser.add_argument("--count",      type=int, default=5,
-                        help="Nombre de fiches à générer (défaut: 5)")
-    parser.add_argument("--delay",      type=int, default=45,
-                        help="Délai cible en secondes entre fiches (défaut: 45)")
+                        help="Mode auto : nombre de fiches manquantes à générer (défaut: 5)")
+    parser.add_argument("--delay",      type=int, default=5,
+                        help="Temps total cible (s) entre 2 départs de fiche, anti-rate-limit. "
+                             "Sans effet si la génération dure déjà plus longtemps (défaut: 5)")
     parser.add_argument("--model",      default=MODEL_DEFAULT,
                         help=f"Modèle Claude (défaut: {MODEL_DEFAULT})")
     parser.add_argument("--start-from", type=int, default=None, dest="start_from",
@@ -133,19 +164,35 @@ def main():
         missing = [n for n in missing if n >= args.start_from]
 
     print(f"Fiches existantes : {len(have)}/{len(all_md)}")
-    suffix = f" (depuis item {args.start_from})" if args.start_from else ""
-    print(f"Manquantes        : {len(missing)}{suffix}")
 
     if args.list:
+        suffix = f" (depuis item {args.start_from})" if args.start_from else ""
+        print(f"Manquantes        : {len(missing)}{suffix}")
         for n in missing:
             print(f"  item {n}")
         return
 
-    if not missing:
-        print("Toutes les fiches sont déjà générées !")
-        return
+    # ── Sélection du batch : items explicites prioritaires sur le mode auto ───
+    if args.items:
+        batch = []
+        for n in args.items:
+            if not md_exists(n):
+                print(f"  ⚠️  Item {n} : aucun cours .md source — ignoré.")
+                continue
+            batch.append(n)
+        if not batch:
+            print("Aucun item valide à générer.")
+            return
+        existing = [n for n in batch if fiche_exists(n)]
+        if existing:
+            print(f"Note : items déjà existants → nouvelle version (_v2…) : {existing}")
+    else:
+        print(f"Manquantes        : {len(missing)}")
+        if not missing:
+            print("Toutes les fiches sont déjà générées !")
+            return
+        batch = missing[:args.count]
 
-    batch = missing[:args.count]
     mode  = "[DRY-RUN] " if args.dry_run else ""
     print(f"{mode}Cette session : {len(batch)} fiche(s) — items {batch}")
     print(f"Modèle : {args.model}\n")
@@ -164,13 +211,16 @@ def main():
         success = False
         stats   = {}
         elapsed = 0.0
+        # Empreinte avant génération : une fiche est "réussie" si un fichier
+        # N_*.html plus récent apparaît (gère création ET nouvelle version _v2).
+        before_mtime = newest_fiche_mtime(num)
 
         for attempt in range(args.retry + 1):
             rc, stats, elapsed = run_fiche(claude_bin, args.model, num)
-            if fiche_exists(num):
+            if newest_fiche_mtime(num) > before_mtime:
                 success = True
                 break
-            reason = f"returncode={rc}, fiche absente"
+            reason = f"returncode={rc}, aucune fiche nouvelle/modifiée"
             print(f"\n  Tentative {attempt + 1} échouée ({reason})", end=" ", flush=True)
             if attempt < args.retry:
                 print("— retry dans 15s...", end=" ", flush=True)
@@ -182,7 +232,8 @@ def main():
             cw   = stats.get("cache_write", 0)
             out  = stats.get("output_tokens", 0)
             cost = stats.get("cost_usd", 0.0)
-            print(f"OK  [{elapsed:.0f}s | in:{inp} cr:{cr} cw:{cw} out:{out} | ${cost:.4f}]")
+            print(f"OK  → {newest_fiche_name(num)}")
+            print(f"      [{elapsed:.0f}s | in:{inp} cr:{cr} cw:{cw} out:{out} | ${cost:.4f}]")
             all_stats.append(stats)
         else:
             print(f"\n  ECHEC définitif")
