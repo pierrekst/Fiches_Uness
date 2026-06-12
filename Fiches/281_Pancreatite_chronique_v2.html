@@ -2,543 +2,332 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="../favicon.svg">
+<link rel="icon" href="../Config/favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IC-281 – Pancréatite chronique</title>
 <style>
   :root {
-    --purple: #534AB7;
-    --teal: #1D9E75;
-    --coral: #D85A30;
-    --blue: #378ADD;
-    --red: #E24B4A;
-    --amber: #F59E0B;
-    --rang-a: #D85A30;
-    --rang-b: #378ADD;
-    --bg: #F8F9FC;
-    --card-bg: #ffffff;
-    --text: #1e2533;
-    --text-muted: #6b7280;
-    --border: #e2e8f0;
-    --border-thin: rgba(0,0,0,0.09);
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #111827;
-      --card-bg: #1f2937;
-      --text: #f3f4f6;
-      --text-muted: #9ca3af;
-      --border: #374151;
-      --border-thin: rgba(255,255,255,0.08);
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
     }
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 20px 16px 60px;
-    max-width: 860px;
-    margin: 0 auto;
-  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
 
   /* HEADER */
-  .page-header {
-    background: linear-gradient(135deg, var(--purple) 0%, #6f66d4 100%);
-    color: white;
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 28px;
-  }
-  .page-header .item-num {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    opacity: .75;
-    margin-bottom: 6px;
-  }
-  .page-header h1 {
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 12px;
-  }
-  .page-header .subtitle {
-    font-size: 13px;
-    opacity: .85;
-    line-height: 1.55;
-  }
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
 
-  /* VUE D'ENSEMBLE */
-  .overview-box {
-    background: linear-gradient(135deg, #eef2ff 0%, #e0f2fe 100%);
-    border: 1px solid #c7d2fe;
-    border-radius: 14px;
-    padding: 20px 24px;
-    margin-bottom: 24px;
-  }
-  @media (prefers-color-scheme: dark) {
-    .overview-box { background: #1e254a; border-color: #3d4a7a; }
-  }
-  .overview-box h2 {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--purple);
-    text-transform: uppercase;
-    letter-spacing: .08em;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .overview-box ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .overview-box ul li {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--text);
-  }
-  .overview-box ul li::before {
-    content: "→";
-    color: var(--purple);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
+  /* OBJECTIFS */
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
 
-  /* SECTION TITLE */
-  .section-title {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
-    margin-top: 4px;
-  }
-  .section-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 18px;
-  }
-  .icon-purple { background: #ede9f7; color: var(--purple); }
-  .icon-teal   { background: #d4f1e8; color: var(--teal); }
-  .icon-coral  { background: #fce8e1; color: var(--coral); }
-  .icon-blue   { background: #dbeafe; color: var(--blue); }
-  .icon-red    { background: #fee2e2; color: var(--red); }
-  .icon-amber  { background: #fef3c7; color: var(--amber); }
-  @media (prefers-color-scheme: dark) {
-    .icon-purple { background: #2d2860; }
-    .icon-teal   { background: #0e3d2d; }
-    .icon-coral  { background: #4a1e0e; }
-    .icon-blue   { background: #1e3a5f; }
-    .icon-red    { background: #4a1515; }
-    .icon-amber  { background: #4a3000; }
-  }
-  .section-title-text h2 {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-  .section-title-text .oic-codes {
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
 
-  /* BADGE RANG */
-  .badge {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 20px;
-    color: white;
-    letter-spacing: .04em;
-    vertical-align: middle;
-    margin-left: 6px;
-  }
-  .badge-a { background: var(--rang-a); }
-  .badge-b { background: var(--rang-b); }
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 
-  /* CARD */
-  .card {
-    background: var(--card-bg);
-    border: 0.5px solid var(--border-thin);
-    border-radius: 14px;
-    padding: 18px 20px;
-    margin-bottom: 14px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
 
-  /* GRID 2 COL */
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-  @media (max-width: 560px) {
-    .grid-2 { grid-template-columns: 1fr; }
-  }
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
 
   /* PILLS */
-  .pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
-  .pill {
-    display: inline-block;
-    padding: 4px 11px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.4;
-  }
-  .pill-green  { background: #d1fae5; color: #065f46; }
-  .pill-red    { background: #fee2e2; color: #991b1b; }
-  .pill-blue   { background: #dbeafe; color: #1e40af; }
-  .pill-amber  { background: #fef3c7; color: #92400e; }
-  .pill-purple { background: #ede9f7; color: #3730a3; }
-  .pill-teal   { background: #d4f1e8; color: #065f46; }
-  .pill-gray   { background: #f3f4f6; color: #374151; }
-  @media (prefers-color-scheme: dark) {
-    .pill-green  { background: #0e3d2d; color: #6ee7b7; }
-    .pill-red    { background: #4a1515; color: #fca5a5; }
-    .pill-blue   { background: #1e3a5f; color: #93c5fd; }
-    .pill-amber  { background: #4a3000; color: #fcd34d; }
-    .pill-purple { background: #2d2860; color: #c4b5fd; }
-    .pill-teal   { background: #0e3d2d; color: #5eead4; }
-    .pill-gray   { background: #374151; color: #d1d5db; }
-  }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
 
-  /* ALERT */
-  .alert {
-    border-radius: 10px;
-    padding: 13px 16px;
-    margin-bottom: 12px;
-    font-size: 13px;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-  .alert-red    { background: #fef2f2; border-left: 4px solid var(--red); }
-  .alert-blue   { background: #eff6ff; border-left: 4px solid var(--blue); }
-  .alert-green  { background: #f0fdf4; border-left: 4px solid var(--teal); }
-  .alert-amber  { background: #fffbeb; border-left: 4px solid var(--amber); }
-  @media (prefers-color-scheme: dark) {
-    .alert-red    { background: #2a1010; }
-    .alert-blue   { background: #10243a; }
-    .alert-green  { background: #0a2a1a; }
-    .alert-amber  { background: #2a1e00; }
-  }
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
 
-  /* COMPLICATION CARD */
-  .compl-card {
-    background: var(--card-bg);
-    border: 0.5px solid var(--border-thin);
-    border-radius: 12px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-  }
-  .compl-card.border-red    { border-left: 4px solid var(--red); }
-  .compl-card.border-amber  { border-left: 4px solid var(--amber); }
-  .compl-card.border-blue   { border-left: 4px solid var(--blue); }
-  .compl-card.border-teal   { border-left: 4px solid var(--teal); }
-  .compl-card.border-purple { border-left: 4px solid var(--purple); }
-  .compl-card.border-coral  { border-left: 4px solid var(--coral); }
-  .compl-card h4 {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 5px;
-  }
-  .compl-card p, .compl-card li {
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.55;
-  }
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red); }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
 
-  /* NUMBERED STEPS */
-  .steps { display: flex; flex-direction: column; gap: 10px; }
-  .step {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .step-num {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: #e5e7eb;
-    color: #374151;
-    font-size: 13px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  @media (prefers-color-scheme: dark) {
-    .step-num { background: #374151; color: #d1d5db; }
-  }
-  .step-content { font-size: 13px; padding-top: 4px; }
-  .step-content strong { display: block; margin-bottom: 3px; }
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
 
-  /* TABLE */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-    margin-top: 10px;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  thead th {
-    background: var(--purple);
-    color: white;
-    padding: 9px 12px;
-    text-align: left;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
-  tbody tr:nth-child(even) { background: rgba(0,0,0,0.025); }
-  @media (prefers-color-scheme: dark) {
-    tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
-  }
-  tbody td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
+  /* LISTES */
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
 
-  /* KEY-VALUE */
-  .kv-table { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin-top: 8px; }
-  .kv-key   { font-size: 12.5px; font-weight: 700; color: var(--text-muted); white-space: nowrap; }
-  .kv-val   { font-size: 12.5px; }
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
 
-  /* HR */
-  hr {
-    border: none;
-    border-top: 1.5px solid var(--border);
-    margin: 28px 0;
-  }
+  /* PHASES */
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
 
-  /* TIMELINE */
-  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; margin-top: 10px; }
-  .timeline::before {
-    content: "";
-    position: absolute;
-    left: 14px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: var(--border);
-    z-index: 0;
-  }
-  .tl-item {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    position: relative;
-    padding-bottom: 18px;
-    z-index: 1;
-  }
-  .tl-dot {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-    z-index: 2;
-  }
-  .tl-body { font-size: 13px; padding-top: 4px; }
-  .tl-body strong { display: block; margin-bottom: 3px; font-size: 13px; }
+  /* BORDER-LEFT SHORTCUTS */
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
 
-  p { font-size: 13px; line-height: 1.6; }
-  ul { padding-left: 18px; }
-  li { font-size: 13px; line-height: 1.6; margin-bottom: 3px; }
-  strong { font-weight: 700; }
+  /* BORDER LEFT CARDS */
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
 
-  .small { font-size: 11.5px; color: var(--text-muted); }
+  /* SECTION TITLES */
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 </head>
 <body>
+<div class="page">
 
-<!-- ===== EN-TÊTE ===== -->
-<div class="page-header">
-  <div class="item-num">Item IC-281 · Hépato-gastro-entérologie</div>
-  <h1>🫁 Pancréatite chronique</h1>
-  <div class="subtitle">
-    À apprendre en parallèle avec l'item 358 (Pancréatite aiguë) — les deux items partagent causes, mécanismes et complications.
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="header-num">Item IC-281 · Hépato-gastro-entérologie</div>
+  <h1>Pancréatite chronique</h1>
+  <div style="font-size:.9rem;opacity:.9;margin-top:4px;">Inflammation chronique → fibrose progressive irréversible → destruction exocrine puis endocrine</div>
+  <div class="header-tags">
+    <span class="htag">Alcool &gt; 80 %</span>
+    <span class="htag">Tabac facteur indépendant</span>
+    <span class="htag">Fibrose irréversible</span>
+    <span class="htag">Homme ~40 ans</span>
+    <span class="htag">Douleur transfixiante</span>
+    <span class="htag">Item 358 en parallèle</span>
   </div>
 </div>
 
-<!-- ===== VUE D'ENSEMBLE ===== -->
-<div class="overview-box">
-  <h2>🎯 Vue d'ensemble — Ce que cet item attend de vous</h2>
-  <ul>
-    <li>Retenir que la pancréatite chronique est une fibrose progressive qui détruit d'abord l'exocrine puis l'endocrine.</li>
-    <li>Savoir que l'alcool en est la cause dans 80 % des cas, avec le tabac comme facteur de risque indépendant majeur.</li>
-    <li>Reconnaître la douleur typique transfixiante et les complications (pseudokystes, sténose biliaire, IPE, diabète, dénutrition).</li>
-    <li>Maîtriser l'imagerie diagnostique : scanner en 1ʳᵉ intention, IRM pour les anomalies canalaires, échoendoscopie en 2ᵉ ligne.</li>
-    <li>Comprendre la chronologie d'évolution sur des années : douleurs → complications exo/endocrines → stade tardif silencieux.</li>
-    <li>Connaître les grands axes de prise en charge : sevrage, antalgie, extraits pancréatiques, traitement du diabète et des complications.</li>
-  </ul>
+<!-- ===== OBJECTIFS ===== -->
+<div class="objectifs">
+  <strong>Vision d'ensemble :</strong> La PC est une fibrose pancréatique irréversible d'origine principalement alcoolique, évoluant en 3 stades sur des années : phase douloureuse (PA récidivantes) → insuffisance exo- et endocrine → dénutrition au premier plan. Maîtriser l'imagerie diagnostique (scanner + IRM), reconnaître et traiter les complications (pseudokystes, sténose biliaire, IPE, diabète).
 </div>
 
-<!-- ===== 1. DÉFINITION ===== -->
+<!-- ===== 1. DÉFINITION + ÉPIDÉMIO ===== -->
 <div class="section-title">
-  <div class="section-icon icon-purple">📖</div>
-  <div class="section-title-text">
-    <h2>Définition <span class="badge badge-a">Rang A</span></h2>
-    <div class="oic-codes">OIC-281-01</div>
-  </div>
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Définition &amp; Épidémiologie
 </div>
 
-<div class="card">
-  <p>La <strong>pancréatite chronique (PC)</strong> est une inflammation chronique du pancréas entraînant une <strong>fibrose mutilante progressive</strong>, responsable d'une destruction du tissu exocrine puis endocrine de la glande.</p>
-  <div class="alert alert-blue" style="margin-top:12px">
-    <span class="alert-icon">ℹ️</span>
-    <div>Contrairement à la pancréatite aiguë, la PC est <strong>irréversible</strong> : chaque poussée aggrave la fibrose et accélère la destruction fonctionnelle.</div>
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <p style="font-size:.84rem;margin-bottom:8px;">Inflammation chronique du pancréas → <strong>fibrose mutilante irréversible</strong>, destruction progressive :</p>
+    <div class="kv-row"><span class="kv-key">Phase précoce</span><span class="kv-val">Tissu exocrine (acini)</span></div>
+    <div class="kv-row"><span class="kv-key">Phase tardive</span><span class="kv-val">Tissu endocrine (îlots)</span></div>
+    <div class="alert alert-blue" style="margin-top:10px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Contrairement à la PA, la PC est <strong>irréversible</strong> : chaque poussée aggrave la fibrose.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">25 / 100 000</span></div>
+    <div class="kv-row"><span class="kv-key">Âge de début</span><span class="kv-val">~40 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Sexe</span><span class="kv-val">Homme 80 %</span></div>
   </div>
 </div>
 
 <hr>
 
-<!-- ===== 2. ÉPIDÉMIOLOGIE ===== -->
+<!-- ===== 2. ÉTIOLOGIES ===== -->
 <div class="section-title">
-  <div class="section-icon icon-blue">📊</div>
-  <div class="section-title-text">
-    <h2>Épidémiologie <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-02</div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="kv-table">
-    <span class="kv-key">Prévalence</span>
-    <span class="kv-val">25 / 100 000 habitants (pays occidentaux)</span>
-    <span class="kv-key">Âge de début</span>
-    <span class="kv-val">Autour de 40 ans</span>
-    <span class="kv-key">Sexe</span>
-    <span class="kv-val">Nette prédominance masculine (80 %)</span>
-  </div>
-</div>
-
-<hr>
-
-<!-- ===== 3. ÉTIOLOGIES ===== -->
-<div class="section-title">
-  <div class="section-icon icon-coral">🧪</div>
-  <div class="section-title-text">
-    <h2>Étiologies <span class="badge badge-a">Rang A</span> / <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-03 · OIC-281-04</div>
-  </div>
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Étiologies
 </div>
 
 <div class="alert alert-amber">
-  <span class="alert-icon">⚠️</span>
-  <div><strong>Piège classique :</strong> moins de 5 % des consommateurs excessifs d'alcool développent une PC — terrain génétique et tabac jouent un rôle. L'arrêt de l'alcool seul ne suffit pas toujours.</div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> &lt;5 % des alcooliques chroniques développent une PC — terrain génétique indispensable. Arrêt alcool seul insuffisant si tabac poursuivi.</div>
 </div>
 
-<div class="grid-2">
-  <div class="card">
-    <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--coral)">Cause principale <span class="badge badge-a">A</span></h4>
-    <p><strong>Alcool chronique</strong> : &gt; 80 % des PC, consommation &gt; 100 g/j pendant &gt; 10 ans.</p>
-    <p style="margin-top:6px"><strong>Tabac</strong> : facteur de risque indépendant majeur (associé dans &gt; 80 % des cas) et facteur péjoratif aggravant l'évolution.</p>
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes principales <span class="badge badge-red">Rang A</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Alcool chronique</span><span class="kv-val">&gt;80 % des PC</span></div>
+    <div class="kv-row"><span class="kv-key">Seuil indicatif</span><span class="kv-val">&gt;100 g/j pendant &gt;10 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Tabac</span><span class="kv-val">Facteur indépendant + péjoratif</span></div>
   </div>
-  <div class="card">
-    <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--blue)">Causes rares <span class="badge badge-b">B</span></h4>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Causes rares <span class="badge badge-blue">Rang B</span>
+    </div>
     <div class="pills">
-      <span class="pill pill-blue">PC obstructives</span>
-      <span class="pill pill-purple">Auto-immunes (IgG4)</span>
+      <span class="pill pill-blue">Obstructives (TIPMP, TNE)</span>
+      <span class="pill pill-purple">Auto-immunes IgG4</span>
       <span class="pill pill-teal">Génétiques</span>
       <span class="pill pill-amber">Hypercalcémie chronique</span>
       <span class="pill pill-amber">Hypertriglycéridémie</span>
-      <span class="pill pill-gray">Idiopathiques (~10%)</span>
+      <span class="pill pill-gray">Idiopathiques ~10 %</span>
     </div>
-    <p style="margin-top:10px;font-size:12px;color:var(--text-muted)">Obstructions : tumeurs lentes (TIPMP, TNE), sténose post-traumatique Wirsung, séquelles PA, anomalie congénitale.</p>
   </div>
 </div>
 
 <hr>
 
-<!-- ===== 4. CLINIQUE : DOULEUR ===== -->
+<!-- ===== 3. CLINIQUE — DOULEUR ===== -->
 <div class="section-title">
-  <div class="section-icon icon-red">🩺</div>
-  <div class="section-title-text">
-    <h2>Présentation clinique — La douleur <span class="badge badge-a">Rang A</span></h2>
-    <div class="oic-codes">OIC-281-05</div>
-  </div>
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Présentation clinique — Douleur
 </div>
 
-<div class="card">
-  <div class="kv-table">
-    <span class="kv-key">Siège</span>       <span class="kv-val">Épigastrique</span>
-    <span class="kv-key">Irradiation</span>  <span class="kv-val">Postérieure, <strong>transfixiante</strong></span>
-    <span class="kv-key">Déclencheurs</span> <span class="kv-val">Prise alimentaire, alcool</span>
-    <span class="kv-key">Durée</span>        <span class="kv-val">Plusieurs heures à quelques jours</span>
-    <span class="kv-key">Mécanismes</span>   <span class="kv-val">Poussée de PA sur PC <em>ou</em> inflammation chronique sous-jacente</span>
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Sémiologie de la douleur
+    </div>
+    <div class="kv-row"><span class="kv-key">Siège</span><span class="kv-val">Épigastrique</span></div>
+    <div class="kv-row"><span class="kv-key">Irradiation</span><span class="kv-val">Postérieure — <strong>transfixiante</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Déclencheurs</span><span class="kv-val">Repas, alcool</span></div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">Heures à quelques jours</span></div>
+    <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Poussée PA sur PC <em>ou</em> inflammation chronique</span></div>
   </div>
-  <div class="alert alert-amber" style="margin-top:12px">
-    <span class="alert-icon">⚠️</span>
-    <div>L'<strong>amaigrissement</strong> est en partie lié à la restriction alimentaire volontaire des patients qui évitent de manger pour ne pas déclencher les douleurs — à distinguer d'une insuffisance exocrine pure.</div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Amaigrissement — mécanismes
+    </div>
+    <ul class="lst">
+      <li><strong>Restriction alimentaire volontaire</strong> — le patient évite de manger pour ne pas déclencher la douleur (mécanisme précoce)</li>
+      <li>Insuffisance exocrine → maldigestion (stade tardif)</li>
+      <li>Carences : vitamines A, D, K, B12, B9, Ca, Zn, Se</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> ne pas attribuer l'amaigrissement uniquement à l'IPE — la restriction alimentaire précède l'insuffisance exocrine.</div>
+    </div>
   </div>
 </div>
 
 <hr>
 
-<!-- ===== 5. BIOLOGIE ===== -->
+<!-- ===== 4. BIOLOGIE ===== -->
 <div class="section-title">
-  <div class="section-icon icon-teal">🔬</div>
-  <div class="section-title-text">
-    <h2>Biologie <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-07</div>
-  </div>
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Biologie
 </div>
 
 <div class="card">
-  <table>
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Marqueurs biologiques selon le contexte
+  </div>
+  <table class="table-blue">
     <thead>
-      <tr><th>Marqueur</th><th>Quand ?</th><th>Signification</th></tr>
+      <tr><th>Marqueur</th><th>Timing</th><th>Signification</th></tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>Lipasémie ↑</strong></td>
-        <td>Lors des poussées aiguës</td>
-        <td>Poussée de pancréatite aiguë sur PC — inutile en dehors des poussées</td>
+        <td><strong>Lipasémie</strong></td>
+        <td><span class="badge badge-red">Poussée</span></td>
+        <td>Poussée PA sur PC — inutile en dehors des crises</td>
       </tr>
       <tr>
-        <td><strong>PAL, GGT ↑ ± bilirubine</strong></td>
-        <td>En cas de complication biliaire</td>
-        <td>Cholestase par sténose du cholédoque dans la tête pancréatique</td>
+        <td><strong>PAL / GGT ± bilirubine</strong></td>
+        <td><span class="badge badge-amber">Complication</span></td>
+        <td>Cholestase → sténose cholédoque dans la tête pancréatique</td>
       </tr>
       <tr>
         <td><strong>Glycémie / HbA1c</strong></td>
-        <td>Après des années d'évolution</td>
+        <td><span class="badge badge-amber">Tardif</span></td>
         <td>Diabète pancréatique (insuffisance endocrine)</td>
       </tr>
       <tr>
-        <td><strong>Élastase fécale ↓</strong></td>
-        <td>Stéatorrhée, amaigrissement</td>
-        <td>Confirme l'insuffisance pancréatique exocrine</td>
+        <td><strong>Élastase fécale</strong></td>
+        <td><span class="badge badge-amber">Tardif</span></td>
+        <td>Basse → confirme IPE (stéatorrhée + amaigrissement)</td>
       </tr>
       <tr>
         <td><strong>Vitamines A, D, K, B12, B9</strong></td>
-        <td>Stade évolué</td>
-        <td>Carences liées à la maldigestion + malnutrition</td>
+        <td><span class="badge badge-amber">Tardif</span></td>
+        <td>Carences liées à maldigestion et malnutrition</td>
       </tr>
     </tbody>
   </table>
@@ -546,247 +335,271 @@
 
 <hr>
 
-<!-- ===== 6. IMAGERIE ===== -->
+<!-- ===== 5. IMAGERIE ===== -->
 <div class="section-title">
-  <div class="section-icon icon-blue">🖼️</div>
-  <div class="section-title-text">
-    <h2>Imagerie diagnostique <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-08</div>
-  </div>
+  <svg viewBox="0 0 24 24"><path d="M4 7v-1a2 2 0 0 1 2-2h2"/><path d="M4 17v1a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v1"/><path d="M16 20h2a2 2 0 0 0 2-2v-1"/><rect x="8" y="9" width="8" height="6" rx="1"/></svg>
+  Imagerie diagnostique
 </div>
 
 <div class="alert alert-blue">
-  <span class="alert-icon">ℹ️</span>
-  <div>Les signes radiologiques sont <strong>souvent absents au début</strong> et apparaissent avec le temps : la normalité de l'imagerie précoce n'exclut pas le diagnostic.</div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Signes radiologiques <strong>souvent absents au début</strong> — normalité précoce n'exclut pas le diagnostic.</div>
 </div>
 
-<div class="steps" style="margin-bottom:14px">
-  <div class="step">
+<ul class="steps">
+  <li>
     <div class="step-num">1</div>
-    <div class="step-content">
-      <strong>Scanner abdominal sans et avec injection (1ʳᵉ intention & référence pour le parenchyme)</strong>
-      Visualise : calcifications pancréatiques (spontanément hyperdenses), atrophie, dilatations canalaires, collections, pseudokystes, compressions vasculaires ou digestives.
+    <div>
+      <div class="step-title">Scanner abdominal ± injection — 1ʳᵉ intention</div>
+      <div class="step-content">Calcifications (hyperdenses spontanées), atrophie, dilatation Wirsung, pseudokystes, compressions vasculaires/digestives.</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">2</div>
-    <div class="step-content">
-      <strong>IRM bilio-pancréatique (référence pour les anomalies canalaires)</strong>
-      Séquences centrées sur le pancréas, voies biliaires et canal pancréatique principal. Moins performante pour le parenchyme, ne visualise pas les calcifications.
+    <div>
+      <div class="step-title">IRM bilio-pancréatique — référence anomalies canalaires</div>
+      <div class="step-content">Séquences canal pancréatique + voies biliaires. Ne visualise pas les calcifications.</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">3</div>
-    <div class="step-content">
-      <strong>Association Scanner + IRM = excellente spécificité diagnostique</strong>
-      Élimine les diagnostics différentiels (notamment la TIPMP calcifiée).
+    <div>
+      <div class="step-title">Scanner + IRM = haute spécificité diagnostique</div>
+      <div class="step-content">Association élimine les diagnostics différentiels (TIPMP calcifiée++).</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">4</div>
-    <div class="step-content">
-      <strong>Échoendoscopie bilio-pancréatique (2ᵉ ligne, sous AG)</strong>
-      Très haute sensibilité, caractérise les obstacles canalaires, permet biopsies (forme pseudo-tumorale) et drainage des collections. Pas en 1ʳᵉ intention.
+    <div>
+      <div class="step-title">Échoendoscopie — 2ᵉ ligne (sous AG)</div>
+      <div class="step-content">Haute sensibilité, caractérise obstacles canalaires, biopsies (forme pseudo-tumorale), drainage collections. <strong>Pas en 1ʳᵉ intention.</strong></div>
     </div>
+  </li>
+</ul>
+
+<hr>
+
+<!-- ===== 6. COMPLICATIONS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Poussée de PA <span class="phase phase-sev">Précoce</span>
+    </div>
+    <p style="font-size:.84rem;">Principal mode de révélation de la PC alcoolique. Cf. item 358.</p>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Collections &amp; Pseudokystes
+    </div>
+    <ul class="lst">
+      <li>Liquéfaction de nécrose (collections nécrotiques)</li>
+      <li>Rétention canalaire (pseudokystes — liquide clair)</li>
+      <li>Complications : surinfection, compression (VP/VMS, cholédoque), hémorragie par pseudoanévrysme, rupture → pleurésie / ascite pancréatique</li>
+    </ul>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Sténose biliaire (cholestase)
+    </div>
+    <p style="font-size:.84rem;">Fibrose péricanalaire ou compression → ↑ PAL/GGT ± bilirubine, ictère, prurit.</p>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Insuffisance exocrine (IPE) <span class="phase phase-prod">Tardif</span>
+    </div>
+    <p style="font-size:.84rem;">Stéatorrhée + amaigrissement. Confirmée par <strong>élastase fécale basse</strong>.</p>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Diabète pancréatique <span class="phase phase-prod">Tardif</span>
+    </div>
+    <p style="font-size:.84rem;">D'abord non insulino-requérant → puis insulinodépendant.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Dénutrition &amp; Risque néoplasique
+    </div>
+    <p style="font-size:.84rem;"><strong>Dénutrition :</strong> vitamines A, D, K, B12, B9 · Ca · Zn · Se → risque <strong>ostéoporose</strong>.</p>
+    <p style="font-size:.84rem;margin-top:6px"><strong>Cancer :</strong> facteur de risque modéré d'adénocarcinome — <span class="badge badge-amber">pas de dépistage spécifique</span>.</p>
   </div>
 </div>
 
 <hr>
 
-<!-- ===== 7. COMPLICATIONS ===== -->
+<!-- ===== 7. CHRONOLOGIE D'ÉVOLUTION ===== -->
 <div class="section-title">
-  <div class="section-icon icon-red">⚡</div>
-  <div class="section-title-text">
-    <h2>Complications <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-06</div>
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+  Chronologie d'évolution
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Phase initiale
+    </div>
+    <div style="margin-bottom:6px"><span class="phase phase-sev">Années 1–5</span></div>
+    <strong style="font-size:.84rem;">Phase douloureuse</strong>
+    <ul class="lst" style="margin-top:6px">
+      <li>Poussées de PA récidivantes</li>
+      <li>Douleurs chroniques transfixiantes</li>
+      <li>Mode de révélation habituel</li>
+    </ul>
   </div>
-</div>
-
-<div class="compl-card border-red">
-  <h4>🔴 Poussée de pancréatite aiguë</h4>
-  <p>Principal mode de révélation de la PC liée à l'alcool. Cf. Item 358 pour la prise en charge.</p>
-</div>
-
-<div class="compl-card border-amber">
-  <h4>🟡 Collections nécrotiques et pseudokystes</h4>
-  <p>Mécanismes différents : liquéfaction de nécrose (collections nécrotiques) vs rétention canalaire (pseudokystes à liquide clair). Évolution : stabilisation, régression ou complications :</p>
-  <ul style="margin-top:6px">
-    <li>Surinfection</li>
-    <li>Compression : veine porte / VMS, cholédoque, tube digestif</li>
-    <li>Hémorragie par pseudoanévrysme</li>
-    <li>Rupture → pleurésie ou ascite pancréatique</li>
-  </ul>
-</div>
-
-<div class="compl-card border-blue">
-  <h4>🔵 Sténose biliaire (complications biliaires)</h4>
-  <p>Fibrose péricanalaire ou compression extrinsèque → cholestase : ictère, prurit, ↑ PAL/GGT ± bilirubine.</p>
-</div>
-
-<div class="compl-card border-teal">
-  <h4>🟢 Insuffisance pancréatique exocrine (IPE)</h4>
-  <p>Complication tardive : stéatorrhée + amaigrissement. Confirmée par élastase fécale basse sur un échantillon de selles.</p>
-</div>
-
-<div class="compl-card border-purple">
-  <h4>🟣 Diabète pancréatique (insuffisance endocrine)</h4>
-  <p>Complication tardive et fréquente. D'abord non insulino-requérant, puis insulinodépendant.</p>
-</div>
-
-<div class="compl-card border-coral">
-  <h4>🟠 Dénutrition</h4>
-  <p>Dénutrition globale : vitamines liposolubles (A, D, K), B12, B9, calcium, zinc, sélénium. Risque d'<strong>ostéoporose</strong>.</p>
-</div>
-
-<div class="compl-card border-red">
-  <h4>🔴 Risque de dégénérescence</h4>
-  <p>Facteur de risque <em>modéré</em> d'adénocarcinome pancréatique. Risque faible — <strong>ne justifie pas de dépistage spécifique</strong>.</p>
-</div>
-
-<hr>
-
-<!-- ===== 8. ÉVOLUTION CHRONOLOGIQUE ===== -->
-<div class="section-title">
-  <div class="section-icon icon-purple">⏱️</div>
-  <div class="section-title-text">
-    <h2>Chronologie d'évolution <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-09</div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+      </div>
+      Phase intermédiaire
+    </div>
+    <div style="margin-bottom:6px"><span class="phase phase-mod">Après 5–10 ans</span></div>
+    <strong style="font-size:.84rem;">Phase mixte</strong>
+    <ul class="lst" style="margin-top:6px">
+      <li>Douleurs s'estompent progressivement</li>
+      <li>Apparition IPE + diabète</li>
+      <li>Complications chroniques au premier plan</li>
+    </ul>
   </div>
-</div>
-
-<div class="card">
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--coral)">1</div>
-      <div class="tl-body">
-        <strong>Stade initial (années 1–5) — Phase douloureuse</strong>
-        Poussées de pancréatite aiguë récidivantes, douleurs chroniques épigastriques transfixiantes, complications aiguës. C'est souvent le mode de révélation.
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
+      Stade tardif
     </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--amber)">2</div>
-      <div class="tl-body">
-        <strong>Stade intermédiaire (après plusieurs années) — Phase mixte</strong>
-        Disparition progressive des douleurs. Apparition de l'insuffisance exocrine (stéatorrhée, diarrhée de maldigestion) et endocrine (diabète). Augmentation des complications chroniques (pseudokystes, compressions).
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot" style="background:var(--teal)">3</div>
-      <div class="tl-body">
-        <strong>Stade tardif — Phase de «burn-out»</strong>
-        Persistance isolée du diabète et/ou de l'IPE. Les douleurs ont souvent disparu (le pancréas est «épuisé»). Dénutrition et complications chroniques au premier plan.
-      </div>
-    </div>
+    <div style="margin-bottom:6px"><span class="phase phase-prod">Burn-out</span></div>
+    <strong style="font-size:.84rem;">Pancréas épuisé</strong>
+    <ul class="lst" style="margin-top:6px">
+      <li>Douleurs disparues</li>
+      <li>IPE + diabète persistants</li>
+      <li>Dénutrition &amp; complications chroniques</li>
+    </ul>
   </div>
 </div>
 
 <hr>
 
-<!-- ===== 9. PRISE EN CHARGE ===== -->
+<!-- ===== 8. PRISE EN CHARGE ===== -->
 <div class="section-title">
-  <div class="section-icon icon-teal">💊</div>
-  <div class="section-title-text">
-    <h2>Prise en charge <span class="badge badge-b">Rang B</span></h2>
-    <div class="oic-codes">OIC-281-10</div>
-  </div>
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge
 </div>
 
-<div class="steps">
-  <div class="step">
+<ul class="steps">
+  <li>
     <div class="step-num">1</div>
-    <div class="step-content">
-      <strong>Sevrage alcool + tabac (priorité absolue)</strong>
-      L'arrêt de l'alcool permet souvent la disparition des douleurs. Le tabac est un facteur péjoratif indépendant — l'arrêt est indispensable.
+    <div>
+      <div class="step-title">Sevrage alcool + tabac — priorité absolue</div>
+      <div class="step-content">Arrêt alcool → souvent disparition des douleurs. Tabac = facteur péjoratif indépendant, sevrage indispensable.</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">2</div>
-    <div class="step-content">
-      <strong>Traitement de la douleur (pluridisciplinaire, recours possible aux spécialistes douleur)</strong>
-      <div class="pills" style="margin-top:6px">
-        <span class="pill pill-green">Paracétamol (palier 1)</span>
-        <span class="pill pill-blue">Tramadol / codéine (palier 2)</span>
-        <span class="pill pill-amber">Morphiniques (fréquents)</span>
-        <span class="pill pill-purple">Prégabaline (neuropathique)</span>
-        <span class="pill pill-gray">AINS</span>
+    <div>
+      <div class="step-title">Antalgie pluridisciplinaire (recours spécialiste douleur)</div>
+      <div class="step-content">
+        <div class="pills" style="margin-top:4px">
+          <span class="pill pill-teal">Paracétamol (palier 1)</span>
+          <span class="pill pill-blue">Tramadol / codéine (palier 2)</span>
+          <span class="pill pill-amber">Morphiniques (fréquents)</span>
+          <span class="pill pill-purple">Prégabaline (neuropathique)</span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">3</div>
-    <div class="step-content">
-      <strong>Insuffisance exocrine → Extraits pancréatiques</strong>
-      Indiqués en cas d'amaigrissement ou de stéatorrhée. À prendre <strong>au milieu du repas</strong> pour optimiser le mélange au bol alimentaire.
+    <div>
+      <div class="step-title">IPE → Extraits pancréatiques</div>
+      <div class="step-content">Indiqués si amaigrissement ou stéatorrhée. À prendre <strong>au milieu du repas</strong> (mélange optimal au bol alimentaire).</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">4</div>
-    <div class="step-content">
-      <strong>Diabète pancréatique → Traitement spécifique</strong>
-      Non différent des autres causes de diabète (ADO puis insuline selon l'évolution).
+    <div>
+      <div class="step-title">Diabète pancréatique → ADO puis insuline</div>
+      <div class="step-content">Traitement non différent des autres diabètes selon l'évolution.</div>
     </div>
-  </div>
-  <div class="step">
+  </li>
+  <li>
     <div class="step-num">5</div>
-    <div class="step-content">
-      <strong>Traitement des complications spécifiques</strong>
-      <ul style="margin-top:5px">
-        <li>Dénutrition : supplémentation nutritionnelle orale ± entérale</li>
-        <li>Pseudokystes : drainage <strong>échoendoscopique en 1ʳᵉ intention</strong> ; chirurgie (résection ou dérivation) si échec</li>
-        <li>Sténoses bilio-pancréatiques : prothèse par voie endoscopique ; chirurgie si échec</li>
-      </ul>
+    <div>
+      <div class="step-title">Traitement des complications spécifiques</div>
+      <div class="step-content">
+        <div class="kv-row"><span class="kv-key">Pseudokystes</span><span class="kv-val">Drainage écho-endoscopique 1ʳᵉ intention · chirurgie si échec</span></div>
+        <div class="kv-row"><span class="kv-key">Sténoses biliopancréatiques</span><span class="kv-val">Prothèse endoscopique · chirurgie si échec</span></div>
+        <div class="kv-row"><span class="kv-key">Dénutrition</span><span class="kv-val">Supplémentation orale ± entérale</span></div>
+      </div>
     </div>
-  </div>
-</div>
+  </li>
+</ul>
 
 <hr>
 
-<!-- ===== SYNTHÈSE FINALE ===== -->
+<!-- ===== SYNTHÈSE — POINTS CLÉS ===== -->
 <div class="section-title">
-  <div class="section-icon icon-teal">✅</div>
-  <div class="section-title-text">
-    <h2>Synthèse — Points clés à retenir</h2>
-  </div>
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points clés &amp; Pièges ECNi
 </div>
 
 <div class="alert alert-green">
-  <span class="alert-icon">✅</span>
-  <div>
-    <strong>Définition :</strong> fibrose irréversible → destruction exocrine puis endocrine.
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>PC = fibrose <strong>irréversible</strong> → destruction exocrine puis endocrine.</div>
 </div>
 <div class="alert alert-green">
-  <span class="alert-icon">✅</span>
-  <div>
-    <strong>Cause :</strong> alcool (&gt;80%) + tabac (facteur indépendant). Hommes, 40 ans.
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Cause : <strong>alcool &gt;80 %</strong> + tabac facteur indépendant. Homme, ~40 ans.</div>
 </div>
 <div class="alert alert-green">
-  <span class="alert-icon">✅</span>
-  <div>
-    <strong>Douleur :</strong> épigastrique transfixiante, déclenchée par repas/alcool.
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Douleur : épigastrique <strong>transfixiante</strong>, déclenchée par repas/alcool.</div>
 </div>
 <div class="alert alert-green">
-  <span class="alert-icon">✅</span>
-  <div>
-    <strong>Imagerie :</strong> scanner 1ʳᵉ intention (calcifications, atrophie) + IRM (anomalies canalaires). EchoEndo en 2ᵉ ligne.
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Imagerie : <strong>scanner 1ʳᵉ intention</strong> (calcifications, atrophie) + IRM (anomalies canalaires). Échoendoscopie en 2ᵉ ligne.</div>
 </div>
 <div class="alert alert-green">
-  <span class="alert-icon">✅</span>
-  <div>
-    <strong>Complications tardives :</strong> IPE (élastase fécale basse + extraits pancréatiques), diabète, dénutrition, ostéoporose.
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>IPE : élastase fécale basse → extraits pancréatiques <strong>au milieu du repas</strong>.</div>
 </div>
 <div class="alert alert-amber">
-  <span class="alert-icon">⚠️</span>
-  <div>
-    <strong>Pièges :</strong> &lt;5% des alcooliques font une PC / extraits pancréatiques <em>au milieu</em> du repas / dépistage cancer non recommandé / douleurs disparaissent au stade tardif (burn-out).
-  </div>
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges :</strong> &lt;5 % des alcooliques font une PC · Extraits pancréatiques <em>au milieu</em> (pas avant) du repas · Dépistage cancer non recommandé · Douleurs disparaissent au stade burn-out.</div>
 </div>
 
-<p class="small" style="text-align:center;margin-top:32px">Source : LiSa UNESS — IC-281 Pancréatite chronique · Fiche générée le 24/05/2026</p>
+<p style="font-size:.75rem;color:var(--muted);text-align:center;margin-top:28px">Source : LiSa UNESS — IC-281 Pancréatite chronique · Révision visuelle 12/06/2026</p>
 
+</div><!-- /.page -->
 </body>
 </html>
