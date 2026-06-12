@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 96 – Neuropathies périphériques</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red{background:var(--red-light);color:var(--red);border-left:3px solid var(--red);}
+  .alert-blue{background:var(--blue-light);color:var(--blue);border-left:3px solid var(--blue);}
+  .alert-green{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+  .alert-amber{background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal{background:var(--teal-light);color:var(--teal);border-left:3px solid var(--teal);}
+  .alert-red .alert-icon svg{stroke:var(--red);}
+  .alert-blue .alert-icon svg{stroke:var(--blue);}
+  .alert-green .alert-icon svg{stroke:var(--teal);}
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal .alert-icon svg{stroke:var(--teal);}
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red{background:var(--red-light);color:var(--red);}
+  .pill-blue{background:var(--blue-light);color:var(--blue);}
+  .pill-teal{background:var(--teal-light);color:var(--teal);}
+  .pill-amber{background:var(--amber-light);color:var(--amber);}
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral{background:var(--coral-light);color:var(--coral);}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red th{background:var(--red-light);color:var(--red);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red{background:var(--red-light);color:var(--red);}
+  .badge-amber{background:var(--amber-light);color:var(--amber);}
+  .badge-green{background:var(--teal-light);color:var(--teal);}
+  .badge-blue{background:var(--blue-light);color:var(--blue);}
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod{background:var(--amber);}
+  .phase-sev{background:var(--red);}
+  .bl-red{border-left:4px solid var(--red);padding-left:12px;}
+  .bl-amber{border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue{border-left:4px solid var(--blue);padding-left:12px;}
+  .bl-teal{border-left:4px solid var(--teal);padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .card-red{border-left:4px solid var(--red);}
+  .card-blue{border-left:4px solid var(--blue);}
+  .card-teal{border-left:4px solid var(--teal);}
+  .card-amber{border-left:4px solid var(--amber);}
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">ITEM 96</div>
+  <h1>Neuropathies périphériques</h1>
+  <div class="header-sub">Classification · Diagnostic électroclinique · Étiologies · Urgences</div>
+  <div class="header-tags">
+    <span class="htag">Neurologie</span>
+    <span class="htag">ENMG indispensable</span>
+    <span class="htag">Mononeuropathie multiple = urgence</span>
+    <span class="htag">Biopsie nerveuse</span>
+    <span class="htag">SLA ≠ NP</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vision globale :</strong> Maîtriser la classification anatomique des neuropathies (6 entités) et la démarche en 4 étapes : localisation clinique → mécanisme à l'ENMG → classement électroclinique → recherche étiologique. Savoir distinguer les patterns axonal, démyélinisant et neuronal à l'ENMG. Connaître les grandes étiologies (diabète +++, alcool, Charcot-Marie-Tooth, vascularites). Reconnaître deux <strong>urgences</strong> : mononeuropathies multiples (vascularite → biopsie nerveuse urgente) et polyradiculonévrite aiguë (Guillain-Barré). Différencier cliniquement neuropathie périphérique et SLA.
+</div>
+
+<!-- SECTION 1: CLASSIFICATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Classification anatomique — 6 entités
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Tableau de classification
+  </div>
+  <table>
+    <thead>
+      <tr><th>Entité</th><th>Définition</th><th>Caractéristiques clés</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mononeuropathie</strong></td>
+        <td>1 tronc nerveux atteint</td>
+        <td>Territoire limité : nerf médian, ulnaire, fibulaire, facial</td>
+      </tr>
+      <tr>
+        <td><strong>Mononeuropathie multiple</strong> <span class="badge badge-red">URGENCE</span></td>
+        <td>Plusieurs troncs nerveux (multinévrite)</td>
+        <td>Asymétrique, aiguë, douloureuse — vascularite jusqu'à preuve du contraire</td>
+      </tr>
+      <tr>
+        <td><strong>Plexopathie</strong></td>
+        <td>Atteinte d'un plexus nerveux</td>
+        <td>Plexus brachial +++</td>
+      </tr>
+      <tr>
+        <td><strong>Polyneuropathie</strong></td>
+        <td>Atteinte longueur-dépendante de toutes les fibres</td>
+        <td>Distale, symétrique, MI d'abord → MS quand atteinte aux genoux</td>
+      </tr>
+      <tr>
+        <td><strong>Polyradiculoneuropathie</strong></td>
+        <td>Racines sensitives + motrices + troncs nerveux</td>
+        <td>Ex : Guillain-Barré — composante proximale, aréflexie diffuse, hyperprotéinorachie</td>
+      </tr>
+      <tr>
+        <td><strong>Neuronopathie</strong></td>
+        <td>Atteinte du corps cellulaire (moteur ou sensitif)</td>
+        <td>NON longueur-dépendant, asymétrique — sensitive = paranéoplasique/Gougerot</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2: DÉMARCHE DIAGNOSTIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Démarche diagnostique — 4 étapes
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Étapes structurées
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div>
+          <div class="step-title">Localisation</div>
+          <div class="step-content">Tronculaire / radiculaire / plexique / neuronal — clinique (interrogatoire + examen)</div>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div>
+          <div class="step-title">Mécanisme physiopathologique</div>
+          <div class="step-content">Démyélinisant / axonal / neuronal — <strong>ENMG obligatoire</strong></div>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div>
+          <div class="step-title">Classement électroclinique</div>
+          <div class="step-content">Synthèse étapes 1 + 2 → orientation étiologique ciblée</div>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div>
+          <div class="step-title">Recherche étiologique</div>
+          <div class="step-content">Biologie, LCS, biopsie nerveuse — guidée par le classement</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Signes moteurs
+      </div>
+      <ul class="lst">
+        <li>Parésie / paralysie, amyotrophie</li>
+        <li>Fasciculations, crampes</li>
+        <li>Abolition des réflexes ostéotendineux</li>
+        <li>Steppage (atteinte distale MI)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Signes sensitifs <span class="badge badge-blue">Premiers signes</span>
+      </div>
+      <ul class="lst">
+        <li>Paresthésies, dysesthésies</li>
+        <li>Douleurs neuropathiques</li>
+        <li>Troubles épicritiques et proprioceptifs</li>
+        <li>Ataxie → évocatrice de démyélinisation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Signes neurovégétatifs <span class="badge badge-amber">Penser amylose</span>
+      </div>
+      <ul class="lst">
+        <li>Hypotension orthostatique</li>
+        <li>Troubles sexuels/érectiles</li>
+        <li>Troubles digestifs, urinaires</li>
+        <li>Signes vasomoteurs/trophiques</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3: ENMG -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  ENMG — Patterns électrophysiologiques
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Caractérisation par l'ENMG (indispensable dans toute neuropathie)
+  </div>
+  <table class="table-teal">
+    <thead>
+      <tr><th>Pattern</th><th>Stimulodétection</th><th>EMG de détection</th><th>Clinique</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Axonal</strong></td>
+        <td>Vitesses normales ou peu ralenties<br>↓ amplitude PA moteur et sensitif</td>
+        <td>Tracé neurogène (fibrillations, potentiels géants, tracé simple)</td>
+        <td>Métabolique / toxique</td>
+      </tr>
+      <tr>
+        <td><strong>Démyélinisant</strong></td>
+        <td>↓↓ vitesses de conduction motrices<br>↑ latences distales + ondes F<br>Dispersion des PA, blocs de conduction</td>
+        <td>Variable</td>
+        <td>Ataxie prédominante</td>
+      </tr>
+      <tr>
+        <td><strong>Neuronopathie sensitive</strong></td>
+        <td>Abolition diffuse PA sensitifs aux 4 membres<br>Paramètres moteurs normaux</td>
+        <td>Normal (moteur)</td>
+        <td>Non longueur-dépendant, asymétrique</td>
+      </tr>
+      <tr>
+        <td><strong>Neuronopathie motrice (SLA)</strong></td>
+        <td>↓ amplitude PA moteur (topographie variable)<br>PA sensitifs normaux</td>
+        <td>Atteinte motrice pure + fasciculations diffuses</td>
+        <td>Moteur pur + MNc</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 4: ÉTIOLOGIES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies par type
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Polyneuropathies axonales — Fréquentes
+    </div>
+    <table>
+      <thead><tr><th>Cause</th><th>Élément clé</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Diabète</strong> <span class="badge badge-red">1re cause</span></td><td>Glycémie à jeun + HGPO 75g</td></tr>
+        <tr><td><strong>Intolérance au glucose</strong></td><td>HGPO</td></tr>
+        <tr><td><strong>Alcool</strong></td><td>Toxique exogène</td></tr>
+        <tr><td><strong>Insuffisance rénale</strong></td><td>↑ créatinine</td></tr>
+        <tr><td><strong>Médicaments</strong></td><td>Chimiothérapie (vincristine, platines → neuronopathie),<br>thalidomide, isoniazide, amiodarone, antirétroviraux,<br>chloroquine, métronidazole, disulfirame</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Polyneuropathies axonales — Rares
+    </div>
+    <table>
+      <thead><tr><th>Cause</th><th>Élément clé</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Amylose héréditaire (TTR)</strong></td><td>Mutation gène transthyrétine<br>Triade : dysautonomie + polyneuropathie axonale + canal carpien<br>Contexte familial → biopsie nerveuse + génétique</td></tr>
+        <tr><td><strong>Amylose primitive</strong></td><td>Gammapathie monoclonale IgM → immunofixation</td></tr>
+        <tr><td><strong>VIH</strong></td><td>Polyneuropathie sensitive à phase tardive</td></tr>
+        <tr><td><strong>Vascularite évoluée</strong></td><td>Début asymétrique + douleurs + déficit moteur → biopsie à discuter</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Polyneuropathies démyélinisantes
+    </div>
+    <table>
+      <thead><tr><th>Entité</th><th>Caractéristiques</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Charcot-Marie-Tooth</strong> <span class="badge badge-purple">Héréditaire</span></td>
+          <td>Atrophie mollets, pieds creux, atteinte sensitivomotrice à prédominance motrice, peu de paresthésies<br>Forme AD : duplication PMP22 (chr 17) → diagnostic génétique</td>
+        </tr>
+        <tr>
+          <td><strong>IgM anti-MAG</strong> <span class="badge badge-blue">Acquise</span></td>
+          <td>&gt; 50 ans — ataxiante + tremblement des mains — peu de déficit moteur au début — ENMG : démyélinisation distale — immunofixation</td>
+        </tr>
+        <tr>
+          <td><strong>PIDC</strong> <span class="badge badge-blue">Chronique</span></td>
+          <td>Dysimmunitaire — hyperprotéinorachie au LCS — lésions inflammatoires à la biopsie</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Neuronopathies sensitives
+    </div>
+    <table>
+      <thead><tr><th>Cause</th><th>Bilan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Paranéoplasique</strong> <span class="badge badge-red">+++</span></td>
+          <td>Cancer poumon petites cellules — Ac anti-Hu (antineuronaux) — recherche exhaustive du cancer obligatoire</td>
+        </tr>
+        <tr>
+          <td><strong>Dysimmunitaire</strong></td>
+          <td>Syndrome de Gougerot-Sjögren</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Clinique : troubles sensitifs <strong>asymétriques non longueur-dépendants</strong> (MI + MS + tronc + face), aréflexie diffuse, ataxie. Peut mimer une polyneuropathie.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5: MONONEUROPATHIES MULTIPLES = URGENCE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Mononeuropathies multiples — URGENCE DIAGNOSTIQUE ET THÉRAPEUTIQUE
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>URGENCE :</strong> La perte en fibres nerveuses par ischémie est irréversible. Biopsie nerveuse urgente + traitement (corticoïdes ± immunosuppresseurs) à initier sans délai.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Présentation clinique
+    </div>
+    <ul class="lst">
+      <li>Atteinte <strong>asymétrique</strong> de plusieurs troncs nerveux</li>
+      <li>Installation <strong>aiguë</strong>, souvent <strong>douloureuse</strong></li>
+      <li>Déficit moteur associé</li>
+      <li>Syndrome inflammatoire (↑ CRP, VS)</li>
+    </ul>
+    <div class="card-title" style="margin-top:14px;margin-bottom:6px;">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement
+    </div>
+    <ul class="lst">
+      <li>Corticoïdes ± immunosuppresseurs (urgence)</li>
+      <li>Adapté à la cause sous-jacente</li>
+    </ul>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Étiologies — Vascularites
+    </div>
+    <table class="table-red">
+      <thead><tr><th>Type</th><th>Exemples</th></tr></thead>
+      <tbody>
+        <tr><td>Vaisseaux moyens</td><td>Périartérite noueuse (PAN)</td></tr>
+        <tr><td>Petits vaisseaux</td><td>Vascularites à ANCA<br>Cryoglobulinémie essentielle</td></tr>
+        <tr><td>Maladie systémique</td><td>Cryoglobulinémie + VHC (sérologie VHC)<br>VIH<br>Vascularite satellite de cancer</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>À part :</strong> Diabète → mononeuropathie multiple sans biopsie neuromusculaire. Lèpre → grande cause mondiale, rare en France.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Biopsie nerveuse — Confirmation diagnostique urgente
+  </div>
+  <ul class="lst">
+    <li>Nerf sensitif de la jambe : branche sensitive du nerf fibulaire ou nerf sural</li>
+    <li>Discutée en RCP avant réalisation (geste invasif = amputation nerveuse)</li>
+    <li>Consentement éclairé obligatoire</li>
+    <li>Résultat : occlusion artérielle + perte axonale fasciculaire (vascularite)</li>
+    <li>Jamais en 1re intention sauf urgence vascularite</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 6: SLA vs NEUROPATHIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic différentiel — Neuropathie périphérique vs SLA
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Tableau comparatif
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Critère</th>
+        <th>Neuropathie périphérique</th>
+        <th>SLA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Type de déficit</strong></td>
+        <td>Moteur ± sensitif ± végétatif</td>
+        <td>Moteur pur <strong>exclusivement</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Syndrome MNc</strong></td>
+        <td>Absent</td>
+        <td><strong>Présent</strong> (Babinski, spasticité)</td>
+      </tr>
+      <tr>
+        <td><strong>Syndrome MNp</strong></td>
+        <td>Présent</td>
+        <td>Présent (fasciculations, amyotrophie)</td>
+      </tr>
+      <tr>
+        <td><strong>Troubles sensitifs</strong></td>
+        <td>Présents (variable)</td>
+        <td><strong>Absents</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Troubles sphinctériens</strong></td>
+        <td>Possibles (végétatif)</td>
+        <td><strong>Absents</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Signes cérébelleux</strong></td>
+        <td>Absents</td>
+        <td><strong>Absents</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Troubles cognitifs</strong></td>
+        <td>Absents</td>
+        <td>20% (type fronto-temporal)</td>
+      </tr>
+      <tr>
+        <td><strong>Âge</strong></td>
+        <td>Variable</td>
+        <td>Âge moyen 63 ans</td>
+      </tr>
+      <tr>
+        <td><strong>Pronostic</strong></td>
+        <td>Variable selon cause</td>
+        <td><strong>Toujours fatal</strong> — atteinte bulbaire/respiratoire</td>
+      </tr>
+      <tr>
+        <td><strong>ENMG</strong></td>
+        <td>Axonal / démyélinisant / neuronal sensitif</td>
+        <td>Atteinte motrice pure — fasciculations diffuses (bulbaire + cervical + lombosacré)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Neuropathie motrice à blocs de conduction (NMMBC) = déficit moteur pur sans MNc ni troubles cognitifs. Distinguer de la SLA par l'ENMG (blocs de conduction, pas de dégénérescence neurogène diffuse).</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7: EXAMENS COMPLÉMENTAIRES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Stratégie des examens complémentaires
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    ENMG — Toujours prescrit en 1re intention
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;color:var(--teal);margin-bottom:6px;">EMG de détection</p>
+      <ul class="lst">
+        <li>Caractère <strong>neurogène</strong> : potentiels de fibrillation, tracé simple, accélération de fréquence</li>
+        <li>Topographie : tronculaire / radiculaire / diffuse</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;color:var(--teal);margin-bottom:6px;">Stimulodétection (conduction nerveuse)</p>
+      <ul class="lst">
+        <li>Différencie axonal vs démyélinisant vs neuronal</li>
+        <li>Latences ondes F, vitesses de conduction, amplitudes des PA moteurs et sensitifs</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan biologique de 1re intention (systématique)
+  </div>
+  <div class="pills">
+    <span class="pill pill-blue">NFS</span>
+    <span class="pill pill-blue">VS — CRP</span>
+    <span class="pill pill-blue">Glycémie à jeun</span>
+    <span class="pill pill-blue">HGPO 75g</span>
+    <span class="pill pill-blue">Ionogramme sanguin</span>
+    <span class="pill pill-blue">Bilan hépatique</span>
+    <span class="pill pill-blue">Hémostase</span>
+    <span class="pill pill-blue">Immunofixation Ig sériques</span>
+  </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">2e intention selon hypothèses : sérologies VIH/VHC, ANCA, Ac anti-Hu, cryoglobulinémie, bilan thyroïdien, vitamine B12...</p>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Examen du LCS (ponction lombaire)
+    </div>
+    <table>
+      <thead><tr><th>Résultat</th><th>Contexte</th></tr></thead>
+      <tbody>
+        <tr><td>Hyperprotéinorachie isolée</td><td>Polyradiculonévrite (Guillain-Barré), diabète</td></tr>
+        <tr><td>Réaction cellulaire</td><td>Affections paranéoplasiques</td></tr>
+        <tr><td>Méningite (cellules + protéines +++)</td><td>Néoplasie, hémopathie, infection</td></tr>
+      </tbody>
+    </table>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-purple">Polyradiculonévrites</span>
+      <span class="pill pill-purple">Neuronopathies sensitives</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Biopsie neuromusculaire
+    </div>
+    <ul class="lst">
+      <li><strong>Jamais en 1re intention</strong> — discutée en RCP</li>
+      <li>Nerf sensitif de jambe (fibulaire sensitif ou sural)</li>
+      <li>Consentement éclairé obligatoire (geste invasif)</li>
+    </ul>
+    <table style="margin-top:8px;">
+      <thead><tr><th>Indication</th><th>Résultat attendu</th></tr></thead>
+      <tbody>
+        <tr><td>Vascularite suspectée</td><td>Occlusion artérielle + perte axonale fasciculaire</td></tr>
+        <tr><td>Amylose</td><td>Dépôts amyloïde (rouge Congo)</td></tr>
+        <tr><td>PIDC</td><td>Lésions inflammatoires + démyélinisation/remyélinisation</td></tr>
+        <tr><td>NP évolutive sans cause</td><td>Orientation diagnostique</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION FINALE : POINTS CLÉS -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir — Pièges ECNi
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Urgence absolue :</strong> Mononeuropathie multiple = vascularite jusqu'à preuve du contraire → biopsie nerveuse urgente + corticoïdes/immunosuppresseurs sans délai (ischémie nerveuse irréversible).</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège amylose :</strong> Dysautonomie + polyneuropathie axonale ± canal carpien ± contexte familial → penser amylose TTR (héréditaire) ou IgM (primitive). Immunofixation + biopsie nerveuse + génétique TTR.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège neuronopathie sensitive :</strong> Peut mimer cliniquement une polyneuropathie. Clé = ENMG → abolition diffuse des PA sensitifs aux 4 membres (non longueur-dépendant). Chercher un cancer du poumon à petites cellules + Ac anti-Hu.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège SLA :</strong> NMMBC (neuropathie motrice à blocs de conduction) = déficit moteur pur sans MNc. Distinguer de la SLA par l'ENMG (blocs de conduction, pas de fasciculations diffuses, sensitif normal).</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>SLA en bref :</strong> MNc + MNp + moteur pur (zéro sensitif, zéro sphinctérien, zéro cérébelleux) + évolution progressive. Âge moyen 63 ans. Toujours fatale (atteinte bulbaire + respiratoire). 20% troubles cognitifs fronto-temporaux.</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Charcot-Marie-Tooth :</strong> 1re cause de polyneuropathie héréditaire. Pieds creux + atrophie mollets. Diagnostic génétique : duplication PMP22 (chromosome 17) dans la forme autosomique dominante.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>ENMG = examen clé :</strong> Indispensable dans toute neuropathie périphérique. Oriente le mécanisme (axonal/démyélinisant/neuronal) et donc l'étiologie. Bilan biologique systématique + LCS si polyradiculonévrite ou neuronopathie sensitive.</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Biopsie nerveuse :</strong> Jamais en 1re intention. Toujours discutée en RCP avec consentement éclairé. Indications : vascularite suspectée (urgence), amylose, PIDC, neuropathie évolutive sans cause.</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

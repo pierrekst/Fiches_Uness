@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 25 – Grossesse extra-utérine</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#c0392b 0%,#D85A30 45%,#C97B2A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 25</div>
+  <h1>Grossesse extra-utérine</h1>
+  <div class="header-sub">Urgence gynécologique — diagnostic et prise en charge</div>
+  <div class="header-tags">
+    <span class="htag">Gynécologie-Obstétrique</span>
+    <span class="htag">Urgence</span>
+    <span class="htag">Hémorragie</span>
+    <span class="htag">Métrorragies</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vision globale :</strong> La GEU est une urgence potentielle à évoquer chez <strong>toute femme en âge de procréer</strong> présentant douleurs pelviennes et/ou métrorragies. La démarche diagnostique repose sur la triade clinique + bêta-hCG + échographie endovaginale. Le traitement est chirurgical (cœlioscopie) ou médical (méthotrexate) selon la stabilité hémodynamique et les critères de sévérité. Les enjeux : ne pas rater une rupture tubaire (choc hémorragique) et préserver la fertilité.
+</div>
+
+<!-- SECTION 1 : DÉFINITION & ÉPIDÉMIO -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition &amp; Épidémiologie
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <p style="font-size:.84rem;">Nidation de l'œuf <strong>en dehors de l'utérus</strong>. Synonyme : grossesse ectopique.</p>
+    <div style="margin-top:10px;">
+      <div class="kv-row"><span class="kv-key">Tubaire ampullaire</span><span class="kv-val">70 %</span></div>
+      <div class="kv-row"><span class="kv-key">Tubaire isthmique</span><span class="kv-val">20 %</span></div>
+      <div class="kv-row"><span class="kv-key">Pavillonnaire</span><span class="kv-val">5 %</span></div>
+      <div class="kv-row"><span class="kv-key">Extra-tubaire (ovarienne, cervicale…)</span><span class="kv-val">5 %</span></div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Incidence France</span><span class="kv-val">2 % des grossesses</span></div>
+    <div class="kv-row"><span class="kv-key">Tendance</span><span class="kv-val">En augmentation</span></div>
+    <div style="margin-top:10px;">
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Grossesse hétérotopique :</strong> coexistence d'une GIU et d'une GEU — principal FDR : PMA</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Facteurs de risque -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Facteurs de risque — altèrent la motilité tubaire
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Facteur</th><th>Précision</th></tr></thead>
+    <tbody>
+      <tr><td><strong>IGH (salpingite)</strong></td><td>1<sup>er</sup> FDR modifiable</td></tr>
+      <tr><td><strong>Tabac</strong></td><td>Relation dose-effet</td></tr>
+      <tr><td><strong>ATCD chirurgie tubaire / abdomino-pelvienne</strong></td><td>Sauf appendicectomie et aspiration non compliquées</td></tr>
+      <tr><td><strong>ATCD de GEU</strong></td><td>Récidive ~20 %</td></tr>
+      <tr><td><strong>Endométriose, tuberculose, malformation tubaire</strong></td><td>Altération paroi tubaire</td></tr>
+      <tr><td><strong>Âge maternel &gt; 35 ans</strong></td><td>—</td></tr>
+      <tr><td><strong>Contraception microprogestative / DIU</strong></td><td>Grossesse sur DIU = GEU jusqu'à preuve du contraire</td></tr>
+      <tr><td><strong>AMP / FIV</strong></td><td>FDR majeur grossesse hétérotopique</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : DIAGNOSTIC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic clinique
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Règle d'or :</strong> « Toute femme en âge de procréer, jusqu'à preuve du contraire » — évoquer la GEU devant toute douleur pelvienne et/ou métrorragie.</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Signes fonctionnels
+    </div>
+    <ul class="lst">
+      <li>Retard de règles / règles inhabituelles</li>
+      <li><strong>Douleurs pelviennes</strong> latéralisées (ou non)</li>
+      <li><strong>Métrorragies</strong> — peu abondantes, foncées « sépia »</li>
+      <li>Signes sympathiques de grossesse (nausées, tension mammaire)</li>
+      <li>Douleurs scapulaires, vertiges, malaise <span class="badge badge-red">gravité</span></li>
+    </ul>
+    <div style="margin-top:8px;" class="pill-gray" style="font-size:.78rem;padding:3px 8px;border-radius:6px;">Peut être asymptomatique</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen physique
+    </div>
+    <ul class="lst">
+      <li><strong>Constantes</strong> — tachycardie (1<sup>er</sup> signe de choc !)</li>
+      <li>Palpation abdominale : douleur / défense / contracture</li>
+      <li>Spéculum : confirme origine endo-utérine des saignements</li>
+      <li>TV : utérus « trop petit » pour le terme, masse annexielle, douleur au Douglas</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Diagnostics différentiels -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostics différentiels
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:6px;">bêta-hCG <span class="badge badge-blue">POSITIFS</span></p>
+      <ul class="lst">
+        <li>Grossesse intra-utérine</li>
+        <li>Fausse couche spontanée</li>
+        <li>Môle hydatiforme</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">bêta-hCG <span class="badge badge-purple">NÉGATIFS</span></p>
+      <ul class="lst">
+        <li>Kyste hémorragique du corps jaune</li>
+        <li>Infection génitale haute</li>
+        <li>Torsion d'annexe</li>
+        <li>Colique néphrétique, appendicite</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : CRITÈRES DE GRAVITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Critères de gravité — Urgence chirurgicale immédiate
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Un seul critère suffit</strong> à poser l'indication chirurgicale en urgence :<br>
+  Instabilité hémodynamique / état de choc / malaise / perte de connaissance — Défense ou contracture abdominale — Hémopéritoine à l'échographie</span>
+</div>
+
+<div class="grid3">
+  <div style="text-align:center;background:var(--red-light);border-radius:10px;padding:12px;">
+    <div class="phase phase-sev">CHOC</div>
+    <p style="font-size:.82rem;margin-top:4px;">Tachycardie, hypotension, extrémités froides, marbrures</p>
+  </div>
+  <div style="text-align:center;background:var(--red-light);border-radius:10px;padding:12px;">
+    <div class="phase phase-sev">CONTRACTURE</div>
+    <p style="font-size:.82rem;margin-top:4px;">Défense / contracture abdominale généralisée ou localisée</p>
+  </div>
+  <div style="text-align:center;background:var(--red-light);border-radius:10px;padding:12px;">
+    <div class="phase phase-sev">HÉMOPÉRITOINE</div>
+    <p style="font-size:.82rem;margin-top:4px;">Épanchement libre à l'écho (Morrison, Douglas)</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : BILAN PARACLINIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan paraclinique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Bilan biologique
+    </div>
+    <ul class="lst">
+      <li><strong>BU</strong> (bêta-hCG qualitatif) — systématique aux urgences</li>
+      <li><strong>bêta-hCG plasmatique</strong> qualitatif + quantitatif</li>
+      <li>NFS-plaquettes, TP/TCA, fibrinogène</li>
+      <li>Groupe ABO-Rh (2 déterminations), RAI</li>
+      <li>HémoCue si signes de gravité</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Si MTX envisagé :</strong> bilan hépatique (ASAT/ALAT/GGT/bili/PA), urée, créatinine</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Échographie pelvienne
+    </div>
+    <p style="font-size:.83rem;font-weight:700;color:var(--muted);margin-bottom:6px;">Sus-pubienne</p>
+    <ul class="lst">
+      <li>Épanchement de Morrison (hémoP)</li>
+      <li>Recherche de GEU visible</li>
+    </ul>
+    <p style="font-size:.83rem;font-weight:700;color:var(--muted);margin:8px 0 4px;">Endovaginale (référence)</p>
+    <ul class="lst">
+      <li><strong>Signes indirects :</strong> vacuité utérine +++, pseudo-sac, endomètre épaissi, épanchement Douglas</li>
+      <li><strong>Signes directs :</strong> masse latéro-utérine, sac gestationnel ectopique ± vésicule vitelline ± activité cardiaque</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Interprétation bêta-hCG -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Interprétation bêta-hCG + Échographie
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Situation</th><th>Interprétation</th><th>Conduite</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>bêta-hCG &gt; 1 500 UI/L + vacuité utérine à l'écho EV</td>
+        <td><strong class="badge badge-red">GEU très probable</strong></td>
+        <td>Prise en charge immédiate</td>
+      </tr>
+      <tr>
+        <td>Grossesse non visualisée ni en intra ni extra-utérin</td>
+        <td><strong>GLI</strong> (grossesse de localisation indéterminée)</td>
+        <td>Répéter bêta-hCG + écho à H48</td>
+      </tr>
+      <tr>
+        <td>bêta-hCG double en 48h</td>
+        <td>GIU évolutive normale</td>
+        <td>Surveillance</td>
+      </tr>
+      <tr>
+        <td>bêta-hCG diminue</td>
+        <td>FCS probable</td>
+        <td>Surveillance décroissance</td>
+      </tr>
+      <tr>
+        <td>bêta-hCG stagne ou augmente insuffisamment</td>
+        <td><strong class="badge badge-red">GEU probable</strong></td>
+        <td>Traitement</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement
+</div>
+
+<!-- Arbre de décision visuel -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Indications chirurgicales — au moins 1 critère = chirurgie
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Instabilité hémodynamique</span>
+    <span class="pill pill-red">Douleurs abdominales importantes</span>
+    <span class="pill pill-red">bêta-hCG &gt; 10 000 UI/L</span>
+    <span class="pill pill-red">Hématosalpinx &gt; 4 cm</span>
+    <span class="pill pill-red">Insuffisance hépatique ou rénale</span>
+    <span class="pill pill-red">Suivi ambulatoire impossible</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement chirurgical
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><div class="step-title">Voie d'abord</div><div class="step-content">Cœlioscopie sous AG (référence) — Laparotomie d'emblée si instabilité HD</div></div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><div class="step-title">Exploration</div><div class="step-content">Confirmation diagnostic, localisation, état tubaire controlatéral, facteurs favorisants (adhérences, IGH)</div></div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><div class="step-title">Salpingotomie <span class="badge badge-green">conservateur</span></div><div class="step-content">Aspiration contenu tubaire après incision. Surveillance bêta-hCG jusqu'à négativation</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">4</span>
+        <div><div class="step-title">Salpingectomie <span class="badge badge-red">non conservateur</span></div><div class="step-content">Saignement important ou état tubaire altéré. Pas de suivi bêta-hCG.</div></div>
+      </li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Analyse anatomopathologique systématique du produit d'aspiration ou de la pièce</span>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement médical — Méthotrexate (MTX)
+    </div>
+    <p style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Conditions requises (toutes)</p>
+    <ul class="lst">
+      <li>Asymptomatique, hémodynamiquement stable</li>
+      <li>GEU visible à l'échographie</li>
+      <li>Pas de contre-indication au MTX</li>
+    </ul>
+    <p style="font-size:.82rem;font-weight:700;color:var(--red);margin:8px 0 4px;">Contre-indications au MTX</p>
+    <table class="table-red" style="margin-top:0;">
+      <thead><tr><th>Type</th><th>CI</th></tr></thead>
+      <tbody>
+        <tr><td>Liées à la patiente</td><td>Difficultés compréhension/suivi, allaitement, refus, ATCD GEU homolatérale</td></tr>
+        <tr><td>Liées à la GEU</td><td>Masse &gt; 4 cm, rupture, hémopéritoine</td></tr>
+        <tr><td>Biologiques</td><td>bêta-hCG &gt; 10 000, thrombopénie &lt; 50 000, leucopénie &lt; 2 000, Hb &lt; 9 g/dL, IR (clairance &lt; 30), IH, troubles coagulation</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Échec MTX ~25 %</strong> — 2e injection ou chirurgie. Surveiller bêta-hCG jusqu'à négativation (efficacité : J7 &lt; J0, ou J7 &lt; 85 % de J4)</span>
+    </div>
+    <div class="alert alert-green" style="margin-top:4px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span>Pas de délai à respecter avant nouvelle conception (demi-vie plasmatique 3–4 h)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Info patiente avant chirurgie -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Information patiente avant chirurgie
+  </div>
+  <ul class="lst">
+    <li>Déroulement de la cœlioscopie sous AG</li>
+    <li>Risque d'échec de la salpingotomie → réintervention possible</li>
+    <li>Salpingectomie si état tubaire trop altéré — fertilité conservée si trompe controlatérale normale</li>
+    <li>Recours à la FIV si trompe unique enlevée</li>
+    <li>Risque de conversion en laparotomie</li>
+    <li>Risque transfusionnel per/post-opératoire</li>
+    <li>Risques généraux cœlio : plaie d'organe, vasculaire</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : MESURES ASSOCIÉES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Mesures associées &amp; Prévention secondaire
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Mesures systématiques
+    </div>
+    <div class="kv-row"><span class="kv-key">Rhésus négatif</span><span class="kv-val">Immunoglobulines anti-D obligatoires</span></div>
+    <div class="kv-row"><span class="kv-key">Anémie</span><span class="kv-val">Supplémentation martiale ou transfusion CGR</span></div>
+    <div class="kv-row"><span class="kv-key">Soutien psychologique</span><span class="kv-val">Systématique</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention secondaire
+    </div>
+    <ul class="lst">
+      <li><strong>Arrêt du tabac</strong></li>
+      <li>Dépistage et traitement des IST (patiente + partenaire) si séquelles d'IGH à la cœlio</li>
+      <li>Risque de récidive : <strong>~20 %</strong> quel que soit le traitement</li>
+      <li>Prochaine grossesse : échographie précoce de localisation</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : ÉVOLUTION NATURELLE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Évolution naturelle sans traitement
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span>Distension tubaire progressive → <strong>rupture tubaire</strong> → hémopéritoine massif → choc hémorragique → décès exceptionnel mais possible</span>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Points tombables ECNi
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <div><div class="step-title">Diagnostic = triade</div><div class="step-content">Retard de règles + douleur pelvienne + métrorragies « sépia » → bêta-hCG + écho endovaginale</div></div>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <div><div class="step-title">Seuil diagnostique</div><div class="step-content">bêta-hCG &gt; 1 500 UI/L + vacuité utérine = GEU très probable</div></div>
+    </li>
+    <li>
+      <span class="step-num step-num-red">3</span>
+      <div><div class="step-title">GLI → répéter à H48</div><div class="step-content">Grossesse de localisation indéterminée : refaire bêta-hCG + écho 48h après</div></div>
+    </li>
+    <li>
+      <span class="step-num step-num-red">4</span>
+      <div><div class="step-title">Urgence = 1 critère suffit</div><div class="step-content">Choc, contracture ou hémopéritoine → chirurgie immédiate (laparotomie si instabilité HD)</div></div>
+    </li>
+    <li>
+      <span class="step-num">5</span>
+      <div><div class="step-title">MTX : surveiller jusqu'à J7</div><div class="step-content">Efficacité : bêta-hCG J7 &lt; J0 (ou &lt; 85 % de J4). Échec ~25 %</div></div>
+    </li>
+    <li>
+      <span class="step-num">6</span>
+      <div><div class="step-title">Anti-D obligatoire si Rh–</div><div class="step-content">Prévention alloimmunisation systématique</div></div>
+    </li>
+    <li>
+      <span class="step-num">7</span>
+      <div><div class="step-title">Récidive ~20 %</div><div class="step-content">Écho de localisation précoce lors de la prochaine grossesse, quel que soit le traitement</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-amber" style="margin-top:14px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Pièges classiques :</strong> GEU sur DIU (pas protecteur contre la GEU), grossesse hétérotopique (surtout sur FIV — la GIU ne doit pas faire éliminer la GEU), tachycardie sinusale premier signe de choc hémorragique (avant l'hypotension)</span>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>

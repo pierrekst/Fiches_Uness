@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 248 – Prévention primaire par la nutrition</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red); }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 248</div>
+  <h1>Prévention primaire par la nutrition chez l'adulte et l'enfant</h1>
+  <div class="header-sub">Activité physique · Alimentation · Sédentarité · Comportement</div>
+  <div class="header-tags">
+    <span class="htag">ANSES 2016</span>
+    <span class="htag">HSCP 2017</span>
+    <span class="htag">Rang A &amp; B</span>
+    <span class="htag">Nutrition</span>
+    <span class="htag">Prévention primaire</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Deux piliers de la prévention primaire — <strong>alimentation équilibrée</strong> et <strong>activité physique (AP)</strong> — face aux grandes maladies chroniques (cardiovasculaires, métaboliques, cancers). Maîtriser : définitions précises, outils d'évaluation, repères quantifiés par âge (ANSES 2016 / HSCP 2017), effets démontrés sur la santé, et approche motivationnelle pour accompagner le changement de comportement.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions fondamentales
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Activité physique (AP)
+    </div>
+    <p style="font-size:.84rem;">Tout mouvement produit par les <strong>muscles squelettiques</strong> responsable d'une <strong>augmentation de la dépense énergétique</strong> au-dessus de la valeur de repos.</p>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-blue">Déplacements</span>
+      <span class="pill pill-blue">Loisirs</span>
+      <span class="pill pill-blue">Vie professionnelle</span>
+      <span class="pill pill-blue">Domicile</span>
+    </div>
+    <p style="font-size:.81rem;color:var(--muted);margin-top:8px;">Paramètres : durée (séquences ≥ 10 min), intensité, fréquence, type/contexte</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Inactivité physique
+    </div>
+    <p style="font-size:.84rem;">Niveau insuffisant d'AP d'intensité <strong>modérée à élevée</strong>, situé <strong>sous le seuil des recommandations</strong>.</p>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+      <p style="font-size:.8rem;font-weight:800;color:var(--amber);margin-bottom:4px;">Sédentarité</p>
+      <p style="font-size:.83rem;">Comportements en <strong>éveil, assis ou allongé</strong>, dépense énergétique <strong>≤ 1,5 MET</strong>.<br>Ex : TV, bureau. <em>Distincte et indépendante de l'inactivité physique.</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Condition physique
+  </div>
+  <p style="font-size:.84rem;">Capacité à réaliser les activités quotidiennes <strong>sans fatigue excessive</strong> et à répondre favorablement à l'effort. Regroupe : endurance cardiorespiratoire, équilibre, souplesse, force et endurance musculaire.<br>Évaluée objectivement par le <strong>VO<sub>2</sub>max</strong> (calorimétrie indirecte).</p>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège classique :</strong> Inactivité physique ≠ sédentarité. Un sujet peut faire du sport le soir (actif) ET être sédentaire toute la journée au bureau. Ce sont deux dimensions indépendantes, cumulativement délétères.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : ÉVALUATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Évaluation de l'activité physique
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Outils de mesure (ANSES 2016)
+  </div>
+  <table class="table-blue">
+    <tr><th>Méthode</th><th>Paramètres mesurés</th><th>Particularité</th></tr>
+    <tr>
+      <td><strong>Calorimétrie indirecte</strong> <span class="badge badge-green">Référence</span></td>
+      <td>Échanges gazeux O<sub>2</sub>/CO<sub>2</sub>, VO<sub>2</sub>max, dépense énergétique</td>
+      <td>Gold standard — évalue la condition physique</td>
+    </tr>
+    <tr>
+      <td><strong>Questionnaires / Carnets</strong></td>
+      <td>Type, intensité, durée, fréquence</td>
+      <td>Déclaratif — dépense calculée</td>
+    </tr>
+    <tr>
+      <td><strong>Podomètre</strong></td>
+      <td>Nombre de pas, distance</td>
+      <td>Prise de conscience + objectif motivationnel</td>
+    </tr>
+    <tr>
+      <td><strong>Accéléromètre</strong></td>
+      <td>Activité et intensité (coups/min)</td>
+      <td>Évalue dépense énergétique objectivement</td>
+    </tr>
+    <tr>
+      <td><strong>GPS</strong></td>
+      <td>Distance, vitesse, topographie</td>
+      <td>Ne fonctionne pas à l'intérieur</td>
+    </tr>
+    <tr>
+      <td><strong>Fréquence cardiaque</strong></td>
+      <td>Battements/min</td>
+      <td>Marqueur physiologique de l'intensité</td>
+    </tr>
+    <tr>
+      <td><strong>Échelles visuelles analogiques</strong></td>
+      <td>Dyspnée, douleur, motivation…</td>
+      <td>Adaptées à divers paramètres subjectifs</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Évaluation à l'entretien — 4 domaines, 4 paramètres
+  </div>
+  <div class="grid2" style="margin-top:6px;">
+    <div>
+      <p style="font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:6px;">4 domaines à explorer :</p>
+      <ul class="lst">
+        <li>Déplacements (trajet, escaliers…)</li>
+        <li>Vie professionnelle / scolaire</li>
+        <li>Loisirs (sport, promenades, bricolage)</li>
+        <li>Domicile (jardinage, tâches ménagères)</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:6px;">4 paramètres par activité :</p>
+      <ul class="lst">
+        <li>Durée (séquences ≥ 10 min)</li>
+        <li>Intensité</li>
+        <li>Fréquence</li>
+        <li>Type / contexte</li>
+      </ul>
+    </div>
+  </div>
+  <ul class="lst" style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px;">
+    <li>Questionner les <strong>AP antérieures</strong> : vécu, raisons d'arrêt, centres d'intérêt, freins</li>
+    <li>Évaluer l'<strong>influence de l'entourage</strong> (famille, milieu scolaire, associatif)</li>
+    <li>Évaluer le <strong>temps sédentaire quotidien</strong> en minutes/heures</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : EFFETS SUR LA SANTÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Effets sur la santé
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Bénéfices de l'AP (prévention primaire)
+    </div>
+    <ul class="lst">
+      <li>Réduction mortalité totale et cardiovasculaire</li>
+      <li>Prévention DT2, HTA, obésité</li>
+      <li>Réduction risque de certains cancers</li>
+      <li>Amélioration santé mentale (anxiété, dépression, estime de soi)</li>
+      <li>Prévention perte d'autonomie chez le sujet âgé</li>
+      <li>Réduction douleurs dorso-lombaires chroniques</li>
+      <li><strong>Enfant :</strong> condition physique, santé osseuse, réussite scolaire, composition corporelle</li>
+    </ul>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Le gain de santé maximal est observé chez les sujets <strong>inactifs qui deviennent modérément actifs</strong>.</div>
+    </div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Risques — Inactivité &amp; sédentarité
+    </div>
+    <ul class="lst">
+      <li>Augmentation mortalité toutes causes</li>
+      <li>Mortalité cardiovasculaire, morbidité coronarienne</li>
+      <li>DT2, HTA, certains cancers</li>
+      <li>Surpoids, obésité et ses complications</li>
+      <li>Troubles psychologiques (anxiété, dépression)</li>
+      <li>Déminéralisation osseuse (sujet âgé)</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Agir sur <strong>inactivité ET sédentarité séparément</strong> — deux cibles thérapeutiques distinctes.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Effets de l'alimentation — Chiffres-clés tombables
+  </div>
+  <div class="grid2" style="margin-top:6px;">
+    <div>
+      <div class="kv-row"><span class="kv-key">Mortalité attribuable à la mauvaise alimentation</span><span class="kv-val">15% mondial</span></div>
+      <div class="kv-row"><span class="kv-key">Comparaison</span><span class="kv-val">Plus que le tabac</span></div>
+      <div class="kv-row"><span class="kv-key">Cancers liés aux facteurs nutritionnels</span><span class="kv-val">&gt; 20% des nouveaux cas</span></div>
+    </div>
+    <div>
+      <p style="font-size:.8rem;font-weight:700;color:var(--amber);margin-bottom:6px;">Facteurs nutritionnels de risque cardio-métabolique :</p>
+      <ul class="lst">
+        <li>Excès de sel</li>
+        <li>Excès d'acides gras saturés</li>
+        <li>Faible consommation de fruits et légumes</li>
+        <li>Boissons sucrées, fast-food, alimentation "occidentale"</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-green" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Facteurs protecteurs : allaitement, AP régulière, fibres, <strong>régime méditerranéen</strong></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : REPÈRES ALIMENTAIRES ADULTE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Repères alimentaires — Adulte (HSCP 2017)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Recommandations population générale adulte
+  </div>
+  <table class="table-teal">
+    <tr><th>Groupe alimentaire</th><th>Repère quantifié</th><th>Précisions</th></tr>
+    <tr>
+      <td><strong>Fruits et légumes</strong></td>
+      <td><span class="badge badge-green">≥ 5 portions/j</span> (80–100 g/portion)</td>
+      <td>Max 1 verre jus sans sucre ajouté/j — privilégier fruits frais</td>
+    </tr>
+    <tr>
+      <td><strong>Fruits à coque</strong> (sans sel)</td>
+      <td>1 petite poignée/j</td>
+      <td>Allergènes fréquents</td>
+    </tr>
+    <tr>
+      <td><strong>Légumineuses</strong></td>
+      <td>≥ 2 fois/semaine</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Céréales complètes</strong></td>
+      <td>Tous les jours</td>
+      <td>Pain, pâtes, riz, céréales non sucrées</td>
+    </tr>
+    <tr>
+      <td><strong>Produits laitiers</strong></td>
+      <td><span class="badge badge-blue">2/j</span> (3/j pers. âgée)</td>
+      <td>150 ml lait / 125 g yaourt / 30 g fromage</td>
+    </tr>
+    <tr>
+      <td><strong>Viande rouge</strong></td>
+      <td><span class="badge badge-red">≤ 500 g/semaine</span></td>
+      <td>Privilégier la volaille</td>
+    </tr>
+    <tr>
+      <td><strong>Charcuterie</strong></td>
+      <td><span class="badge badge-red">≤ 150 g/semaine</span></td>
+      <td>Privilégier le jambon blanc</td>
+    </tr>
+    <tr>
+      <td><strong>Poisson</strong></td>
+      <td>2 fois/semaine</td>
+      <td>Dont 1 poisson gras — varier espèces et origine</td>
+    </tr>
+    <tr>
+      <td><strong>Matières grasses</strong></td>
+      <td>Éviter l'excès</td>
+      <td>Privilégier huiles de colza, noix, olive</td>
+    </tr>
+    <tr>
+      <td><strong>Produits sucrés</strong></td>
+      <td><span class="badge badge-amber">À limiter</span></td>
+      <td>Y compris boissons sucrées et jus de fruits</td>
+    </tr>
+    <tr>
+      <td><strong>Sel</strong></td>
+      <td>À limiter</td>
+      <td>Utiliser du sel iodé</td>
+    </tr>
+    <tr>
+      <td><strong>Boissons</strong></td>
+      <td><span class="badge badge-blue">Eau uniquement</span></td>
+      <td>Les édulcorés maintiennent le goût pour le sucre</td>
+    </tr>
+    <tr>
+      <td><strong>Alcool</strong></td>
+      <td><span class="badge badge-red">≤ 10 verres/sem — ≤ 2/j</span></td>
+      <td>Jours sans consommation — zéro pendant la grossesse</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : ALIMENTATION ENFANT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Alimentation de l'enfant
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Repères par âge (HSCP 2017)
+  </div>
+  <table class="table-blue">
+    <tr><th>Âge</th><th>Alimentation</th><th>Spécificités</th></tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">0 – 4 à 6 mois</td>
+      <td>Alimentation lactée exclusive<br>Idéalement <strong>allaitement maternel</strong></td>
+      <td>Sinon préparations spécifiques nourrisson</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">4 – 6 mois</td>
+      <td><strong>Diversification alimentaire</strong></td>
+      <td>Sans restriction du choix (fruits, légumes, légumineuses, PL, œuf, viande, poisson)<br>Pas de boissons végétales avant 1 an<br>Pas d'écrans avant 3 ans (en particulier pendant les repas)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">3 – 17 ans</td>
+      <td>Mêmes groupes que l'adulte</td>
+      <td><span class="badge badge-blue">3 produits laitiers/j</span> (au lieu de 2)<br>Portions réduites de moitié chez les petits, rejoignent adulte vers 11–12 ans, dépassées temporairement chez l'ado</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Aliments à éviter chez l'enfant
+    </div>
+    <ul class="lst">
+      <li>Café, thé, sodas, boissons caféinées</li>
+      <li>Édulcorants et boissons édulcorées</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Aliments à limiter chez l'enfant
+    </div>
+    <ul class="lst">
+      <li>Soja (phytoestrogènes)</li>
+      <li>Chocolat (exposition au nickel)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Conseils aux parents
+  </div>
+  <ul class="lst">
+    <li><strong>Ne pas forcer à finir l'assiette</strong> — respecter les signaux de faim/rassasiement (signaux innés)</li>
+    <li><strong>Contexte calme</strong> — sans écrans, mastication suffisante, ambiance sereine</li>
+    <li><strong>Lutter contre la néophobie</strong> (avant 2 ans) : proposer sans forcer, réitérer sous formes variées, donner l'exemple</li>
+    <li>Surveiller la <strong>courbe staturo-pondérale et l'IMC</strong> pour adapter les apports</li>
+    <li>Préférer les <strong>préparations maison</strong></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : RECOMMANDATIONS AP PAR ÂGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Recommandations d'activité physique par âge (ANSES 2016)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Tableau des recommandations — AP et sédentarité
+  </div>
+  <table class="table-teal">
+    <tr><th>Population</th><th>Activité physique</th><th>Rupture sédentarité</th></tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">Enfants &lt; 5 ans</td>
+      <td><strong>3 h/j</strong> d'AP (15 min/h pour 12 h d'éveil)</td>
+      <td>Max <strong>60 min en continu</strong> assis</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">Enfants 6–17 ans</td>
+      <td><strong>≥ 60 min/j</strong> intensité modérée à élevée<br>Tous les 2 jours : ≥ 20 min intensité élevée + renforcement musculaire + souplesse</td>
+      <td>Max <strong>120 min en continu</strong> assis</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">Adultes</td>
+      <td><strong>30 min/j — ≥ 5 j/semaine</strong> intensité modérée à élevée<br>Éviter 2 jours consécutifs sans AP<br>Renforcement musculaire 1–2×/sem (1–2 j récupération)<br>Assouplissement 2–3×/sem</td>
+      <td>Interrompre toutes les <strong>90–120 min</strong> : marche 3–5 min + mobilisation musculaire</td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;white-space:nowrap;">Personnes âgées &gt; 65 ans</td>
+      <td><strong>30 min/j intensité modérée</strong><br>Renforcement ≥ 2 j/sem non consécutifs<br>Assouplissement 2–3×/sem<br><strong>Équilibre ≥ 2 j/sem non consécutifs</strong></td>
+      <td>Interrompre toutes les <strong>90–120 min</strong> : 5 min activité + mobilisation musculaire</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Même de <strong>petits changements</strong> améliorent significativement la mortalité. Les recommandations sont des objectifs à atteindre progressivement — toute augmentation d'AP est bénéfique.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : ALIMENTATION ÉQUILIBRÉE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Grands principes d'une alimentation équilibrée
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      À privilégier
+    </div>
+    <ul class="lst">
+      <li>Suivre les repères HSCP 2017</li>
+      <li>Respecter les signaux internes de faim/rassasiement</li>
+      <li>Repas calme — mastication suffisante, sans distraction</li>
+      <li>Aliments de saison, locaux, préparations maison</li>
+      <li><strong>Régime méditerranéen</strong> — efficacité scientifique démontrée en prévention cardiovasculaire</li>
+      <li>Limiter les produits <strong>NutriScore D ou E</strong></li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      À éviter
+    </div>
+    <ul class="lst">
+      <li>Restrictions alimentaires (frustration → compensations)</li>
+      <li>Grignotage, portions excessives</li>
+      <li>Aliments gras/sucrés transformés</li>
+      <li>Repas devant écrans</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Produit BIO gras/sucré = toujours un produit gras/sucré. Le bénéfice des fruits/légumes est démontré bio ou non.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : FREINS ET PRÉVENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Freins aux changements et prévention primaire
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Freins individuels
+    </div>
+    <ul class="lst">
+      <li>Absence de conscience des enjeux de santé</li>
+      <li>Déni des conséquences potentielles</li>
+      <li>Appréhension des contraintes / frustrations</li>
+      <li>Faible sentiment d'auto-efficacité</li>
+      <li>Absence d'auto-détermination</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Menacer des complications = méthode <strong>ni éthique ni efficace</strong></div>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Freins externes
+    </div>
+    <ul class="lst">
+      <li>Environnement bâti (accès équipements sportifs)</li>
+      <li>Environnement alimentaire (marketing, prix, accessibilité)</li>
+      <li>Histoire personnelle / culturelle / familiale</li>
+    </ul>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Motivation ≠</span><span class="kv-val">Volonté / Courage</span></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:6px;">Résulte de facteurs conscients et inconscients — se travaille avec le patient dans la durée.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Approche motivationnelle — rôle du médecin
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Évaluer la motivation</div><div class="step-content">Sans stigmatisation — explorer les représentations du patient : impact de ses comportements, enjeux, changements nécessaires, freins/bénéfices perçus</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Entretien motivationnel</div><div class="step-content">Empathie, écoute active bienveillante — ne pas imposer de réponse thérapeutique immédiate si le patient n'est pas prêt</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Définir des objectifs en commun</div><div class="step-content">Changement graduel, respect du libre arbitre, réajustements réguliers — rassurer sur le maintien du plaisir alimentaire</div></div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div><div class="step-title">Impliquer l'entourage</div><div class="step-content">Famille, milieu scolaire, associatif — soutien social clé pour pérenniser les changements</div></div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div><div class="step-title">Accompagnement global</div><div class="step-content">Gestion du stress, qualité du sommeil, compétences psychosociales — objectif prioritaire : stabilisation du poids</div></div>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 9 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points clés à retenir — Pièges ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège 1 :</strong> Inactivité physique ≠ sédentarité (≤ 1,5 MET). Deux dimensions indépendantes, deux cibles distinctes en consultation.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège 2 :</strong> La mauvaise alimentation est responsable de 15% de la mortalité mondiale — <strong>plus que le tabac</strong>. Chiffre fréquent en QCM.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège 3 :</strong> Boissons végétales interdites avant 1 an. La diversification commence à 4–6 mois <strong>sans restriction du choix alimentaire</strong>.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège 4 :</strong> Menacer le patient de complications pour le motiver = méthode ni éthique ni efficace. L'approche motivationnelle sans jugement est la seule valide.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>À retenir adulte :</strong> <strong>30 min/j, ≥ 5 j/sem</strong> d'intensité modérée à élevée + rupture sédentarité toutes les <strong>90–120 min</strong>.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>À retenir enfant 6–17 ans :</strong> <strong>60 min/j</strong> + renforcement musculaire tous les 2 jours + max <strong>120 min</strong> de sédentarité continue.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Personne âgée :</strong> ajouter <strong>exercices d'équilibre ≥ 2 j/sem non consécutifs</strong> + 3 produits laitiers/j (protéines). Spécificité à ne pas oublier.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Références :</strong> ANSES 2016 (AP), HSCP 2017 (alimentation). Le <strong>régime méditerranéen</strong> est le seul modèle alimentaire à efficacité cardiovasculaire démontrée au niveau populationnel.</div>
+</div>
+
+</div>
+</body>
+</html>
