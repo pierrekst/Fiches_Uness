@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 223 — Dyslipidémies</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#D85A30 40%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;flex:1.2;padding-left:8px;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 223</div>
+  <h1>Dyslipidémies</h1>
+  <div class="header-sub">Risque cardiovasculaire · Classification · EAL · Objectifs LDL · Traitement</div>
+  <div class="header-tags">
+    <span class="htag">Endocrinologie</span>
+    <span class="htag">Cardiologie</span>
+    <span class="htag">Rang A prioritaire</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Ce chapitre recouvre l'ensemble de la prise en charge des anomalies lipidiques en prévention cardiovasculaire primaire et secondaire. Il faut maîtriser : (1) l'évaluation du risque CV global par SCORE2 et ses limites, (2) la classification des dyslipidémies primaires en 3 types et leurs phénotypes Fredrickson, (3) le diagnostic par l'EAL à jeun, (4) les signes cliniques évocateurs (xanthomes tendineux, xanthélasma, arc cornéen), (5) les causes secondaires et le bilan de débrouillage, (6) les objectifs LDL selon le risque et les paliers thérapeutiques (statine — ézétimibe — anti-PCSK9), (7) les spécificités des hypertriglycéridémies incluant le risque de pancréatite aiguë.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : RISQUE CARDIOVASCULAIRE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Évaluation du risque cardiovasculaire global
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      SCORE2 / SCORE2-OP — Principes
+    </div>
+    <div class="kv-row"><span class="kv-key">Variables utilisées</span><span class="kv-val">Chol non-HDL, tabac, PAS, âge, sexe</span></div>
+    <div class="kv-row"><span class="kv-key">Risque évalué</span><span class="kv-val">Ischémie coronaire ou AVC à 10 ans</span></div>
+    <div class="kv-row"><span class="kv-key">SCORE2 valide</span><span class="kv-val">40 ≤ âge &lt; 70 ans</span></div>
+    <div class="kv-row"><span class="kv-key">SCORE2-OP valide</span><span class="kv-val">âge ≥ 70 ans</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> inutilisable si diabète, IRC, hypercholestérolémie familiale ou maladie cardiovasculaire avérée — ces patients ont un risque défini d'emblée</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Seuils SCORE2 selon l'âge
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Risque</th><th>&lt;50 ans</th><th>50–69 ans</th><th>≥70 ans</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-green">Faible–modéré</span></td><td>&lt;2,5 %</td><td>&lt;5 %</td><td>&lt;7,5 %</td></tr>
+        <tr><td><span class="badge badge-amber">Élevé</span></td><td>2,5–7,5 %</td><td>5–10 %</td><td>7,5–15 %</td></tr>
+        <tr><td><span class="badge badge-red">Très élevé</span></td><td>≥7,5 %</td><td>≥10 %</td><td>≥15 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Niveaux de risque définis d'emblée (hors SCORE2)
+  </div>
+  <table class="table-red">
+    <thead><tr><th>Population</th><th>Niveau de risque</th></tr></thead>
+    <tbody>
+      <tr><td>Maladie CV avérée — athérome symptomatique (SCA, AVC, AOMI, anévrisme aorte) ou asymptomatique documenté (plaque coronaire, plaque carotidienne)</td><td><span class="badge badge-red">Très élevé</span></td></tr>
+      <tr><td>IRC : eDFG &lt;30 ou eDFG 30–44 + ACR ≥3 ou ACR &gt;30 mg/mmol</td><td><span class="badge badge-red">Très élevé</span></td></tr>
+      <tr><td>Diabète avec ≥1 critère sévère (MCV avérée, eDFG &lt;30, ACR &gt;30)</td><td><span class="badge badge-red">Très élevé</span></td></tr>
+      <tr><td>Hypercholestérolémie familiale sans ATCD CV</td><td><span class="badge badge-amber">Élevé d'emblée</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : CLASSIFICATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Classification des dyslipidémies
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Hypercholestérolémie pure
+    </div>
+    <div class="pills" style="margin-bottom:8px;"><span class="pill pill-blue">LDL élevé isolé</span><span class="pill pill-blue">Fredrickson IIa</span></div>
+    <ul class="lst">
+      <li><strong>Familiale homozygote</strong> — LDL &gt;10 mmol/L (4 g/L), CV dans l'enfance, rare</li>
+      <li><strong>Familiale hétérozygote</strong> — LDL 5–10 mmol/L (1,9–4 g/L), CV &lt;50 ans sans traitement</li>
+      <li><strong>Polygénique</strong> — LDL &lt;5,7 mmol/L (2,20 g/L), progressive, la plus fréquente</li>
+    </ul>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Hypertriglycéridémie pure
+    </div>
+    <div class="pills" style="margin-bottom:8px;"><span class="pill pill-amber">TG &gt;1,7 mmol/L</span><span class="pill pill-amber">TG &gt;1,50 g/L</span></div>
+    <ul class="lst">
+      <li><strong>Hyperchylomicronémie familiale</strong> (I) — déficit LPL, risque pancréatite</li>
+      <li><strong>HTG multifactorielle</strong> — la plus fréquente, origine multigénique + environnement</li>
+      <li><strong>HTG endogène</strong> (IV) — excès VLDL</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Pancréatite aiguë si TG &gt;11 mmol/L (10 g/L)</div>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Hyperlipidémie mixte
+    </div>
+    <div class="pills" style="margin-bottom:8px;"><span class="pill pill-teal">LDL + TG élevés</span></div>
+    <ul class="lst">
+      <li><strong>Dysbétalipoprotéinémie</strong> (III) — élévation harmonieuse chol/TG, rare</li>
+      <li><strong>Hyperlipidémie combinée familiale</strong> (IIb) — phénotypes variables, risque CV élevé</li>
+      <li><strong>Dyslipidémie DT2/synd. métabolique</strong> — TG élevés + HDL bas, risque CV élevé</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : DEPISTAGE + DIAGNOSTIC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Dépistage et diagnostic
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Quand dépister ?
+    </div>
+    <table>
+      <thead><tr><th>Type</th><th>Indications</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-red">Impératif</span></td>
+          <td>Prévention secondaire (ATCD CV ou athérome asymptomatique)<br>FdR CV présents (tabac, HTA, diabète, IRC, ATCD fam. coronaire précoce)<br>Médicaments lipidiques (corticoïdes, oestroprogestatifs, rétinoïdes, antirétroviraux, neuroleptiques, inh. mTOR)</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-blue">Conseillé</span></td>
+          <td>Homme ≥40 ans<br>Femme ≥50 ans ou ménopausée<br>Toute femme sous contraception hormonale</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      EAL — Exploration d'une Anomalie Lipidique
+    </div>
+    <div class="kv-row"><span class="kv-key">Prélèvement</span><span class="kv-val">Sérum, jeûne 12 heures</span></div>
+    <div class="kv-row"><span class="kv-key">Mesures obligatoires</span><span class="kv-val">Aspect sérum, CT, TG, HDL-c</span></div>
+    <div class="kv-row"><span class="kv-key">LDL-c calculé (Friedewald)</span><span class="kv-val">Si TG &lt;3,8 mmol/L (3,4 g/L)</span></div>
+    <div class="kv-row"><span class="kv-key">LDL-c mesure directe</span><span class="kv-val">Si TG ≥3,8 mmol/L (3,4 g/L)</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> LDL calculé invalide si TG ≥3,4 g/L — mesure directe obligatoire</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : MANIFESTATIONS CLINIQUES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Manifestations cliniques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hypercholestérolémie — formes sévères
+    </div>
+    <table>
+      <thead><tr><th>Signe</th><th>Localisation / précision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Xanthomes tendineux</strong></td><td>Achille, extenseurs des doigts — pathognomoniques HC familiale</td></tr>
+        <tr><td><strong>Xanthélasma</strong></td><td>Dépôts péri-orbitaires — significatif avant 60 ans</td></tr>
+        <tr><td><strong>Arc cornéen</strong></td><td>Limbe cornéen — significatif avant 60 ans</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> xanthélasma et arc cornéen non spécifiques après 60 ans — valeur sémiologique uniquement avant 60 ans</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hypertriglycéridémie sévère
+    </div>
+    <table>
+      <thead><tr><th>Signe</th><th>Précision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Xanthomatose éruptive</strong></td><td>Papules jaunâtres sur fesses, coudes</td></tr>
+        <tr><td><strong>Lipémie rétinienne</strong></td><td>Aspect laiteux des vaisseaux au fond d'oeil</td></tr>
+        <tr><td><strong>Pancréatite aiguë</strong></td><td>Risque majeur si TG &gt;11 mmol/L (10 g/L)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : CAUSES SECONDAIRES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Causes secondaires et bilan étiologique (rang B)
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Principales causes secondaires
+    </div>
+    <table>
+      <thead><tr><th>Catégorie</th><th>Exemples</th></tr></thead>
+      <tbody>
+        <tr><td>Endocrinopathies</td><td>Hypothyroïdie, hypercorticisme</td></tr>
+        <tr><td>Maladies rénales</td><td>Syndrome néphrotique, glomérulopathie</td></tr>
+        <tr><td>Hépatiques</td><td>Cholestase</td></tr>
+        <tr><td>Médicaments</td><td>Corticoïdes, oestroprogestatifs, rétinoïdes, antirétroviraux, neuroleptiques, inhibiteurs mTOR</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan biologique de débrouillage
+    </div>
+    <div class="kv-row"><span class="kv-key">TSH</span><span class="kv-val">Hypothyroïdie</span></div>
+    <div class="kv-row"><span class="kv-key">Créatininémie</span><span class="kv-val">Insuffisance rénale chronique</span></div>
+    <div class="kv-row"><span class="kv-key">Protéinurie (BU)</span><span class="kv-val">Syndrome néphrotique</span></div>
+    <div class="kv-row"><span class="kv-key">Phosphatases alcalines</span><span class="kv-val">Cholestase</span></div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Bilan guidé par le contexte clinique — pas systématique si cause évidente (médicaments)</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement des dyslipidémies
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Objectifs LDL-c selon le niveau de risque CV (ESC 2021)
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Niveau de risque</th><th>Exemples</th><th>Objectif LDL (mmol/L)</th><th>Objectif LDL (g/L)</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-red">Très élevé</span></td>
+        <td>Prévention secondaire, IRC sévère, DT1/DT2 avec MCV avérée</td>
+        <td><strong>&lt;1,4</strong></td><td><strong>&lt;0,55</strong></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Élevé</span></td>
+        <td>≥3 FdR CV, HC familiale sans ATCD CV, IRC modérée, DT2 ≥10 ans avec FdR</td>
+        <td><strong>&lt;1,8</strong></td><td><strong>&lt;0,70</strong></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-green">Modéré</span></td>
+        <td>2 FdR CV, DT2 &lt;10 ans sans FdR ni atteinte organe cible</td>
+        <td><strong>&lt;2,6</strong></td><td><strong>&lt;1,00</strong></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-blue">Faible</span></td>
+        <td>0–1 FdR CV (consensus NSFA-SFD-SFE 2014)</td>
+        <td><strong>&lt;4,9</strong></td><td><strong>&lt;1,90</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>HC familiale — objectifs spécifiques :</strong> enfant &lt;3,5 mmol/L (1,35 g/L) ; adulte précoce sans FdR : &lt;2,6 mmol/L (1,00 g/L) ; adulte tardif avec FdR : &lt;1,8 mmol/L (0,70 g/L) ; prévention secondaire : &lt;1,4 mmol/L (0,55 g/L)</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement de l'hypercholestérolémie — paliers
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><div class="step-title">Statine — 1ère intention</div><div class="step-content">Traitement de référence, tolérance hépatique et musculaire à surveiller</div></div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><div class="step-title">+ Ézétimibe — si objectif non atteint</div></div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><div class="step-title">+ Cholestyramine (résine)</div></div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div><div class="step-title">Inhibiteurs de PCSK9 — formes sévères / prévention secondaire</div></div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement des hypertriglycéridémies et mixtes
+    </div>
+    <div class="kv-row"><span class="kv-key">HTG isolée, TG &lt;5,6 mmol/L (5 g/L)</span><span class="kv-val">Diététique en 1ère intention</span></div>
+    <div class="kv-row"><span class="kv-key">HTG isolée, TG &gt;5,6 mmol/L (5 g/L)</span><span class="kv-val">Fibrates ± oméga-3</span></div>
+    <div class="kv-row"><span class="kv-key">Mixte — objectif prioritaire</span><span class="kv-val">Normalisation LDL-c d'abord</span></div>
+    <div class="kv-row"><span class="kv-key">Mixte — fibrate si TG ≥5,2 mmol/L + HDL bas</span><span class="kv-val">Fénofibrate uniquement</span></div>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Jamais gemfibrozil</strong> — uniquement fénofibrate (préférentiellement)</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Surveillance du traitement
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Paramètre</th><th>Quand</th><th>Remarque</th></tr></thead>
+    <tbody>
+      <tr><td>Bilan lipidique</td><td>2–3 mois après initiation, puis annuel</td><td>Vérifier atteinte objectif LDL</td></tr>
+      <tr><td>Transaminases</td><td>Avant initiation + dans les 3 mois suivants</td><td>Systématique pour statine</td></tr>
+      <tr><td>CPK</td><td>Uniquement si myalgies</td><td>Non systématique</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : HYGIENE-DIETETIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Règles hygiéno-diététiques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Hypercholestérolémie
+    </div>
+    <div class="kv-row"><span class="kv-key">Graisses totales</span><span class="kv-val">&lt;35 % de l'apport calorique</span></div>
+    <div class="kv-row"><span class="kv-key">Acides gras saturés</span><span class="kv-val">&lt;10 % de l'apport calorique</span></div>
+    <div class="kv-row"><span class="kv-key">Privilégier</span><span class="kv-val">AG mono-insaturés et polyinsaturés oméga-3</span></div>
+    <div class="kv-row"><span class="kv-key">Fruits et légumes</span><span class="kv-val">À encourager</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Hypertriglycéridémie
+    </div>
+    <div class="kv-row"><span class="kv-key">Modérée</span><span class="kv-val">Réduction pondérale (diét. + activité physique), réduction alcool, réduction sucres simples</span></div>
+    <div class="kv-row"><span class="kv-key">Sévère</span><span class="kv-val">Régime hypolipidique strict + huile à base de triglycérides à chaînes moyennes (MCT)</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS-CLES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Urgence TG &gt;11 mmol/L (10 g/L) :</strong> risque de pancréatite aiguë — régime hypolipidique strict + fibrates ± oméga-3 en urgence</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège SCORE2 :</strong> inutilisable si diabète, IRC, HC familiale ou athérome avéré — ces 4 situations ont un risque défini d'emblée</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège xanthélasma / arc cornéen :</strong> valeur sémiologique uniquement avant 60 ans — banals et non spécifiques après 60 ans</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège LDL calculé :</strong> invalide si TG ≥3,8 mmol/L (3,4 g/L) — mesure directe obligatoire dans ce cas</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège fibrates :</strong> fénofibrate uniquement en mixte (jamais gemfibrozil) — et seulement après atteinte de l'objectif LDL</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Surveillance statines :</strong> transaminases avant + à 3 mois (systématique) — CPK uniquement si myalgies (non systématiques)</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>HC familiale hétérozygote :</strong> LDL entre 1,9 et 4 g/L — événements CV avant 50 ans sans traitement — risque élevé d'emblée</div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Prévention secondaire = très élevé d'emblée :</strong> objectif LDL &lt;1,4 mmol/L (0,55 g/L) — statine + ézétimibe ± anti-PCSK9</div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

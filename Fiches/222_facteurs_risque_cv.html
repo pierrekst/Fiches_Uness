@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>222 — Facteurs de risque cardio-vasculaire et prévention</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#E24B4A 0%,#C97B2A 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;max-width:60%;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">ITEM 222</div>
+  <h1>Facteurs de risque cardio-vasculaire et prévention</h1>
+  <div class="header-sub">Prévention CV — Épidémiologie — FDR modifiables et non modifiables — Scores de risque</div>
+  <div class="header-tags">
+    <span class="htag">Cardiologie</span>
+    <span class="htag">Médecine préventive</span>
+    <span class="htag">4 FDR modifiables</span>
+    <span class="htag">Syndrome métabolique</span>
+    <span class="htag">Activité physique</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Cet item est le socle de la prévention cardiovasculaire. Comprendre qui est à risque (FDR majeurs modifiables vs non modifiables), comment les FDR s'agrègent (syndrome métabolique), comment quantifier le risque global (scores SCORE2), et quelles stratégies — diététiques, comportementales, médicamenteuses — permettent de le réduire. Les facteurs "indirects" (obésité, sédentarité, alcool, stress, hypertriglycéridémie) amplifient le risque principalement via les FDR majeurs. L'activité physique est la mesure de prévention la plus transversale, efficace à tous les stades. La prévention centrée sur le patient est pertinente et réalisable en soins primaires.
+</div>
+
+<!-- SECTION 1 : NIVEAUX DE PRÉVENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Niveaux de prévention cardiovasculaire
+</div>
+
+<div class="grid3">
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Primaire
+    </div>
+    <div class="kv-row"><span class="kv-key">Population</span><span class="kv-val" style="font-size:.78rem;">Indemnes de toute maladie CV</span></div>
+    <div class="kv-row"><span class="kv-key">Objectif</span><span class="kv-val" style="font-size:.78rem;">Réduire l'incidence d'événements CV</span></div>
+    <div class="kv-row"><span class="kv-key">Intensité</span><span class="kv-val" style="font-size:.78rem;">Selon niveau de risque CV</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Primo-secondaire
+    </div>
+    <div class="kv-row"><span class="kv-key">Population</span><span class="kv-val" style="font-size:.78rem;">Lésions athéromateuses <strong>infracliniques</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Objectif</span><span class="kv-val" style="font-size:.78rem;">Prévenir l'expression clinique</span></div>
+    <div class="kv-row"><span class="kv-key">Intensité</span><span class="kv-val" style="font-size:.78rem;">Prise en charge <strong>vigoureuse</strong></span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Secondaire
+    </div>
+    <div class="kv-row"><span class="kv-key">Population</span><span class="kv-val" style="font-size:.78rem;">ATCD d'événement CV clinique</span></div>
+    <div class="kv-row"><span class="kv-key">Objectif</span><span class="kv-val" style="font-size:.78rem;">Réduire le risque de récidive</span></div>
+    <div class="kv-row"><span class="kv-key">Intensité</span><span class="kv-val" style="font-size:.78rem;">Prise en charge <strong>vigoureuse</strong></span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : FDR MAJEURS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Facteurs de risque cardiovasculaires majeurs et indépendants
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>FDR vs marqueur :</strong> Un FDR a une relation de causalité démontrée avec la maladie CV. Un marqueur de risque n'a pas de causalité démontrée.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      4 FDR modifiables <span class="badge badge-red">Cibles thérapeutiques</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">HTA</span><span class="kv-val">AVC ×7 / IDM ×3 / AOMI ×2</span></div>
+    <div class="kv-row"><span class="kv-key">Tabagisme</span><span class="kv-val">Décès CV ×2,8</span></div>
+    <div class="kv-row"><span class="kv-key">Diabète</span><span class="kv-val">Événement CV ×2</span></div>
+    <div class="kv-row"><span class="kv-key">Hypercholestérolémie</span><span class="kv-val" style="font-size:.78rem;">LDL ↑ → risque quasi-linéaire</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      3 FDR non modifiables
+    </div>
+    <div class="kv-row"><span class="kv-key">Âge</span><span class="kv-val">Homme ≥ 50 ans / Femme ≥ 60 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Sexe masculin</span><span class="kv-val">—</span></div>
+    <div class="kv-row"><span class="kv-key">Hérédité coronaire</span><span class="kv-val" style="font-size:.77rem;">IDM/Mort subite chez parent 1° :<br>Homme &lt; 55 ans / Femme &lt; 65 ans</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : SYNDROME MÉTABOLIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Syndrome métabolique — modèle d'agrégation de FDR
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </span>
+    Critères du syndrome métabolique <span class="badge badge-amber">Mécanisme : insulino-résistance</span>
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Composante</th><th>Seuil</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Obésité abdominale</strong></td><td>Tour de taille &gt; 94 cm (H) / &gt; 80 cm (F)</td></tr>
+      <tr><td>Pré-diabète ou diabète</td><td>Glycémie à jeun élevée ou diabète connu</td></tr>
+      <tr><td>HTA</td><td>PA &gt; 130/85 mmHg</td></tr>
+      <tr><td>Hypertriglycéridémie</td><td>TG &gt; 1,5 g/L</td></tr>
+      <tr><td>Hypo-HDLémie</td><td>HDL-c bas</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <span>Obésité + sédentarité → insulino-résistance → syndrome métabolique. L'obésité abdominale (graisse viscérale) est le phénotype le plus à risque CV, à distinguer de l'obésité diffuse sous-cutanée.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : SCORES DE RISQUE + PRÉVALENCES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Scores de risque — SCORE2 / SCORE2-OP
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </span>
+    SCORE2 — prévention primaire (sujets apparemment sains)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Objectif</span><span class="kv-val" style="font-size:.8rem;">Probabilité d'événement CV majeur à 10 ans</span></div>
+      <div class="kv-row"><span class="kv-key">Événements</span><span class="kv-val" style="font-size:.8rem;">Décès IDM/AVC + IDM/AVC non fatals</span></div>
+      <div class="kv-row"><span class="kv-key">France</span><span class="kv-val">"low CVD risk"</span></div>
+    </div>
+    <div>
+      <p style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Variables incluses :</p>
+      <div class="pills">
+        <span class="pill pill-blue">Sexe</span>
+        <span class="pill pill-blue">Tabagisme</span>
+        <span class="pill pill-blue">Cholestérol non-HDL</span>
+        <span class="pill pill-blue">PAS</span>
+        <span class="pill pill-blue">Âge</span>
+      </div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <span><strong>Piège :</strong> Diabète, obésité, hérédité coronaire, sédentarité <strong>ne font PAS partie</strong> du score SCORE2.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : PRÉVALENCES ET BÉNÉFICES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Prévalences et bénéfices de la prise en charge
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr><th>FDR</th><th>Prévalence (France)</th><th>Risque CV associé</th><th>Bénéfice de la prise en charge</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>HTA</strong></td>
+      <td>1 adulte / 3 ;<br>&gt; 50% après 65 ans</td>
+      <td>AVC ×7, IDM ×3, AOMI ×2</td>
+      <td>−10/5 mmHg → −20% risque coronaire, −32% risque AVC (annuel relatif)</td>
+    </tr>
+    <tr>
+      <td><strong>Tabac</strong></td>
+      <td>~25% en 2019 (−4 pts depuis 2016)</td>
+      <td>Décès CV ×2,8</td>
+      <td>Sevrage → −36% décès CV ; −32% récidive IDM</td>
+    </tr>
+    <tr>
+      <td><strong>Diabète</strong></td>
+      <td>4–5% (↑ 5%/an) ; 90% T2 ;<br>sous-estimé de 20% ; prévalence 20% après 75 ans</td>
+      <td>Événement CV ×2</td>
+      <td>iSGLT2 et aGLP-1 réduisent les événements CV (au-delà du seul contrôle de l'HbA1c)</td>
+    </tr>
+    <tr>
+      <td><strong>Dyslipidémie</strong></td>
+      <td>~20% avec LDL-c &gt; 1,6 g/L ;<br>~6% avec LDL-c &gt; 1,9 g/L</td>
+      <td>Corrélation quasi-linéaire LDL ↑ → risque ↑</td>
+      <td>−1 mmol/L de LDL-c → −20% événements CV relatifs</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 6 : STRATÉGIES DE PRÉVENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Stratégies individuelles de prévention
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      Mesures hygiéno-diététiques (MHD)
+    </div>
+    <ul class="lst">
+      <li>Alimentation saine : ↓ sel, acides gras saturés, sucres libres</li>
+      <li>Activité physique à promouvoir</li>
+      <li>Sommeil</li>
+      <li>Lutte contre tabagisme actif et passif</li>
+      <li>Limiter la consommation d'alcool</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </span>
+      Traitements médicamenteux
+    </div>
+    <ul class="lst">
+      <li>Anti-HTA</li>
+      <li>Aide au sevrage tabagique (varénicline, substituts nicotiniques)</li>
+      <li>Antidiabétiques (iSGLT2, aGLP-1 en 2° prévention)</li>
+      <li>Hypolipémiants (statines, ézétimibe, anti-PCSK9)</li>
+      <li>Antiplaquettaires (prévention secondaire)</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      <span>+ Éducation thérapeutique + suivi des cibles thérapeutiques</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : ALCOOL -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Alcool et risque cardiovasculaire — courbe en J
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </span>
+    Consommation chronique d'alcool et mortalité CV
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Consommation</th><th>Quantité</th><th>Effet sur le risque CV</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="phase phase-prod">Faible</span></td>
+        <td>10–20 g/j (1–2 verres)</td>
+        <td>−15 à −30% RR de SCA et décès CV<br><small style="color:var(--muted);">↑ HDL-c, ↑ sensibilité insuline, effet antioxydant, anti-inflammatoire, antiplaquettaire</small></td>
+      </tr>
+      <tr>
+        <td><span class="phase phase-mod">Modérée</span></td>
+        <td>20–30 g/j (2–3 verres)</td>
+        <td>Effet protecteur résiduel, atténué</td>
+      </tr>
+      <tr>
+        <td><span class="phase phase-sev">Importante</span></td>
+        <td>&gt; 30 g/j (&gt; 3 verres)</td>
+        <td>↑ PA et risque diabète ; sur-risque CV proportionnel à la dose ; cardiopathie dilatée toxique</td>
+      </tr>
+      <tr>
+        <td><span class="phase phase-sev">Binge drinking</span></td>
+        <td>Intoxication aiguë</td>
+        <td>+40% RR SCA et mortalité CV en post-intoxication</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Piège :</strong> L'alcool <strong>ne modifie pas significativement le LDL-c</strong> — mais augmente simultanément les TG et le HDL-c.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : FACTEURS PSYCHOSOCIAUX -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Facteurs psychosociaux et risque cardiovasculaire
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </span>
+    Stress chronique — mécanismes et impact
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Réponses physiopathologiques au stress :</p>
+      <ul class="lst">
+        <li>Activation neuro-endocrine / dysfonction du SNA</li>
+        <li>↑ PA et fréquence cardiaque</li>
+        <li>Activation de la coagulation</li>
+        <li>Effet pro-inflammatoire</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Conséquences cliniques :</p>
+      <ul class="lst">
+        <li>Instabilité rythmique (TV, FV, FA)</li>
+        <li>Rupture de plaque + thrombose → SCA, AVCi</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Magnitude :</strong> Population générale → RR ×1,1 à 1,6 (faible). Mais chez sujets à haut risque CV ou maladie CV établie : RR &gt; 2 (rôle de <strong>déclencheur</strong>). À prendre en compte particulièrement en prévention primo-secondaire et secondaire.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 9 : OBÉSITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Obésité et risque cardiovasculaire
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      Définitions et seuils
+    </div>
+    <div class="kv-row"><span class="kv-key">Surpoids</span><span class="kv-val">IMC 25–30 kg/m²</span></div>
+    <div class="kv-row"><span class="kv-key">Obésité</span><span class="kv-val">IMC &gt; 30 kg/m²</span></div>
+    <div class="kv-row"><span class="kv-key">Obésité sévère</span><span class="kv-val">IMC &gt; 40 kg/m²</span></div>
+    <div class="kv-row"><span class="kv-key">Obésité abdominale (H)</span><span class="kv-val">Tour de taille &gt; 94 cm</span></div>
+    <div class="kv-row"><span class="kv-key">Obésité abdominale (F)</span><span class="kv-val">Tour de taille &gt; 80 cm</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span><strong>Piège :</strong> Obésité abdominale (viscérale) &gt;&gt; obésité diffuse sous-cutanée en termes de risque CV.</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Mécanismes physiopathologiques
+    </div>
+    <ul class="lst">
+      <li>↑ Insulino-résistance</li>
+      <li>"Dyslipidémie athérogène" : ↑ TG + ↓ HDL-c + ↑ LDL petites et denses</li>
+      <li>↑ Pression artérielle</li>
+      <li>↑ Inflammation systémique</li>
+    </ul>
+    <p style="font-size:.82rem; font-weight:700; margin-top:10px; margin-bottom:4px;">Aggravation des FDR majeurs :</p>
+    <ul class="lst">
+      <li>Favorise HTA, DT2, hypertriglycéridémie, syndrome métabolique</li>
+      <li>Cercle vicieux : obésité → sédentarité → obésité</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 10 : HYPERTRIGLYCÉRIDÉMIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Hypertriglycéridémie et risque cardiovasculaire
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </span>
+    Rôle des triglycérides — risque résiduel sous statine
+  </div>
+  <div class="kv-row"><span class="kv-key">Priorité du traitement</span><span class="kv-val">LDL-c reste la cible prioritaire</span></div>
+  <div class="kv-row"><span class="kv-key">TG : statut</span><span class="kv-val">Marqueur de risque résiduel malgré statine</span></div>
+  <div class="kv-row"><span class="kv-key">Associations fréquentes</span><span class="kv-val">↓ HDL-c + ↑ LDL petites et denses</span></div>
+  <div class="kv-row"><span class="kv-key">Contextes à risque</span><span class="kv-val">Insulino-résistance, DT2, surpoids, obésité</span></div>
+  <div class="kv-row"><span class="kv-key">Impact d'une baisse de 40 mg/dL TG</span><span class="kv-val">−4 à 5% événements CV absolus (vs −20% pour même baisse LDL-c)</span></div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <span><strong>Étude REDUCE-IT :</strong> En prévention secondaire, TG &gt; 2 g/L malgré statine → l'icosapent éthyl réduit significativement à 5 ans le critère combiné (décès CV, IDM, AVC, revascularisation, angor instable).</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 11 : ACTIVITÉ PHYSIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Activité physique et prévention cardiovasculaire
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    Bénéfices de l'AP régulière <span class="badge badge-green">−30% mortalité CV — dose-dépendant</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">PA systolique</span><span class="kv-val">↓</span></div>
+      <div class="kv-row"><span class="kv-key">LDL-c et TG</span><span class="kv-val">↓</span></div>
+      <div class="kv-row"><span class="kv-key">HDL-c</span><span class="kv-val">↑</span></div>
+      <div class="kv-row"><span class="kv-key">Poids</span><span class="kv-val">↓</span></div>
+      <div class="kv-row"><span class="kv-key">Insulino-résistance</span><span class="kv-val">↓ (améliore contrôle glycémique)</span></div>
+    </div>
+    <div>
+      <p style="font-size:.82rem; font-weight:700; margin-bottom:6px;">Valable à tout âge et à tous les stades :</p>
+      <div class="pills">
+        <span class="pill pill-teal">Prévention primaire</span>
+        <span class="pill pill-teal">Primo-secondaire</span>
+        <span class="pill pill-teal">Secondaire</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </span>
+    Recommandations quantitatives en prévention primaire (adulte sain)
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Intensité</th><th>Définition physiologique</th><th>Dose minimale</th><th>Dose optimale</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="phase phase-prod">Modérée</span></td>
+        <td>Aérobie sans lactate ; 40–70% VO2max ; 55–74% FCmax</td>
+        <td><strong>≥ 150 min/sem</strong></td>
+        <td>300 min/sem</td>
+      </tr>
+      <tr>
+        <td><span class="phase phase-mod">Vigoureuse</span></td>
+        <td>Aérobie + lactates ; 70–80% VO2max ; 75–90% FCmax</td>
+        <td><strong>≥ 75 min/sem</strong></td>
+        <td>150 min/sem</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="color:var(--muted); font-style:italic;">Combinaison équivalente des 2 schémas</td>
+        <td colspan="2">Fréquence : &gt; 3 séances/sem, idéalement quotidien</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Contre-indication :</strong> AP d'intensité vigoureuse contre-indiquée en cas d'HTA non contrôlée.</span>
+  </div>
+  <div class="alert alert-blue" style="margin-top:6px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <span><strong>Populations spécifiques (obèses, HTA contrôlée, DT2) :</strong> ajouter ≥ 3 séances/sem d'exercices en résistance en plus des exercices aérobies. L'AP doit être individualisée (âge, état de santé, condition physique, préférences) pour favoriser l'observance à long terme.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 12 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés et pièges à l'ECNi
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Pièges classiques
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>SCORE2 n'inclut PAS : diabète, obésité, hérédité coronaire, sédentarité</span>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Alcool → augmente TG ET HDL-c, mais <strong>pas le LDL-c</strong></span>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Obésité abdominale viscérale &gt; obésité sous-cutanée diffuse en risque CV</span>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Stress : RR ×1,1–1,6 en population générale (faible), mais RR &gt;2 chez sujets à haut risque CV (rôle de déclencheur)</span>
+    </div>
+    <div class="alert alert-red">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span><strong>CI :</strong> AP vigoureuse formellement contre-indiquée si HTA non contrôlée</span>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </span>
+      À retenir absolument
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>4 FDR modifiables majeurs :</strong> HTA, tabac, diabète, hypercholestérolémie</span>
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>Syndrome métabolique :</strong> obésité abdominale + pré-DT2/HTA + dyslipidémie athérogène → mécanisme = insulino-résistance</span>
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>Activité physique :</strong> −30% mortalité CV, dose-dépendant, valable à tous les stades de prévention ; 150 min/sem intensité modérée en primaire</span>
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>−1 mmol/L LDL → −20% événements CV ;</strong> sevrage tabagique → −36% décès CV</span>
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>Prévention centrée sur le patient efficace et réalisable en soins primaires</strong></span>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
