@@ -61,6 +61,7 @@
 
 ## Cancérologie (CNECancer)
 
+- **290.** Épidémiologie, facteurs de risque, prévention et dépistage des cancers
 - **292.** Diagnostic des cancers : signes d'appel et investigations para-cliniques ; caractérisation du stade ; pronostic
 - **294.** Traitement des cancers : principales modalités, classes thérapeutiques et leurs complications majeures. La décision thérapeutique pluridisciplinaire et l'information du malade
 - **295.** Prise en charge et accompagnement d'un malade atteint de cancer à tous les stades de la maladie dont le stade de soins palliatifs en abordant les problématiques techniques, relationnelles, sociales et éthiques
@@ -144,6 +145,7 @@
 - **162.** Infections sexuellement transmissibles (IST) : gonococcies, chlamydioses, syphilis, papillomavirus humain (HPV), trichomonose
 - **187.** Hypersensibilités et allergies cutanéomuqueuses chez l'enfant et l'adulte. Urticaire, dermatites atopique et de contact
 - **302.** Tumeurs cutanées, épithéliales et mélaniques
+- **350.** Grosse jambe rouge aiguë
 
 ## Douleur (CEMD)
 
@@ -210,6 +212,7 @@
 
 ## Gynécologie obstétrique (CEGO)
 
+- **23.** Grossesse normale
 - **24.** Principales complications de la grossesse
 - **25.** Grossesse extra-utérine
 - **26.** Douleur abdominale aiguë chez une femme enceinte
@@ -246,10 +249,12 @@
 - **130.** La personne âgée malade : particularités sémiologiques, psychologiques et thérapeutiques. (voir item 322)
 - **131.** Troubles de la marche et de l'équilibre. (voir item 109)
 - **132.** Troubles cognitifs du sujet âgé. (voir item 108)
+- **133.** Autonomie et dépendance chez le sujet âgé
 - **252.** Troubles nutritionnels chez le sujet âgé
 
 ## Humanités (COLHUM)
 
+- **1.** La relation médecin-malade dans le cadre du colloque singulier ou au sein d'une équipe, le cas échéant pluriprofessionnelle. La communication avec le patient et son entourage. L'annonce d'une maladie grave ou létale ou d'un dommage associé aux soins. La formation du patient. La personnalisation de la prise en charge médicale
 - **8.** Les discriminations
 - **9.** Introduction à l'éthique médicale
 - **10.** corps
@@ -303,6 +308,8 @@
 - **157.** Bactériémie/Fongémie de l'adulte et de l'enfant
 - **158.** Sepsis et choc septique de l'enfant et de l'adulte
 - **159.** Tuberculose de l'adulte et de l'enfant
+- **166.** Grippe
+- **168.** Infections à herpès virus du sujet immunocompétent
 - **169.** Infections à VIH
 - **170.** Paludisme
 - **171.** Gale et pédiculose
@@ -357,29 +364,6 @@
 
 - **38.** Infertilité du couple : conduite de la première consultation
 - **39.** Assistance médicale à la procréation : principaux aspects biologiques, médicaux et éthiques
-
-## Médecine générale (CNGE)
-
-- **1.** La relation médecin-malade dans le cadre du colloque singulier ou au sein d'une équipe, le cas échéant pluriprofessionnelle. La communication avec le patient et son entourage. L'annonce d'une maladie grave ou létale ou d'un dommage associé aux soins. La formation du patient. La personnalisation de la prise en charge médicale
-- **3.** Le raisonnement et la décision en médecine. La médecine fondée sur les preuves (Evidence Based Medicine, EBM). La décision médicale partagée. La controverse
-- **23.** Grossesse normale
-- **59.** Sujets en situation de précarité
-- **72.** Troubles à symptomatologie somatique et apparentés à tous les âges
-- **110.** Troubles du sommeil de l'enfant et de l'adulte
-- **133.** Autonomie et dépendance chez le sujet âgé
-- **146.** Vaccinations
-- **148.** Infections naso-sinusiennes de l'adulte et de l'enfant
-- **149.** Angines de l'adulte et de l'enfant
-- **166.** Grippe
-- **168.** Infections à herpès virus du sujet immunocompétent
-- **221.** Athérome : épidémiologie et physiopathologie. Le malade poly-athéromateux
-- **222.** Facteurs de risque cardio-vasculaire et prévention
-- **224.** Hypertension artérielle de l'adulte et de l'enfant
-- **249.** Modifications thérapeutiques du mode de vie (alimentation et activité physique) chez l'adulte et l'enfant
-- **283.** Constipation chez l'enfant et l'adulte
-- **290.** Épidémiologie, facteurs de risque, prévention et dépistage des cancers
-- **322.** La décision thérapeutique personnalisée : bon usage dans des situations à risque
-- **350.** Grosse jambe rouge aiguë
 
 ## Médecine Intensive Réanimation (CEMIR)
 
@@ -481,6 +465,7 @@
 ## Nutrition (CENutri)
 
 - **248.** Prévention primaire par la nutrition chez l'adulte et l'enfant
+- **249.** Modifications thérapeutiques du mode de vie (alimentation et activité physique) chez l'adulte et l'enfant
 - **250.** Dénutrition chez l'adulte et l'enfant
 - **251.** Amaigrissement à tous les âges
 - **253.** Obésité de l'enfant et de l'adulte (voir item 71)
@@ -520,6 +505,8 @@
 - **89.** Altération de la fonction auditive
 - **90.** Pathologie des glandes salivaires
 - **103.** Vertige
+- **148.** Infections naso-sinusiennes de l'adulte et de l'enfant
+- **149.** Angines de l'adulte et de l'enfant
 - **150.** Otites infectieuses de l'adulte et de l'enfant
 - **298.** Tumeurs de la cavité buccale, naso-sinusiennes et du cavum, et des voies aérodigestives supérieures
 
@@ -547,6 +534,7 @@
 
 ## Pneumologie (CEP)
 
+- **110.** Troubles du sommeil de l'enfant et de l'adulte
 - **154.** Infections broncho pulmonaires communautaires de l'adulte et de l'enfant
 - **188.** Hypersensibilité et allergies respiratoires chez l'enfant et chez l'adulte. Asthme, rhinite
 - **203.** Dyspnée aiguë et chronique
@@ -575,6 +563,7 @@
 - **69.** Troubles psychiques de la grossesse et du post-partum
 - **70.** Troubles psychiques du sujet âgé
 - **71.** Troubles des conduites alimentaires chez l'adolescent et l'adulte (voir item 253)
+- **72.** Troubles à symptomatologie somatique et apparentés à tous les âges
 - **73.** Différents types de techniques psychothérapeutiques
 - **74.** Prescription et surveillance des psychotropes (voir item 330)
 - **121.** Le handicap psychique. (voir item 56 et 118)
@@ -631,6 +620,7 @@
 - **19.** La sécurité sociale. L'assurance maladie. Les assurances complémentaires. La complémentaire santé solidaire (CSS). La consommation médicale. Protection sociale. Consommation médicale et économie de la santé
 - **20.** La méthodologie de la recherche en santé
 - **21.** Mesure de l'état de santé de la population
+- **59.** Sujets en situation de précarité
 - **180.** Risques sanitaires liés aux irradiations. Radioprotection
 - **181.** La sécurité sanitaire des produits destinés à l'homme. La veille sanitaire (voir item 325)
 
