@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 336 — Coma non traumatique</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#E24B4A 0%,#C97B2A 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 336</div>
+  <h1>Coma non traumatique chez l'adulte et chez l'enfant</h1>
+  <div class="header-sub">Urgence neurologique — Diagnostic, étiologie, prise en charge</div>
+  <div class="header-tags">
+    <span class="htag">Urgence extrême</span>
+    <span class="htag">Score de Glasgow</span>
+    <span class="htag">Mort encéphalique</span>
+    <span class="htag">Antidotes</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Ce chapitre forme un tout cohérent : partir d'un patient inconscient, le scorer (GCS), l'examiner (pupilles, oculomotricité), identifier les urgences extrêmes, orienter vers une cause lésionnelle ou métabolique, prescrire les examens adaptés et traiter. Points-clés : maîtriser les seuils GCS (surtout &lt;8), les antidotes (naloxone, flumazénil, G30%), les critères de mort encéphalique et l'apport respectif du scanner et de l'IRM en urgence.
+</div>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions essentielles
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Coma
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Altération aiguë vigilance + conscience</span></div>
+    <div class="kv-row"><span class="kv-key">Critère</span><span class="kv-val">Absence de réponse aux stimuli (verbal → tactile → douloureux)</span></div>
+    <div class="kv-row"><span class="kv-key">Présentation</span><span class="kv-val">Yeux fermés, patient apparemment inconscient</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Vigilance vs Conscience
+    </div>
+    <div class="kv-row"><span class="kv-key">Vigilance</span><span class="kv-val">Ouverture des yeux + rythme veille-sommeil</span></div>
+    <div class="kv-row"><span class="kv-key">Conscience</span><span class="kv-val">Interaction avec l'environnement (poursuite oculaire suffit)</span></div>
+    <div class="kv-row"><span class="kv-key">Règle clé</span><span class="kv-val">Vigilant sans conscient = état végétatif</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> vérifier d'abord le pouls central (ACR ?) et l'absence de traumatisme avant toute évaluation. Un coma traumatique peut simuler un coma non traumatique (trauma non évident).</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : GLASGOW -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Score de Glasgow (GCS)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Glasgow Coma Scale — Cotation détaillée
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Score</th><th>Ouverture des yeux (Y)</th><th>Réponse verbale (V)</th><th>Réponse motrice (M)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>6</strong></td>
+        <td>—</td>
+        <td>—</td>
+        <td>Obéit aux ordres simples</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>5</strong></td>
+        <td>—</td>
+        <td>Orienté, discours cohérent</td>
+        <td>Localise la douleur</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>4</strong></td>
+        <td>Spontanée</td>
+        <td>Confus (phrases incohérentes)</td>
+        <td>Non orienté, retire le côté stimulé</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>3</strong></td>
+        <td>À la demande</td>
+        <td>Mots inappropriés</td>
+        <td>Flexion stéréotypée (décortication)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>2</strong></td>
+        <td>À la douleur</td>
+        <td>Sons incompréhensibles</td>
+        <td>Extension stéréotypée (décérébration)</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>1</strong></td>
+        <td>Aucune</td>
+        <td>Aucune</td>
+        <td>Aucune</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div style="background:var(--red-light);padding:10px 14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="color:var(--red);font-weight:700;font-size:.84rem;">GCS &lt; 8</span>
+    <span style="color:var(--red);font-weight:600;font-size:.82rem;">Perte protection VAS → IOT</span>
+  </div>
+  <div style="background:var(--purple-light);padding:10px 14px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;">
+    <span style="color:var(--purple);font-weight:700;font-size:.84rem;">GCS = 3</span>
+    <span style="color:var(--purple);font-weight:600;font-size:.82rem;">Critère mort encéphalique</span>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Stimulations nociceptives :</strong> pression du lit unguéal des 4 membres + pression temporo-mandibulaire (manœuvre de Pierre Marie et Foix). Toujours noter la <em>meilleure</em> réponse motrice.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : EXAMEN NEUROLOGIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Examen neurologique du patient comateux
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Pupilles — Orientation étiologique
+    </div>
+    <table>
+      <tr><td><strong>Myosis</strong></td><td>Opioïdes <span class="badge badge-amber">antidote : naloxone</span></td></tr>
+      <tr><td><strong>Mydriase unilatérale</strong></td><td>Engagement temporal <span class="badge badge-red">URGENCE</span></td></tr>
+      <tr><td><strong>Mydriase bilatérale</strong></td><td>Tricycliques ou atteinte neurologique sévère</td></tr>
+    </table>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Oculomotricité
+    </div>
+    <ul class="lst">
+      <li>Perte du parallélisme des axes = lésion tronc cérébral (thrombose basilaire +++, hématome tronc)</li>
+      <li>Mouvements pendulaires (lents gauche-droite) = non localisateurs, coma intermédiaire</li>
+      <li>Paralysie VI uni/bilatérale = non localisatrice = signe d'<strong>HTIC</strong></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : ORIENTATION CLINIQUE / ANAMNÈSE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Éléments d'orientation clinique et anamnestique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Clinique à rechercher
+    </div>
+    <ul class="lst">
+      <li>Mode d'installation : brutal / progressif</li>
+      <li>Fièvre, purpura</li>
+      <li>Syndrome méningé</li>
+      <li>Troubles oculomoteurs</li>
+      <li>Signes de traumatisme : hématome en lunette, signe de Battle</li>
+      <li>Convulsions, myoclonies</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Contexte anamnestique
+    </div>
+    <ul class="lst">
+      <li>Alcool, substances illicites (intoxication chronique)</li>
+      <li>Lettre d'adieu, blisters vides (tentative de suicide)</li>
+      <li>Seringues vides, traces de piqûres (opioïdes)</li>
+      <li>Ordonnances antidiabétiques/insuline</li>
+      <li>Vétusté du logement, type de chauffage (CO)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : URGENCES EXTRÊMES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Situations d'urgence extrême
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>4 urgences immédiates :</strong><br>
+  Absence de mouvements respiratoires (hors gasp) ou pouls central absent → MCE<br>
+  Signes de détresse respiratoire<br>
+  GCS &lt; 8 → perte de protection des VAS<br>
+  Glycémie &lt; 3 mmol/L → resucrage IV immédiat</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Engagement cérébral — Tableau clinique
+  </div>
+  <table class="table-red">
+    <tr><th>Type</th><th>Signes</th></tr>
+    <tr><td><strong>Engagement temporal</strong></td><td>Mydriase unilatérale + extension stéréotypée ipsilatérale → labilité PA/FC, pauses respiratoires → arrêt cardio-respiratoire</td></tr>
+    <tr><td><strong>HTIC</strong></td><td>Paralysie VI (non localisatrice), œdème papillaire, céphalées + vomissements en jet, effacement sillons/ventricules au scanner</td></tr>
+    <tr><td><strong>État de mal épileptique</strong></td><td>Crise &gt; 5 min ou crises subintrantes (sans reprise de conscience entre elles)</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : BILAN COMPLÉMENTAIRE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Examens complémentaires en urgence
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Bilan biologique systématique
+    </div>
+    <ul class="lst">
+      <li>Glycémie capillaire + confirmation plasmatique</li>
+      <li>Ionogramme : natrémie, calcémie, urée, créatinine</li>
+      <li>Gaz du sang</li>
+      <li>Bilan hépatique</li>
+      <li>Analyse toxicologique sang/urine (selon contexte)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imagerie — Indications
+    </div>
+    <table>
+      <tr><th>Examen</th><th>Indication</th></tr>
+      <tr><td><strong>Scanner cérébral</strong></td><td>Signe de localisation, trauma possible, hémorragie méningée, AVC, coma sans cause évidente ou sans amélioration</td></tr>
+      <tr><td><strong>IRM cérébrale</strong> <span class="badge badge-green">préférer si dispo</span></td><td>Suspicion AVC ischémique (thrombose basilaire, AVC sylvien malin) ou encéphalite</td></tr>
+      <tr><td><strong>Ponction lombaire</strong></td><td>Coma fébrile, méningite, méningoencéphalite, encéphalite</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Sémiologie TDM cérébrale
+  </div>
+  <div class="grid2">
+    <div class="bl-red">
+      <strong>Hémorragie intracrânienne</strong>
+      <ul class="lst">
+        <li>AVC hémorragique : hyperdensité spontanée parenchymateuse ± inondation ventriculaire ± effet de masse</li>
+        <li>Hémorragie méningée : hyperdensité dans les espaces sous-arachnoïdiens (citernes de la base, sillons)</li>
+      </ul>
+    </div>
+    <div class="bl-amber">
+      <strong>Effet de masse / Engagement</strong>
+      <ul class="lst">
+        <li>Engagement sous-falcoriel : déviation ligne médiane + disparition des ventricules</li>
+        <li>Engagement temporal : disparition de l'espace entre lobe temporal et tronc cérébral</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : CAUSES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Principales causes de coma non traumatique
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Causes lésionnelles
+    </div>
+    <div style="margin-bottom:10px;">
+      <span class="phase phase-sev">Vasculaires</span>
+      <ul class="lst">
+        <li>Hémorragie méningée</li>
+        <li>Hématome intracérébral</li>
+        <li>AVC ischémique (thrombose tronc basilaire, AVC sylvien malin)</li>
+        <li>Thrombophlébite cérébrale</li>
+      </ul>
+    </div>
+    <div>
+      <span class="phase phase-sev">Infections SNC</span>
+      <ul class="lst">
+        <li>Méningite, méningoencéphalite, encéphalite</li>
+        <li>Abcès cérébral</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes non lésionnelles
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-mod">Métaboliques</span>
+      <ul class="lst">
+        <li>Encéphalopathies : hypercapnique, urémique, hépatique</li>
+        <li>Dysionies : hypo/hypernatrémie, hypo/hypercalcémie</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-mod">Endocrines</span>
+      <ul class="lst">
+        <li>Hypoglycémie, hypothyroïdie, insuffisance surrénalienne</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-prod">Carentielles</span>
+      <ul class="lst">
+        <li>Gayet-Wernicke (B1), Pellagre (PP)</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-mod">Sevrage</span>
+      <ul class="lst">
+        <li>Delirium tremens sévère, sevrage benzodiazépines</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-sev">Intoxications</span>
+      <ul class="lst">
+        <li>Benzodiazépines, opioïdes, neuroleptiques, CO</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:6px;"><span class="phase phase-sev">Épileptiques</span>
+      <ul class="lst">
+        <li>État de mal épileptique, coma post-critique</li>
+      </ul>
+    </div>
+    <div><span class="phase phase-sev">HTIC</span>
+      <ul class="lst">
+        <li>Tumeur, abcès, thrombophlébite, pseudotumor cerebri</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> un bas débit sanguin d'origine systémique (état de choc) peut se présenter comme un coma non traumatique — toujours penser à la cause cardiovasculaire.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge symptomatique initiale
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Mesures systématiques — Dans l'ordre
+  </div>
+  <ol class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Libération des VAS</div><div class="step-content">PLS, retrait corps étrangers et prothèses dentaires, canule de Guédel</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Oxygénothérapie</div><div class="step-content">Si SpO2 &lt; 92%</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Voie veineuse + sérum physiologique</div><div class="step-content">Isotonique — éviter glucosé hypotonique en perfusion de base</div></div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div><div class="step-title">Antidote si cause identifiée</div><div class="step-content">Hypoglycémie → G30% 1 amp IV direct / Benzodiazépines → Flumazénil IV / Opioïdes → Naloxone IV</div></div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div><div class="step-title">Monitorage</div><div class="step-content">ECG, SpO2, PNI</div></div>
+    </li>
+    <li>
+      <div class="step-num">6</div>
+      <div><div class="step-title">Appel à l'aide</div><div class="step-content">Réanimateur, SAMU</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">7</div>
+      <div><div class="step-title">IOT si GCS &lt; 8 persistant</div><div class="step-content">Pas de cause rapidement réversible → intubation orotrachéale + ventilation mécanique</div></div>
+    </li>
+  </ol>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Antidotes spécifiques
+    </div>
+    <div class="kv-row"><span class="kv-key">Hypoglycémie</span><span class="kv-val">G30% 1 amp IV (ou sucre/jus si conscient)</span></div>
+    <div class="kv-row"><span class="kv-key">Benzodiazépines</span><span class="kv-val">Flumazénil IV</span></div>
+    <div class="kv-row"><span class="kv-key">Opioïdes</span><span class="kv-val">Naloxone IV</span></div>
+    <div class="kv-row"><span class="kv-key">Seuil glycémique</span><span class="kv-val">&lt; 3 mmol/L</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Maintien homéostasie — Prévention ACSOS
+    </div>
+    <div class="kv-row"><span class="kv-key">Glycémie</span><span class="kv-val">Normoglycémie stricte</span></div>
+    <div class="kv-row"><span class="kv-key">Température</span><span class="kv-val">Normothermie (éviter hypo ET hyperthermie)</span></div>
+    <div class="kv-row"><span class="kv-key">Pression artérielle</span><span class="kv-val">Éviter hypovolémie</span></div>
+    <div class="kv-row"><span class="kv-key">Natrémie / PaCO2</span><span class="kv-val">Contrôle strict</span></div>
+    <div class="kv-row"><span class="kv-key">Oxygénation</span><span class="kv-val">Éviter hypoxémie</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 9 : MORT ENCÉPHALIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+  Critères de mort encéphalique
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Conditions préalables :</strong> absence de facteurs confondants — température &gt; 35°C requise pour l'EEG, toxiques négatifs (barbituriques +++).</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Diagnostic = 3 critères cliniques + 1 examen complémentaire
+  </div>
+  <div class="grid2">
+    <div class="bl-red">
+      <strong>Clinique (les 3 sont obligatoires)</strong>
+      <ul class="lst">
+        <li>Coma profond GCS = 3</li>
+        <li>Abolition de tous les réflexes du tronc : RPM, cornéen, oculovestibulaire, toux, oculocardiaque</li>
+        <li>Abolition ventilation spontanée + épreuve d'hypercapnie positive (patient ventilé)</li>
+      </ul>
+    </div>
+    <div class="bl-blue">
+      <strong>Examens complémentaires (1 suffit)</strong>
+      <ul class="lst">
+        <li><strong>Option A — 2 EEG :</strong> ≥ 30 min chacun, intervalle 4h, amplification maximale, tracé nul</li>
+        <li><strong>Option B — Imagerie avec injection :</strong> angiographie 4 axes ou angioscanner → absence d'opacification des artères intracérébrales</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> le diabète insipide accompagne souvent la mort encéphalique mais n'est <em>pas</em> un critère diagnostique. La mort encéphalique permet de signer le certificat de décès.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 10 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Ce qui tombe à l'ECNi
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Point tombable</th><th>À retenir</th></tr></thead>
+    <tbody>
+      <tr><td>GCS seuil VAS</td><td>GCS &lt; 8 = perte protection VAS → IOT si pas de cause réversible rapide</td></tr>
+      <tr><td>Mydriase unilatérale</td><td>Engagement temporal jusqu'à preuve du contraire — urgence absolue</td></tr>
+      <tr><td>Myosis</td><td>Opioïdes → naloxone IV</td></tr>
+      <tr><td>Hypoglycémie</td><td>G30% IV si trouble de conscience, seuil &lt; 3 mmol/L</td></tr>
+      <tr><td>Perfusion de base</td><td>Sérum physiologique (isotonique) — jamais G5% hypotonique</td></tr>
+      <tr><td>Mort encéphalique</td><td>3 critères cliniques + (2 EEG à 4h OU angioscanner) — pièges : barbituriques, hypothermie</td></tr>
+      <tr><td>IRM en urgence</td><td>Thrombose basilaire et AVC sylvien malin (appel neurologie vasculaire)</td></tr>
+      <tr><td>Coma fébrile</td><td>Ponction lombaire (méningite, encéphalite) — après scanner si besoin</td></tr>
+      <tr><td>Trauma déguisé</td><td>Un coma traumatique peut se présenter sans notion évidente de trauma → vigilance</td></tr>
+      <tr><td>Diabète insipide</td><td>Fréquent dans la mort encéphalique mais non critère diagnostique</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Réflexe systématique devant tout coma :</strong> glycémie capillaire → pouls central → Glasgow → pupilles. Ces 4 éléments guident la conduite immédiate.</div>
+</div>
+
+</div>
+</body>
+</html>
