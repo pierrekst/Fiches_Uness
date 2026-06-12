@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 252 — Troubles nutritionnels chez le sujet âgé</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red); }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 252</div>
+  <h1>Troubles nutritionnels chez le sujet âgé</h1>
+  <div class="header-sub">Dénutrition · Obésité · Besoins nutritionnels · Prise en charge</div>
+  <div class="header-tags">
+    <span class="htag">Gériatrie</span>
+    <span class="htag">Dénutrition</span>
+    <span class="htag">HAS 2021</span>
+    <span class="htag">Obésité SA</span>
+    <span class="htag">ECNi tombable</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble</strong> — Ce chapitre couvre deux pathologies nutritionnelles fréquentes et souvent intriquées chez le sujet âgé : la <strong>dénutrition</strong> (priorité diagnostique et thérapeutique) et l'<strong>obésité</strong> (aux effets paradoxalement mixtes). Trois axes clés : (1) maîtriser les <strong>besoins nutritionnels de référence</strong>, (2) appliquer les nouveaux <strong>critères HAS 2021</strong> — 1 critère phénotypique + 1 critère étiologique — avec les seuils IMC spécifiques au SA, (3) connaître la <strong>stratégie de renutrition par paliers</strong> (oral → entéral → parentéral).
+</div>
+
+<hr>
+
+<!-- 1. VIEILLISSEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Vieillissement et déséquilibre nutritionnel
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Modifications physiologiques
+    </div>
+    <ul class="lst">
+      <li>Diminution de la <strong>masse musculaire</strong></li>
+      <li>Augmentation de la <strong>masse grasse</strong></li>
+      <li>Altération de la régulation de l'appétit</li>
+      <li>Sarcopénie + désadaptation à l'effort → réduction activité physique et appétit</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Mécanismes de dénutrition
+    </div>
+    <ul class="lst">
+      <li>Diminution des apports alimentaires (appétit, mobilité)</li>
+      <li>Épisodes d'<strong>hypercatabolisme</strong> lors de pathologies intercurrentes</li>
+      <li>Aggravés par comorbidités et iatrogénie</li>
+      <li>Double risque : dénutrition <em>et</em> obésité possibles</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>La dénutrition est un <strong>facteur de risque indépendant de mauvais pronostic</strong> : autonomie, chutes, infections, décès. Cause majeure de <strong>vulnérabilité, fragilité et dépendance iatrogène</strong> (HAS). Elle doit être <strong>recherchée dans tout bilan gériatrique global</strong>.</div>
+</div>
+
+<hr>
+
+<!-- 2. BESOINS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Besoins nutritionnels du sujet âgé (RNP)
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Références nutritionnelles pour la population (RNP) — couvre 97,5 % de la population saine
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Énergie</span><span class="kv-val">30 kcal/kg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Protéines</span><span class="kv-val">1 à 1,2 g/kg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Glucides</span><span class="kv-val">50 % AET</span></div>
+      <div class="kv-row"><span class="kv-key">Lipides</span><span class="kv-val">40 % AET</span></div>
+      <div class="kv-row"><span class="kv-key">Acides gras essentiels</span><span class="kv-val">9–10 g/j</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Eau</span><span class="kv-val">40 ml/kg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Calcium</span><span class="kv-val">1 g/j</span></div>
+      <div class="kv-row"><span class="kv-key">Vitamine D</span><span class="kv-val">15 µg/j</span></div>
+      <div class="kv-row"><span class="kv-key">Fibres</span><span class="kv-val">30 g/j</span></div>
+    </div>
+  </div>
+  <div class="alert alert-green" style="margin-top:8px;margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Poids stable</strong> (hors troubles hydratation) = apports couvrant les besoins. Privilégier les protéines d'<strong>origine animale</strong> (plus riches en acides aminés essentiels). Eau : 1/2 par les boissons, 1/2 par les aliments.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- 3. FACTEURS DE RISQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Facteurs de risque de dénutrition
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Facteurs de risque (souvent multiples et intriqués)
+  </div>
+  <table class="table-red">
+    <thead><tr><th>Catégorie</th><th>Exemples</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Psycho-socio-environnemental</strong></td><td>Deuil, isolement social, entrée en institution, dépendance</td></tr>
+      <tr><td><strong>Pathologie aiguë</strong> (hypercatabolisme)</td><td>Infection, fracture, chirurgie, inflammation → catabolisme musculaire + fonte lipidique + modification métabolisme glucidique</td></tr>
+      <tr><td><strong>Pathologie chronique sévère</strong></td><td>Insuffisance cardiaque/rénale/respiratoire/hépatique, cancer, TNCM, dépression, rhumatismes</td></tr>
+      <tr><td><strong>Troubles de la prise alimentaire</strong></td><td>Troubles bucco-dentaires, dysphagie, troubles du comportement, impotence fonctionnelle</td></tr>
+      <tr><td><strong>Iatrogénie médicamenteuse</strong></td><td>Polymédication, sécheresse buccale, dysgueusie, anorexie, somnolence</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- 4. DIAGNOSTIC HAS 2021 -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic de la dénutrition — Critères HAS 2021
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Règle diagnostique absolue :</strong> au moins <strong>1 critère phénotypique ET au moins 1 critère étiologique</strong>. Dénutrition = bilan énergétique et/ou protéique négatif.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Critères PHENOTYPIQUES <span class="badge badge-blue">1 suffit</span>
+    </div>
+    <ul class="lst">
+      <li>Perte de poids <strong>≥ 5 %</strong> en 1 mois</li>
+      <li>Perte de poids <strong>≥ 10 %</strong> en 6 mois</li>
+      <li>Perte de poids <strong>≥ 10 %</strong> / poids habituel avant maladie</li>
+      <li><strong>IMC &lt; 22 kg/m²</strong></li>
+      <li><strong>Sarcopénie confirmée</strong> (force + masse musculaire réduites)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Critères ETIOLOGIQUES <span class="badge badge-green">1 suffit</span>
+    </div>
+    <ul class="lst">
+      <li>Réduction apports <strong>≥ 50 %</strong> pendant &gt; 1 semaine</li>
+      <li>Toute réduction des apports pendant &gt; 2 semaines / besoins habituels</li>
+      <li>Malabsorption / maldigestion</li>
+      <li>Pathologie aiguë (infection, fracture…), chronique (IC…) ou maligne évolutive</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Dénutrition sévère -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Critères de DENUTRITION SEVERE <span class="badge badge-red">1 suffit</span>
+  </div>
+  <div class="kv-row"><span class="kv-key">IMC</span><span class="kv-val" style="color:var(--red);">&lt; 20 kg/m²</span></div>
+  <div class="kv-row"><span class="kv-key">Perte de poids</span><span class="kv-val" style="color:var(--red);">≥ 10 % / 1 mois</span></div>
+  <div class="kv-row"><span class="kv-key">Perte de poids</span><span class="kv-val" style="color:var(--red);">≥ 15 % / 6 mois</span></div>
+  <div class="kv-row"><span class="kv-key">Perte de poids / poids habituel avant maladie</span><span class="kv-val" style="color:var(--red);">≥ 15 %</span></div>
+  <div class="kv-row"><span class="kv-key">Albuminémie <em style="font-size:.76rem;">(avec ou sans syndrome inflammatoire)</em></span><span class="kv-val" style="color:var(--red);">≤ 30 g/L</span></div>
+</div>
+
+<!-- Sarcopénie -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Sarcopénie confirmée — critères (pour critère phénotypique)
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Étape obligatoire</th><th>Critère (1 suffit par étape)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Réduction de la force musculaire</strong></td><td>5 levers de chaise <em>ou</em> force de préhension au dynamomètre</td></tr>
+      <tr><td><strong>Réduction de la masse musculaire</strong></td><td>Masse musculaire appendiculaire <em>ou</em> index de masse musculaire appendiculaire (kg/m²) <em>ou</em> diamètre du mollet</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- 5. BIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Marqueurs biologiques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Albumine <span class="badge badge-purple">Marqueur pronostic robuste</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Normale</span><span class="kv-val">&gt; 35 g/L</span></div>
+    <div class="kv-row"><span class="kv-key">Dénutrition (hors inflammation)</span><span class="kv-val">&lt; 35 g/L</span></div>
+    <div class="kv-row"><span class="kv-key">Dénutrition sévère</span><span class="kv-val" style="color:var(--red);">≤ 30 g/L</span></div>
+    <div class="kv-row"><span class="kv-key">Demi-vie</span><span class="kv-val">21 jours</span></div>
+    <div class="kv-row"><span class="kv-key">Surveillance maximale</span><span class="kv-val">1 ×/mois</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> influencée par l'inflammation et le statut hydrique — interpréter en contexte</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Transthyrétine (préalbumine) <span class="badge badge-green">Suivi court terme</span>
+    </div>
+    <div class="kv-row"><span class="kv-key">Seuil de dénutrition</span><span class="kv-val">&lt; 0,2 g/L</span></div>
+    <div class="kv-row"><span class="kv-key">Demi-vie</span><span class="kv-val">2 jours</span></div>
+    <div class="alert alert-blue" style="margin-top:10px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Non utilisée en pratique clinique courante.</strong> Utile pour le suivi nutritionnel à court terme lors de la prise en charge.</div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Les critères de dénutrition sont avant tout <strong>CLINIQUES</strong> (HAS 2021). La biologie est complémentaire : l'albumine est un marqueur pronostic robuste mais n'est plus le critère diagnostique principal.</div>
+</div>
+
+<hr>
+
+<!-- 6. COMPLICATIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications de la dénutrition
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Morbi-mortalité
+    </div>
+    <ul class="lst">
+      <li>Facteur pronostic péjoratif indépendant (cancer, infections…)</li>
+      <li>Allongement de la durée de séjour</li>
+      <li>Risque accru d'institutionnalisation</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Sarcopénie / Chutes
+    </div>
+    <ul class="lst">
+      <li>Diminution masse, force et fonction musculaires</li>
+      <li>Réduction de la mobilité</li>
+      <li>Risque de chute et dépendance</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Autres complications
+    </div>
+    <ul class="lst">
+      <li><strong>Immunodépression</strong> (cellulaire, humorale, non spécifique) → infections, nosocomiales</li>
+      <li>Escarres + retard de cicatrisation</li>
+      <li>Déshydratation</li>
+      <li>Déficits micronutriments : vitamines B9, B12, zinc</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- 7. OBESITE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Obésité du sujet âgé
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Définition identique quel que soit l'âge :</strong> IMC ≥ 30 kg/m². <strong>Piège majeur ECNi :</strong> un patient âgé obèse (IMC ≥ 30) peut simultanément être dénutri — les deux ne s'excluent pas.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Effets délétères (facteurs de risque)
+    </div>
+    <ul class="lst">
+      <li>Diabète, HTA, dyslipidémie</li>
+      <li>Pathologies cardiovasculaires</li>
+      <li>Insuffisance respiratoire, insuffisance veineuse</li>
+      <li>Arthrose, complications articulaires</li>
+      <li>Mortalité toutes causes (surtout obésité morbide)</li>
+      <li>Perte d'indépendance fonctionnelle : excès de poids + masse musculaire insuffisante → difficultés AVQ (lever chaise, escaliers)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Effets protecteurs (paradoxe)
+    </div>
+    <ul class="lst">
+      <li><strong>Fractures :</strong> protection mécanique du tissu adipeux, stimulation osseuse par le poids, conversion androgènes surrénaliens → oestrogènes</li>
+      <li><strong>Survie augmentée</strong> dans les pathologies chroniques cachectisantes (IRC, IRC, IC, rhumatismes inflammatoires) grâce aux réserves énergétiques importantes</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- 8. PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge de la dénutrition — Stratégie par paliers
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Objectifs de renutrition
+  </div>
+  <div class="kv-row"><span class="kv-key">Énergie cible</span><span class="kv-val">30–40 kcal/kg/j</span></div>
+  <div class="kv-row"><span class="kv-key">Protéines cibles</span><span class="kv-val">1,2–1,5 g/kg/j</span></div>
+  <div class="kv-row"><span class="kv-key">Évaluation des ingesta</span><span class="kv-val">kcal/j, moyenne sur quelques jours</span></div>
+</div>
+
+<ul class="steps">
+  <li>
+    <div class="step-num">1</div>
+    <div>
+      <div class="step-title">Évaluation gériatrique globale</div>
+      <div class="step-content">Comorbidités, traitements en cours, dépendance, contexte socio-environnemental, espérance de vie et qualité de vie</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num">2</div>
+    <div>
+      <div class="step-title">Rechercher et traiter tous les facteurs aggravants</div>
+      <div class="step-content">État bucco-dentaire, mycoses buccales, troubles de la déglutition, constipation, régimes inappropriés, iatrogénie médicamenteuse, difficultés d'approvisionnement/cuisine/alimentation</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num">3</div>
+    <div>
+      <div class="step-title">Déterminer les objectifs et évaluer les ingesta actuels</div>
+      <div class="step-content">30–40 kcal/kg/j — 1,2–1,5 g protéines/kg/j — mesure des ingesta habituels</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num">4</div>
+    <div>
+      <div class="step-title">Stratégie nutritionnelle par paliers (selon sévérité et ingesta)</div>
+      <div class="step-content">
+        <strong>Dénutrition :</strong> conseils nutritionnels + alimentation enrichie → CNO si échec<br>
+        <strong>Dénutrition sévère :</strong> CNO d'emblée<br>
+        <strong>Ingesta &lt; 50 % des besoins ou échec oral :</strong> nutrition entérale (si tube digestif fonctionnel) → nutrition parentérale si occlusion, malabsorption ou échec entérale
+      </div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num">5</div>
+    <div>
+      <div class="step-title">Surveillance — prévenir le syndrome de renutrition inappropriée</div>
+      <div class="step-content">
+        Poids : chaque consultation médicale, entrée hospit puis 1×/semaine en court séjour, 1×/15 j en SSR, entrée en institution puis 1×/mois<br>
+        Ingesta surveillés ; albumine max 1×/mois (sauf si initiale normale)
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>L'alimentation doit rester ou redevenir un <strong>plaisir</strong> et une occasion de <strong>lien social</strong>. La renutrition est un acte thérapeutique multidisciplinaire impliquant médecin, diététicien, soignants, kinésithérapeute et entourage.</div>
+</div>
+
+<hr>
+
+<!-- 9. POINTS CLES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Essentiels ECNi
+  </div>
+  <div class="pills" style="margin-bottom:12px;">
+    <span class="pill pill-blue">IMC &lt;22 → dénutrition</span>
+    <span class="pill pill-red">IMC &lt;20 → sévère</span>
+    <span class="pill pill-amber">IMC ≥30 → obésité</span>
+    <span class="pill pill-purple">1 phénotypique + 1 étiologique</span>
+    <span class="pill pill-teal">Albumine ≤30 → sévère</span>
+  </div>
+  <table>
+    <thead><tr><th>Point-clé</th><th>Valeur / Règle</th></tr></thead>
+    <tbody>
+      <tr><td>Diagnostic dénutrition</td><td>≥ 1 critère phénotypique ET ≥ 1 critère étiologique (HAS 2021)</td></tr>
+      <tr><td>Seuil IMC dénutrition SA</td><td>&lt; 22 kg/m² — différent de l'adulte (&lt; 18,5) !</td></tr>
+      <tr><td>Seuil IMC dénutrition sévère SA</td><td>&lt; 20 kg/m²</td></tr>
+      <tr><td>Albuminémie dénutrition sévère</td><td>≤ 30 g/L (valable avec ou sans syndrome inflammatoire)</td></tr>
+      <tr><td>Albuminémie dénutrition (hors inflam.)</td><td>&lt; 35 g/L — demi-vie 21 j — max 1×/mois</td></tr>
+      <tr><td>Palier thérapeutique dénutrition sévère</td><td>CNO d'emblée (ne pas attendre l'échec des conseils diét.)</td></tr>
+      <tr><td>Obésité + dénutrition simultanées</td><td>Possibles — IMC ≥ 30 n'exclut pas la dénutrition</td></tr>
+      <tr><td>Effets protecteurs obésité SA</td><td>Fractures + survie dans pathologies chroniques cachectisantes</td></tr>
+      <tr><td>Définition obésité SA</td><td>Identique quel que soit l'âge : IMC ≥ 30 kg/m²</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges classiques ECNi :</strong> (1) Seuil IMC dénutrition SA = 22, pas 18,5 ; (2) Albumine faussée par l'inflammation → ne pas diagnostiquer la dénutrition sur la seule albumine en contexte inflammatoire ; (3) Patient obèse ≠ bien nourri (obésité + dénutrition coexistent) ; (4) Dénutrition sévère → CNO d'emblée sans passer par la case "conseils diét." ; (5) Transthyrétine : non utilisée en pratique courante (demi-vie 2j = suivi court terme seulement).</div>
+</div>
+
+</div>
+</body>
+</html>
