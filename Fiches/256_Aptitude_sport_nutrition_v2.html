@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 256 — Aptitude au sport ; besoins nutritionnels du sportif</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 256</div>
+  <h1>Aptitude au sport chez l'adulte et l'enfant<br>Besoins nutritionnels du sportif</h1>
+  <div class="header-tags">
+    <span class="htag">Certificat médical</span>
+    <span class="htag">Contre-indications CV</span>
+    <span class="htag">Examen médical sport</span>
+    <span class="htag">Ostéochondroses</span>
+    <span class="htag">Nutrition sportive</span>
+  </div>
+</div>
+
+<!-- VISION D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Savoir délivrer un certificat d'aptitude au sport (quand, à qui, avec quel examen) et identifier les contre-indications, dominées par les pathologies cardiovasculaires. Connaître les spécificités de l'enfant sportif intensif (ostéochondroses, besoins alimentaires, seuils horaires à risque). Adapter les conseils nutritionnels selon le niveau et le type de pratique.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : CERTIFICAT MÉDICAL -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Certificat médical d'aptitude sportive
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Certificat d'absence de contre-indication
+    </div>
+    <div class="kv-row"><span class="kv-key">Indications</span><span class="kv-val">Licence fédérale ou compétition sans licence</span></div>
+    <div class="kv-row"><span class="kv-key">Validité</span><span class="kv-val">< 1 an</span></div>
+    <div class="kv-row"><span class="kv-key">Rédacteur</span><span class="kv-val">Tout docteur en médecine</span></div>
+    <div class="kv-row"><span class="kv-key">Renouvellement même fédération</span><span class="kv-val">Tous les 3 ans (QS-SPORT les 2 autres années)</span></div>
+    <div class="kv-row"><span class="kv-key">Mineurs (depuis 2021)</span><span class="kv-val">Pas de certificat si QS-SPORT négatif</span></div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Sports à examens spécifiques
+    </div>
+    <ul class="lst">
+      <li>Alpinisme, spéléologie</li>
+      <li>Plongée subaquatique</li>
+      <li>Sports de combat avec KO</li>
+      <li>Sports utilisant armes à feu ou véhicule à moteur</li>
+      <li>Sports utilisant un aéronef</li>
+      <li>Rugby à 15, 13 ou 7</li>
+    </ul>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Examens complémentaires : cardio, ORL, dentaire, neuro, ophtalmo, rachis cervical selon discipline</div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Inaptitude EPS scolaire
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">PRINCIPE</div>
+      <div style="font-size:.84rem;">EPS <strong>obligatoire</strong> par défaut — tous aptes sans certificat spécifique d'inaptitude</div>
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">CAUSES D'INAPTITUDE</div>
+      <ul class="lst">
+        <li>Maladies chroniques en décompensation</li>
+        <li>Handicaps permanents</li>
+        <li>Dénutrition importante (anorexie mentale)</li>
+        <li>Affections aiguës (fracture en consolidation)</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:.82rem;color:var(--muted);">Validité du certificat d'inaptitude : max = année scolaire en cours — inaptitudes totales/définitives exceptionnelles</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : EXAMEN MÉDICAL -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Examen médical d'aptitude — Contenu
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Tronc commun adulte / enfant
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Étape</th><th>Contenu</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Interrogatoire</strong></td>
+        <td>ATCD perso et familiaux, FdR CV (item 222), médicaments/compléments (anti-dopage), symptômes CV à l'effort, conditions de pratique</td>
+      </tr>
+      <tr>
+        <td><strong>Anthropométrie</strong></td>
+        <td>Taille, poids, IMC</td>
+      </tr>
+      <tr>
+        <td><strong>Examen CV</strong></td>
+        <td>Auscultation, palpation des pouls, souffles vasculaires, PA aux <strong>2 bras</strong>, ECG de repos</td>
+      </tr>
+      <tr>
+        <td><strong>Examen pulmonaire</strong></td>
+        <td>Auscultation</td>
+      </tr>
+      <tr>
+        <td><strong>Appareil locomoteur</strong></td>
+        <td>Orienté selon plaintes et segments sollicités (rachis, membres)</td>
+      </tr>
+      <tr>
+        <td><strong>Acuité visuelle</strong></td>
+        <td>Dépistage</td>
+      </tr>
+      <tr>
+        <td><strong>Prévention</strong></td>
+        <td>Vaccinations, hygiène de vie, alimentation, sommeil, suivi dentaire/gynécologique</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      ECG de repos — rythme de réalisation
+    </div>
+    <div class="kv-row"><span class="kv-key">1re licence, à partir de 12 ans</span><span class="kv-val">ECG initial</span></div>
+    <div class="kv-row"><span class="kv-key">12 – 20 ans</span><span class="kv-val">Tous les 3 ans</span></div>
+    <div class="kv-row"><span class="kv-key">20 – 35 ans</span><span class="kv-val">Tous les 5 ans</span></div>
+    <div class="kv-row"><span class="kv-key">> 35 ans</span><span class="kv-val">Tous les 1–2 ans</span></div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Spécificités enfant
+    </div>
+    <ul class="lst">
+      <li><strong>Statique rachidienne</strong> — troubles de croissance</li>
+      <li><strong>Quantité totale AP</strong> (scolaire + clubs) :<br>
+        <span class="badge badge-amber">Risque</span> si &gt;6h/sem avant 10 ans<br>
+        <span class="badge badge-amber">Risque</span> si &gt;10h/sem après 10 ans</li>
+      <li>Si pratique intensive : retentissement scolaire, sommeil, alimentation, compléments</li>
+      <li>Courbes de croissance, stade pubertaire, vaccinations</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Interrogatoire CV (OIC-11-A) :</strong> La majorité des morts subites à l'effort étant CV, rechercher systématiquement : douleur thoracique, palpitations, dyspnée anormale à l'effort, malaise ou perte de connaissance.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : CONTRE-INDICATIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Contre-indications à la pratique sportive
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Principe clé :</strong> Les morts subites à l'exercice sont dans la grande majorité des cas d'origine cardiovasculaire. Les contre-indications sont donc essentiellement cardiovasculaires.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes cardiovasculaires
+    </div>
+    <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">PATHOLOGIES À RISQUE RYTHMIQUE</div>
+    <ul class="lst">
+      <li>Cardiomyopathie hypertrophique (CMH)</li>
+      <li>Dysplasie arythmogène du VD (DAVD)</li>
+      <li>Anomalies de naissance des coronaires</li>
+      <li>Syndrome de Brugada</li>
+      <li>QT long / QT court</li>
+    </ul>
+    <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin:10px 0 6px;">PATHOLOGIES ÉVOLUTIVES OU NON ÉQUILIBRÉES</div>
+    <ul class="lst">
+      <li>Coronaropathie instable</li>
+      <li>Insuffisance cardiaque instable</li>
+      <li>HTA non équilibrée</li>
+      <li>Myocardite</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="card card-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Autres causes générales
+      </div>
+      <ul class="lst">
+        <li>Pertes de connaissance non investiguées</li>
+        <li>Pathologies respiratoires évolutives</li>
+        <li>Insuffisance staturo-pondérale morbide</li>
+        <li>Affections morphologiques sévères</li>
+        <li>Pathologies neurologiques graves</li>
+      </ul>
+    </div>
+
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        CI propres à certains sports
+      </div>
+      <table style="margin-top:0;">
+        <thead><tr><th>Sport</th><th>Contre-indication</th></tr></thead>
+        <tbody>
+          <tr><td>Contact</td><td>Perte d'un organe pair (œil, rein, gonade)</td></tr>
+          <tr><td>Collision / contact</td><td>Hémophilie, anticoagulants</td></tr>
+          <tr><td>Boxe</td><td>Myopie (risque décollement rétine)</td></tr>
+          <tr><td>Plongée</td><td>Asthme, ATCD pneumothorax, pathologies ORL</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : BÉNÉFICES ET RISQUES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Bénéfices et risques de la pratique sportive
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Bénéfices (tout âge)
+    </div>
+    <ul class="lst">
+      <li>Prévention primaire pathologies chroniques (CV, métaboliques, psychiatriques)</li>
+      <li>Augmentation de l'espérance de vie</li>
+      <li>Amélioration de la qualité de vie</li>
+      <li>Santé mentale : estime de soi, réduction de l'anxiété</li>
+    </ul>
+    <div style="margin-top:8px;font-size:.8rem;font-weight:700;color:var(--muted);">SPÉCIFICITÉS ENFANT</div>
+    <ul class="lst" style="margin-top:4px;">
+      <li>Développement des aptitudes motrices et physiques</li>
+      <li>Prévention obésité et syndrome métabolique</li>
+      <li>Interactions sociales, motivation</li>
+      <li>Pratique dans l'enfance → pratique à l'âge adulte</li>
+    </ul>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Risques
+    </div>
+    <div class="bl-red" style="margin-bottom:10px;">
+      <strong>Cardiovasculaires</strong> — risque CV transitoirement accru pendant l'exercice intense (augmentation débit cardiaque et PA) malgré le bénéfice en prévention au long cours
+    </div>
+    <div class="bl-amber">
+      <strong>Traumatiques</strong> — selon le sport pratiqué (macro- et microtraumatismes)
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : PATHOLOGIES ENFANT SPORTIF -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Pathologies de l'enfant sportif
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Ostéochondroses :</strong> douleurs des cartilages de croissance par hyperutilisation — apparaissent lors des pics de croissance (cartilages de conjugaison actifs). Traction tendineuse + impacts + cisaillement des plaques épiphysaires.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Maladie de Sever
+    </div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Apophyse postérieure du calcanéum (talon)</span></div>
+    <div class="kv-row"><span class="kv-key">Âge typique</span><span class="kv-val">9–10 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">Clinique ± radio</span></div>
+    <div class="kv-row"><span class="kv-key">Traitement</span><span class="kv-val">Repos sportif (immobilisation si sévère)</span></div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Maladie d'Osgood-Schlatter
+    </div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Tubérosité tibiale antérieure (genou)</span></div>
+    <div class="kv-row"><span class="kv-key">Âge garçons</span><span class="kv-val">~13 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Âge filles</span><span class="kv-val">~11 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Sports à risque</span><span class="kv-val">Football, tennis, gymnastique, sports collectifs</span></div>
+    <div class="kv-row"><span class="kv-key">Traitement</span><span class="kv-val">Repos sportif (immobilisation si sévère)</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Les récidives homolatérales et controlatérales sont fréquentes — prévenir la famille. La poussée pubertaire est la période la plus à risque (augmentation masse corporelle et bras de leviers biomécaniques).</div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : NUTRITION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Besoins nutritionnels du sportif
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Substrats énergétiques
+    </div>
+    <div class="kv-row"><span class="kv-key">Glucides</span><span class="kv-val">Activités haute intensité</span></div>
+    <div class="kv-row"><span class="kv-key">Lipides</span><span class="kv-val">Activités modérées et prolongées</span></div>
+    <div class="kv-row"><span class="kv-key">< 3h/sem d'AP</span><span class="kv-val">Apports population générale</span></div>
+    <div class="kv-row"><span class="kv-key">> 3h/sem d'AP</span><span class="kv-val">Adapter pour couvrir la DET</span></div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Enfant sportif — spécificités
+    </div>
+    <div style="font-size:.8rem;color:var(--muted);margin-bottom:6px;">Définition : &gt;10h/sem après 10 ans — &gt;6h/sem avant 10 ans</div>
+    <ul class="lst">
+      <li>3 repas + 1 collation</li>
+      <li>Glucides lents diversifiés, lipides insaturés</li>
+      <li><strong>4 produits laitiers/j</strong> + supplémentation vit D l'hiver</li>
+      <li>Hydratation avant/après compétitions</li>
+      <li>Compléments hyperprotidiques : inutiles si alimentation équilibrée</li>
+    </ul>
+    <div class="alert-amber" style="border-radius:8px;padding:7px 10px;font-size:.8rem;margin-top:8px;border-left:3px solid var(--amber);background:var(--amber-light);color:var(--amber);">Vigilance TCA : sports où contrôle du poids/apparence prédomine</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Apports protidiques selon le niveau de pratique
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Type de pratique</th><th>Apports protidiques</th><th>Remarque</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>AP modérée (3×30–60 min/sem)</td>
+        <td><strong>0,83 g/kg/j</strong></td>
+        <td>Référence population générale</td>
+      </tr>
+      <tr>
+        <td>Sports d'endurance</td>
+        <td><strong>1,2–1,4 g/kg/j</strong> (12–14% AET)</td>
+        <td>Couverts par ↑ des apports énergétiques totaux</td>
+      </tr>
+      <tr>
+        <td>Maintien masse musculaire</td>
+        <td><strong>1,3–1,5 g/kg/j</strong></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>Augmentation masse musculaire</td>
+        <td><strong>Jusqu'à 2,5 g/kg/j</strong> (max 6 mois)</td>
+        <td>Suppléments : max 1/3 des apports, sans dépasser 1 g/kg/j</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Glucides, lipides, hydratation en endurance et musculation
+  </div>
+  <div class="grid3">
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">GLUCIDES</div>
+      <ul class="lst">
+        <li>IG faible — <em>à distance</em> de l'effort</li>
+        <li>IG élevé — <em>à proximité</em> de l'effort</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">LIPIDES</div>
+      <ul class="lst">
+        <li>Diminuer pour ↑ glucides</li>
+        <li>Ne pas descendre sous <strong>20% AET</strong></li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">EAU & ÉLECTROLYTES</div>
+      <ul class="lst">
+        <li>NaCl + eau : compenser les pertes liées à l'exercice</li>
+        <li>Minéraux/vitamines couverts par alimentation équilibrée</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Points tombables ECNi
+  </div>
+
+  <div class="grid2">
+    <div>
+      <div class="alert alert-blue" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Certificat :</strong> validité 1 an — renouvellement même fédération tous les 3 ans — QS-SPORT les 2 années intermédiaires — mineurs dispensés depuis 2021 si QS-SPORT négatif</div>
+      </div>
+      <div class="alert alert-blue">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>ECG :</strong> 1re licence dès 12 ans — tous les 3 ans (12–20 ans) — tous les 5 ans (20–35 ans) — tous les 1–2 ans après 35 ans</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber" style="margin-bottom:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Seuils enfant intensif — risque si &gt;6h/sem avant 10 ans, ou &gt;10h/sem après 10 ans</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège nutrition :</strong> Lipides jamais &lt;20% AET même en musculation. Suppléments protéiques : max 1/3 des apports, sans dépasser 1 g/kg/j</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-red" style="margin-top:4px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Mort subite à l'exercice = cause CV dans la grande majorité des cas.</strong> L'examen d'aptitude est centré sur le CV : interrogatoire (douleur thoracique, palpitations, dyspnée, malaise/PDC) + PA aux 2 bras + ECG. CMH et DAVD = principales causes chez le jeune sportif.</div>
+  </div>
+
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-red">Mort subite = cause CV</span>
+    <span class="pill pill-blue">ECG dès 12 ans</span>
+    <span class="pill pill-amber">Sever = calcanéum 9–10 ans</span>
+    <span class="pill pill-purple">Osgood-Schlatter = genou 11–13 ans</span>
+    <span class="pill pill-teal">Lipides ≥ 20% AET</span>
+    <span class="pill pill-amber">QS-SPORT remplace certificat (mineurs)</span>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
