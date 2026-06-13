@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-13. Ne pas éditer à la main._
 
-**Avancement : 130 / 367 items (35.4%)**
+**Avancement : 133 / 367 items (36.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -160,7 +160,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 150 | [ ] | Otites infectieuses de l adulte et de l enfant | — |
 | 151 | [x] | Méningites | 151_Meningites_MEH_abces_cerebral.html |
 | 152 | [x] | Endocardite infectieuse | 152_Endocardite_infectieuse.html |
-| 153 | [ ] | Surveillance des porteurs de prothèses valvulaires | — |
+| 153 | [x] | Surveillance des porteurs de prothèses valvulaires | 153_protheses_valvulaires.html |
 | 154 | [ ] | Infections broncho pulmonaires communautaires de l adulte et de l enfa… | — |
 | 155 | [x] | Infections cutanéo-muqueuses et des phanères | 155_infections_cutaneo_muqueuses.html |
 | 156 | [ ] | Infections ostéo articulaires | — |
@@ -239,13 +239,13 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 229 | [ ] | Surveillance et complications des abords veineux | — |
 | 230 | [x] | Douleur thoracique aiguë | 230_douleur_thoracique_aigue.html |
 | 231 | [ ] | Électrocardiogramme | — |
-| 232 | [ ] | Fibrillation atriale | — |
+| 232 | [x] | Fibrillation atriale | 232_fibrillation_atriale.html |
 | 233 | [x] | Valvulopathies | 233_Valvulopathies.html |
 | 234 | [ ] | Insuffisance cardiaque de l adulte | — |
 | 235 | [ ] | Péricardite aiguë | — |
 | 236 | [ ] | Troubles de la conduction intracardiaque | — |
 | 237 | [ ] | Palpitations | — |
-| 238 | [ ] | Souffle cardiaque chez l enfant | — |
+| 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant.html |
 | 239 | [ ] | Acrosyndromes | — |
 | 240 | [ ] | Hypoglycémie chez l adulte et l enfant | — |
 | 241 | [ ] | Goitre | — |

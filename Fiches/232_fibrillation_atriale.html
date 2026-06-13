@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 232 — Fibrillation atriale</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 232</div>
+  <h1>Fibrillation atriale</h1>
+  <div class="header-sub">Arythmie supra-ventriculaire la plus fréquente — AVC, insuffisance cardiaque, anticoagulation</div>
+  <div class="header-tags">
+    <span class="htag">Cardiologie</span>
+    <span class="htag">ECG</span>
+    <span class="htag">CHA2DS2-VASc</span>
+    <span class="htag">HAS-BLED</span>
+    <span class="htag">Cardioversion</span>
+    <span class="htag">AOD / AVK</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> La FA est le trouble du rythme supra-ventriculaire le plus fréquent (1 individu sur 3 au cours de sa vie). Le fil conducteur : reconnaître la FA à l'ECG, classer la forme chronologique, rechercher les facteurs déclenchants, évaluer le risque thromboembolique par le score CHA2DS2-VASc pour décider de l'anticoagulation, puis choisir entre contrôle du rythme (cardioversion/ablation) et contrôle de la fréquence — et savoir réagir en urgence devant une FA mal tolérée.
+</div>
+
+<hr>
+
+<!-- DÉFINITION & PHYSIOPATHOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition &amp; Physiopathologie
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <ul class="lst">
+      <li>Trouble du rythme <strong>supra-ventriculaire</strong></li>
+      <li>Activité électrique <strong>anarchique</strong> des oreillettes</li>
+      <li>Perte de la <strong>contraction atriale efficace</strong></li>
+      <li>Diagnostic : FA &gt; 30 secondes documentée à l'ECG (surface ou Holter)</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Physiopathologie
+    </div>
+    <ul class="lst">
+      <li><strong>Foyers ectopiques focaux</strong> au niveau des veines pulmonaires</li>
+      <li><strong>Remodelage atrial</strong> : dilatation + fibrose → circuits de réentrée</li>
+      <li>NAV = seule connexion atrio-ventriculaire → filtre l'activité anarchique (400-600 bpm) → réponse ventriculaire <strong>irrégulière</strong></li>
+    </ul>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-red">¼ des AVC ischémiques</span>
+      <span class="pill pill-amber">IC bidirectionnelle</span>
+      <span class="pill pill-blue">Troubles cognitifs</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Données clés
+  </div>
+  <div class="kv-row"><span class="kv-key">Prévalence vie entière</span><span class="kv-val">1 individu sur 3</span></div>
+  <div class="kv-row"><span class="kv-key">Arythmie la plus fréquente</span><span class="kv-val">Trouble du rythme supra-ventriculaire n°1</span></div>
+  <div class="kv-row"><span class="kv-key">Sexe</span><span class="kv-val">Prédominance masculine</span></div>
+  <div class="kv-row"><span class="kv-key">Facteur d'âge</span><span class="kv-val">Prévalence augmente avec l'âge</span></div>
+  <div class="kv-row"><span class="kv-key">Association arythmique</span><span class="kv-val">Fortement liée au flutter atrial</span></div>
+  <div class="kv-row"><span class="kv-key">Responsabilité AVC ischémique</span><span class="kv-val">1/4 (25 %)</span></div>
+</div>
+
+<hr>
+
+<!-- SYMPTÔMES & ECG -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Présentation clinique &amp; ECG
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Symptômes
+    </div>
+    <div class="bl-blue" style="margin-bottom:8px;">
+      <strong>Classiques</strong>
+      <ul class="lst"><li>Palpitations</li><li>Dyspnée</li><li>Asthénie</li></ul>
+    </div>
+    <div class="bl-amber" style="margin-bottom:8px;">
+      <strong>Moins fréquents</strong>
+      <ul class="lst"><li>Douleur thoracique</li><li>Mauvaise tolérance à l'effort</li><li>Malaise / syncope</li></ul>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Peut être <strong>asymptomatique</strong> — découverte fortuite ou lors d'une complication (AVC, IC)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      ECG — Critères diagnostiques
+    </div>
+    <table class="table-blue">
+      <tr><th>Critère</th><th>Description</th></tr>
+      <tr><td><strong>Absence d'ondes P</strong></td><td>Ligne isoélectrique irrégulière (fibrillation)</td></tr>
+      <tr><td><strong>RR irréguliers</strong></td><td>Irrégulièrement irréguliers</td></tr>
+      <tr><td><strong>QRS fins</strong></td><td>Sauf bloc de branche organique ou fonctionnel</td></tr>
+      <tr><td><strong>FC ventriculaire</strong></td><td>Variable — souvent 100-160 bpm si non traité</td></tr>
+    </table>
+    <div style="margin-top:10px;">
+      <strong style="font-size:.8rem;color:var(--muted);">Présentations particulières :</strong>
+      <ul class="lst" style="margin-top:4px;">
+        <li><strong>QRS larges</strong> : BB organique ou aberration de conduction (BB fonctionnel)</li>
+        <li><strong>FA grosse maille</strong> : à ne pas confondre avec le flutter atrial</li>
+        <li><strong>FA + BAV3</strong> : RR réguliers malgré FA sous-jacente</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- CLASSIFICATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Classification chronologique
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Formes chronologiques
+  </div>
+  <table class="table-blue">
+    <tr><th>Forme</th><th>Définition</th><th>Point clé</th></tr>
+    <tr>
+      <td><span class="badge badge-blue">1er épisode</span></td>
+      <td>Premier épisode documenté</td>
+      <td>Peut évoluer vers n'importe quelle forme</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-green">Paroxystique</span></td>
+      <td>Retour spontané en RS en <strong>&lt; 7 jours</strong></td>
+      <td>Sans cardioversion électrique ni pharmacologique</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-amber">Persistante</span></td>
+      <td>Retour en RS avec ou sans thérapeutique, <strong>&gt; 7 jours</strong></td>
+      <td>Nécessite une action pour revenir en RS</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-red">Permanente</span></td>
+      <td>FA pour laquelle le retour en RS <strong>n'est pas l'objectif</strong></td>
+      <td>Stratégie contrôle de fréquence exclusivement</td>
+    </tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Formes particulières
+    </div>
+    <ul class="lst">
+      <li><strong>FA isolée</strong> : sans cardiopathie ni comorbidité</li>
+      <li><strong>FA valvulaire</strong> : RM rhumatismal modéré-sévère ou prothèse mécanique — CHA2DS2-VASc non applicable, AC systématique</li>
+      <li><strong>Maladie de l'oreillette</strong> : alternance FA paroxystique + bradycardie sinusale</li>
+      <li><strong>FA + IC</strong> : relation bidirectionnelle (cardiopathie rythmique possible)</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Comorbidités / FdR de FA
+    </div>
+    <div class="bl-blue" style="margin-bottom:6px;">
+      <strong>FdR cardiovasculaires</strong>
+      <ul class="lst"><li>HTA, diabète, obésité, sédentarité, tabac</li></ul>
+    </div>
+    <div class="bl-amber" style="margin-bottom:6px;">
+      <strong>Pathologies cardiovasculaires</strong>
+      <ul class="lst"><li>IC, valvulopathies, coronaropathie</li></ul>
+    </div>
+    <div class="bl-teal">
+      <strong>Pathologies respiratoires</strong>
+      <ul class="lst"><li>BPCO, syndrome d'apnées du sommeil, EP</li></ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- FACTEURS DÉCLENCHANTS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Facteurs déclenchants — à rechercher systématiquement
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Causes à éliminer en priorité
+  </div>
+  <table class="table-amber">
+    <tr><th>Catégorie</th><th>Exemples</th></tr>
+    <tr><td><strong>Métaboliques</strong></td><td>Hypokaliémie, <strong>hyperthyroïdie</strong> (TSH systématique)</td></tr>
+    <tr><td><strong>Inflammatoires</strong></td><td>Infection systémique, post-opératoire de chirurgie thoracique/cardiaque, péricardite</td></tr>
+    <tr><td><strong>Vagaux</strong></td><td>Réactions vagales</td></tr>
+    <tr><td><strong>Toxiques</strong></td><td>Alcool, caféine, cocaïne, amphétamines, catécholamines, corticoïdes, chimiothérapies</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- BILAN DE PREMIÈRE INTENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan de première intention
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examens systématiques
+    </div>
+    <ul class="lst">
+      <li><strong>ECG 12 dérivations</strong> — confirme la FA</li>
+      <li><strong>Holter-ECG</strong> si FA paroxystique non documentée</li>
+      <li><strong>ETT</strong> — cardiopathie sous-jacente, FEVG, thrombus</li>
+      <li><strong>Biologie :</strong> NFS, ionogramme (kaliémie ++), créatinine, glycémie, <strong>TSH</strong></li>
+      <li><strong>Rx thorax</strong> si signe d'IC associée</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Examens ciblés
+    </div>
+    <ul class="lst">
+      <li><strong>Polysomnographie</strong> si suspicion SAS</li>
+      <li><strong>ETO</strong> avant cardioversion si FA &gt; 48h ou durée inconnue</li>
+      <li><strong>Bilan hépatique</strong> si contexte alcool</li>
+      <li><strong>Score CHA2DS2-VASc</strong> pour décision anticoagulation (FA non valvulaire)</li>
+      <li><strong>Score HAS-BLED</strong> pour évaluation risque hémorragique</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SCORE CHA2DS2-VASc -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Risque thromboembolique — Score CHA2DS2-VASc
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège :</strong> CHA2DS2-VASc uniquement dans la FA non valvulaire. FA valvulaire (RM modéré-sévère ou prothèse mécanique) → anticoagulation systématique sans calcul de score.</span>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Score CHA2DS2-VASc (max 9)
+    </div>
+    <table class="table-blue">
+      <tr><th>Lettre</th><th>Facteur de risque</th><th style="text-align:center;">Pts</th></tr>
+      <tr><td><strong>C</strong></td><td>Insuffisance cardiaque</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+      <tr><td><strong>H</strong></td><td>Hypertension artérielle</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+      <tr><td><strong>A<sub>2</sub></strong></td><td>Âge ≥ 75 ans</td><td style="text-align:center;"><span class="badge badge-red">2</span></td></tr>
+      <tr><td><strong>D</strong></td><td>Diabète</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+      <tr><td><strong>S<sub>2</sub></strong></td><td>Antécédent AVC / AIT / embolie</td><td style="text-align:center;"><span class="badge badge-red">2</span></td></tr>
+      <tr><td><strong>V</strong></td><td>Maladie vasculaire (coronaire, AOMI, plaque aorte)</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+      <tr><td><strong>A</strong></td><td>Âge 65-74 ans</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+      <tr><td><strong>Sc</strong></td><td>Sexe féminin</td><td style="text-align:center;"><span class="badge badge-blue">1</span></td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Décision anticoagulation
+    </div>
+    <table class="table-blue">
+      <tr><th>Score Homme</th><th>Score Femme</th><th>Décision</th></tr>
+      <tr><td>0</td><td>≤ 1 (sexe seul)</td><td>Pas d'anticoagulation</td></tr>
+      <tr><td>1</td><td>2</td><td>À discuter au cas par cas</td></tr>
+      <tr><td>≥ 2</td><td>≥ 3</td><td><strong>Anticoagulation recommandée</strong></td></tr>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Piège :</strong> Le sexe féminin seul (score = 1 chez la femme) ne justifie pas l'anticoagulation.</span>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Score HAS-BLED — Risque hémorragique (max 9)
+  </div>
+  <div class="grid2">
+    <table class="table-amber">
+      <tr><th>Lettre</th><th>Facteur</th><th style="text-align:center;">Pts</th></tr>
+      <tr><td><strong>H</strong></td><td>HTA non contrôlée (PAS &gt; 160 mmHg)</td><td style="text-align:center;">1</td></tr>
+      <tr><td><strong>A</strong></td><td>Anomalie rénale ou hépatique</td><td style="text-align:center;">1 chacun</td></tr>
+      <tr><td><strong>S</strong></td><td>Antécédent AVC</td><td style="text-align:center;">1</td></tr>
+      <tr><td><strong>B</strong></td><td>Saignement ou prédisposition hémorragique</td><td style="text-align:center;">1</td></tr>
+      <tr><td><strong>L</strong></td><td>INR labile (temps dans la cible &lt; 60 %)</td><td style="text-align:center;">1</td></tr>
+      <tr><td><strong>E</strong></td><td>Âge &gt; 65 ans</td><td style="text-align:center;">1</td></tr>
+      <tr><td><strong>D</strong></td><td>AAP, AINS ou alcool</td><td style="text-align:center;">1 chacun</td></tr>
+    </table>
+    <div>
+      <div class="kv-row"><span class="kv-key">Seuil risque élevé</span><span class="kv-val">≥ 3</span></div>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège majeur :</strong> HAS-BLED élevé ≠ contre-indication à l'anticoagulation. Sert uniquement à identifier les patients à surveiller de plus près.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge — 3 piliers
+</div>
+
+<!-- Pilier 1 : Anti-thrombotique -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    1. Stratégie anti-thrombotique
+  </div>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.83rem;">Molécules disponibles</strong>
+      <ul class="lst" style="margin-top:4px;">
+        <li><strong>AOD</strong> (Dabigatran, Rivaroxaban, Apixaban) — <span class="badge badge-green">1ère intention FA non valvulaire</span></li>
+        <li><strong>AVK</strong> — cible INR 2-3 (FA valvulaire, ou si AOD CI)</li>
+        <li><strong>HNF</strong> — voie IVSE ou SC, relais possible par AVK</li>
+        <li><strong>HBPM</strong> — <span class="badge badge-red">pas d'AMM dans la FA</span></li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.83rem;">Points essentiels</strong>
+      <ul class="lst" style="margin-top:4px;">
+        <li><strong>Antiagrégants plaquettaires</strong> : aucune place dans la FA (même aspirine)</li>
+        <li><strong>Fermeture de l'auricule gauche</strong> (percutanée) : indication si FA + indication d'AC <em>ET</em> CI permanente aux anticoagulants</li>
+        <li>Prise en charge des facteurs de risque : éducation thérapeutique indispensable</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Pilier 2 : Contrôle du rythme -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    2. Stratégie de contrôle du rythme
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>Objectif :</strong> Retour en rythme sinusal et maintien. Impossible en FA permanente.</span>
+  </div>
+
+  <strong style="font-size:.83rem;">Conditions préalables à la cardioversion — 1 condition parmi 3 :</strong>
+  <ul class="steps" style="margin-top:8px;">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Anticoagulation efficace ≥ 3 semaines avant la cardioversion</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">ETO sans thrombus atrial gauche</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">FA datée de moins de 48 heures</div></div>
+    </li>
+  </ul>
+  <div class="alert alert-green" style="margin-top:8px;margin-bottom:14px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <span>Après toute cardioversion : anticoagulation efficace <strong>4 semaines systématiquement</strong>, quel que soit le score CHA2DS2-VASc</span>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.83rem;">Agents anti-arythmiques :</strong>
+      <table class="table-teal" style="margin-top:6px;">
+        <tr><th>Classe</th><th>Molécules</th><th>Indication</th></tr>
+        <tr><td>Ic</td><td>Flécaïnide, Propafénone</td><td>FA paroxystique sans cardiopathie</td></tr>
+        <tr><td>III</td><td>Amiodarone</td><td>FA avec cardiopathie / urgence</td></tr>
+        <tr><td>III</td><td>Sotalol</td><td>FA paroxystique (hors IC)</td></tr>
+        <tr><td>III</td><td>Dronédarone</td><td>FA paroxystique/persistante sans IC</td></tr>
+      </table>
+    </div>
+    <div>
+      <strong style="font-size:.83rem;">Ablation de FA :</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Cathétérisme endocavitaire par voie veineuse fémorale</li>
+        <li>Énergies : cryothérapie, radiofréquence, électroporation</li>
+        <li><strong>Isolation des veines pulmonaires</strong> : systématique</li>
+        <li><strong>Ablation du substrat atrial</strong> : à discuter si FA persistante</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Pilier 3 : Contrôle de la fréquence -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    3. Stratégie de contrôle de la fréquence
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>Objectif :</strong> FC moyenne &lt; 110 bpm. Évaluation par Holter-ECG de contrôle.</span>
+  </div>
+  <table class="table-amber">
+    <tr><th>Classe</th><th>Molécules</th><th>Notes</th></tr>
+    <tr><td><strong>β-bloquants</strong> <span class="badge badge-green">1ère intention</span></td><td>Bisoprolol, Métoprolol</td><td>Toutes situations</td></tr>
+    <tr><td><strong>ICa non DHP</strong></td><td>Diltiazem, Vérapamil</td><td>CI si IC à FE réduite</td></tr>
+    <tr><td><strong>Digitaliques</strong></td><td>Digoxine</td><td>Patients sédentaires, IC systolique</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- FA MAL TOLÉRÉE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  FA mal tolérée — Urgence
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Signes de mauvaise tolérance :</strong><br>Hypotension / choc cardiogénique — Décompensation cardiaque aiguë — Syncope</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge en urgence
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num step-num-red">1</div>
+      <div>
+        <div class="step-title">Cardioversion électrique en urgence</div>
+        <div class="step-content">Indication rare mais formelle — sans délai d'anticoagulation préalable (la règle des 3 semaines ne s'applique pas en urgence vitale)</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">2</div>
+      <div>
+        <div class="step-title">Anticoagulation efficace dès que possible</div>
+        <div class="step-content">HNF IVSE en urgence, relais par AOD ou AVK selon le contexte</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Pièges classiques ECNi
+    </div>
+    <ul class="lst">
+      <li>CHA2DS2-VASc <strong>non applicable en FA valvulaire</strong> → AC systématique</li>
+      <li>HAS-BLED élevé <strong>≠ CI à l'anticoagulation</strong> → surveillance renforcée seulement</li>
+      <li><strong>Antiagrégants plaquettaires</strong> : aucune place dans la FA</li>
+      <li><strong>HBPM</strong> : pas d'AMM dans la FA</li>
+      <li>Après cardioversion : <strong>4 semaines d'AC systématiques</strong> (quel que soit CHA2DS2-VASc)</li>
+      <li><strong>Sexe féminin seul</strong> (score = 1 chez femme) : pas d'anticoagulation</li>
+      <li>FA + BAV3 : RR réguliers → ne pas méconnaître la FA sous-jacente</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Essentiels à maîtriser
+    </div>
+    <ul class="lst">
+      <li>ECG : absence d'ondes P + RR <strong>irrégulièrement irréguliers</strong> + QRS fins</li>
+      <li>Paroxystique = &lt; 7j spontané ; Persistante = &gt; 7j ; Permanente = pas d'objectif RS</li>
+      <li>CHA2DS2-VASc : <strong>A2 et S2 valent 2 points</strong> chacun</li>
+      <li>FA non valvulaire : <strong>AOD en 1ère intention</strong></li>
+      <li>Ablation = isolation des veines pulmonaires pour tous</li>
+      <li>FA mal tolérée → cardioversion électrique en urgence sans attendre</li>
+      <li>FA = premier responsable des AVC ischémiques emboliques (¼)</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
