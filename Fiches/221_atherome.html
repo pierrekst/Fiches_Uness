@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 221 — Athérome</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#D85A30 0%,#C97B2A 40%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 221</div>
+  <h1>Athérome — Épidémiologie et physiopathologie</h1>
+  <div class="header-sub">Le malade poly-athéromateux</div>
+  <div class="header-tags">
+    <span class="htag">Cardiologie</span>
+    <span class="htag">Vasculaire</span>
+    <span class="htag">Prévention secondaire</span>
+    <span class="htag">Maladie systémique</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> L'athérome est une maladie inflammatoire systémique des artères de gros et moyen calibre, 2e cause de mortalité en France.
+  Ce chapitre couvre la définition et physiopathologie de la plaque, l'épidémiologie (gradient Nord/Sud, tendances temporelles), la notion de malade poly-athéromateux,
+  les localisations préférentielles, la stratégie d'imagerie, et les principes de prise en charge médicale, chirurgicale et éducative.
+</div>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions fondamentales
+</div>
+
+<div class="grid2">
+  <div class="card card-coral">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Athérome
+    </div>
+    <ul class="lst">
+      <li>Remaniements de <strong>l'intima</strong> des artères de gros et moyen calibre</li>
+      <li>Accumulation focale de lipides, glucides complexes, sang, tissu fibrineux, dépôts calcaires</li>
+      <li>Atteinte secondaire de la <strong>média</strong></li>
+      <li>Mécanisme : <strong>réponse inflammatoire à une agression de l'endothélium</strong></li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      Malade poly-athéromateux
+    </div>
+    <ul class="lst">
+      <li>Maladie systémique : <strong>tous les sites vasculaires sont concernés</strong></li>
+      <li>Sites principaux : coronaires, TSA, aorte, membres inférieurs, artères rénales, digestives</li>
+      <li><strong>Poly-athéromateux = ≥ 2 sites anatomiques différents atteints</strong></li>
+      <li>L'atteinte peut être symptomatique <em>ou infraclinique</em></li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Chiffres clés en France
+    </div>
+    <div class="kv-row"><span class="kv-key">Rang mortalité</span><span class="kv-val">2e cause (après cancer)</span></div>
+    <div class="kv-row"><span class="kv-key">AVC / an</span><span class="kv-val">120 000 – 130 000</span></div>
+    <div class="kv-row"><span class="kv-key">Cardiopathies ischémiques / an</span><span class="kv-val">120 000 – 130 000</span></div>
+    <div class="kv-row"><span class="kv-key">Décès cardiovasculaires</span><span class="kv-val">230 / 100 000 hab.</span></div>
+    <div class="kv-row"><span class="kv-key">Réduction complications (30 ans)</span><span class="kv-val">— 30 %</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Gradient géographique et temporel
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Région</th><th>Incidence</th></tr></thead>
+      <tbody>
+        <tr><td>Finlande (Nord)</td><td><strong>500 / 100 000</strong></td></tr>
+        <tr><td>Europe du Sud-Est</td><td><strong>125 / 100 000</strong></td></tr>
+        <tr><td>Chine, Japon</td><td>Faible</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:10px;">
+      <div class="kv-row"><span class="kv-key">Début chez l'homme</span><span class="kv-val">~50 ans</span></div>
+      <div class="kv-row"><span class="kv-key">Début chez la femme</span><span class="kv-val">~60 ans (décalage 10 ans)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> L'atteinte de la femme est <strong>sous-estimée</strong>. Le risque cardiovasculaire féminin augmente fortement après la ménopause — ne pas négliger sous prétexte du sexe.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : PHYSIOPATHOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie — Formation de la plaque
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Cascade de formation (chronologique)
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Accumulation lipidique dans l'intima</div><div class="step-content">Stries lipidiques dès l'enfance, tout au long de la vie</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Apparition de LDL oxydées</div><div class="step-content">Augmentation de la composante lipidique — LDL ox = signal danger pour l'endothélium</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Recrutement de macrophages</div><div class="step-content">Se gorgent de LDL oxydées → cellules spumeuses (foam cells)</div></div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div><div class="step-title">Migration et prolifération des cellules musculaires lisses</div><div class="step-content">Modification phénotypique, migration dans la plaque pour isoler les cellules inflammatoires</div></div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div><div class="step-title">Croissance et remodelage de la plaque</div><div class="step-content">Diminution progressive de la lumière artérielle</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Complications de la plaque
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Sténose → altération flux d'aval</span>
+    <span class="pill pill-red">Rupture de plaque → thrombus ± embolie distale</span>
+    <span class="pill pill-amber">Hémorragie intra-plaque → majoration sténose</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : FACTEURS DE RISQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Facteurs de risque cardiovasculaire
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Modifiables <badge class="badge badge-red">Action possible</badge>
+    </div>
+    <div class="pills">
+      <span class="pill pill-red">Diabète</span>
+      <span class="pill pill-red">Tabagisme</span>
+      <span class="pill pill-red">HTA</span>
+      <span class="pill pill-red">Hypercholestérolémie</span>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Non modifiables
+    </div>
+    <div class="pills">
+      <span class="pill pill-blue">Âge</span>
+      <span class="pill pill-blue">Sexe masculin</span>
+      <span class="pill pill-blue">ATCD familiaux</span>
+    </div>
+    <div style="margin-top:8px;font-size:.82rem;color:var(--muted);">
+      ATCD familiaux : IDM / mort subite chez un apparenté H 1er degré <strong>&lt; 55 ans</strong> ou F 1er degré <strong>&lt; 65 ans</strong>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : LOCALISATIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="3"/><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg>
+  Localisations préférentielles
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="11" r="3"/><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1-2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"/></svg>
+    </div>
+    Territoires atteints (par ordre de fréquence clinique)
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Territoire</th><th>Artères principales</th><th>Organe cible</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Coronaires</strong></td><td>Artères coronaires</td><td>Cœur</td></tr>
+      <tr><td><strong>Cérébral</strong></td><td>TSA — troncs supra-aortiques, carotides</td><td>Cerveau</td></tr>
+      <tr><td><strong>Aorte abdominale</strong></td><td>Aorte terminale + iliaques</td><td>—</td></tr>
+      <tr><td><strong>Membres inférieurs</strong></td><td>Fémorale superficielle ++</td><td>Muscles</td></tr>
+      <tr><td><strong>Rénal</strong></td><td>Artères rénales</td><td>Reins</td></tr>
+      <tr><td><strong>Digestif</strong></td><td>Artères digestives</td><td>Système digestif</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Zones préférentielles : bifurcations, ostia — zones de stress hémodynamique maximal</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : IMAGERIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Stratégie d'exploration en imagerie
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Choix de la modalité
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Intention</th><th>Examen</th><th>Avantages</th><th>Limites</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="phase phase-prod">1re intention</span></td>
+        <td><strong>Écho-Doppler</strong></td>
+        <td>Non invasif, non irradiant, sans risque allergique</td>
+        <td>Opérateur-dépendant</td>
+      </tr>
+      <tr>
+        <td><span class="phase phase-mod">2e intention</span></td>
+        <td><strong>IRM / Angio-TDM</strong></td>
+        <td>Bilan complet des lésions</td>
+        <td>IRM : majore les sténoses, ne voit pas les calcifications</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Ordre d'exploration chez le patient poly-athéromateux (exemple AOMI)
+  </div>
+  <ul class="steps">
+    <li><div class="step-num">1</div><div><div class="step-title">Coronaires</div><div class="step-content">Même asymptomatique — le cardiologue décide de la stratégie</div></div></li>
+    <li><div class="step-num">2</div><div><div class="step-title">TSA (troncs supra-aortiques)</div><div class="step-content">Écho-Doppler TSA — même asymptomatique</div></div></li>
+    <li><div class="step-num">3</div><div><div class="step-title">Artères rénales</div><div class="step-content">Si HTA résistante à triple association incluant un thiazidique</div></div></li>
+    <li><div class="step-num">4</div><div><div class="step-title">Artères digestives</div><div class="step-content">Si angor mésentérique</div></div></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge du malade poly-athéromateux
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement médical — applicable à tous les stades
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">Mesures hygiéno-diététiques</div>
+      <ul class="lst">
+        <li><strong>Arrêt tabac</strong> actif et passif</li>
+        <li>Régime méditerranéen : poissons 3×/sem, fruits, légumes, huiles olive/colza</li>
+        <li>Activité physique : <strong>≥ 150 min/sem</strong> d'intensité modérée</li>
+        <li>Perte pondérale si surpoids/obésité</li>
+        <li>Traitement dyslipidémie, HTA, diabète</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">Médicaments systématiques</div>
+      <table>
+        <thead><tr><th>Molécule</th><th>Indication</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Statine</strong></td><td>Systématique en prévention secondaire<br><span style="color:var(--muted);">À discuter en prévention primaire selon risque CV</span></td></tr>
+          <tr><td><strong>IEC ou ARA2</strong></td><td>Prévention secondaire : réduit IDM, AVC, décès vasculaire, protège la fonction rénale</td></tr>
+          <tr><td><strong>Antiplaquettaire</strong></td><td>Si pas de contre-indication hémorragique</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Traitement chirurgical — seuils à connaître
+  </div>
+  <table class="table-red">
+    <thead><tr><th>Territoire</th><th>Indication / seuil</th><th>Technique</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Carotides internes</strong></td>
+        <td>Sténose serrée (symptomatique ou asymptomatique)</td>
+        <td>Endartériectomie</td>
+      </tr>
+      <tr>
+        <td><strong>Coronaires</strong></td>
+        <td>Selon clinique et lésions</td>
+        <td>Angioplastie-stenting ou chirurgie</td>
+      </tr>
+      <tr>
+        <td><strong>AAA</strong></td>
+        <td><strong>Diamètre &gt; 55 mm</strong><br>ou augmentation <strong>≥ 1 cm/an</strong><br>ou anévrysme symptomatique</td>
+        <td>Revascularisation d'exclusion</td>
+      </tr>
+      <tr>
+        <td><strong>Membres inférieurs</strong></td>
+        <td>Selon stade clinique ;<br>stade effort → traitement médical + marche d'abord ;<br>chirurgie si lésion du carrefour fémoral</td>
+        <td>Revascularisation selon localisation</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Priorité chirurgicale :</strong> en dehors de l'urgence, traiter en priorité l'atteinte la plus symptomatique <em>ou</em> la plus à risque de complication — décision au cas par cas.</div>
+  </div>
+</div>
+
+<div class="alert alert-teal">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>AOMI spécifique :</strong> la <strong>marche</strong> est l'activité physique recommandée en 1re intention — elle développe la collatéralité mieux que tout autre exercice.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : ÉDUCATION THÉRAPEUTIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Éducation thérapeutique
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    5 axes de l'ETP chez le patient athéromateux
+  </div>
+  <ul class="steps">
+    <li><div class="step-num">1</div><div><div class="step-title">Compréhension de la maladie et des FdR CV</div></div></li>
+    <li><div class="step-num">2</div><div><div class="step-title">Signes d'alerte et conduite à tenir</div><div class="step-content">Que faire si symptôme aigu (douleur thoracique, déficit neurologique...)</div></div></li>
+    <li><div class="step-num">3</div><div><div class="step-title">Définition d'objectifs thérapeutiques réévalués régulièrement</div></div></li>
+    <li><div class="step-num">4</div><div><div class="step-title">Adhésion au suivi et aux traitements</div><div class="step-content">Surveillance efficacité et tolérance médicaments</div></div></li>
+    <li><div class="step-num">5</div><div><div class="step-title">Entretiens motivationnels répétés</div><div class="step-content">Sevrage tabagique, alimentation, activité physique — maintien dans la durée</div></div></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 9 : POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Poly-athéromateux = <strong>au moins 2 sites</strong> — l'atteinte peut être infraclinique (asymptomatique).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Seuil AAA = <strong>55 mm</strong> (ou +1 cm/an ou symptomatique) — ne pas confondre avec 50 mm parfois cité pour la surveillance.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> L'IRM <strong>majore</strong> les sténoses et <strong>ne montre pas les calcifications</strong> — préférer le scanner pour ces indications.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> ATCD familiaux = IDM chez apparenté H 1er degré <strong>&lt; 55 ans</strong> OU F 1er degré <strong>&lt; 65 ans</strong> — seuils asymétriques.</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Ce qu'il faut retenir absolument
+  </div>
+  <ul class="lst">
+    <li><strong>Athérome = inflammation systémique</strong> — traiter tous les sites et tous les FdR CV</li>
+    <li><strong>2e cause de mortalité</strong> en France (après cancer), 1re dans les autres pays</li>
+    <li><strong>Gradient Nord/Sud</strong> : Finlande 500 vs Sud-Est 125 / 100 000</li>
+    <li>Femme : risque sous-estimé, décalage de <strong>10 ans</strong> par rapport à l'homme</li>
+    <li>Imagerie : <strong>écho-Doppler d'abord</strong>, puis IRM/scanner selon territoire</li>
+    <li>Prévention secondaire : <strong>statine + IEC/ARA2 + antiplaquettaire</strong> (triade)</li>
+    <li>AOMI : <strong>marche = traitement physique de référence</strong> (collatéralité)</li>
+    <li>AAA : chirurgie si <strong>diamètre &gt; 55 mm</strong>, &gt; 1 cm/an ou symptomatique</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

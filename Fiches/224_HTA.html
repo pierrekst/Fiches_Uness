@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 224 — Hypertension artérielle</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#D85A30 0%,#E24B4A 40%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 224</div>
+  <h1>Hypertension artérielle de l'adulte et de l'enfant</h1>
+  <div class="header-sub">1er facteur de risque cardiovasculaire modifiable — 30 % des adultes français</div>
+  <div class="header-tags">
+    <span class="htag">Définition &amp; mesure</span>
+    <span class="htag">HTA secondaire</span>
+    <span class="htag">Urgences hypertensives</span>
+    <span class="htag">Stratégie thérapeutique</span>
+    <span class="htag">HTA de l'enfant</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue globale du chapitre.</strong> Ce chapitre couvre l'HTA de A à Z : savoir la mesurer correctement (cabinet, AMT, MAPA), distinguer les 4 profils (normotension / blouse blanche / masquée / vraie HTA), évaluer le retentissement sur les organes cibles, dépister une cause secondaire (10 % des cas), reconnaître les urgences, stratifier le risque pour adapter le traitement médicamenteux par étapes (bithérapie → trithérapie → quadrithérapie), et gérer les situations particulières (sujet âgé, grossesse, enfant).
+</div>
+
+<!-- ═══════════════════════════════════════ DÉFINITIONS & MESURE ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition &amp; seuils diagnostiques
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Seuils en consultation (clinique)
+    </div>
+    <div class="kv-row"><span class="kv-key">HTA</span><span class="kv-val">PAS ≥ 140 ou PAD ≥ 90 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">HTA sévère (grade 3)</span><span class="kv-val">PAS ≥ 180 et/ou PAD ≥ 110 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">Normale-haute</span><span class="kv-val">130–139 / 85–89 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">Conditions</span><span class="kv-val">Répétées, assis, repos ≥ 5 min, plusieurs consultations</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Seuils ambulatoires
+    </div>
+    <div class="kv-row"><span class="kv-key">AMT (≥ 18 valeurs)</span><span class="kv-val">≥ 135/85 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">MAPA diurne</span><span class="kv-val">≥ 135/85 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">MAPA nocturne</span><span class="kv-val">≥ 120/70 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">MAPA 24 h</span><span class="kv-val">≥ 130/80 mmHg</span></div>
+  </div>
+</div>
+
+<!-- PROFILS HTA -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    4 profils selon mesures clinique vs ambulatoire
+  </div>
+  <table class="table-blue">
+    <tr><th></th><th>Ambulatoire normale</th><th>Ambulatoire élevée</th></tr>
+    <tr>
+      <td style="font-weight:700;">Clinique normale</td>
+      <td><span class="pill-teal pill">Normotension</span></td>
+      <td><span class="pill-amber pill">HTA masquée</span> <span class="badge badge-amber">risque sous-estimé</span></td>
+    </tr>
+    <tr>
+      <td style="font-weight:700;">Clinique élevée</td>
+      <td><span class="pill-blue pill">HTA blouse blanche</span></td>
+      <td><span class="pill-red pill">Hypertension vraie</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- MESURE DE LA PA -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Technique de mesure de la PA
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      En consultation (adulte)
+    </div>
+    <ul class="lst">
+      <li>Assis ou allongé, repos ≥ 5 min</li>
+      <li>Tensiomètre électronique validé, brassard brachial adapté</li>
+      <li>1re fois : mesure aux 2 bras — garder le bras le plus élevé si diff PAS &gt; 10 mmHg</li>
+      <li>3 mesures par consultation → moyenne des 2 dernières</li>
+      <li>Rechercher hypotension orthostatique si : âgé, diabétique, sujet fragile</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Hypotension orthostatique :</strong> baisse PAS ≥ 20 mmHg ou PAD ≥ 10 mmHg entre couché/assis et debout à 1 et 3 min</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      AMT — Règle des 3
+    </div>
+    <div class="kv-row"><span class="kv-key">Appareil</span><span class="kv-val">Électronique validé au bras</span></div>
+    <div class="kv-row"><span class="kv-key">Quand</span><span class="kv-val">3 mesures matin (avant PDJ + médicaments) + 3 soir (avant coucher)</span></div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">3 jours consécutifs</span></div>
+    <div class="kv-row"><span class="kv-key">Position</span><span class="kv-val">Assis, avant-bras sur table, espacement entre mesures</span></div>
+    <div class="kv-row"><span class="kv-key">Seuil diagnostic</span><span class="kv-val">Moyenne ≥ 135/85 mmHg</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ ÉPIDÉMIOLOGIE ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Chiffres clés à retenir
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Prévalence adulte (France)</span><span class="kv-val">~30 %</span></div>
+      <div class="kv-row"><span class="kv-key">HTA essentielle/primitive</span><span class="kv-val">&gt; 90 % des cas</span></div>
+      <div class="kv-row"><span class="kv-key">HTA secondaire</span><span class="kv-val">~10 % des cas</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Traités parmi hypertendus</span><span class="kv-val">1 sur 2</span></div>
+      <div class="kv-row"><span class="kv-key">Contrôlés parmi traités</span><span class="kv-val">1 sur 2</span></div>
+      <div class="kv-row"><span class="kv-key">Contrôlés au total</span><span class="kv-val"><strong>1 sur 4</strong></span></div>
+    </div>
+  </div>
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-red">AVC</span>
+    <span class="pill pill-red">Démence</span>
+    <span class="pill pill-red">IC</span>
+    <span class="pill pill-red">IDM</span>
+    <span class="pill pill-red">Décès CV</span>
+    <span class="pill pill-amber">IRC terminale (retardée)</span>
+    <span class="pill pill-gray">Risque diminué par traitement</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ ÉVALUATION INITIALE ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Évaluation initiale &amp; bilan paraclinique
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Objectifs de l'évaluation initiale
+    </div>
+    <ul class="lst">
+      <li>Rechercher atteinte des organes cibles et pathologies associées</li>
+      <li>Évaluer le risque cardiovasculaire global (scores SCORE2 / SCORE2-OP)</li>
+      <li>Dépister une HTA secondaire et des facteurs aggravants</li>
+      <li>Rechercher une hypotension orthostatique</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-6-6z"/><polyline points="9 3 9 9 15 9"/></svg>
+      </div>
+      Bilan paraclinique minimal
+    </div>
+    <ul class="lst">
+      <li>Natrémie, <strong>kaliémie</strong>, créatininémie + DFG estimé</li>
+      <li>Glycémie à jeun</li>
+      <li>EAL à jeun (bilan lipidique)</li>
+      <li>Protéinurie : rapport protéinurie/créatininurie</li>
+      <li>ECG de repos</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ORGANES CIBLES -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Retentissement sur les organes cibles
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Cardiaque</span><span class="kv-val">HVG, coronaropathie, IC</span></div>
+      <div class="kv-row"><span class="kv-key">Vasculaire</span><span class="kv-val">Artériopathie, athérosclérose</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Cérébral</span><span class="kv-val">AVC, démence</span></div>
+      <div class="kv-row"><span class="kv-key">Rénal</span><span class="kv-val">Néphroangios­clérose, IRC</span></div>
+      <div class="kv-row"><span class="kv-key">Ophtalmologique</span><span class="kv-val">Rétinopathie hypertensive</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ HTA SECONDAIRE ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  HTA secondaire (~10 % des cas)
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Signes d'orientation — Évoquer HTA secondaire si :</strong> HTA d'emblée sévère (≥ 180/110) — HTA avant 40 ans — <strong>Hypokaliémie associée</strong> — Nodule surrénalien — HTA résistante — atteinte organe cible disproportionnée — urgence hypertensive / HTA maligne</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Principales causes d'HTA secondaire
+  </div>
+  <table class="table-amber">
+    <tr><th>Cause</th><th>Éléments d'orientation</th><th>Explorations clés</th></tr>
+    <tr>
+      <td><strong>Hyperaldostéronisme primaire</strong></td>
+      <td>Hypokaliémie, faiblesse musculaire, tétanie</td>
+      <td>Rénine + aldostérone (condition standardisée) — aldostéronurie 24 h</td>
+    </tr>
+    <tr>
+      <td><strong>Phéochromocytome</strong></td>
+      <td>Sueurs, céphalées, palpitations — taches café au lait</td>
+      <td>Métanéphrines/normétanéphrines urinaires et plasmatiques libres</td>
+    </tr>
+    <tr>
+      <td><strong>Syndrome de Cushing</strong></td>
+      <td>Signes cliniques d'hypercorticisme</td>
+      <td>Cortisol libre urinaire — test de freinage minute</td>
+    </tr>
+    <tr>
+      <td><strong>Sténose artère rénale</strong></td>
+      <td>Athéromateuse (âgé, tabac) ou dysplasie fibromusculaire (femme jeune)</td>
+      <td>Écho-Doppler artères rénales — angioscanner abdominal</td>
+    </tr>
+    <tr>
+      <td><strong>Néphropathie</strong></td>
+      <td>Antécédents rénaux/familiaux, protéinurie</td>
+      <td>Bilan rénal complet — analyses urinaires 24 h</td>
+    </tr>
+    <tr>
+      <td><strong>SAHOS</strong></td>
+      <td>Ronflement, somnolence, surpoids</td>
+      <td>Polygraphie respiratoire nocturne</td>
+    </tr>
+    <tr>
+      <td><strong>Médicaments / toxiques</strong></td>
+      <td>Corticoïdes, AINS, œstrogènes, vasoconstricteurs nasaux, cocaïne, alcool</td>
+      <td>Interrogatoire +++</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ URGENCES ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Urgences hypertensives
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Urgence hypertensive <span class="badge badge-red">HOSPIT.</span>
+    </div>
+    <ul class="lst">
+      <li>PA augmentée <em>+ souffrance viscérale</em></li>
+      <li>Encéphalopathie hypertensive</li>
+      <li>Déficit neurologique focal (attendre imagerie avant de baisser PA)</li>
+      <li>IRA, IC congestive, ischémie coronarienne</li>
+      <li>Dissection aortique</li>
+      <li>Œdème papillaire</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:#9b1c1c;">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      HTA maligne <span class="badge badge-red">CAS PARTICULIER</span>
+    </div>
+    <ul class="lst">
+      <li>HTA grade 3 <em>+ atteinte artériolaire sévère</em></li>
+      <li>Rétinopathie : hémorragies rétiniennes / nodules cotonneux / œdème papillaire (stades III-IV Keith-Wagener)</li>
+      <li>Encéphalopathie hypertensive</li>
+      <li>IRC rapidement progressive (néphro­angiosclérose maligne)</li>
+      <li>HVG marquée</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Réhydratation SSI + IEC/ARA2 recommandés</div>
+    </div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Crise hypertensive <span class="badge badge-green">PAS D'HOSPIT.</span>
+    </div>
+    <ul class="lst">
+      <li>HTA grade 3 <em>sans</em> souffrance viscérale</li>
+      <li>Céphalées légères à modérées parfois</li>
+      <li>Pas une urgence hypertensive</li>
+    </ul>
+    <div class="alert alert-green" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Mise au calme — éducation adhésion — adaptation traitement — consultation rapide</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge de l'urgence hypertensive
+  </div>
+  <ul class="lst">
+    <li>Hospitalisation en urgence</li>
+    <li>Diminution <strong>progressive</strong> de la PA par anti-HTA IV</li>
+    <li>Si déficit neurologique focal : attendre l'imagerie cérébrale avant de baisser la PA (ne pas méconnaître un AVC)</li>
+    <li>HTA maligne : réhydratation SSI + IEC/ARA2</li>
+    <li>Traiter les insuffisances d'organe associées</li>
+    <li>Surveillance rapprochée — rechercher étiologie curable</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ HTA RÉSISTANTE ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  HTA résistante
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Définition &amp; facteurs de résistance
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Définition :</strong> HTA non contrôlée malgré hygiène de vie adaptée + <strong>trithérapie à doses optimales</strong> incluant un <strong>diurétique thiazidique</strong> (± IEC/ARA2 + inhibiteur calcique)</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.82rem;color:var(--muted);">Facteurs de résistance à éliminer</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Non-adhésion thérapeutique</li>
+        <li>Interactions médicamenteuses / substances pressives</li>
+        <li>Apports sodés excessifs</li>
+        <li>Alcool en excès</li>
+        <li>SAHOS</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;color:var(--muted);">Traitement : quadrithérapie</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>IEC ou ARA2 + inhibiteur calcique + diurétique thiazidique (doses max tolérées)</li>
+        <li>+ <strong>Spironolactone</strong> (surveiller kaliémie et fonction rénale)</li>
+        <li>Ou bêta-bloquant si CI/EI à la spironolactone (2e intention)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ TRAITEMENT ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Stratégie thérapeutique
+</div>
+
+<!-- Objectif tensionnel -->
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Objectif tensionnel :</strong> viser PAS 120 mmHg et PAD 70 mmHg — obtenir <strong>PAS &lt; 130 mmHg ET PAD &lt; 80 mmHg</strong> en clinique + ambulatoire (AMT ou MAPA diurne &lt; 130/80 mmHg). Chez le fragile (âge &gt; 85 ans, espérance de vie &lt; 3 ans, hypotension orthostatique) : PAS tolérée la plus proche de 120 mmHg, au mieux &lt; 140 mmHg.</div>
+</div>
+
+<!-- Escalade thérapeutique -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Escalade thérapeutique
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">0</div>
+      <div>
+        <div class="step-title">Modifications du mode de vie (pour TOUS, y compris PA normale-haute)</div>
+        <div class="step-content">Activité physique — perte de poids — réduction alcool — réduction apports sodés — sevrage tabagique — alimentation fruits/légumes, limiter graisses saturées</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Bithérapie faible dose en monoprise (d'emblée ou après 3-6 mois selon le profil)</div>
+        <div class="step-content"><strong>IEC ou ARA2</strong> + <strong>inhibiteur calcique</strong> ou <strong>diurétique thiazidique/indapamide</strong> — d'emblée si HTA modérée-sévère ou risque CV élevé</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Trithérapie : IEC/ARA2 + inhibiteur calcique + diurétique thiazidique/indapamide</div>
+        <div class="step-content">Augmentation posologique ou ajout du 3e agent si objectif non atteint. Vérifier adhésion et mode de vie.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">R</div>
+      <div>
+        <div class="step-title">HTA résistante → Quadrithérapie + spironolactone</div>
+        <div class="step-content">Trithérapie à doses max + spironolactone (surveiller kaliémie/fonction rénale) — ou bêta-bloquant en 2e intention</div>
+      </div>
+    </li>
+  </ul>
+  <div class="alert alert-blue" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Bêta-bloquant :</strong> instauré à toute étape si indication spécifique (cardiopathie ischémique/rythmique, IC)</div>
+  </div>
+</div>
+
+<!-- CI et EI -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Effets indésirables &amp; contre-indications des anti-HTA
+  </div>
+  <table class="table-red">
+    <tr><th>Classe</th><th>CI absolues</th><th>CI relatives</th><th>EI fréquents</th></tr>
+    <tr>
+      <td><strong>Diurétiques thiazidiques</strong></td>
+      <td>Grossesse — Hypercalcémie</td>
+      <td>Hyponatrémie — Hypokaliémie</td>
+      <td>Hypokaliémie — Hyponatrémie — Hyperglycémie — Troubles métaboliques</td>
+    </tr>
+    <tr>
+      <td><strong>Bêta-bloquants</strong></td>
+      <td>Asthme — BAV 2e et 3e degrés</td>
+      <td>Asthme sévère</td>
+      <td>Asthénie — Bradycardie — Acrosyndrome — Troubles libido — Dysfonction érectile</td>
+    </tr>
+    <tr>
+      <td><strong>Inhibiteurs calciques (DHP)</strong></td>
+      <td>Tachyarythmie — IC non contrôlée</td>
+      <td>—</td>
+      <td>Œdèmes MI — Céphalées — Vertiges — Flushs</td>
+    </tr>
+    <tr>
+      <td><strong>Inhibiteurs calciques (Vérapamil/Diltiazem)</strong></td>
+      <td>BAV 2e et 3e degrés — IC sévère (FEVG &lt; 40 %)</td>
+      <td>—</td>
+      <td>Constipation — Bradycardie — Céphalées — Vertiges — Flushs — Œdèmes MI</td>
+    </tr>
+    <tr>
+      <td><strong>IEC</strong></td>
+      <td>Grossesse — Œdème angio-neurotique sous IEC</td>
+      <td>Femme en âge de procréer sans contraception — Hyperkaliémie &gt; 5,5 mmol/L</td>
+      <td><strong>Toux</strong> — Hyperkaliémie — Insuffisance rénale fonctionnelle</td>
+    </tr>
+    <tr>
+      <td><strong>ARA2 (sartans)</strong></td>
+      <td>Grossesse</td>
+      <td>Femme en âge de procréer sans contraception — Hyperkaliémie &gt; 5,5 mmol/L</td>
+      <td>Hyperkaliémie — Insuffisance rénale fonctionnelle</td>
+    </tr>
+    <tr>
+      <td><strong>Spironolactone</strong></td>
+      <td>IRC stades 4-5 ou IRA — Hyperkaliémie — Grossesse</td>
+      <td>—</td>
+      <td>Hyperkaliémie — Gynécomastie — Dysménorrhée</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Situations particulières -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Choix du traitement selon les comorbidités
+  </div>
+  <table class="table-teal">
+    <tr><th>Comorbidité</th><th>Molécules préférentielles</th></tr>
+    <tr><td>Diabète + microalbuminurie ou IRC</td><td><strong>IEC ou ARA2</strong></td></tr>
+    <tr><td>Insuffisance rénale / protéinurie</td><td><strong>IEC ou ARA2</strong></td></tr>
+    <tr><td>Post-AVC</td><td>Diurétiques thiazidiques + IEC/ARA2 + Inhibiteurs calciques</td></tr>
+    <tr><td>Coronaropathie</td><td>IEC ou ARA2 + <strong>Bêta-bloquants</strong></td></tr>
+    <tr><td>Insuffisance cardiaque (FEVG réduite)</td><td>IEC ou ARA2 + Bêta-bloquants + Diurétiques</td></tr>
+  </table>
+</div>
+
+<!-- Sujet âgé > 80 ans -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Particularités du sujet &gt; 80 ans
+  </div>
+  <ul class="lst">
+    <li>Objectif : PAS tolérée la plus proche de 120 mmHg, au mieux &lt; 140 mmHg</li>
+    <li><strong>Éviter la bithérapie d'emblée</strong></li>
+    <li>Limiter la iatrogénie : ne pas dépasser <strong>3 principes actifs</strong></li>
+    <li>Ne pas générer d'hypotension orthostatique</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ SUIVI ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Suivi à long terme
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Rythme du suivi
+    </div>
+    <div class="kv-row"><span class="kv-key">6 premiers mois</span><span class="kv-val">Tous les mois</span></div>
+    <div class="kv-row"><span class="kv-key">Au-delà (objectif atteint)</span><span class="kv-val">Tous les 3 à 6 mois</span></div>
+    <div class="kv-row"><span class="kv-key">Créatinine + protéinurie</span><span class="kv-val">Tous les 1 à 2 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Glycémie + bilan lipidique</span><span class="kv-val">Tous les 3 ans (si pas de diabète/dyslipidémie)</span></div>
+    <div class="kv-row"><span class="kv-key">ECG</span><span class="kv-val">Tous les 3 à 5 ans (ou plus si symptômes)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Points de vigilance du suivi
+    </div>
+    <ul class="lst">
+      <li>PA clinique confirmée par AMT ou MAPA</li>
+      <li>Adhésion au traitement et aux modifications du mode de vie</li>
+      <li>Efficacité + tolérance des anti-HTA</li>
+      <li>Interactions médicamenteuses</li>
+      <li>Hypotension orthostatique (dépistage systématique)</li>
+      <li>Atteintes des organes cibles</li>
+      <li>Allègement si hypotension orthostatique, dénutrition, patient fragile</li>
+      <li>Arrêt temporaire si hypovolémie (diarrhée, déshydratation, infection)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ HTA ENFANT ══ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  HTA de l'enfant
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Définition &amp; mesure
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>HTA enfant :</strong> PA ≥ 95e percentile selon les abaques âge/taille/sexe, sur plusieurs mesures</div>
+    </div>
+    <div class="kv-row"><span class="kv-key">Technique</span><span class="kv-val">Auscultatoire (tensiomètre validé enfant)</span></div>
+    <div class="kv-row"><span class="kv-key">Bras</span><span class="kv-val"><strong>Droit</strong> (coarctation aortique → brachial gauche faussement bas)</span></div>
+    <div class="kv-row"><span class="kv-key">Position</span><span class="kv-val">Allongé, calme</span></div>
+    <div class="kv-row"><span class="kv-key">Dépistage systématique</span><span class="kv-val">Après 3 ans, 1 fois/an</span></div>
+    <div class="kv-row"><span class="kv-key">Avant 3 ans</span><span class="kv-val">Uniquement si facteur de risque (petit poids naissance, rein, cardiaque…)</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Causes d'HTA chez l'enfant
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>L'HTA de l'enfant est <strong>principalement secondaire</strong> (contrairement à l'adulte)</div>
+    </div>
+    <ul class="lst">
+      <li><strong>Causes rénales et réno-vasculaires</strong> (1re cause)</li>
+      <li>Causes endocriniennes et tumorales</li>
+      <li>Cause cardiaque (coarctation aortique)</li>
+      <li>Médicamenteuses (corticoïdes)</li>
+      <li>HTA essentielle en augmentation (obésité)</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Urgence : inhibiteur calcique (forme sublinguale CI chez l'enfant) en attendant avis spécialisé</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ CONSULTATION D'ANNONCE ══ -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Consultation d'annonce — Objectifs
+  </div>
+  <ul class="lst">
+    <li>Explorer connaissances, vécu et représentations du patient</li>
+    <li>Informer loyalement : HTA, FdR associés, complications, modalités de traitement, bénéfices attendus, risque CV global</li>
+    <li>Fixer les objectifs tensionnels</li>
+    <li>Obtenir une <strong>décision médicale partagée</strong> pour favoriser l'adhésion</li>
+    <li>Établir un <strong>plan de soins personnalisé</strong> (mode de vie + médicaments)</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════ POINTS CLÉS ══ -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés &amp; pièges ECNi
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°1 :</strong> Crise hypertensive ≠ urgence hypertensive. La crise (PA grade 3 sans souffrance viscérale) ne nécessite PAS d'hospitalisation.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°2 :</strong> Déficit neurologique focal + HTA sévère → NE PAS baisser la PA avant l'imagerie (risque de méconnaître un AVC ischémique).</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°3 :</strong> HTA + hypokaliémie → penser hyperaldostéronisme primaire en 1er. Bilan à réaliser en condition standardisée.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°4 :</strong> IEC et ARA2 sont <strong>contre-indiqués pendant la grossesse</strong> et chez la femme en âge de procréer sans contraception efficace.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°5 :</strong> HTA de l'enfant → mesure AU BRAS DROIT (coarctation aortique = brachial gauche faussement abaissé). L'HTA est principalement secondaire chez l'enfant.</div>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°6 :</strong> Sujet &gt; 80 ans : bithérapie d'emblée déconseillée — max 3 principes actifs — objectif PAS &lt; 140 mmHg si &lt; 120 non toléré.</div>
+  </div>
+
+  <div class="alert alert-green" style="margin-top:4px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>À retenir :</strong> Seul 1 hypertendu sur 4 est contrôlé en France — 1 traité sur 2 — 1 hypertendu sur 2 traité.<br>AMT = règle des 3 (3 mesures matin + 3 soir, 3 jours). MAPA 24 h = examen de référence.<br>Bilan initial minimal : ionogramme + créatinine + DFG + glycémie à jeun + EAL + protéinurie + ECG.</div>
+  </div>
+</div>
+
+</div><!-- /page -->
+</body>
+</html>
