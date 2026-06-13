@@ -257,10 +257,10 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 247 | [x] | Diabète sucré de type 1 et 2 de l enfant et de l adulte | 247_Diabete_sucre.html |
 | 248 | [x] | Prévention primaire par la nutrition chez l adulte et l enfant | 248_Prevention_primaire_nutrition.html |
 | 249 | [x] | Modifications thérapeutiques du mode de vie | 249_modifications_therapeutiques_mode_vie.html |
-| 250 | [x] | Dénutrition chez l adulte et l enfant | 250_Denutrition.html |
-| 251 | [x] | Amaigrissement à tous les âges | 251_Amaigrissement.html |
+| 250 | [x] | Dénutrition chez l adulte et l enfant | 250_Denutrition_v2.html |
+| 251 | [x] | Amaigrissement à tous les âges | 251_Amaigrissement_v2.html |
 | 252 | [x] | Troubles nutritionnels chez le sujet âgé | 252_troubles_nutritionnels_SA.html |
-| 253 | [x] | Obésité de l enfant et de l adulte | 253_obesite.html |
+| 253 | [x] | Obésité de l enfant et de l adulte | 253_obesite_v2.html |
 | 254 | [x] | Besoins nutritionnels de la femme enceinte | 254_besoins_nutritionnels_enceinte.html |
 | 255 | [ ] | Diabète gestationnel | — |
 | 256 | [x] | Aptitude au sport chez l adulte et l enfant | 256_Aptitude_sport_nutrition_v2.html |

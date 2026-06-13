@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 250 — Dénutrition chez l'adulte et l'enfant</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#D85A30 50%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .oic-label{display:inline-flex;align-items:center;gap:4px;background:var(--purple-light);color:var(--purple);border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:700;margin-bottom:10px;}
+  .obj-box{background:var(--purple-light);border-radius:10px;padding:10px 14px;margin-bottom:14px;}
+  .obj-box-head{font-size:.7rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .obj-box-head svg{width:14px;height:14px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-item{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text);padding:3px 0;}
+  .obj-item::before{content:"";flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--purple);margin-top:7px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">ITEM 250</div>
+  <h1>Dénutrition chez l'adulte et l'enfant</h1>
+  <div class="header-sub">Épidémiologie · Diagnostic · Prise en charge · Syndrome de renutrition</div>
+  <div class="header-tags">
+    <span class="htag">HAS 2019 (adulte / enfant)</span>
+    <span class="htag">HAS 2021 (PA &gt; 70 ans)</span>
+    <span class="htag">Nutrition clinique</span>
+    <span class="htag">SFNCM</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Savoir <strong>dépister</strong> la dénutrition (critères phénotypique + étiologique, jamais albumine seule), <strong>grader la sévérité</strong> (seuils différents selon l'âge : enfant / adulte &lt; 70 ans / PA ≥ 70 ans), <strong>choisir le bon support nutritionnel</strong> (alimentation enrichie → CNO → NE → NP), et prévenir le <strong>syndrome de renutrition</strong> (urgence métabolique mortelle dans les 72 premières heures).
+</div>
+
+<hr>
+
+<!-- ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître l'épidémiologie de la dénutrition (prévalence hospitalière et en population générale)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Prévalence à l'hôpital
+    </div>
+    <div class="kv-row"><span class="kv-key">Enfants hospitalisés</span><span class="kv-val">10%</span></div>
+    <div class="kv-row"><span class="kv-key">Adultes hospitalisés</span><span class="kv-val">30%</span></div>
+    <div class="kv-row"><span class="kv-key">Sujets âgés &gt; 70 ans hospitalisés</span><span class="kv-val"><span class="badge badge-red">50%</span></span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Prévalence hors hôpital
+    </div>
+    <div class="kv-row"><span class="kv-key">70-79 ans à domicile</span><span class="kv-val">4%</span></div>
+    <div class="kv-row"><span class="kv-key">≥ 80 ans à domicile</span><span class="kv-val">10%</span></div>
+    <div class="kv-row"><span class="kv-key">Prévalence globale France</span><span class="kv-val">~ 3 millions</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- PHYSIOPATHOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie — Situations à risque
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Identifier les situations à risque de dénutrition chez l'adulte (baisse des ingesta, malabsorption, pertes)</div>
+  <div class="obj-item">Identifier les situations à risque de dénutrition chez l'enfant (mêmes mécanismes que l'adulte)</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  On parle de <strong>situations à risque</strong> (pas de "facteurs de risque"). Toute pathologie sévère ou chronique où les apports ne couvrent pas les besoins. Identiques chez l'adulte et l'enfant.
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Diminution des entrées
+    </div>
+    <ul class="lst">
+      <li><strong>Baisse des ingesta</strong> — cause la plus fréquente ++</li>
+      <li>Malabsorption digestive (maldigestion)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Augmentation des sorties
+    </div>
+    <ul class="lst">
+      <li>Dépenses énergétiques augmentées (rare)</li>
+      <li>Pertes digestives : entéropathies exsudatives</li>
+      <li>Pertes urinaires : glycosurie, sd néphrotique</li>
+      <li>Pertes cutanées : brûlures étendues</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- CONSÉQUENCES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Conséquences de la dénutrition
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les conséquences de la dénutrition (musculaires, immunitaires, cutanées, digestives, cardiaques, mortalité) et les spécificités pédiatriques</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Communes à tous les âges
+    </div>
+    <table>
+      <tr><td><strong>Musculaire</strong></td><td>Sarcopénie, asthénie, chutes</td></tr>
+      <tr><td><strong>Immunitaire</strong></td><td>Immunodépression → infections</td></tr>
+      <tr><td><strong>Cutanée</strong></td><td>Escarres, cicatrisation altérée</td></tr>
+      <tr><td><strong>Digestive</strong></td><td>Atrophie villositaire → malabsorption</td></tr>
+      <tr><td><strong>Cardiaque</strong></td><td>Cardiomyopathie, arythmies</td></tr>
+      <tr><td><strong>Mortalité</strong></td><td>Morbi-mortalité augmentée</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Spécifiques à l'enfant
+    </div>
+    <table>
+      <tr><td><strong>Croissance</strong></td><td>Retard staturo-pondéral</td></tr>
+      <tr><td><strong>Cognitif</strong></td><td>Retard développement psychomoteur</td></tr>
+      <tr><td><strong>Osseux</strong></td><td>Ostéopénie, retard pubertaire</td></tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- DIAGNOSTIC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Critères diagnostiques
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les critères diagnostiques de la dénutrition chez l'enfant (phénotypiques + étiologiques, sévérité selon courbes IOTF)</div>
+  <div class="obj-item">Connaître les critères diagnostiques de la dénutrition chez l'adulte de moins de 70 ans (HAS 2019 : phénotypique + étiologique, seuils IMC/albumine)</div>
+  <div class="obj-item">Connaître les critères diagnostiques de la dénutrition chez la personne âgée de plus de 70 ans (HAS 2021 : seuils différents, IMC &lt; 22/20, sarcopénie)</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  Règle universelle (HAS 2019) : diagnostic = <strong>≥ 1 critère phénotypique + ≥ 1 critère étiologique</strong>. L'albumine seule ne suffit pas au diagnostic.
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Critères étiologiques — communs à tous les âges (1 seul suffit)
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Mécanisme</th><th>Définition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Réduction des ingesta</strong></td><td>≥ 50% pendant &gt; 1 semaine, OU toute réduction &gt; 2 semaines vs besoins habituels</td></tr>
+      <tr><td><strong>Absorption réduite</strong></td><td>Maldigestion, malabsorption</td></tr>
+      <tr><td><strong>Agression / hypercatabolisme</strong></td><td>± sd inflammatoire : pathologie aiguë, chronique évolutive ou maligne</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Enfant &lt; 18 ans
+    </div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px;">Critères phénotypiques (1 suffit)</div>
+    <ul class="lst">
+      <li>Perte poids ≥ 5% / 1 mois</li>
+      <li>Perte poids ≥ 10% / 6 mois</li>
+      <li>Perte poids ≥ 10% vs habituel</li>
+      <li>IMC &lt; courbe IOTF 18,5</li>
+      <li>Stagnation pondérale (2 couloirs en dessous)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Adulte &lt; 70 ans
+    </div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px;">Critères phénotypiques (1 suffit)</div>
+    <ul class="lst">
+      <li>Perte poids ≥ 5% / 1 mois</li>
+      <li>Perte poids ≥ 10% / 6 mois</li>
+      <li>Perte poids ≥ 10% vs habituel</li>
+      <li>IMC &lt; 18,5</li>
+      <li>Réduction masse ou force musculaire quantifiée</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      PA ≥ 70 ans <span class="badge badge-amber">HAS 2021</span>
+    </div>
+    <div style="font-size:.75rem;color:var(--muted);margin-bottom:6px;">Critères phénotypiques (1 suffit)</div>
+    <ul class="lst">
+      <li>Perte poids ≥ 5% / 1 mois</li>
+      <li>Perte poids ≥ 10% / 6 mois</li>
+      <li>Perte poids ≥ 10% vs habituel</li>
+      <li>IMC &lt; 22 <span class="badge badge-amber">seuil plus élevé !</span></li>
+      <li>Sarcopénie confirmée (force + masse)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SÉVÉRITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Grading de la sévérité
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Enfant &lt; 18 ans
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Critère</th><th><span class="phase phase-mod">Modérée</span></th><th><span class="phase phase-sev">Sévère</span></th></tr></thead>
+    <tbody>
+      <tr><td>Perte poids / 1 mois</td><td>≥ 5% et ≤ 10%</td><td>&gt; 10%</td></tr>
+      <tr><td>Perte poids / 6 mois</td><td>≥ 10% et ≤ 15%</td><td>&gt; 15%</td></tr>
+      <tr><td>IMC (courbes IOTF)</td><td>IOTF 17 &lt; IMC &lt; IOTF 18,5</td><td>IMC ≤ IOTF 17</td></tr>
+      <tr><td>Stagnation pondérale</td><td>2 à 3 couloirs en dessous</td><td>≥ 3 couloirs en dessous</td></tr>
+      <tr><td>Statural</td><td>—</td><td>Infléchissement ≥ 1 couloir</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Adulte &lt; 70 ans
+    </div>
+    <table class="table-teal">
+      <thead><tr><th>Critère</th><th><span class="phase phase-mod">Modérée</span></th><th><span class="phase phase-sev">Sévère</span></th></tr></thead>
+      <tbody>
+        <tr><td>Poids / 1 mois</td><td>≥ 5% et ≤ 10%</td><td>&gt; 10%</td></tr>
+        <tr><td>Poids / 6 mois</td><td>≥ 10% et ≤ 15%</td><td>&gt; 15%</td></tr>
+        <tr><td>Poids vs habituel</td><td>≥ 10% et ≤ 15%</td><td>≥ 15%</td></tr>
+        <tr><td>IMC (kg/m²)</td><td>17 &lt; IMC &lt; 18,5</td><td>≤ 17</td></tr>
+        <tr><td>Albuminémie</td><td>30–35 g/L</td><td>&lt; 30 g/L</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      PA ≥ 70 ans <span class="badge badge-amber">HAS 2021</span>
+    </div>
+    <table class="table-red">
+      <thead><tr><th>Critère</th><th><span class="phase phase-mod">Modérée</span></th><th><span class="phase phase-sev">Sévère</span></th></tr></thead>
+      <tbody>
+        <tr><td>Poids / 1 mois</td><td>≥ 5% et &lt; 10%</td><td>≥ 10%</td></tr>
+        <tr><td>Poids / 6 mois</td><td>≥ 10% et &lt; 15%</td><td>≥ 15%</td></tr>
+        <tr><td>Poids vs habituel</td><td>≥ 10% et &lt; 15%</td><td>≥ 15%</td></tr>
+        <tr><td>IMC (kg/m²)</td><td>&lt; 22</td><td>&lt; 20</td></tr>
+        <tr><td>Sarcopénie confirmée</td><td>En faveur</td><td>En faveur</td></tr>
+        <tr><td>Albuminémie</td><td>30–35 g/L (en faveur)</td><td>&lt; 30 g/L (critère)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- BILAN COMPLÉMENTAIRE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan complémentaire
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les examens complémentaires permettant de qualifier une dénutrition (albuminémie, CRP, évaluation de la masse et force musculaires)</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Examens pour qualifier la dénutrition
+  </div>
+  <div class="kv-row"><span class="kv-key">Albuminémie</span><span class="kv-val">Marqueur de sévérité — interprétée avec la CRP</span></div>
+  <div class="kv-row"><span class="kv-key">CRP</span><span class="kv-val">Albumine faussement basse si inflammation</span></div>
+  <div class="kv-row"><span class="kv-key">Force musculaire</span><span class="kv-val">Grip test (dynamomètre)</span></div>
+  <div class="kv-row"><span class="kv-key">Masse musculaire</span><span class="kv-val">DEXA, BIA, scanner, IRM</span></div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <strong>Piège :</strong> Un syndrome inflammatoire abaisse l'albumine indépendamment de la dénutrition. L'albumine est un marqueur de sévérité, <strong>non un critère diagnostique isolé</strong>.
+</div>
+
+<hr>
+
+<!-- PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge nutritionnelle — Arbre décisionnel SFNCM
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les principes de la complémentation nutritionnelle orale (CNO) : prescription, posologie, règles d'utilisation</div>
+  <div class="obj-item">Connaître les principes de la nutrition entérale (NE) : site gastrique vs jéjunal, composition des mélanges, indications</div>
+  <div class="obj-item">Connaître les principes de la nutrition parentérale (NP) : voie d'abord, composition des poches, supplémentation obligatoire en micronutriments</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  Décision selon : <strong>sévérité de la dénutrition</strong> + <strong>réduction des ingesta</strong> + <strong>fonctionnalité du tube digestif</strong> + <strong>troubles de la déglutition / conscience</strong>. Traiter en parallèle la cause.
+</div>
+
+<ul class="steps">
+  <li>
+    <span class="step-num">1</span>
+    <div>
+      <div class="step-title">Adapter et enrichir l'alimentation orale</div>
+      <div class="step-content">Texture (mouliné, haché) · Enrichissement en MG, glucides, protéines · Fractionnement (collations) · Tenir compte des goûts</div>
+    </div>
+  </li>
+  <li>
+    <span class="step-num">2</span>
+    <div>
+      <div class="step-title">Compléments Nutritionnels Oraux (CNO)</div>
+      <div class="step-content">À distance des repas, ≤ 2 unités/j · Pas de substitution aux repas · Varier arômes et textures</div>
+    </div>
+  </li>
+  <li>
+    <span class="step-num">3</span>
+    <div>
+      <div class="step-title">Nutrition Entérale (NE)</div>
+      <div class="step-content">Site gastrique ++ (préférentiel) · Site jéjunal si CI gastrique : RGO réfractaire, gastrectomie, cancer gastrique, sténose duodénale · Mélange sans gluten, complet (protéines + glucides + lipides + vitamines + oligo-éléments)</div>
+    </div>
+  </li>
+  <li>
+    <span class="step-num step-num-red">4</span>
+    <div>
+      <div class="step-title">Nutrition Parentérale (NP)</div>
+      <div class="step-content">Voie veineuse centrale ++ · Poches compartimentées (AA + glucose + lipides ± électrolytes) · <strong>Sans micronutriments</strong> → supplémenter systématiquement poly-vitamines + oligo-éléments quotidiennement</div>
+    </div>
+  </li>
+</ul>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <strong>Piège NP :</strong> Les poches de NP ne contiennent pas de micronutriments — prescrire <strong>systématiquement</strong> poly-vitamines et oligo-éléments en supplément chaque jour.
+</div>
+
+<hr>
+
+<!-- SYNDROME DE RENUTRITION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Syndrome de renutrition
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les modalités du diagnostic du syndrome de renutrition (hypophosphorémie dans les 72h, signes cardiaques et neuro-musculaires)</div>
+  <div class="obj-item">Connaître les modalités de prévention du syndrome de renutrition (correction phosphore + B1, renutrition progressive, surveillance biologique)</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  Complication <strong>potentiellement mortelle</strong> — quelle que soit la voie de renutrition (orale, entérale ou parentérale). Survient dans les <strong>72 premières heures</strong>.
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Biologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Hypophosphorémie</span><span class="kv-val"><span class="badge badge-red">Clé ++</span></span></div>
+    <div class="kv-row"><span class="kv-key">Hypokaliémie</span><span class="kv-val">Associée</span></div>
+    <div class="kv-row"><span class="kv-key">Hypomagnésémie</span><span class="kv-val">Associée</span></div>
+    <div class="kv-row"><span class="kv-key">Déficit en vitamine B1</span><span class="kv-val">Thiamine</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Clinique (polymorphe)
+    </div>
+    <table>
+      <tr><td><strong>Cardiaque</strong></td><td>Arythmies, syncope, insuffisance cardiaque aiguë</td></tr>
+      <tr><td><strong>Neuro-musculaire</strong></td><td>Paresthésies, fasciculations, tétanie, paralysies, rhabdomyolyse</td></tr>
+      <tr><td><strong>Neurologique</strong></td><td>Confusion, encéphalopathie, convulsions</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prévention et surveillance
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Action</th><th>Modalité</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Correction phosphore</strong></td><td>Systématique avant et pendant la renutrition</td></tr>
+      <tr><td><strong>Correction K, Mg</strong></td><td>Si déficit constaté</td></tr>
+      <tr><td><strong>Supplémentation B1</strong></td><td>Thiamine systématique</td></tr>
+      <tr><td><strong>Renutrition progressive</strong></td><td>Apports augmentés graduellement</td></tr>
+      <tr><td><strong>Surveillance biologique</strong></td><td>Phosphorémie + kaliémie avant ET les premiers jours</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Points tombables ECNi
+  </div>
+  <ul class="lst">
+    <li><strong>Diagnostic = phénotypique + étiologique</strong> — jamais albumine isolée</li>
+    <li>Seuil IMC PA ≥ 70 ans : <strong>&lt; 22</strong> (modérée) / <strong>&lt; 20</strong> (sévère) — bien plus élevé qu'adulte &lt; 70 ans (18,5 / 17)</li>
+    <li>Albumine : <strong>30–35 g/L</strong> → modérée, <strong>&lt; 30 g/L</strong> → sévère — toujours croiser avec la CRP</li>
+    <li>CNO : jamais à la place des repas, à distance, ≤ 2/j</li>
+    <li>NE : site gastrique en 1re intention — jéjunal si RGO réfractaire ou gastrectomie</li>
+    <li>NP : penser à prescrire <strong>poly-vitamines + oligo-éléments</strong> (absents des poches)</li>
+    <li>Syndrome de renutrition : <strong>hypophosphorémie dans les 72h</strong> — prévention = corriger Po4 + B1, renutrition progressive, surveiller phosphorémie et kaliémie</li>
+    <li>Chez l'enfant : l'infléchissement statural (≥ 1 couloir) signe une <strong>dénutrition sévère</strong></li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <strong>Piège classique :</strong> Ne pas confondre les seuils IMC selon l'âge. Chez la PA, IMC &lt; 22 = dénutrition modérée — un IMC de 20 qui serait "normal" chez l'adulte jeune signe une dénutrition sévère chez le sujet âgé.
+</div>
+
+</div>
+</body>
+</html>
