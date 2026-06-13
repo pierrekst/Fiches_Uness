@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 325 — Risque iatrogène, erreur médicamenteuse</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .oic-label{display:inline-flex;align-items:center;gap:4px;background:var(--purple-light);color:var(--purple);border-radius:20px;padding:2px 10px;font-size:.7rem;font-weight:700;margin-bottom:10px;}
+
+  /* OBJECTIFS DE SECTION (ce qui est attendu) */
+  .obj-box{background:var(--purple-light);border-radius:10px;padding:10px 14px;margin-bottom:14px;}
+  .obj-box-head{font-size:.7rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .obj-box-head svg{width:14px;height:14px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-item{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text);padding:3px 0;}
+  .obj-rank{flex-shrink:0;width:18px;height:18px;border-radius:4px;font-size:.64rem;font-weight:800;display:flex;align-items:center;justify-content:center;color:#fff;margin-top:1px;}
+  .rank-a{background:var(--red);}
+  .rank-b{background:var(--muted);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 325</div>
+  <h1>Risque iatrogène &amp; erreur médicamenteuse</h1>
+  <div class="header-sub">Identification et gestion des risques liés aux médicaments et aux biomatériaux</div>
+  <div class="header-tags">
+    <span class="htag">Pharmacovigilance</span>
+    <span class="htag">Addictovigilance</span>
+    <span class="htag">Matériovigilance</span>
+    <span class="htag">Circuit du médicament</span>
+    <span class="htag">ONIAM</span>
+    <span class="htag">Contrefaçon</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS GLOBAUX -->
+<div class="objectifs">
+  <strong>Vision d'ensemble :</strong> Cet item porte sur l'identification et la gestion de tous les risques liés aux produits de santé.
+  Il faut maîtriser <strong>3 grandes vigilances</strong> (pharmaco-, addicto-, matério-) avec leur circuit de déclaration respectif,
+  comprendre les <strong>mécanismes physiopathologiques</strong> des principales pathologies iatrogènes,
+  sécuriser le <strong>circuit du médicament</strong> à chaque étape (prescription → administration),
+  et connaître les recours juridiques via l'<strong>ONIAM</strong>. Tout tableau clinique inexpliqué doit faire évoquer une cause médicamenteuse.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 1 — DÉFINITIONS FONDAMENTALES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions fondamentales
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître la définition d'un effet indésirable médicamenteux (EIM)</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Comprendre les enjeux concernant les risques liés aux médicaments et aux biomatériaux</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître la définition d'une prescription médicamenteuse inappropriée (PMI)</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      EIM — Effet indésirable médicamenteux
+    </div>
+    <p style="font-size:.83rem;">Toute réaction <strong>nocive et non voulue</strong> suspectée d'être due à un médicament, dans les conditions d'utilisation <strong>conforme ou non conforme</strong> à l'AMM.</p>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-red">Surdosage</span>
+      <span class="pill pill-red">Mésusage</span>
+      <span class="pill pill-red">Abus</span>
+      <span class="pill pill-amber">Hors-AMM</span>
+      <span class="pill pill-amber">Grossesse</span>
+      <span class="pill pill-amber">Interaction</span>
+      <span class="pill pill-blue">Exposition prof.</span>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Enjeux (OIC-02)
+    </div>
+    <div class="kv-row"><span class="kv-key">Individuel</span><span class="kv-val">Bon usage / prise en charge</span></div>
+    <div class="kv-row"><span class="kv-key">Santé publique</span><span class="kv-val">Surveillance en vie réelle</span></div>
+    <div class="kv-row"><span class="kv-key">Objectif final</span><span class="kv-val">Ajuster les décisions réglementaires</span></div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      PMI — Prescription médicamenteuse inappropriée (OIC-03)
+    </div>
+    <p style="font-size:.83rem;">Prescription engendrant <strong>plus de risques que de bénéfices</strong>.</p>
+    <ul class="lst" style="margin-top:6px;">
+      <li>Sans indication / hors AMM / hors recommandations</li>
+      <li>Non prise en compte : âge, poids, IRC, IHC, grossesse</li>
+      <li>Interactions médicamenteuses ignorées</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 2 — MÉCANISMES PHYSIOPATHOLOGIQUES -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Mécanismes des pathologies induites par les médicaments
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître la prévention des dysfonctionnements du circuit du médicament</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Définir et expliquer les mécanismes généraux des principales pathologies induites par les médicaments</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Règle des 5B — Prévention des erreurs (OIC-04)
+    </div>
+    <div class="grid2" style="margin-top:6px;gap:6px;margin-bottom:0;">
+      <div style="background:var(--teal-light);border-radius:8px;padding:8px 10px;text-align:center;font-weight:700;color:var(--teal);font-size:.85rem;">Bon Patient</div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:8px 10px;text-align:center;font-weight:700;color:var(--teal);font-size:.85rem;">Bon Médicament</div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:8px 10px;text-align:center;font-weight:700;color:var(--teal);font-size:.85rem;">Bonne Dose</div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:8px 10px;text-align:center;font-weight:700;color:var(--teal);font-size:.85rem;">Bonne Voie</div>
+    </div>
+    <div style="background:var(--teal-light);border-radius:8px;padding:8px 10px;text-align:center;font-weight:700;color:var(--teal);font-size:.85rem;margin-top:6px;">Bon Moment</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Types A et B (OIC-05)
+    </div>
+    <table class="table-blue">
+      <tr><th>Type</th><th>Mécanisme</th><th>Exemple</th></tr>
+      <tr>
+        <td><strong>A — Prévisible</strong><br><span style="font-size:.78rem;color:var(--muted);">dose-dépendant</span></td>
+        <td>Effet pharmacodynamique direct</td>
+        <td>Syndrome extra-pyramidal (neuroleptiques), IRA sous IEC (déshydratation)</td>
+      </tr>
+      <tr>
+        <td><strong>B — Non prévisible</strong><br><span style="font-size:.78rem;color:var(--muted);">idiosyncrasique</span></td>
+        <td>Indépendant des propriétés pharmacodynamiques</td>
+        <td>Réaction immuno-allergique</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Principales pathologies iatrogènes par système
+  </div>
+  <table class="table-teal">
+    <tr><th>Syndrome / Organe</th><th>Mécanisme</th><th>Médicaments en cause</th></tr>
+    <tr>
+      <td><strong>Extra-pyramidal</strong></td>
+      <td>Blocage dopaminergique</td>
+      <td>Neuroleptiques, métoclopramide</td>
+    </tr>
+    <tr>
+      <td><strong>Atropinique</strong></td>
+      <td>Antagonisme muscarinique (périphérique &gt; central si forte dose)</td>
+      <td>Niveau 3 : amitriptyline, clozapine, imipramine<br>Niveau 1 : acide valproïque, olanzapine</td>
+    </tr>
+    <tr>
+      <td><strong>Malin des neuroleptiques</strong></td>
+      <td>Idiosyncrasique : hyperthermie + rigidité + troubles conscience + dysautonomie</td>
+      <td>Tous les neuroleptiques</td>
+    </tr>
+    <tr>
+      <td><strong>Sérotoninergique</strong></td>
+      <td>Hyperactivation 5-HT1A (interaction &gt; monothérapie)</td>
+      <td>IMAO, ISRS, tramadol, sélégiline</td>
+    </tr>
+    <tr>
+      <td><strong>Bradycardie / Trouble conduction</strong></td>
+      <td>Chronotrope négatif</td>
+      <td>Bêtabloquants, digoxine, anticalciques non DHP, anti-arythmiques</td>
+    </tr>
+    <tr>
+      <td><strong>Allongement QT / Torsade</strong></td>
+      <td>Canaux K+ ou hypokaliémie</td>
+      <td>Anti-arythmiques, neuroleptiques, macrolides, antihistaminiques, diurétiques</td>
+    </tr>
+    <tr>
+      <td><strong>Insuffisance cardiaque</strong></td>
+      <td>Inotrope négatif / toxicité myocardique</td>
+      <td>Bêtabloquants, anticalciques non DHP, anthracyclines</td>
+    </tr>
+    <tr>
+      <td><strong>HTA</strong></td>
+      <td>Rétention hydrosodée ou vasoconstriction</td>
+      <td>Corticoïdes, vasoconstricteurs nasaux (alpha-adrénergiques)</td>
+    </tr>
+    <tr>
+      <td><strong>Hypotension orthostatique</strong></td>
+      <td>Effet dopaminergique, alpha-bloquant, vasodilatateur ou diurétique</td>
+      <td>Lévodopa, antidépresseurs tricycliques, dérivés nitrés, diurétiques</td>
+    </tr>
+    <tr>
+      <td><strong>Hépatite</strong></td>
+      <td>Toxique (dépassement glutathion) ou immuno-allergique</td>
+      <td>Paracétamol (surdosage / dénutrition / alcoolisme)</td>
+    </tr>
+    <tr>
+      <td><strong>Ostéoporose / Myopathie / Tendinopathie</strong></td>
+      <td>Effets musculo-squelettiques directs</td>
+      <td>Corticoïdes (os), statines (myalgies), fluoroquinolones (tendons)</td>
+    </tr>
+    <tr>
+      <td><strong>Hématologie</strong></td>
+      <td>Toxique (dose-dépendant, progressif) ou immunologique (brutal, indép. dose)</td>
+      <td>Héparine (TIH), chimiothérapies</td>
+    </tr>
+    <tr>
+      <td><strong>Bronchospasme</strong></td>
+      <td>Blocage récepteurs bêta-adrénergiques bronchiques</td>
+      <td>Bêtabloquants</td>
+    </tr>
+    <tr>
+      <td><strong>Dépression respiratoire</strong></td>
+      <td>Effet central</td>
+      <td>Morphiniques</td>
+    </tr>
+    <tr>
+      <td><strong>Auto-immunité</strong></td>
+      <td>Inhibition check-points PD1/PDL1</td>
+      <td>Nivolumab, ipilimumab</td>
+    </tr>
+    <tr>
+      <td><strong>Neuropathies périphériques</strong></td>
+      <td>Toxicité directe</td>
+      <td>Vincristine, sels de platine, fludarabine</td>
+    </tr>
+    <tr>
+      <td><strong>Diabète / Hypothyroïdie</strong></td>
+      <td>Effets endocriniens</td>
+      <td>Corticoïdes (diabète), anti-VEGF TKI (hypothyroïdie)</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Le métoclopramide est un neuroleptique "caché" — peut causer un syndrome extra-pyramidal. <br>Le syndrome sérotoninergique survient surtout par <strong>association</strong> de médicaments sérotoninergiques.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 3 — ÉPIDÉMIOLOGIE & SUJET ÂGÉ -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie des risques iatrogènes &amp; population âgée
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître l'épidémiologie des risques iatrogènes</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître les caractéristiques des EIM chez les personnes âgées</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Étude ENEIS — Chiffres clés
+    </div>
+    <div class="kv-row"><span class="kv-key">Admissions dues à un EIG</span><span class="kv-val">3 – 5 %</span></div>
+    <div class="kv-row"><span class="kv-key">EIG liés à des produits de santé (parmi hosp.)</span><span class="kv-val">~50 %</span></div>
+    <div class="kv-row"><span class="kv-key">EIG évitables parmi ceux liés aux produits de santé</span><span class="kv-val">1/2</span></div>
+    <div class="kv-row"><span class="kv-key">Incidence EIG en cours d'hospitalisation</span><span class="kv-val">~7 %</span></div>
+    <div class="kv-row"><span class="kv-key">EIG évitables en cours d'hospit.</span><span class="kv-val">2/5</span></div>
+    <div class="kv-row"><span class="kv-key">EIG entraînant prolongation d'hospit.</span><span class="kv-val">2/5</span></div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      EIM chez le sujet âgé — Spécificités (OIC-07)
+    </div>
+    <ul class="lst">
+      <li><strong>Fréquence et gravité accrues</strong> : polymédication, comorbidités, modifications pharmacocinétiques liées à l'âge</li>
+      <li><strong>Symptomatologie atypique</strong> : chute, confusion, déshydratation plutôt que signes classiques</li>
+    </ul>
+    <p style="font-size:.8rem;margin-top:8px;font-weight:700;">Médicaments les plus souvent en cause :</p>
+    <div class="pills" style="margin-top:4px;">
+      <span class="pill pill-red">Cardiovasculaires</span>
+      <span class="pill pill-red">Psychotropes</span>
+      <span class="pill pill-red">Anticoagulants</span>
+      <span class="pill pill-amber">AINS</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 4 — PHARMACOVIGILANCE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Pharmacovigilance
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître les objectifs et principes de la pharmacovigilance</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître le principe d'imputabilité</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître la déclaration d'un effet indésirable suspecté d'être dû à un médicament</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Objectifs &amp; acteurs — OIC-08
+  </div>
+  <p style="font-size:.83rem;margin-bottom:10px;"><strong>Définition :</strong> Surveillance, évaluation, prévention et gestion du risque d'EIM en situation réelle. Objectif : améliorer le rapport bénéfice/risque au niveau individuel et collectif.</p>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.8rem;font-weight:700;margin-bottom:4px;">Produits concernés</p>
+      <ul class="lst">
+        <li>Médicaments sous AMM / ATU / RTU</li>
+        <li>Médicaments homéopathiques et phytothérapeutiques</li>
+        <li>Médicaments dérivés du sang</li>
+        <li>Préparations magistrales, hospitalières, officinales</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.8rem;font-weight:700;margin-bottom:4px;">Acteurs &amp; bases de données</p>
+      <ul class="lst">
+        <li>PS (médecins, pharmaciens, dentistes, sages-femmes) — déclaration <strong>obligatoire</strong></li>
+        <li>Entreprises exploitant les médicaments, patients, associations</li>
+        <li><strong>CRPV</strong> → <strong>ANSM</strong> (Base Nationale PV) → <strong>EMA</strong> (Eudravigilance) → <strong>OMS</strong> (VigiBase®)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imputabilité — OIC-09
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Estimation du <strong>lien de causalité</strong> entre un médicament et un EIM. Évaluée par le CRPV.</p>
+    <p style="font-size:.8rem;font-weight:700;margin-bottom:4px;">Méthode française — 3 critères :</p>
+    <ul class="lst">
+      <li><strong>Chronologique :</strong> délai de survenue, évolution à l'arrêt, re-administration</li>
+      <li><strong>Sémiologique :</strong> facteurs favorisants, absence de diagnostic différentiel, propriétés pharmacologiques</li>
+      <li><strong>Bibliographique :</strong> données publiées</li>
+    </ul>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Déclaration EIM — OIC-10
+    </div>
+    <table class="table-red">
+      <tr><th>Qui</th><th>Quoi</th><th>Comment</th></tr>
+      <tr>
+        <td>PS (médecin, pharmacien, dentiste, sage-femme) — <strong>obligatoire</strong><br>Patients, associations</td>
+        <td>Tout EIM suspecté (y compris surdosage, abus, erreur médicamenteuse)</td>
+        <td>Portail signalement.social-sante.gouv.fr<br>Formulaire Cerfa → CRPV local</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 5 — ADDICTOVIGILANCE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Addictovigilance
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Expliquer les objectifs et principes de l'addictovigilance</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître le mécanisme de déclaration d'un abus, d'une dépendance et des usages détournés liés à toute substance psychoactive</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Objectifs &amp; organisation — OIC-11
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>Définition :</strong> Surveillance, évaluation, prévention et gestion du risque d'abus, usage détourné et pharmacodépendance lié à toute substance psychoactive — <strong>sauf alcool et tabac</strong>.</p>
+    <div class="kv-row"><span class="kv-key">Réseau national</span><span class="kv-val">13 CEIP-A (piloté par ANSM)</span></div>
+    <div class="kv-row"><span class="kv-key">Enquêtes spécifiques</span><span class="kv-val">OPPIDUM / OSIAP / ASOS / DRAMES / DTA / Soumission chimique</span></div>
+    <div class="kv-row"><span class="kv-key">Base nationale</span><span class="kv-val">ANSM → Europe → OMS</span></div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Déclaration addictovigilance — OIC-12
+    </div>
+    <table class="table-red">
+      <tr><th>Qui</th><th>Quoi</th><th>À qui / Comment</th></tr>
+      <tr>
+        <td>Médecin, dentiste, sage-femme, pharmacien (<strong>obligatoire</strong>)<br>Tout PS ou particulier (facultatif)</td>
+        <td>Cas de <strong>pharmacodépendance grave</strong> ou d'<strong>abus grave</strong> d'une substance (sauf alcool, tabac)</td>
+        <td>Au <strong>CEIP</strong> du territoire<br>Fiche ANSM ou portail signalement.social-sante.gouv.fr</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 6 — MATÉRIOVIGILANCE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Matériovigilance &amp; Biomatériaux
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître les objectifs et principes de la matériovigilance</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître la déclaration d'un effet indésirable suspecté d'être dû à des biomatériaux</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Objectifs &amp; organisation — OIC-13
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>Définition :</strong> Surveillance des incidents résultant de l'utilisation des <strong>dispositifs médicaux (DM)</strong> après mise sur le marché — tous DM, quelle que soit leur classe.</p>
+    <table class="table-teal">
+      <tr><th>Échelon</th><th>Acteur</th><th>Rôle principal</th></tr>
+      <tr>
+        <td><strong>National</strong></td>
+        <td>ANSM</td>
+        <td>Enregistre, instruit, décisions de police sanitaire, alertes descendantes</td>
+      </tr>
+      <tr>
+        <td><strong>Régional</strong></td>
+        <td>CRMRV</td>
+        <td>Évalue, alerte ANSM, coordonne les CLMV</td>
+      </tr>
+      <tr>
+        <td><strong>Local</strong></td>
+        <td>CLMV</td>
+        <td>Signale incidents, sensibilise, diffuse alertes</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Déclaration biomatériaux — OIC-14
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>Quoi déclarer :</strong> Tout incident ou risque d'incident grave ayant entraîné ou susceptible d'entraîner la <strong>mort ou une dégradation grave de l'état de santé</strong>.</p>
+    <table class="table-red">
+      <tr><th>Contexte</th><th>À qui</th></tr>
+      <tr>
+        <td>Exercice en établissement de santé ou association d'HAD</td>
+        <td>Au <strong>CLMV</strong></td>
+      </tr>
+      <tr>
+        <td>Hors établissement, fabricant, mandataire, particulier</td>
+        <td>Directement à l'<strong>ANSM</strong> (portail ou courrier materiovigilance@ansm.sante.fr — Cerfa)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Mémo vigilances :</strong> Les 3 vigilances partagent le <strong>même portail de déclaration</strong> : signalement.social-sante.gouv.fr — seul le destinataire final change (CRPV / CEIP / CLMV ou ANSM).</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 7 — ERREUR MÉDICAMENTEUSE & CIRCUIT DU MÉDICAMENT -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Erreur médicamenteuse &amp; sécurisation du circuit
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Identifier une erreur médicamenteuse, ses mécanismes et connaître les conséquences</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Connaître la définition d'une erreur médicamenteuse et de son signalement</div>
+  <div class="obj-item"><span class="obj-rank rank-a">A</span>Identifier et prévenir une erreur sur le circuit du médicament</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Définition &amp; caractérisation — OIC-15
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>HAS :</strong> Tout événement évitable pouvant conduire à une utilisation inappropriée d'un médicament ou à un dommage au patient alors que le médicament est sous contrôle d'un professionnel / patient.</p>
+    <table class="table-red">
+      <tr><th>Dimension</th><th>Exemples</th></tr>
+      <tr><td><strong>Qualification</strong></td><td>Erreur avérée / presque erreur / risque d'erreur</td></tr>
+      <tr><td><strong>Étape</strong></td><td>Prescription, dispensation, préparation, administration, suivi</td></tr>
+      <tr><td><strong>Nature</strong></td><td>Erreur de médicament, dose, voie, patient, moment, omission...</td></tr>
+      <tr><td><strong>Causes</strong></td><td>Communication, facteurs humains, confusion de dénomination, étiquetage</td></tr>
+    </table>
+    <p style="font-size:.8rem;font-weight:700;margin-top:8px;">Conséquences :</p>
+    <div class="pills">
+      <span class="pill pill-red">EI avec dommage</span>
+      <span class="pill pill-amber">Presque accident</span>
+      <span class="pill pill-teal">Sans dommage</span>
+    </div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Signalement de l'erreur médicamenteuse — OIC-16
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>Pourquoi ?</strong> Permettre des mesures correctives pour éviter la récidive + partage d'expériences régional/national.</p>
+    <table class="table-amber">
+      <tr><th>Situation</th><th>Rubrique à sélectionner</th></tr>
+      <tr><td>Erreur <strong>avec</strong> EI</td><td>"Pharmacovigilance"</td></tr>
+      <tr><td>Erreur <strong>sans</strong> EI</td><td>"Erreur médicamenteuse sans effet"</td></tr>
+      <tr><td>EIGS (décès, pronostic vital, déficit fonctionnel perm.)</td><td>"EIGS — volet 1" → ARS + "pharmacovigilance" si médicament impliqué</td></tr>
+    </table>
+    <p style="font-size:.8rem;margin-top:8px;">Portail : signalement.social-sante.gouv.fr — ou CRPV local</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Risques par étape du circuit du médicament — OIC-17
+  </div>
+  <table class="table-blue">
+    <tr><th>Étape</th><th>Principaux risques</th><th>Mesures de prévention</th></tr>
+    <tr>
+      <td><strong>Prescription</strong></td>
+      <td>Oral (interdit sauf force majeure), mauvaise identification patient/prescripteur, abréviations, libellé imprécis, CI non respectées</td>
+      <td>Prescription écrite, identification complète, informatisation avec alertes</td>
+    </tr>
+    <tr>
+      <td><strong>Préparation</strong></td>
+      <td>Défaut d'asepsie, erreur de calcul/dilution, mauvais conditionnement/étiquetage</td>
+      <td>Doubles contrôles, traçabilité des pesées, procédures standardisées</td>
+    </tr>
+    <tr>
+      <td><strong>Transport</strong></td>
+      <td>Altération du conditionnement, rupture chaîne du froid, chariots non scellés</td>
+      <td>Containers identifiés et scellés, respect T°/lumière/humidité</td>
+    </tr>
+    <tr>
+      <td><strong>Stockage</strong></td>
+      <td>Confusion de noms/emballages, mauvaises conditions de conservation</td>
+      <td>Armoires sécurisées, conditionnement unitaire, système plein/vide, référent de stock</td>
+    </tr>
+    <tr>
+      <td><strong>Dispensation</strong></td>
+      <td>Erreur d'analyse ordonnance, erreur de dose/médicament/forme, omission</td>
+      <td>Analyse pharmaceutique complète, délivrance nominative</td>
+    </tr>
+    <tr>
+      <td><strong>Information patient</strong></td>
+      <td>Défaut de communication → erreurs d'auto-administration</td>
+      <td>Information adaptée, vérification par reformulation, support écrit</td>
+    </tr>
+    <tr>
+      <td><strong>Administration</strong></td>
+      <td>Erreur posologie/voie/horaire, oubli, médicament périmé, erreur de patient</td>
+      <td>Vérification identité patient, conserver conditionnement jusqu'au dernier moment — en cas de doute : <strong>ne pas administrer</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Surveillance</strong></td>
+      <td>Absence de suivi clinique/biologique, non-traçabilité des EI</td>
+      <td>Connaitre les paramètres de surveillance par traitement, suivi thérapeutique pharmacologique si nécessaire</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 8 — CONTREFAÇON -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Contrefaçon des médicaments
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître la définition de la contrefaçon d'un médicament</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Apprécier les risques liés à la contrefaçon des médicaments</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Définition — OIC-18
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;"><strong>OMS 1992 :</strong> Fausse représentation <em>délibérée et frauduleuse</em> d'un médicament — sur son identité (nom, composition) et/ou sa source (fabricant, pays).</p>
+    <p style="font-size:.8rem;font-weight:700;margin-bottom:4px;">À distinguer de :</p>
+    <ul class="lst">
+      <li>Violations de brevets</li>
+      <li>Produits non enregistrés (autorisés ailleurs)</li>
+      <li>Produits de qualité inférieure <em>non intentionnelle</em></li>
+    </ul>
+    <p style="font-size:.8rem;margin-top:6px;color:var(--muted);">Le terme "contrefaçon" tend à être abandonné au profit de "faux médicaments" (définition plus large). Convention Medicrime du Conseil de l'Europe.</p>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Risques sanitaires — OIC-19
+    </div>
+    <table class="table-red">
+      <tr><th>Type de problème</th><th>Conséquence</th><th>Exemple</th></tr>
+      <tr>
+        <td><strong>Aucun PA</strong></td>
+        <td>Absence d'efficacité + détournement des soins</td>
+        <td>Avastin® sans PA (USA 2012)</td>
+      </tr>
+      <tr>
+        <td><strong>PA insuffisant</strong></td>
+        <td>Inefficacité + pharmaco-résistance (ATB, antiparasitaires)</td>
+        <td>Metakelfin® sous-dosé (Tanzanie 2009)</td>
+      </tr>
+      <tr>
+        <td><strong>PA en excès</strong></td>
+        <td>Surdosage, EI graves</td>
+        <td>Glibenclamide ×6 → 2 décès (Chine 2009)</td>
+      </tr>
+      <tr>
+        <td><strong>Substances toxiques</strong></td>
+        <td>Décès (métaux lourds, antigel, poisons)</td>
+        <td>Sirop paracétamol/diéthylène glycol → 89 décès (Haïti+Inde)</td>
+      </tr>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Risque amplié</strong> dans les pays en développement (moins protégés contre les trafics).</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BLOC 9 — ONIAM / RESPONSABILITÉ SANS FAUTE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  ONIAM &amp; Responsabilité sans faute
+</div>
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Définir la notion de responsabilité sans faute et le rôle de l'Office national d'indemnisation des accidents médicaux (ONIAM)</div>
+  <div class="obj-item"><span class="obj-rank rank-b">B</span>Connaître les modalités de saisine de l'ONIAM</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Responsabilité sans faute &amp; ONIAM — OIC-21
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Art. L1142-1 CSP : 2 régimes — <strong>avec faute</strong> (assureur de l'acteur de santé) et <strong>sans faute / aléa thérapeutique</strong> (indemnisation par l'ONIAM au titre de la solidarité nationale).</p>
+    <div class="kv-row"><span class="kv-key">ONIAM</span><span class="kv-val">Office National d'Indemnisation des Accidents Médicaux, Affections Iatrogènes et Infections Nosocomiales</span></div>
+    <div class="kv-row"><span class="kv-key">CCI</span><span class="kv-val">Commission de Conciliation et d'Indemnisation — présidée par un magistrat</span></div>
+    <div class="kv-row"><span class="kv-key">Procédure</span><span class="kv-val">Gratuite, amiable, rapide</span></div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Seuils de gravité &amp; procédure — OIC-20
+    </div>
+    <p style="font-size:.8rem;font-weight:700;margin-bottom:4px;">La CCI peut être saisie si le dommage est <strong>grave</strong> :</p>
+    <ul class="lst">
+      <li>AIPP &gt; <strong>24 %</strong></li>
+      <li>ATAP ≥ <strong>6 mois</strong> consécutifs (ou non consécutifs sur 12 mois)</li>
+      <li>DFT ≥ <strong>50 %</strong> pendant ≥ 6 mois</li>
+      <li>Inaptitude définitive à l'activité professionnelle</li>
+      <li>Troubles particulièrement graves (y compris économiques)</li>
+    </ul>
+    <p style="font-size:.8rem;font-weight:700;margin-top:8px;">Délai de saisine :</p>
+    <div class="kv-row"><span class="kv-key">Prescription</span><span class="kv-val">10 ans à compter de la consolidation</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Procédure de saisine CCI / ONIAM — étapes
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <div><div class="step-title">Constitution du dossier</div><div class="step-content">La victime adresse à la CCI un formulaire + pièces justificatives. Procédure gratuite.</div></div>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <div><div class="step-title">Évaluation par la CCI</div><div class="step-content">Délai : <strong>6 mois</strong> après réception du dossier complet. Avis sur circonstances, causes, nature et étendue des dommages. Expertise par des médecins inscrits sur liste.</div></div>
+    </li>
+    <li>
+      <span class="step-num">3</span>
+      <div><div class="step-title">Offre d'indemnisation</div><div class="step-content">L'ONIAM (aléa) ou l'assureur (faute) dispose de <strong>4 mois</strong> pour proposer une indemnisation. Si acceptée : paiement dans <strong>1 mois</strong>.</div></div>
+    </li>
+    <li>
+      <span class="step-num">4</span>
+      <div><div class="step-title">Substitution de l'ONIAM (étape facultative)</div><div class="step-content">Si l'assureur refuse ou ne répond pas : la victime peut demander à l'ONIAM de se substituer (délai de 4 mois). L'ONIAM se retourne ensuite contre l'assureur.</div></div>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- POINTS-CLÉS À RETENIR -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège classique :</strong> L'EIM inclut les situations hors AMM, le mésusage, l'abus — pas uniquement les conditions "normales" d'utilisation.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Le métoclopramide est un <strong>neuroleptique "caché"</strong> — penser au syndrome extrapyramidal même pour un antiémétique.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> L'addictovigilance exclut <strong>alcool et tabac</strong>. La déclaration se fait au <strong>CEIP</strong> (et non au CRPV).</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Critique :</strong> En cas de doute sur un médicament lors de l'administration → <strong>ne pas administrer</strong> et contacter le prescripteur.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>À retenir :</strong> Les 3 vigilances utilisent le <strong>même portail de signalement</strong> (signalement.social-sante.gouv.fr) mais ont des réseaux distincts : CRPV (pharmaco), CEIP (addicto), CLMV/ANSM (matério).</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>À retenir :</strong> ONIAM = aléa thérapeutique (responsabilité <em>sans faute</em>) — seuil AIPP &gt; 24 %, délai 10 ans post-consolidation. Procédure gratuite via CCI.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Mnémotechnique :</strong> <strong>5B</strong> = Bon Patient, Bon Médicament, Bonne Dose, Bonne Voie, Bon Moment — outil de prévention des erreurs médicamenteuses.</div>
+</div>
+
+</div>
+</body>
+</html>
