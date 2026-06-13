@@ -332,7 +332,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 322 | [ ] | La décision thérapeutique personnalisée | — |
 | 323 | [ ] | Analyser et utiliser les résultats des études cliniques dans la perspe… | — |
 | 324 | [ ] | Éducation thérapeutique | — |
-| 325 | [x] | Identification et gestion des risques liés aux médicaments et aux biom… | 325_risque_iatrogenemedicamenteux.html |
+| 325 | [x] | Identification et gestion des risques liés aux médicaments et aux biom… | 325_risque_iatrogenemedicamenteux_v2.html |
 | 326 | [x] | Cadre réglementaire de la prescription thérapeutique et recommandation… | 326_prescription_reglementaire.html |
 | 327 | [ ] | Principes de la médecine intégrative | — |
 | 328 | [ ] | Thérapeutiques non médicamenteuses et dispositifs médicaux | — |
