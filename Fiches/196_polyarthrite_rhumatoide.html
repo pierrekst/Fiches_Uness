@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 196 — Polyarthrite rhumatoïde</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  .obj-box{background:var(--purple-light);border-radius:10px;padding:10px 14px;margin-bottom:14px;}
+  .obj-box-head{font-size:.7rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .obj-box-head svg{width:14px;height:14px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-item{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text);padding:3px 0;}
+  .obj-item::before{content:"";flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--purple);margin-top:7px;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .das-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:.83rem;}
+  .das-row:last-child{border-bottom:none;}
+  .das-bar{flex:1;height:8px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 196 — Rhumatologie</div>
+  <h1>Polyarthrite rhumatoïde</h1>
+  <div class="header-sub">Rhumatisme inflammatoire chronique le plus fréquent — diagnostic précoce et traitement de fond</div>
+  <div class="header-tags">
+    <span class="htag">Rhumatisme inflammatoire</span>
+    <span class="htag">ACPA / FR</span>
+    <span class="htag">DAS28</span>
+    <span class="htag">Méthotrexate</span>
+    <span class="htag">Biothérapies</span>
+    <span class="htag">Érosions articulaires</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> La polyarthrite rhumatoïde (PR) est un rhumatisme inflammatoire chronique auto-immun touchant préférentiellement les petites articulations des mains et des pieds de manière bilatérale et symétrique. Sa prise en charge repose sur un <strong>diagnostic clinico-biologique précoce</strong> (ACPA très spécifiques), une <strong>quantification rigoureuse de l'activité</strong> (score DAS28) et un <strong>traitement de fond initié rapidement</strong> (méthotrexate en 1re intention) visant la rémission complète pour prévenir les destructions articulaires irréversibles.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : ÉPIDÉMIOLOGIE & PHYSIOPATHOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie &amp; Physiopathologie
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+    Ce qui est attendu
+  </div>
+  <div class="obj-item">Connaître l'épidémiologie de la polyarthrite rhumatoïde</div>
+  <div class="obj-item">Comprendre la physiopathologie (facteurs génétiques, environnementaux, immunologiques)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Prévalence adultes</span><span class="kv-val">0,3 – 0,8 %</span></div>
+    <div class="kv-row"><span class="kv-key">Sex-ratio</span><span class="kv-val">F/H = 3/1</span></div>
+    <div class="kv-row"><span class="kv-key">Pic de début</span><span class="kv-val">40 – 60 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Rang parmi les RIC</span><span class="kv-val">N°1 (le + fréquent)</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Physiopathologie
+    </div>
+    <ul class="lst">
+      <li><strong>Maladie multifactorielle</strong> — cause inconnue</li>
+      <li><strong>Facteurs génétiques :</strong> HLA-DR4, HLA-DR1 (gènes épitopes partagés)</li>
+      <li><strong>Facteurs environnementaux :</strong> tabac (risque x3), infections</li>
+      <li><strong>Auto-immunité :</strong> production d'autoanticorps (FR, ACPA)</li>
+      <li><strong>Synovite :</strong> inflammation synoviale → pannus → érosions osseuses</li>
+      <li><strong>Cytokines :</strong> TNF-alpha, IL-6, IL-1 jouent un rôle central</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : DIAGNOSTIC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic positif
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+    Ce qui est attendu
+  </div>
+  <div class="obj-item">Connaître les modalités du diagnostic positif (clinique)</div>
+  <div class="obj-item">Connaître les examens complémentaires (biologie, radiographie, échographie)</div>
+  <div class="obj-item">Connaître les indications des examens d'imagerie devant une suspicion de PR</div>
+  <div class="obj-item">Reconnaître les images typiques : mains/pieds en phase d'état, érosions radiographiques, nodules rhumatoïdes</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Critères cliniques — Phase d'état
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Articulations cibles</p>
+      <ul class="lst">
+        <li><strong>Poignets</strong></li>
+        <li><strong>MCP</strong> (métacarpophalangiennes)</li>
+        <li><strong>IPP</strong> (interphalangiennes proximales)</li>
+        <li><strong>MTP</strong> (métatarsophalangiennes)</li>
+      </ul>
+      <div class="pills" style="margin-top:8px;">
+        <span class="pill pill-blue">Bilatéral</span>
+        <span class="pill pill-blue">Symétrique</span>
+        <span class="pill pill-blue">&gt; 6 semaines</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Sémiologie inflammatoire</p>
+      <ul class="lst">
+        <li>Douleurs articulaires <strong>inflammatoires</strong> (nuit, réveil, dérouillage)</li>
+        <li>Dérouillage matinal <strong>&gt; 30 min</strong></li>
+        <li>Gonflements articulaires (synovites)</li>
+        <li>Raideur progressive</li>
+        <li>Déformations tardives (col de cygne, boutonnière)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — IPD épargnées dans la PR !</strong><br>Les interphalangiennes distales (IPD) sont classiquement respectées — leur atteinte oriente vers le rhumatisme psoriasique ou l'arthrose érosive.</div>
+</div>
+
+<!-- Critères ACR/EULAR 2010 -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Critères de classification ACR/EULAR 2010 (score ≥ 6/10)
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Critère</th><th>Détail</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr>
+        <td rowspan="4" style="vertical-align:middle; text-align:center;"><strong>Articulations</strong><br><span style="font-size:.75rem;color:var(--muted);">0 – 5 pts</span></td>
+        <td>1 grande articulation</td><td>0</td>
+      </tr>
+      <tr><td>2 – 10 grandes articulations</td><td>1</td></tr>
+      <tr><td>1 – 3 petites articulations</td><td>2</td></tr>
+      <tr><td>4 – 10 petites articulations ou ≥ 10 articulations dont au moins 1 petite</td><td>3 – 5</td></tr>
+      <tr>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Sérologie</strong><br><span style="font-size:.75rem;color:var(--muted);">0 – 3 pts</span></td>
+        <td>FR et ACPA négatifs</td><td>0</td>
+      </tr>
+      <tr><td>FR ou ACPA faiblement positifs (&lt; 3N)</td><td>2</td></tr>
+      <tr><td>FR ou ACPA fortement positifs (≥ 3N)</td><td>3</td></tr>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Réactants de phase aiguë</strong><br><span style="font-size:.75rem;color:var(--muted);">0 – 1 pt</span></td>
+        <td>CRP et VS normales</td><td>0</td>
+      </tr>
+      <tr><td>CRP ou VS anormales</td><td>1</td></tr>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Durée des symptômes</strong><br><span style="font-size:.75rem;color:var(--muted);">0 – 1 pt</span></td>
+        <td>&lt; 6 semaines</td><td>0</td>
+      </tr>
+      <tr><td>≥ 6 semaines</td><td>1</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Bilan biologique -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Bilan biologique
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Examen</th><th>Résultat attendu / Interprétation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>ACPA</strong> (anti-CCP / anti-protéines citrullinées)</td>
+        <td>Spécificité &gt; 95 % — Sensibilité ~70 %<br><span class="badge badge-green">Très spécifique</span> <span class="badge badge-blue">Valeur pronostique</span></td>
+      </tr>
+      <tr>
+        <td><strong>Facteur rhumatoïde (FR)</strong></td>
+        <td>Sensibilité ~70 %, Spécificité ~70 %<br><span class="badge badge-amber">Peu spécifique</span> — positif dans d'autres maladies</td>
+      </tr>
+      <tr>
+        <td><strong>CRP / VS</strong></td>
+        <td>Syndrome inflammatoire inconstant — normal n'exclut pas la PR</td>
+      </tr>
+      <tr>
+        <td><strong>NFS, BH, créatinine</strong></td>
+        <td>Bilan pré-thérapeutique (Méthotrexate)</td>
+      </tr>
+      <tr>
+        <td><strong>AAN</strong> (anticorps antinucléaires)</td>
+        <td>Si ACPA négatifs — pour éliminer LED</td>
+      </tr>
+      <tr>
+        <td><strong>Liquide synovial si ponction</strong></td>
+        <td>Inflammatoire stérile, sans microcristaux</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Imagerie -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    </div>
+    Imagerie — Indications et résultats
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Examen</th><th>Incidences / Protocole</th><th>Résultats attendus</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Radiographies standard</strong><br><span class="badge badge-amber">Systématique</span></td>
+        <td>
+          — Mains + poignets (face)<br>
+          — Avant-pieds (face + 3/4)<br>
+          — Bassin, rachis cervical C1-C2<br>
+          — Thorax<br>
+          — Articulations symptomatiques
+        </td>
+        <td>
+          — Normales en début d'évolution<br>
+          — <strong>Pincement interlignes</strong> (destruction cartilage)<br>
+          — <strong>Érosions osseuses</strong> (géodes marginales)<br>
+          — Ostéoporose juxta-articulaire
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Échographie articulaire</strong><br><span class="badge badge-blue">En cas de doute</span></td>
+        <td>Articulations symptomatiques</td>
+        <td>
+          — Épanchement articulaire<br>
+          — Synovite (épaississement synovial + hyperhémie)<br>
+          — Ténosynovite<br>
+          — Érosions précoces
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Manifestations extra-articulaires -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Manifestations extra-articulaires
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="lst">
+        <li><strong>Nodules rhumatoïdes</strong> — coudes, dos des mains (OIC-11-A)</li>
+        <li><strong>Syndrome de Sjögren secondaire</strong> — xérophtalmie, xérostomie</li>
+        <li><strong>Séreuses</strong> — pleurésie, péricardite</li>
+        <li><strong>Syndrome de Felty</strong> — PR + splénomégalie + leucopénie</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="lst">
+        <li><strong>Amylose AA</strong> — complication tardive (insuffisance rénale)</li>
+        <li><strong>Hématologique</strong> — anémie inflammatoire fréquente</li>
+        <li><strong>Vasculite rhumatoïde</strong> — forme sévère rare</li>
+        <li><strong>Compression médullaire</strong> — luxation atloïdo-axoïdienne (C1-C2)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : ÉVALUATION ACTIVITÉ & SUIVI -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Évaluation de l'activité &amp; Suivi
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+    Ce qui est attendu
+  </div>
+  <div class="obj-item">Connaître les paramètres d'évaluation de l'activité de la PR (DAS28)</div>
+  <div class="obj-item">Connaître les paramètres du suivi clinique, biologique et radiographique</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Score DAS28 — 4 composantes
+  </div>
+  <div class="grid2">
+    <div>
+      <table>
+        <thead><tr><th>Composante</th><th>Mesure</th></tr></thead>
+        <tbody>
+          <tr><td>NAD28</td><td>Nb articulations <strong>douloureuses</strong> sur 28</td></tr>
+          <tr><td>NAG28</td><td>Nb articulations <strong>gonflées</strong> sur 28</td></tr>
+          <tr><td>EVA globale</td><td>Appréciation globale par le patient (0–100 mm)</td></tr>
+          <tr><td>CRP ou VS</td><td>Marqueur biologique d'inflammation</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Les antalgiques et corticoïdes influencent le ressenti mais ne sont <strong>pas inclus</strong> dans le calcul du DAS28.</div>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:8px;">Seuils décisionnels</p>
+      <div style="padding:8px 0;border-bottom:1px solid var(--border);">
+        <span class="phase phase-prod">Rémission</span>
+        <span style="font-size:.83rem;margin-left:8px;">DAS28 <strong>&lt; 2,6</strong></span>
+      </div>
+      <div style="padding:8px 0;border-bottom:1px solid var(--border);">
+        <span class="badge badge-green">Faible activité</span>
+        <span style="font-size:.83rem;margin-left:8px;">DAS28 ≤ 3,2</span>
+      </div>
+      <div style="padding:8px 0;border-bottom:1px solid var(--border);">
+        <span class="phase phase-mod">Activité modérée</span>
+        <span style="font-size:.83rem;margin-left:8px;">DAS28 entre 3,2 et 5,1</span>
+      </div>
+      <div style="padding:8px 0;">
+        <span class="phase phase-sev">Forte activité</span>
+        <span style="font-size:.83rem;margin-left:8px;">DAS28 <strong>&gt; 5,1</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Modalités du suivi
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Type de suivi</th><th>Éléments à surveiller</th><th>Rythme</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Clinique</strong></td>
+        <td>
+          — Activité (DAS28)<br>
+          — Tolérance des traitements<br>
+          — État général + manifestations extra-articulaires<br>
+          — Comorbidités (CV, tumorales, infectieuses)
+        </td>
+        <td>Tous les 1 – 3 mois</td>
+      </tr>
+      <tr>
+        <td><strong>Biologique</strong></td>
+        <td>
+          — CRP / VS (activité de la maladie)<br>
+          — NFS, BH, créatinine (tolérance Méthotrexate)
+        </td>
+        <td>Tous les 3 mois</td>
+      </tr>
+      <tr>
+        <td><strong>Radiographique</strong></td>
+        <td>
+          — Mains + poignets (face)<br>
+          — Avant-pieds (face + 3/4)
+        </td>
+        <td>
+          Tous les <strong>6 mois</strong> pendant 1 an<br>
+          puis tous les <strong>ans</strong> pendant 3 ans
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : DIAGNOSTIC DIFFÉRENTIEL -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic différentiel
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+    Ce qui est attendu
+  </div>
+  <div class="obj-item">Connaître les principales maladies à éliminer devant une polyarthrite récente (clinique, biologie, imagerie)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--muted);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Principales pathologies à éliminer
+  </div>
+  <table>
+    <thead><tr><th>Diagnostic</th><th>Arguments cliniques distinctifs</th><th>Biologie / Imagerie</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>LED</strong> (lupus)</td>
+        <td>Photosensibilité, rash malaire, atteintes systémiques (rein, SNC)</td>
+        <td>AAN+ (anti-dsDNA, anti-Sm) — cytopénies</td>
+      </tr>
+      <tr>
+        <td><strong>Rhumatisme psoriasique</strong></td>
+        <td>Psoriasis cutané/unguéal, IPD touchées, dactylite</td>
+        <td>ACPA généralement négatifs — enthésopathies à l'écho</td>
+      </tr>
+      <tr>
+        <td><strong>SpA périphérique</strong></td>
+        <td>Asymétrique, enthésopathies, oligoarthrite membres inférieurs</td>
+        <td>HLA-B27 possible, sacro-iliite à l'IRM</td>
+      </tr>
+      <tr>
+        <td><strong>Infection virale</strong></td>
+        <td>Parvovirus B19, VHB, VHC, chikungunya — début brutal, contexte épidémique</td>
+        <td>Sérologies virales — évolution spontanément favorable</td>
+      </tr>
+      <tr>
+        <td><strong>RAA</strong></td>
+        <td>Sujet jeune, migrateur, antécédent angine streptococcique</td>
+        <td>ASLO élevés — cardite possible</td>
+      </tr>
+      <tr>
+        <td><strong>Chondrocalcinose / Goutte</strong></td>
+        <td>Accès aigus, terrain métabolique (hyperuricémie, hypercalcémie)</td>
+        <td>Uricémie, calcifications méniscales ; microcristaux dans le liquide</td>
+      </tr>
+      <tr>
+        <td><strong>Arthrose érosive des mains</strong></td>
+        <td>IPD touchées, noeuds de Heberden/Bouchard</td>
+        <td>Pincement + ostéophytes (sans érosions marginales) — ACPA–</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge thérapeutique
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+    Ce qui est attendu
+  </div>
+  <div class="obj-item">Connaître les principes de la prise en charge pharmacologique et non pharmacologique</div>
+  <div class="obj-item">Connaître les objectifs thérapeutiques (rémission, DAS28)</div>
+  <div class="obj-item">Connaître le traitement de fond de 1re intention</div>
+</div>
+
+<!-- Objectifs -->
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>
+    <strong>Objectifs thérapeutiques (stratégie treat-to-target) :</strong><br>
+    Objectif 1 — <strong>Rémission</strong> (DAS28 &lt; 2,6) ou à défaut faible activité (DAS28 ≤ 3,2)<br>
+    Objectif 2 — Prévenir les <strong>lésions structurales</strong> (érosions, pincements)<br>
+    Objectif 3 — Préserver la <strong>qualité de vie</strong> et les capacités socioprofessionnelles
+  </div>
+</div>
+
+<!-- Traitement médicamenteux -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement médicamenteux — Stratégie par paliers
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <div>
+        <div class="step-title">Traitement symptomatique</div>
+        <div class="step-content">
+          <strong>AINS</strong> (rotation possible) — Antalgiques (éviter opioïdes)<br>
+          <strong>Corticoïdes locaux :</strong> infiltrations de corticoïdes sur les articulations inflammatoires, synoviorthèse isotopique
+        </div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num" style="background:var(--blue-light);color:var(--blue);">2</span>
+      <div>
+        <div class="step-title">Traitement de fond de 1re intention — <span class="badge badge-blue">MÉTHOTREXATE</span></div>
+        <div class="step-content">
+          Initié le plus <strong>précocement possible</strong><br>
+          Posologie : 10–15 mg/sem à augmenter progressivement jusqu'à 25 mg/sem<br>
+          Toujours associé à l'<strong>acide folique</strong> (protection contre la toxicité)<br>
+          CI : grossesse (tératogène), IRC sévère, insuffisance hépatique, pneumopathie active<br>
+          Surveillance : NFS + BH + créatinine toutes les 6–8 semaines
+        </div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num" style="background:var(--purple-light);color:var(--purple);">3</span>
+      <div>
+        <div class="step-title">Traitements de fond alternatifs (si CI au MTX)</div>
+        <div class="step-content">Léflunomide, Sulfasalazine, Hydroxychloroquine</div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num" style="background:var(--red-light);color:var(--red);">4</span>
+      <div>
+        <div class="step-title">Biothérapies / JAK inhibiteurs (en 2e ligne)</div>
+        <div class="step-content">
+          Après <strong>échec du MTX</strong> (DAS28 non atteint après 3–6 mois)<br>
+          <strong>Anti-TNF :</strong> étanercept, adalimumab, infliximab, certolizumab, golimumab<br>
+          <strong>Anti-IL-6 :</strong> tocilizumab (sarilumab)<br>
+          <strong>Anti-CD20 :</strong> rituximab (si PR séropositive ou CI aux anti-TNF)<br>
+          <strong>Anti-CTLA4 :</strong> abatacept<br>
+          <strong>JAK inhibiteurs :</strong> baricitinib, tofacitinib, upadacitinib (voie orale)
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Traitement non pharmacologique -->
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      Traitements non pharmacologiques
+    </div>
+    <ul class="lst">
+      <li><strong>Arrêt du tabac</strong> (facteur de risque modifiable majeur)</li>
+      <li><strong>Activité physique régulière</strong></li>
+      <li><strong>Kinésithérapie :</strong><br>— En poussée : méthodes antalgiques (froid), orthèses de repos<br>— Hors poussée : renforcement musculaire, marche, préhension</li>
+      <li><strong>Ergothérapie</strong> — adaptation du poste de travail</li>
+      <li><strong>Chirurgie</strong> — prothèse articulaire si destructions sévères</li>
+      <li><strong>Prise en charge sociale</strong> — ALD (100 %) pour formes sévères</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Organisation de la prise en charge
+    </div>
+    <ul class="lst">
+      <li><strong>Rhumatologue :</strong> coordination globale</li>
+      <li><strong>Médecin généraliste :</strong> suivi conjoint, tolérance, comorbidités</li>
+      <li><strong>Information patient :</strong> rapport bénéfice/risque, observance, signes d'alerte</li>
+      <li><strong>Éducation thérapeutique</strong> — programme structuré</li>
+      <li><strong>Prévention cardiovasculaire</strong> (risque CV augmenté dans la PR)</li>
+      <li><strong>Vaccinations :</strong> grippe, pneumocoque (avant biothérapie)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés &amp; Pièges à retenir
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence diagnostique :</strong> Toute polyarthrite persistante (&gt; 6 semaines) impose un bilan rapide et une consultation rhumatologique — le délai entre le début des symptômes et l'initiation du MTX conditionne le pronostic structural.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — FR peu spécifique :</strong> Le facteur rhumatoïde (FR) est positif dans d'autres maladies (Sjögren, hépatite C, endocardite, personnes âgées normales). Ce sont les <strong>ACPA qui sont très spécifiques</strong> de la PR (&gt; 95 %).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — CRP/VS normale n'exclut pas la PR :</strong> Le syndrome inflammatoire biologique est <strong>inconstant</strong>. Un patient avec des synovites cliniques et des ACPA positifs peut avoir une CRP normale.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — Radiographies normales n'excluent pas la PR :</strong> Les érosions osseuses sont absentes en début de maladie. Les radiographies initiales servent de <strong>baseline</strong> pour le suivi évolutif.</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — L'essentiel à retenir
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Thème</th><th>Ce qui est tombable</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Épidémio</strong></td><td>Prévalence 0,3–0,8 % — Femme 40–60 ans — RIC le plus fréquent</td></tr>
+      <tr><td><strong>Clinique</strong></td><td>MCP + IPP + MTP + poignets — bilatéral symétrique — dérouillage &gt; 30 min — &gt; 6 semaines</td></tr>
+      <tr><td><strong>IPD épargnées</strong></td><td>IPD atteintes = rhumatisme psoriasique ou arthrose érosive</td></tr>
+      <tr><td><strong>Biologie</strong></td><td>ACPA = très spécifique (&gt; 95 %) — FR = peu spécifique (~70 %)</td></tr>
+      <tr><td><strong>Imagerie</strong></td><td>Mains/pieds face + avant-pieds 3/4 — érosions + pincement interlignes (tardifs)</td></tr>
+      <tr><td><strong>DAS28</strong></td><td>4 composantes (NAD, NAG, EVA, CRP/VS) — Rémission &lt; 2,6 — Cible ≤ 3,2</td></tr>
+      <tr><td><strong>Traitement fond 1e L</strong></td><td>MÉTHOTREXATE + acide folique — initié précocement — CI : grossesse, IRC, hépatopathie</td></tr>
+      <tr><td><strong>Suivi radio</strong></td><td>Tous les 6 mois la 1re année, puis annuel pendant 3 ans</td></tr>
+      <tr><td><strong>Nodules</strong></td><td>Siège préférentiel : coudes (image OIC-11-A) — signe d'activité de la maladie</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</body>
+</html>

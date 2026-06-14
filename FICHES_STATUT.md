@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-13. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-14. Ne pas éditer à la main._
 
-**Avancement : 133 / 367 items (36.2%)**
+**Avancement : 136 / 367 items (37.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -203,7 +203,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 193 | [ ] | Connaître les principaux types de vascularite systémique | — |
 | 194 | [ ] | Lupus systémique | — |
 | 195 | [ ] | Artérite à cellules géantes | — |
-| 196 | [ ] | Polyarthrite rhumatoïde | — |
+| 196 | [x] | Polyarthrite rhumatoïde | 196_polyarthrite_rhumatoide.html |
 | 197 | [ ] | Spondyloarthrite | — |
 | 198 | [ ] | Arthropathies microcristallines | — |
 | 199 | [ ] | Syndrome douloureux régional complexe | — |
@@ -247,7 +247,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 237 | [ ] | Palpitations | — |
 | 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant.html |
 | 239 | [ ] | Acrosyndromes | — |
-| 240 | [ ] | Hypoglycémie chez l adulte et l enfant | — |
+| 240 | [x] | Hypoglycémie chez l adulte et l enfant | 240_hypoglycemie.html |
 | 241 | [ ] | Goitre | — |
 | 242 | [ ] | Hyperthyroïdie | — |
 | 243 | [ ] | Hypothyroïdie | — |
@@ -316,7 +316,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 306 | [ ] | Tumeurs de l ovaire | — |
 | 307 | [ ] | Tumeurs des os primitives et secondaires | — |
 | 308 | [ ] | Tumeurs du pancréas | — |
-| 309 | [ ] | Tumeurs du poumon | — |
+| 309 | [x] | Tumeurs du poumon | 309_tumeurs_poumon.html |
 | 310 | [ ] | Tumeurs de la prostate | — |
 | 311 | [ ] | Tumeurs du rein de l adulte | — |
 | 312 | [ ] | Tumeurs du sein | — |

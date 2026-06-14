@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 240 — Hypoglycémie chez l'adulte et l'enfant</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#E24B4A 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light); color:var(--blue); }
+  .table-teal th{background:var(--teal-light); color:var(--teal); }
+  .table-red  th{background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-box{background:var(--purple-light);border-radius:10px;padding:10px 14px;margin-bottom:14px;}
+  .obj-box-head{font-size:.7rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+  .obj-box-head svg{width:14px;height:14px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-item{display:flex;align-items:flex-start;gap:8px;font-size:.82rem;color:var(--text);padding:3px 0;}
+  .obj-item::before{content:"";flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--purple);margin-top:7px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .header-tag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 240</div>
+  <h1>Hypoglycémie chez l'adulte et l'enfant</h1>
+  <div class="header-sub">Définition, mécanismes, clinique, étiologies, prise en charge urgente</div>
+  <div class="header-tags">
+    <span class="htag">Urgence métabolique</span>
+    <span class="htag">Diabétologie / Endocrinologie</span>
+    <span class="htag">Triade de Whipple</span>
+    <span class="htag">Resucrage</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble du chapitre :</strong> Ce chapitre couvre l'hypoglycémie sous toutes ses formes — du diagnostic (triade de Whipple, seuils biologiques stricts) à la gestion de l'urgence. L'enjeu est double : savoir <strong>reconnaître</strong> une hypoglycémie (clinique + biologie simultanées, pas de diagnostic sans glycémie veineuse documentée) et savoir <strong>traiter</strong> en urgence selon la sévérité. Les étiologies sont clé : chez le diabétique, les insulinosécréteurs indépendants de la glycémie sont piégeux ; chez le non-diabétique, l'insulinome et l'insuffisance surrénalienne sont à ne pas rater. Le dosage insuline + peptide-C lors de l'épreuve de jeûne oriente l'étiologie.
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 : DÉFINITION ET RÉGULATION -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition &amp; Régulation glycémique
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître la définition clinique et biologique de l'hypoglycémie (Triade de Whipple)</div>
+  <div class="obj-item">Distinguer les seuils chez le diabétique et le non-diabétique</div>
+  <div class="obj-item">Connaître les hormones hypo- et hyperglycémiantes et leurs seuils de déclenchement</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </span>
+    Triade de Whipple — Diagnostic = les 3 critères SIMULTANÉS
+  </div>
+  <div class="grid3">
+    <div class="card" style="border-left:4px solid var(--red);margin-bottom:0;">
+      <div style="font-weight:700;font-size:.82rem;color:var(--red);margin-bottom:4px;">1 — Signes neuroglycopéniques</div>
+      <div style="font-size:.81rem;">Symptômes spécifiques de carence en glucose cérébral (troubles conscience, confusion, convulsions…)</div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--red);margin-bottom:0;">
+      <div style="font-weight:700;font-size:.82rem;color:var(--red);margin-bottom:4px;">2 — Glycémie <strong>veineuse</strong> basse</div>
+      <div style="font-size:.81rem;">Documentée au moment des symptômes — <strong>pas la glycémie capillaire</strong></div>
+    </div>
+    <div class="card" style="border-left:4px solid var(--red);margin-bottom:0;">
+      <div style="font-weight:700;font-size:.82rem;color:var(--red);margin-bottom:4px;">3 — Correction après resucrage</div>
+      <div style="font-size:.81rem;">Disparition rapide et complète des symptômes après normalisation glycémique</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Seuils de glycémie veineuse
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Non-diabétique</span>
+      <span class="kv-val">GV &lt; <strong>0,50 g/L</strong> (2,75 mmol/L)</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Diabétique</span>
+      <span class="kv-val">GV &lt; <strong>0,70 g/L</strong> (3,85 mmol/L)</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Diagnostic bio sans symptômes</span>
+      <span class="kv-val"><span class="badge badge-amber">Diabétique uniquement</span></span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Hormones de contre-régulation
+    </div>
+    <table class="table-teal">
+      <thead><tr><th>Glycémie</th><th>Hormone déclenchée</th></tr></thead>
+      <tbody>
+        <tr><td>&lt; 0,65 g/L (3,6 mmol/L)</td><td>Glucagon, Adrénaline, GH</td></tr>
+        <tr><td>&lt; 0,60 g/L (3,3 mmol/L)</td><td>Cortisol</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Hypoglycémiants : Insuline (principal), IGF2 (si concentrations très élevées)</div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <div><strong>Pièges définition :</strong> Symptômes ET glycémie basse SIMULTANÉS — l'un sans l'autre ne suffit pas. Glycémie obligatoirement VEINEUSE (la capillaire est insuffisante). Les signes végétatifs (sueurs, tremblements, palpitations) sont <strong>non spécifiques</strong> : le diagnostic repose sur les signes NEUROGLYCOPÉNIQUES.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 : CLINIQUE ET COMA -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Signes cliniques &amp; Coma hypoglycémique
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Distinguer les signes neurovégétatifs (précoces, non spécifiques) des signes neuroglycopéniques (spécifiques)</div>
+  <div class="obj-item">Reconnaître les caractéristiques du coma hypoglycémique et savoir le diagnostiquer</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Signes neurovégétatifs <span class="badge badge-amber">Précoces, non spécifiques</span>
+    </div>
+    <ul class="lst">
+      <li>Palpitations, anxiété</li>
+      <li>Sueurs, tremblements</li>
+      <li>Fringale (faim brutale)</li>
+    </ul>
+    <div style="margin-top:8px;font-size:.79rem;color:var(--muted);">Médiés par la décharge adrénergique — inconstants, peuvent manquer (hypoglycémie non ressentie)</div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Signes neuroglycopéniques <span class="badge badge-red">Spécifiques ++</span>
+    </div>
+    <ul class="lst">
+      <li>Troubles de la conscience, confusion</li>
+      <li>Troubles de la concentration, élocution, mémoire</li>
+      <li>Flou visuel, diplopie</li>
+      <li>Convulsions focales ou généralisées</li>
+      <li>Troubles du comportement / syndrome psychiatrique</li>
+      <li>Déficit sensitivomoteur, paresthésies</li>
+      <li>Troubles de la coordination, coma</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </span>
+    Caractéristiques du coma hypoglycémique
+  </div>
+  <div class="grid2">
+    <div>
+      <table>
+        <thead><tr><th colspan="2">Sémiologie du coma</th></tr></thead>
+        <tbody>
+          <tr><td>Profondeur</td><td>Variable, peut être très profond</td></tr>
+          <tr><td>Début</td><td><strong>Brutal</strong></td></tr>
+          <tr><td>Agitation</td><td>Souvent agité</td></tr>
+          <tr><td>Sueurs</td><td>Profuses</td></tr>
+          <tr><td>Signes neurologiques</td><td>Irritation pyramidale</td></tr>
+          <tr><td>Température</td><td>Hypothermie</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div class="alert alert-green">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <div><strong>Critère diagnostique clé :</strong> Disparition rapide et complète après resucrage par glucosé IV.</div>
+      </div>
+      <div class="alert alert-amber">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div><strong>Piège :</strong> Les signes neuroglycopéniques peuvent simuler un AVC, un épisode psychiatrique ou une épilepsie — glycémie veineuse systématique devant tout trouble aigu de la conscience.</div>
+      </div>
+      <div class="alert alert-blue">
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+        <div>Hypoglycémie organique chez non-diabétique : survient à <strong>jeun / à distance des repas / la nuit / à l'effort</strong>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 : ÉTIOLOGIES -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Étiologies
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Connaître les médicaments antidiabétiques hypoglycémiants et ceux qui ne le sont pas</div>
+  <div class="obj-item">Connaître les principales étiologies d'hypoglycémie organique chez le diabétique et le non-diabétique</div>
+  <div class="obj-item">Savoir interpréter insuline + peptide-C pour orienter l'étiologie</div>
+</div>
+
+<!-- Médicaments du diabète -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>
+    Médicaments antidiabétiques — risque hypoglycémiant
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Classe</th>
+        <th>Mécanisme</th>
+        <th>Risque seul</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Insulines</strong></td>
+        <td>Action directe de l'insuline</td>
+        <td><span class="badge badge-red">OUI</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sulfamides</strong> (sulfonylurées)</td>
+        <td>Insulinosécréteurs, fixation récepteur cellule B — <strong>indépendant de la glycémie</strong></td>
+        <td><span class="badge badge-red">OUI</span></td>
+      </tr>
+      <tr>
+        <td><strong>Glinides</strong></td>
+        <td>Même mécanisme que sulfamides — action rapide, demi-vie courte</td>
+        <td><span class="badge badge-red">OUI</span></td>
+      </tr>
+      <tr>
+        <td><strong>Metformine</strong> (biguanides)</td>
+        <td>Non insulinosécréteur</td>
+        <td><span class="badge badge-green">NON</span> <span class="badge badge-amber">Sauf alcool associé</span></td>
+      </tr>
+      <tr>
+        <td><strong>Analogues GLP-1</strong></td>
+        <td>Insulinosécréteurs <strong>GLUCO-DÉPENDANTS</strong> — s'arrêtent dès que glycémie basse</td>
+        <td><span class="badge badge-green">NON seul</span> <span class="badge badge-red">Oui si + insuline/sulfamides</span></td>
+      </tr>
+      <tr>
+        <td><strong>DPP-4i, SGLT2i, Alpha-glucosidasei</strong></td>
+        <td>Mécanismes non insulinosécréteurs directs</td>
+        <td><span class="badge badge-green">NON</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Étiologies organiques -->
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Étiologies chez le <strong>diabétique</strong>
+    </div>
+    <ul class="lst">
+      <li>Dose d'insuline mal adaptée</li>
+      <li>Insulinosécréteurs (sulfamides, glinides) mal adaptés</li>
+      <li>Inadéquation insuline / repas (saut de repas)</li>
+      <li>Gastroparésie (retard d'absorption alimentaire)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Étiologies chez le <strong>non-diabétique</strong>
+    </div>
+    <ul class="lst">
+      <li><strong>Alcool</strong> — surtout alcoolisation aiguë sévère</li>
+      <li><strong>Médicaments</strong> — quinolones, quinine, pentamidine, indométacine ;<br>prise cachée d'insuline ou sulfamides (contexte psychiatrique)</li>
+      <li><strong>Insulinome</strong> ++ (tumeur des cellules B pancréatiques)</li>
+      <li><strong>Insuffisance hépatique sévère</strong></li>
+      <li><strong>Insuffisance rénale sévère</strong></li>
+      <li><strong>Dénutrition sévère</strong></li>
+      <li><strong>Insuffisance surrénalienne</strong> (périphérique ou centrale)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Bilan étiologique -->
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+    Bilan étiologique — Insuline + Peptide-C lors de l'hypoglycémie
+  </div>
+  <table class="table-amber">
+    <thead>
+      <tr><th>Étiologie</th><th>Insulinémie</th><th>Peptide-C</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Insulinome</strong> / prise cachée sulfamides</td>
+        <td><span class="badge badge-red">Élevée</span></td>
+        <td><span class="badge badge-red">Élevé</span></td>
+      </tr>
+      <tr>
+        <td><strong>Prise cachée d'insuline exogène</strong> (reconnue par le kit)</td>
+        <td><span class="badge badge-red">Élevée</span></td>
+        <td><span class="badge badge-green">Bas</span></td>
+      </tr>
+      <tr>
+        <td><strong>Prise cachée d'insuline exogène</strong> (NON reconnue par le kit)</td>
+        <td><span class="badge badge-green">Basse</span></td>
+        <td><span class="badge badge-green">Bas</span></td>
+      </tr>
+      <tr>
+        <td><strong>Insuffisance viscérale / surrénalienne / dénutrition / alcool</strong></td>
+        <td><span class="badge badge-green">Basse</span></td>
+        <td><span class="badge badge-green">Bas</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+    <div><strong>Épreuve de jeûne de 72h</strong> = référence si pas de prélèvement obtenu lors de l'épisode et insuffisance surrénalienne éliminée. Permet de déclencher une hypoglycémie contrôlée et doser insuline + peptide-C.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 : PRISE EN CHARGE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge — Resucrage en urgence
+</div>
+
+<div class="obj-box">
+  <div class="obj-box-head"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>Ce qui est attendu</div>
+  <div class="obj-item">Planifier la prise en charge selon la sévérité de l'hypoglycémie chez l'adulte et l'enfant</div>
+  <div class="obj-item">Connaître les doses et voies d'administration du resucrage</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </span>
+    Algorithme de resucrage
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num">1</span>
+      <div>
+        <div class="step-title">Hypoglycémie modérée <span class="badge badge-amber">Conscient, peut avaler seul</span></div>
+        <div class="step-content">Resucrage <strong>per os par le patient</strong> : <strong>15 g de sucre rapide</strong> (= 3 morceaux de sucre)</div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <div>
+        <div class="step-title">Hypoglycémie modérément sévère <span class="badge badge-amber">Conscient, besoin d'aide</span></div>
+        <div class="step-content">Resucrage <strong>per os par un tiers</strong> : <strong>15 g de sucre rapide</strong> (= 3 morceaux de sucre)</div>
+      </div>
+    </li>
+    <li>
+      <span class="step-num-red step-num">3</span>
+      <div>
+        <div class="step-title">Hypoglycémie très sévère <span class="badge badge-red">Inconscient / coma / convulsion</span></div>
+        <div class="step-content">
+          <strong>Option A :</strong> Glucagon <strong>1 mg IM ou SC</strong>, puis resucrage per os dès que possible<br>
+          <strong>Option B (si glucagon non disponible) :</strong> Sérum glucosé 30% IV — <strong>10 mL/20 kg de poids</strong>, puis relais par G10%
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <div><strong>Urgence :</strong> Ne jamais donner quoi que ce soit per os à un patient inconscient (fausse route). Voie IV ou IM impérative. Le glucagon IM/SC est utilisable par les proches à domicile.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SYNTHÈSE FINALE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="alert alert-red">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <div><strong>Diagnostic = Triade de Whipple COMPLÈTE :</strong> symptômes neuroglycopéniques + glycémie VEINEUSE basse SIMULTANÉS + correction après resucrage. Pas de diagnostic sans GV documentée.</div>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <div><strong>Piège médicamenteux :</strong> Metformine, GLP-1, DPP4i, SGLT2i, alpha-glucosidasei = PAS hypoglycémiants seuls. Seuls les insulinosécréteurs INDÉPENDANTS (sulfamides, glinides) et l'insuline le sont.</div>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <div><strong>Insulinome vs prise cachée d'insuline :</strong> les deux → insulinémie élevée, MAIS le peptide-C différencie (élevé = sécrétion endogène ; bas = injection exogène reconnue).</div>
+    </div>
+  </div>
+  <div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <div><strong>Seuils à retenir :</strong> GV &lt; 0,50 g/L chez non-diabétique / GV &lt; 0,70 g/L chez diabétique. Contre-régulation : glucagon/adrénaline/GH dès 0,65 g/L, cortisol dès 0,60 g/L.</div>
+    </div>
+    <div class="alert alert-green">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <div><strong>Urgence :</strong> Conscient → sucre per os 15 g. Inconscient → glucagon 1 mg IM/SC ou G30% IV 10 mL/20 kg puis relais G10%. Ne jamais alimenter per os un patient inconscient.</div>
+    </div>
+    <div class="alert alert-blue">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      <div><strong>Épreuve de jeûne 72h :</strong> référence pour le diagnostic étiologique du non-diabétique quand aucun prélèvement n'a pu être réalisé pendant un épisode spontané.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
