@@ -105,7 +105,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 95 | [ ] | Radiculalgie et syndrome canalaire | — |
 | 96 | [x] | Neuropathies périphériques | 96_Neuropathies_peripheriques.html |
 | 97 | [ ] | Polyradiculonévrite aiguë inflammatoire | — |
-| 98 | [x] | Myasthénie | 98_Myasthenie_v2.html |
+| 98 | [x] | Myasthénie | 98_Myasthenie_v3.html |
 | 99 | [x] | Migraine | 99_Migraine_cephalees_primaires.html |
 | 100 | [x] | Céphalée inhabituelle aiguë et chronique chez l adulte et l enfant | 100_Cephalee_inhabituelle_v2.html |
 | 101 | [x] | Paralysie faciale | 101_Paralysie_faciale.html |
