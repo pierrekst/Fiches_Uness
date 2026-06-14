@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-14. Ne pas éditer à la main._
 
-**Avancement : 136 / 367 items (37.1%)**
+**Avancement : 137 / 367 items (37.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -364,7 +364,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 354 | [ ] | Syndrome occlusif de l enfant et de l adulte | — |
 | 355 | [x] | Hémorragie digestive | 355_Hemorragie_digestive.html |
 | 356 | [ ] | Appendicite de l enfant et de l adulte | — |
-| 357 | [ ] | Péritonite aiguë chez l enfant et chez l adulte | — |
+| 357 | [x] | Péritonite aiguë chez l enfant et chez l adulte | 357_Peritonite_aigue.html |
 | 358 | [x] | Pancréatite aiguë | 358_Pancreatite_aigue.html |
 | 359 | [ ] | Détresse et insuffisance respiratoire aigüe du nourrisson | — |
 | 360 | [x] | Pneumothorax | 360_pneumothorax.html |

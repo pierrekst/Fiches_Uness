@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 357 — Péritonite aiguë</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#D85A30 0%,#E24B4A 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light); color:var(--blue);}
+  .table-teal th{background:var(--teal-light); color:var(--teal);}
+  .table-red  th{background:var(--red-light);  color:var(--red);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 357</div>
+  <h1>Péritonite aiguë</h1>
+  <div class="header-sub">Chez l'enfant et chez l'adulte — Urgence médico-chirurgicale</div>
+  <div class="header-tags">
+    <span class="htag">Urgence vitale</span>
+    <span class="htag">Chirurgie digestive</span>
+    <span class="htag">Sepsis / Choc septique</span>
+    <span class="htag">Adulte &amp; Enfant</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE -->
+<div class="card card-red">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </span>
+    Vision globale du chapitre
+  </div>
+  <p style="font-size:.85rem;color:var(--muted);line-height:1.6;">La péritonite est une inflammation aiguë du péritoine, quasi toujours d'origine infectieuse, et qui engage le pronostic vital. Ce chapitre couvre l'intégralité du raisonnement clinique : savoir classer une péritonite (primaire / secondaire / tertiaire), reconnaître le tableau clinique chez l'adulte et chez l'enfant, identifier les causes les plus fréquentes, évaluer la gravité par les critères de sepsis et choc septique, choisir les bons examens complémentaires, et initier sans délai le traitement médico-chirurgical en urgence.</p>
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITION & CLASSIFICATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition, classification et gravité
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir la péritonite et comprendre son pronostic vital potentiellement engagé d'emblée</div>
+  <div class="obj-line">Distinguer les trois catégories : péritonites primaires, secondaires et tertiaires</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </span>
+    Définition
+  </div>
+  <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val" style="text-align:left;padding-left:12px;">Inflammation aiguë du péritoine, due le plus souvent à une perforation digestive</span></div>
+  <div class="kv-row"><span class="kv-key">Épidémiologie</span><span class="kv-val" style="text-align:left;padding-left:12px;">2e cause de sepsis en réanimation</span></div>
+  <div class="kv-row"><span class="kv-key">Pronostic</span><span class="kv-val" style="text-align:left;padding-left:12px;">Mortalité très élevée sans traitement rapide — pronostic vital engagé dès le diagnostic</span></div>
+</div>
+
+<table class="table-red">
+  <thead>
+    <tr>
+      <th>Catégorie</th>
+      <th>Mécanisme</th>
+      <th>Exemples</th>
+      <th>Traitement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Primaire</strong></td>
+      <td>Contamination hématogène ou translocation digestive — sans perforation</td>
+      <td>Infection de liquide d'ascite chez le cirrhotique (++)</td>
+      <td>Médical</td>
+    </tr>
+    <tr>
+      <td><strong>Secondaire</strong> <span class="badge badge-red">+++ fréquente</span></td>
+      <td>Perforation du tube digestif ou de l'arbre biliaire → pus dans le péritoine</td>
+      <td>Appendice (enfant +++), ulcère duodénal, diverticule sigmoïdien</td>
+      <td>Médico-chirurgical</td>
+    </tr>
+    <tr>
+      <td><strong>Tertiaire</strong></td>
+      <td>Infection intraabdominale persistante après traitement d'une infection documentée</td>
+      <td>Péritonite post-opératoire, péritonite sur cathéter de dialyse péritonéale</td>
+      <td>Médico-chirurgical</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 2 : DIAGNOSTIC CLINIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic clinique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes fonctionnels et physiques d'une péritonite chez l'adulte</div>
+  <div class="obj-line">Identifier le tableau clinique spécifique chez l'enfant</div>
+  <div class="obj-line">Connaître la péritonite asthénique et ses quatre facteurs favorisants</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Clinique — Adulte
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">IRRITATION PÉRITONÉALE</p>
+    <ul class="lst">
+      <li>Douleur abdominale aiguë</li>
+      <li><strong>Défense</strong> localisée ou généralisée</li>
+      <li><strong>Contracture</strong> abdominale (signe majeur)</li>
+      <li>Douleur au toucher rectal ou à la décompression</li>
+    </ul>
+    <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin:8px 0 4px;">SYNDROME INFECTIEUX</p>
+    <ul class="lst">
+      <li>Fièvre ≥ 38,5°C</li>
+      <li>Tachycardie &gt; 90/min</li>
+      <li>FR &gt; 20/min</li>
+    </ul>
+    <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin:8px 0 4px;">AUTRES SIGNES</p>
+    <ul class="lst">
+      <li>Iléus, nausées, vomissements, hoquet</li>
+      <li>Signes urinaires si abcès pelvien</li>
+    </ul>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Clinique — Enfant
+    </div>
+    <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">TABLEAU CLASSIQUE</p>
+    <div class="kv-row"><span class="kv-key">Douleurs</span><span class="kv-val">Vives, paroxystiques, déclenchées par mvt</span></div>
+    <div class="kv-row"><span class="kv-key">Transit</span><span class="kv-val">Arrêt gaz + matières ± diarrhée paradoxale</span></div>
+    <div class="kv-row"><span class="kv-key">Vomissements</span><span class="kv-val">Précédés d'un refus alimentaire</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre</span><span class="kv-val">39–40°C</span></div>
+    <div style="margin-top:10px;" class="alert alert-teal">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Tableau classique : <strong>occlusion fébrile douloureuse</strong></span>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </span>
+    Péritonite asthénique — forme trompeuse
+  </div>
+  <p style="font-size:.84rem;margin-bottom:8px;">Forme <strong>pauci-symptomatique</strong>, de diagnostic difficile. Tableau clinique atténué masquant la gravité réelle.</p>
+  <p style="font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:6px;">4 FACTEURS FAVORISANTS</p>
+  <div class="pills">
+    <span class="pill pill-amber">Âge élevé</span>
+    <span class="pill pill-amber">Immunosuppression</span>
+    <span class="pill pill-amber">Dénutrition majeure</span>
+    <span class="pill pill-amber">Antibiothérapie préalable</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : ÉTIOLOGIES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Citer les trois principales causes de péritonite chez l'adulte</div>
+  <div class="obj-line">Citer les principales causes chez l'enfant</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </span>
+      Étiologies — Adulte
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num step-num-red">1</span>
+        <div>
+          <div class="step-title">Péritonite appendiculaire</div>
+          <div class="step-content">Appendicite perforée — cf. item 356</div>
+        </div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">2</span>
+        <div>
+          <div class="step-title">Perforation d'ulcère duodénal</div>
+          <div class="step-content">Cf. item 272</div>
+        </div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">3</span>
+        <div>
+          <div class="step-title">Perforation d'un diverticule sigmoïdien</div>
+          <div class="step-content">Cf. item 287</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </span>
+      Étiologies — Enfant
+    </div>
+    <table>
+      <thead><tr><th>Fréquence</th><th>Cause</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-red">Très fréquente</span></td><td>Appendiculaire (grande majorité des cas)</td></tr>
+        <tr><td><span class="badge badge-amber">Parfois</span></td><td>Perforation d'organe creux : diverticule de Meckel, trauma intestinal, invagination, occlusion</td></tr>
+        <tr><td><span class="badge badge-blue">Rarement</span></td><td>Primitive (pneumocoque) ou sur cathéter de dialyse péritonéale</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : GRAVITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Critères de gravité — Sepsis et choc septique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le sepsis et le choc septique selon les critères actuels</div>
+  <div class="obj-line">Identifier les signes de défaillance d'organe évocateurs de sepsis</div>
+</div>
+
+<div class="alert alert-red" style="margin-bottom:14px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Sepsis =</strong> dysfonction d'organe menaçant le pronostic vital causée par une réponse excessive de l'hôte à une infection</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Sepsis — critères (≥ 2 sur)
+    </div>
+    <div class="kv-row"><span class="kv-key">Hémodynamique</span><span class="kv-val">PAS ≤ 100 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">Lactate</span><span class="kv-val">≥ 18 mg/dL (2 mmol/L)</span></div>
+    <div class="kv-row"><span class="kv-key">Diurèse</span><span class="kv-val">&lt; 0,5 mL/kg/h &gt; 2h</span></div>
+    <div class="kv-row"><span class="kv-key">Respiratoire</span><span class="kv-val">PaO2/FiO2 &lt; 300 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">Rénal</span><span class="kv-val">Créatinine &gt; 2 mg/dL (177 µmol/L)</span></div>
+    <div class="kv-row"><span class="kv-key">Hépatique</span><span class="kv-val">Bilirubine &gt; 2 mg/dL (34 µmol/L)</span></div>
+    <div class="kv-row"><span class="kv-key">Hématologique</span><span class="kv-val">Plaquettes &lt; 100 000/mm³</span></div>
+    <div class="kv-row"><span class="kv-key">Neurologique</span><span class="kv-val">Confusion ou GCS &lt; 13</span></div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span>
+      Choc septique <span class="badge badge-red">Plus grave</span>
+    </div>
+    <p style="font-size:.84rem;margin-bottom:10px;">Sepsis <strong>+</strong> les deux conditions suivantes :</p>
+    <div class="kv-row"><span class="kv-key">Vasopresseurs</span><span class="kv-val">Noradrénaline++ pour PAM ≥ 65 mmHg</span></div>
+    <div class="kv-row"><span class="kv-key">Lactate</span><span class="kv-val">≥ 18 mg/dL malgré remplissage adapté</span></div>
+    <div style="margin-top:12px;" class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Cf. items 158 (Sepsis) et 332 (États de choc)</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : EXAMENS COMPLÉMENTAIRES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Examens complémentaires
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Prescrire le bon bilan biologique et interpréter son rôle dans la prise en charge</div>
+  <div class="obj-line">Choisir l'examen d'imagerie selon l'âge (TDM chez l'adulte, échographie chez l'enfant)</div>
+  <div class="obj-line">Connaître les trois signes TDM principaux d'une péritonite</div>
+  <div class="obj-line">Connaître les limites des examens complémentaires chez l'enfant</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Biologie
+    </div>
+    <div class="alert alert-blue" style="margin-bottom:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Le bilan biologique est peu utile pour le diagnostic — il évalue le <strong>retentissement</strong> et la <strong>gravité</strong></span>
+    </div>
+    <ul class="lst">
+      <li>Ionogramme sanguin, NFS-plaquettes</li>
+      <li>Bilan hépatique, bilan d'hémostase</li>
+      <li>Gaz du sang artériels</li>
+      <li>Groupage – RAI</li>
+      <li><strong>Hémocultures +++</strong></li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>La négativité des biomarqueurs ne doit <strong>pas remettre en cause</strong> le diagnostic</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      Imagerie
+    </div>
+    <table>
+      <thead><tr><th>Patient</th><th>Examen de 1re intention</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Adulte</strong></td>
+          <td>Scanner abdomino-pelvien avec injection <span class="badge badge-blue">Seul examen à réaliser</span></td>
+        </tr>
+        <tr>
+          <td><strong>Enfant</strong></td>
+          <td>Échographie abdominale (Se 95%, Sp 90% pour appendicite)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>Chez l'enfant : une <strong>échographie négative n'exclut pas le diagnostic</strong> d'appendicite</span>
+    </div>
+    <div class="alert alert-red" style="margin-top:6px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>ASP = <strong>INTERDIT</strong> dans le bilan de péritonite (ne plus prescrire)</span>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </span>
+    Les 3 signes TDM d'une péritonite
+  </div>
+  <div class="grid3">
+    <div class="bl-red" style="padding:10px 12px;">
+      <div style="font-weight:700;font-size:.85rem;">Épanchement gazeux</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:3px;">Signe une perforation d'organe creux</div>
+    </div>
+    <div class="bl-blue" style="padding:10px 12px;">
+      <div style="font-weight:700;font-size:.85rem;">Épanchement liquidien</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:3px;">Intrapéritonéal — collections cloisonnées → abcès</div>
+    </div>
+    <div class="bl-teal" style="padding:10px 12px;">
+      <div style="font-weight:700;font-size:.85rem;">Rehaussement péritonéal</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:3px;">Des feuillets péritonéaux après injection</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : PRISE EN CHARGE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge de la péritonite secondaire
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les principes du traitement chirurgical en urgence et de l'antibiothérapie</div>
+</div>
+
+<div class="alert alert-red" style="margin-bottom:14px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Traitement chirurgical = URGENCE</strong> — à associer systématiquement à l'antibiothérapie et à la prise en charge des défaillances d'organe</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </span>
+      Chirurgie (urgence)
+    </div>
+    <ul class="steps">
+      <li>
+        <span class="step-num step-num-red">1</span>
+        <div><div class="step-title">Exploration de l'abdomen</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">2</span>
+        <div><div class="step-title">Prélèvements bactériologiques</div><div class="step-content">Liquide péritonéal pour culture</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">3</span>
+        <div><div class="step-title">Traitement de la cause</div><div class="step-content">Appendicectomie, suture de perforation…</div></div>
+      </li>
+      <li>
+        <span class="step-num step-num-red">4</span>
+        <div><div class="step-title">Toilette péritonéale</div></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </span>
+      Antibiothérapie
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Situation</th><th>Protocole</th><th>Durée</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Péritonite communautaire non compliquée</td>
+          <td>Amox/Clav + Gentamicine <br><em>ou</em><br> Ceftriaxone + Métronidazole</td>
+          <td><strong>4 jours</strong></td>
+        </tr>
+        <tr>
+          <td>Péritonites associées aux soins ou formes graves</td>
+          <td>Élargir aux bactéries résistantes + entérocoques + levures selon terrain</td>
+          <td><strong>8–14 jours</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span><strong>Désescalade obligatoire</strong> selon les résultats des prélèvements (liquide péritonéal + hémocultures)</span>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:6px;">Cibler entérobactéries + anaérobies digestifs dans tous les cas</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </span>
+    Synthèse — ce qui tombe à l'ECNi
+  </div>
+  <table>
+    <thead><tr><th>Thème</th><th>À retenir</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Classification</strong></td>
+        <td>3 catégories : primaire (ascite/cirrhotique), secondaire (perforation +++), tertiaire (post-op)</td>
+      </tr>
+      <tr>
+        <td><strong>Causes adulte</strong></td>
+        <td>Appendiculaire — Ulcère duodénal perforé — Diverticule sigmoïdien perforé</td>
+      </tr>
+      <tr>
+        <td><strong>Causes enfant</strong></td>
+        <td>Appendiculaire dans la grande majorité des cas</td>
+      </tr>
+      <tr>
+        <td><strong>Imagerie adulte</strong></td>
+        <td>TDM abdomino-pelvien avec injection = seul examen à prescrire (jamais ASP)</td>
+      </tr>
+      <tr>
+        <td><strong>Imagerie enfant</strong></td>
+        <td>Échographie en 1re intention (Se 95% appendicite) — TDM rarement</td>
+      </tr>
+      <tr>
+        <td><strong>3 signes TDM</strong></td>
+        <td>Épanchement gazeux + liquidien + rehaussement des feuillets péritonéaux</td>
+      </tr>
+      <tr>
+        <td><strong>Biologie</strong></td>
+        <td>Ne pose pas le diagnostic — évalue retentissement. Hémocultures +++. Négativité n'élimine pas</td>
+      </tr>
+      <tr>
+        <td><strong>Choc septique</strong></td>
+        <td>Sepsis + noradrénaline (PAM ≥ 65) + lactate ≥ 2 mmol/L malgré remplissage</td>
+      </tr>
+      <tr>
+        <td><strong>ATB communautaire</strong></td>
+        <td>Amox/Clav + Gentamicine ou Ceftriaxone + Métronidazole — 4 jours</td>
+      </tr>
+      <tr>
+        <td><strong>Désescalade</strong></td>
+        <td>Obligatoire dès retour des prélèvements (liquide périto + hémocultures)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège péritonite asthénique :</strong> chez le sujet âgé, immunodéprimé, dénutri ou sous antibiotiques, le tableau clinique peut être trompeur (peu ou pas de défense). Ne pas minimiser la gravité sous prétexte d'une clinique pauvre.</span>
+</div>
+
+<div class="alert alert-amber" style="margin-top:8px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège biologie :</strong> une CRP et une hyperleucocytose normales ne permettent <strong>pas</strong> d'éliminer une péritonite — le diagnostic est clinique et TDM.</span>
+</div>
+
+<div class="alert alert-amber" style="margin-top:8px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège imagerie enfant :</strong> l'échographie abdominale négative n'exclut pas l'appendicite — si forte suspicion clinique, le diagnostic reste chirurgical.</span>
+</div>
+
+</div>
+</body>
+</html>
