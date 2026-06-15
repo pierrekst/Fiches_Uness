@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 198 — Arthropathies microcristallines</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#D85A30 45%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .table-red th{background:var(--red-light);color:var(--red);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 198</div>
+  <h1>Arthropathies microcristallines</h1>
+  <div class="header-sub">Goutte · Rhumatisme à pyrophosphate de calcium · Calcifications apatitiques</div>
+  <div class="header-tags">
+    <span class="htag">Rhumatologie</span>
+    <span class="htag">Urgences rhumatologiques</span>
+    <span class="htag">Traitement chronique</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Trois maladies rhumatismales inflammatoires causées par des dépôts de microcristaux dans et autour des articulations. La goutte (cristaux d'urate de sodium) est la plus fréquente et la plus grave sur le plan cardiovasculaire. Les enjeux : savoir diagnostiquer une crise aiguë, l'éliminer d'une arthrite septique, connaître les traitements de la crise et le traitement de fond hypouricémiant, distinguer les trois types de cristaux et leurs terrains respectifs.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : PHYSIOPATHOLOGIE & CRISTAUX -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie et types de cristaux
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier les trois microcristaux pathologiques et leur maladie respective</div>
+  <div class="obj-line">Connaître le seuil de solubilité des urates et le mécanisme de cristallisation</div>
+  <div class="obj-line">Comprendre les mécanismes d'hyperuricémie</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Urate de sodium (UMS)
+    </div>
+    <div class="kv-row"><span class="kv-key">Maladie</span><span class="kv-val">Goutte</span></div>
+    <div class="kv-row"><span class="kv-key">Forme</span><span class="kv-val">Aiguilles biréfringentes</span></div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Intra-articulaire</span></div>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Les cristaux d'acide urique ne se trouvent que dans les urines.</div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Pyrophosphate de calcium (PPC)
+    </div>
+    <div class="kv-row"><span class="kv-key">Maladie</span><span class="kv-val">Chondrocalcinose</span></div>
+    <div class="kv-row"><span class="kv-key">Forme</span><span class="kv-val">Losanges faiblement biréfringents</span></div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Cartilage / ménisques</span></div>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Calcifications visibles à la radiographie.</div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Apatite (phosphate de calcium)
+    </div>
+    <div class="kv-row"><span class="kv-key">Maladie</span><span class="kv-val">Calcifications péri-articulaires</span></div>
+    <div class="kv-row"><span class="kv-key">Forme</span><span class="kv-val">Amas non biréfringents</span></div>
+    <div class="kv-row"><span class="kv-key">Localisation</span><span class="kv-val">Péri-articulaire (coiffe, doigts)</span></div>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Opacités radio-opaques périarticulaires.</div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Seuil de l'hyperuricémie et mécanisme de cristallisation
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Seuil de solubilité des urates</span><span class="kv-val" style="color:var(--red);">360 µmol/L = 60 mg/L</span></div>
+      <div class="kv-row"><span class="kv-key">Température de cristallisation</span><span class="kv-val">35°C (extrémités)</span></div>
+      <div class="kv-row"><span class="kv-key">Cible thérapeutique hypouricémiante</span><span class="kv-val" style="color:var(--teal);">&lt; 360 µmol/L</span></div>
+      <div class="kv-row"><span class="kv-key">Dissolution des cristaux</span><span class="kv-val">Réversible si uricémie &lt; seuil</span></div>
+    </div>
+    <div>
+      <div style="font-size:.83rem;font-weight:700;margin-bottom:6px;color:var(--muted);">Mécanismes d'hyperuricémie</div>
+      <ul class="lst">
+        <li><strong>Défaut d'élimination</strong> rénale et/ou intestinale (cause principale)</li>
+        <li><strong>Excès de production</strong> d'acide urique (rare)</li>
+        <li>pH urinaire &lt; 6 → lithiase urique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : ÉPIDÉMIOLOGIE & TERRAIN -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie et terrain — Comparaison des trois arthropathies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la prévalence de la goutte en France</div>
+  <div class="obj-line">Différencier les terrains de la goutte, du rhumatisme à PPC et des calcifications apatitiques</div>
+  <div class="obj-line">Identifier les comorbidités et facteurs déclenchants de la goutte</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Comparaison des trois arthropathies microcristallines
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Critère</th><th>Goutte (UMS)</th><th>PPC (Chondrocalcinose)</th><th>Apatite</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Terrain</strong></td>
+        <td>Homme mûr, surpoids, comorbidités CV, IRC, diabète</td>
+        <td>Sujet âgé (+ Hémochromatose, Hyperparathyroïdie)</td>
+        <td>Femme plus jeune</td>
+      </tr>
+      <tr>
+        <td><strong>Site typique</strong></td>
+        <td>MTP 1er orteil, pied, cheville, genou</td>
+        <td>Genou, poignet</td>
+        <td>Épaule (coiffe), doigts/poignets (pseudo-phlegmon)</td>
+      </tr>
+      <tr>
+        <td><strong>Prévalence</strong></td>
+        <td><strong>0,9 %</strong> adultes en France<br>Rhumatisme inflammatoire le plus fréquent</td>
+        <td>Augmente avec l'âge</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td><strong>Imagerie caractéristique</strong></td>
+        <td>Double contour écho (tardivement géodes radio)</td>
+        <td>Calcif. méniscale, ligament triangulaire carpe, cartilages fémoraux, symphyse pubienne</td>
+        <td>Dépôts périarticulaires radio-opaques</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs de risque de goutte (hors hyperuricémie)
+    </div>
+    <ul class="lst">
+      <li>Âge, sexe masculin, ménopause</li>
+      <li>Antécédents familiaux (composante génétique forte)</li>
+      <li>Insuffisance rénale chronique</li>
+      <li>Syndrome métabolique (obésité, HTA, DT2, dyslipidémie)</li>
+      <li>Alcool (bière +++ même sans alcool, spiritueux)</li>
+      <li>Alimentation riche en protéines animales, fructose</li>
+      <li>Médicaments : diurétiques (anse, thiazidiques), ciclosporine</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs déclenchants d'une crise
+    </div>
+    <ul class="lst">
+      <li>Traumatisme, déshydratation</li>
+      <li>Contexte postopératoire, infarctus, infection à distance</li>
+      <li>Prise médicamenteuse : diurétique, <strong>mise en route d'un hypouricémiant</strong></li>
+      <li>Alcool, bière, sodas</li>
+      <li>Aliments très caloriques / riches en protéines animales</li>
+    </ul>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Goutte avant 35 ans (10-15 %) : rechercher mutation génétique (URAT1, ABCG2)</div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  <div><strong>Goutte secondaire</strong> — Causes : insuffisance rénale chronique, médicaments (diurétiques thiazidiques et de l'anse, furosémide, acide étacrynique, acétazolamide, ciclosporine, tacrolimus, aspirine faible dose, éthambutol, pyrazinamide). Syndrome métabolique fréquemment associé : HTA, obésité (périmètre abdominal &gt; 94 cm H, &gt; 88 cm F), intolérance glucose, hypertriglycéridémie, bas HDL.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : CLINIQUE & DIAGNOSTIC -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Clinique et diagnostic de la crise aiguë
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les caractéristiques sémiologiques d'un accès microcristallin aigu</div>
+  <div class="obj-line">Connaître les modalités du diagnostic de la goutte</div>
+  <div class="obj-line">Savoir éliminer une arthrite septique</div>
+  <div class="obj-line">Connaître les deux examens biologiques indispensables</div>
+  <div class="obj-line">Identifier les situations nécessitant un avis spécialisé</div>
+  <div class="obj-line">Reconnaître les formes polyarticulaires et les caractéristiques du liquide synovial</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Sémiologie de l'accès microcristallin typique
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="lst">
+        <li><strong>Début brutal</strong></li>
+        <li>Douleur intense : <strong>EVA ≥ 7/10</strong></li>
+        <li>Maximum en <strong>&lt; 24 heures</strong></li>
+        <li>Rougeur locale intense (rouge pivoine)</li>
+        <li>Œdème localisé</li>
+        <li>Résolution spontanée en quelques jours à semaines</li>
+        <li>Restauration ad integrum au début</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.83rem;font-weight:700;margin-bottom:6px;">Topographie de la goutte</div>
+      <ul class="lst">
+        <li><strong>MTP gros orteil</strong> (podagre) — 1er épisode classique</li>
+        <li>Autres MTP, tarse, cheville</li>
+        <li>Genou (ascendant)</li>
+        <li>Membres supérieurs (après plusieurs années)</li>
+        <li>Rachis, hanche, épaule : exceptionnel</li>
+      </ul>
+      <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Prodromes possibles : brûlures. Rarement grosse jambe rouge aiguë.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Arguments diagnostiques de la goutte
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Élément</th><th>Détail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Terrain</strong></td><td>Homme &gt; 35 ans, femme ménopausée, diurétiques au long cours, transplanté d'organe, antécédents familiaux</td></tr>
+      <tr><td><strong>Anamnèse</strong></td><td>Crises antérieures, antécédents familiaux, lithiase urique, facteurs déclenchants</td></tr>
+      <tr><td><strong>Réponse à la colchicine</strong></td><td>Sensibilité rapide si débutée tôt (argument fort)</td></tr>
+      <tr><td><strong>Uricémie</strong></td><td>Souvent &gt; 360 µmol/L, mais <strong>peut être normale lors de la crise</strong> → répéter 15 jours après</td></tr>
+      <tr><td><strong>Microcristaux dans le liquide synovial</strong> <span class="badge badge-red">Pathognomonique</span></td><td>Examen le plus contributif — cristaux UMS négatifs biréfringents en lumière polarisée</td></tr>
+      <tr><td><strong>Imagerie</strong></td><td>Écho : double contour (dépôts uratiques sur cartilage) ou tophus infraradiologiques ; Radio : tardivement géodes, encoches épiphysaires, interligne préservé</td></tr>
+      <tr><td><strong>Tophus clinique</strong></td><td>Dépôts visibles/palpables : hélix auriculaire, coudes (bursite), tendons calcanéen et patellaire, IPD</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      2 examens biologiques indispensables
+    </div>
+    <div class="kv-row"><span class="kv-key">Uricémie</span><span class="kv-val">Peut être normale pendant la crise</span></div>
+    <div class="kv-row"><span class="kv-key">Créatininémie + DFGe</span><span class="kv-val">MDRD ou CKD-EPI</span></div>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">+ Hémogramme systématique</div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Caractéristiques du liquide synovial inflammatoire
+    </div>
+    <div class="kv-row"><span class="kv-key">Cellularité</span><span class="kv-val">&gt; 2 000 cellules/mm³ (jusqu'à 100 000)</span></div>
+    <div class="kv-row"><span class="kv-key">Type cellulaire</span><span class="kv-val">Prédominance PNN</span></div>
+    <div class="kv-row"><span class="kv-key">Bactériologie</span><span class="kv-val">Négative (systématique !)</span></div>
+    <div class="kv-row"><span class="kv-key">Microcristaux</span><span class="kv-val">Présents (inconstants)</span></div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Éliminer une arthrite septique</strong> — La crise microcristalline peut donner fièvre, frissons, CRP élevée, hyperleucocytose. Elle peut aussi être déclenchée par une infection à distance. Toujours effectuer une ponction articulaire avec examen bactériologique pour éliminer une infection articulaire associée.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Situations nécessitant un avis spécialisé (rhumatologue/néphrologue)
+  </div>
+  <ul class="lst">
+    <li>Goutte précoce <strong>&lt; 35 ans</strong> (recherche maladies génétiques ou rénales)</li>
+    <li>Goutte polyarticulaire ou oligoarticulaire</li>
+    <li>Goutte tophacée ou avec dactylite goutteuse</li>
+    <li>Goutte + IRC (DFG &lt; 60 ml/min)</li>
+    <li>Goutte + insuffisance cardiaque ou coronaire instable</li>
+    <li>Goutte difficile à traiter (intolérance / contre-indication à colchicine, AINS, corticoïdes)</li>
+    <li>Allergie à l'allopurinol (avant introduction du fébuxostat)</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : TRAITEMENT DE LA CRISE AIGUË -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement de la crise aiguë
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de traitement d'une crise de goutte aiguë</div>
+  <div class="obj-line">Connaître les principes de traitement d'un accès à cristaux de PPC</div>
+  <div class="obj-line">Connaître les principes de traitement d'un accès à cristaux d'hydroxyapatite</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement de la crise de goutte — choix selon comorbidités
+  </div>
+  <table class="table-red">
+    <thead><tr><th>Médicament</th><th>Posologie</th><th>Contre-indications principales</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Colchicine</strong> <span class="badge badge-red">1ère intention</span></td>
+        <td>1 mg dès le début, puis 0,5 mg 1 h plus tard (= 1,5 mg J1)<br>Puis 0,5 mg × 2-3/j</td>
+        <td>Insuffisance rénale sévère, interactions (macrolides, statines)</td>
+      </tr>
+      <tr>
+        <td><strong>AINS per os</strong></td>
+        <td>Pleine dose, courte durée (durée de la crise)</td>
+        <td>IRC, maladie cardiovasculaire sévère, UGD</td>
+      </tr>
+      <tr>
+        <td><strong>Corticothérapie orale</strong></td>
+        <td>30-35 mg/j éq. prednisone × 3-5 jours</td>
+        <td>Infection active (à éliminer avant)</td>
+      </tr>
+      <tr>
+        <td><strong>Corticothérapie IA</strong></td>
+        <td>Infiltration intra-articulaire</td>
+        <td>Après exclusion arthrite septique obligatoire</td>
+      </tr>
+      <tr>
+        <td><strong>Anti-IL-1</strong> (Anakinra, Canakinumab)</td>
+        <td>En milieu hospitalier</td>
+        <td>Échec ou CI aux autres options</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:10px;font-size:.83rem;color:var(--muted);">Mesures associées : repos, orthèse, <strong>glaçage articulaire</strong> (avec protection cutanée — raccourcit la durée), antalgiques selon EVA. Le patient doit s'auto-traiter dès les premiers signes.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Piège :</strong> Ne pas introduire ou modifier le traitement hypouricémiant pendant une crise de goutte — cela peut déclencher ou prolonger la crise. Toujours traiter la crise d'abord.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement accès à PPC
+    </div>
+    <ul class="lst">
+      <li>Mêmes molécules que la goutte (colchicine, AINS, corticoïdes)</li>
+      <li>Adapter les posologies à l'âge <strong>(patients plus âgés)</strong></li>
+      <li>AINS et colchicine plus prudents (comorbidités nombreuses)</li>
+      <li>Infiltration IA cortisonique : bonne option si monoarthrite (après exclusion infection)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement accès à hydroxyapatite
+    </div>
+    <ul class="lst">
+      <li>Repos, glaçage</li>
+      <li>AINS</li>
+      <li>Corticothérapie orale 30 mg/j × 3-5 jours</li>
+      <li>Injections cortisoniques locales : <strong>2ème intention</strong> (évolution spontanément favorable)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : TRAITEMENT DE FOND DE LA GOUTTE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement de fond de la goutte — Hypouricémiants et règles hygiénodiététiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les règles hygiénodiététiques de la goutte</div>
+  <div class="obj-line">Connaître les principes des traitements hypouricémiants</div>
+  <div class="obj-line">Connaître les formes sévères de goutte et le risque de surmortalité</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Règles hygiénodiététiques
+    </div>
+    <ul class="lst">
+      <li>Amaigrissement progressif si surpoids/obésité</li>
+      <li><strong>Interdiction spiritueux et bière</strong> (même sans alcool, riche en purines)</li>
+      <li>Arrêt des sodas sucrés, limiter jus de fruits (fructose)</li>
+      <li>Diminution alcool en général</li>
+      <li>Modération viande et produits de la mer</li>
+      <li><strong>Laitages écrémés encouragés</strong> (effet uricosurique)</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Principes du traitement hypouricémiant
+    </div>
+    <div class="kv-row"><span class="kv-key">Cible uricémique</span><span class="kv-val" style="color:var(--red);">&lt; 360 µmol/L (60 mg/L)</span></div>
+    <div class="kv-row"><span class="kv-key">Objectif</span><span class="kv-val">Dissolution des cristaux sur le long terme</span></div>
+    <div style="margin-top:8px;font-size:.83rem;">Informer le patient :</div>
+    <ul class="lst">
+      <li>Risque de crise au démarrage du traitement</li>
+      <li>Observance au long cours indispensable</li>
+      <li>Risque cardiovasculaire, métabolique, rénal associé</li>
+      <li>Dépistage et traitement des comorbidités</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Surmortalité de la goutte non traitée</strong> — La goutte est associée à une <strong>surmortalité cardiovasculaire</strong> (syndrome métabolique, HTA, diabète fréquemment associés). À l'inverse, une hypouricémie est aussi à risque de surmortalité. La cible est donc une uricémie entre 60 et 360 µmol/L.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Formes sévères de goutte (sans traitement hypouricémiant)
+  </div>
+  <ul class="lst">
+    <li>Crises de plus en plus fréquentes</li>
+    <li>Extension aux membres supérieurs, puis rachis, hanche, épaule</li>
+    <li><strong>Arthropathie chronique</strong> : douleurs mécaniques + crises inflammatoires récurrentes</li>
+    <li><strong>Tophus goutteux</strong> : hélix auriculaire, olécrane (bursite), tendons calcanéen et patellaire, IPD (chez patients sous diurétiques)</li>
+    <li>Dactylite goutteuse</li>
+    <li>Néphropathie urique, lithiase urique récidivante</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : PPC — AFFECTIONS ASSOCIÉES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Rhumatisme à PPC — Affections associées
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les deux principales affections associées aux dépôts de PPC</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>2 affections à rechercher systématiquement devant un rhumatisme à PPC :</strong><br>
+  1. <strong>Hémochromatose</strong> (saturation transferrine, ferritine)<br>
+  2. <strong>Hyperparathyroïdie primaire</strong> (calcémie, PTH)
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : IMAGERIE RADIOLOGIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Imagerie radiologique — Chondrocalcinose
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les calcifications radiologiques typiques du rhumatisme à PPC (poignet, genou, bassin)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Localisations radiologiques caractéristiques du PPC
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Localisation</th><th>Aspect radiologique</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Poignet</strong></td><td>Calcification du ligament triangulaire du carpe</td></tr>
+      <tr><td><strong>Genou</strong></td><td>Calcification méniscale et calcification cartilagineuse</td></tr>
+      <tr><td><strong>Bassin</strong></td><td>Calcifications de la symphyse pubienne et des cartilages fémoraux</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Pièges et incontournables ECNi
+  </div>
+  <ul class="lst">
+    <li><strong>Uricémie normale pendant la crise</strong> : n'élimine pas la goutte. Doser 15 jours après l'accès.</li>
+    <li><strong>Arthrite septique à toujours éliminer</strong> : ponction + bactériologie systématique même si tableau très évocateur de goutte.</li>
+    <li><strong>Ne jamais démarrer un hypouricémiant pendant la crise</strong> : risque de prolongement ou déclenchement de crise.</li>
+    <li><strong>Colchicine : dose initiale 1 mg + 0,5 mg 1h après</strong> (pas 0,5 mg/h jusqu'à diarrhée comme jadis).</li>
+    <li><strong>Seuil uricémie : 360 µmol/L = 60 mg/L</strong> — valeur cible ET valeur diagnostique.</li>
+    <li><strong>PPC chez sujet âgé</strong> → chercher hémochromatose et hyperparathyroïdie primaire.</li>
+    <li><strong>Bière sans alcool</strong> : toujours interdite dans la goutte (riche en purines).</li>
+    <li><strong>Laitages écrémés</strong> : seuls aliments à encourager activement (effet uricosurique).</li>
+    <li><strong>Goutte non traitée = surmortalité cardiovasculaire</strong> : c'est une maladie chronique systémique, pas un simple rhumatisme.</li>
+    <li><strong>Microcristaux dans le liquide synovial</strong> : seul examen pathognomonique.</li>
+  </ul>
+</div>
+
+<div class="grid3">
+  <div class="card" style="text-align:center;">
+    <div class="card-title" style="justify-content:center;">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      UMS / Goutte
+    </div>
+    <div class="pills" style="justify-content:center;">
+      <span class="pill pill-amber">Homme mûr</span>
+      <span class="pill pill-amber">MTP 1er orteil</span>
+      <span class="pill pill-red">Surmortalité CV</span>
+    </div>
+  </div>
+  <div class="card" style="text-align:center;">
+    <div class="card-title" style="justify-content:center;">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      PPC / Chondrocalcinose
+    </div>
+    <div class="pills" style="justify-content:center;">
+      <span class="pill pill-blue">Sujet âgé</span>
+      <span class="pill pill-blue">Genou / poignet</span>
+      <span class="pill pill-amber">Hémochromatose / HyperPTH</span>
+    </div>
+  </div>
+  <div class="card" style="text-align:center;">
+    <div class="card-title" style="justify-content:center;">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Apatite
+    </div>
+    <div class="pills" style="justify-content:center;">
+      <span class="pill pill-teal">Femme jeune</span>
+      <span class="pill pill-teal">Épaule (coiffe)</span>
+      <span class="pill pill-teal">Évolution spontanément favorable</span>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

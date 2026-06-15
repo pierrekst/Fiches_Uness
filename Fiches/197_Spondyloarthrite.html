@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 197 — Spondyloarthrite</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 197</div>
+  <h1>Spondyloarthrite</h1>
+  <div class="header-sub">Rhumatismes inflammatoires chroniques — groupe hétérogène, terrain HLA-B27, lésion élémentaire = enthésite</div>
+  <div class="header-tags">
+    <span class="htag">Rhumatologie</span>
+    <span class="htag">Inflammatoire chronique</span>
+    <span class="htag">HLA-B27</span>
+    <span class="htag">Enthésite</span>
+    <span class="htag">Biothérapies</span>
+    <span class="htag">AINS 1re ligne</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Vision globale.</strong> Les spondyloarthrites forment un groupe de rhumatismes inflammatoires chroniques unifiés par leur lésion élémentaire (l'enthésite), leur terrain génétique (HLA-B27) et leurs manifestations axiales et/ou périphériques. Il faut savoir les reconnaître, les classer selon les critères ASAS 2009 (axiale vs périphérique), les distinguer des autres rachialgies et des arthrites chroniques, puis initier une prise en charge graduée : AINS en 1re ligne, biothérapies si résistance. La kinésithérapie est incontournable pour prévenir l'ankylose. La connaissance des facteurs de mauvais pronostic et des complications propres des formes évoluées est exigible.
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 1 : CONCEPT ET CLASSIFICATION          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Concept, classification et épidémiologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le concept de spondyloarthrite et lister ses différentes formes cliniques</div>
+  <div class="obj-line">Connaître la classification ASAS 2009 (axiale radiographique / non radiographique / périphérique)</div>
+  <div class="obj-line">Connaître les données épidémiologiques clés et le rôle du HLA-B27</div>
+  <div class="obj-line">Comprendre l'enthèse et l'enthésite comme lésion élémentaire de toutes les formes</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Formes du groupe SpA
+    </div>
+    <ul class="lst">
+      <li><strong>Spondylarthrite ankylosante (SA)</strong> — forme typique axiale</li>
+      <li>Rhumatisme psoriasique</li>
+      <li>Arthrites réactionnelles (dont sd Fiessinger-Leroy-Reiter)</li>
+      <li>Arthrites associées aux MICI (Crohn, RCH)</li>
+      <li>Formes juvéniles</li>
+      <li>Spondyloarthrites indifférenciées</li>
+      <li>Syndrome SAPHO</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie et terrain
+    </div>
+    <div class="kv-row"><span class="kv-key">Prévalence globale (France)</span><span class="kv-val">0,35 %</span></div>
+    <div class="kv-row"><span class="kv-key">Âge de début</span><span class="kv-val">&lt; 45 ans</span></div>
+    <div class="kv-row"><span class="kv-key">HLA-B27 dans SA</span><span class="kv-val">&gt; 90 %</span></div>
+    <div class="kv-row"><span class="kv-key">HLA-B27 population caucasienne</span><span class="kv-val">6–8 %</span></div>
+    <div class="kv-row"><span class="kv-key">Lésion élémentaire</span><span class="kv-val">Enthésite</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Classification ASAS 2009
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Sous-type</th>
+        <th>Critère principal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Axiale</strong><br><span style="color:var(--muted);font-size:.78rem;">Rachialgie &gt; 3 mois, début &lt; 45 ans</span></td>
+        <td><span class="pill pill-red">Radiographique</span></td>
+        <td>Sacro-iliite visible en radio = <strong>Spondylarthrite ankylosante</strong></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Non radiographique</span></td>
+        <td>Pas de sacro-iliite radio (IRM ou critères cliniques/HLA)</td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Périphérique</strong></td>
+        <td><span class="pill pill-blue">Articulaire érosive</span></td>
+        <td>Arthrite avec érosions radiologiques</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-teal">Articulaire non érosive</span></td>
+        <td>Arthrite sans érosion</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Enthésitique</span></td>
+        <td>Enthésite prédominante</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Enthèse :</strong> zone d'ancrage osseux d'une structure fibreuse (tendon, ligament, capsule). L'enthésite (inflammation enthèse) est la lésion élémentaire de toutes les SpA — par opposition à la PR dont la lésion élémentaire est la <em>synovite</em>.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 2 : MANIFESTATIONS CLINIQUES           -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Manifestations cliniques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les signes axiales (dorsolombalgies, pygalgies inflammatoires) et périphériques (oligoarthrite, coxite)</div>
+  <div class="obj-line">Reconnaître les enthésites périphériques : talalgie inflammatoire, dactylite (orteil/doigt en saucisse)</div>
+  <div class="obj-line">Connaître les manifestations extra-articulaires (uvéite, MICI, psoriasis, atteinte cardiaque)</div>
+  <div class="obj-line">Connaître la forme complète des arthrites réactionnelles (syndrome Fiessinger-Leroy-Reiter)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Signes articulaires et périarticulaires
+    </div>
+    <div style="margin-bottom:10px;">
+      <span class="phase phase-prod">Axial</span>
+      <ul class="lst" style="margin-top:4px;">
+        <li><strong>Dorsolombalgies inflammatoires</strong> (nocturnes, dérouillage matinal &gt; 30 min)</li>
+        <li><strong>Pygalgies (fessalgies)</strong> inflammatoires uni/bilatérales ou à bascule = sacro-iliite</li>
+      </ul>
+    </div>
+    <div style="margin-bottom:10px;">
+      <span class="phase phase-mod">Périphérique articulaire</span>
+      <ul class="lst" style="margin-top:4px;">
+        <li>Oligoarthrite membres inférieurs (grosses articulations)</li>
+        <li><strong>Coxite</strong> (hanche) = signe de forme sévère</li>
+      </ul>
+    </div>
+    <div>
+      <span class="phase phase-sev">Enthésopathique</span>
+      <ul class="lst" style="margin-top:4px;">
+        <li><strong>Talalgie inflammatoire</strong> — la plus fréquente et caractéristique</li>
+        <li><strong>Dactylite</strong> : orteil ou doigt « en saucisse »</li>
+        <li>Atteinte de la paroi thoracique antérieure</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Manifestations extra-articulaires
+    </div>
+    <table>
+      <tr>
+        <td><strong>Uvéite aiguë antérieure</strong></td>
+        <td>Oeil rouge douloureux unilatéral</td>
+      </tr>
+      <tr>
+        <td><strong>MICI</strong></td>
+        <td>Crohn ou RCH dans 10–20 % des cas</td>
+      </tr>
+      <tr>
+        <td><strong>Psoriasis</strong></td>
+        <td>Scalp, inversé, unguéal+++ (rhumatisme psoriasique)</td>
+      </tr>
+      <tr>
+        <td><strong>Cardiaque</strong> (rare)</td>
+        <td>Valvulopathie aortique/mitrale, BAV</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Arthrites réactionnelles — à connaître
+  </div>
+  <p style="font-size:.84rem;">Arthrites <strong>aseptiques</strong> survenant quelques semaines après une infection génitale ou digestive.</p>
+  <p style="font-size:.84rem;margin-top:8px;"><strong>Syndrome de Fiessinger-Leroy-Reiter</strong> (forme complète) :</p>
+  <div class="pills" style="margin-top:6px;">
+    <span class="pill pill-red">Urétrite</span>
+    <span class="pill pill-amber">Conjonctivite</span>
+    <span class="pill pill-blue">Arthrite</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 3 : EXAMENS ET IMAGERIE               -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic — Examens complémentaires et imagerie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les critères de classification ASAS cliniques, biologiques et radiologiques</div>
+  <div class="obj-line">Savoir utiliser rationnellement la radio, l'IRM, le HLA-B27 et la biologie inflammatoire</div>
+  <div class="obj-line">Distinguer syndesmophyte (SPA) et ostéophyte (arthrose) ; reconnaître la sacro-iliite et la coxite radiologique</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Biologie
+    </div>
+    <div class="kv-row"><span class="kv-key">CRP/VS normales dans SPA non traitée</span><span class="kv-val">60 % des cas !</span></div>
+    <div class="kv-row"><span class="kv-key">HLA-B27</span><span class="kv-val">Si doute diagnostic</span></div>
+    <div class="kv-row"><span class="kv-key">EFR</span><span class="kv-val">Formes évoluées (syndrome restrictif)</span></div>
+    <div class="kv-row"><span class="kv-key">ECG</span><span class="kv-val">Recherche BAV</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> CRP très élevée → chercher une affection tumorale ou infectieuse associée, pas uniquement la SPA.</div>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Imagerie — utilisation rationnelle
+    </div>
+    <ul class="lst">
+      <li><strong>Radio standard en 1re intention</strong> : rachis cervical + thoracique + lombaire (face + profil), bassin de face, zones douloureuses</li>
+      <li><strong>IRM sacro-iliaques (± rachis)</strong> : si doute diagnostic uniquement (sacro-iliite non visible en radio)</li>
+      <li>IRM <strong>inutile</strong> si sacro-iliite déjà présente en radio</li>
+      <li>Échographie et scintigraphie : rarement utiles au diagnostic</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Lésions radiologiques clés
+  </div>
+  <table class="table-teal">
+    <thead>
+      <tr>
+        <th>Lésion</th>
+        <th>Localisation</th>
+        <th>Aspect radiologique</th>
+        <th>Spécificité</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Syndesmophyte</strong></td>
+        <td>Enthèse vertébrale</td>
+        <td>Ossification <em>fine et verticale</em> entre 2 vertèbres → ankylose</td>
+        <td><span class="badge badge-green">Spécifique SPA</span></td>
+      </tr>
+      <tr>
+        <td><strong>Enthésophyte</strong></td>
+        <td>Enthèse périphérique (ex : épine calcanéenne)</td>
+        <td>Ossification cicatricielle le long d'une enthèse</td>
+        <td><span class="badge badge-amber">Non spécifique</span></td>
+      </tr>
+      <tr>
+        <td><strong>Sacro-iliite</strong></td>
+        <td>Articulation sacro-iliaque</td>
+        <td>Pincement de l'interligne, berges irrégulières</td>
+        <td><span class="badge badge-green">Très évocatrice</span></td>
+      </tr>
+      <tr>
+        <td><strong>Coxite</strong></td>
+        <td>Hanche</td>
+        <td>Pincement global <em>sans ostéophytose</em></td>
+        <td><span class="badge badge-red">Forme sévère</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Syndesmophyte vs ostéophyte :</strong> le syndesmophyte est <em>fin et vertical</em> (spécifique SPA, enthèse vertébrale). L'ostéophyte est <em>grossier et horizontal</em> (arthrose). Ne pas confondre sur la radio du rachis lombaire.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 4 : TRAITEMENT                        -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge thérapeutique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes généraux de la prise en charge (coordination rhumatologue/MG, éducation)</div>
+  <div class="obj-line">Savoir quels DMARDs sont indiqués selon la forme axiale ou périphérique</div>
+  <div class="obj-line">Connaître la place de la kinésithérapie dans la prévention de l'ankylose</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement de 1re ligne
+    </div>
+    <ul class="lst">
+      <li><strong>AINS</strong> (1re ligne) — rotation possible des AINS, efficacité sur douleur et raideur</li>
+      <li><strong>Antalgiques</strong> — éviter les opioïdes</li>
+      <li><strong>Corticoïdes locaux</strong> — infiltrations (arthrite, enthésopathie), synoviorthèse isotopique</li>
+    </ul>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:8px;font-weight:700;">Résistance aux AINS → traitement de fond (DMARD)</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitements de fond — DMARDs (AMM)
+    </div>
+    <table class="table-blue">
+      <thead>
+        <tr><th>Forme</th><th>Molécules</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Périphérique</strong></td>
+          <td>
+            <span class="pill pill-purple">MTX</span>
+            <span class="pill pill-purple">Leflunomide</span><br>
+            <span class="pill pill-red">anti-TNF</span>
+            <span class="pill pill-blue">anti-IL-17</span>
+            <span class="pill pill-teal">anti-IL-23</span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Axiale</strong></td>
+          <td>
+            <span class="pill pill-red">anti-TNF</span>
+            <span class="pill pill-blue">anti-IL-17</span><br>
+            <em style="font-size:.78rem;color:var(--muted);">MTX inefficace dans forme axiale pure</em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement non pharmacologique — incontournable
+  </div>
+  <div class="grid2" style="margin-bottom:0;margin-top:6px;">
+    <ul class="lst">
+      <li><strong>Arrêt du tabac</strong> (facteur de mauvais pronostic)</li>
+      <li><strong>Kinésithérapie +++</strong> : entretien des amplitudes rachidiennes, thoraciques et des membres, postures, autorééducation quotidienne</li>
+      <li><strong>Activité physique régulière</strong></li>
+    </ul>
+    <ul class="lst">
+      <li>Appareillage (corset) si déformation rachidienne évolutive</li>
+      <li>Chirurgie : prothèse de hanche (coxite), ostéotomie si cyphose dorsale majeure</li>
+      <li>ALD si forme sévère ou invalidante</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION 5 : PRONOSTIC ET SUIVI                -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Pronostic et suivi à long terme
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les facteurs de mauvais pronostic fonctionnel</div>
+  <div class="obj-line">Connaître les scores d'activité (BASDAI, ASDAS) et les modalités de suivi clinique, biologique et radiologique</div>
+  <div class="obj-line">Connaître les complications propres des formes évoluées</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs de mauvais pronostic
+    </div>
+    <ul class="lst">
+      <li>Coxite</li>
+      <li>Début précoce (avant 16 ans)</li>
+      <li>Dactylite</li>
+      <li>Syndrome inflammatoire important (CRP élevée)</li>
+      <li>Résistance aux AINS</li>
+      <li>Tabagisme actif</li>
+      <li>Syndesmophytes présents au diagnostic</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Modalités de suivi
+    </div>
+    <div class="kv-row"><span class="kv-key">Score d'activité clinique</span><span class="kv-val">BASDAI (0–10)</span></div>
+    <div class="kv-row"><span class="kv-key">Score composite clinico-biologique</span><span class="kv-val">ASDAS</span></div>
+    <div class="kv-row"><span class="kv-key">Radio rachis (formes évolutives)</span><span class="kv-val">Tous les 2–3 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Biologie</span><span class="kv-val">CRP/VS</span></div>
+    <div class="kv-row"><span class="kv-key">Coordination</span><span class="kv-val">Rhumatologue + MG</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Complications propres des formes évoluées
+  </div>
+  <div class="grid2" style="margin-top:6px;margin-bottom:0;">
+    <ul class="lst">
+      <li>Ankylose rachidienne (handicap majeur)</li>
+      <li>Atteinte restrictive pulmonaire / fibrose pulmonaire</li>
+      <li>Surrisque cardiovasculaire (AVC, IDM)</li>
+      <li>Ostéoporose et risque fracturaire</li>
+    </ul>
+    <ul class="lst">
+      <li>Trouble de conduction (BAV) / insuffisance aortique</li>
+      <li>Amylose AA</li>
+      <li>Dysplasies bulleuses kystiques des apex</li>
+      <li>Dilatation du cul-de-sac dural</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SECTION SYNTHÈSE                              -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Lésion élémentaire = enthésite</strong> (pas la synovite comme dans la PR). C'est ce qui explique la talalgie, la dactylite et l'atteinte axiale préférentielle.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège biologique :</strong> 60 % des SPA non traitées ont une CRP normale — l'absence de syndrome inflammatoire n'élimine pas le diagnostic.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Syndesmophyte ≠ ostéophyte :</strong> le syndesmophyte est fin et vertical (spécifique SPA), l'ostéophyte est grossier et horizontal (arthrose). Distinction clé à l'ECNi.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>MTX inefficace dans la forme axiale pure</strong> — réservé à la forme périphérique. En axial : anti-TNF ou anti-IL-17 si résistance aux AINS.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>IRM des sacro-iliaques :</strong> utile si doute diagnostic (SPA non radiographique). Inutile si sacro-iliite déjà visible en radio — ne pas la prescrire systématiquement.</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Kinésithérapie et autorééducation quotidienne :</strong> seul traitement capable de prévenir l'ankylose rachidienne. Incontournable quelle que soit la forme.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Mauvais pronostic (7 éléments) :</strong> coxite — début avant 16 ans — dactylite — syndrome inflammatoire important — résistance aux AINS — tabagisme actif — syndesmophytes au diagnostic.</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-15. Ne pas éditer à la main._
 
-**Avancement : 138 / 367 items (37.6%)**
+**Avancement : 140 / 367 items (38.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -204,8 +204,8 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 194 | [ ] | Lupus systémique | — |
 | 195 | [ ] | Artérite à cellules géantes | — |
 | 196 | [x] | Polyarthrite rhumatoïde | 196_polyarthrite_rhumatoide.html |
-| 197 | [ ] | Spondyloarthrite | — |
-| 198 | [ ] | Arthropathies microcristallines | — |
+| 197 | [x] | Spondyloarthrite | 197_Spondyloarthrite.html |
+| 198 | [x] | Arthropathies microcristallines | 198_Arthropathies_microcristallines.html |
 | 199 | [ ] | Syndrome douloureux régional complexe | — |
 | 200 | [ ] | Douleur et épanchement articulaire | — |
 | 201 | [ ] | Transplantation d organes | — |
