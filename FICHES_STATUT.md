@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-15. Ne pas éditer à la main._
 
-**Avancement : 140 / 367 items (38.1%)**
+**Avancement : 141 / 367 items (38.4%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -241,7 +241,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 231 | [ ] | Électrocardiogramme | — |
 | 232 | [x] | Fibrillation atriale | 232_fibrillation_atriale.html |
 | 233 | [x] | Valvulopathies | 233_Valvulopathies.html |
-| 234 | [ ] | Insuffisance cardiaque de l adulte | — |
+| 234 | [x] | Insuffisance cardiaque de l adulte | 234_Insuffisance_cardiaque.html |
 | 235 | [ ] | Péricardite aiguë | — |
 | 236 | [ ] | Troubles de la conduction intracardiaque | — |
 | 237 | [ ] | Palpitations | — |

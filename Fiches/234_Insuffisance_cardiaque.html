@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 234 — Insuffisance cardiaque de l'adulte</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 234 — Cardiologie</div>
+  <h1>Insuffisance cardiaque de l'adulte</h1>
+  <div class="header-sub">Définitions &amp; FEVG · Physiopathologie G/D · Diagnostic &amp; BNP/ETT · OAP cardiogénique · Choc cardiogénique · Traitement de fond</div>
+  <div class="header-tags">
+    <span class="htag">FEr ≤40 % · FElr 41–49 % · FEp ≥50 %</span>
+    <span class="htag">OAP = urgence</span>
+    <span class="htag">Choc = SCA n°1</span>
+    <span class="htag">4 piliers FEr</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> L'IC est un syndrome clinique (dyspnée, congestion) lié à une anomalie cardiaque structurelle/fonctionnelle, confirmé par les peptides natriurétiques et l'<strong>ETT</strong>. La <strong>FEVG</strong> structure tout le raisonnement : elle classe la maladie (réduite / légèrement réduite / préservée) et conditionne le traitement (seule l'<strong>IC-FEr</strong> dispose de traitements qui réduisent la mortalité). Trois urgences à maîtriser sans hésiter : l'<strong>OAP cardiogénique</strong> (détresse respiratoire par hyperpression capillaire), le <strong>choc cardiogénique</strong> (bas débit + hypoperfusion, 1ère cause = IDM) et la décompensation aiguë. Penser toujours : confirmer le diagnostic → typer (FEVG) → rechercher l'étiologie + le facteur déclenchant → traiter.
+</div>
+
+<!-- =================== SECTION 1 : DÉFINITIONS & ÉPIDÉMIO =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions, classification FEVG &amp; épidémiologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir l'insuffisance cardiaque et distinguer l'IC à FE réduite, légèrement réduite et préservée.</div>
+  <div class="obj-line">Connaître l'épidémiologie de l'IC (prévalence, âge, mortalité, place de l'IC-FEp).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></span>Définition</div>
+    <p style="font-size:.84rem;"><strong>Physiopathologique :</strong> incapacité du cœur à délivrer un débit suffisant aux besoins de l'organisme <em>et/ou</em> à fonctionner avec des pressions de remplissage normales.</p>
+    <p style="font-size:.84rem;margin-top:8px;"><strong>Universelle :</strong> syndrome clinique (symptômes ± signes d'IC) causé par une anomalie cardiaque structurelle/fonctionnelle, confirmé par ≥ 1 critère :</p>
+    <ul class="lst">
+      <li>Signes cliniques (crépitants, OMI, turgescence jugulaire)</li>
+      <li>↑ peptide natriurétique (BNP / NT-proBNP)</li>
+      <li>Anomalies écho / hémodynamiques</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>FEVG — paramètre central</div>
+    <div class="kv-row"><span class="kv-key">Formule</span><span class="kv-val">(VTD − VTS) / VTD</span></div>
+    <div class="kv-row"><span class="kv-key">VTD / VTS / VES</span><span class="kv-val">160 / 60 / 100 mL</span></div>
+    <div class="kv-row"><span class="kv-key">Mesure de référence</span><span class="kv-val">Échocardiographie</span></div>
+    <p style="font-size:.83rem;margin-top:8px;color:var(--muted);">Fraction de sang éjectée à chaque systole rapportée au volume télédiastolique — meilleur reflet de la fonction systolique du VG.</p>
+  </div>
+</div>
+
+<table class="table-blue">
+  <thead><tr><th>Type d'IC</th><th>FEVG</th><th>Mécanisme dominant</th><th>Implication thérapeutique</th></tr></thead>
+  <tbody>
+    <tr><td><strong>IC-FE réduite (FEr)</strong></td><td><span class="badge badge-red">≤ 40 %</span></td><td>Défaillance de la <strong>contraction</strong> (systolique)</td><td>Seul type avec traitement réduisant la mortalité</td></tr>
+    <tr><td><strong>IC-FE légèrement réduite</strong></td><td><span class="badge badge-amber">41–49 %</span></td><td>Mixte</td><td>Bénéfice thérapeutique intermédiaire</td></tr>
+    <tr><td><strong>IC-FE préservée (FEp)</strong></td><td><span class="badge badge-green">≥ 50 %</span></td><td>Défaillance du <strong>remplissage</strong> (relaxation / compliance) = diastolique</td><td>Traitement = diurétiques + comorbidités</td></tr>
+  </tbody>
+</table>
+
+<div class="card" style="margin-top:14px;">
+  <div class="card-title"><span class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></span>Épidémiologie</div>
+  <div class="grid3">
+    <div class="bl-blue"><div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">1–2 %</span></div></div>
+    <div class="bl-blue"><div class="kv-row"><span class="kv-key">Âge moyen</span><span class="kv-val">70–80 ans</span></div></div>
+    <div class="bl-red"><div class="kv-row"><span class="kv-key">Mortalité 1 an</span><span class="kv-val">≈ 10 %</span></div></div>
+  </div>
+  <ul class="lst">
+    <li>Prédominance <strong>masculine</strong> ; prévalence en <strong>hausse</strong> (vieillissement + meilleure survie post-coronaire)</li>
+    <li><strong>50 % des IC sont à FE préservée</strong> → terrain : sujet âgé + comorbidités (IRC, diabète/obésité/syndrome métabolique, BPCO/SAOS, anémie)</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 2 : PHYSIOPATHOLOGIE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie (IC gauche &amp; droite)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Comprendre les déterminants du débit cardiaque et la physiopathologie de l'IC gauche.</div>
+  <div class="obj-line">Connaître le remodelage, la désynchronisation et les arythmies au cours de l'IC.</div>
+  <div class="obj-line">Connaître les mécanismes et conséquences de l'insuffisance cardiaque droite.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>Déterminants du débit cardiaque</div>
+    <div class="kv-row"><span class="kv-key">Débit cardiaque Qc</span><span class="kv-val">VES × Fc ≈ 5 L/min</span></div>
+    <div class="kv-row"><span class="kv-key">VES</span><span class="kv-val">VTD − VTS</span></div>
+    <p style="font-size:.83rem;margin-top:8px;">Le VES dépend de :</p>
+    <ul class="lst">
+      <li><strong>Propriétés intrinsèques</strong> : inotropie + compliance (altérées dans l'IC)</li>
+      <li><strong>Conditions de charge</strong> : précharge (remplissage diastolique) / postcharge (éjection systolique)</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>Remodelage &amp; conséquences électriques</div>
+    <p style="font-size:.83rem;"><strong>Remodelage</strong> (présent quelle que soit la cause) : activation neurohormonale, anomalie calcique/mitochondriale, fibrose, hypertrophie, mort cellulaire → modif. taille/forme/fonction. Bénéfice court terme, délétère à long terme.</p>
+    <ul class="lst">
+      <li><strong>Désynchronisation</strong> (BAV 1, BBG) → corrigeable par resynchronisation</li>
+      <li><strong>Arythmies</strong> ventriculaires → risque de <strong>mort subite</strong> → DAI si IC sévère</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Insuffisance cardiaque droite</div>
+  <p style="font-size:.84rem;">Secondaire à une atteinte intrinsèque du VD <strong>ou</strong> à une ↑ postcharge VD (HTP) :</p>
+  <ul class="lst">
+    <li><strong>HTP postcapillaire</strong> par IC gauche = <strong>cause la plus fréquente</strong> (→ IC globale)</li>
+    <li><strong>HTP précapillaire</strong> (EP, HTAP…)</li>
+  </ul>
+  <p style="font-size:.83rem;margin-top:8px;">Conséquences : remodelage VD (hypertrophie, dilatation, dysfonction) + signes congestifs droits : OMI, turgescence jugulaire, ascite / IHC tardives, dilatation VCI &amp; reflux dans les veines sus-hépatiques à l'imagerie.</p>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 3 : DIAGNOSTIC & BILAN =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic clinique &amp; bilan paraclinique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes fonctionnels et physiques de l'IC gauche, droite et globale, et coter la dyspnée (NYHA).</div>
+  <div class="obj-line">Connaître les examens du bilan d'une IC (biologie, ECG, ETT, coronarographie).</div>
+  <div class="obj-line">Connaître l'intérêt et les limites du BNP / NT-proBNP pour le diagnostic et le suivi.</div>
+  <div class="obj-line">Connaître la valeur de l'ETT dans le diagnostic positif et étiologique.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>IC gauche</div>
+    <ul class="lst">
+      <li><strong>Dyspnée</strong> d'effort (commune, peu spécifique) → <strong>orthopnée</strong> (plus spécifique) → <strong>dyspnée paroxystique nocturne</strong></li>
+      <li>Râles crépitants/sous-crépitants bilatéraux, déclives, symétriques</li>
+      <li>Épanchement pleural · tachycardie · tableau d'OAP</li>
+    </ul>
+    <p style="font-size:.82rem;margin-top:6px;color:var(--muted);">Autres : asthénie, palpitations, Cheyne-Stokes, confusion (bas débit), signes digestifs.</p>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>IC droite</div>
+    <ul class="lst">
+      <li>Turgescence jugulaire · reflux hépato-jugulaire</li>
+      <li>Hépatomégalie · perturbation du bilan hépatique · ascite</li>
+      <li><strong>OMI</strong> : mous, blancs, indolores, bilatéraux, godet +, déclives</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;"><span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><span><strong>IC globale</strong> = signes droits + gauches. IC droite comme gauche peut se compliquer de choc cardiogénique.</span></div>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></span>Classification NYHA de la dyspnée</div>
+  <table>
+    <thead><tr><th>Stade</th><th>Symptômes</th><th>Activité physique</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge badge-green">I</span></td><td>Aucun symptôme à l'effort</td><td>Pas de limitation</td></tr>
+      <tr><td><span class="badge badge-blue">II</span></td><td>Efforts importants (course, plusieurs étages)</td><td>Limitation modérée</td></tr>
+      <tr><td><span class="badge badge-amber">III</span></td><td>Efforts modérés (ménage, toilette)</td><td>Limitation marquée</td></tr>
+      <tr><td><span class="badge badge-red">IV</span></td><td>Symptômes <strong>au repos</strong></td><td>Limitation sévère</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Bilan d'une IC — confirmer · étiologie · gravité</div>
+  <table class="table-teal">
+    <thead><tr><th>Examen</th><th>Apports</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Biologie</strong></td><td>Iono (Na/K), créatinine, bilan hépatique, TSHus ; NFS, bilan martial (fer, ferritine, CST → carence martiale, hémochromatose) ; troponine</td></tr>
+      <tr><td><strong>BNP / NT-proBNP</strong></td><td>Reflet de la mise en tension des cavités ; orientation diagnostique + suivi</td></tr>
+      <tr><td><strong>ECG</strong></td><td>Insuffisant seul mais <strong>rarement normal</strong> ; FA, HVG, BBG, séquelle d'IDM → orientation étiologique</td></tr>
+      <tr><td><strong>ETT</strong> (référence)</td><td>Chez <strong>tous</strong> les patients : FEVG, géométrie/fonction VG &amp; VD, valvulopathies, hémodynamique (débit, fonction diastolique, PAPs via IT, pressions de remplissage), péricarde</td></tr>
+      <tr><td><strong>Coronarographie</strong></td><td>Si dysfonction systolique, trouble de cinétique, ischémie prouvée, TV/mort subite récupérée → éliminer une coronaropathie (coroscanner possible chez le sujet jeune)</td></tr>
+      <tr><td>Selon contexte</td><td>IRM cardiaque, scintigraphie osseuse (amylose), enquête génétique, cathétérisme droit</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>BNP / NT-proBNP — interprétation</div>
+  <div class="grid2">
+    <div class="bl-teal">
+      <p style="font-size:.83rem;"><strong>Élimine l'IC si normal</strong> (dyspnée aiguë) :</p>
+      <div class="kv-row"><span class="kv-key">BNP</span><span class="kv-val">&lt; 100 pg/mL</span></div>
+      <div class="kv-row"><span class="kv-key">NT-proBNP</span><span class="kv-val">&lt; 300 pg/mL</span></div>
+    </div>
+    <div class="bl-red">
+      <p style="font-size:.83rem;"><strong>En faveur de l'IC</strong> : BNP &gt; 300 ; NT-proBNP selon l'âge :</p>
+      <div class="kv-row"><span class="kv-key">&lt; 50 ans</span><span class="kv-val">&gt; 450 pg/mL</span></div>
+      <div class="kv-row"><span class="kv-key">50–75 ans</span><span class="kv-val">&gt; 900 pg/mL</span></div>
+      <div class="kv-row"><span class="kv-key">&gt; 75 ans</span><span class="kv-val">&gt; 1800 pg/mL</span></div>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span><strong>Pièges d'interprétation :</strong><br>↑ avec l'âge, le sexe féminin, l'insuffisance rénale, la FA · ↓ en cas d'obésité.<br>Sous <strong>ARNI (sacubitril-valsartan)</strong> : le <strong>BNP ↑ (ininterprétable)</strong>, mais le <strong>NT-proBNP reste fiable</strong> (non substrat de la néprilysine).</span></div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 4 : ÉTIOLOGIES =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Étiologies &amp; facteurs déclenchants
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales étiologies de l'IC gauche et droite.</div>
+  <div class="obj-line">Identifier les facteurs déclenchants d'une décompensation cardiaque.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>IC gauche</div>
+    <ul class="lst">
+      <li><strong>Cardiopathie ischémique</strong> ± séquelle d'IDM (sidération réversible après revascularisation)</li>
+      <li><strong>HTA</strong> (++ dans l'IC-FEp)</li>
+      <li><strong>Valvulopathies</strong> sévères (toutes)</li>
+      <li><strong>CMD</strong> : primitive, familiale (25 %), toxique (alcool, cocaïne), myocardite, endocrine/nutritionnelle/métabolique, post-partum, chimio (anthracyclines, herceptine)</li>
+      <li><strong>CM hypertrophiques</strong> (sarcomérique, amylose, Fabry) · <strong>restrictives</strong> (amylose, hémochromatose, post-RT)</li>
+      <li>Troubles du rythme · causes péricardiques (tamponnade, péricardite constrictive)</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>IC droite</div>
+    <ul class="lst">
+      <li><strong>IC gauche</strong> = cause la plus fréquente (→ IC globale)</li>
+      <li>Insuffisance respiratoire chronique</li>
+      <li><strong>HTAP précapillaire</strong> : EP, anorexigènes, porto-pulmonaire, paranéoplasique, MVO, primitive</li>
+      <li>Dysplasie arythmogène du VD</li>
+      <li>Valvulopathies tricuspidiennes · infarctus du VD · péricardite constrictive</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Facteurs déclenchants d'une décompensation</div>
+  <div class="pills">
+    <span class="pill pill-red">FA / troubles du rythme</span>
+    <span class="pill pill-amber">Poussée hypertensive</span>
+    <span class="pill pill-red">Ischémie / SCA</span>
+    <span class="pill pill-blue">Infections</span>
+    <span class="pill pill-purple">Embolie pulmonaire</span>
+    <span class="pill pill-coral">Anémie</span>
+    <span class="pill pill-amber">Inobservance médicamenteuse</span>
+    <span class="pill pill-amber">Écart de régime hyposodé</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 5 : OAP CARDIOGÉNIQUE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  OAP cardiogénique <span class="badge badge-red">URGENCE</span>
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir l'OAP cardiogénique et son mécanisme physiopathologique.</div>
+  <div class="obj-line">Distinguer OAP cardiogénique et OAP lésionnel ; argumenter les diagnostics différentiels.</div>
+  <div class="obj-line">Poser le diagnostic clinique, repérer les signes de gravité et connaître les examens urgents.</div>
+  <div class="obj-line">Connaître la sémiologie radiographique de l'OAP hémodynamique et son traitement d'urgence.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Définition &amp; mécanisme</div>
+  <p style="font-size:.84rem;">Détresse respiratoire aiguë <strong>brutale</strong> par élévation des pressions de remplissage VG → ↑ pression OG → ↑ pression capillaire pulmonaire <strong>(&gt; 25 mmHg)</strong> &gt; pression oncotique → transsudat alvéolaire → « inondation » → altération de l'hématose (<strong>hypoxémie</strong> + hyperventilation compensatrice → <strong>hypocapnie initiale</strong>).</p>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></span>Cardiogénique vs lésionnel</div>
+    <table>
+      <thead><tr><th></th><th>Cardiogénique</th><th>Lésionnel (SDRA)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mécanisme</strong></td><td>↑ PCP (hyperpression)</td><td>↑ perméabilité membrane alvéolo-capillaire</td></tr>
+        <tr><td><strong>PCP</strong></td><td>Élevée &gt; 25 mmHg</td><td>Normale/basse &lt; 18 mmHg</td></tr>
+        <tr><td><strong>Liquide</strong></td><td>Transsudat (pauvre en protides)</td><td>Riche en protides (≈ plasma)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Diagnostics différentiels</div>
+    <p style="font-size:.83rem;">Toute IRA, surtout formes atypiques :</p>
+    <div class="pills">
+      <span class="pill pill-gray">SDRA</span><span class="pill pill-gray">Asthme</span>
+      <span class="pill pill-gray">EP</span><span class="pill pill-gray">BPCO décompensée</span>
+      <span class="pill pill-gray">Pneumopathie</span><span class="pill pill-gray">Tamponnade</span>
+      <span class="pill pill-gray">Épanchement pleural / PNO</span>
+    </div>
+    <p style="font-size:.82rem;margin-top:8px;color:var(--muted);">Orienter vers cause non cardiaque : toux/expectoration purulente, wheezing/cornage, fièvre, signes de phlébite, anomalies de percussion/palpation.</p>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Tableau clinique de l'OAP</div>
+  <ul class="lst">
+    <li>Détresse respiratoire brutale, <strong>souvent nocturne</strong>, polypnée superficielle angoissante, « chape de plomb »</li>
+    <li>Grésillement laryngé, <strong>expectoration mousseuse</strong> blanchâtre/saumonée, sueurs, patient assis jambes pendantes</li>
+    <li><strong>Crépitants bilatéraux</strong> remontant des bases vers les sommets (« marée montante ») ± épanchement pleural</li>
+    <li><span class="badge badge-amber">Piège</span> pseudo-asthme cardiaque : frein expiratoire + sibilants (sujet âgé)</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Signes de gravité</div>
+    <p style="font-size:.82rem;"><strong>Détresse resp. :</strong> FR &gt; 30, tirage, sueurs profuses (hypercapnie), cyanose, FC &gt; 150, normo/hypercapnie</p>
+    <p style="font-size:.82rem;margin-top:6px;"><strong>Choc :</strong> PAS &lt; 90 (ou chute de 30 mmHg), troubles de conscience, marbrures, oligurie</p>
+    <p style="font-size:.82rem;margin-top:6px;"><strong>Épuisement :</strong> FR &lt; 12, confusion, OAP persistant · <strong>SCA :</strong> douleur thoracique, sus-décalage ST</p>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Examens urgents <span style="font-weight:600;font-size:.78rem;color:var(--muted);">(ne pas retarder la PEC)</span></div>
+    <ul class="lst">
+      <li>Iono, urée, créatinine, NFS, bilan hépatique</li>
+      <li>Troponine (si douleur thoracique / modif. ECG)</li>
+      <li>BNP / NT-proBNP</li>
+      <li>ECG · Radio thorax · Gaz du sang</li>
+      <li>Échographie cardiaque</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Sémiologie radiographique (OAP hémodynamique)</div>
+  <ul class="lst">
+    <li>Redistribution vasculaire de la base vers les sommets</li>
+    <li>Œdème interstitiel : <strong>lignes B de Kerley</strong>, flou des gros vaisseaux hilaires, images réticulo-nodulaires des bases</li>
+    <li>Œdème alvéolaire : opacités floconneuses à contours flous, <strong>« en ailes de papillon »</strong> (bilatérales ; formes unilatérales trompeuses si IM)</li>
+    <li>Épanchements pleuraux · cardiomégalie (<strong>RCT &gt; 0,5</strong>)</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement d'urgence de l'OAP</div>
+  <ul class="steps">
+    <li><span class="step-num step-num-red">1</span><div><div class="step-title">Conditionnement</div><div class="step-content">Hospitalisation USC · position <strong>assise</strong> · VVP · monitorage (FC, PA, SpO₂, scope) · <strong>O₂</strong> objectif SaO₂ &gt; 90 %</div></div></li>
+    <li><span class="step-num step-num-red">2</span><div><div class="step-title">Diurétiques de l'anse</div><div class="step-content"><strong>Furosémide</strong> IV 1 mg/kg, à adapter à la diurèse</div></div></li>
+    <li><span class="step-num step-num-red">3</span><div><div class="step-title">Dérivés nitrés</div><div class="step-content"><strong>Trinitrine</strong> 1 mg/h si <strong>PAS &gt; 100 mmHg</strong>, adaptée à la PA</div></div></li>
+    <li><span class="step-num step-num-red">4</span><div><div class="step-title">Mesures associées</div><div class="step-content">Morphine IV si anxiété/douleur · traiter le facteur déclenchant (digoxine + anticoagulation si FA rapide, poussée HTA) · <strong>anticoagulation préventive systématique</strong></div></div></li>
+    <li><span class="step-num step-num-red">5</span><div><div class="step-title">Si non-réponse</div><div class="step-content"><strong>CPAP</strong> ; puis intubation + ventilation invasive si épuisement respiratoire</div></div></li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:10px;"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span><strong>Traitements de fond :</strong> bêtabloquant introduit <strong>à distance</strong> (après sevrage O₂) · IEC débutables rapidement, surtout si HTA associée.</span></div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 6 : TRAITEMENT DE FOND IC-FEr & ETP =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement de fond de l'IC-FEr, ETP &amp; réadaptation
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les classes médicamenteuses du traitement de l'IC à FE diminuée.</div>
+  <div class="obj-line">Connaître les mesures hygiéno-diététiques, l'éducation thérapeutique et la réadaptation cardiaque.</div>
+</div>
+
+<div class="alert alert-green"><span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span><span><strong>Les 4 piliers de l'IC-FEr</strong> sont introduits <strong>progressivement et simultanément</strong> : ils réduisent la mortalité, les ré-hospitalisations et améliorent les symptômes.</span></div>
+
+<table class="table-teal">
+  <thead><tr><th>Classe</th><th>Molécules / principes</th><th>Surveillance</th></tr></thead>
+  <tbody>
+    <tr><td><strong>IEC</strong> (ou ARA II si toux/angio-œdème) ou <strong>ARNI</strong> (sacubitril-valsartan)</td><td>Faible dose, ↑ par paliers (1–2 sem)</td><td>PA, fonction rénale, kaliémie</td></tr>
+    <tr><td><strong>Bêtabloquants</strong> (IC stable)</td><td><strong>Carvédilol, bisoprolol, nébivolol</strong> ; très faible dose, ↑ progressive</td><td>FC, PA, bradycardie/BAV</td></tr>
+    <tr><td><strong>Anti-aldostérone</strong></td><td>Spironolactone / éplérénone si FE &lt; 35 % symptomatique</td><td>Créat &lt; 20–25 mg/L et K⁺ &lt; 5,0 mmol/L</td></tr>
+    <tr><td><strong>iSGLT2 (glifozines)</strong></td><td>Quels que soient la FE et le statut diabétique ; ↓ pré/postcharge (effet diurétique osmotique + vasodilatation)</td><td>—</td></tr>
+    <tr><td>Diurétiques de l'anse <span class="badge badge-blue">symptomatique</span></td><td>Si congestion ; dose minimale efficace (± thiazidique si résistance)</td><td>K⁺, Na⁺, créatininémie</td></tr>
+  </tbody>
+</table>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Mesures hygiéno-diététiques &amp; ETP</div>
+    <ul class="lst">
+      <li><strong>Régime hyposodé</strong> 5–6 g sel/j (bannir la salière)</li>
+      <li>Éviction <strong>alcool / tabac</strong> (++ CMD toxique)</li>
+      <li><strong>Activité physique</strong> régulière, non essoufflante</li>
+      <li><strong>Pesée régulière</strong> → consulter si +2–3 kg</li>
+      <li><strong>Vaccinations</strong> antigrippale + antipneumococcique</li>
+      <li>Adaptation professionnelle ; suivi ambulatoire + télésurveillance</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>Moyens mnémotechniques &amp; réadaptation</div>
+    <p style="font-size:.83rem;"><strong>EPON</strong> (4 principes) : <strong>E</strong>xercice physique · se <strong>P</strong>eser · <strong>O</strong>bservance · <strong>N</strong>e pas trop saler</p>
+    <p style="font-size:.83rem;margin-top:6px;"><strong>EPOF</strong> (4 signes d'alerte) : <strong>E</strong>ssoufflement · <strong>P</strong>rise de poids · <strong>Œ</strong>dèmes · <strong>F</strong>atigue</p>
+    <p style="font-size:.82rem;margin-top:8px;color:var(--muted);"><strong>Réadaptation cardiaque</strong> = réentraînement + optimisation thérapeutique + ETP. Indications : post-SCA/angioplastie, post-chirurgie cardiaque, IC (mise en place du traitement, post-resynchronisation, post-greffe).</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 7 : COMPLICATIONS & CHOC =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications &amp; choc cardiogénique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les complications de l'IC et les causes de décès.</div>
+  <div class="obj-line">Poser le diagnostic d'un choc cardiogénique (clinique + critères hémodynamiques).</div>
+  <div class="obj-line">Connaître les principes du traitement du choc cardiogénique.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Complications &amp; pronostic</div>
+  <div class="alert alert-red"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span>Maladie <strong>grave</strong> : mortalité moyenne <strong>≈ 50 % à 5 ans</strong>.</span></div>
+  <ul class="lst">
+    <li>IC chronique réfractaire, <strong>cachexie cardiaque</strong>, choc cardiogénique → défaillance multiviscérale</li>
+    <li><strong>Syndrome cardiorénal</strong> → insuffisance rénale terminale</li>
+    <li>Épisodes d'IC aiguë récidivants</li>
+    <li><strong>Mort subite</strong> (TV/FV, dissociation électromécanique)</li>
+    <li>Complications <strong>thromboemboliques</strong> : AVC, EP (alitement)</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Diagnostic du choc cardiogénique</div>
+    <p style="font-size:.83rem;">Clinique : signes d'IC + <strong>hypotension</strong> + <strong>hypoperfusion</strong> (oligurie, marbrures, extrémités froides, cyanose, troubles de conscience). Caractère cardiogénique confirmé par ETT/cathétérisme après exclusion d'une hypovolémie.</p>
+    <div class="kv-row"><span class="kv-key">PAS</span><span class="kv-val">&lt; 90 mmHg (≥ 30 min)</span></div>
+    <div class="kv-row"><span class="kv-key">Index cardiaque</span><span class="kv-val">&lt; 2,2 L/min/m²</span></div>
+    <div class="kv-row"><span class="kv-key">PAPO / PCP</span><span class="kv-val">&gt; 15 mmHg</span></div>
+    <div class="alert alert-red" style="margin-top:8px;"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span>1ère cause = <strong>infarctus du myocarde</strong>.</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement du choc cardiogénique</div>
+    <ul class="lst">
+      <li>Hospitalisation <strong>réanimation / USI</strong> · sonde urinaire · monitorage invasif (KT radial)</li>
+      <li>Évaluer la volémie : remplissage si hypovolémie / diurétiques si surcharge</li>
+      <li><strong>Dobutamine</strong> (β1, inotrope +) en 1ʳᵉ intention</li>
+      <li><strong>Noradrénaline</strong> (α) en 2ᵉ ligne si vasoplégie · lévosimendan en recours</li>
+      <li><strong>Traiter l'étiologie</strong> / facteur déclenchant (revascularisation si IDM…)</li>
+      <li>Si échec : <strong>CPIA</strong> (IDM), assistance circulatoire (ECMO), cœur artificiel / greffe en urgence</li>
+    </ul>
+    <p style="font-size:.8rem;margin-top:6px;color:var(--muted);">PEC détaillée → item 232.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SYNTHÈSE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+<div class="card card-teal">
+  <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>L'essentiel en 30 secondes</div>
+  <ul class="lst">
+    <li><strong>FEVG</strong> classe l'IC : <strong>FEr ≤ 40 %</strong> (systolique), <strong>41–49 %</strong>, <strong>FEp ≥ 50 %</strong> (diastolique). Seule la FEr a un traitement qui réduit la mortalité.</li>
+    <li>Diagnostic = clinique + <strong>peptides natriurétiques</strong> + <strong>ETT</strong> (examen de référence, chez tous).</li>
+    <li><strong>NT-proBNP</strong> reste fiable sous ARNI ; le BNP devient ininterprétable.</li>
+    <li><strong>OAP cardiogénique</strong> = urgence : assis + O₂ + <strong>furosémide</strong> + dérivés nitrés (si PAS &gt; 100) ; CPAP si non-réponse. PCP &gt; 25 mmHg, transsudat (vs lésionnel = perméabilité, PCP normale).</li>
+    <li><strong>4 piliers FEr</strong> introduits ensemble : <strong>IEC/ARNI + bêtabloquant + anti-aldostérone + iSGLT2</strong>.</li>
+    <li><strong>Choc cardiogénique</strong> : PAS &lt; 90, IC &lt; 2,2, PAPO &gt; 15 ; <strong>1ère cause = IDM</strong> ; dobutamine ± noradrénaline + traiter l'étiologie.</li>
+    <li>Mortalité de l'IC ≈ <strong>50 % à 5 ans</strong> ; risque de mort subite (DAI si IC sévère).</li>
+    <li><strong>EPON</strong> (éducation) / <strong>EPOF</strong> (signes d'alerte).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
