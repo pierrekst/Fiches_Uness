@@ -346,7 +346,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 336 | [x] | Coma non traumatique chez l adulte et chez l enfant | 336_coma_non_traumatique.html |
 | 337 | [ ] | Principales intoxications aiguës | — |
 | 338 | [ ] | Œdème de Quincke et anaphylaxie | — |
-| 339 | [x] | Syndromes coronariens aigus | 339_SCA.html |
+| 339 | [x] | Syndromes coronariens aigus | 339_SCA_v2.html |
 | 340 | [x] | Accidents vasculaires cérébraux | 340_AVC.html |
 | 341 | [x] | Hémorragie méningée | 341_hemorragie_meningee.html |
 | 342 | [ ] | Malaise | — |
