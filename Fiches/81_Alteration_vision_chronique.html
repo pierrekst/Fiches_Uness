@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 81 — Altération chronique de la vision</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 81</div>
+  <h1>Altération chronique de la vision</h1>
+  <div class="header-sub">Ophtalmologie — BAV progressive, DMLA, cataracte, examens complémentaires, toxicologie oculaire</div>
+  <div class="header-tags">
+    <span class="htag">DMLA</span>
+    <span class="htag">Cataracte</span>
+    <span class="htag">Rétine</span>
+    <span class="htag">Nerf optique</span>
+    <span class="htag">Réflexe photomoteur</span>
+    <span class="htag">Toxicologie</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Cet item couvre toutes les causes d'altération visuelle s'installant progressivement. Savoir les classer (structures oculaires vs voies optiques), reconnaître la DMLA et la cataracte (causes majeures après 50 ans), maîtriser la sémiologie du syndrome maculaire et son dépistage par grille d'Amsler et OCT, interpréter un réflexe photomoteur (mydriase sensorielle vs paralytique), connaître les examens complémentaires ophtalmologiques et leurs indications, et repérer les médicaments responsables d'atteintes visuelles chroniques.
+</div>
+
+<!-- ============================================================
+     SECTION 1 : ÉTIOLOGIES
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies — Classification anatomique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître et classer les principales causes de baisse d'acuité visuelle progressive et d'altération du champ visuel</div>
+  <div class="obj-line">Distinguer atteintes du segment antérieur, de la rétine centrale/périphérique et des voies optiques</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Localisation</th>
+      <th>Étiologies</th>
+      <th>Latéralité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Segment antérieur / Médias</strong></td>
+      <td>Cataracte (nucléaire, corticale, sous-capsulaire post.)</td>
+      <td>Bilatérale, souvent asymétrique</td>
+    </tr>
+    <tr>
+      <td>Dystrophies cornéennes</td>
+      <td>Variable</td>
+    </tr>
+    <tr>
+      <td>Glaucome primitif à angle ouvert (triade : PIO + CV + excavation)</td>
+      <td>Souvent bilatéral</td>
+    </tr>
+    <tr>
+      <td rowspan="5" style="vertical-align:middle; text-align:center;"><strong>Macula</strong></td>
+      <td>DMLA (atrophique / exsudative)</td>
+      <td>Bilatérale asymétrique</td>
+    </tr>
+    <tr>
+      <td>Dystrophies héréditaires (Stargardt, Best, dystrophie des cônes)</td>
+      <td>Bilatérale</td>
+    </tr>
+    <tr>
+      <td>Membrane épirétinienne / Trou maculaire</td>
+      <td>Souvent unilatéral</td>
+    </tr>
+    <tr>
+      <td>Œdèmes maculaires (diabète, OVCR, post-op cataracte, uvéites)</td>
+      <td>Variable</td>
+    </tr>
+    <tr>
+      <td>Maculopathies toxiques (APS, poppers)</td>
+      <td>Bilatérale</td>
+    </tr>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Rétine périphérique</strong></td>
+      <td>Rétinopathies pigmentaires (héméralopie, ostéoblastes au FO)</td>
+      <td>Bilatérale</td>
+    </tr>
+    <tr>
+      <td>Décollement de rétine rhegmatogène (scotome périphérique)</td>
+      <td>Unilatéral</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Nerf optique</strong></td>
+      <td>Glaucome, NOIA, névrite optique (SEP)</td>
+      <td>Uni ou bilatéral</td>
+    </tr>
+    <tr>
+      <td>Neuropathies toxiques (éthambutol, alcool-tabac, plomb, diabète)</td>
+      <td>Bilatérale</td>
+    </tr>
+    <tr>
+      <td>Neuropathies tumorales (gliome, méningiome des gaines)</td>
+      <td>Unilatérale</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Voies optiques centrales</strong></td>
+      <td>Chiasma — adénome hypophysaire → hémianopsie bitemporale (sup. d'abord)</td>
+      <td>Bilatérale</td>
+    </tr>
+    <tr>
+      <td>Rétrochiasmatique (AVC, tumeur) → hémianopsie latérale homonyme</td>
+      <td>Controlatérale à la lésion</td>
+    </tr>
+    <tr>
+      <td>Cécité corticale (AVC vertébrobasilaire)</td>
+      <td>Bilatérale</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 2 : DMLA
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  DMLA — Dégénérescence Maculaire Liée à l'Âge
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition et les stades de la DMLA : MLA (débutant) vs DMLA atrophique vs DMLA exsudative</div>
+  <div class="obj-line">Connaître l'épidémiologie : première cause de malvoyance après 50 ans, prévalence par tranches d'âge, risque de bilatéralisation</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition
+    </div>
+    <div class="kv-row"><span class="kv-key">Terrain</span><span class="kv-val">&gt; 50 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Structure atteinte</span><span class="kv-val">Macula — épithélium pigmentaire</span></div>
+    <div class="kv-row"><span class="kv-key">Symétrie</span><span class="kv-val">Uni ou bilatérale, asymétrique</span></div>
+    <div class="kv-row"><span class="kv-key">MLA (débutant)</span><span class="kv-val">Drusen ± altérations pigmentaires — AV conservée</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">1re cause malvoyance</span><span class="kv-val">&gt; 50 ans (pays industrialisés)</span></div>
+    <div class="kv-row"><span class="kv-key">Prévalence globale</span><span class="kv-val">18 % après 50 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Formes évoluées</span><span class="kv-val">0,5 % à 65 ans → 8 % après 85 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Formes atrophiques vs exsudatives</span><span class="kv-val">Atrophiques plus fréquentes</span></div>
+    <div class="kv-row"><span class="kv-key">Risque bilatéralisation</span><span class="kv-val">50 % à 5 ans (DMLA exsudative)</span></div>
+  </div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr><th>Stade</th><th>Description anatomique</th><th>Symptômes</th><th>Traitement</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>MLA</strong> <span class="badge badge-green">Débutant</span></td>
+      <td>Drusen, altérations pigmentaires de l'EP</td>
+      <td>AV normale ou peu abaissée</td>
+      <td>Surveillance, compléments nutritionnels</td>
+    </tr>
+    <tr>
+      <td><strong>DMLA atrophique</strong> <span class="badge badge-amber">Sèche</span></td>
+      <td>Atrophie géographique de l'EP</td>
+      <td>BAV progressive lente</td>
+      <td>Pas de traitement curatif établi</td>
+    </tr>
+    <tr>
+      <td><strong>DMLA exsudative</strong> <span class="badge badge-red">Humide</span></td>
+      <td>Néovaisseaux choroïdiens — œdème / DSR</td>
+      <td>BAV ± rapide + métamorphopsies</td>
+      <td><strong>Anti-VEGF IVT</strong> (ranibizumab, aflibercept)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Les drusen seuls = MLA, pas encore DMLA. La DMLA requiert une forme évoluée (atrophique ou exsudative) avec BAV. La prévalence des formes évoluées est faible à 65 ans mais explose après 85 ans (8 %).</div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 3 : AUTRES PATHOLOGIES MACULAIRES
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Autres pathologies maculaires chroniques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les syndromes de l'interface vitréomaculaire : membrane épirétinienne et trou maculaire (mécanisme, symptômes, examen clé, traitement)</div>
+  <div class="obj-line">Connaître les principales causes d'œdème maculaire et leur traitement</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Membrane épirétinienne
+    </div>
+    <ul class="lst">
+      <li>Prolifération fibreuse à la surface de la macula après décollement vitré postérieur (~50 ans)</li>
+      <li>Symptômes : métamorphopsies, BAV modérée, reflet « cellophane » au FO</li>
+      <li><strong>Examen clé : OCT</strong> maculaire (épaississement + distorsion)</li>
+      <li>Traitement : vitrectomie si BAV importante</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Trou maculaire
+    </div>
+    <ul class="lst">
+      <li>Perte de continuité du tissu neurosensoriel au niveau de la fovéa</li>
+      <li>Symptômes : BAV rapide, scotome central, métamorphopsies</li>
+      <li><strong>Examen clé : OCT</strong> (confirme, mesure la taille → indication chirurgicale)</li>
+      <li>Traitement : vitrectomie</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Œdèmes maculaires — Causes et traitements
+  </div>
+  <table>
+    <thead>
+      <tr><th>Cause</th><th>Particularité</th><th>Traitement principal</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Maculopathie diabétique</strong></td>
+        <td>1re cause de malvoyance chez le DT2</td>
+        <td>Anti-VEGF IVT ± dexaméthasone IVT</td>
+      </tr>
+      <tr>
+        <td><strong>OVCR</strong></td>
+        <td>Unilatérale</td>
+        <td>Anti-VEGF IVT ± corticoïdes IVT</td>
+      </tr>
+      <tr>
+        <td><strong>Post-chirurgie cataracte</strong></td>
+        <td>Syndrome d'Irvine-Gass (~3 % des cas)</td>
+        <td>AINS collyres ; régression spontanée dans 2/3 des cas</td>
+      </tr>
+      <tr>
+        <td><strong>Uvéites</strong></td>
+        <td>Postérieures principalement, antérieures chroniques</td>
+        <td>Traitement étiologique + corticoïdes ± IVT</td>
+      </tr>
+      <tr>
+        <td><strong>Néovaisseaux choroïdiens</strong></td>
+        <td>DMLA exsudative = cause principale</td>
+        <td>Anti-VEGF IVT en urgence relative</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 4 : CATARACTE
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Cataracte
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition et les 7 grandes causes de cataracte (sénile, traumatique, iatrogène, métabolique, maladies ophtalmiques, génétique, congénitale)</div>
+  <div class="obj-line">Savoir diagnostiquer cliniquement une cataracte et identifier son type selon la localisation</div>
+  <div class="obj-line">Épidémiologie : chirurgie la plus fréquente en France, 2e cause de cécité mondiale</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition & Épidémiologie
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Opacification du cristallin (tout ou partie)</span></div>
+    <div class="kv-row"><span class="kv-key">Chirurgie la plus fréquente</span><span class="kv-val">~900 000 actes/an en France</span></div>
+    <div class="kv-row"><span class="kv-key">Rang mondial cécité</span><span class="kv-val">2e cause (après amétropies non corrigées)</span></div>
+    <div class="kv-row"><span class="kv-key">Tendance</span><span class="kv-val">En augmentation (vieillissement population)</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Causes — mémo
+    </div>
+    <ul class="lst">
+      <li><strong>Sénile</strong> — la plus fréquente, bilatérale globalement symétrique</li>
+      <li><strong>Traumatique</strong> — contusive (rosace, SSP) ou perforante</li>
+      <li><strong>Iatrogène</strong> — corticoïdes locaux/généraux (SSP), radiothérapie orbitaire</li>
+      <li><strong>Métabolique</strong> — diabète (SSP), hyperparathyroïdie</li>
+      <li><strong>Maladies ophtalmiques</strong> — uvéites chroniques, myopie forte, rétinopathies pigmentaires, chirurgie oculaire antérieure</li>
+      <li><strong>Génétique</strong> — Steinert (cataracte + ptosis + troubles moteurs + arythmie), trisomie 21</li>
+      <li><strong>Congénitale</strong> — rubéole congénitale, héréditaire</li>
+    </ul>
+  </div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr><th>Type</th><th>Localisation</th><th>Signe clinique distinctif</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nucléaire</strong></td>
+      <td>Noyau cristallinien</td>
+      <td>BAV de loin prédomine, myopie d'indice</td>
+    </tr>
+    <tr>
+      <td><strong>Sous-capsulaire postérieure (SSP)</strong></td>
+      <td>Face postérieure du cristallin</td>
+      <td>Gêne de loin ET de près — évoquer cause métabolique/iatrogène</td>
+    </tr>
+    <tr>
+      <td><strong>Corticale</strong></td>
+      <td>Cortex cristallinien</td>
+      <td>Éblouissements, halos colorés</td>
+    </tr>
+    <tr>
+      <td><strong>Totale</strong></td>
+      <td>Tout le cristallin</td>
+      <td>Aire pupillaire blanche visible à l'œil nu</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Signes fonctionnels de cataracte
+  </div>
+  <div class="grid2">
+    <ul class="lst">
+      <li>BAV progressive de loin (± de près selon type)</li>
+      <li>Photophobie, halos colorés autour des lumières</li>
+      <li>Gêne à la conduite de nuit</li>
+    </ul>
+    <ul class="lst">
+      <li>Diplopie monoculaire (rare)</li>
+      <li>Jaunissement de la perception des couleurs</li>
+      <li>Diagnostic : <strong>lampe à fente</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Cataracte SSP chez un patient sous corticoïdes — évoquer la responsabilité iatrogène, pas seulement la maladie inflammatoire sous-jacente. Steinert = association cataracte + ptosis + troubles moteurs + trouble du rythme cardiaque.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 5 : SYNDROME MACULAIRE & DÉPISTAGE
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Syndrome maculaire — Séméiologie et dépistage
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les symptômes composant le syndrome maculaire</div>
+  <div class="obj-line">Connaître les modalités de dépistage : grille d'Amsler (auto-dépistage) et OCT maculaire (spécialisé)</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Symptômes du syndrome maculaire
+  </div>
+  <div class="pills">
+    <span class="pill pill-blue">BAV</span>
+    <span class="pill pill-blue">Scotome central</span>
+    <span class="pill pill-red">Métamorphopsies</span>
+    <span class="pill pill-amber">Macro/micropsies</span>
+    <span class="pill pill-purple">Dyschromatopsie</span>
+    <span class="pill pill-teal">Photophobie</span>
+    <span class="pill pill-gray">Baisse sensibilité contrastes</span>
+  </div>
+  <div style="margin-top:10px;font-size:.83rem;color:var(--muted);">Causé par : liquide maculaire (œdème / décollement séreux rétinien), membrane épirétinienne, trou maculaire.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Grille d'Amsler — Auto-dépistage
+    </div>
+    <ul class="lst">
+      <li>Quadrillage régulier avec point central fixe</li>
+      <li>Tester chaque œil séparément (cache l'autre)</li>
+      <li>Scotome = partie de la grille non vue</li>
+      <li>Métamorphopsies = grille déformée ou ondulée</li>
+      <li>Utilisable par le patient à domicile</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      OCT maculaire — Dépistage spécialisé
+    </div>
+    <ul class="lst">
+      <li>Non invasif, coupes rétiniennes haute précision</li>
+      <li>Confirme : MER, trou maculaire, œdème, DSR, atrophie</li>
+      <li>Quantifie l'épaisseur maculaire (suivi sous traitement)</li>
+      <li>Visualise et localise les néovaisseaux choroïdiens (DMLA)</li>
+      <li>Dépistage et suivi du glaucome (perte de fibres optiques)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 6 : RÉFLEXE PHOTOMOTEUR
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Réflexe photomoteur — Interprétation
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les voies afférentes (sensorielle) et efférentes (parasympathique, sympathique) du réflexe photomoteur</div>
+  <div class="obj-line">Distinguer mydriase sensorielle et mydriase paralytique par l'analyse des RPM directs et consensuels</div>
+  <div class="obj-line">Connaître le syndrome de Claude-Bernard-Horner</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Anatomie fonctionnelle du RPM
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="bl-blue" style="margin-bottom:10px;">
+        <strong>Voie afférente (sensorielle)</strong><br>
+        <span style="font-size:.82rem;color:var(--muted);">Photorécepteurs → nerf optique → chiasma (hémidécussation des fibres pupillomotrices) → bandelettes optiques → corps genouillés → noyaux du III (bilatéraux)</span>
+      </div>
+      <div class="bl-teal">
+        <strong>Voie efférente parasympathique</strong><br>
+        <span style="font-size:.82rem;color:var(--muted);">Noyaux du III → nerf III → sphincter de l'iris → myosis (RPM direct + consensuel)</span>
+      </div>
+    </div>
+    <div>
+      <div class="bl-amber" style="margin-bottom:10px;">
+        <strong>Voie sympathique (dilatation)</strong><br>
+        <span style="font-size:.82rem;color:var(--muted);">Hypothalamus → ganglion cervical supérieur → carotide → orbite → muscle dilatateur de l'iris + muscle de Müller (paupière sup.)</span>
+      </div>
+      <div class="alert alert-teal" style="margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>CBH :</strong> lésion sympathique = myosis + ptosis homolatéraux</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table-red">
+  <thead>
+    <tr>
+      <th>Type de mydriase</th>
+      <th>Œil atteint éclairé — RPM direct</th>
+      <th>Œil atteint éclairé — RPM consensuel</th>
+      <th>Œil sain éclairé — RPM direct</th>
+      <th>Œil sain éclairé — RPM consensuel (œil atteint)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Sensorielle</strong><br><span style="font-size:.78rem;color:var(--muted);">Cécité, neuropathie optique<br>Voie afférente abolie</span></td>
+      <td><span class="badge badge-red">Aboli</span></td>
+      <td><span class="badge badge-red">Aboli</span></td>
+      <td><span class="badge badge-green">Conservé</span></td>
+      <td><span class="badge badge-green">Conservé</span></td>
+    </tr>
+    <tr>
+      <td><strong>Paralytique (III)</strong><br><span style="font-size:.78rem;color:var(--muted);">Paralysie du III<br>Voie efférente abolie</span></td>
+      <td><span class="badge badge-red">Aboli</span></td>
+      <td><span class="badge badge-green">Conservé</span></td>
+      <td><span class="badge badge-green">Conservé</span></td>
+      <td><span class="badge badge-red">Aboli</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Mémo :</strong> Dans la mydriase sensorielle, les 2 RPM (direct + consensuel) sont abolis à l'éclairement de l'œil atteint, et tous les deux conservés à l'éclairement de l'œil sain — la voie afférente est « coupée ». Dans la mydriase paralytique (III), seul l'œil atteint ne répond jamais (quelle que soit la direction d'éclairement) car c'est son effecteur (sphincter irien) qui est paralysé.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 7 : EXAMENS COMPLÉMENTAIRES
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Examens complémentaires en ophtalmologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principaux examens complémentaires ophtalmologiques et leurs indications spécifiques</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr><th>Examen</th><th>Principe</th><th>Indications principales</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Topographie cornéenne</strong></td>
+      <td>Carte de courbure cornéenne</td>
+      <td>Analyse astigmatisme, kératocône</td>
+    </tr>
+    <tr>
+      <td><strong>Biométrie</strong></td>
+      <td>Kératométrie + longueur axiale du globe</td>
+      <td>Calcul de l'implant (chirurgie cataracte)</td>
+    </tr>
+    <tr>
+      <td><strong>Périmétrie cinétique</strong> (Goldmann)</td>
+      <td>Point mobile de la périphérie vers le centre</td>
+      <td>Déficits périphériques : <strong>hémianopsies, quadranopsies</strong> — neuro-ophtalmologie</td>
+    </tr>
+    <tr>
+      <td><strong>Périmétrie statique automatisée</strong></td>
+      <td>Point fixe d'intensité croissante</td>
+      <td>Champ visuel central fin — <strong>glaucome</strong> (dépistage + suivi)</td>
+    </tr>
+    <tr>
+      <td><strong>OCT</strong></td>
+      <td>Coupes rétiniennes non invasives haute résolution</td>
+      <td>Macula (MER, trou, œdème, DMLA), glaucome (fibres optiques)</td>
+    </tr>
+    <tr>
+      <td><strong>Angiographie à la fluorescéine</strong></td>
+      <td>Injection IV fluorescéine — vascularisation rétinienne</td>
+      <td>Rétinopathie diabétique, DMLA — réalisable chez la femme enceinte</td>
+    </tr>
+    <tr>
+      <td><strong>Angiographie ICG</strong></td>
+      <td>Injection IV vert d'indocyanine — vaisseaux choroïdiens</td>
+      <td>Néovaisseaux choroïdiens (<strong>DMLA exsudative</strong>)</td>
+    </tr>
+    <tr>
+      <td><strong>ERG</strong></td>
+      <td>Potentiel rétinien global à stimulation lumineuse</td>
+      <td>Dystrophies rétiniennes héréditaires (ERG multifocal = atteinte maculaire)</td>
+    </tr>
+    <tr>
+      <td><strong>EOG</strong></td>
+      <td>Activité de l'épithélium pigmentaire</td>
+      <td>Maladie de Best</td>
+    </tr>
+    <tr>
+      <td><strong>PEV</strong></td>
+      <td>Potentiel cortex occipital à stimulation rétinienne</td>
+      <td>Neuropathies optiques, <strong>SEP</strong> (anomalie infraclinique)</td>
+    </tr>
+    <tr>
+      <td><strong>Échographie mode A</strong></td>
+      <td>Longueur axiale du globe</td>
+      <td>Calcul d'implant si biométrie optique impossible</td>
+    </tr>
+    <tr>
+      <td><strong>Échographie mode B</strong></td>
+      <td>Coupe 2D du globe</td>
+      <td>DR sur milieux troubles, corps étranger intra-oculaire, tumeur intra-orbitaire</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Angiographie fluorescéine = réalisable chez la femme enceinte (peu d'effets secondaires) — mais risque très faible et réel de choc anaphylactique à mentionner.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 8 : TOXICOLOGIE OCULAIRE
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Toxicologie oculaire médicamenteuse
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les médicaments responsables d'altération chronique de la vision : antipaludéens de synthèse, inhibiteurs MEK, neuropathies optiques toxiques (éthambutol, alcool, plomb), corticoïdes</div>
+</div>
+
+<table class="table-amber">
+  <thead>
+    <tr><th>Substance</th><th>Lésion oculaire</th><th>Particularité / Surveillance</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Antipaludéens de synthèse</strong><br>Chloroquine / Hydroxychloroquine</td>
+      <td>Maculopathie toxique en « œil de bœuf » (périfovéolaire)</td>
+      <td>Chloroquine &gt; HCQ en toxicité<br>HCQ : risque quasi nul avant 5 ans de traitement continu<br>Début périfovéolaire (fovéa épargnée → AV conservée initialement)<br><strong>Arrêt immédiat</strong> si signes précoces (effets persistent 6 mois)<br>Surveillance : bilan pré-thérapeutique puis annuel dès la 5e année (CV 10° + OCT maculaire)</td>
+    </tr>
+    <tr>
+      <td><strong>Inhibiteurs MEK</strong><br>(mélanomes métastatiques)</td>
+      <td>Décollements séreux rétiniens multiples (petites bulles)</td>
+      <td>Souvent réversibles à l'arrêt ou à la diminution de dose<br>OVCR possible → arrêt obligatoire<br>Discussion bénéfice/risque oncologue + ophtalmologue</td>
+    </tr>
+    <tr>
+      <td><strong>Nitrite d'alkyle (poppers)</strong></td>
+      <td>Atteinte des photorécepteurs maculaires</td>
+      <td>Aiguë (heures à jours), souvent réversible<br>Phosphènes + microscotome central<br>Pas de traitement spécifique</td>
+    </tr>
+    <tr>
+      <td><strong>Éthambutol / Isoniazide</strong></td>
+      <td>Neuropathie optique toxique bilatérale</td>
+      <td>Dyschromatopsie axe rouge-vert = 1er signe<br>Surveillance : CV + vision des couleurs + OCT papille (avant ttt, J21, M2, puis tous les 2 mois)</td>
+    </tr>
+    <tr>
+      <td><strong>Alcool (± tabac)</strong></td>
+      <td>Neuropathie optique alcoolo-tabagique</td>
+      <td>Scotome caeco-central bilatéral<br>Arrêt + supplémentation vitaminique → prévention atrophie optique</td>
+    </tr>
+    <tr>
+      <td><strong>Corticoïdes locaux/généraux au long cours</strong></td>
+      <td>Cataracte sous-capsulaire postérieure</td>
+      <td>Bilatérale, corrélée à la durée et à la dose</td>
+    </tr>
+    <tr>
+      <td><strong>Plomb</strong> (exposition professionnelle)</td>
+      <td>Neuropathie optique toxique bilatérale</td>
+      <td>Bilatérale, progressive</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence APS :</strong> La maculopathie aux antipaludéens est irréversible si elle atteint la fovéa. L'arrêt doit être immédiat dès les premiers signes (CV 10° ou ERG multifocal anormal), car la toxicité continue jusqu'à 6 mois après l'arrêt du traitement.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================
+     SECTION 9 : POINTS-CLÉS
+     ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Incontournables
+    </div>
+    <ul class="lst">
+      <li>DMLA = 1re cause malvoyance après 50 ans ; anti-VEGF IVT pour la forme exsudative</li>
+      <li>Risque bilatéralisation DMLA exsudative : 50 % à 5 ans</li>
+      <li>Cataracte = chirurgie la plus fréquente en France (~900 000/an) ; 2e cause cécité mondiale</li>
+      <li>OCT = examen clé pour toute pathologie maculaire</li>
+      <li>Périmétrie statique = gold standard glaucome ; cinétique (Goldmann) = hémianopsies/quadranopsies</li>
+      <li>Adénome hypophysaire → hémianopsie bitemporale supérieure d'abord</li>
+      <li>PEV = dépistage névrite optique infraclinique dans la SEP</li>
+      <li>Angiographie ICG (pas fluorescéine) = visualisation des néovaisseaux choroïdiens (DMLA exsudative)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Pièges classiques
+    </div>
+    <ul class="lst">
+      <li>APS : arrêt IMMÉDIAT si toxicité débutante — irréversible si fovéa atteinte, effets persistent 6 mois post-arrêt</li>
+      <li>Cataracte SSP sous corticoïdes : évoquer l'iatrogénie</li>
+      <li>Steinert = cataracte + ptosis + troubles moteurs + arythmie cardiaque</li>
+      <li>Syndrome d'Irvine-Gass (œdème post-cataracte) : régression spontanée dans 2/3 des cas</li>
+      <li>Mydriase sensorielle : RPM direct ET consensuel abolis à l'éclairement de l'œil atteint</li>
+      <li>Mydriase paralytique (III) : RPM consensuel de l'œil atteint aboli quel que soit l'œil éclairé</li>
+      <li>Rétinopathie pigmentaire : héméralopie + ostéoblastes au FO + bilatérale + héréditaire</li>
+      <li>Drusen seuls = MLA (pas encore DMLA) — DMLA = formes évoluées avec BAV</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-14. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-15. Ne pas éditer à la main._
 
-**Avancement : 137 / 367 items (37.3%)**
+**Avancement : 138 / 367 items (37.6%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -88,7 +88,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 78 | [ ] | Addiction au cannabis | — |
 | 79 | [ ] | Addictions comportementales | — |
 | 80 | [ ] | Dopage et conduites dopantes | — |
-| 81 | [ ] | Altération chronique de la vision | — |
+| 81 | [x] | Altération chronique de la vision | 81_Alteration_vision_chronique.html |
 | 82 | [ ] | Altération aiguë de la vision | — |
 | 83 | [ ] | Infections et inflammations oculaires | — |
 | 84 | [ ] | Glaucomes | — |
