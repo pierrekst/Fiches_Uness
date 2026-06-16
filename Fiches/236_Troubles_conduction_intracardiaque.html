@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 236 — Troubles de la conduction intracardiaque</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 236 — Cardiologie</div>
+  <h1>Troubles de la conduction intracardiaque</h1>
+  <div class="header-sub">Dysfonction sinusale · Bloc auriculo-ventriculaire (BAV) · Bloc de branche (BB)</div>
+  <div class="header-tags">
+    <span class="htag">Bradycardie</span>
+    <span class="htag">ECG</span>
+    <span class="htag">Urgence si mauvaise tolérance</span>
+    <span class="htag">Stimulateur cardiaque</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Trois niveaux d'atteinte du tissu de conduction, du haut vers le bas : le <strong>nœud sinusal</strong> (dysfonction sinusale), le <strong>nœud AV / faisceau de His</strong> (BAV) et les <strong>branches</strong> (BB). Le raisonnement est toujours le même : reconnaître le trouble sur l'ECG → juger la <strong>tolérance</strong> (une bradycardie mal tolérée = urgence) → traquer une <strong>étiologie curable</strong> (ischémie, hyperkaliémie, médicaments) avant de conclure à la dégénérescence → décider d'un <strong>stimulateur définitif</strong> selon le siège et les symptômes.
+</div>
+
+<!-- ============ SECTION 1 ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Anatomie &amp; physiopathologie des trois blocs
+</div>
+<div class="obj-list">
+  <div class="obj-line">Comprendre l'anatomie du tissu de conduction (nœud sinusal → nœud AV → His → branches → Purkinje).</div>
+  <div class="obj-line">Distinguer le mécanisme de la dysfonction sinusale, du BAV et du bloc de branche.</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>
+    Le circuit de conduction normal
+  </div>
+  <ul class="lst">
+    <li><strong>Nœud sinusal</strong> : toit de l'oreillette droite, près de l'ostium de la veine cave supérieure → pacemaker physiologique.</li>
+    <li><strong>Nœud atrio-ventriculaire (AV)</strong> : OD, en haut et en avant de l'ostium du sinus coronaire.</li>
+    <li><strong>Faisceau de His</strong> → branche droite + branche gauche (elle-même divisée en hémibranches antérieure et postérieure) → <strong>réseau de Purkinje</strong> → dépolarisation ventriculaire.</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      Dysfonction sinusale
+    </div>
+    <p style="font-size:.84rem;">Bradycardie sinusale <strong>inappropriée</strong> par rapport aux besoins de l'organisme. Mécanisme :</p>
+    <ul class="lst">
+      <li><strong>Arrêt sinusal</strong> (le nœud ne décharge plus), ou</li>
+      <li><strong>Bloc sino-atrial (BSA)</strong> : activité non transmise à l'OD.</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      BAV &amp; Bloc de branche
+    </div>
+    <ul class="lst">
+      <li><strong>BAV</strong> = atteinte du nœud AV ou du His → distinguer <strong>supra-hissien</strong> (nodal, bénin) et <strong>hissien / infra-hissien</strong> (péjoratif).</li>
+      <li><strong>BB</strong> = interruption ou retard sur une branche du His ; complet ou incomplet, permanent ou intermittent.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Règle pronostique clé :</strong> plus le bloc est <strong>bas situé</strong> (infra-hissien), plus le rythme d'échappement est <strong>lent et instable</strong> et les QRS larges → danger. Un bloc haut situé (nodal) a un échappement rapide à QRS fins, mieux toléré.</span>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 2 ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic ECG des troubles de conduction
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir évoquer le diagnostic de dysfonction sinusale et de trouble de conduction sur l'ECG.</div>
+  <div class="obj-line">Reconnaître et grader les BAV (1, 2 Mobitz 1, 2 Mobitz 2, 3) et les blocs de branche (BBD / BBG).</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    Dysfonction sinusale à l'ECG
+  </div>
+  <ul class="lst">
+    <li>Bradycardie <strong>sans onde P visible</strong>, avec rythme d'échappement jonctionnel ou atrial.</li>
+    <li>Parfois <strong>pause sinusale prolongée</strong> isolée (asystolie) avec retour en rythme sinusal.</li>
+    <li><strong>BSA du 2<sup>e</sup> degré</strong> : pause entre 2 ondes P = <strong>multiple</strong> du cycle sinusal normal.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+    Les blocs auriculo-ventriculaires
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Degré</th><th>ECG</th><th>Siège habituel</th><th>Clinique / pronostic</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>BAV 1</strong></td>
+        <td>PR <strong>&gt; 200 ms</strong> constant, chaque P suivie d'un QRS</td>
+        <td>Nodal (supra-hissien)</td>
+        <td>Asymptomatique — bénin</td>
+      </tr>
+      <tr>
+        <td><strong>BAV 2 Mobitz 1</strong><br>(Luciani-Wenckebach)</td>
+        <td><strong>Allongement progressif</strong> du PR jusqu'à une P bloquée (non suivie de QRS)</td>
+        <td><strong>Supra-hissien</strong> (nodal)</td>
+        <td>Souvent bénin / vagal</td>
+      </tr>
+      <tr>
+        <td><strong>BAV 2 Mobitz 2</strong></td>
+        <td>PR <strong>constant</strong> puis P brutalement bloquée ; PP régulier, pause = 2 cycles PP. Peut être 2/1, 3/1…</td>
+        <td><strong>Hissien / infra-hissien</strong></td>
+        <td>Péjoratif — risque de BAV 3</td>
+      </tr>
+      <tr>
+        <td><strong>BAV 3</strong><br>(complet)</td>
+        <td><strong>Dissociation auriculo-ventriculaire</strong> complète ; rythme ventriculaire d'échappement plus lent</td>
+        <td>Nodal (QRS fins, échap. haut) <em>ou</em> infra-hissien (QRS larges, échap. bas)</td>
+        <td>Urgence si mal toléré</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Repère Mobitz 1 vs 2 :</strong> dans le Mobitz 1 le PR <strong>s'allonge</strong> avant la P bloquée (nodal, bénin) ; dans le Mobitz 2 le PR <strong>ne bouge pas</strong> avant le blocage (infra-hissien, dangereux). L'ECG de surface ne suffit pas toujours à localiser précisément le bloc.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>
+      Bloc de branche droit (BBD)
+    </div>
+    <ul class="lst">
+      <li>QRS <strong>élargis &gt; 120 ms</strong>.</li>
+      <li>Aspect <strong>RsR'</strong> en V1.</li>
+      <li>Onde S large et empâtée en latéral (V6, DI, aVL).</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>
+      Bloc de branche gauche (BBG)
+    </div>
+    <ul class="lst">
+      <li>QRS <strong>élargis &gt; 120 ms</strong>.</li>
+      <li>Aspect <strong>rS ou QS</strong> en V1.</li>
+      <li><strong>R exclusif ou RR'</strong> en V6.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 3 ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Étiologies &amp; bilan de première intention
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales étiologies des troubles de conduction.</div>
+  <div class="obj-line">Connaître les examens de première intention pour rechercher une cardiopathie et une cause curable.</div>
+</div>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Réflexe central :</strong> toujours rechercher une <strong>cause secondaire (curable / réversible)</strong> AVANT de retenir la dégénérescence. La cause dégénérative (maladie de Lev et de Lenègre = fibrose ± calcification du tissu de conduction du sujet âgé) est un <strong>diagnostic d'élimination</strong>.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      Causes secondaires à traquer
+    </div>
+    <ul class="lst">
+      <li><strong>Ischémie</strong> — infarctus <strong>inférieur ++</strong></li>
+      <li><strong>Hyperkaliémie</strong></li>
+      <li><strong>Médicaments</strong> bradycardisants : bêtabloquant, amiodarone, digitalique, inhibiteur calcique bradycardisant</li>
+      <li><strong>Rétrécissement aortique serré</strong></li>
+      <li>Infectieuses : <strong>Lyme</strong>, endocardite (aortique, abcès de l'anneau), RAA</li>
+      <li>Post-chirurgie valvulaire / <strong>TAVI</strong>, post-radiothérapie</li>
+      <li>Neuromusculaires, surcharge, congénitale, mutation génétique, <strong>réflexe vagal</strong></li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      Bilan de 1<sup>re</sup> intention
+    </div>
+    <table>
+      <thead><tr><th>Examen</th><th>Objectif</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ECG</strong></td><td>Syndrome coronaire aigu associé</td></tr>
+        <tr><td><strong>Ionogramme</strong></td><td>Hyperkaliémie</td></tr>
+        <tr><td><strong>Troponine</strong></td><td>Si suspicion d'origine ischémique</td></tr>
+        <tr><td><strong>ETT</strong></td><td>Cardiopathie sous-jacente : FEVG, RA serré, endocardite, HVG (surcharge)</td></tr>
+        <tr><td><strong>Sérologie Lyme</strong></td><td>Si patient à risque</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 4 ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Tolérance &amp; traitement de l'urgence
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes de mauvaise tolérance d'une bradycardie.</div>
+  <div class="obj-line">Connaître les médicaments tachycardisants et le traitement d'urgence de la bradycardie mal tolérée.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    Signes de mauvaise tolérance
+  </div>
+  <p style="font-size:.83rem;color:var(--muted);margin-bottom:8px;">La tolérance dépend du caractère <strong>paroxystique ou permanent</strong> et de la <strong>fréquence ventriculaire</strong>. Une bradycardie mal tolérée = <strong>urgence thérapeutique</strong>.</p>
+  <table class="table-red">
+    <thead><tr><th>Domaine</th><th>Signes de gravité</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Interrogatoire</strong></td><td>Syncope « à l'emporte-pièce » avec chute traumatique, angor</td></tr>
+      <tr><td><strong>Examen</strong></td><td>Hypotension, signes de choc, oligurie, bradycardie sévère, trouble de conscience, insuffisance cardiaque</td></tr>
+      <tr><td><strong>ECG</strong></td><td>Allongement du QT, torsade de pointes</td></tr>
+      <tr><td><strong>Biologie</strong></td><td>Retentissement de bas débit : insuffisance rénale, insuffisance hépatocellulaire, ↑ lactates</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>
+    Conduite à tenir en urgence
+  </div>
+  <ul class="steps">
+    <li>
+      <span class="step-num step-num-red">1</span>
+      <div><div class="step-title">Arrêt cardio-respiratoire</div><div class="step-content">Manœuvres de réanimation : coup de poing sternal, puis MCE si inefficace.</div></div>
+    </li>
+    <li>
+      <span class="step-num">2</span>
+      <div><div class="step-title">Mauvaise tolérance sans ACR → traitement médicamenteux tachycardisant</div><div class="step-content">Isoprénaline ou atropine (cf. tableau ci-dessous).</div></div>
+    </li>
+    <li>
+      <span class="step-num">3</span>
+      <div><div class="step-title">Échec ou mauvaise tolérance → entraînement électro-systolique</div><div class="step-content">Stimulation externe (patchs) puis sonde temporaire dans le VD par ponction veineuse.</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>
+      Isoprénaline (Isuprel)
+    </div>
+    <div class="kv-row"><span class="kv-key">Voie</span><span class="kv-val">IV, à l'abri de la lumière (alu)</span></div>
+    <div class="kv-row"><span class="kv-key">Dilution</span><span class="kv-val">5 amp. dans 250 cc G5%</span></div>
+    <div class="kv-row"><span class="kv-key">Action</span><span class="kv-val">β1 (chrono/inotrope +) · β2</span></div>
+    <div class="kv-row"><span class="kv-key">Contre-indic.</span><span class="kv-val">Intox. digitalique, ESV, FC &gt; 120</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>
+      Atropine
+    </div>
+    <div class="kv-row"><span class="kv-key">Voie / dose</span><span class="kv-val">0,5–1 mg IVD</span></div>
+    <div class="kv-row"><span class="kv-key">Renouvellement</span><span class="kv-val">/ 3–5 min, max 3 mg</span></div>
+    <div class="kv-row"><span class="kv-key">Efficace si</span><span class="kv-val">brady ischémique, vagale, intox. digit.</span></div>
+    <div class="kv-row"><span class="kv-key">Contre-indic.</span><span class="kv-val">QT long, adénome prostate, glaucome</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Piège ECG :</strong> l'atropine est <strong>contre-indiquée si QT long</strong> (risque de torsade de pointes), alors qu'elle reste l'arme de la bradycardie vagale. À l'inverse, l'isoprénaline est contre-indiquée dans l'intoxication digitalique.</span>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 5 ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Indications du stimulateur cardiaque définitif
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les grandes indications de pose d'un stimulateur cardiaque (pacemaker) définitif.</div>
+</div>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Pré-requis :</strong> avant toute implantation, éliminer une <strong>étiologie curable / réversible</strong>. Le pacemaker est réservé à la bradycardie inappropriée <strong>sans cause traitable</strong>.</span>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+    Indications retenues
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Trouble</th><th>Pacemaker ?</th></tr></thead>
+    <tbody>
+      <tr><td>Dysfonction sinusale <strong>symptomatique</strong></td><td><span class="pill pill-teal">Oui</span></td></tr>
+      <tr><td><strong>BAV 3</strong> (complet)</td><td><span class="pill pill-teal">Oui</span></td></tr>
+      <tr><td><strong>BAV 2 Mobitz 2</strong> : si siège <strong>infra-hissien</strong> OU symptomatique (quel que soit le siège)</td><td><span class="pill pill-teal">Oui</span></td></tr>
+      <tr><td>BAV 2 Mobitz 1 <strong>asymptomatique</strong></td><td><span class="pill pill-red">Non</span></td></tr>
+      <tr><td><strong>BAV 1</strong></td><td><span class="pill pill-red">Non</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Technique :</strong> implantation sous anesthésie locale, incision dans le sillon delto-pectoral, 1 sonde (simple chambre) ou 2 sondes (double chambre) placées dans les cavités droites via le réseau veineux supérieur.</span>
+</div>
+
+<hr>
+
+<!-- ============ SYNTHÈSE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      ECG : les pièges discriminants
+    </div>
+    <ul class="lst">
+      <li><strong>Dysfonction sinusale</strong> = bradycardie <strong>sans onde P</strong>, échappement jonctionnel.</li>
+      <li><strong>Mobitz 1</strong> : PR s'allonge (nodal, bénin) ↔ <strong>Mobitz 2</strong> : PR fixe puis P bloquée (infra-hissien, grave).</li>
+      <li><strong>BAV 3</strong> : dissociation AV complète ; QRS larges + échappement lent = siège bas = danger.</li>
+      <li><strong>BBD</strong> = RsR' en V1 ; <strong>BBG</strong> = R en V6, QRS &gt; 120 ms.</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      Réflexes décisifs
+    </div>
+    <ul class="lst">
+      <li>Toujours chercher une <strong>cause curable</strong> (ischémie inférieure, hyperK, médicaments) avant la dégénérescence (Lev-Lenègre).</li>
+      <li>Bradycardie <strong>mal tolérée</strong> = urgence : atropine / isoprénaline → sonde si échec.</li>
+      <li><strong>Atropine CI si QT long</strong> ; <strong>isoprénaline CI si intox. digitalique</strong>.</li>
+      <li><strong>Pacemaker</strong> : dysfonction sinusale symptomatique, BAV 3, BAV 2 Mobitz 2 (infra-hissien/symptomatique). Pas pour BAV 1 ni Mobitz 1 asymptomatique.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

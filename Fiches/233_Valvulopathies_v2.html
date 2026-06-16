@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 233 — Valvulopathies</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.92;margin-top:4px;line-height:1.5;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 233 — Cardiologie</div>
+  <h1>Valvulopathies</h1>
+  <div class="header-sub">Les 4 valvulopathies clés : Insuffisance Mitrale (IM), Rétrécissement Aortique (RA), Insuffisance Aortique (IA), Rétrécissement Mitral (RM). Diagnostic clinique → confirmation par échographie → indication chirurgicale ou percutanée.</div>
+  <div class="header-tags">
+    <span class="htag">IM — souffle holosystolique apexo-axillaire</span>
+    <span class="htag">RA — souffle éjectionnel irradiant aux carotides</span>
+    <span class="htag">IA — souffle diastolique aspiratif</span>
+    <span class="htag">RM — roulement diastolique</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> 4 valvulopathies = 2 fuites (IM, IA) + 2 obstacles (RA, RM). Pour chacune : <strong>définir</strong> le défaut mécanique → comprendre la <strong>physiopathologie</strong> (surcharge volumique pour les fuites, surcharge pressive pour les obstacles) → identifier l'<strong>étiologie</strong> (dégénératif chez le sujet âgé, rhumatismal/congénital chez le jeune) → reconnaître le <strong>souffle</strong> caractéristique → confirmer et quantifier par <strong>échographie (ETT, examen clé)</strong> → poser l'<strong>indication thérapeutique</strong> (chirurgie vs percutané, et leur timing). <strong>Fil rouge :</strong> le RA est la plus fréquente, les valvulopathies aiguës (IM/IA) sont des urgences (OAP, choc), et toute décision d'intervention passe par la « Heart Team ».</div>
+
+<!-- ================= SECTION 1 : DÉFINITIONS & PHYSIOPATHOLOGIE ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  1 · Définitions & physiopathologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir IM, RA, IA et RM : nature du défaut valvulaire et conséquence hémodynamique.</div>
+  <div class="obj-line">Comprendre les mécanismes et conséquences physiopathologiques de chaque valvulopathie, et la différence aigu vs chronique.</div>
+</div>
+
+<table class="table-blue">
+  <tr><th>Valvulopathie</th><th>Défaut mécanique</th><th>Conséquence hémodynamique</th></tr>
+  <tr><td><strong>IM</strong> — Insuffisance mitrale</td><td>Défaut de fermeture <em>systolique</em> de la mitrale</td><td>Régurgitation VG → OG en systole <span class="badge badge-red">fuite</span></td></tr>
+  <tr><td><strong>RA</strong> — Rétrécissement aortique</td><td>Limitation d'ouverture <em>systolique</em> de l'aortique</td><td>Obstacle à l'éjection systolique du VG <span class="badge badge-purple">obstacle</span></td></tr>
+  <tr><td><strong>IA</strong> — Insuffisance aortique</td><td>Défaut de fermeture <em>diastolique</em> de l'aortique</td><td>Régurgitation aorte → VG en diastole <span class="badge badge-red">fuite</span></td></tr>
+  <tr><td><strong>RM</strong> — Rétrécissement mitral</td><td>Limitation d'ouverture <em>diastolique</em> de la mitrale</td><td>Obstacle au remplissage OG → VG <span class="badge badge-purple">obstacle</span></td></tr>
+</table>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>IM — surcharge volumique OG/VG</div>
+    <ul class="lst">
+      <li>Sévérité = taille de l'orifice régurgitant × pressions de remplissage VG × caractère aigu/chronique.</li>
+      <li><strong>Mécanisme — classification de Carpentier :</strong></li>
+      <li><strong>Type I</strong> : jeu valvulaire normal (perforation, dilatation de l'anneau).</li>
+      <li><strong>Type II</strong> : feuillets dépassant le plan de l'anneau (prolapsus, rupture de cordage).</li>
+      <li><strong>Type III</strong> : restriction des feuillets en aval (tenting) — fonctionnel ou rhumatismal.</li>
+      <li><strong>IM aiguë :</strong> ↑ brutale précharge, OG peu dilatée → HTAP post-capillaire brutale → OAP.</li>
+      <li><strong>IM chronique :</strong> dilatation + hyperkinésie VG (Starling), ↓ post-charge, dilatation OG, HTAP et symptômes tardifs.</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>RA — surcharge pressive VG</div>
+    <ul class="lst">
+      <li>Évolution lente ; <strong>valvulopathie la plus fréquente</strong> des pays développés.</li>
+      <li>Mécanisme : « dégénérescence » — calcifications + fibrose des feuillets.</li>
+      <li>↑ post-charge par ↑ gradient VG–aorte.</li>
+      <li>Adaptation VG : <strong>HVG concentrique sans dilatation</strong>.</li>
+      <li>Trouble de relaxation → insuffisance cardiaque diastolique ; altération tardive de la contractilité.</li>
+      <li>Insuffisance coronarienne fonctionnelle (angor sans coronaropathie).</li>
+    </ul>
+  </div>
+</div>
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>IA — surcharge volumique VG</div>
+    <ul class="lst">
+      <li>Sévérité = taille de l'orifice régurgitant × durée de la diastole.</li>
+      <li>Mécanisme : anomalie de la racine aortique <em>ou</em> atteinte de la valve.</li>
+      <li><strong>IA aiguë :</strong> surcharge VG brutale (volume + pression), ↑ post-charge relative, ↓ débit coronaire.</li>
+      <li><strong>IA chronique :</strong> dilatation VG (surcharge volumique) + HVG modérée (↑ VES), fibrose et dysfonction VG à terme.</li>
+      <li>↑ PA systolique, ↓ PA diastolique, hyperpulsatilité artérielle (hyperdébit périphérique).</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>RM — surcharge pressive OG</div>
+    <ul class="lst">
+      <li>Devenu rare (origine le plus souvent rhumatismale).</li>
+      <li>Mécanisme : fusion commissurale + atteinte sous-valvulaire et/ou calcifications de l'anneau.</li>
+      <li>Obstacle OG → VG : dilatation importante de l'OG → <strong>risque élevé de FA et thromboembolie</strong>.</li>
+      <li>Surcharge pressive en amont : HTP post-capillaire puis <strong>fixée pré-capillaire</strong> → insuffisance cardiaque globale.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ================= SECTION 2 : ÉTIOLOGIES ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  2 · Étiologies
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales étiologies de chaque valvulopathie, en distinguant le terrain (sujet âgé/dégénératif vs sujet jeune/rhumatismal-congénital).</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>IM</div>
+    <p><strong>Organique / primaire :</strong></p>
+    <ul class="lst">
+      <li><strong>Dégénérative myxoïde (Barlow)</strong> : sujet jeune &lt;40 ans, ♀ → prolapsus par excès de tissu.</li>
+      <li><strong>Dégénérative fibro-élastique</strong> : &gt;60 ans, ♂ → rupture de cordage fréquente.</li>
+      <li>Endocardite (perforation, végétation) ; post-rhumatismale (jeune, polyvalvulaire).</li>
+      <li><strong>Ischémique</strong> : aiguë par rupture/dysfonction de pilier (souvent postérieur).</li>
+    </ul>
+    <p style="margin-top:6px;"><strong>Fonctionnelle / secondaire :</strong> dilatation + hypokinésie VG (cardiopathie ischémique ou dilatée).</p>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>RA</div>
+    <ul class="lst">
+      <li><strong>Dégénératif (Mönckeberg)</strong> : vieillissement, calcification + fibrose → le plus fréquent.</li>
+      <li><strong>Bicuspidie congénitale</strong> : sujet jeune &lt;65 ans, souvent associée à une pathologie de l'aorte ascendante.</li>
+      <li><strong>Post-rhumatismal</strong> : sujet jeune, rare, atteinte souvent polyvalvulaire.</li>
+    </ul>
+  </div>
+</div>
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>IA</div>
+    <p><strong>Chronique :</strong></p>
+    <ul class="lst">
+      <li><strong>Dystrophique annulo-ectasiante</strong> : &gt;40 ans, idiopathique/HTA, ou Marfan/Ehlers-Danlos/Turner.</li>
+      <li><strong>Bicuspidie</strong> : associée à dilatation aortique (anévrysme).</li>
+      <li>Post-rhumatismale (&lt;40 ans) ; inflammatoire/aortite (Lupus, syphilis, PR, spondylarthrite).</li>
+    </ul>
+    <p style="margin-top:6px;"><strong>Aiguë :</strong> dissection aortique / rupture de Valsalva, endocardite, traumatique.</p>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>RM</div>
+    <ul class="lst">
+      <li><strong>Post-rhumatismal</strong> : le plus fréquent — fusion commissurale + atteinte sous-valvulaire.</li>
+      <li>Dégénératif : anneau calcifié.</li>
+      <li>Congénital : rare (valve en parachute).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Réflexe terrain :</strong> sujet <strong>âgé</strong> = dégénératif (RA calcifié, IM fibro-élastique). Sujet <strong>jeune</strong> = bicuspidie, Barlow, ou rhumatismal (RM ++, souvent polyvalvulaire).</span>
+</div>
+
+<hr>
+
+<!-- ================= SECTION 3 : CLINIQUE & AUSCULTATION ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  3 · Signes fonctionnels & auscultation
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes fonctionnels et l'auscultation caractéristique de chaque valvulopathie.</div>
+</div>
+
+<table>
+  <tr><th>Valvulopathie</th><th>Signes fonctionnels</th><th>Souffle / auscultation</th></tr>
+  <tr>
+    <td><strong>IM</strong></td>
+    <td>Aiguë : dyspnée aiguë/OAP (± douleur brève si rupture de cordage). Chronique : longtemps asymptomatique → dyspnée progressive.</td>
+    <td>Souffle <strong>holosystolique</strong> doux « en jet de vapeur », maximal au <strong>foyer mitral, irradiant dans l'aisselle gauche</strong>. Galop protodiastolique si IM importante ; éclat B2 si HTP.</td>
+  </tr>
+  <tr>
+    <td><strong>RA</strong></td>
+    <td>Longtemps asymptomatique → triade d'effort : <strong>dyspnée +++, angor ++, syncope/lipothymie</strong>.</td>
+    <td>Souffle <strong>méso-systolique râpeux</strong>, maximal au <strong>foyer aortique, irradiant aux carotides</strong>. <strong>Abolition du B2</strong> si RA serré.</td>
+  </tr>
+  <tr>
+    <td><strong>IA</strong></td>
+    <td>Longtemps asymptomatique → dyspnée +++, angor d'effort.</td>
+    <td>Souffle <strong>protodiastolique doux aspiratif</strong>, foyer aortique irradiant le long du bord gauche du sternum, <strong>mieux entendu assis penché en avant</strong>. Si sévère : holodiastolique, roulement de Flint, galop, pistol-shot. <strong>Hyperpulsatilité, ↑ PA différentielle</strong> (PAd &lt;50 mmHg = IA sévère).</td>
+  </tr>
+  <tr>
+    <td><strong>RM</strong></td>
+    <td>Longtemps asymptomatique, révélé par <strong>grossesse ou passage en FA</strong> ; dyspnée, asthénie, palpitations.</td>
+    <td><strong>Roulement diastolique</strong> au foyer mitral, <strong>éclat de B1</strong> si valve souple, dédoublement B2 si HTP (rythme en 3 temps de Durozier). IC droite, FA, hémoptysie.</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ================= SECTION 4 : EXAMENS COMPLÉMENTAIRES ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  4 · Examens complémentaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître l'intérêt (limité) de l'ECG, de la radio thoracique et de l'épreuve d'effort dans les valvulopathies.</div>
+  <div class="obj-line">Connaître la valeur primordiale de l'échocardiographie (ETT) dans l'IM, le RA, l'IA et le RM.</div>
+</div>
+
+<div class="alert alert-green">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+  <span><strong>L'ETT est l'examen CLÉ.</strong> Elle confirme le diagnostic, apprécie la sévérité, détermine l'étiologie, évalue le retentissement (FEVG, diamètres VG, PAPs) et cherche d'autres valvulopathies. <strong>ETO</strong> surtout pour les valvulopathies <strong>mitrales</strong> et la suspicion d'<strong>endocardite</strong>.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>ECG & Radio — peu spécifiques</div>
+    <p><strong>ECG</strong> (rarement normal si valvulopathie chronique sévère) :</p>
+    <ul class="lst">
+      <li>HVG systolique (RA) / diastolique (IM, IA).</li>
+      <li>Hypertrophie de l'OG (toutes).</li>
+      <li><strong>FA</strong> (fréquente, surtout valvulopathies mitrales).</li>
+      <li>BAV (rare, surtout RA) ; HVD (RM).</li>
+    </ul>
+    <p style="margin-top:6px;"><strong>Radio de thorax :</strong> surcharge pulmonaire (IM, RA, RM), cardiomégalie (IM, IA, RM), dilatation de l'aorte ascendante (RA, IA).</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Épreuve d'effort</div>
+    <div class="alert alert-red" style="margin-top:0;">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span><strong>Contre-indiquée</strong> dans les valvulopathies <strong>symptomatiques</strong>.</span>
+    </div>
+    <ul class="lst">
+      <li><strong>RA serré asymptomatique :</strong> test sous-maximal → cherche symptômes, anomalie ECG, profil tensionnel inadapté, arythmie V (en faveur de la chirurgie).</li>
+      <li><strong>IM sévère asympto. :</strong> écho d'effort (volume régurgitant, pressions pulmonaires).</li>
+      <li><strong>RM :</strong> écho d'effort si discordance clinique/écho.</li>
+      <li><strong>IA :</strong> non indiquée.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Critères de sévérité « serré » à connaître</div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">RA serré — surface valvulaire</span><span class="kv-val">&lt; 1 cm²</span></div>
+      <div class="kv-row"><span class="kv-key">RA serré — Vmax / gradient moyen</span><span class="kv-val">&gt; 4 m/s / &gt; 40 mmHg</span></div>
+      <div class="kv-row"><span class="kv-key">RA très serré — Vmax</span><span class="kv-val">&gt; 5,5 m/s</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">RM serré — surface mitrale</span><span class="kv-val">&lt; 1,5 cm²</span></div>
+      <div class="kv-row"><span class="kv-key">IA sévère — PA diastolique</span><span class="kv-val">&lt; 50 mmHg</span></div>
+      <div class="kv-row"><span class="kv-key">IM/IA sévère — grade</span><span class="kv-val">3 à 4/4</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ================= SECTION 5 : ÉVOLUTION & COMPLICATIONS ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  5 · Évolution & complications
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les évolutions et complications de chaque valvulopathie, et le pronostic charnière lié à l'apparition des symptômes.</div>
+</div>
+
+<table class="table-red">
+  <tr><th>Valvulopathie</th><th>Évolution</th><th>Complications</th></tr>
+  <tr>
+    <td><strong>IM</strong></td>
+    <td>Aiguë : OAP, choc cardiogénique, décès sans intervention. Chronique : selon sévérité, étiologie, FEVG.</td>
+    <td>Insuffisance cardiaque gauche, FA, endocardite, complications thromboemboliques.</td>
+  </tr>
+  <tr>
+    <td><strong>RA</strong></td>
+    <td>Lente : ↓ surface ≈ 0,1 cm²/an. <strong>Bon pronostic si serré asymptomatique</strong> (mort subite &lt;1%/an). <strong>Mauvais pronostic dès les symptômes</strong> sans intervention.</td>
+    <td>IC, troubles de conduction, FA, <strong>mort subite</strong> ; plus rare : endocardite, embol calcaire, <strong>syndrome de Heyde</strong> (Willebrand acquis → saignements digestifs sur angiodysplasie).</td>
+  </tr>
+  <tr>
+    <td><strong>IA</strong></td>
+    <td>Aiguë : évolution très rapide → choc, décès. Chronique : mortalité <strong>10–20 %/an si symptomatique</strong>.</td>
+    <td>IC, troubles du rythme, endocardite, dissection aortique si dilatation associée.</td>
+  </tr>
+  <tr>
+    <td><strong>RM</strong></td>
+    <td>Pronostic : âge, symptômes, HTAP fixée ou non, faisabilité d'une commissurotomie percutanée.</td>
+    <td>FA, IC, HTAP, thromboembolie, <strong>décompensation lors de la grossesse</strong>.</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ================= SECTION 6 : TRAITEMENTS — PRINCIPES ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  6 · Traitements — principes (chirurgie & percutané)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes du traitement chirurgical de chaque valvulopathie.</div>
+  <div class="obj-line">Connaître le principe des traitements percutanés de l'IM, du RA et du RM.</div>
+</div>
+
+<table class="table-teal">
+  <tr><th>Valvulopathie</th><th>Chirurgie</th><th>Percutané</th></tr>
+  <tr>
+    <td><strong>IM</strong></td>
+    <td><strong>Plastie mitrale en 1<sup>re</sup> intention</strong> si faisable (prolapsus ++). Sinon remplacement valvulaire (prothèse mécanique, ou biologique si &gt;65 ans).</td>
+    <td><strong>MitraClip</strong> (réparation bord-à-bord, technique d'Alfieri par voie percutanée).</td>
+  </tr>
+  <tr>
+    <td><strong>RA</strong></td>
+    <td>Remplacement valvulaire aortique : prothèse mécanique, ou biologique si &gt;65 ans.</td>
+    <td><strong>TAVI</strong> (bioprothèse percutanée, valve native laissée en place). Valvuloplastie au ballon : rare (resténose), réservée à l'urgence/palliatif.</td>
+  </tr>
+  <tr>
+    <td><strong>IA</strong></td>
+    <td>Remplacement valvulaire (± homogreffe si endocardite). Si dilatation aortique : <strong>Bentall</strong> (tube valvé + réimplantation coronaire) ou <strong>Tirone David</strong> (conservation de la valve native).</td>
+    <td>TAVI en cours d'évaluation (haut risque / CI chirurgicale).</td>
+  </tr>
+  <tr>
+    <td><strong>RM</strong></td>
+    <td>Commissurotomie chirurgicale (cœur fermé/ouvert) — rare ; ou remplacement valvulaire mitral.</td>
+    <td><strong>Commissurotomie mitrale percutanée</strong> si RM rhumatismal d'anatomie favorable (valve souple peu calcifiée, IM absente/minime).</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- ================= SECTION 7 : INDICATIONS ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  7 · Indications opératoires & percutanées
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales indications du traitement chirurgical de l'IM, du RA, de l'IA et du RM.</div>
+  <div class="obj-line">Connaître les principales indications du traitement percutané du RA (TAVI) et de l'IM (MitraClip).</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Principe général :</strong> intervention si absence de CI, après évaluation des comorbidités et du risque chirurgical. La décision passe par la <strong>« Heart Team »</strong> (au minimum chirurgien cardiaque + cardiologue interventionnel). On opère soit <strong>dès les symptômes</strong>, soit <strong>avant</strong> si retentissement VG/OG, FA ou HTAP.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>IM sévère (grade 3-4/4)</div>
+    <ul class="lst">
+      <li><strong>IM aiguë mal tolérée → urgence.</strong></li>
+      <li>Symptomatique et <strong>FEVG &gt; 30 %</strong> → chirurgie (privilégier la plastie).</li>
+      <li>Asymptomatique → si <strong>DTS &gt; 45 mm, FEVG &lt; 60 %, FA, ou PAPs &gt; 50 mmHg</strong>.</li>
+    </ul>
+    <p style="margin-top:6px;"><strong>Percutané (MitraClip) :</strong> IM organique chez patient CI/haut risque chirurgical (ex : FEVG &lt;30 %) ; IM fonctionnelle si IC persiste malgré traitement médical optimal.</p>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title"><span class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>RA serré</div>
+    <ul class="lst">
+      <li><strong>RA serré symptomatique.</strong></li>
+      <li>RA serré avec <strong>épreuve d'effort positive</strong>.</li>
+      <li>RA serré asymptomatique + 1 critère : <strong>FEVG &lt; 50 %</strong>, OU RA très serré (Vmax &gt;5,5 m/s) d'évolution rapide (&gt;0,3 m/s/an), HVG importante.</li>
+    </ul>
+    <p style="margin-top:6px;"><strong>TAVI</strong> (espérance de vie &gt;1 an) : CI chirurgicale (aorte porcelaine, thorax hostile), haut risque, risque intermédiaire &gt;75 ans si voie fémorale favorable. Extension aux bas risques &gt;65-70 ans.</p>
+  </div>
+</div>
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>IA sévère</div>
+    <ul class="lst">
+      <li><strong>IA aiguë → indication urgente</strong> (mal tolérée).</li>
+      <li>IA chronique symptomatique.</li>
+      <li>Asymptomatique : <strong>FEVG &lt; 50 %</strong>, OU DTS &gt; 50 mm / DTD &gt; 70 mm.</li>
+      <li>Dilatation aorte ascendante <strong>&gt; 55 mm</strong> (Marfan &gt;45-50 selon FDR, bicuspidie &gt;50 mm).</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>RM</div>
+    <p>Commissurotomie percutanée privilégiée si anatomie favorable. Chirurgie si percutané non envisageable :</p>
+    <ul class="lst">
+      <li>RM très sévère.</li>
+      <li>RM sévère symptomatique ou autre chirurgie cardiaque nécessaire.</li>
+      <li>RM modéré symptomatique avec HTAP post-capillaire / gradient moyen &gt;15 mmHg à l'effort.</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ================= SECTION 8 : TRAITEMENT MÉDICAL DE L'IA ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  8 · Traitement médical de l'IA
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les modalités du traitement médical de l'IA (en l'absence d'indication chirurgicale).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement</div>
+    <ul class="lst">
+      <li><strong>RHD :</strong> régime pauvre en sel.</li>
+      <li><strong>IEC / ARA2</strong> ± diurétiques.</li>
+      <li>Si <strong>Marfan / dilatation aortique</strong> : bêtabloquants ou ARA2 (Losartan) pour freiner la dilatation.</li>
+      <li>Prévention de l'<strong>endocardite</strong> : hygiène bucco-dentaire, suivi /6 mois.</li>
+      <li>Dépistage familial 1<sup>er</sup> degré si Marfan ou bicuspidie.</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>Surveillance (clinique + ECG + ETT)</div>
+    <div class="kv-row"><span class="kv-key">IA modérée à sévère asymptomatique</span><span class="kv-val">tous les 6 mois – 1 an</span></div>
+    <div class="kv-row"><span class="kv-key">Aorte &gt; 40 mm</span><span class="kv-val">tous les ans</span></div>
+    <div class="kv-row"><span class="kv-key">IA minime</span><span class="kv-val">tous les 2 ans</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ================= SYNTHÈSE ================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Réflexes auscultatoires</div>
+    <ul class="lst">
+      <li><strong>IM</strong> : holosystolique, apex → aisselle gauche.</li>
+      <li><strong>RA</strong> : méso-systolique râpeux, foyer aortique → carotides, abolition B2.</li>
+      <li><strong>IA</strong> : protodiastolique aspiratif, assis penché en avant, ↑ PA différentielle.</li>
+      <li><strong>RM</strong> : roulement diastolique, éclat B1.</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Chiffres seuils</div>
+    <ul class="lst">
+      <li>RA serré : surface &lt;1 cm², Vmax &gt;4 m/s, gradient &gt;40 mmHg.</li>
+      <li>RM serré : surface &lt;1,5 cm².</li>
+      <li>IA sévère : PAd &lt;50 mmHg.</li>
+      <li>Chirurgie IM asympto : DTS &gt;45 mm, FEVG &lt;60 %.</li>
+      <li>Chirurgie IA asympto : FEVG &lt;50 %, DTS &gt;50 / DTD &gt;70 mm, aorte &gt;55 mm.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Urgences :</strong> IM et IA <strong>aiguës</strong> (rupture de cordage, endocardite, dissection) → OAP / choc cardiogénique → indication opératoire en urgence.</span>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Pièges classiques ECNi :</strong> RA serré asymptomatique = <strong>bon</strong> pronostic (épreuve d'effort autorisée, sous-maximale) mais pronostic <strong>noir dès le 1<sup>er</sup> symptôme</strong> → ne pas attendre. Épreuve d'effort <strong>contre-indiquée si symptomatique</strong>. RM révélé par <strong>grossesse/FA</strong>. <strong>Syndrome de Heyde</strong> = RA + saignements digestifs (Willebrand acquis). IM organique → <strong>plastie</strong> avant prothèse.</span>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-15. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-16. Ne pas éditer à la main._
 
-**Avancement : 141 / 367 items (38.4%)**
+**Avancement : 143 / 367 items (39.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -240,10 +240,10 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 230 | [x] | Douleur thoracique aiguë | 230_douleur_thoracique_aigue.html |
 | 231 | [ ] | Électrocardiogramme | — |
 | 232 | [x] | Fibrillation atriale | 232_fibrillation_atriale.html |
-| 233 | [x] | Valvulopathies | 233_Valvulopathies.html |
+| 233 | [x] | Valvulopathies | 233_Valvulopathies_v2.html |
 | 234 | [x] | Insuffisance cardiaque de l adulte | 234_Insuffisance_cardiaque.html |
 | 235 | [ ] | Péricardite aiguë | — |
-| 236 | [ ] | Troubles de la conduction intracardiaque | — |
+| 236 | [x] | Troubles de la conduction intracardiaque | 236_Troubles_conduction_intracardiaque.html |
 | 237 | [ ] | Palpitations | — |
 | 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant.html |
 | 239 | [ ] | Acrosyndromes | — |
@@ -349,7 +349,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 339 | [x] | Syndromes coronariens aigus | 339_SCA_v2.html |
 | 340 | [x] | Accidents vasculaires cérébraux | 340_AVC.html |
 | 341 | [x] | Hémorragie méningée | 341_hemorragie_meningee.html |
-| 342 | [ ] | Malaise | — |
+| 342 | [x] | Malaise | 342_Malaise_syncope_PdC.html |
 | 343 | [ ] | État confusionnel et trouble de conscience chez l adulte et chez l enf… | — |
 | 344 | [ ] | Prise en charge d une patiente atteinte de pré-éclampsie | — |
 | 345 | [ ] | Malaise grave du nourrisson et mort inattendue du nourrisson | — |
