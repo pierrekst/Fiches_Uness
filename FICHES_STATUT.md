@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-16. Ne pas éditer à la main._
 
-**Avancement : 144 / 367 items (39.2%)**
+**Avancement : 145 / 367 items (39.5%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -101,7 +101,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 91 | [x] | Déficit neurologique récent | 91_Deficit_neurologique_recent.html |
 | 92 | [x] | Déficit moteur et ou sensitif des membres | 92_Deficit_moteur_sensitif_v2.html |
 | 93 | [x] | Compression médullaire non traumatique et syndrome de la queue de chev… | 93_compression_medullaire.html |
-| 94 | [ ] | Rachialgie | — |
+| 94 | [x] | Rachialgie | 94_Rachialgie.html |
 | 95 | [x] | Radiculalgie et syndrome canalaire | 95_Radiculalgie_syndrome_canalaire.html |
 | 96 | [x] | Neuropathies périphériques | 96_Neuropathies_peripheriques.html |
 | 97 | [ ] | Polyradiculonévrite aiguë inflammatoire | — |

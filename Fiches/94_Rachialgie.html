@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 94 — Rachialgie</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag,.header-tag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 94</div>
+  <h1>Rachialgie</h1>
+  <div class="header-sub">Cervicalgie, dorsalgie, lombalgie : démarche clinique, drapeaux rouges, et prise en charge fondée sur la preuve</div>
+  <div class="header-tags">
+    <span class="htag">Trouble musculo-squelettique n°1</span>
+    <span class="htag">Drapeaux rouges / jaunes / noirs</span>
+    <span class="htag">Rester actif</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> La rachialgie (cervicalgie, dorsalgie, lombalgie) est avant tout un symptôme <strong>commun et bénin</strong> dans l'immense majorité des cas — l'enjeu de l'item est de savoir <strong>reconnaître les rares formes secondaires</strong> grâce aux drapeaux rouges, d'identifier les <strong>facteurs de risque de chronicisation</strong> (drapeaux jaunes/noirs), et de connaître la stratégie d'imagerie raisonnée (pas d'imagerie systématique en aigu). Le traitement repose sur un message simple mais fondamental : <strong>rassurer et rester actif</strong>, à rebours des habitudes de repos prolongé. La lombalgie chronique est la première cause de handicap au monde — sa prise en charge est multidisciplinaire.
+</div>
+
+<!-- ===================== SECTION 1 : DEFINITIONS + EPIDEMIO ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions et épidémiologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les définitions des rachialgies : cervicalgie, dorsalgie, lombalgie</div>
+  <div class="obj-line">Connaître les prévalences des rachialgies</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Cervicalgie</div>
+    Douleur de la région postérieure du rachis cervical.
+    <div class="pills"><span class="pill pill-blue">2/3 population concernée</span><span class="pill pill-gray">Prévalence 2-11%</span></div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Dorsalgie</div>
+    Douleur en regard du rachis thoracique (T1 à T12).
+    <div class="pills"><span class="pill pill-teal">Plus rare</span><span class="pill pill-gray">5-10% consult. rhumato</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Lombalgie</div>
+    Douleur entre la charnière thoracolombaire et le pli fessier inférieur (HAS).
+    <div class="pills"><span class="pill pill-purple">1/4 à 1/3 population</span><span class="pill pill-red">TMS le + fréquent</span></div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>La lombalgie est l'<strong>affection la plus invalidante au monde</strong> (handicap, arrêts de travail). Les formes chroniques (10% des cas) représentent <strong>80% des coûts</strong> liés à la pathologie.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>Classement par durée</div>
+    <div class="kv-row"><div class="kv-key">Aiguë</div><div class="kv-val">&lt; 6 semaines</div></div>
+    <div class="kv-row"><div class="kv-key">Sub-aiguë</div><div class="kv-val">6 semaines - 3 mois</div></div>
+    <div class="kv-row"><div class="kv-key">Chronique</div><div class="kv-val">&gt; 3 mois</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>Classement étiologique / évolutif</div>
+    <div class="kv-row"><div class="kv-key">Commune</div><div class="kv-val">Non spécifique</div></div>
+    <div class="kv-row"><div class="kv-key">Symptomatique</div><div class="kv-val">Secondaire à une pathologie</div></div>
+    <div class="kv-row"><div class="kv-key">Récidivante</div><div class="kv-val">Récidive &lt; 12 mois</div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 2 : INTERROGATOIRE + EXAMEN ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Interrogatoire et examen physique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir interroger un patient et l'examiner devant une rachialgie</div>
+  <div class="obj-line">Connaître les principaux mécanismes à l'origine d'une rachialgie commune (discal vs interapophysaire)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Interrogatoire</div>
+    <ul class="lst">
+      <li>Siège, irradiations, mode/circonstances d'apparition</li>
+      <li>Impulsivité à la toux/défécation</li>
+      <li>Horaire mécanique vs inflammatoire (réveils nocturnes, dérouillage matinal)</li>
+      <li>Facteurs aggravants/atténuants, intensité (EVA), mode évolutif</li>
+      <li>Retentissement : autoquestionnaires Québec, Dallas, Oswestry</li>
+      <li>Signes associés : radiculalgie, troubles vésico-sphinctériens, anesthésie en selle</li>
+      <li>Efficacité des traitements antérieurs, drapeaux rouges, signes inflammatoires extra-articulaires</li>
+      <li>Déconditionnement à l'effort, facteurs de risque psycho-sociaux</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Examen physique</div>
+    <ul class="lst">
+      <li>Taille et perte de taille / âge 20 ans</li>
+      <li>Inspection : déformation (frontale, sagittale, axiale), attitude antalgique, inégalité MI, trouble de marche</li>
+      <li>Palpation : rachis, muscles paravertébraux, sacro-iliaques, sonnette</li>
+      <li>Mobilisation : syndrome rachidien (distances menton-sternum/acromion, doigts-sol, indice de Schöber)</li>
+      <li>Signes de conflit disco-radiculaire : Lasègue, Léri, sonnette radiculaire</li>
+      <li>Extra-rachidien : articulations périphériques, examen neuro des 4 membres, insuffisance vertébro-basilaire, thoraco-abdominal (dorsalgies)</li>
+    </ul>
+  </div>
+</div>
+
+<table class="table-blue">
+<tr><th>Origine</th><th>Discale</th><th>Interapophysaire</th></tr>
+<tr><td><strong>Âge</strong></td><td>25-50 ans</td><td>&gt; 50 ans</td></tr>
+<tr><td><strong>Contexte</strong></td><td>Effort/traumatisme, ATCD lumbago résolutif</td><td>—</td></tr>
+<tr><td><strong>Clinique</strong></td><td>Lombalgie médiane, mécanique, impulsive, ↑ hyperextension, syndrome discal</td><td>Médiane ou unilatérale, mécanique, ↑ piétinement/station prolongée, douleurs référées diffuses (fesses, cuisses)</td></tr>
+<tr><td><strong>Examen</strong></td><td>Syndrome rachidien net</td><td>Pauvre : hyperesthésie au palper-rouler, pas de syndrome discal</td></tr>
+<tr><td><strong>Complication</strong></td><td>Radiculalgie, syndrome de la queue de cheval</td><td>Canal lombaire rétréci, claudication radiculaire</td></tr>
+</table>
+
+<div class="card card-amber" style="margin-top:14px;">
+  <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>Facteurs de risque de rachialgie commune</div>
+  <div class="pills">
+    <span class="pill pill-amber">Traumatismes/microtraumatismes répétés</span>
+    <span class="pill pill-amber">Postures prolongées (loisirs/travail)</span>
+    <span class="pill pill-amber">Sédentarité</span>
+    <span class="pill pill-amber">Obésité (lombalgie)</span>
+    <span class="pill pill-amber">Troubles de la statique rachidienne</span>
+    <span class="pill pill-amber">Tabagisme</span>
+    <span class="pill pill-amber">ATCD familiaux</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 3 : DRAPEAUX ROUGES + IMAGERIE ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Drapeaux rouges et stratégie d'imagerie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir demander à bon escient une imagerie devant une rachialgie</div>
+  <div class="obj-line">Connaître les arguments en faveur d'une rachialgie secondaire (drapeaux rouges) conduisant à des examens complémentaires</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Drapeaux rouges (HAS mars 2019)</div>
+  <table class="table-red" style="margin-top:0;">
+  <tr><th>Signe d'alarme</th><th>Orientation</th></tr>
+  <tr><td>Douleur non mécanique (aggravation progressive, présente au repos/nuit)</td><td>Maladie inflammatoire, néoplasie, infection</td></tr>
+  <tr><td>Symptôme neurologique étendu (sphincters, déficit moteur jambes, queue de cheval)</td><td><strong>IRM en urgence</strong></td></tr>
+  <tr><td>Paresthésie pubienne/périnéale</td><td>Idem (atteinte sévère)</td></tr>
+  <tr><td>Traumatisme important</td><td>Fracture → imagerie</td></tr>
+  <tr><td>Perte de poids, AEG, ATCD cancer, fièvre</td><td>Néoplasie, infection (tuberculose)</td></tr>
+  <tr><td>Toxicomanie IV, corticothérapie prolongée, immunodépression</td><td>Infection</td></tr>
+  <tr><td>Déformation structurale importante</td><td>Radiographies, IRM</td></tr>
+  <tr><td>Douleur thoracique (dorsalgie)</td><td>Origine thoraco-abdominale (anévrisme aorte, poumon)</td></tr>
+  <tr><td>Âge &lt; 20 ans ou &gt; 55 ans</td><td>Ostéopathie fragilisante, tumeur, maladie inflammatoire</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Lombalgies</div>
+    <div class="kv-row"><div class="kv-key">Poussée aiguë</div><div class="kv-val">Aucune imagerie avant J7sem.</div></div>
+    <div class="kv-row"><div class="kv-key">Drapeau rouge</div><div class="kv-val">IRM lombaire + NFS/CRP/VS</div></div>
+    <div class="kv-row"><div class="kv-key">Échec à 7 sem.</div><div class="kv-val">IRM ± radios F+P</div></div>
+    <div class="kv-row"><div class="kv-key">Lombalgie chronique</div><div class="kv-val">IRM (TDM si CI) ± radios F+P</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Cervicalgies / dorsalgies</div>
+    <div class="kv-row"><div class="kv-key">Cervicalgie aiguë</div><div class="kv-val">Aucune avant J7sem. sauf drapeau rouge</div></div>
+    <div class="kv-row"><div class="kv-key">Cervicalgie chronique</div><div class="kv-val">Radio F+P+3/4 (IRM si radiculalgie/geste)</div></div>
+    <div class="kv-row"><div class="kv-key">Entorse cervicale</div><div class="kv-val">Clichés dynamiques flexion/extension</div></div>
+    <div class="kv-row"><div class="kv-key">Toute dorsalgie</div><div class="kv-val">= drapeau rouge → radio F+P systématique</div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 4 : CHRONICISATION ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Facteurs de risque de chronicisation
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les facteurs favorisants d'une évolution vers la chronicité (drapeaux jaunes et noirs)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Drapeaux jaunes</div>
+    <ul class="lst">
+      <li>Anxiété, dépression, isolement</li>
+      <li>Croyances inappropriées sur le mal de dos</li>
+      <li>Catastrophisme, évitement</li>
+      <li>Problèmes professionnels : conflit, insatisfaction, arrêt/accident de travail</li>
+    </ul>
+  </div>
+  <div class="card" style="border-left:4px solid #1e2029;">
+    <div class="card-title"><div class="card-icon" style="background:#1e2029;"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Drapeaux noirs</div>
+    <ul class="lst">
+      <li>Absence de mesures de retour à l'emploi</li>
+      <li>Insécurité financière, critères du système de compensation</li>
+      <li>Manque de contact avec le milieu de travail</li>
+      <li>Durée de l'arrêt : après 2 ans, 0% de probabilité de retour au travail</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 5 : ETIOLOGIES SECONDAIRES + COMPLEXES ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Étiologies des rachialgies secondaires et de la rachialgie complexe
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales étiologies d'une rachialgie secondaire et les autres étiologies plus rares</div>
+  <div class="obj-line">Connaître les étiologies de la rachialgie complexe (« compliquée »)</div>
+  <div class="obj-line">Connaître les causes extrarachidiennes (douleurs référées) des lombalgies</div>
+</div>
+
+<table class="table-red">
+<tr><th>Catégorie (rang A)</th><th>Étiologies</th></tr>
+<tr><td><strong>Tumorale</strong></td><td>Métastases (rarement cancer primitif)</td></tr>
+<tr><td><strong>Infectieuse</strong></td><td>Spondylodiscite, mal de Pott (tuberculeuse)</td></tr>
+<tr><td><strong>Inflammatoire</strong></td><td>Spondylarthrite ankylosante</td></tr>
+<tr><td><strong>Traumatique</strong></td><td>Fracture vertébrale, luxation traumatique</td></tr>
+<tr><td><strong>Ostéoporotique</strong></td><td>Fracture vertébrale ostéoporotique</td></tr>
+<tr><td><strong>Viscérale</strong></td><td>Pour les dorsalgies</td></tr>
+</table>
+
+<div class="alert alert-blue" style="margin-top:14px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Autres étiologies (rang B) :</strong> chondrocalcinose, rhumatisme à apatite, polyarthrite rhumatoïde · tumeur intrarachidienne ou de la fosse postérieure (cervicalgies) · douleurs référées ORL ou cervicale antérieure (cervicalgies).</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Rachialgie « complexe » (à ne pas confondre avec la secondaire)</div>
+  À la fois cause et conséquence de la lombalgie chronique commune — c'est ce que le traitement précoce vise à prévenir.
+  <div class="grid2" style="margin-top:10px;margin-bottom:0;">
+    <div>
+      <strong>Sociales</strong> : arrêts prolongés/répétés, inaptitude, invalidité, précarisation, épuisement professionnel, restrictions sociales/familiales.<br><br>
+      <strong>Psychologiques</strong> : anxiété, dépression, kinésiophobie, mésusage des antalgiques.
+    </div>
+    <div>
+      <strong>Physiques globales</strong> : déconditionnement, prise de poids, sédentarité, troubles du sommeil, effets secondaires des traitements.<br><br>
+      <strong>Rachidiennes</strong> : douleur persistante, enraidissement, perte de force des muscles spinaux/abdominaux, incapacité fonctionnelle.
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>Causes extra-rachidiennes des lombalgies (douleurs référées abdomino-pelviennes)</div>
+  <div class="pills">
+    <span class="pill pill-red">Vasculaire : anévrisme aorte abdominale</span>
+    <span class="pill pill-blue">Urinaire : lithiase, hydronéphrose, tumeur</span>
+    <span class="pill pill-teal">Digestive : tumeur gastrique/rectocolique/pancréatique, pancréatite chronique</span>
+    <span class="pill pill-amber">Gynécologique : tumeur pelvienne, endométriose</span>
+    <span class="pill pill-gray">Adénopathies/fibrose rétropéritonéale</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 6 : PRISE EN CHARGE ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge thérapeutique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les grands principes de prise en charge d'une rachialgie aiguë ou chronique</div>
+  <div class="obj-line">Savoir quels traitements prescrire et connaître l'efficacité/inefficacité des différentes options</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Message clé :</strong> rassurer (évolution favorable &gt; 90% en une dizaine de jours) et rester physiquement actif. À proscrire : repos au lit ordonné, arrêt de travail prolongé.</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>Poussée aiguë de lombalgie</div>
+  <div class="pills">
+    <span class="pill pill-teal">Rassurer</span>
+    <span class="pill pill-teal">Éducation thérapeutique</span>
+    <span class="pill pill-teal">Rester actif</span>
+    <span class="pill pill-red">Repos au lit / AT prolongé proscrits</span>
+  </div>
+  <div class="kv-row"><div class="kv-key">Antalgiques</div><div class="kv-val">Palier 1-2 (pas de palier 3)</div></div>
+  <div class="kv-row"><div class="kv-key">AINS</div><div class="kv-val">Si absence de CI</div></div>
+  <div class="kv-row"><div class="kv-key">Ceinture lombaire</div><div class="kv-val">Possible</div></div>
+  <div class="kv-row"><div class="kv-key">Kinésithérapie</div><div class="kv-val">Non indiquée si épisode aigu isolé</div></div>
+  <div class="kv-row"><div class="kv-key">Myorelaxants / néfopam / corticoïdes</div><div class="kv-val">Non recommandés / pas de preuve</div></div>
+  <div class="kv-row"><div class="kv-key">Suivi</div><div class="kv-val">2-4 sem. ; 6-12 sem. si FdR de chronicisation</div></div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>Lombalgie chronique commune</div>
+  <div class="pills">
+    <span class="pill pill-purple">Éducation thérapeutique</span>
+    <span class="pill pill-purple">Maintien activités physiques</span>
+    <span class="pill pill-purple">Kinésithérapie active</span>
+    <span class="pill pill-purple">Soutien psychologique</span>
+    <span class="pill pill-purple">Reprise socio-pro rapide</span>
+  </div>
+  <ul class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Antalgie + kinésithérapie active</div><div class="step-content">Travail actif, étirements sous-pelviens, renforcement spinaux, verrouillage lombaire, proprioception, reconditionnement aérobie</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Programme de restauration fonctionnelle du rachis</div><div class="step-content">Multidisciplinaire : kiné sec/balnéo, ergothérapie, APA, diététique, soutien psy, réinsertion socio-pro</div></div></li>
+  </ul>
+  <div class="alert alert-blue" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Bilan pré-programme : rétractions musculaires (quadriceps/ischio-jambiers), Schöber, déconditionnement, HADs, FABQ, autoquestionnaires Québec/Dallas/Oswestry, qualité de vie, test de lever de charge.</div>
+  </div>
+  <div class="kv-row"><div class="kv-key">Douleur neuropathique associée</div><div class="kv-val">Tricycliques, IRSNA, gabapentinoïdes, TENS</div></div>
+  <div class="kv-row"><div class="kv-key">Radiculalgie associée</div><div class="kv-val">Infiltration épidurale en 2e intention</div></div>
+  <div class="kv-row"><div class="kv-key">Tractions vertébrales, école du dos</div><div class="kv-val">Efficacité non démontrée</div></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Cervicalgies</div>
+    <div class="kv-row"><div class="kv-key">Aiguë</div><div class="kv-val">Réassurance, antalgiques 1-2, AINS ; pas de collier ni kiné</div></div>
+    <div class="kv-row"><div class="kv-key">Chronique</div><div class="kv-val">Antalgiques 1-2, ETP, kiné (étirements, isométrique, proprioception)</div></div>
+    <div class="kv-row"><div class="kv-key">À proscrire</div><div class="kv-val">Immobilisation cervicale continue/prolongée</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Dorsalgie aiguë commune</div>
+    Après radios systématiques + recherche de cause viscérale.
+    <div class="kv-row"><div class="kv-key">Traitement</div><div class="kv-val">Réassurance, antalgiques 1-2, AINS</div></div>
+    <div class="kv-row"><div class="kv-key">Kinésithérapie</div><div class="kv-val">Non indiquée si épisode isolé</div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 7 : SACRALGIE + COCCYGODYNIE ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Sacralgie et coccygodynie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la démarche diagnostique devant une sacralgie</div>
+  <div class="obj-line">Connaître la démarche diagnostique devant une coccygodynie</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Sacralgie</div>
+    Douleur en regard du sacrum, irradiant vers fesses/cuisses postérieures. Reproduite à la palpation/mobilisation des sacro-iliaques. Rechercher des drapeaux rouges.
+    <div class="kv-row"><div class="kv-key">Imagerie 1ère ligne</div><div class="kv-val">Radio bassin F + cliché de Sèze</div></div>
+    <div class="kv-row"><div class="kv-key">Suspicion fracture (sujet âgé)</div><div class="kv-val">TDM ou scintigraphie</div></div>
+    <div class="kv-row"><div class="kv-key">Suspicion rhumatisme inflammatoire</div><div class="kv-val">IRM bassin</div></div>
+    <div class="kv-row"><div class="kv-key">DD</div><div class="kv-val">Coccygodynie, lombalgie irradiée</div></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Coccygodynie</div>
+    Douleur localisée à l'aire coccygienne, sans irradiation, exacerbée à la station assise / au relever.
+    <div class="kv-row"><div class="kv-key">Orientation</div><div class="kv-val">Douleur au relever → subluxation/fracture</div></div>
+    <div class="kv-row"><div class="kv-key">FdR subluxation</div><div class="kv-val">Obésité, grossesse</div></div>
+    <div class="kv-row"><div class="kv-key">Traumatisme et délai</div><div class="kv-val">&lt; 1 mois → responsabilité probable ; &gt; 3 mois → improbable</div></div>
+    <div class="kv-row"><div class="kv-key">DD</div><div class="kv-val">Sacro-iliaque, anale, névralgie pudendale</div></div>
+    <div class="kv-row"><div class="kv-key">Évolution</div><div class="kv-val">Guérison spontanée en qq semaines (formes aiguës)</div></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===================== SECTION 8 : SYNTHESE ===================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Synthèse finale</div>
+  <ul class="lst">
+    <li>L'immense majorité des rachialgies sont <strong>communes</strong> — l'imagerie n'est pas systématique en phase aiguë, sauf drapeaux rouges.</li>
+    <li><strong>Drapeaux rouges</strong> = rachialgie secondaire potentielle (tumeur, infection, fracture, inflammation) → IRM ciblée ± bilan biologique.</li>
+    <li><strong>Symptôme neurologique étendu / queue de cheval</strong> = IRM en urgence, sans délai.</li>
+    <li><strong>Drapeaux jaunes/noirs</strong> prédisent le passage à la chronicité — à dépister précocement pour adapter la prise en charge.</li>
+    <li>Message thérapeutique central : <strong>rassurer + rester actif</strong>. Le repos au lit prolongé et l'arrêt de travail systématique sont délétères.</li>
+    <li>Lombalgie chronique : prise en charge <strong>multidisciplinaire</strong> (kinésithérapie active, soutien psychologique, réentraînement à l'effort, réinsertion socio-professionnelle).</li>
+    <li><strong>Piège ECNi :</strong> toute dorsalgie est un drapeau rouge en soi (radio systématique + recherche de cause viscérale thoraco-abdominale).</li>
+    <li>Ne pas confondre <strong>rachialgie secondaire</strong> (cause organique identifiable) et <strong>rachialgie complexe</strong> (facteurs bio-psycho-sociaux aggravant une lombalgie chronique commune).</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
