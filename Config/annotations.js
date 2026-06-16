@@ -81,9 +81,9 @@
       page.querySelectorAll('.annot-hl.has-note').forEach(function(span){
         if(!span.dataset.note) return;
         var r = span.getBoundingClientRect();
-        cards.push({top:r.top + window.pageYOffset, note:span.dataset.note, color:span.dataset.color, aid:span.dataset.aid});
+        cards.push({center:r.top + r.height/2 + window.pageYOffset, note:span.dataset.note, color:span.dataset.color, aid:span.dataset.aid});
       });
-      cards.sort(function(a,b){ return a.top - b.top; });
+      cards.sort(function(a,b){ return a.center - b.center; });
       var lastBottom = -Infinity;
       cards.forEach(function(c){
         var el = document.createElement('div');
@@ -91,10 +91,14 @@
         el.dataset.color = c.color;
         el.dataset.aid = c.aid;
         el.textContent = c.note;
-        var top = Math.max(c.top, lastBottom + 8);
-        el.style.top = top + 'px';
         el.style.left = left + 'px';
-        marginBox.appendChild(el);
+        el.style.visibility = 'hidden';
+        marginBox.appendChild(el);                          // ajout d'abord pour mesurer la hauteur
+        // centrer la carte sur le surlignage, sinon empiler sous la précédente (anti-chevauchement)
+        var top = Math.max(c.center - el.offsetHeight/2, lastBottom + 8);
+        if(top < 0) top = 0;
+        el.style.top = top + 'px';
+        el.style.visibility = '';
         lastBottom = top + el.offsetHeight;
       });
     }
