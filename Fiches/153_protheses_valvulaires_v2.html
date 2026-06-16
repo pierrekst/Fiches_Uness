@@ -648,6 +648,12 @@
     if(hl){ e.stopPropagation(); openNote(hl.dataset.aid); }
   });
 
+  ta.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){   // Entrée = valider ; Maj+Entrée = saut de ligne
+      e.preventDefault();
+      pop.querySelector('.annot-save').click();
+    }
+  });
   pop.querySelector('.annot-save').addEventListener('click', function(){
     if(!activeAid) return;
     var spans = page.querySelectorAll('.annot-hl[data-aid="'+activeAid+'"]');
