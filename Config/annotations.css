@@ -1,0 +1,48 @@
+/* ============================================================
+   ANNOTATIONS — feuille de style partagée par toutes les fiches
+   Utilise les variables CSS de la fiche (--card, --border, --amber…).
+   Chargée via : <link rel="stylesheet" href="../Config/annotations.css">
+   La logique est dans Config/annotations.js (qui génère l'UI).
+   ============================================================ */
+
+.annot-hl{border-radius:3px;padding:0 1px;cursor:pointer;transition:filter .15s;}
+.annot-hl[data-color="yellow"]{background:rgba(247,255,0,.60);}
+.annot-hl[data-color="green"] {background:rgba(57,255,20,.48);}
+.annot-hl[data-color="blue"]  {background:rgba(0,209,255,.48);}
+.annot-hl[data-color="pink"]  {background:rgba(255,29,206,.45);}
+.annot-hl[data-color="orange"]{background:rgba(255,128,0,.50);}
+.annot-hl[data-color="underline"]{background:transparent;text-decoration:underline;text-decoration-color:#ff1a1a;text-decoration-thickness:2px;text-underline-offset:2px;}
+.annot-hl:hover{filter:brightness(.94);}
+.annot-hl.has-note{border-bottom:2px solid var(--amber);}
+.annot-hl.has-note::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);vertical-align:super;margin-left:2px;}
+
+#annot-bar{position:fixed;z-index:9999;display:none;gap:6px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:6px 8px;box-shadow:0 4px 18px rgba(0,0,0,.20);}
+#annot-bar .sw{width:22px;height:22px;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;cursor:pointer;padding:0;}
+#annot-bar .sw-yellow{background:#f7ff00;}
+#annot-bar .sw-green {background:#39ff14;}
+#annot-bar .sw-blue  {background:#00d1ff;}
+#annot-bar .sw-pink  {background:#ff1dce;}
+#annot-bar .sw-orange{background:#ff8000;}
+#annot-bar .sw-underline{background:var(--card);border:1.5px solid var(--border);border-bottom:4px solid #ff1a1a;border-radius:4px;}
+
+#annot-pop{position:fixed;z-index:10000;display:none;width:248px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px;box-shadow:0 6px 22px rgba(0,0,0,.24);}
+#annot-pop textarea{width:100%;min-height:72px;border:1px solid var(--border);border-radius:8px;padding:8px;font-family:inherit;font-size:.82rem;background:var(--bg);color:var(--text);resize:vertical;}
+#annot-pop .pop-actions{display:flex;justify-content:space-between;gap:8px;margin-top:8px;}
+#annot-pop button{border:none;border-radius:7px;padding:6px 11px;font-size:.76rem;font-weight:700;cursor:pointer;}
+#annot-pop .annot-save{background:var(--teal);color:#fff;}
+#annot-pop .annot-del{background:var(--red-light);color:var(--red);}
+
+#annot-clear{position:fixed;bottom:16px;right:16px;z-index:9998;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+#annot-clear:hover{color:var(--red);border-color:var(--red);}
+
+#annot-margin{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:50;}
+.annot-margin-card{position:absolute;width:210px;pointer-events:auto;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:9px;padding:9px 11px;font-size:.78rem;line-height:1.45;color:var(--text);box-shadow:0 2px 10px rgba(0,0,0,.10);cursor:pointer;white-space:pre-wrap;word-break:break-word;}
+.annot-margin-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.18);}
+.annot-margin-card[data-color="yellow"]{border-left-color:#e0c200;}
+.annot-margin-card[data-color="green"] {border-left-color:#1D9E75;}
+.annot-margin-card[data-color="blue"]  {border-left-color:#0aa6cc;}
+.annot-margin-card[data-color="pink"]  {border-left-color:#cc16a3;}
+.annot-margin-card[data-color="orange"]{border-left-color:#e67300;}
+.annot-margin-card[data-color="underline"]{border-left-color:#ff1a1a;}
+
+@media print{#annot-bar,#annot-pop,#annot-clear,#annot-margin{display:none !important;}}
