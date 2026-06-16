@@ -365,7 +365,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 355 | [x] | Hémorragie digestive | 355_Hemorragie_digestive.html |
 | 356 | [ ] | Appendicite de l enfant et de l adulte | — |
 | 357 | [x] | Péritonite aiguë chez l enfant et chez l adulte | 357_Peritonite_aigue.html |
-| 358 | [x] | Pancréatite aiguë | 358_Pancreatite_aigue.html |
+| 358 | [x] | Pancréatite aiguë | 358_Pancreatite_aigue_v2.html |
 | 359 | [ ] | Détresse et insuffisance respiratoire aigüe du nourrisson | — |
 | 360 | [x] | Pneumothorax | 360_pneumothorax.html |
 | 361 | [x] | Lésions péri-articulaires et ligamentaires du genou | 361_lesions_periarticulaires.html |
