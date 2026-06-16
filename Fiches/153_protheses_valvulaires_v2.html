@@ -113,6 +113,32 @@
   .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
   .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
   .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+
+  /* ===== ANNOTATIONS (prototype) ===== */
+  .annot-hl{border-radius:3px;padding:0 1px;cursor:pointer;transition:filter .15s;}
+  .annot-hl[data-color="yellow"]{background:rgba(255,214,64,.45);}
+  .annot-hl[data-color="green"] {background:rgba(29,158,117,.32);}
+  .annot-hl[data-color="blue"]  {background:rgba(55,138,221,.30);}
+  .annot-hl[data-color="pink"]  {background:rgba(226,75,74,.30);}
+  .annot-hl:hover{filter:brightness(.94);}
+  .annot-hl.has-note{border-bottom:2px solid var(--amber);}
+  .annot-hl.has-note::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);vertical-align:super;margin-left:2px;}
+  #annot-bar{position:fixed;z-index:9999;display:none;gap:6px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:6px 8px;box-shadow:0 4px 18px rgba(0,0,0,.20);}
+  #annot-bar .sw{width:22px;height:22px;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;cursor:pointer;padding:0;}
+  #annot-bar .sw-yellow{background:#ffd640;}
+  #annot-bar .sw-green {background:#1D9E75;}
+  #annot-bar .sw-blue  {background:#378ADD;}
+  #annot-bar .sw-pink  {background:#E24B4A;}
+  #annot-bar .note-btn{height:22px;padding:0 9px;border:none;border-radius:6px;background:var(--purple-light);color:var(--purple);font-size:.72rem;font-weight:700;cursor:pointer;}
+  #annot-pop{position:fixed;z-index:10000;display:none;width:248px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px;box-shadow:0 6px 22px rgba(0,0,0,.24);}
+  #annot-pop textarea{width:100%;min-height:72px;border:1px solid var(--border);border-radius:8px;padding:8px;font-family:inherit;font-size:.82rem;background:var(--bg);color:var(--text);resize:vertical;}
+  #annot-pop .pop-actions{display:flex;justify-content:space-between;gap:8px;margin-top:8px;}
+  #annot-pop button{border:none;border-radius:7px;padding:6px 11px;font-size:.76rem;font-weight:700;cursor:pointer;}
+  #annot-pop .annot-save{background:var(--teal);color:#fff;}
+  #annot-pop .annot-del{background:var(--red-light);color:var(--red);}
+  #annot-clear{position:fixed;bottom:16px;right:16px;z-index:9998;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.14);}
+  #annot-clear:hover{color:var(--red);border-color:var(--red);}
+  @media print{#annot-bar,#annot-pop,#annot-clear{display:none !important;}}
 </style>
 </head>
 <body>
@@ -419,5 +445,192 @@
 </div>
 
 </div>
+
+<!-- ===== ANNOTATIONS (prototype) — UI ===== -->
+<div id="annot-bar">
+  <button class="sw sw-yellow" data-color="yellow" title="Surligner jaune"></button>
+  <button class="sw sw-green"  data-color="green"  title="Surligner vert"></button>
+  <button class="sw sw-blue"   data-color="blue"   title="Surligner bleu"></button>
+  <button class="sw sw-pink"   data-color="pink"   title="Surligner rouge"></button>
+  <button class="note-btn" data-action="note" title="Surligner et ajouter une note">+ Note</button>
+</div>
+<div id="annot-pop">
+  <textarea placeholder="Ta note…"></textarea>
+  <div class="pop-actions">
+    <button class="annot-del">Supprimer</button>
+    <button class="annot-save">Enregistrer</button>
+  </div>
+</div>
+<button id="annot-clear" title="Efface tous les surlignages et notes de cette fiche">Effacer mes annotations</button>
+
+<script>
+/* Prototype d'annotations — autonome, sans CDN.
+   Stockage : localStorage, par fiche, dans CE navigateur.
+   ATTENTION : si le contenu de la fiche est régénéré, incrémenter CONTENT_VERSION
+   pour invalider les annotations devenues obsolètes. */
+(function(){
+  var KEY = 'annot_153_protheses_v2';
+  var CONTENT_VERSION = '1';
+  var page = document.querySelector('.page');
+  var bar = document.getElementById('annot-bar');
+  var pop = document.getElementById('annot-pop');
+  var clearBtn = document.getElementById('annot-clear');
+  var ta = pop.querySelector('textarea');
+  if(!page || !window.localStorage){ return; }
+
+  var currentRange = null;   // sélection mémorisée
+  var activeAid = null;      // groupe de surlignage en cours d'édition
+
+  /* ---- Persistance ---- */
+  function save(){
+    try{ localStorage.setItem(KEY, JSON.stringify({v:CONTENT_VERSION, html:page.innerHTML})); }catch(e){}
+  }
+  function restore(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return;
+      var data = JSON.parse(raw);
+      if(data && data.v === CONTENT_VERSION && data.html){ page.innerHTML = data.html; }
+    }catch(e){}
+  }
+
+  /* ---- Surlignage ---- */
+  function newAid(){ return 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+
+  function highlightRange(range, color){
+    var aid = newAid();
+    var walker = document.createTreeWalker(page, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node){
+        if(!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if(node.parentElement && node.parentElement.closest('.annot-hl')) return NodeFilter.FILTER_REJECT;
+        if(!range.intersectsNode(node)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var nodes = [];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    var spans = [];
+    nodes.forEach(function(node){
+      var start = 0, end = node.nodeValue.length;
+      if(node === range.startContainer) start = range.startOffset;
+      if(node === range.endContainer) end = range.endOffset;
+      if(start >= end) return;
+      var r = document.createRange();
+      r.setStart(node, start); r.setEnd(node, end);
+      var span = document.createElement('span');
+      span.className = 'annot-hl';
+      span.dataset.color = color;
+      span.dataset.aid = aid;
+      try{ r.surroundContents(span); spans.push(span); }catch(e){}
+    });
+    return spans.length ? aid : null;
+  }
+
+  function unwrapAid(aid){
+    page.querySelectorAll('.annot-hl[data-aid="'+aid+'"]').forEach(function(span){
+      var parent = span.parentNode;
+      while(span.firstChild) parent.insertBefore(span.firstChild, span);
+      parent.removeChild(span);
+      parent.normalize();
+    });
+  }
+
+  /* ---- Barre flottante ---- */
+  function showBar(rect){
+    bar.style.display = 'flex';
+    var bw = bar.offsetWidth, bh = bar.offsetHeight;
+    var top = rect.top - bh - 8;
+    if(top < 8) top = rect.bottom + 8;
+    var left = rect.left + rect.width/2 - bw/2;
+    left = Math.max(8, Math.min(left, window.innerWidth - bw - 8));
+    bar.style.top = top + 'px';
+    bar.style.left = left + 'px';
+  }
+  function hideBar(){ bar.style.display = 'none'; }
+
+  document.addEventListener('mouseup', function(e){
+    if(e.target.closest('#annot-bar') || e.target.closest('#annot-pop')) return;
+    setTimeout(function(){
+      var sel = window.getSelection();
+      if(!sel || sel.isCollapsed || !sel.rangeCount){ hideBar(); return; }
+      var range = sel.getRangeAt(0);
+      if(!page.contains(range.commonAncestorContainer)){ hideBar(); return; }
+      currentRange = range.cloneRange();
+      showBar(range.getBoundingClientRect());
+    }, 10);
+  });
+
+  bar.addEventListener('mousedown', function(e){ e.preventDefault(); }); // garder la sélection
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn || !currentRange) return;
+    var isNote = btn.dataset.action === 'note';
+    var color = isNote ? 'yellow' : btn.dataset.color;
+    var aid = highlightRange(currentRange, color);
+    window.getSelection().removeAllRanges();
+    hideBar();
+    save();
+    if(isNote && aid){ openNote(aid); }
+  });
+
+  /* ---- Notes ---- */
+  function openNote(aid){
+    activeAid = aid;
+    var spans = page.querySelectorAll('.annot-hl[data-aid="'+aid+'"]');
+    if(!spans.length) return;
+    ta.value = spans[0].dataset.note || '';
+    var rect = spans[0].getBoundingClientRect();
+    pop.style.display = 'block';
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var top = rect.bottom + 8;
+    if(top + ph > window.innerHeight - 8) top = Math.max(8, rect.top - ph - 8);
+    var left = Math.max(8, Math.min(rect.left, window.innerWidth - pw - 8));
+    pop.style.top = top + 'px';
+    pop.style.left = left + 'px';
+    ta.focus();
+  }
+  function closePop(){ pop.style.display = 'none'; activeAid = null; }
+
+  page.addEventListener('click', function(e){
+    var hl = e.target.closest('.annot-hl');
+    if(hl){ e.stopPropagation(); openNote(hl.dataset.aid); }
+  });
+
+  pop.querySelector('.annot-save').addEventListener('click', function(){
+    if(!activeAid) return;
+    var spans = page.querySelectorAll('.annot-hl[data-aid="'+activeAid+'"]');
+    var txt = ta.value.trim();
+    spans.forEach(function(s, i){
+      if(txt) s.dataset.note = txt; else delete s.dataset.note;
+      s.classList.remove('has-note');
+    });
+    if(txt && spans.length) spans[spans.length-1].classList.add('has-note');
+    save(); closePop();
+  });
+  pop.querySelector('.annot-del').addEventListener('click', function(){
+    if(!activeAid) return;
+    unwrapAid(activeAid);
+    save(); closePop();
+  });
+
+  document.addEventListener('mousedown', function(e){
+    if(!e.target.closest('#annot-pop') && !e.target.closest('.annot-hl')) closePop();
+  });
+
+  clearBtn.addEventListener('click', function(){
+    if(!confirm('Effacer tous les surlignages et notes de cette fiche ?')) return;
+    page.querySelectorAll('.annot-hl').forEach(function(span){
+      var parent = span.parentNode;
+      while(span.firstChild) parent.insertBefore(span.firstChild, span);
+      parent.removeChild(span);
+    });
+    page.normalize();
+    save(); closePop(); hideBar();
+  });
+
+  /* ---- Init ---- */
+  restore();
+})();
+</script>
 </body>
 </html>
