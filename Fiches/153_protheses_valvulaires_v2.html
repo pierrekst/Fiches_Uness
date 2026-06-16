@@ -116,19 +116,19 @@
 
   /* ===== ANNOTATIONS (prototype) ===== */
   .annot-hl{border-radius:3px;padding:0 1px;cursor:pointer;transition:filter .15s;}
-  .annot-hl[data-color="yellow"]{background:rgba(255,214,64,.45);}
-  .annot-hl[data-color="green"] {background:rgba(29,158,117,.32);}
-  .annot-hl[data-color="blue"]  {background:rgba(55,138,221,.30);}
-  .annot-hl[data-color="pink"]  {background:rgba(226,75,74,.30);}
+  .annot-hl[data-color="yellow"]{background:rgba(247,255,0,.60);}
+  .annot-hl[data-color="green"] {background:rgba(57,255,20,.48);}
+  .annot-hl[data-color="blue"]  {background:rgba(0,209,255,.48);}
+  .annot-hl[data-color="pink"]  {background:rgba(255,29,206,.45);}
   .annot-hl:hover{filter:brightness(.94);}
   .annot-hl.has-note{border-bottom:2px solid var(--amber);}
   .annot-hl.has-note::after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);vertical-align:super;margin-left:2px;}
   #annot-bar{position:fixed;z-index:9999;display:none;gap:6px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:6px 8px;box-shadow:0 4px 18px rgba(0,0,0,.20);}
   #annot-bar .sw{width:22px;height:22px;border:1.5px solid rgba(0,0,0,.12);border-radius:50%;cursor:pointer;padding:0;}
-  #annot-bar .sw-yellow{background:#ffd640;}
-  #annot-bar .sw-green {background:#1D9E75;}
-  #annot-bar .sw-blue  {background:#378ADD;}
-  #annot-bar .sw-pink  {background:#E24B4A;}
+  #annot-bar .sw-yellow{background:#f7ff00;}
+  #annot-bar .sw-green {background:#39ff14;}
+  #annot-bar .sw-blue  {background:#00d1ff;}
+  #annot-bar .sw-pink  {background:#ff1dce;}
   #annot-bar .note-btn{height:22px;padding:0 9px;border:none;border-radius:6px;background:var(--purple-light);color:var(--purple);font-size:.72rem;font-weight:700;cursor:pointer;}
   #annot-pop{position:fixed;z-index:10000;display:none;width:248px;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:12px;box-shadow:0 6px 22px rgba(0,0,0,.24);}
   #annot-pop textarea{width:100%;min-height:72px;border:1px solid var(--border);border-radius:8px;padding:8px;font-family:inherit;font-size:.82rem;background:var(--bg);color:var(--text);resize:vertical;}
@@ -138,7 +138,14 @@
   #annot-pop .annot-del{background:var(--red-light);color:var(--red);}
   #annot-clear{position:fixed;bottom:16px;right:16px;z-index:9998;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.14);}
   #annot-clear:hover{color:var(--red);border-color:var(--red);}
-  @media print{#annot-bar,#annot-pop,#annot-clear{display:none !important;}}
+  #annot-margin{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:50;}
+  .annot-margin-card{position:absolute;width:210px;pointer-events:auto;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--amber);border-radius:9px;padding:9px 11px;font-size:.78rem;line-height:1.45;color:var(--text);box-shadow:0 2px 10px rgba(0,0,0,.10);cursor:pointer;white-space:pre-wrap;word-break:break-word;}
+  .annot-margin-card:hover{box-shadow:0 4px 14px rgba(0,0,0,.18);}
+  .annot-margin-card[data-color="yellow"]{border-left-color:#e0c200;}
+  .annot-margin-card[data-color="green"] {border-left-color:#1D9E75;}
+  .annot-margin-card[data-color="blue"]  {border-left-color:#0aa6cc;}
+  .annot-margin-card[data-color="pink"]  {border-left-color:#cc16a3;}
+  @media print{#annot-bar,#annot-pop,#annot-clear,#annot-margin{display:none !important;}}
 </style>
 </head>
 <body>
@@ -462,6 +469,7 @@
   </div>
 </div>
 <button id="annot-clear" title="Efface tous les surlignages et notes de cette fiche">Effacer mes annotations</button>
+<div id="annot-margin"></div>
 
 <script>
 /* Prototype d'annotations — autonome, sans CDN.
@@ -475,6 +483,7 @@
   var bar = document.getElementById('annot-bar');
   var pop = document.getElementById('annot-pop');
   var clearBtn = document.getElementById('annot-clear');
+  var marginBox = document.getElementById('annot-margin');
   var ta = pop.querySelector('textarea');
   if(!page || !window.localStorage){ return; }
 
@@ -484,15 +493,54 @@
   /* ---- Persistance ---- */
   function save(){
     try{ localStorage.setItem(KEY, JSON.stringify({v:CONTENT_VERSION, html:page.innerHTML})); }catch(e){}
+    renderMargin();
   }
   function restore(){
     try{
       var raw = localStorage.getItem(KEY);
-      if(!raw) return;
-      var data = JSON.parse(raw);
-      if(data && data.v === CONTENT_VERSION && data.html){ page.innerHTML = data.html; }
+      if(raw){
+        var data = JSON.parse(raw);
+        if(data && data.v === CONTENT_VERSION && data.html){ page.innerHTML = data.html; }
+      }
     }catch(e){}
+    renderMargin();
   }
+
+  /* ---- Notes en marge droite ---- */
+  function renderMargin(){
+    marginBox.innerHTML = '';
+    var prect = page.getBoundingClientRect();
+    var avail = document.documentElement.clientWidth - prect.right;
+    if(avail < 235){ marginBox.style.display = 'none'; return; } // pas assez de place → repli sur la pastille + popup
+    marginBox.style.display = 'block';
+    var left = prect.right + window.pageXOffset + 16;
+    var cards = [];
+    page.querySelectorAll('.annot-hl.has-note').forEach(function(span){
+      if(!span.dataset.note) return;
+      var r = span.getBoundingClientRect();
+      cards.push({top:r.top + window.pageYOffset, note:span.dataset.note, color:span.dataset.color, aid:span.dataset.aid});
+    });
+    cards.sort(function(a,b){ return a.top - b.top; });
+    var lastBottom = -Infinity;
+    cards.forEach(function(c){
+      var el = document.createElement('div');
+      el.className = 'annot-margin-card';
+      el.dataset.color = c.color;
+      el.dataset.aid = c.aid;
+      el.textContent = c.note;
+      var top = Math.max(c.top, lastBottom + 8);
+      el.style.top = top + 'px';
+      el.style.left = left + 'px';
+      marginBox.appendChild(el);
+      lastBottom = top + el.offsetHeight;
+    });
+  }
+  marginBox.addEventListener('click', function(e){
+    var card = e.target.closest('.annot-margin-card');
+    if(card){ openNote(card.dataset.aid); }
+  });
+  var rzTimer;
+  window.addEventListener('resize', function(){ clearTimeout(rzTimer); rzTimer = setTimeout(renderMargin, 120); });
 
   /* ---- Surlignage ---- */
   function newAid(){ return 'a' + Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
