@@ -159,8 +159,8 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 149 | [x] | Angines de l adulte et de l enfant | 149_Angines.html |
 | 150 | [ ] | Otites infectieuses de l adulte et de l enfant | — |
 | 151 | [x] | Méningites | 151_Meningites_MEH_abces_cerebral.html |
-| 152 | [x] | Endocardite infectieuse | 152_Endocardite_infectieuse.html |
-| 153 | [x] | Surveillance des porteurs de prothèses valvulaires | 153_protheses_valvulaires.html |
+| 152 | [x] | Endocardite infectieuse | 152_Endocardite_infectieuse_v2.html |
+| 153 | [x] | Surveillance des porteurs de prothèses valvulaires | 153_protheses_valvulaires_v2.html |
 | 154 | [ ] | Infections broncho pulmonaires communautaires de l adulte et de l enfa… | — |
 | 155 | [x] | Infections cutanéo-muqueuses et des phanères | 155_infections_cutaneo_muqueuses.html |
 | 156 | [ ] | Infections ostéo articulaires | — |
@@ -245,7 +245,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 235 | [ ] | Péricardite aiguë | — |
 | 236 | [x] | Troubles de la conduction intracardiaque | 236_Troubles_conduction_intracardiaque.html |
 | 237 | [ ] | Palpitations | — |
-| 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant.html |
+| 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant_v2.html |
 | 239 | [ ] | Acrosyndromes | — |
 | 240 | [x] | Hypoglycémie chez l adulte et l enfant | 240_hypoglycemie.html |
 | 241 | [ ] | Goitre | — |

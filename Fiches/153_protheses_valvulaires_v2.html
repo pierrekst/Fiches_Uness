@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 153 — Surveillance des porteurs de prothèses valvulaires</title>
+<link rel="icon" href="../Config/favicon.svg">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#2b4a8a 0%,#378ADD 50%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 153</div>
+  <h1>Surveillance des porteurs de prothèses valvulaires</h1>
+  <div class="header-sub">Mécanique vs biologique — anticoagulation, complications, suivi à vie</div>
+  <div class="header-tags">
+    <span class="htag">Cardiologie</span>
+    <span class="htag">Anticoagulation</span>
+    <span class="htag">Risque infectieux élevé</span>
+    <span class="htag">Suivi multidisciplinaire</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Un porteur de prothèse valvulaire reste un patient à vie sous surveillance : le choix mécanique/biologique conditionne le type d'anticoagulation et donc le profil de complications attendu (thrombose vs dégénérescence). Le fil conducteur : connaître les deux familles de prothèses et leurs implications thérapeutiques, savoir reconnaître précocement les grandes complications (thrombo-embolique, désinsertion, dégénérescence, endocardite, hémorragie sous AVK), organiser un suivi clinique/paraclinique rythmé, et retenir que <strong>tout porteur de prothèse est un patient à haut risque d'endocardite infectieuse</strong> à vie.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : TYPES DE PROTHÈSES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Les différents types de prothèses valvulaires
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les différents types de prothèses valvulaires</div>
+</div>
+
+<table class="table-blue">
+  <thead><tr><th>Type</th><th>Composition</th><th>Durabilité</th><th>Anticoagulation</th><th>Indication d'âge</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Mécanique</strong></td>
+      <td>Titane / carbone, double ailette (Saint-Jude®, CarboMedics®)</td>
+      <td>Excellente, quasi illimitée</td>
+      <td>AVK au long cours <em>obligatoire</em></td>
+      <td>&lt; 60 ans (aortique), &lt; 65 ans (mitrale)</td>
+    </tr>
+    <tr>
+      <td><strong>Biologique</strong></td>
+      <td>Péricarde bovin/porcin sur armature (Carpentier-Edwards®) ou sans armature, homogreffe</td>
+      <td>10–15 ans</td>
+      <td>Pas d'AC au long cours si rythme sinusal (AVK 3 mois mitrale/tricuspide, antiagrégant 3 mois aortique)</td>
+      <td>&gt; 60 ans (aortique), &gt; 65 ans (mitrale)</td>
+    </tr>
+    <tr>
+      <td><strong>Percutanée (TAVI)</strong></td>
+      <td>Péricarde sur stent métallique (CoreValve®, Sapien 3®), position aortique</td>
+      <td>En évaluation</td>
+      <td>Antiagrégant le plus souvent</td>
+      <td>Risque opératoire élevé à intermédiaire (extension en cours &gt; 65 ans à bas risque)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Le choix mécanique/biologique repose sur l'arbitrage <strong>durabilité vs risque hémorragique lié à l'anticoagulation</strong> au long cours — d'où le seuil d'âge.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : COMPLICATIONS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Principales complications
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales complications des prothèses valvulaires</div>
+  <div class="obj-line">Connaître les modalités du diagnostic d'une désinsertion de prothèse valvulaire, incluant l'hémolyse</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    1 — Complications thrombo-emboliques
+  </div>
+  <ul class="lst">
+    <li>Surtout valves mécaniques (mais aussi biologiques, notamment TAVI) — risque maximal la <strong>1<sup>re</sup> année</strong></li>
+    <li>Facteurs de risque : position mitrale/tricuspide &gt; aortique, FA ou dysfonction VG, prothèse mécanique d'ancienne génération</li>
+    <li><strong>INR mal équilibré</strong> = principale cause de thrombose sur valve mécanique</li>
+    <li>Embolie systémique (AIT/AVC, ischémie de membre, infarctus splénique/rénal) ou thrombose obstructive (OAP, choc cardiogénique)</li>
+  </ul>
+  <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">ETT/ETO : ↑ gradients, ↓ surface fonctionnelle, thrombus visible</span></div>
+  <div class="kv-row"><span class="kv-key">Prothèse mécanique</span><span class="kv-val">Radio-cinéma : mobilité des ailettes</span></div>
+  <div class="kv-row"><span class="kv-key">Mortalité chirurgie en urgence</span><span class="kv-val">~30 %</span></div>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">Formes subaiguës/dysfonction modérée/inopérables : correction de l'anticoagulation, ajout d'antiagrégant, voire thrombolyse. <strong>Principal diagnostic différentiel : endocardite infectieuse.</strong></p>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    2 — Désinsertion de prothèse (fuite paraprothétique)
+  </div>
+  <ul class="lst">
+    <li>Étiologie principale à évoquer : <strong>endocardite infectieuse</strong> (ou lâchage de suture sans origine infectieuse)</li>
+    <li>Tableau d'IA (souffle diastolique) ou d'IM (souffle systolique) selon la position</li>
+    <li>Biologie : anémie hémolytique mécanique possible (↑ LDH, ↓ haptoglobine, schizocytes) — plus fréquente en position mitrale</li>
+  </ul>
+  <div class="kv-row"><span class="kv-key">Examen clé</span><span class="kv-val">ETT (+ ETO) : flux doppler de régurgitation paraprothétique</span></div>
+  <div class="kv-row"><span class="kv-key">Prise en charge</span><span class="kv-val">Surveillance → chirurgie selon sévérité/cinétique ; fermeture percutanée si CI opératoire</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      3 — Dégénérescence des bioprothèses
+    </div>
+    <ul class="lst">
+      <li>Mode sténosant le plus fréquent, fuyant (plus rapide) ou mixte</li>
+      <li>Délai moyen d'apparition : <strong>~8 ans</strong></li>
+      <li>FdR : sexe masculin, jeune âge à l'implantation, IRC, anomalies du métabolisme calcique, dyslipidémie, mismatch patient-prothèse, position mitrale</li>
+    </ul>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">PEC : surveillance (formes débutantes) → remplacement chirurgical ou percutané.</p>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      4 — Endocardite infectieuse sur prothèse
+    </div>
+    <ul class="lst">
+      <li>Incidence à 5 ans : <strong>~5 %</strong>, majorité la 1<sup>re</sup> année</li>
+      <li>EI précoce (&lt; 1 an) : Staph. epidermidis/aureus (contamination périopératoire)</li>
+      <li>EI tardive (&gt; 1 an) : écologie proche des EI sur valve native</li>
+    </ul>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">ATB systématique ≥ 6 semaines, ± chirurgie selon cas (cf. item 152).</p>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>5 — Hémorragies sous AVK :</strong> ~2 %/an-patient. Cérébrale, digestive, hématurie, gingivorragie… → examen clinique complet, prise en charge d'un surdosage en AVK (cf. item 183).</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : SURVEILLANCE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Modalités de surveillance
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les modalités de surveillance des porteurs de prothèses valvulaires</div>
+</div>
+
+<table class="table-teal">
+  <thead><tr><th>Suivi</th><th>Rythme</th><th>Contenu</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Clinique (médecin traitant)</strong></td><td>Trimestriel</td><td>Signes cardio (dyspnée, douleur thoracique, palpitations, syncope), souffle nouveau/modifié, signes infectieux, observance soins dentaires/ORL</td></tr>
+    <tr><td><strong>Cardiologique</strong></td><td>Annuel, dès la 1<sup>re</sup> année</td><td>Examen + avis sur toute anomalie clinique</td></tr>
+    <tr><td><strong>ECG</strong></td><td>Annuel (médecin traitant) + suivi cardiologue</td><td>—</td></tr>
+    <tr><td><strong>Radiographie thoracique</strong></td><td>Non systématique</td><td>Large indication si examen clinique anormal</td></tr>
+    <tr><td><strong>INR (si AVK)</strong></td><td>Mensuel minimum</td><td>Au laboratoire, ou autosurveillance (CoaguChek® INRange) chez l'adulte sous prothèse mécanique</td></tr>
+    <tr><td><strong>Biologie</strong></td><td>Annuel</td><td>NFS, ionogramme sanguin</td></tr>
+    <tr><td><strong>Échocardiographie</strong></td><td>Annuel (cardiologue)</td><td>ETT ± ETO si atypie/doute</td></tr>
+  </tbody>
+</table>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Devant toute anomalie en consultation : <strong>recours systématique au cardiologue</strong>.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : RISQUE INFECTIEUX ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Sujet à haut risque infectieux à vie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir que tout patient porteur d'une prothèse valvulaire est un sujet à risque infectieux (endocardite infectieuse, greffe)</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>Toute prothèse valvulaire classe le patient en <strong>cardiopathie à haut risque d'EI (groupe A)</strong>. Fièvre + souffle non connu = alerte ; fièvre prolongée sans point d'appel = rechercher une EI. Stratégie diagnostique et antibiothérapie identiques à l'EI sur valve native (item 152).</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Prévention
+  </div>
+  <ul class="lst">
+    <li>Carte de porteur de prothèse valvulaire à présenter systématiquement</li>
+    <li>Éducation thérapeutique : signes devant faire consulter (fièvre prolongée, AEG)</li>
+    <li>Hémocultures systématiques avant toute antibiothérapie</li>
+    <li>Soins dentaires tous les <strong>6 mois</strong> (détartrage, recherche de foyer)</li>
+  </ul>
+  <div class="kv-row"><span class="kv-key">Antibioprophylaxie</span><span class="kv-val">Extraction dentaire, chirurgie parodontale, manipulation gingivale/apicale, perforation muqueuse orale</span></div>
+  <div class="kv-row"><span class="kv-key">Amoxicilline</span><span class="kv-val">2 g adulte / 50 mg/kg enfant, 1 h avant le geste</span></div>
+  <div class="kv-row"><span class="kv-key">Si allergie : Clindamycine</span><span class="kv-val">600 mg adulte / 20 mg/kg enfant</span></div>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">Indications chirurgicales en faveur (EI sur prothèse) : dysfonction de prothèse cliniquement significative, sepsis non contrôlé sous ATB, abcès/fistule, EI à <em>S. aureus</em>.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 : CIBLES INR ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Cibles d'INR
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les valeurs cibles d'INR en fonction des prothèses valvulaires et du terrain</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Seuls les <strong>AVK</strong> sont recommandés sur prothèse mécanique. La cible d'INR croise le <strong>risque thrombotique propre à la prothèse</strong> et les <strong>facteurs de risque liés au patient</strong>.</div>
+</div>
+
+<table class="table-amber">
+  <thead><tr><th>Risque thrombotique de la prothèse</th><th>Pas de facteur de risque patient</th><th>≥ 1 facteur de risque patient</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Faible</strong> (Medtronic-Hall®, Saint-Jude®, CarboMedics® aortique)</td><td>2,5</td><td>3,0</td></tr>
+    <tr><td><strong>Intermédiaire</strong> (Björk-Shiley® monodisque, autres double-ailette à risque non faible)</td><td>3,0</td><td>3,5</td></tr>
+    <tr><td><strong>Élevé</strong> (anciennes générations type Starr®)</td><td>3,5</td><td>4,0</td></tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs de risque liés au patient
+    </div>
+    <ul class="lst">
+      <li>Prothèse mécanique en position mitrale, tricuspide ou pulmonaire</li>
+      <li>Antécédent de maladie thrombo-embolique</li>
+      <li>Fibrillation atriale</li>
+      <li>OG dilatée &gt; 50 mm</li>
+      <li>Contraste spontané dense dans l'OG (sludge)</li>
+      <li>Rétrécissement mitral associé</li>
+      <li>FEVG &lt; 35 %</li>
+      <li>État d'hypercoagulabilité (SAPL)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Bioprothèses
+    </div>
+    <div class="kv-row"><span class="kv-key">Rythme sinusal sans FdR</span><span class="kv-val">Pas d'AC au long cours</span></div>
+    <div class="kv-row"><span class="kv-key">Position aortique</span><span class="kv-val">Antiagrégant 3 mois (endothélisation)</span></div>
+    <div class="kv-row"><span class="kv-key">Position mitrale/tricuspide</span><span class="kv-val">AVK efficace 3 mois</span></div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">Anticoagulation curative requise si facteur de risque associé (ex. FA).</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== POINTS-CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Mécanique vs biologique :</strong> mécanique = durabilité mais AVK à vie (&lt; 60/65 ans) ; biologique = pas d'AC au long cours mais dégénérescence à 10–15 ans (&gt; 60/65 ans).</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>5 complications à connaître :</strong> thrombo-embolique (INR mal équilibré +++), désinsertion (penser EI), dégénérescence bioprothèse (~8 ans), EI sur prothèse, hémorragie sous AVK.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Suivi :</strong> clinique trimestriel (médecin traitant), cardiologique annuel avec ETT, INR mensuel minimum si AVK, NFS/iono annuel.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Risque infectieux :</strong> toute prothèse = cardiopathie à haut risque d'EI (groupe A) → soins dentaires/6 mois, antibioprophylaxie ciblée, carte de porteur.</div>
+</div>
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges :</strong> désinsertion = toujours évoquer l'EI en 1<sup>er</sup> ; diagnostic différentiel n°1 d'une thrombose de prothèse = EI ; cible INR = prothèse <em>et</em> patient, jamais l'un sans l'autre.</div>
+</div>
+
+</div>
+</body>
+</html>
