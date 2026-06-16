@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-16. Ne pas éditer à la main._
 
-**Avancement : 143 / 367 items (39.0%)**
+**Avancement : 144 / 367 items (39.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -102,7 +102,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 92 | [x] | Déficit moteur et ou sensitif des membres | 92_Deficit_moteur_sensitif_v2.html |
 | 93 | [x] | Compression médullaire non traumatique et syndrome de la queue de chev… | 93_compression_medullaire.html |
 | 94 | [ ] | Rachialgie | — |
-| 95 | [ ] | Radiculalgie et syndrome canalaire | — |
+| 95 | [x] | Radiculalgie et syndrome canalaire | 95_Radiculalgie_syndrome_canalaire.html |
 | 96 | [x] | Neuropathies périphériques | 96_Neuropathies_peripheriques.html |
 | 97 | [ ] | Polyradiculonévrite aiguë inflammatoire | — |
 | 98 | [x] | Myasthénie | 98_Myasthenie_v3.html |
@@ -117,7 +117,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 107 | [x] | Mouvements anormaux | 107_mouvements_anormaux.html |
 | 108 | [x] | Confusion | 108_confusion_demences.html |
 | 109 | [x] | Troubles de la marche et de l équilibre | 109_troubles_marche_equilibre.html |
-| 110 | [x] | Troubles du sommeil de l enfant et de l adulte | 110_Troubles_sommeil.html |
+| 110 | [x] | Troubles du sommeil de l enfant et de l adulte | 110_Troubles_sommeil_v2.html |
 | 111 | [x] | Dermatoses faciales | 111_Dermatoses_faciales.html |
 | 112 | [x] | Dermatose bulleuse touchant la peau et ou les muqueuses externes | 112_Dermatose_bulleuse.html |
 | 113 | [x] | Hémangiomes et malformations vasculaires cutanées | 113_Hemangiomes_malformations_vasculaires.html |
