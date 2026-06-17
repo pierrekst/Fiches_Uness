@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-17. Ne pas éditer à la main._
 
-**Avancement : 146 / 367 items (39.8%)**
+**Avancement : 147 / 367 items (40.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -232,8 +232,8 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 222 | [x] | Facteurs de risque cardio-vasculaire et prévention | 222_facteurs_risque_cv.html |
 | 223 | [x] | Dyslipidémies | 223_dyslipidémies.html |
 | 224 | [x] | Hypertension artérielle de l adulte et de l enfant | 224_HTA.html |
-| 225 | [x] | Artériopathie de l aorte | 225_arteriopathie_anevrismes.html |
-| 226 | [ ] | Thrombose veineuse profonde et embolie pulmonaire | — |
+| 225 | [x] | Artériopathie de l aorte | 225_arteriopathie_anevrismes_v2.html |
+| 226 | [x] | Thrombose veineuse profonde et embolie pulmonaire | 226_TVP_EP.html |
 | 227 | [ ] | Insuffisance veineuse chronique | — |
 | 228 | [ ] | Ulcère de jambe | — |
 | 229 | [ ] | Surveillance et complications des abords veineux | — |
