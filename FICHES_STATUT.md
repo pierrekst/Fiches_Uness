@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-16. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-17. Ne pas éditer à la main._
 
-**Avancement : 145 / 367 items (39.5%)**
+**Avancement : 146 / 367 items (39.8%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -238,7 +238,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 228 | [ ] | Ulcère de jambe | — |
 | 229 | [ ] | Surveillance et complications des abords veineux | — |
 | 230 | [x] | Douleur thoracique aiguë | 230_douleur_thoracique_aigue.html |
-| 231 | [ ] | Électrocardiogramme | — |
+| 231 | [x] | Électrocardiogramme | 231_ECG_lecture.html |
 | 232 | [x] | Fibrillation atriale | 232_fibrillation_atriale.html |
 | 233 | [x] | Valvulopathies | 233_Valvulopathies_v2.html |
 | 234 | [x] | Insuffisance cardiaque de l adulte | 234_Insuffisance_cardiaque.html |

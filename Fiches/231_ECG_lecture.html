@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>231 — Électrocardiogramme : indications et interprétations</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+    --ecg-grid:#f6d8d8; --ecg-line:#16181f;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+      --ecg-grid:#3a2530; --ecg-line:#e8eaf0;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* OBJECTIFS */
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  /* LISTES */
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  /* PHASES */
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  /* BORDER-LEFT */
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* OBJ-LIST (check-list sobre des objectifs) */
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  /* TRACÉS ECG (SVG dessinés, viewBox calé sur le contenu) */
+  .ecg{margin:10px 0;border:0.5px solid var(--border);border-radius:10px;padding:10px 12px 8px;
+    background:
+     repeating-linear-gradient(0deg,var(--ecg-grid) 0 1px,transparent 1px 7px),
+     repeating-linear-gradient(90deg,var(--ecg-grid) 0 1px,transparent 1px 7px),
+     var(--card);
+    color:var(--ecg-line);}
+  .ecg svg{width:100%;height:auto;display:block;}
+  .ecg svg .wave{fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round;}
+  .ecg svg .feat{fill:none;stroke:#E24B4A;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;}
+  .ecg svg .lbl{fill:currentColor;font-size:8px;font-weight:700;font-family:-apple-system,sans-serif;}
+  .ecg svg .lblr{fill:#E24B4A;font-size:8px;font-weight:700;font-family:-apple-system,sans-serif;}
+  .ecg svg .brk{fill:none;stroke:var(--muted);stroke-width:0.8;}
+  .ecg-cap{font-size:.76rem;color:var(--muted);margin-top:5px;line-height:1.45;}
+  .ecg-cap b{color:var(--text);font-weight:700;}
+  .ecg-cap .r{color:var(--red);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 231 · IC-231</div>
+  <h1>Électrocardiogramme : indications et interprétations</h1>
+  <div class="header-sub">Lecture systématique du tracé · reconnaissance des urgences rythmiques et ischémiques</div>
+  <div class="header-tags">
+    <span class="htag">28 objectifs</span>
+    <span class="htag">Méthode de lecture</span>
+    <span class="htag">Troubles conduction</span>
+    <span class="htag">Troubles rythme</span>
+    <span class="htag">SCA · Dyskaliémies</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Cet item est un <strong>atlas de lecture ECG</strong> : il ne s'apprend pas comme une maladie mais comme une <strong>méthode</strong>. Fil conducteur : (1) toujours dérouler la même lecture systématique <em>fréquence → rythme → axe → conduction → repolarisation → hypertrophies</em> ; (2) savoir d'emblée <strong>repérer les urgences</strong> (FV, TV, torsade, BAV haut degré, super-Wolff, flutter 1/1, SCA ST+, hyperkaliémie, QT long) ; (3) classer les anomalies par étage anatomique — <strong>oreillettes</strong> (hypertrophies, FA, flutter, dysfonction sinusale), <strong>jonction/conduction</strong> (BAV, blocs de branche, WPW), <strong>ventricules</strong> (HVG/HVD, ESV, TV/FV) — et par mécanisme (ischémie, métabolique, stimulation). Chaque pattern a une signature visuelle : c'est elle qu'il faut mémoriser.
+</div>
+
+<!-- =================== SECTION 1 : MÉTHODE & NORMAL =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  1 · Indications, lecture méthodique de l'ECG normal & signes de gravité
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les situations cliniques justifiant la réalisation d'un ECG</div>
+  <div class="obj-line">Dérouler une lecture systématique et reconnaître les normes d'un ECG normal</div>
+  <div class="obj-line">Identifier sur l'ECG les situations engageant le pronostic vital à court terme</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Indications d'un ECG</div>
+    <ul class="lst">
+      <li><strong>Symptômes</strong> : douleur thoracique, dyspnée, palpitations, malaise/syncope</li>
+      <li><strong>Bilan/suivi</strong> de cardiopathie ou pathologie à risque CV (ex. diabète)</li>
+      <li><strong>Bilan d'HTA</strong></li>
+      <li><strong>Enquête familiale</strong> (cardiopathies héréditaires)</li>
+      <li><strong>Pré-opératoire</strong> selon terrain et type de chirurgie</li>
+      <li><strong>Aptitude</strong> professionnelle (conducteurs, pilotes) ou sportive</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Normes de l'ECG normal</div>
+    <div class="kv-row"><span class="kv-key">Rythme sinusal régulier</span><span class="kv-val">60–100 bpm</span></div>
+    <div class="kv-row"><span class="kv-key">Axe du QRS</span><span class="kv-val">−30° à +90°</span></div>
+    <div class="kv-row"><span class="kv-key">Intervalle PR</span><span class="kv-val">120–200 ms</span></div>
+    <div class="kv-row"><span class="kv-key">Durée QRS</span><span class="kv-val">≤ 100 ms</span></div>
+    <div class="kv-row"><span class="kv-key">QTc normal (Bazett)</span><span class="kv-val">340–440 ms</span></div>
+    <div class="kv-row"><span class="kv-key">QTc long si</span><span class="kv-val">≥ 480 ms</span></div>
+  </div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 230 92" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave" d="M10,52 Q24,34 38,52 L52,52 L56,57 L62,14 L68,58 L72,52 L88,52 Q104,30 120,52 L226,52"/>
+    <text class="lbl" x="20" y="30">P</text>
+    <text class="lbl" x="55" y="11">QRS</text>
+    <text class="lbl" x="100" y="26">T</text>
+    <path class="brk" d="M12,64 L12,68 L56,68 L56,64"/>
+    <text class="lbl" x="14" y="78" style="font-size:7px">PR 120–200 ms</text>
+    <path class="brk" d="M56,74 L56,78 L120,78 L120,74"/>
+    <text class="lbl" x="68" y="89" style="font-size:7px">QT (QTc 340–440)</text>
+  </svg>
+  <div class="ecg-cap"><b>Complexe normal.</b> Onde P (dépolarisation atriale) → PR → QRS (dépolarisation ventriculaire) → segment ST → onde T (repolarisation). Aucune onde Q pathologique, pas de rabotage des R, pas de microvoltage.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>Lecture systématique — toujours le même ordre</div>
+  <ul class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Fréquence</div><div class="step-content">300 / nb gros carreaux entre 2 R ; ou 1500 / nb petits carreaux. Brady &lt; 60, tachy &gt; 100.</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Rythme</div><div class="step-content">Sinusal ? Une onde P avant chaque QRS, P positive en DII / négative en aVR, régulier.</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">Axe du QRS</div><div class="step-content">DI + aVF positifs = axe normal. Déviation gauche (DI+, aVF−) ou droite (DI−, aVF+).</div></div></li>
+    <li><span class="step-num">4</span><div><div class="step-title">Conduction</div><div class="step-content">PR (BAV), largeur QRS (bloc de branche, pré-excitation), QT.</div></div></li>
+    <li><span class="step-num">5</span><div><div class="step-title">Repolarisation</div><div class="step-content">Segment ST (sus/sous-décalage), ondes T, onde U.</div></div></li>
+    <li><span class="step-num">6</span><div><div class="step-title">Morphologie / hypertrophies</div><div class="step-content">Ondes P, indice de Sokolow, ondes Q de nécrose, microvoltage.</div></div></li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Signes de gravité — pronostic vital à court terme</div>
+  <div class="grid2">
+    <div>
+      <span class="phase phase-sev">Tachycardies</span>
+      <ul class="lst"><li>FV, TV, torsade de pointes</li><li>Super-Wolff (FA + pré-excitation)</li><li>Flutter conduit en 1/1 (cadence ~300/min)</li></ul>
+      <span class="phase phase-sev">Bradycardies</span>
+      <ul class="lst"><li>Asystolie</li><li>BAV de haut degré</li><li>Dysfonction sinusale sévère</li></ul>
+    </div>
+    <div>
+      <span class="phase phase-mod">Ischémie</span>
+      <ul class="lst"><li>SCA ST+ et SCA non ST+</li></ul>
+      <span class="phase phase-mod">Métabolique / toxique</span>
+      <ul class="lst"><li>QT très allongé, hypo/hyperkaliémie</li><li>Hypercalcémie, intoxications médicamenteuses</li></ul>
+      <span class="phase phase-prod">Diagnostic différentiel</span>
+      <ul class="lst"><li>Dissociation électromécanique (arrêt sans trouble du rythme, ex. tamponnade)</li></ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 2 : HYPERTROPHIES =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/></svg>
+  2 · Hypertrophies atriales & ventriculaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître une hypertrophie atriale droite et gauche sur l'onde P</div>
+  <div class="obj-line">Identifier une hypertrophie ventriculaire droite</div>
+  <div class="obj-line">Identifier une hypertrophie ventriculaire gauche (indice de Sokolow)</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 150 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 L18,30 L40,30 L42,33 L45,12 L48,35 L51,30 L70,30 L82,30 L104,30 L106,33 L109,12 L112,35 L115,30 L140,30"/>
+      <path class="feat" d="M18,30 L24,11 L30,30 L82,30 L88,11 L94,30"/>
+      <text class="lblr" x="14" y="44" style="font-size:7px">P ample &amp; pointue</text>
+    </svg>
+    <div class="ecg-cap"><b>HAD</b> — P <span class="r">ample et pointue</span> &gt; 2,5 mm en DII (ou &gt; 2 mm en V1-V2). « P pulmonaire ».</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 150 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 L18,30 L46,30 L48,33 L51,12 L54,35 L57,30 L78,30 L106,30 L108,33 L111,12 L114,35 L117,30 L140,30"/>
+      <path class="feat" d="M18,30 L24,21 L30,25 L36,20 L46,30 L78,30 L84,21 L90,25 L96,20 L106,30"/>
+      <text class="lblr" x="14" y="44" style="font-size:7px">P large &amp; bifide</text>
+    </svg>
+    <div class="ecg-cap"><b>HAG</b> — P <span class="r">large &gt; 110-120 ms et bifide</span> ; composante négative &gt; 40 ms en V1. « P mitrale ».</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 10l7-7l7 7"/></svg></span>HVD <span class="badge badge-amber">Rang B</span></div>
+    <ul class="lst">
+      <li>Majoration de l'amplitude des QRS dans les <strong>dérivations droites</strong></li>
+      <li><strong>R &gt; S en V1</strong> ; <strong>S &gt; R en V6</strong></li>
+      <li>Déviation <strong>axiale droite</strong> fréquente</li>
+      <li>Sensibilité/spécificité imparfaites (vs échographie / IRM)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M12 21V3M5 14l7 7l7-7"/></svg></span>HVG <span class="badge badge-green">Rang A</span></div>
+    <div class="alert alert-green" style="margin-bottom:8px">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+      <span><strong>Indice de Sokolow</strong> (le plus fiable) : <strong>S(V1 ou V2) + R(V5 ou V6) &gt; 35 mm</strong></span>
+    </div>
+    <ul class="lst">
+      <li>Si HVG marquée : <strong>T négatives</strong> en latéral (DI, aVL, V5, V6) ± déviation axiale gauche</li>
+      <li><strong>Non applicable</strong> en cas de nécrose antérieure</li>
+      <li>Historique : HVG <em>systolique</em> (HTA, RAo → T négatives) vs <em>diastolique</em> (IAo → T positives)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 3 : BLOCS DE BRANCHE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  3 · Blocs de branche, hémiblocs & blocs fasciculaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier un bloc de branche complet, un hémibloc et un bloc bifasciculaire</div>
+  <div class="obj-line">Identifier un bloc incomplet de branche et un bloc fonctionnel</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Principe.</strong> Bloc <strong>organique</strong> (permanent) vs <strong>fonctionnel</strong> (aberration de conduction sur fréquence rapide). Toujours des <strong>troubles secondaires de repolarisation</strong> : ST et T opposés à l'axe du QRS. <strong>Complet si QRS &gt; 120 ms</strong>, <strong>incomplet si QRS 100–120 ms</strong> (même morphologie).</span>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 160 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q14,23 22,30 L30,30 L32,24 L36,34 L42,16 L48,33 L52,30 Q62,38 72,30 L90,30 Q98,23 106,30 L114,30 L116,24 L120,34 L126,16 L132,33 L136,30 Q146,38 156,30"/>
+      <text class="lblr" x="32" y="13" style="font-size:7px">rSR'</text>
+    </svg>
+    <div class="ecg-cap"><b>BBD complet</b> (V1) — QRS &gt; 120 ms, aspect <span class="r">rSR' en V1-V2</span>, S élargie en DI/V5/V6, T négative discordante.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 160 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q14,23 22,30 L30,30 L34,12 L40,17 L46,11 L54,30 Q64,38 74,30 L92,30 Q100,23 108,30 L116,30 L120,12 L126,17 L132,11 L140,30 Q150,38 160,30"/>
+      <text class="lblr" x="34" y="9" style="font-size:7px">R large crocheté</text>
+    </svg>
+    <div class="ecg-cap"><b>BBG complet</b> (V6) — QRS &gt; 120 ms, <span class="r">R large crochetée</span>, perte du q en DI/V5/V6, T négative discordante.</div>
+  </div>
+</div>
+
+<table class="table-blue">
+  <thead><tr><th>Bloc</th><th>QRS</th><th>Signes clés</th></tr></thead>
+  <tbody>
+    <tr><td><strong>BBD complet</strong></td><td>&gt; 120 ms</td><td>RsR' en V1-V2 ; S élargie en DI/V5/V6 (&gt; 40 ms) ; déflexion intrinsécoïde V1 &gt; 50 ms</td></tr>
+    <tr><td><strong>BBG complet</strong></td><td>&gt; 120 ms</td><td>QS (ou rS) en V1-V2 ; aspect rR' avec perte du q en DI/V5/V6 ; déflexion intrinsécoïde V5-V6 &gt; 60 ms</td></tr>
+    <tr><td><strong>HBAG</strong></td><td>&lt; 120 ms*</td><td>Déviation axiale gauche &gt; −45° ; qR en DI-aVL, rS en DII-DIII-aVF</td></tr>
+    <tr><td><strong>HBPG</strong> (rare, sévère)</td><td>&lt; 120 ms*</td><td>Déviation axiale droite &gt; +100° ; rS en DI-aVL, qR en DII-DIII-aVF (« S1Q3 »)</td></tr>
+    <tr><td><strong>Bifasciculaire</strong></td><td>&gt; 120 ms</td><td>BBD + HBAG <em>ou</em> BBD + HBPG (risque ↑ de BAV complet, surtout avec HBPG)</td></tr>
+  </tbody>
+</table>
+<div class="ecg-cap" style="margin-top:4px">* sauf si BBD complet associé.</div>
+
+<div class="alert alert-amber" style="margin-top:10px">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Pièges.</strong> Bifasciculaire + PR &gt; 200 ms = « bifasciculaire + BAV1 », <strong>pas</strong> trifasciculaire.<br><strong>Bloc alternant</strong> (BBG puis BBD alternés) = risque majeur de BAV complet → <strong>indication de stimulateur</strong>.</span>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 4 : BAV =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  4 · Blocs atrioventriculaires (BAV)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier les différents degrés de BAV en rythme sinusal</div>
+  <div class="obj-line">Interpréter la conduction AV en présence d'une arythmie atriale</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q12,23 18,30 L62,30 L65,33 L68,9 L71,36 L74,30 L84,30 Q92,21 100,30 L108,30 Q114,23 120,30 L164,30 L167,33 L170,9 L173,36 L176,30 L186,30 Q194,21 200,30"/>
+      <path class="feat" d="M18,30 L62,30 M120,30 L164,30"/>
+    </svg>
+    <div class="ecg-cap"><b>BAV 1</b> — <span class="r">PR allongé &gt; 200 ms</span>, constant, toutes les P conduites.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 230 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q11,23 16,30 L26,30 L28,33 L30,10 L32,34 L34,30 L56,30 Q61,23 66,30 L82,30 L84,33 L86,10 L88,34 L90,30 L112,30 Q117,23 122,30 L144,30 L146,33 L148,10 L150,34 L152,30 L172,30 Q177,23 182,30 L224,30"/>
+      <path class="feat" d="M172,30 Q177,23 182,30"/>
+      <text class="lblr" x="184" y="22" style="font-size:7px">P bloquée</text>
+    </svg>
+    <div class="ecg-cap"><b>BAV 2 Mobitz 1</b> (Wenckebach) — <span class="r">allongement progressif du PR</span> jusqu'à une P bloquée. Le plus souvent <b>nodal</b> (bénin).</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 230 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q11,23 16,30 L22,30 L24,33 L26,10 L28,34 L30,30 L52,30 Q57,23 62,30 L68,30 L70,33 L72,10 L74,34 L76,30 L98,30 Q103,23 108,30 L150,30 Q155,23 160,30 L166,30 L168,33 L170,10 L172,34 L174,30 L224,30"/>
+      <path class="feat" d="M98,30 Q103,23 108,30"/>
+      <text class="lblr" x="92" y="22" style="font-size:7px">P bloquée brutale</text>
+    </svg>
+    <div class="ecg-cap"><b>BAV 2 Mobitz 2</b> — <span class="r">P bloquée sans allongement préalable</span> du PR. Le plus souvent <b>infra-nodal</b> (Hissien) → risque ↑.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 230 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="feat" d="M4,30 Q9,23 14,30 L34,30 Q39,23 44,30 L64,30 Q69,23 74,30 L94,30 Q99,23 104,30 L124,30 Q129,23 134,30 L154,30 Q159,23 164,30 L184,30 Q189,23 194,30 L214,30 Q219,23 224,30 L228,30"/>
+      <path class="wave" d="M0,30 L18,30 L22,33 L28,9 L36,38 L42,30 L92,30 L96,33 L102,9 L110,38 L116,30 L166,30 L170,33 L176,9 L184,38 L190,30 L228,30"/>
+    </svg>
+    <div class="ecg-cap"><b>BAV 3 (complet)</b> — <b>dissociation AV</b> : <span class="r">P régulières (rouge)</span> indépendantes des QRS d'échappement, plus lents et réguliers.</div>
+  </div>
+</div>
+
+<table class="table-amber">
+  <thead><tr><th>Type</th><th>Signature ECG</th><th>Siège habituel</th></tr></thead>
+  <tbody>
+    <tr><td><strong>BAV 1</strong></td><td>PR &gt; 200 ms, toutes les P conduites</td><td>Nodal</td></tr>
+    <tr><td><strong>Mobitz 1</strong></td><td>PR ↑ progressif → 1 P bloquée (Luciani-Wenckebach)</td><td>Nodal (bénin)</td></tr>
+    <tr><td><strong>Mobitz 2</strong></td><td>P bloquée sans allongement du PR, PR/RR instables</td><td>Infra-nodal (Hissien)</td></tr>
+    <tr><td><strong>BAV 2/1</strong></td><td>1 P bloquée sur 2, PR constant des P conduites</td><td>Mobitz 1 ou 2 (test d'effort : <em>amélioration</em> si nodal, <em>aggravation</em> si infra-nodal)</td></tr>
+    <tr><td><strong>BAV 3</strong></td><td>Dissociation AV complète ; échappement jonctionnel (QRS fins) ou ventriculaire (QRS larges)</td><td>Nodal ou infra-nodal</td></tr>
+  </tbody>
+</table>
+
+<div class="alert alert-blue" style="margin-top:10px">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>BAV & arythmie atriale.</strong> On ne parle <strong>pas</strong> de BAV 1/2 en arythmie atriale. Un <strong>BAV complet sur FA/flutter</strong> donne un rythme ventriculaire <strong>régulier</strong> (échappement), non multiple de l'activité atriale.</span>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 5 : DYSFONCTION SINUSALE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M19.5 12.572l-7.5 7.428l-7.5-7.428a5 5 0 1 1 7.5-6.566a5 5 0 1 1 7.5 6.566z"/></svg>
+  5 · Dysfonction sinusale & blocs sino-atriaux
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître une dysfonction sinusale et écarter une bradycardie physiologique</div>
+  <div class="obj-line">Connaître les mécanismes et variantes (maladie de l'oreillette, insuffisance chronotrope…)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span>Dysfonction sinusale</div>
+    <ul class="lst">
+      <li><strong>Bradycardie inadaptée</strong> aux besoins : &lt; 60 bpm ou <strong>pauses &gt; 3 s</strong></li>
+      <li>Souvent <strong>dégénérative</strong> chez le sujet âgé</li>
+      <li>Toute bradycardie ≠ dysfonction (bradycardie physiologique du sportif)</li>
+      <li>Écarter cause secondaire : <strong>iatrogène</strong> (bradycardisants), <strong>hyperkaliémie</strong>, <strong>hypothyroïdie</strong></li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Blocs sino-atriaux (BSA)</div>
+    <div class="kv-row"><span class="kv-key">BSA I</span><span class="kv-val">Non visible (bradycardie)</span></div>
+    <div class="kv-row"><span class="kv-key">BSA II – 1er°</span><span class="kv-val">PP ↑ puis P absente (&lt; 2× PP)</span></div>
+    <div class="kv-row"><span class="kv-key">BSA II – 2e°</span><span class="kv-val">P absente sans préavis (= 2× PP)</span></div>
+    <div class="kv-row"><span class="kv-key">BSA III</span><span class="kv-val">Aucune activité sinusale → échappement</span></div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title"><span class="card-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>Variantes & mécanismes <span class="badge badge-amber">Rang B</span></div>
+  <ul class="lst">
+    <li><strong>Maladie de l'oreillette (brady-tachy)</strong> : alternance arythmie atriale ↔ dysfonction sinusale</li>
+    <li><strong>Pauses post-réductionnelles</strong> : à l'arrêt d'une arythmie atriale</li>
+    <li><strong>Insuffisance chronotrope</strong> : FCmax &lt; 75 % de la FMT (220 − âge) à l'effort</li>
+    <li><strong>Syndrome du sinus carotidien</strong> : pause &gt; 3 s à la stimulation du sinus carotidien</li>
+    <li><strong>Hypertonie vagale</strong> (jeune sportif) : brady &lt; 50 bpm éveil, jusqu'à 30 au sommeil, asymptomatique, s'accélère à l'effort/atropine → <strong>pas de traitement</strong></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 6 : TACHYCARDIES SUPRAVENTRICULAIRES =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  6 · Tachycardies supraventriculaires & pré-excitation
+</div>
+<div class="obj-list">
+  <div class="obj-line">Différencier une tachycardie sinusale d'une tachycardie supraventriculaire non sinusale</div>
+  <div class="obj-line">Identifier une fibrillation atriale, un flutter et une tachycardie jonctionnelle</div>
+  <div class="obj-line">Connaître l'intérêt diagnostique et thérapeutique des manœuvres vagales</div>
+  <div class="obj-line">Reconnaître le Wolff-Parkinson-White et le risque de mort subite</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M0,30 L18,30 L20,33 L22,12 L24,34 L26,30 L62,30 L64,33 L66,12 L68,34 L70,30 L106,30 L108,33 L110,12 L112,34 L114,30 L162,30 L164,33 L166,12 L168,34 L170,30 L218,30"/>
+      <path class="feat" d="M2,30 L6,28 L10,32 L14,29 L30,31 L34,28 L40,32 L46,29 L52,31 L74,30 L78,28 L82,32 L88,29 L94,31 L100,28 L118,31 L122,28 L128,32 L134,29 L140,31 L146,28 L172,31 L178,28 L184,32 L190,29 L196,31 L202,28 L208,31 L214,29"/>
+    </svg>
+    <div class="ecg-cap"><b>Fibrillation atriale</b> — <b>rythme irrégulier</b>, <span class="r">trémulation de la ligne de base sans onde P</span>, QRS fins (sauf BBD/pré-excitation).</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="feat" d="M0,24 L8,36 L16,24 L24,36 L32,24 L40,36 L48,24 L56,36 L64,24 L72,36 L80,24 L88,36 L96,24 L104,36 L112,24 L120,36 L128,24 L136,36 L144,24 L152,36 L160,24 L168,36 L176,24 L184,36 L192,24 L200,36 L208,24 L216,36"/>
+      <path class="wave" d="M0,30 L40,30 L43,33 L46,12 L49,34 L52,30 L120,30 L123,33 L126,12 L129,34 L132,30 L200,30 L203,33 L206,12 L209,34 L212,30 L220,30"/>
+    </svg>
+    <div class="ecg-cap"><b>Flutter atrial commun</b> — <span class="r">ondes F en dents de scie ~300/min</span> (positives V1, négatives en inférieur), conduction souvent 2/1 → ventricule à 150 bpm.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Démarche : tachycardie régulière à QRS fins</div>
+  <table>
+    <thead><tr><th>Diagnostic</th><th>Onde P / F / P'</th><th>Indices</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tachycardie sinusale</strong></td><td>P sinusale (+ DII, − aVR, ± biphasique V1)</td><td>Début/fin <strong>progressifs</strong>, cause déclenchante (effort, sepsis, EP, anémie…)</td></tr>
+      <tr><td><strong>Tachycardie atriale</strong></td><td>P' ≠ P sinusale, <strong>retour à la ligne isoélectrique</strong></td><td>Conduction 1/1, 2/1 ou variable</td></tr>
+      <tr><td><strong>Flutter</strong></td><td>Ondes F en dents de scie, <strong>pas de retour</strong> isoélectrique</td><td>Conduction 2/1 (≈150) ou variable</td></tr>
+      <tr><td><strong>Jonctionnelle</strong></td><td>P' rétrogrades (− inférieur) après QRS, rapport A/V = 1</td><td>Début/fin <strong>brusques</strong> (Bouveret)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/><path d="M12 7v5l3 3"/></svg></span>Tachycardies jonctionnelles</div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:6px">Réentrée empruntant le <strong>NAV</strong> → <strong>arrêtées par manœuvres vagales / adénosine</strong>. Début et fin brusques, régulières, A/V = 1.</p>
+    <ul class="lst">
+      <li><strong>Réentrée intra-nodale</strong> : voie lente + voie rapide ; P' <strong>« collées »</strong> au QRS (souvent invisibles)</li>
+      <li><strong>Sur voie accessoire</strong> (Kent) : P' à <strong>distance &gt; 80 ms</strong> ; orthodromique (QRS fins, fréquent) ou antidromique (QRS larges)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg></span>Wolff-Parkinson-White <span class="badge badge-amber">Rang B</span></div>
+    <ul class="lst">
+      <li>En rythme sinusal : <strong>PR court &lt; 120 ms + onde delta</strong> (empâtement initial du QRS)</li>
+      <li>= voie accessoire à <strong>conduction antérograde</strong> ; symptômes (palpitations) → « syndrome » WPW</li>
+      <li>Absence de WPW en RS <strong>n'élimine pas</strong> une voie accessoire cachée</li>
+      <li><strong class="r">Risque de mort subite</strong> : super-Wolff = FA + voie accessoire à conduction antérograde rapide</li>
+    </ul>
+  </div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave" d="M6,30 Q12,24 18,30 L24,30 L46,11 L49,34 L52,30 Q62,21 72,30 L96,30 Q102,24 108,30 L114,30 L136,11 L139,34 L142,30 Q152,21 162,30 L186,30 Q192,24 198,30 L204,30"/>
+    <path class="feat" d="M24,30 L34,28 L46,11 M114,30 L124,28 L136,11"/>
+    <text class="lblr" x="22" y="22" style="font-size:7px">delta</text>
+    <text class="lblr" x="112" y="22" style="font-size:7px">delta</text>
+  </svg>
+  <div class="ecg-cap"><b>WPW</b> — <span class="r">PR court + onde delta</span> (empâtement de la montée du QRS), QRS élargi.</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title"><span class="card-icon" style="background:var(--blue)"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Manœuvres vagales / adénosine — bloquent transitoirement le NAV</div>
+  <div class="grid2">
+    <ul class="lst">
+      <li>Massage sino-carotidien, <strong>Valsalva</strong></li>
+      <li>Tachycardie sinusale → <strong>ralentissement transitoire</strong></li>
+    </ul>
+    <ul class="lst">
+      <li>Tachycardie jonctionnelle → <strong>réduction</strong></li>
+      <li>Flutter / TA → <strong>démasque</strong> les ondes F / P'</li>
+      <li>TV → <strong>aucun effet</strong> (test discriminant)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>FA à rythme ventriculaire régulier</strong> (piège) : évoquer un <strong>BAV complet avec échappement</strong>, un <strong>rythme entraîné par pacemaker</strong>, ou une <strong>bi-tachycardie</strong> (FA + TV).</span>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 7 : ARYTHMIES VENTRICULAIRES =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  7 · Extrasystoles & arythmies ventriculaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier les extrasystoles atriales, jonctionnelles et ventriculaires</div>
+  <div class="obj-line">Identifier une tachycardie ventriculaire et ses signes pathognomoniques</div>
+  <div class="obj-line">Identifier une fibrillation ventriculaire et une torsade de pointes</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Extrasystoles — dépolarisation prématurée</div>
+  <table>
+    <thead><tr><th>Type</th><th>ECG</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ESA</strong> (atriale)</td><td>P' prématurée ≠ P sinusale ; souvent suivie d'une pause</td></tr>
+      <tr><td><strong>ESJ</strong> (jonctionnelle)</td><td>QRS prématuré <strong>non précédé de P</strong>, semblable au QRS sinusal</td></tr>
+      <tr><td><strong>ESV</strong> (ventriculaire)</td><td>QRS prématuré <strong>large</strong>, non précédé de P ; retard droit (origine VG) ou retard gauche (origine VD)</td></tr>
+    </tbody>
+  </table>
+  <div class="ecg-cap" style="margin-top:6px">Récurrence : isolée · <strong>bigéminée</strong> (1/2) · <strong>trigéminée</strong> (1/3).</div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 230 48" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave" d="M2,30 Q8,24 14,30 L18,30 L20,33 L22,14 L24,34 L26,30 L36,30 Q42,22 48,30 L62,30 Q68,24 74,30 L78,30 L80,33 L82,14 L84,34 L86,30 L96,30 Q102,22 108,30 L150,30 Q156,24 162,30 L166,30 L168,33 L170,14 L172,34 L174,30 L184,30 Q190,22 196,30 L228,30"/>
+    <path class="feat" d="M120,30 L126,10 L134,42 L140,30"/>
+    <text class="lblr" x="112" y="9" style="font-size:7px">ESV</text>
+  </svg>
+  <div class="ecg-cap"><b>ESV</b> — <span class="r">QRS large et prématuré, sans onde P</span>, morphologie différente, suivi d'un repos compensateur.</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M0,30 L6,12 L14,40 L20,30 L26,12 L34,40 L40,30 L46,12 L54,40 L60,30 L66,12 L74,40 L80,30 L86,12 L94,40 L100,30 L106,12 L114,40 L120,30 L126,12 L134,40 L140,30 L146,12 L154,40 L160,30 L166,12 L174,40 L180,30 L186,12 L194,40 L200,30 L206,12 L214,40 L220,30"/>
+    </svg>
+    <div class="ecg-cap"><b>Tachycardie ventriculaire</b> — QRS <b>larges &gt; 120 ms réguliers</b>. Toute tachycardie à QRS larges = TV jusqu'à preuve du contraire.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="feat" d="M0,30 L8,16 L14,38 L20,22 L28,40 L34,14 L42,33 L48,20 L56,39 L62,17 L70,31 L78,41 L86,18 L94,29 L102,40 L110,16 L118,34 L126,21 L134,38 L142,15 L150,32 L158,42 L166,19 L174,30 L182,40 L190,17 L198,33 L206,22 L214,30 L220,30"/>
+    </svg>
+    <div class="ecg-cap"><b class="r">Fibrillation ventriculaire</b> — ondulations <b>anarchiques</b>, polymorphes, décroissantes → asystolie. <b>Défibrillation immédiate.</b></div>
+  </div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 220 48" xmlns="http://www.w3.org/2000/svg">
+    <path class="feat" d="M0,30 L6,28 L12,32 L20,25 L28,35 L36,18 L46,44 L56,12 L66,46 L76,12 L86,44 L96,18 L104,34 L112,26 L120,32 L128,28 L136,31 L144,29 L152,30 L160,30"/>
+    <path class="wave" d="M160,30 L184,30 L186,33 L188,16 L190,34 L192,30 L216,30"/>
+  </svg>
+  <div class="ecg-cap"><b>Torsade de pointes</b> — TV polymorphe avec <span class="r">rotation de l'axe autour de la ligne de base</span> (fuseau). Sur QT long, hypokaliémie, bradycardie, médicaments QT-longeants ; peut dégénérer en FV.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>TV — 2 signes pathognomoniques</div>
+  <ul class="lst">
+    <li><strong>Dissociation AV</strong> : moins d'ondes P que de QRS</li>
+    <li><strong>Complexes de capture / fusion</strong> : QRS fin (capture) ou de largeur intermédiaire (fusion) au sein de la tachycardie</li>
+  </ul>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:6px">Autres arguments : QRS &gt; 160 ms, R exclusive en aVR, concordance précordiale (+ ou −). <strong>Soutenue</strong> si &gt; 30 s ou mal tolérée. <em>Intérêt des ECG longs</em> pour démasquer ces signes.</p>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 8 : MÉTABOLIQUE & QT =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  8 · Dyskaliémies & allongement du QT
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes ECG d'hypo- et d'hyperkaliémie</div>
+  <div class="obj-line">Mesurer et identifier un allongement du QT</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q12,24 18,30 L26,30 L28,33 L30,12 L32,34 L34,30 L42,30 L96,30 L98,33 L100,12 L102,34 L104,30 L112,30 L188,30"/>
+      <path class="feat" d="M42,30 L52,8 L62,30 M112,30 L122,8 L132,30"/>
+      <text class="lblr" x="44" y="7" style="font-size:7px">T ample pointue</text>
+    </svg>
+    <div class="ecg-cap"><b>Hyperkaliémie</b> — <span class="r">T amples, pointues, symétriques</span> ; puis PR allongé, QRS élargis ; risque de BAV, dysfonction sinusale.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 200 44" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q12,24 18,30 L26,30 L28,33 L30,12 L32,34 L34,30 L42,32 Q52,28 62,32 L70,32"/>
+      <path class="feat" d="M70,32 Q80,24 90,32 L188,32"/>
+      <text class="lblr" x="70" y="22" style="font-size:7px">onde U</text>
+      <text class="lbl" x="42" y="26" style="font-size:7px">T plate</text>
+    </svg>
+    <div class="ecg-cap"><b>Hypokaliémie</b> — T plates/négatives, sous-décalage ST, <strong>QT long</strong> et <span class="r">apparition d'une onde U</span> ; hyperexcitabilité (ESV, torsades).</div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title"><span class="card-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/><path d="M12 7v5l3 3"/></svg></span>Allongement du QT</div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">QTc allongé si</span><span class="kv-val">&gt; 440 ms</span></div>
+      <div class="kv-row"><span class="kv-key">QT long congénital si</span><span class="kv-val">≥ 480 ms*</span></div>
+    </div>
+    <div style="font-size:.82rem;color:var(--muted)">
+      <strong>Mesure</strong> : début du QRS → fin de l'onde T (tangente). À mesurer où T est nette (<strong>DII ou V5</strong>). Correction par la <strong>formule de Bazett</strong>.
+    </div>
+  </div>
+  <div class="ecg-cap" style="margin-top:4px">* en l'absence de facteur favorisant. Danger principal : <strong>torsade de pointes</strong>.</div>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 9 : PÉRICARDITE & SCA =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M19.5 12.572l-7.5 7.428l-7.5-7.428a5 5 0 1 1 7.5-6.566a5 5 0 1 1 7.5 6.566z"/></svg>
+  9 · Péricardite aiguë & syndromes coronaires aigus
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les stades ECG d'une péricardite aiguë</div>
+  <div class="obj-line">Identifier la maladie coronaire et les SCA avec et sans sus-décalage de ST</div>
+</div>
+
+<div class="grid2">
+  <div class="ecg">
+    <svg viewBox="0 0 200 46" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q12,24 18,30 L22,32 L26,33 L28,12 L30,30"/>
+      <path class="feat" d="M30,30 Q40,24 50,21 Q62,19 72,26"/>
+      <path class="wave" d="M72,26 Q80,28 88,30 L100,30 Q106,24 112,30 L116,32 L120,33 L122,12 L124,30"/>
+      <path class="feat" d="M124,30 Q134,24 144,21 Q156,19 166,26 Q176,28 186,30"/>
+      <text class="lblr" x="36" y="16" style="font-size:7px">ST concave</text>
+    </svg>
+    <div class="ecg-cap"><b>Péricardite — stade I</b> : <span class="r">sus-décalage ST concave vers le haut, diffus, sans miroir, sans Q</span> ; sous-décalage de PQ.</div>
+  </div>
+  <div class="ecg">
+    <svg viewBox="0 0 200 46" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave" d="M6,30 Q12,24 18,30 L24,30 L26,33 L28,12 L30,30"/>
+      <path class="feat" d="M30,28 L36,20 Q50,8 64,16 Q74,22 82,30"/>
+      <path class="wave" d="M82,30 L100,30 Q106,24 112,30 L118,30 L120,33 L122,12 L124,30"/>
+      <path class="feat" d="M124,28 L130,20 Q144,8 158,16 Q168,22 176,30"/>
+      <text class="lblr" x="34" y="12" style="font-size:7px">Pardee</text>
+    </svg>
+    <div class="ecg-cap"><b>SCA ST+</b> : <span class="r">sus-décalage convexe (onde de Pardee)</span>, systématisé ≥ 2 dérivations contiguës, avec <strong>miroir</strong>.</div>
+  </div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave" d="M6,30 Q12,24 18,30 L24,30 L26,33 L28,11 L30,34 L32,30"/>
+    <path class="feat" d="M32,34 L52,34"/>
+    <path class="wave" d="M52,34 Q62,40 72,34 L100,30 Q106,24 112,30 L118,30 L120,33 L122,11 L124,34 L126,30"/>
+    <path class="feat" d="M126,34 L146,34"/>
+    <path class="wave" d="M146,34 Q156,40 166,34 L214,30"/>
+    <text class="lblr" x="30" y="44" style="font-size:7px">sous-décalage ST</text>
+  </svg>
+  <div class="ecg-cap"><b>SCA non ST+</b> — <span class="r">sous-décalage ST horizontal/descendant</span> ≥ 2 dérivations contiguës ± T négatives. <strong>ECG parfois normal</strong> (post-critique) → un ECG normal n'élimine pas le diagnostic.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg></span>SCA ST+ — évolution</div>
+    <ul class="lst">
+      <li>T positives amples symétriques (très précoce)</li>
+      <li><strong>Sus-décalage convexe</strong> &gt; 1 mm (frontales) / &gt; 2 mm (précordiales), onde de Pardee</li>
+      <li><strong>Miroir</strong> dans le territoire opposé</li>
+      <li><strong>Ondes Q de nécrose</strong> (&gt; 1/3 du QRS, &gt; 40 ms) ± rabotage des R (territoire antérieur) puis T négatives</li>
+      <li>Sus-décalage persistant = <strong>anévrysme</strong> ventriculaire</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue)"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Territoires (ECG 18 dérivations)</div>
+    <div class="kv-row"><span class="kv-key">Antéroseptal</span><span class="kv-val">V1–V3</span></div>
+    <div class="kv-row"><span class="kv-key">Apical</span><span class="kv-val">V4</span></div>
+    <div class="kv-row"><span class="kv-key">Latéral bas / haut</span><span class="kv-val">V5-V6 / DI-aVL</span></div>
+    <div class="kv-row"><span class="kv-key">Inférieur</span><span class="kv-val">DII-DIII-aVF</span></div>
+    <div class="kv-row"><span class="kv-key">Ventricule droit</span><span class="kv-val">V3R-V4R</span></div>
+    <div class="kv-row"><span class="kv-key">Postérieur</span><span class="kv-val">V7–V9</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Pièges SCA.</strong> ECG <strong>non interprétable</strong> en cas de BBG complet ou d'entraînement ventriculaire par pacemaker.<br><strong>IDM postérieur</strong> : grandes R exclusives en V1-V3 (image miroir) → dérivations postérieures V7-V9 indispensables.</span>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title"><span class="card-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Péricardite — 4 stades <span class="badge badge-amber">Rang B</span></div>
+  <table>
+    <tbody>
+      <tr><td style="vertical-align:middle; text-align:center;"><strong>I</strong></td><td>Sus-décalage ST concave sans miroir/Q, T positives, sous-décalage PQ</td></tr>
+      <tr><td style="vertical-align:middle; text-align:center;"><strong>II</strong></td><td>ST isoélectrique, T plates</td></tr>
+      <tr><td style="vertical-align:middle; text-align:center;"><strong>III</strong></td><td>T négatives</td></tr>
+      <tr><td style="vertical-align:middle; text-align:center;"><strong>IV</strong></td><td>Normalisation progressive (&lt; 1 mois)</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:6px"><strong>Tamponnade</strong> : alternance électrique + <strong>microvoltage</strong> (QRS &lt; 5 mm en périphérie). Troubles du rythme supraventriculaires fréquents.</p>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 10 : STIMULATION =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg>
+  10 · Stimulation cardiaque (pacemaker)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître un électro-entraînement atrial, ventriculaire ou séquentiel</div>
+</div>
+
+<div class="ecg">
+  <svg viewBox="0 0 220 46" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave" d="M6,30 L30,30 L34,38 L40,14 L48,36 L54,30 Q64,22 74,30 L96,30 L120,30 L124,38 L130,14 L138,36 L144,30 Q154,22 164,30 L186,30 L210,30"/>
+    <path class="feat" d="M30,32 L30,6 M120,32 L120,6"/>
+    <text class="lblr" x="22" y="44" style="font-size:7px">spike</text>
+    <text class="lblr" x="112" y="44" style="font-size:7px">spike</text>
+  </svg>
+  <div class="ecg-cap"><b>Stimulation ventriculaire</b> — <span class="r">spike</span> puis QRS large (stimulation en VD = aspect retard gauche).</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon" style="background:var(--purple)"><svg viewBox="0 0 24 24"><path d="M13 3v7h6l-8 11v-7H5z"/></svg></span>Repères <span class="badge badge-amber">Rang B</span></div>
+  <ul class="lst">
+    <li>Rythme stimulé <strong>seulement si</strong> rythme propre &lt; rythme programmé</li>
+    <li><strong>Spike</strong> (artéfact de stimulation) plus ou moins visible avant le complexe entraîné</li>
+    <li>QRS stimulés <strong>larges</strong> (VD) sauf <strong>resynchronisation</strong> (sonde VD + sonde VG via veine coronaire)</li>
+    <li>2 sondes (OD + VD) ; 3 si resynchronisation ; <strong>pas de sonde atriale</strong> si FA permanente</li>
+  </ul>
+  <table class="table-teal" style="margin-top:8px">
+    <thead><tr><th>Indication</th><th>Étage stimulé</th></tr></thead>
+    <tbody>
+      <tr><td>Dysfonction sinusale</td><td>Oreillette</td></tr>
+      <tr><td>BAV</td><td>Ventricule</td></tr>
+      <tr><td>Dysfonction sinusale + BAV</td><td>Séquentiel (les 2 étages)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- =================== SECTION 11 : HOLTER =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+  11 · Holter ECG
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes et indications de l'enregistrement Holter</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon" style="background:var(--blue)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg></span>Méthode</div>
+    <ul class="lst">
+      <li>ECG longue durée : <strong>24 h</strong> le plus souvent, jusqu'à plusieurs semaines</li>
+      <li>2-3 dérivations (Holter 12 dérivations possible)</li>
+      <li>Si symptômes trop rares : <strong>enregistreurs d'événements</strong> externes ou implantables (~3 ans)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Indications</div>
+    <ul class="lst">
+      <li><strong>Malaises/syncopes ou palpitations</strong> non documentés sur ECG standard</li>
+      <li>FC moyenne sous bradycardisants</li>
+      <li>Contrôle de fréquence en FA</li>
+      <li>Troubles du rythme atriaux/ventriculaires même asymptomatiques</li>
+      <li>QT mesuré directement (à 60 bpm, sans formule de correction)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- =================== SYNTHÈSE =================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon" style="background:var(--red)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Les urgences ECG à reconnaître d'emblée</div>
+  <div class="pills">
+    <span class="pill pill-red">FV → défibrillation</span>
+    <span class="pill pill-red">TV soutenue</span>
+    <span class="pill pill-red">Torsade de pointes</span>
+    <span class="pill pill-red">BAV haut degré</span>
+    <span class="pill pill-red">Super-Wolff</span>
+    <span class="pill pill-red">Flutter 1/1</span>
+    <span class="pill pill-red">SCA ST+ (Pardee)</span>
+    <span class="pill pill-red">Hyperkaliémie</span>
+    <span class="pill pill-red">QT long</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon" style="background:var(--teal)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Réflexes diagnostiques</div>
+    <ul class="lst">
+      <li><strong>Tachycardie QRS larges = TV</strong> jusqu'à preuve du contraire (chercher dissociation AV, capture/fusion)</li>
+      <li><strong>Sokolow &gt; 35 mm</strong> = HVG</li>
+      <li><strong>PR court + delta</strong> = WPW</li>
+      <li><strong>Dents de scie ~300/min</strong> = flutter (souvent 150 en 2/1)</li>
+      <li><strong>Irrégulier sans P</strong> = FA</li>
+      <li><strong>Mobitz 1</strong> = nodal/bénin ; <strong>Mobitz 2</strong> = infra-nodal/dangereux</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon" style="background:var(--amber)"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Pièges classiques ECNi</div>
+    <ul class="lst">
+      <li><strong>ECG normal n'élimine pas un SCA</strong> (non ST+, post-critique)</li>
+      <li><strong>BBG / pacemaker</strong> → ECG non interprétable pour l'ischémie</li>
+      <li><strong>IDM postérieur</strong> : grandes R en V1-V3 → dérivations V7-V9</li>
+      <li><strong>FA régulière</strong> → penser BAV complet, pacemaker, bi-tachycardie</li>
+      <li><strong>Péricardite</strong> : sus-décalage <em>concave</em>, diffus, <em>sans miroir</em> (≠ Pardee convexe)</li>
+      <li><strong>Hyperkaliémie</strong> : T amples pointues → BAV/QRS larges → risque vital</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
