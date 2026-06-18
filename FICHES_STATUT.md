@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
 
-**Avancement : 151 / 367 items (41.1%)**
+**Avancement : 152 / 367 items (41.4%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -275,7 +275,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 265 | [ ] | Lithiase urinaire | — |
 | 266 | [ ] | Polykystose rénale | — |
 | 267 | [ ] | Troubles de l équilibre acido-basique et désordres hydro-électrolytiqu… | — |
-| 268 | [ ] | Hypercalcémie | — |
+| 268 | [x] | Hypercalcémie | 268_Hypercalcemie.html |
 | 269 | [ ] | Douleurs abdominales aiguës chez l enfant et chez l adulte | — |
 | 270 | [ ] | Douleurs lombaires aiguës | — |
 | 271 | [x] | Reflux gastro-œsophagien chez le nourrisson | 271_RGO.html |

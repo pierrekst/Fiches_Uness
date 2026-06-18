@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 268 — Hypercalcémie</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#D85A30 50%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  .intro-box{background:var(--card);border:1.5px solid var(--amber);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+
+  .formula-box{background:var(--amber-light);border-radius:8px;padding:10px 14px;font-size:.84rem;color:var(--amber);font-weight:700;text-align:center;margin:8px 0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 268</div>
+  <h1>Hypercalcémie</h1>
+  <div class="header-sub">Diagnostic étiologique et prise en charge de l'urgence hypercalcémique</div>
+  <div class="header-tags">
+    <span class="htag">Endocrinologie</span>
+    <span class="htag">Néphrologie</span>
+    <span class="htag">Urgence métabolique</span>
+    <span class="htag">PTH</span>
+    <span class="htag">Hyperparathyroïdie</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-box">
+  <p>L'hypercalcémie est un trouble métabolique dont la démarche repose entièrement sur le <strong>dosage de la PTH</strong> : elle sépare les formes parathyroïdiennes (HPT primaire en tête, cause la plus fréquente) des formes extra-parathyroïdiennes (cancers osseux, granulomatoses, intoxications). Il faut maîtriser les <strong>normes et la formule de correction</strong>, les <strong>signes cliniques et ECG</strong>, le <strong>bilan de 1ère intention</strong>, l'<strong>arbre étiologique structuré</strong> et le <strong>traitement d'urgence</strong> de la crise aiguë hypercalcémique (Ca corrigé &gt; 3,5 mmol/L = urgence vitale).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SECTION 1 : NORMES, DÉFINITION, MÉCANISMES -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Normes, Définition et Mécanismes
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les normes de la calcémie totale et de la calcémie ionisée</div>
+  <div class="obj-line">Identifier une hypercalcémie et corriger la calcémie selon l'albuminémie</div>
+  <div class="obj-line">Connaître les principaux mécanismes physiopathologiques des hypercalcémies</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Valeurs normales et seuils
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Calcémie totale normale</span>
+      <span class="kv-val">2,20 – 2,60 mmol/L</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Calcémie ionisée normale</span>
+      <span class="kv-val">1,15 – 1,30 mmol/L</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Fraction ionisée (seule active)</span>
+      <span class="kv-val">55 % du Ca total</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Seuil hypercalcémie — Ca total</span>
+      <span class="kv-val">&gt; 2,60 mmol/L</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Seuil hypercalcémie — Ca ionisé</span>
+      <span class="kv-val">&gt; 1,30 mmol/L</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Crise aiguë hypercalcémique</span>
+      <span class="kv-val" style="color:var(--red);">&gt; 3,5 mmol/L (ionisé)</span>
+    </div>
+  </div>
+
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Calcémie corrigée — Formule indispensable
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Toute hypercalcémie totale doit être <strong>confirmée</strong> par le dosage du Ca ionisé ou par la calcémie corrigée :</p>
+    <div class="formula-box">
+      Ca corrigée = Ca total (mmol/L) + (40 – albumine en g/L) × 0,025
+    </div>
+    <p style="font-size:.81rem;color:var(--muted);margin-top:8px;">Ca total varie dans le même sens que l'albumine : hyperalbuminémie → fausse hypercalcémie totale (piège classique).</p>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Mécanismes physiopathologiques
+  </div>
+  <div class="grid3" style="margin-top:8px;margin-bottom:0;">
+    <div class="bl-amber">
+      <div style="font-weight:700;font-size:.84rem;margin-bottom:4px;">Résorption osseuse excessive</div>
+      <div style="font-size:.81rem;color:var(--muted);">Métastases, myélome, PTH élevée, hyperthyroïdie, immobilisation prolongée, intox vit A</div>
+    </div>
+    <div class="bl-blue">
+      <div style="font-weight:700;font-size:.84rem;margin-bottom:4px;">Absorption digestive augmentée</div>
+      <div style="font-size:.81rem;color:var(--muted);">Intox vit D native ou active, calcitriol ectopique (granulomatose), syndrome lait-alcalins</div>
+    </div>
+    <div class="bl-teal">
+      <div style="font-weight:700;font-size:.84rem;margin-bottom:4px;">Diminution des sorties rénales</div>
+      <div style="font-size:.81rem;color:var(--muted);">Thiazidiques, mutation CaSR (hypercalcémie hypocalciurique familiale bénigne)</div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Régulation calcique :</strong> PTH (stimulée par hypocalcémie via CaSR parathyroïdien) stimule le rein à produire le calcitriol → absorption digestive et libération osseuse du calcium. Le CaSR rénal augmente directement la calciurie en cas d'hypercalcémie.</div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════ -->
+<!-- SECTION 2 : CLINIQUE ET ECG       -->
+<!-- ══════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Signes cliniques et ECG
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes cliniques de l'hypercalcémie aiguë et chronique</div>
+  <div class="obj-line">Connaître les anomalies ECG caractéristiques de l'hypercalcémie</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Règle fondamentale :</strong> la majorité des hypercalcémies sont <strong>asymptomatiques</strong>. Les symptômes n'apparaissent que si l'hypercalcémie est <strong>aiguë et importante</strong>.</div>
+</div>
+
+<table class="table-red">
+  <thead>
+    <tr>
+      <th>Système</th>
+      <th>Signes aigus</th>
+      <th>Signes chroniques</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Digestifs</strong></td>
+      <td>Anorexie, nausées, vomissements, pancréatite aiguë (rare)</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Neuropsychiques</strong></td>
+      <td>Asthénie, déficits cognitifs, troubles de l'humeur, confusion, hallucinations, <strong>coma si sévère</strong></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Rénaux</strong></td>
+      <td>Syndrome polyuro-polydipsique (diabète insipide néphrogénique — baisse sensibilité ADH), DEC par perte NaCl, insuffisance rénale fonctionnelle</td>
+      <td>Lithiase calcique, néphrocalcinose, IRC</td>
+    </tr>
+    <tr>
+      <td><strong>Cardiologiques</strong></td>
+      <td>Raccourcissement QT, tachycardie sinusale, sous-décalage ST — Troubles du rythme ventriculaire (TV, bradycardie sévère) si crise aiguë (Ca ionisé &gt; 3,5 mmol/L)</td>
+      <td>Dépôts valvulaires et coronaires</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card card-red" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    ECG — Anomalies électriques de l'hypercalcémie
+  </div>
+  <div class="pills" style="margin-bottom:12px;">
+    <span class="pill pill-red">Raccourcissement QT +++</span>
+    <span class="pill pill-red">Tachycardie sinusale</span>
+    <span class="pill pill-amber">Sous-décalage ST</span>
+    <span class="pill pill-red">Troubles du rythme ventriculaire</span>
+  </div>
+  <div class="alert alert-red" style="margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>ECG obligatoire</strong> devant toute découverte d'hypercalcémie. En crise aiguë (Ca ionisé &gt; 3,5 mmol/L) : risque de tachycardie ventriculaire ou bradycardie sévère potentiellement mortelle.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════ -->
+<!-- SECTION 3 : BILAN DIAGNOSTIQUE     -->
+<!-- ═══════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les examens de 1ère intention devant une hypercalcémie</div>
+  <div class="obj-line">Interpréter la PTH pour orienter le diagnostic mécanistique (parathyroïdien vs extra-parathyroïdien)</div>
+  <div class="obj-line">Savoir orienter les examens de 2e intention selon le bilan initial</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan de 1ère intention — 3 objectifs
+  </div>
+  <div class="grid3" style="margin-top:8px;margin-bottom:0;">
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Diagnostic positif</div>
+      <ul class="lst">
+        <li>Calcémie totale</li>
+        <li>Calcémie ionisée</li>
+        <li>Albuminémie → calcémie corrigée</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Retentissement</div>
+      <ul class="lst">
+        <li>Créatininémie (rein)</li>
+        <li>ECG (cœur)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Mécanistique</div>
+      <ul class="lst">
+        <li><strong>PTH +++</strong></li>
+        <li>Phosphatémie</li>
+        <li>Calcitriol — 1,25(OH)D</li>
+        <li>25(OH)-vitamine D</li>
+        <li>Calciurie des 24h</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Interprétation de la PTH — Clé du diagnostic mécanistique
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>PTH</th>
+        <th>Phosphatémie</th>
+        <th>Calciurie</th>
+        <th>Orientation diagnostique</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-amber">Normale ou élevée &gt; 65 pg/mL</span></td>
+        <td><span class="badge badge-red">Basse &lt; 0,84 mmol/L</span></td>
+        <td>Élevée</td>
+        <td><strong>Hyperparathyroïdie primaire +++</strong></td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Normale</span></td>
+        <td>Normale</td>
+        <td><span class="badge badge-red">Basse</span></td>
+        <td>Hypercalcémie hypocalciurique familiale bénigne (HHF) — mutation CaSR</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">Basse &lt; 10 pg/mL</span></td>
+        <td>Variable</td>
+        <td>Élevée ou normale</td>
+        <td>Mécanisme <strong>extra-parathyroïdien</strong> (osseux, digestif, rénal, tumoral)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Bilan de 2e intention selon résultat mécanistique :</strong><br>
+  — Forme extra-PTH + <strong>hypercalcitriolémie</strong> → ECA, VS, CRP, radio de thorax (sarcoïdose +++), fibroscopie bronchique, LBA, TEP — rechercher granulome, lymphome, infection<br>
+  — Forme extra-PTH + <strong>calcitriol normal</strong> → EPP, immunofixation, vitamine A, TSH, CPK, scanner TAP, scintigraphie osseuse/TEP, PTHrp si hypophosphatémie<br>
+  — Forme parathyroïdienne → écho cervicale + scintigraphie MIBI (uniquement si indication chirurgicale)</div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SECTION 4 : ÉTIOLOGIES                   -->
+<!-- ══════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Étiologies — Arbre diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales étiologies des hypercalcémies selon l'arbre diagnostique (PTH, calciurie, calcitriol)</div>
+  <div class="obj-line">Connaître les caractéristiques diagnostiques de l'hyperparathyroïdie primaire</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mécanisme</th>
+      <th>PTH</th>
+      <th>Calciurie</th>
+      <th>Calcitriol</th>
+      <th>Principales étiologies</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><span class="badge badge-blue">Parathyroïdien</span></td>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><span class="badge badge-amber">N ou ↑</span></td>
+      <td>↑ (hypercalciurie)</td>
+      <td>↑</td>
+      <td><strong>HPT primaire +++</strong> : adénome (une glande) &gt;&gt;&gt; hyperplasie (NEM1/2a) &gt; carcinome parathyroïdien (exceptionnel)</td>
+    </tr>
+    <tr>
+      <td>↓ (hypocalciurie)</td>
+      <td>N</td>
+      <td>Hypercalcémie hypocalciurique familiale bénigne (HHF) — mutation perte de fonction du CaSR — ne pas opérer</td>
+    </tr>
+    <tr>
+      <td style="vertical-align:middle; text-align:center;"><span class="badge badge-amber">↑↑</span></td>
+      <td>Variable</td>
+      <td>Variable</td>
+      <td>HPT tertiaire (IRC → hyperplasie secondaire → autonomisation — souvent révélée après transplantation rénale)</td>
+    </tr>
+    <tr>
+      <td rowspan="4" style="vertical-align:middle; text-align:center;"><span class="badge badge-red">Extra-parathyroïdien</span></td>
+      <td rowspan="4" style="vertical-align:middle; text-align:center;"><span class="badge badge-red">↓↓</span></td>
+      <td>↑↑ très élevée</td>
+      <td>N</td>
+      <td><strong>Formes osseuses :</strong> métastases (sein, poumon, rein, thyroïde, testicule), myélome multiple, lymphome, hyperthyroïdie, intoxication vit A / acide rétinoïque, immobilisation prolongée</td>
+    </tr>
+    <tr>
+      <td>↑</td>
+      <td>↑↑</td>
+      <td><strong>Formes digestives — calcitriol ectopique :</strong> sarcoïdose +++, tuberculose, lymphome hodgkinien/non hodgkinien, acromégalie<br>+ intox vit D native (Sterogyl, Dedrogyl) ou active (Rocaltrol, Un Alfa)</td>
+    </tr>
+    <tr>
+      <td>N ou ↓</td>
+      <td>N</td>
+      <td><strong>Formes rénales :</strong> diurétiques thiazidiques (calciurie basse)</td>
+    </tr>
+    <tr>
+      <td>↑</td>
+      <td>N (pas d'↑ calcitriol)</td>
+      <td><strong>Hypercalcémie humorale maligne (PTHrp) :</strong> carcinome à petites cellules +++ — syndrome paranéoplasique — tableau similaire HPT primaire (hypophosphatémie) mais PTH basse</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card card-teal" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Hyperparathyroïdie primaire — Étiologie à connaître +++
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Profil et nature de la lésion</div>
+      <ul class="lst">
+        <li>Femme &gt; 40 ans +++</li>
+        <li><strong>Adénome</strong> d'une des 4 glandes parathyroïdes +++</li>
+        <li>Hyperplasie des 4 glandes (formes génétiques — NEM1, NEM2a, HRPT2)</li>
+        <li>Carcinome parathyroïdien (exceptionnel — hypercalcémie majeure)</li>
+        <li><strong>Diagnostic biologique +++</strong> (pas clinique)</li>
+      </ul>
+      <div style="font-size:.75rem;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin:10px 0 6px;">Bilan morphologique (si indication chirurgicale)</div>
+      <ul class="lst">
+        <li>Écho cervicale + scintigraphie MIBI (1ère intention)</li>
+        <li>TEP Choline si discordance ou examens non contributifs</li>
+        <li>Utiles uniquement pour la localisation pré-opératoire</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.75rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Complications chroniques</div>
+      <ul class="lst">
+        <li><strong>Rénales :</strong> lithiase phosphocalcique, néphrocalcinose → IRC</li>
+        <li><strong>Osseuses :</strong> ostéoporose (perte osseuse chronique par résorption)</li>
+      </ul>
+      <div style="font-size:.75rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin:10px 0 6px;">Biologie typique</div>
+      <div class="kv-row"><span class="kv-key">PTH</span><span class="kv-val" style="color:var(--amber);">Normale ou ↑</span></div>
+      <div class="kv-row"><span class="kv-key">Phosphatémie</span><span class="kv-val" style="color:var(--red);">Basse &lt; 0,84 mmol/L</span></div>
+      <div class="kv-row"><span class="kv-key">Calcitriol</span><span class="kv-val">Élevé</span></div>
+      <div class="kv-row"><span class="kv-key">Calciurie 24h</span><span class="kv-val">Élevée</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- SECTION 5 : TRAITEMENT URGENCE           -->
+<!-- ══════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement des hypercalcémies sévères
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes du traitement symptomatique de la crise aiguë hypercalcémique</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Crise aiguë hypercalcémique = Ca corrigé &gt; 3,5 mmol/L = URGENCE THÉRAPEUTIQUE</strong><br>Traitement symptomatique d'abord, puis traitement étiologique secondairement.</div>
+</div>
+
+<ul class="steps">
+  <li>
+    <div class="step-num step-num-red">1</div>
+    <div>
+      <div class="step-title">NaCl 0,9% IV — traitement de 1ère ligne</div>
+      <div class="step-content">Correction de la déshydratation extracellulaire + effet hypercalciuriant par expansion volémique</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num step-num-red">2</div>
+    <div>
+      <div class="step-title">Bisphosphonate injectable (anti-résorptif osseux)</div>
+      <div class="step-content">Dose adaptée à la sévérité de l'hypercalcémie et à la fonction rénale. Participation osseuse fréquente dans la majorité des causes</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num step-num-red">3</div>
+    <div>
+      <div class="step-title">Arrêt des traitements inducteurs</div>
+      <div class="step-content">Calcium oral, vitamine D native et active, diurétiques thiazidiques, lithium, digitaliques</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num" style="background:var(--amber-light);color:var(--amber);">4</div>
+    <div>
+      <div class="step-title">Corticoïdes</div>
+      <div class="step-content">Si hypercalcitriolémie (granulomatose : sarcoïdose, tuberculose, lymphome) ou myélome</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num" style="background:var(--purple-light);color:var(--purple);">5</div>
+    <div>
+      <div class="step-title">Dialyse avec bain de dialyse pauvre en calcium</div>
+      <div class="step-content">En dernier recours si les traitements préalables sont insuffisants</div>
+    </div>
+  </li>
+  <li>
+    <div class="step-num" style="background:var(--teal-light);color:var(--teal);">+</div>
+    <div>
+      <div class="step-title">Traitement étiologique (secondaire)</div>
+      <div class="step-content">Exérèse adénome parathyroïdien, traitement du cancer, traitement endocrinien, remobilisation du patient</div>
+    </div>
+  </li>
+</ul>
+
+<hr>
+
+<!-- ══════════════════════════════════════ -->
+<!-- SECTION SYNTHÈSE                      -->
+<!-- ══════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — Fausse hypercalcémie :</strong> hyperalbuminémie → Ca total artificiellement élevé. Toujours corriger la calcémie (formule) ou mesurer le Ca ionisé avant de conclure.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — PTHrp :</strong> tableau identique à HPT primaire (hypophosphatémie) mais <strong>PTH basse</strong>. Le PTHrp est dosé si hypophosphatémie + PTH basse (carcinome petites cellules +++)</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — HHF bénigne :</strong> mutation perte de fonction du CaSR → calciurie basse + PTH normale. <strong>Ne pas opérer</strong> (ni HPT primaire ni adénome) — traitement chirurgical contre-indiqué.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — HPT tertiaire :</strong> IRC → hyperparathyroïdie secondaire (hypocalcémie) → autonomisation progressive des glandes → hypercalcémie. Souvent démasquée après transplantation rénale.</div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Check-list ECNi — À ne pas rater
+  </div>
+  <div class="grid2">
+    <ul class="lst">
+      <li><strong>Seuil hypercalcémie :</strong> Ca total &gt; 2,60 mmol/L ou Ca ionisé &gt; 1,30 mmol/L</li>
+      <li><strong>Formule corrigée :</strong> Ca + (40 − albumine) × 0,025</li>
+      <li><strong>ECG systématique</strong> à toute découverte d'hypercalcémie</li>
+      <li><strong>PTH = pivot</strong> du diagnostic mécanistique</li>
+    </ul>
+    <ul class="lst">
+      <li><strong>HPT primaire :</strong> cause la plus fréquente, diagnostic biologique, femme &gt; 40 ans, adénome +++</li>
+      <li><strong>Sarcoïdose :</strong> cause granulomateuse type → calcitriol ectopique → hypercalcitriolémie</li>
+      <li><strong>Urgence : Ca corrigé &gt; 3,5 mmol/L</strong> → NaCl 0,9% IV + bisphosphonate injectable</li>
+      <li><strong>Thiazidiques :</strong> calciurie basse (forme rénale) — distingue des autres causes avec PTH basse</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
