@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 39 – Assistance médicale à la procréation</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;max-width:60%;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red); }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-blue{background:var(--blue-light);color:var(--blue);}
+  .step-num-teal{background:var(--teal-light);color:var(--teal);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red  {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber{border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal {border-left:4px solid var(--teal); padding-left:12px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 39</div>
+  <h1>Assistance médicale à la procréation</h1>
+  <div class="header-sub">Principaux aspects biologiques, médicaux et éthiques</div>
+  <div class="header-tags">
+    <span class="htag">Gynécologie</span>
+    <span class="htag">Fertilité</span>
+    <span class="htag">Loi bioéthique 2021</span>
+    <span class="htag">FIV / ICSI / IIU</span>
+    <span class="htag">Préservation de la fertilité</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Ce chapitre couvre l'arsenal complet de l'AMP : définitions légales, techniques (IIU, FIV-c, ICSI, congélation), préservation de la fertilité (oncofertilité et social freezing), indications selon le type d'infertilité, bilan pré-AMP, cadre juridique issu de la loi de bioéthique 2021 (élargie aux couples de femmes et femmes seules) et complications — notamment le syndrome d'hyperstimulation ovarienne.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS & ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions &amp; Épidémiologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir l'AMP et distinguer ses deux modalités (intraconjugale vs tiers donneur)</div>
+  <div class="obj-line">Définir la préservation de la fertilité et distinguer indications médicales et non médicales</div>
+  <div class="obj-line">Connaître les chiffres clés du recours à l'AMP en France (Agence de la Biomédecine 2021)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      AMP — Définition
+    </div>
+    <ul class="lst">
+      <li>Pratiques cliniques et biologiques permettant la conception in vitro, le transfert d'embryon, l'IIU et la préservation de la fertilité</li>
+      <li>Remédie à l'infertilité ou évite la transmission d'une maladie grave à l'enfant ou au couple</li>
+      <li><strong>Bénéficiaires (loi 2021) :</strong> couple homme/femme, couple de 2 femmes, femme non mariée</li>
+    </ul>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-purple">Intraconjugale</span>
+      <span class="pill pill-blue">Avec tiers donneur</span>
+      <span class="pill pill-teal">Double don possible (2021)</span>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Préservation de la fertilité
+    </div>
+    <ul class="lst">
+      <li>Recueil et conservation de gamètes ou tissus germinaux avant altération prévisible de la fertilité</li>
+      <li><strong>Indications médicales :</strong> traitements gonadotoxiques (chimio, radio, chirurgie), pathologies à risque d'insuffisance ovarienne prématurée</li>
+      <li><strong>Indications non médicales (social freezing) :</strong> ovocytes ou spermatozoïdes uniquement — pas d'embryons ni de cortex ovarien</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Aucune technique ne garantit une grossesse — à mentionner systématiquement au patient
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie — France 2021 (Agence de la Biomédecine)
+  </div>
+  <div class="kv-row"><span class="kv-key">Couples consultant pour infertilité</span><span class="kv-val">1 couple sur 4 à 6</span></div>
+  <div class="kv-row"><span class="kv-key">Tentatives IIU</span><span class="kv-val">> 48 000 / an</span></div>
+  <div class="kv-row"><span class="kv-key">Ponctions ovocytaires (FIV ± ICSI)</span><span class="kv-val">> 62 000 / an</span></div>
+  <div class="kv-row"><span class="kv-key">Naissances après AMP</span><span class="kv-val">> 28 000 / an</span></div>
+  <div class="kv-row"><span class="kv-key">Part des naissances totales</span><span class="kv-val">3,7 %</span></div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : TECHNIQUES D'AMP -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Techniques d'AMP
+</div>
+<div class="obj-list">
+  <div class="obj-line">Maîtriser les étapes de l'IIU (stimulation, monitorage, déclenchement, insémination)</div>
+  <div class="obj-line">Maîtriser les étapes de la FIV-c et de l'ICSI (hyperstimulation contrôlée, ponction, fécondation, culture, transfert)</div>
+  <div class="obj-line">Connaître les modalités de congélation embryonnaire et leurs implications réglementaires</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    IIU — Insémination Intra-Utérine
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num step-num-blue">1</div>
+      <div><div class="step-title">Stimulation folliculaire</div><div class="step-content">Gonadotrophines (FSH ± LH) → 1 à 3 follicules ; ou induction de l'ovulation si anovulation/dysovulation</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-blue">2</div>
+      <div><div class="step-title">Monitorage de l'ovulation</div><div class="step-content">Échographies pelviennes + dosages hormonaux (E2, LH, P4)</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-blue">3</div>
+      <div><div class="step-title">Déclenchement</div><div class="step-content">Injection hCG recombinante → ovulation 36 h après</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-blue">4</div>
+      <div><div class="step-title">Recueil et préparation spermatique</div><div class="step-content">Masturbation J+2 du déclenchement ; sélection des spermatozoïdes mobiles (test de migration-survie)</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-blue">5</div>
+      <div><div class="step-title">Insémination intra-utérine</div><div class="step-content">Dépôt des spermatozoïdes sélectionnés dans la cavité utérine via cathéter — J+2 du déclenchement</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    FIV-c / ICSI — Fécondation In Vitro
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Hyperstimulation ovarienne contrôlée</div><div class="step-content">Fortes doses FSH ± LH SC + blocage de l'axe HH par agonistes ou antagonistes GnRH (évite pic LH prématuré)</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Monitorage</div><div class="step-content">Écho pelvienne (follicules, endomètre) + bilan hormonal (E2, LH, P4) — optimise déclenchement, détecte risque de SHO</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Déclenchement</div><div class="step-content">hCG recombinante ou agoniste GnRH dès que plusieurs follicules &gt; 16 mm</div></div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div><div class="step-title">Ponction folliculaire</div><div class="step-content">36 h après déclenchement — bloc opératoire, anesthésie locale ou générale, voie vaginale échoguidée → complexes cumulo-ovocytaires</div></div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div><div class="step-title">Préparation spermatique</div><div class="step-content">Éjaculat frais ou congelé (conjoint ou donneur) ; ou extraction chirurgicale (biopsie testiculaire, ponction épididymaire) si azoospermie ; ou urines alcalinisées si éjaculation rétrograde</div></div>
+    </li>
+    <li>
+      <div class="step-num">6</div>
+      <div><div class="step-title">Fécondation</div><div class="step-content"><strong>FIV-c :</strong> mise en contact ovocytes + spermatozoïdes — <strong>ICSI :</strong> micro-injection d'un spermatozoïde dans l'ovocyte (ICSI obligatoire si ovocytes congelés)</div></div>
+    </li>
+    <li>
+      <div class="step-num">7</div>
+      <div><div class="step-title">Culture et transfert embryonnaire</div><div class="step-content">1 ou 2 embryons transférés J2–J6 ; test de grossesse (β-hCG) J+14 après ponction</div></div>
+    </li>
+    <li>
+      <div class="step-num">8</div>
+      <div><div class="step-title">Congélation des embryons surnuméraires</div><div class="step-content">Cryoprotecteurs + azote liquide –196°C — embryons appartiennent au couple (≠ ovocytes = propriété de la femme seule)</div></div>
+    </li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    DPI (diagnostic pré-implantatoire) possible dans centres agréés — indication : maladie génétique ou chromosomique grave
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : PRÉSERVATION DE LA FERTILITÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Techniques de préservation de la fertilité
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les techniques de préservation féminine selon le statut pubertaire et le contexte (stimulation, maturation in vitro, congélation de cortex)</div>
+  <div class="obj-line">Connaître les techniques de préservation masculine selon le statut pubertaire (sperme éjaculé, tissu testiculaire)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Préservation féminine
+    </div>
+    <span class="phase phase-prod">Pubère / adulte</span>
+    <table class="table-teal" style="margin-top:6px;">
+      <tr><th>Technique</th><th>Points clés</th></tr>
+      <tr>
+        <td><strong>Congélation ovocytes matures</strong> (après stimulation)</td>
+        <td>~ 2 semaines requises ; contre-indiquée si cancer hormono-dépendant (pic estradiol) ; ICSI obligatoire lors de l'utilisation</td>
+      </tr>
+      <tr>
+        <td><strong>Congélation ovocytes sans stimulation</strong> (maturation in vitro — MIV)</td>
+        <td>Ponction follicules antraux immatures → maturation 24–48 h au lab ; réalisable en urgence quelle que soit la phase du cycle</td>
+      </tr>
+      <tr>
+        <td><strong>Congélation embryons</strong></td>
+        <td>Couple uniquement ; ne peut être réutilisé qu'avec le même conjoint vivant</td>
+      </tr>
+      <tr>
+        <td><strong>Congélation cortex ovarien</strong></td>
+        <td>Cœlioscopie ; autogreffe (ovaire restant ou péritoine) ; restaure la sécrétion hormonale ; risque de réintroduction de cellules tumorales en cas de pathologie maligne</td>
+      </tr>
+    </table>
+    <span class="phase phase-sev" style="margin-top:10px;display:inline-block;">Prépubère</span>
+    <p style="font-size:.83rem;margin-top:4px;"><strong>Congélation de cortex ovarien uniquement</strong></p>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Agonistes GnRH (mise au repos ovarien) : possible mais efficacité non prouvée<br>Transposition ovarienne : indiquée avant radiothérapie pelvienne</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Préservation masculine
+    </div>
+    <span class="phase phase-prod">Pubère / adulte</span>
+    <p style="font-size:.84rem;margin-top:6px;"><strong>Congélation de spermatozoïdes éjaculés</strong> — technique de référence (masturbation au laboratoire)</p>
+    <span class="phase phase-sev" style="margin-top:12px;display:inline-block;">Prépubère</span>
+    <p style="font-size:.84rem;margin-top:6px;"><strong>Congélation de tissu testiculaire</strong> (cellules souches germinales)</p>
+    <p style="font-size:.82rem;margin-top:4px;color:var(--muted);">Utilisation ultérieure encore du domaine de la recherche (spermatogenèse in vitro, greffe, transplantation cellulaire)</p>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Tous les échantillons biologiques sont conservés en azote liquide à –196°C (paillettes avec cryoprotecteur)
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : INDICATIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Indications
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier les principales causes d'infertilité orientant vers l'AMP</div>
+  <div class="obj-line">Choisir entre IIU, FIV-c et ICSI en fonction du type d'infertilité</div>
+  <div class="obj-line">Connaître les indications de dons de gamètes et d'embryons</div>
+  <div class="obj-line">Connaître les indications médicales et non médicales de préservation de la fertilité</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Grandes indications du recours à l'AMP
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Infertilité du couple (item 38)</span>
+    <span class="pill pill-red">Infertilité idiopathique</span>
+    <span class="pill pill-amber">Maladie génétique grave (DPI)</span>
+    <span class="pill pill-amber">Risque transmission virale (VIH)</span>
+    <span class="pill pill-blue">Projet parental couple de femmes / femme seule</span>
+    <span class="pill pill-teal">Préservation de la fertilité (médicale ou non)</span>
+  </div>
+</div>
+
+<table class="table-blue">
+  <tr>
+    <th>Technique</th>
+    <th>IAC — sperme du conjoint</th>
+    <th>IAD — sperme donneur</th>
+  </tr>
+  <tr>
+    <td><strong>IIU</strong></td>
+    <td>
+      <ul class="lst">
+        <li>Infertilité inexpliquée</li>
+        <li>Infertilité cervicale (glaire, col)</li>
+        <li>Altérations spermatiques modérées</li>
+        <li>Troubles sexuels balistiques (dysfonction érectile, éjaculation anté-portas)</li>
+        <li>Sperme congelé avant traitement gonadotoxique</li>
+        <li>Contexte à risque viral (hépatites B/C, VIH)</li>
+      </ul>
+    </td>
+    <td>
+      <ul class="lst">
+        <li>Azoospermie obstructive ou non obstructive (avec ou sans échec d'extraction chirurgicale)</li>
+        <li>Échecs répétés d'ICSI d'indication masculine</li>
+        <li>Pathologie génétique / cytogénétique masculine</li>
+        <li>Couple de femmes, femme non mariée</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Indications FIV-c / ICSI
+    </div>
+    <div class="kv-row"><span class="kv-key">FIV-c</span><span class="kv-val" style="max-width:65%;font-size:.8rem;">Infertilité tubaire, endométriose, échecs IIU / inductions simples</span></div>
+    <div class="kv-row"><span class="kv-key">ICSI</span><span class="kv-val" style="max-width:65%;font-size:.8rem;">Anomalies spermatiques sévères, sperme extrait chirurgicalement ou des urines, échec FIV-c</span></div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <strong>Piège :</strong> ovocytes congelés → ICSI obligatoire (FIV-c impossible)
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Dons de gamètes / embryons
+    </div>
+    <table class="table-teal">
+      <tr><th>Indication</th><th>Technique</th></tr>
+      <tr><td>IOP, azoospermie sévère irréversible</td><td>Don ovocytes / spermatozoïdes</td></tr>
+      <tr><td>Maladie génétique grave</td><td>Don gamètes ou embryons</td></tr>
+      <tr><td>Double infertilité sévère</td><td>Accueil d'embryons (double don)</td></tr>
+      <tr><td>Couple de femmes / femme seule</td><td>IAD ou don d'ovocytes</td></tr>
+      <tr><td>Échecs AMP intraconjugale</td><td>Don gamètes selon bilan</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card" style="margin-top:0;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Indications médicales de préservation de la fertilité
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--teal);margin-bottom:6px;">Féminine</div>
+      <ul class="lst">
+        <li><strong>Hémato-oncologie :</strong> leucémie, Hodgkin, LNH, cancer du sein, autres</li>
+        <li><strong>Non-cancéreux gonadotoxiques :</strong> pathologies hémato (greffe de moelle), pathologies systémiques sous chimio</li>
+        <li><strong>Chirurgie ovarienne :</strong> tumeurs bénignes bilatérales, endométriose sévère / récurrente, torsion récurrente</li>
+        <li><strong>Risque IOP :</strong> syndrome de Turner, prémutation FMR1</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Masculine (pubère / adulte)</div>
+      <ul class="lst">
+        <li>Chimio / radio gonadotoxique (champ à proximité ou sur les testicules)</li>
+        <li>Chirurgie testiculaire (cancer, torsion)</li>
+        <li>Chirurgie voies excrétrices (vasectomie, prostatectomie radicale → anéjaculation / éjaculation rétrograde)</li>
+        <li>Anomalies évolutives : oligospermie sévère, Klinefelter, micro-délétion AZF</li>
+      </ul>
+      <div style="font-size:.82rem;font-weight:700;color:var(--blue);margin:8px 0 4px;">Masculine (prépubère)</div>
+      <ul class="lst">
+        <li>Avant allogreffe CSH (leucémies, drépanocytose, aplasie médullaire) ou autogreffe CSH (lymphomes, tumeurs SNC)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : BILAN PRÉ-AMP -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan pré-AMP
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître le bilan minimal clinique, biologique et radiologique avant toute technique d'AMP</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan minimal obligatoire avant AMP
+  </div>
+  <table class="table-blue">
+    <tr><th>Domaine</th><th>Examens</th></tr>
+    <tr><td><strong>Clinique</strong></td><td>Examen clinique des deux membres du couple — anamnèse complète des facteurs de risque</td></tr>
+    <tr><td><strong>Exploration ovarienne</strong></td><td>Bilan du cycle et statut ovarien (AMH, CFA, FSH basale)</td></tr>
+    <tr><td><strong>Exploration utéro-tubaire</strong></td><td>Selon indication (hystérosalpingographie, hystéroscopie, échographie pelvienne)</td></tr>
+    <tr><td><strong>Sperme</strong></td><td>Spermogramme + spermocytogramme + spermoculture + <strong>test de migration-survie</strong> (choisit la technique AMP adaptée)</td></tr>
+    <tr><td><strong>Imagerie masculine</strong></td><td>Échographie testiculaire ± voies excrétrices si altérations spermatiques</td></tr>
+    <tr>
+      <td><strong>Tests de sécurité sanitaire</strong></td>
+      <td>Sérologies VHB, VHC, VIH, syphilis — pour les deux membres du couple ou la femme non mariée seule<br><span style="color:var(--muted);font-size:.8rem;">Contrôle VHB inutile si immunité connue et documentée</span></td>
+    </tr>
+    <tr><td><strong>Bilan pré-conceptionnel</strong></td><td>Sérologies rubéole, toxoplasmose ; TSH ; exploration métabolique si besoin</td></tr>
+    <tr><td><strong>Psycho-social</strong></td><td>Entretien psychologique proposé à tous ; <strong>systématiquement proposé</strong> si recours à un don de gamètes ou d'embryons</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : CADRE LÉGAL -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Cadre légal &amp; Remboursement
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les conditions d'accès à l'AMP depuis la loi de bioéthique d'août 2021 (bénéficiaires, âges limites)</div>
+  <div class="obj-line">Connaître le remboursement par l'Assurance Maladie et les principes éthiques du don de gamètes</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Limites d'âge — Loi 2021
+    </div>
+    <table>
+      <tr><th>Acte</th><th>Femme</th><th>Conjoint(e)</th></tr>
+      <tr><td>Prélèvement gamètes (FIV / ICSI)</td><td style="vertical-align:middle; text-align:center;">&lt; 43 ans</td><td style="vertical-align:middle; text-align:center;">&lt; 60 ans</td></tr>
+      <tr><td>IIU / transfert embryon / utilisation de gamètes</td><td style="vertical-align:middle; text-align:center;">&lt; 45 ans (porteuse)</td><td style="vertical-align:middle; text-align:center;">&lt; 60 ans</td></tr>
+    </table>
+    <div style="font-size:.82rem;font-weight:700;margin:10px 0 4px;">Conservation non médicale (social freezing)</div>
+    <div class="kv-row"><span class="kv-key">Femme</span><span class="kv-val">29 – 37 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Homme</span><span class="kv-val">29 – 45 ans</span></div>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Consentement écrit obligatoire des deux membres du couple (ou femme non mariée) avant tout acte d'AMP
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Remboursement Assurance Maladie
+    </div>
+    <div class="kv-row"><span class="kv-key">Exploration de la fertilité</span><span class="kv-val">100 %</span></div>
+    <div class="kv-row"><span class="kv-key">Traitements lors du parcours AMP</span><span class="kv-val">100 %</span></div>
+    <div class="kv-row"><span class="kv-key">IIU</span><span class="kv-val">6 tentatives</span></div>
+    <div class="kv-row"><span class="kv-key">FIV-c / ICSI</span><span class="kv-val">4 tentatives</span></div>
+    <div class="kv-row"><span class="kv-key">Préservation de la fertilité médicale</span><span class="kv-val">100 %</span></div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Compteur remis à zéro après une grossesse obtenue en AMP.<br>Embryons congelés à utiliser avant toute nouvelle tentative.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Principes du don de gamètes — CECOS
+  </div>
+  <div class="grid3">
+    <div class="bl-teal">
+      <div style="font-size:.83rem;font-weight:700;">Volontariat</div>
+      <div style="font-size:.81rem;color:var(--muted);margin-top:3px;">Consentement écrit libre ; donneurs célibataires ou en couple ; sans obligation d'avoir des enfants</div>
+    </div>
+    <div class="bl-teal">
+      <div style="font-size:.83rem;font-weight:700;">Gratuité</div>
+      <div style="font-size:.81rem;color:var(--muted);margin-top:3px;">Toute rémunération interdite ; frais occasionnés remboursés</div>
+    </div>
+    <div class="bl-teal">
+      <div style="font-size:.83rem;font-weight:700;">Anonymat levable (2021)</div>
+      <div style="font-size:.81rem;color:var(--muted);margin-top:3px;">L'enfant issu d'un don peut accéder à l'identité du donneur à sa majorité s'il le souhaite</div>
+    </div>
+  </div>
+  <div class="kv-row" style="margin-top:10px;"><span class="kv-key">Limite de naissances par donneur</span><span class="kv-val">10 enfants maximum</span></div>
+  <div class="kv-row"><span class="kv-key">Embryons conservés — consultation annuelle</span><span class="kv-val">Poursuite / destruction / cession recherche ou couple</span></div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : COMPLICATIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier et prendre en charge le syndrome d'hyperstimulation ovarienne (SHO) — complication principale</div>
+  <div class="obj-line">Connaître les autres complications rares : torsion d'annexe, complications de la ponction, risques gravidiques et à long terme</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Syndrome d'hyperstimulation ovarienne (SHO) — complication principale
+  </div>
+  <table class="table-red">
+    <tr><th>Aspect</th><th>Détail</th></tr>
+    <tr><td><strong>Mécanisme</strong></td><td>Réponse ovarienne excessive → 3ème secteur (ascite ± épanchement pleural), prise de poids</td></tr>
+    <tr><td><strong>Clinique</strong></td><td>Douleurs pelviennes, ballonnement, distension abdominale</td></tr>
+    <tr><td><strong>Complication vitale</strong></td><td>Accident thromboembolique artériel ou veineux (phlébite, EP) — suspecté devant dyspnée / douleur thoracique post-ponction</td></tr>
+    <tr><td><strong>Traitement</strong></td><td><strong>HBPM en thromboprophylaxie</strong> — maintenue au 1er trimestre si grossesse survient</td></tr>
+    <tr><td><strong>Formes graves</strong></td><td>Hospitalisation en réanimation</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Stimulation / ponction
+    </div>
+    <ul class="lst">
+      <li><strong>Torsion d'annexe</strong> : urgence chirurgicale — liée à l'augmentation du volume ovarien ; douleur pelvienne brutale, latéralisée, avec défense</li>
+      <li><strong>Risque allergique</strong> médicamenteux : exceptionnel</li>
+      <li><strong>Complications de la ponction</strong> (rares) : hémopéritoine, infections pelviennes (abcès tubo-ovarien), lésions digestives ou urinaires</li>
+      <li><strong>Risques anesthésiques</strong> : communs à tout type d'anesthésie (locale, sédation, générale)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Gravidiques &amp; long terme
+    </div>
+    <ul class="lst">
+      <li>FCS et GEU : fréquence identique aux grossesses spontanées</li>
+      <li>Risque TVP gravidique légèrement augmenté après FIV-c / ICSI</li>
+      <li><strong>Grossesses multiples</strong> (transfert 2 embryons, réponse pluri-folliculaire IIU) → prématurité, petit poids, mort périnatale augmentés vs grossesse unique</li>
+      <li>Transmission éventuelle d'une anomalie génétique sous-jacente à l'infertilité</li>
+      <li>Légère augmentation des malformations congénitales (musculo-squelettique, cardiaque, urogénital) — part liée à l'AMP vs infertilité non résolue</li>
+      <li>Risque carcinologique maternel : données très rassurantes</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse — Points tombables à l'ECNi
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Loi 2021 : AMP ouverte aux couples de 2 femmes et femmes non mariées — âges limites clés : prélèvement gamètes &lt; 43 ans (femme), &lt; 60 ans (conjoint) ; IIU / transfert &lt; 45 ans</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Ovocytes congelés → ICSI obligatoire. Embryon = propriété du couple ; à utiliser avant toute nouvelle tentative</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Anonymat du don levable à la majorité de l'enfant depuis 2021 ; maximum 10 naissances par donneur ; réalisé en CECOS</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> SHO → HBPM systématique, maintenue au 1er trimestre en cas de grossesse</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> torsion d'annexe post-stimulation = urgence chirurgicale (douleur pelvienne brutale, latéralisée, défense)</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> cancer hormono-dépendant → stimulation ovarienne contre-indiquée → préférer MIV ou congélation de cortex ovarien</div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Prépubère fille : congélation de cortex ovarien uniquement — garçon : tissu testiculaire (utilisation future encore en recherche)</div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>AMP en contexte viral (VIH, hépatites) possible dans centres agréés — tests de sécurité sanitaire obligatoires avant tout acte</div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

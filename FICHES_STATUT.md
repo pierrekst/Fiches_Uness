@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-17. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
 
-**Avancement : 147 / 367 items (40.1%)**
+**Avancement : 151 / 367 items (41.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -46,7 +46,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 36 | [ ] | Contraception | — |
 | 37 | [ ] | Interruption volontaire de grossesse | — |
 | 38 | [ ] | Infertilité du couple | — |
-| 39 | [ ] | Assistance médicale à la procréation | — |
+| 39 | [x] | Assistance médicale à la procréation | 39_AMP.html |
 | 40 | [ ] | Algies pelviennes chez la femme | — |
 | 41 | [ ] | Endométriose | — |
 | 42 | [ ] | Aménorrhée | — |
@@ -135,11 +135,11 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 125 | [x] | Troubles de la miction et incontinence urinaire de l adulte et du suje… | 125_troubles_miction_incontinence.html |
 | 126 | [x] | Trouble de l érection | 126_trouble_erection.html |
 | 127 | [x] | Hypertrophie bénigne de la prostate | 127_Hypertrophie_benigne_prostate_v2.html |
-| 128 | [ ] | Ostéopathies fragilisantes | — |
-| 129 | [ ] | Arthrose | — |
+| 128 | [x] | Ostéopathies fragilisantes | 128_Osteopathies_fragilisantes.html |
+| 129 | [x] | Arthrose | 129_Arthrose.html |
 | 130 | [ ] | La personne âgée malade | — |
 | 131 | [x] | Troubles de la marche et de l équilibre | 131_marche_equilibre.html |
-| 132 | [ ] | Troubles cognitifs du sujet âgé | — |
+| 132 | [x] | Troubles cognitifs du sujet âgé | 132_Troubles_cognitifs.html |
 | 133 | [ ] | Autonomie et dépendance chez le sujet âgé | — |
 | 134 | [ ] | Bases neurophysiologiques | — |
 | 135 | [ ] | Thérapeutiques antalgiques | — |

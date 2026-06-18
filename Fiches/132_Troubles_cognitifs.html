@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 132 — Troubles cognitifs du sujet âgé</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 132</div>
+  <h1>Troubles cognitifs du sujet âgé</h1>
+  <div class="header-sub">Voir aussi item 108 — HSD chronique</div>
+  <div class="header-tags">
+    <span class="htag">Gériatrie · Neurologie</span>
+    <span class="htag">TNC mineur / majeur</span>
+    <span class="htag">Alzheimer</span>
+    <span class="htag">DSM-5</span>
+    <span class="htag">SPCD</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Cet item couvre l'intégralité du spectre des troubles neuro-cognitifs (TNC) — de la définition DSM-5 à la prise en charge médicale et psycho-sociale. Il faut distinguer les 4 grandes étiologies dégénératives (Alzheimer, vasculaire, corps de Lewy, DFT), identifier les <strong>causes curables à ne pas manquer</strong>, maîtriser les outils de repérage et le bilan de débrouillage, et conduire une prise en charge globale incluant l'aidant. Les symptômes psycho-comportementaux (SPCD) et la gestion de l'agitation sont des points fréquemment testés.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 1 : DÉFINITIONS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions — DSM-5
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir un trouble neuro-cognitif mineur et majeur selon les critères DSM-5</div>
+  <div class="obj-line">Distinguer les deux niveaux de sévérité par le retentissement sur l'autonomie (IADL)</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Critère DSM-5</th>
+      <th>TNC Mineur (léger)</th>
+      <th>TNC Majeur (démence)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>A — Déclin</strong></td>
+      <td>Modéré (plainte subjective ou test)</td>
+      <td>Significatif (plainte + test objectivé)</td>
+    </tr>
+    <tr>
+      <td><strong>B — Autonomie IADL</strong></td>
+      <td><strong>Préservée</strong> — mais effort compensateur, stratégies d'ajustement</td>
+      <td><strong>Retentissement</strong> — assistance nécessaire (payer factures, médicaments…)</td>
+    </tr>
+    <tr>
+      <td><strong>C — Délirium</strong></td>
+      <td colspan="2" style="vertical-align:middle; text-align:center;">Déficits ne surviennent PAS uniquement dans un contexte confusionnel</td>
+    </tr>
+    <tr>
+      <td><strong>D — Autre pathologie mentale</strong></td>
+      <td colspan="2" style="vertical-align:middle; text-align:center;">Non mieux expliqués par épisode dépressif majeur ou schizophrénie</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pills" style="margin-top:12px;margin-bottom:6px;">
+  <strong style="font-size:.82rem;color:var(--muted);align-self:center;margin-right:4px;">6 domaines cognitifs :</strong>
+  <span class="pill pill-purple">Attention complexe</span>
+  <span class="pill pill-blue">Fonctions exécutives</span>
+  <span class="pill pill-teal">Apprentissage / Mémoire</span>
+  <span class="pill pill-amber">Langage</span>
+  <span class="pill pill-coral">Cognition perceptivo-motrice</span>
+  <span class="pill pill-gray">Cognition sociale</span>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 2 : ÉTIOLOGIES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies des TNC — Classification DSM-5
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les causes principales d'un TNC selon le DSM-5</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple)">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Causes dégénératives
+    </div>
+    <ul class="lst">
+      <li><strong>Maladie d'Alzheimer</strong> — 1re cause (60-70 %)</li>
+      <li><strong>Maladie à corps de Lewy</strong> — 3e cause</li>
+      <li><strong>DFT</strong> — dégénérescence fronto-temporale</li>
+      <li>Maladie de Parkinson</li>
+      <li>Maladie de Huntington</li>
+      <li>Maladie à prions</li>
+      <li>Étiologies multiples</li>
+    </ul>
+  </div>
+  <div class="card card-blue" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Autres causes
+    </div>
+    <ul class="lst">
+      <li><strong>Encéphalopathie vasculaire</strong> — 2e cause</li>
+      <li>Traumatisme cérébral</li>
+      <li>Infection VIH</li>
+      <li>Prise de substance</li>
+      <li>Causes potentiellement réversibles<br>(voir section suivante)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 3 : QUATRE GRANDES DÉMENCES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic des 4 grandes démences
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Diagnostiquer une maladie d'Alzheimer : lésions histologiques (plaques amyloïdes, DNF), profil clinique, IRM</div>
+  <div class="obj-line">Diagnostiquer une encéphalopathie vasculaire : types de lésions, évolution en marche d'escaliers, signes focaux</div>
+  <div class="obj-line">Diagnostiquer une maladie à corps de Lewy : 4 critères cardinaux Mc Keith 2017, hypersensibilité aux neuroleptiques</div>
+  <div class="obj-line">Diagnostiquer une DFT : début avant 60 ans, troubles du comportement prédominants, atrophie fronto-temporale antérieure</div>
+</div>
+
+<!-- Alzheimer -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Maladie d'Alzheimer <span class="badge badge-red">1re cause</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Physiopathologie</div>
+      <ul class="lst">
+        <li><strong>Plaques amyloïdes</strong> — dépôts extracellulaires d'Aβ (clivage anormal de l'APP)</li>
+        <li><strong>DNF</strong> — protéine tau hyperphosphorylée, intracellulaire (perturbe les microtubules)</li>
+        <li>Neuroinflammation (astrogliose + microgliose)</li>
+        <li>Perte neuronale progressive</li>
+        <li>Après 75 ans : coexistence fréquente de lésions mixtes (vasculaires, micro-hémorragies)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Présentation clinique</div>
+      <ul class="lst">
+        <li><strong>Mémoire épisodique</strong> — atteinte prédominante (encodage ++)</li>
+        <li>Désorientation temporo-spatiale</li>
+        <li>Début insidieux, progression lente et continue</li>
+        <li>IRM : atrophie hippocampique (coupes coronales T1)</li>
+        <li>LCR si doute : Aβ42 diminué, tau et p-tau augmentés</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Vasculaire -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Encéphalopathie vasculaire <span class="badge badge-blue">2e cause</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Types de lésions</div>
+      <ul class="lst">
+        <li>Infarctus multiples</li>
+        <li>Infarctus multi-lacunaires</li>
+        <li>Leuco-encéphalopathie diffuse</li>
+        <li>Infarctus stratégique (thalamus, gyrus angulaire)</li>
+        <li>Hypoperfusion</li>
+        <li>Angiopathie amyloïde</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Clinique</div>
+      <ul class="lst">
+        <li><strong>Évolution en marches d'escaliers</strong> (évocatrice, non obligatoire)</li>
+        <li>Progressive dans les encéphalopathies diffuses lacunaires</li>
+        <li>Séquelles neurologiques focales : syndrome pyramidal, déficit moteur, HLH</li>
+        <li>Rigidité extra-pyramidale (atteinte des NGC)</li>
+        <li>Troubles hétérogènes : dysexécutif, ralentissement psychomoteur</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Corps de Lewy -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Maladie à corps de Lewy <span class="badge badge-green">3e cause</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">4 critères cardinaux (Mc Keith 2017)</div>
+      <ul class="lst">
+        <li><strong>Syndrome parkinsonien</strong> — akinéto-rigide ++</li>
+        <li><strong>Troubles comportement sommeil paradoxal</strong> — perte hypotonie SP, cauchemars violents (rêve éveillé)</li>
+        <li><strong>Hallucinations visuelles précoces</strong> — récidivantes, élaborées</li>
+        <li><strong>Fluctuations</strong> — variations marquées attention/vigilance</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Signes associés</div>
+      <ul class="lst">
+        <li>Dysautonomie — hypotension orthostatique</li>
+        <li>Hypersomnie, apathie, anxiété-dépression</li>
+        <li>Hyposmie</li>
+        <li>Hallucinations auditives, somesthésiques</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Hypersensibilité aux neuroleptiques — contre-indiqués (aggravation sévère du parkinsonisme, risque vital)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DFT -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Dégénérescence fronto-temporale (DFT)
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Particularités</div>
+      <ul class="lst">
+        <li><strong>Début &lt; 60 ans</strong> (sujet jeune)</li>
+        <li>ATCD familiaux possibles</li>
+        <li>Anomalie métabolisme protéine tau</li>
+        <li>Hétérogène sur le plan génétique et lésionnel</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;">Clinique et IRM</div>
+      <ul class="lst">
+        <li><strong>Troubles du comportement</strong> — désinhibition, apathie, impulsivité, hyperoralité</li>
+        <li>Syndrome dysexécutif</li>
+        <li>Examen neuro normal puis reflexes archaïques, pyramidal, astasie-abasie</li>
+        <li><strong>IRM :</strong> atrophie frontale + temporale antérieure bilatérale</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Tableau comparatif synthèse -->
+<table>
+  <thead>
+    <tr>
+      <th>Étiologie</th>
+      <th>Début / Âge</th>
+      <th>Atteinte cognitive</th>
+      <th>Signe évocateur</th>
+      <th>IRM clé</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Alzheimer</strong></td>
+      <td>Progressif, &gt; 65 ans</td>
+      <td>Mémoire épisodique ++</td>
+      <td>Trouble encodage, désorientation</td>
+      <td>Atrophie hippocampique</td>
+    </tr>
+    <tr>
+      <td><strong>Vasculaire</strong></td>
+      <td>Brutal ou progressif</td>
+      <td>Dysexécutif, hétérogène</td>
+      <td>Signes focaux, marche en escaliers</td>
+      <td>Leucopathie, lacunes (FLAIR)</td>
+    </tr>
+    <tr>
+      <td><strong>Corps de Lewy</strong></td>
+      <td>Progressif</td>
+      <td>Exécutif / attentionnel</td>
+      <td>Hallucinations visuelles, parkinsonisme, fluctuations</td>
+      <td>Souvent peu spécifique</td>
+    </tr>
+    <tr>
+      <td><strong>DFT</strong></td>
+      <td>&lt; 60 ans</td>
+      <td>Mémoire longtemps préservée</td>
+      <td>Désinhibition, apathie, hyperoralité</td>
+      <td>Atrophie fronto-temporale antérieure</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 4 : CAUSES CURABLES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Causes curables — Diagnostics différentiels <span class="badge badge-red" style="margin-left:8px;">À ne pas manquer</span>
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier les causes potentiellement réversibles de TNC : les éliminer avant tout diagnostic de démence dégénérative</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>Pathologies induisant des TNC possiblement/partiellement <strong>réversibles</strong> avec PEC adaptée — toujours recherchées avant de conclure à une démence</div>
+</div>
+
+<div class="grid2">
+  <div class="card" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red)">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Causes structurales / métaboliques
+    </div>
+    <ul class="lst">
+      <li><strong>Hématome sous-dural chronique</strong></li>
+      <li><strong>Hydrocéphalie à pression normale</strong> (triade : démence + marche + incontinence)</li>
+      <li>Tumeur intra-crânienne</li>
+      <li>Intoxication CO (lésions des NGC)</li>
+      <li>Hyponatrémie / hypercalcémie (installation progressive)</li>
+    </ul>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Causes iatrogènes / endocriniennes / infectieuses
+    </div>
+    <ul class="lst">
+      <li><strong>Carences B12 / B9</strong></li>
+      <li>Hypothyroïdie, insuffisance surrénalienne chronique</li>
+      <li><strong>Iatrogénie</strong> : valproate, lithium, anticholinergiques, psychotropes</li>
+      <li>Vascularites, syndromes paranéoplasiques</li>
+      <li>Neurosyphilis (TPHA-VDRL), VIH</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 5 : DÉMARCHE DIAGNOSTIQUE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Démarche diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les 4 outils de repérage et les domaines cognitifs qu'ils évaluent</div>
+  <div class="obj-line">Prescrire le bilan biologique de 1re intention et le bilan orienté par le contexte</div>
+  <div class="obj-line">Interpréter l'IRM devant un TNC : deux objectifs, séquences et signes à connaître</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Outils de repérage
+    </div>
+    <table class="table-blue" style="margin-top:0;">
+      <thead><tr><th>Test</th><th>Domaine évalué</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MMSE</strong></td><td>Cognition globale</td></tr>
+        <tr><td><strong>5 mots de Dubois</strong></td><td>Mémoire / encodage</td></tr>
+        <tr><td><strong>BREF</strong></td><td>Fonctions exécutives</td></tr>
+        <tr><td><strong>Horloge</strong></td><td>Exécutif + visuospatial</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Ces tests seuls ne font pas le diagnostic — ils évaluent la sévérité et orientent l'enquête</div>
+    </div>
+  </div>
+  <div class="card card-teal" style="margin-bottom:0">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal)">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Bilan biologique
+    </div>
+    <div style="font-size:.8rem;font-weight:700;color:var(--teal);margin-bottom:5px;">1re intention</div>
+    <div class="pills" style="margin-bottom:10px;">
+      <span class="pill pill-teal">NFS</span>
+      <span class="pill pill-teal">CRP</span>
+      <span class="pill pill-teal">TSH</span>
+      <span class="pill pill-teal">Ionogramme</span>
+      <span class="pill pill-teal">Calcémie</span>
+      <span class="pill pill-teal">Glycémie</span>
+      <span class="pill pill-teal">Albuminémie</span>
+    </div>
+    <div style="font-size:.8rem;font-weight:700;color:var(--amber);margin-bottom:5px;">Selon contexte</div>
+    <div class="pills" style="margin-bottom:10px;">
+      <span class="pill pill-amber">SGOT / SGPT / γGT</span>
+      <span class="pill pill-amber">TPHA-VDRL</span>
+      <span class="pill pill-amber">HIV</span>
+      <span class="pill pill-amber">B12 / B9</span>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Si évolution rapide ou tableau atypique → PL (biomarqueurs MA, Ac anti-neuronaux, protéine 14-3-3, microbiologie…)</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue" style="margin-top:0;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    IRM cérébrale — obligatoire à la découverte d'un TNC
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Objectif 1</span><span class="kv-val">Éliminer cause curable</span></div>
+      <div class="kv-row"><span class="kv-key">HSD / HPN / tumeur</span><span class="kv-val">Scanner ou IRM</span></div>
+      <div class="kv-row" style="margin-top:6px;"><span class="kv-key">Objectif 2</span><span class="kv-val">Orientation étiologique</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">T1 coronal</span><span class="kv-val">Atrophie hippocampique</span></div>
+      <div class="kv-row"><span class="kv-key">FLAIR</span><span class="kv-val">Lésions vasculaires / leucopathie</span></div>
+      <div class="kv-row"><span class="kv-key">T2*</span><span class="kv-val">Microsaignements</span></div>
+      <div class="kv-row"><span class="kv-key">Diffusion</span><span class="kv-val">Ischémie récente</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 6 : PRISE EN CHARGE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Organiser la prise en charge médicale : ALD 15, annonce, traitements, prévention iatrogénie, aides</div>
+  <div class="obj-line">Mettre en place la prise en charge psycho-sociale : aides à domicile, protection du patient, mesures juridiques, soutien aidants</div>
+  <div class="obj-line">Connaître les SPCD, les évaluer avec le NPI et connaître leurs conséquences</div>
+  <div class="obj-line">Conduire en 6 étapes la démarche devant une agitation/agressivité dans un contexte de TNC</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Prise en charge médicale — Plan de soin
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="lst">
+        <li>Enquête étiologique complète (clinique, neuropsycho, bio, imagerie)</li>
+        <li><strong>Annonce</strong> — par spécialiste, au patient puis avec son autorisation aux proches ; MG impliqué dans processus continu</li>
+        <li><strong>ALD 15</strong></li>
+        <li>Interventions non médicamenteuses</li>
+        <li>Remédiation cognitive (orthophoniste, accueil/HDJ, ESA)</li>
+        <li>Traitements médicamenteux selon AMM</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="lst">
+        <li>PEC comorbidités (anxiodépressif, FRCV)</li>
+        <li><strong>ÉVITER LA IATROGÉNIE</strong></li>
+        <li>Surveillance nutritionnelle (poids ++)</li>
+        <li>Évaluation et prévention du risque de chutes</li>
+        <li>Aides : évaluation APA, AVS, IDE à domicile</li>
+        <li>Information associations (France Alzheimer…) + structures de répit</li>
+        <li>Suivi du patient <em>et</em> de l'aidant</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Prise en charge psycho-sociale
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Protection du patient</div>
+      <ul class="lst">
+        <li>Risques environnementaux (gaz, accidents domestiques)</li>
+        <li>Gestion médicaments (IDE, pilulier)</li>
+        <li>Conduite automobile</li>
+        <li>Gestion administrative et financière</li>
+        <li><strong>Mesures juridiques</strong> : sauvegarde de justice, curatelle, tutelle</li>
+        <li>Gestionnaire de cas si situation complexe (refus soins, isolement)</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.8rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Soutien aux aidants</div>
+      <ul class="lst">
+        <li>Éducation thérapeutique</li>
+        <li>Information CLIC + dispositifs d'appui à la coordination</li>
+        <li>Associations de familles (groupes de parole)</li>
+        <li><strong>Répit</strong> : AVS domicile, accueil de jour, séjour temporaire EHPAD, plateformes de répit</li>
+        <li>Suivi santé physique et psychique de l'aidant</li>
+      </ul>
+      <div style="font-size:.8rem;font-weight:700;color:var(--teal);margin:8px 0 4px;">Thérapies non médicamenteuses</div>
+      <div class="pills">
+        <span class="pill pill-teal">Stimulation mémoire</span>
+        <span class="pill pill-teal">Musicothérapie</span>
+        <span class="pill pill-teal">Arthérapie</span>
+        <span class="pill pill-teal">Activité physique</span>
+        <span class="pill pill-teal">Aromathérapie</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPCD -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Symptômes Psychologiques et Comportementaux des Démences (SPCD)
+  </div>
+  <div class="pills" style="margin-bottom:10px;">
+    <span class="pill pill-amber">Dépression / dysphorie</span>
+    <span class="pill pill-amber">Anxiété</span>
+    <span class="pill pill-amber">Irritabilité</span>
+    <span class="pill pill-amber">Apathie</span>
+    <span class="pill pill-amber">Exaltation / euphorie</span>
+    <span class="pill pill-amber">Désinhibition</span>
+    <span class="pill pill-amber">Idées délirantes</span>
+    <span class="pill pill-amber">Hallucinations</span>
+    <span class="pill pill-amber">Agitation / agressivité</span>
+    <span class="pill pill-amber">Comportements moteurs aberrants</span>
+    <span class="pill pill-amber">Troubles du sommeil</span>
+    <span class="pill pill-amber">Troubles de l'appétit</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>À rechercher à <strong>chaque consultation</strong> (aidants n'en parlent pas spontanément). Évaluer avec le <strong>NPI</strong> (fréquence × sévérité de chaque symptôme).<br>Conséquences : risque de maltraitance, hospitalisation, épuisement aidant, prescription inappropriée</div>
+  </div>
+</div>
+
+<!-- Agitation / agressivité -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Démarche devant agitation / agressivité dans un TNC
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num step-num-red">1</div>
+      <div>
+        <div class="step-title">Éliminer un syndrome confusionnel +++</div>
+        <div class="step-content">Rupture état antérieur ? Troubles vigilance ? — URGENCE DIAGNOSTIQUE</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">2</div>
+      <div>
+        <div class="step-title">Rechercher un facteur déclenchant</div>
+        <div class="step-content"><strong>INFECTION — IATROGÉNIE — RÉTENTION URINAIRE — DOULEUR</strong> — anxiodépressif — modification environnement / intervenants</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Protéger patient et soignant</div>
+        <div class="step-content">Évaluer auto/hétéro-agressivité et dangerosité de l'environnement</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Approches non médicamenteuses en priorité</div>
+        <div class="step-content">Calme, paroles apaisantes, ne pas contredire, activités occupationnelles</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Si danger : traitement médicamenteux transitoire</div>
+        <div class="step-content">BZD à demi-vie courte <em>ou</em> antipsychotiques atypiques — cures courtes 2-3 semaines — surveiller EI (nombreux)</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Réévaluation + éducation thérapeutique aidants</div>
+        <div class="step-content">Pertinence des approches médicamenteuses et non médicamenteuses mises en place</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 7 : POINTS-CLÉS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°1 :</strong> Ne jamais confondre délirium (confusionnel = urgence, fluctuant) et TNC (criterium C du DSM-5 = déficits ne surviennent PAS dans un contexte confusionnel).</div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°2 :</strong> Maladie à corps de Lewy = contre-indication formelle aux neuroleptiques (aggravation sévère du syndrome parkinsonien, risque vital).</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°3 :</strong> DFT avant 60 ans avec troubles du comportement (désinhibition) — la mémoire peut être longtemps préservée, ne pas rassurer à tort.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège n°4 :</strong> Agitation dans un TNC : toujours 1) éliminer confusion, 2) chercher facteur déclenchant (IIRD : Infection, Iatrogénie, Rétention, Douleur) avant tout médicament.</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Clé DSM-5 :</strong> TNC mineur = IADL préservées (mais effort compensateur) ; TNC majeur = retentissement réel sur les IADL. C'est <em>uniquement</em> ça qui distingue les deux.</div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Bilan systématique :</strong> NFS, CRP, TSH, ionogramme + calcémie + glycémie, albuminémie. Objectif : causes curables/aggravantes. Bilan orienté si besoin (B12, B9, sérologies…).</div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

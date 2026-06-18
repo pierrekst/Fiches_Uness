@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>128 — Ostéopathies fragilisantes</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light);color:var(--red);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 128</div>
+  <h1>Ostéopathies fragilisantes</h1>
+  <div class="header-sub">Ostéoporose — Ostéomalacie — Fractures fragilisantes</div>
+  <div class="header-tags">
+    <span class="htag">Rhumatologie</span>
+    <span class="htag">Endocrinologie</span>
+    <span class="htag">Gériatrie</span>
+    <span class="htag">Médecine interne</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Ce chapitre couvre deux maladies osseuses fragilisantes aux mécanismes distincts : l'<strong>ostéoporose</strong> (réduction de la masse et de la qualité osseuses → fractures sur traumatisme minime) et l'<strong>ostéomalacie</strong> (défaut de minéralisation → os mou). La compétence attendue est triple : diagnostiquer (critères densitométriques, bilan étiologique), évaluer le risque fracturaire, et décider du traitement médicamenteux en fonction du T-score et du statut fracturaire.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS & ÉPIDÉMIOLOGIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions &amp; Épidémiologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir l'ostéoporose selon les critères densitométriques OMS et selon la notion de fracture de fragilité</div>
+  <div class="obj-line">Connaître l'épidémiologie des fractures ostéoporotiques et identifier les fractures dites sévères</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition OMS
+    </div>
+    <p style="font-size:.84rem;margin-bottom:10px;">Maladie généralisée du squelette → résistance osseuse diminuée (densité + microarchitecture) → risque fracturaire élevé.</p>
+    <div class="kv-row">
+      <span class="kv-key">Diagnostic densitométrique</span>
+      <span class="kv-val">T-score ≤ −2,5</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Sites mesurés</span>
+      <span class="kv-val">Rachis lombaire + hanche</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-key">Population de référence</span>
+      <span class="kv-val">Femmes ménopausées</span>
+    </div>
+    <div class="alert-amber alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>Fracture après trauma minime (&gt;50 ans) = ostéoporose jusqu'à preuve du contraire, même si T-score &gt; −2,5</span>
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Fractures sévères <span class="badge badge-red">Excès de mortalité</span>
+    </div>
+    <ul class="lst">
+      <li><strong>FESF</strong> — extrémité supérieure du fémur</li>
+      <li><strong>FESH</strong> — extrémité supérieure de l'humérus</li>
+      <li><strong>Vertèbres</strong></li>
+      <li><strong>Bassin</strong> — sacrum, branches ischio- et ilio-pubiennes</li>
+      <li><strong>Tibia proximal</strong></li>
+    </ul>
+    <div class="alert-blue alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span>Fractures <strong>non sévères</strong> (poignet, autres) : ne pas négliger — indiquent aussi le risque fracturaire</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Épidémiologie — Chiffres clés (France)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Risque fracturaire après 50 ans</span><span class="kv-val">1 femme/2 · 1 homme/5</span></div>
+      <div class="kv-row"><span class="kv-key">FESF / an</span><span class="kv-val">70 000</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Fractures vertébrales / an</span><span class="kv-val">70 000</span></div>
+      <div class="kv-row"><span class="kv-key">Fractures du poignet / an</span><span class="kv-val">35 000</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : PHYSIOPATHOLOGIE & ÉTIOLOGIES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Physiopathologie &amp; Étiologies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Comprendre les mécanismes de perte osseuse dans l'ostéoporose primitive (carence oestrogénique, hérédité, sédentarité, hyperparathyroïdie secondaire)</div>
+  <div class="obj-line">Distinguer ostéoporose primitive et secondaire, et identifier les causes secondaires à éliminer</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Physiopathologie — Ostéoporose primitive
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;color:var(--muted);">FACTEURS MAJEURS</p>
+      <ul class="lst">
+        <li><strong>Carence oestrogénique</strong> (ménopause) → accélération du remodelage osseux → résorption prépondérante → perte de DMO + altération microarchitecture</li>
+        <li><strong>Hérédité</strong> — héritabilité ~80% du pic de masse osseuse</li>
+        <li><strong>Sédentarité / immobilisation</strong> → suppression des contraintes mécaniques → perte osseuse</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;color:var(--muted);">FACTEURS AGGRAVANTS</p>
+      <ul class="lst">
+        <li><strong>Âge</strong> + antécédent de fracture(s)</li>
+        <li><strong>Hyperparathyroïdie secondaire</strong> (carence vit. D / calcium) → remodelage accéléré</li>
+        <li>Tabac, alcool, IMC bas</li>
+        <li>Ménopause précoce (&lt;40 ans)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Causes d'ostéoporose secondaire
+  </div>
+  <div class="alert-amber alert" style="margin-bottom:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège :</strong> chez l'homme, ~50% des ostéoporoses sont secondaires — toujours chercher une cause. Chez la femme aussi, les causes peuvent s'intriquer avec l'ostéoporose post-ménopausique.</span>
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Catégorie</th><th>Causes principales</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Endocrinien</strong></td><td>Hyperparathyroïdie primaire · Hyperthyroïdie · Hypogonadisme (H et F) · Hypercortisolisme endogène</td></tr>
+      <tr><td><strong>Iatrogène</strong></td><td><strong>Corticothérapie</strong> (cause la plus fréquente) · Surdosage en hormone thyroïdienne</td></tr>
+      <tr><td><strong>Digestif / malabsorption</strong></td><td>Gastrectomie · Résections intestinales · Maladie cœliaque · MICI</td></tr>
+      <tr><td><strong>Inflammatoire</strong></td><td>Polyarthrite rhumatoïde · Spondyloarthrites (indépendamment de la corticothérapie)</td></tr>
+      <tr><td><strong>Génétique / métabolique</strong></td><td>Hémochromatose génétique · Anorexie mentale</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : BILAN DIAGNOSTIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Bilan diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications de l'ostéodensitométrie remboursée par l'Assurance Maladie</div>
+  <div class="obj-line">Savoir quand réaliser des radiographies rachidiennes</div>
+  <div class="obj-line">Réaliser le bilan biologique de 1ère et 2ème intention</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Indications de l'ostéodensitométrie remboursée
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Population</th><th>Indication</th></tr></thead>
+    <tbody>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle;text-align:center;"><strong>Tous sexes<br>Tout âge</strong></td>
+        <td>Fracture sans traumatisme majeur (fracture de fragilité)</td>
+      </tr>
+      <tr>
+        <td>Pathologie ou traitement inducteur : hyperparathyroïdie, hyperthyroïdie non traitée, <strong>corticothérapie &gt; 3 mois</strong></td>
+      </tr>
+      <tr>
+        <td rowspan="4" style="vertical-align:middle;text-align:center;"><strong>Femme<br>ménopausée<br>(hors fracture)</strong></td>
+        <td>ATCD de fracture de hanche non traumatique chez un parent au 1er degré</td>
+      </tr>
+      <tr><td>IMC &lt; 19 kg/m²</td></tr>
+      <tr><td>Ménopause précoce (&lt; 40 ans)</td></tr>
+      <tr><td>Corticoïdes ≥ 3 mois consécutifs à dose ≥ 7,5 mg/j éq. prednisone</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+      </div>
+      Radiographies rachidiennes
+    </div>
+    <p style="font-size:.84rem;margin-bottom:8px;color:var(--muted);">Indications :</p>
+    <ul class="lst">
+      <li>Douleurs lombaires ou dorsales</li>
+      <li>Perte de taille <strong>≥ 4 cm</strong></li>
+      <li>Déformation rachidienne / cyphose</li>
+    </ul>
+    <div class="alert-amber alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>Scanner/IRM si doute sur une autre origine (tumorale +++)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+      </div>
+      Bilan biologique — 1ère intention
+    </div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-blue">NFS</span>
+      <span class="pill pill-blue">CRP</span>
+      <span class="pill pill-blue">EPP</span>
+      <span class="pill pill-blue">Calcémie</span>
+      <span class="pill pill-blue">Phosphatémie</span>
+      <span class="pill pill-blue">Créatinine + DFG</span>
+      <span class="pill pill-blue">25-OH-vit D</span>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);">But : éliminer une cause secondaire et les autres ostéopathies (ostéomalacie, myélome)</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+    </div>
+    Bilan biologique — 2ème intention (selon orientation)
+  </div>
+  <div class="grid2">
+    <ul class="lst">
+      <li><strong>PTH</strong> — hyperparathyroïdie primaire</li>
+      <li><strong>TSH</strong> — hyperthyroïdie / surdosage thyroïdien</li>
+      <li><strong>Cortisol minuit ± freinage minute ± cortisolurie 24h</strong> — hypercortisolisme endogène</li>
+    </ul>
+    <ul class="lst">
+      <li><strong>Coefficient de saturation de la transferrine</strong> — hémochromatose</li>
+      <li><strong>Testostérone</strong> — hypogonadisme masculin</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Prescrire les mesures hygiéno-diététiques de base (calcium, vitamine D, activité physique, prévention des chutes)</div>
+  <div class="obj-line">Connaître les indications des traitements médicamenteux selon le T-score et la présence/sévérité de la fracture</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Mesures hygiéno-diététiques — Toujours prescrites
+  </div>
+  <div class="grid2">
+    <ul class="lst">
+      <li>Apports calciques alimentaires <strong>1–1,2 g/j</strong><br><span style="font-size:.8rem;color:var(--muted);">(eaux minérales : Contrex, Hépar, Courmayeur)</span></li>
+      <li>Vitamine D sérique cible <strong>≥ 30 ng/mL</strong> (supplémentation quasi-systématique)</li>
+      <li>Activité physique <strong>en charge</strong> régulière</li>
+    </ul>
+    <ul class="lst">
+      <li>Arrêt tabac — traitement alcoolisme</li>
+      <li><strong>Prévention des chutes</strong> (personnes âgées +++)</li>
+      <li>Antalgiques si douleurs</li>
+      <li>Corset si rachialgies invalidantes sur fracture vertébrale</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Indications du traitement médicamenteux anti-ostéoporotique
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Situation clinique</th>
+        <th>T-score seuil pour traiter</th>
+        <th>Zone d'incertitude</th>
+        <th>Molécules</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="pill pill-red">Fracture sévère</span></td>
+        <td><strong>≤ −1</strong> (quel que soit l'âge)</td>
+        <td>&gt; −1 → avis spécialiste</td>
+        <td rowspan="2" style="vertical-align:middle;text-align:center;">BP per os ou IV<br>Dénosumab (2ème inten.)<br><em>Si FV : ± raloxifène, tériparatide (≥2 FV), THM</em></td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-red">Fracture vertébrale</span></td>
+        <td><strong>≤ −1</strong></td>
+        <td>&gt; −1 → avis spécialiste</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Fracture non sévère</span></td>
+        <td><strong>≤ −2</strong></td>
+        <td>−2 à −1 → avis spécialiste<br>&gt; −1 → pas de traitement</td>
+        <td>BP per os ou IV · Raloxifène · Dénosumab (2ème) · THM (50–60 ans + climatériques)</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-blue">Pas de fracture</span></td>
+        <td><strong>≤ −3</strong></td>
+        <td>−3 à −2 → avis spécialiste<br>&gt; −2 → pas de traitement</td>
+        <td>BP · Raloxifène · Dénosumab (2ème) · THM (si climatériques)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert-blue alert" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>Raloxifène :</strong> réservé aux patientes à faible risque de fracture périphérique (efficacité sur les fractures vertébrales uniquement). <strong>Tériparatide :</strong> uniquement si ≥ 2 fractures vertébrales. <strong>THM :</strong> si entre 50–60 ans avec troubles climatériques associés.</span>
+  </div>
+  <div class="alert-amber alert">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège :</strong> l'ostéodensitométrie est obligatoire avant toute décision thérapeutique médicamenteuse. Le traitement est une prise en charge de maladie chronique → annoncer, expliquer la durée, surveiller l'observance.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : SÉMIOLOGIE RADIOLOGIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+  Sémiologie radiologique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes radiographiques d'une fracture ostéoporotique (déminéralisation, absence d'ostéolyse corticale)</div>
+  <div class="obj-line">Savoir interpréter une radiographie et une IRM du rachis dans ce contexte</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      </div>
+      Radiographie standard
+    </div>
+    <ul class="lst">
+      <li><strong>Déminéralisation homogène</strong> diffuse</li>
+      <li><strong>Sans signe d'ostéolyse corticale</strong></li>
+      <li>Absence d'autres signes pathologiques</li>
+    </ul>
+    <p style="font-size:.82rem;font-weight:700;margin:10px 0 6px;color:var(--muted);">AU RACHIS :</p>
+    <ul class="lst">
+      <li>Localisation : <strong>sous D3</strong> (vertèbres thoraciques basses et lombaires)</li>
+      <li>Perte de hauteur du corps vertébral (tassement)</li>
+      <li><strong>Signe du puzzle</strong> : corticale suivie sur toute sa longueur malgré la fracture → intégrité du mur vertébral postérieur et des pédicules</li>
+    </ul>
+    <div class="alert-amber alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>Ces signes sont <strong>non spécifiques</strong> → scanner/IRM si doute (origine tumorale)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      IRM vertébrale
+    </div>
+    <p style="font-size:.84rem;margin-bottom:10px;">L'IRM est l'examen de référence pour :</p>
+    <ul class="lst">
+      <li>Confirmer le caractère récent/ancien d'une fracture (œdème médullaire en hyposignal T1 / hypersignal T2-STIR)</li>
+      <li>Éliminer une fracture d'origine tumorale (envahissement des parties molles, destruction des pédicules)</li>
+      <li>Préciser le risque de compression médullaire</li>
+    </ul>
+    <div class="alert-red alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span>Destruction d'un pédicule à la radiographie = évoquer une métastase, pas une ostéoporose</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : OSTÉOMALACIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Ostéomalacie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir l'ostéomalacie et la distinguer de l'ostéoporose</div>
+  <div class="obj-line">Reconnaître le tableau clinique et biologique évocateur d'ostéomalacie par carence en vitamine D</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définition &amp; Causes
+  </div>
+  <p style="font-size:.84rem;margin-bottom:10px;"><strong>Défaut de minéralisation</strong> de la matrice ostéoïde nouvellement formée → accumulation de tissu ostéoïde → os mou, résistance mécanique diminuée.</p>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;color:var(--muted);">CARENCE EN VITAMINE D (cause la plus fréquente)</p>
+      <ul class="lst">
+        <li>Défaut d'exposition solaire</li>
+        <li>Régime alimentaire carencé</li>
+        <li>Malabsorption digestive (maladie cœliaque, résection du grêle, insuffisance en sels biliaires)</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;color:var(--muted);">TROUBLES DU MÉTABOLISME DU PHOSPHORE</p>
+      <ul class="lst">
+        <li>Fuite rénale de phosphates (diminution de la réabsorption tubulaire)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Clinique
+    </div>
+    <ul class="lst">
+      <li><strong>Douleurs spontanées</strong> d'installation insidieuse, rythme mécanique, topographie <strong>pelvicrurale</strong> initiale → extension progressive</li>
+      <li><strong>Stries de Looser-Milkman</strong> (fissures visibles en radiographie)</li>
+      <li><strong>Myopathie proximale</strong> dans la moitié des cas : faiblesse musculaire sans déficit neurologique</li>
+    </ul>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+      </div>
+      Biologie — Ostéomalacie par carence vitamine D
+    </div>
+    <div class="kv-row"><span class="kv-key">Calcémie</span><span class="kv-val" style="color:var(--blue);">↓</span></div>
+    <div class="kv-row"><span class="kv-key">Phosphatémie</span><span class="kv-val" style="color:var(--blue);">↓</span></div>
+    <div class="kv-row"><span class="kv-key">Calciurie</span><span class="kv-val" style="color:var(--blue);">↓ (hypocalciurie)</span></div>
+    <div class="kv-row"><span class="kv-key">Phosphatases alcalines</span><span class="kv-val" style="color:var(--red);">↑</span></div>
+    <div class="kv-row"><span class="kv-key">25-OH-vit D</span><span class="kv-val" style="color:var(--red);">effondrée &lt; 5 ng/mL</span></div>
+    <div class="kv-row"><span class="kv-key">PTH</span><span class="kv-val" style="color:var(--red);">↑ (HPT2 secondaire)</span></div>
+    <div class="alert-amber alert" style="margin-top:10px;padding:8px 12px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <span><strong>Contrast clé vs ostéoporose :</strong> la biologie de l'ostéoporose est <em>normale</em> (sert à éliminer les causes secondaires). Dans l'ostéomalacie, la biologie est <em>très perturbée</em> et oriente le diagnostic.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse ECNi — Ne pas rater
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert-red alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Fracture sévère + T-score ≤ −1 = traitement systématique</strong> quel que soit l'âge. Ne pas attendre T-score ≤ −2,5.</span>
+      </div>
+      <div class="alert-amber alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> chez l'homme, toujours chercher une cause secondaire (50% des cas). Chez la femme aussi, le réflexe doit être présent.</span>
+      </div>
+      <div class="alert-amber alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <span><strong>Piège :</strong> corticothérapie &gt; 3 mois = indication remboursée d'ostéodensitométrie. La corticothérapie est la 1ère cause d'ostéoporose secondaire iatrogène.</span>
+      </div>
+    </div>
+    <div>
+      <div class="alert-green alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span><strong>Signe du puzzle :</strong> corticale vertébrale visible sur toute sa longueur = fracture ostéoporotique. Pédicule détruit = métastase à éliminer en urgence.</span>
+      </div>
+      <div class="alert-green alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <span><strong>Ostéomalacie vs ostéoporose :</strong> biologie normale → ostéoporose. Biologie perturbée (↓ Ca, ↓ P, ↑ PAL, effondrement 25-OH-vit D) → ostéomalacie.</span>
+      </div>
+      <div class="alert-blue alert">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <span>Les <strong>mesures hygiéno-diététiques</strong> (calcium, vitamine D, activité physique, prévention des chutes) sont <strong>toujours prescrites</strong>, en complément ou seules si T-score insuffisant pour traiter.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
