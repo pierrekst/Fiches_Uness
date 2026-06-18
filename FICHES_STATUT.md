@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
 
-**Avancement : 154 / 367 items (42.0%)**
+**Avancement : 155 / 367 items (42.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -283,7 +283,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 273 | [x] | Dysphagie | 273_Dysphagie.html |
 | 274 | [x] | Vomissements du nourrisson | 274_Vomissements.html |
 | 275 | [ ] | Splénomégalie | — |
-| 276 | [ ] | Hépatomégalie et masse abdominale | — |
+| 276 | [x] | Hépatomégalie et masse abdominale | 276_Hepatomegalie_masse_abdo.html |
 | 277 | [x] | Lithiase biliaire et complications | 277_Lithiase_biliaire.html |
 | 278 | [x] | Ictère de l adulte et de l enfant | 278_ictere_v2.html |
 | 279 | [x] | Cirrhose et complications | 279_Cirrhose_v2.html |

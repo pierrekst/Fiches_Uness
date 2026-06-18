@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 276 — Hépatomégalie et masse abdominale</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* OBJECTIFS INTRO */
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  /* LISTES */
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  /* PHASES */
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  /* BORDER-LEFT SHORTCUTS */
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  /* SECTION BADGE */
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  /* TABLEAUX COLORÉS */
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  /* HEADER EXTRAS */
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* BORDER LEFT CARDS */
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  /* SECTION TITLES */
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* OBJ LIST */
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 276</div>
+  <h1>Hépatomégalie et masse abdominale</h1>
+  <div class="header-sub">Diagnostic étiologique — Bilan — Biopsie hépatique</div>
+  <div class="header-tags">
+    <span class="htag">Hépato-gastro-entérologie</span>
+    <span class="htag">Imagerie abdominale</span>
+    <span class="htag">Oncologie digestive</span>
+  </div>
+</div>
+
+<!-- INTRO OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Cet item porte sur la démarche diagnostique devant deux situations cliniques courantes : un foie palpable (hépatomégalie) et une masse abdominale de découverte clinique. L'enjeu est double : savoir orienter l'enquête étiologique par l'interrogatoire, l'examen physique et les premiers examens complémentaires, et connaître les indications, contre-indications et modalités de la biopsie hépatique. La reconnaissance des aspects TDM des principales lésions hépatiques (CHC, métastases, kyste) est également exigible.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir une masse abdominale et une hépatomégalie en pratique clinique</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hépatomégalie
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition clinique</span><span class="kv-val">Foie palpable</span></div>
+    <div class="kv-row"><span class="kv-key">Foie palpable = pathologique ?</span><span class="kv-val">Le plus souvent oui</span></div>
+    <div class="kv-row"><span class="kv-key">Mesure de la taille du foie</span><span class="kv-val">Aucun intérêt clinique</span></div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Masse abdominale
+    </div>
+    <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Augmentation de volume d'un organe intra-abdominal</span></div>
+    <div class="kv-row"><span class="kv-key">Enjeu principal</span><span class="kv-val">Localisation → organe → étiologie</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : CAUSES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Principales étiologies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Citer les principales causes d'hépatomégalie selon le mécanisme (stéatose, cirrhose, métastases en tête)</div>
+  <div class="obj-line">Connaître les causes de masse abdominale selon la localisation anatomique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Causes d'hépatomégalie par mécanisme
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Mécanisme / Catégorie</th><th>Étiologies principales</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Maladies hépatiques primitives</strong><br><span style="font-size:.78rem;color:var(--muted)">les + fréquentes</span></td>
+        <td>
+          <span class="pill pill-amber">Stéatose</span> <span class="pill pill-amber">Stéatohépatite (alcool / métabolique)</span><br>
+          <span class="pill pill-red">Cirrhose</span> (hépatomégalie inconstante)<br>
+          <span class="pill pill-blue">Hépatites aiguës ou chroniques</span>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Congestion veineuse</strong></td>
+        <td>
+          Insuffisance cardiaque droite<br>
+          Péricardite constrictive<br>
+          Syndrome de Budd-Chiari (exceptionnel)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Tumeurs hépatiques malignes</strong></td>
+        <td>
+          <span class="pill pill-red">CHC</span> <span class="pill pill-red">Cholangiocarcinome</span> (primitives)<br>
+          <span class="pill pill-red">Métastases</span> (cancers digestifs ++)<br>
+          Hémopathies malignes (rare)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Tumeurs hépatiques bénignes</strong></td>
+        <td>
+          Polykystose hépatique ou hépatorénale<br>
+          Autres tumeurs bénignes (hépatomégalie exceptionnelle)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Infectieuses / parasitaires</strong></td>
+        <td>
+          Abcès amibien ou bactérien<br>
+          Hydatidose (kyste hydatique)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Causes les plus fréquentes :</strong> stéatose hépatique, cirrhose, métastases hépatiques des cancers digestifs.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Masses abdominales selon localisation
+  </div>
+  <table class="table-teal">
+    <thead>
+      <tr><th>Localisation</th><th>Organe</th><th>Étiologies principales</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Épigastre</strong></td>
+        <td>Estomac / Pancréas / Foie gauche</td>
+        <td>Tumeur gastrique — Tumeur pancréatique — Pseudo-kyste pancréatique — Hépatomégalie lobe gauche</td>
+      </tr>
+      <tr>
+        <td><strong>Hypochondre D</strong></td>
+        <td>Foie / Vésicule</td>
+        <td>Hépatomégalie — Obstacle bas cholédoque (cancer tête pancréas) — Tumeur vésicule</td>
+      </tr>
+      <tr>
+        <td><strong>Hypochondre G / flanc G</strong></td>
+        <td>Rate</td>
+        <td>Splénomégalie</td>
+      </tr>
+      <tr>
+        <td><strong>Fosse iliaque D</strong></td>
+        <td>Caecum / Ovaire D</td>
+        <td>Cancer côlon droit — Maladie de Crohn — Abcès appendiculaire<br>Kyste ovarien — Tumeur ovarienne</td>
+      </tr>
+      <tr>
+        <td><strong>Fosse iliaque G</strong></td>
+        <td>Sigmoïde / Ovaire G</td>
+        <td>Constipation — Tumeur sigmoïde — Sigmoïdite<br>Kyste ovarien — Tumeur ovarienne</td>
+      </tr>
+      <tr>
+        <td><strong>Région ombilicale</strong></td>
+        <td>Aorte / Côlon transverse / Grêle</td>
+        <td>Anévrysme aorte abdominale — Cancer colique — Tumeur grêle (rare)</td>
+      </tr>
+      <tr>
+        <td><strong>Hypogastre</strong></td>
+        <td>Utérus / Vessie</td>
+        <td>Grossesse — Fibromyome — Cancer endomètre<br>Globe vésical — Tumeur vésicale</td>
+      </tr>
+      <tr>
+        <td><strong>Ubiquitaire</strong></td>
+        <td>Péritoine / Ganglions / Paroi</td>
+        <td>Carcinose péritonéale (métastase ombilicale) — Adénopathies (lymphome, métastases) — Hernies / éventrations</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : INTERROGATOIRE ET EXAMEN CLINIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Interrogatoire et examen clinique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Mener un interrogatoire ciblé : circonstances de découverte, facteurs de risque hépatiques, antécédents, voyages</div>
+  <div class="obj-line">Décrire les caractéristiques sémiologiques d'une masse à l'examen physique et rechercher les signes associés</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Interrogatoire
+    </div>
+    <ul class="lst">
+      <li>Circonstances : fortuite, dépistage, douleur, ictère</li>
+      <li>Voyage en zone d'endémie parasitaire</li>
+      <li>Facteurs de risque de cirrhose : alcool, syndrome métabolique, hépatite virale</li>
+      <li>ATCD médicaux, chirurgicaux, gynécologiques</li>
+      <li>ATCD familiaux de cancer</li>
+      <li>Signes associés : fièvre, sueurs, amaigrissement, troubles transit, signes urinaires/gynécologiques</li>
+      <li>Date des dernières règles (femme non ménopausée)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Examen clinique
+    </div>
+    <ul class="lst">
+      <li>Caractéristiques masse : localisation, taille, consistance, douleur, fixité aux plans profonds, caractère pulsatile</li>
+      <li>Signes septiques : fièvre, frissons</li>
+      <li>Signes d'IH ou d'HTP (cf. item 279)</li>
+      <li>Cholestase : ictère, prurit, selles décolorées, urines foncées</li>
+      <li>Recherche métastases : palpation foie, aires ganglionnaires, adénopathie de Troisier, touchers pelviens</li>
+      <li>Signes d'insuffisance cardiaque droite : reflux hépato-jugulaire</li>
+      <li>Ascite</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège clinique :</strong> un foie dur à bord inférieur tranchant est très évocateur de cirrhose — ne pas confondre avec une tumeur.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : DÉMARCHE DIAGNOSTIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Démarche diagnostique et bilan paraclinique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Conduire la démarche diagnostique devant une hépatomégalie avec ou sans lésion focale</div>
+  <div class="obj-line">Prescrire le bilan biologique et radiologique de première intention selon l'étiologie suspectée</div>
+  <div class="obj-line">Identifier l'examen de première intention devant une masse abdominale (autre qu'hépatique)</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Algorithme devant une hépatomégalie
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Échographie-doppler abdominale — 1<sup>re</sup> intention</div>
+        <div class="step-content">Examen de débrouillage systématique. Complété par TDM ou IRM hépatique si nécessaire.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2A</div>
+      <div>
+        <div class="step-title">Sans lésion focale</div>
+        <div class="step-content">Suspect maladie hépatique primitive. Bilan selon contexte (voir tableau ci-dessous).</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2B</div>
+      <div>
+        <div class="step-title">Avec lésion(s) focale(s)</div>
+        <div class="step-content">Caractérisation de la lésion hépatique (bénigne / maligne / infectieuse) — contexte + imagerie (TDM/IRM). Cf. item 304.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Hépatomégalie sans lésion focale — orientation
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Cause suspectée</th><th>Signes évocateurs</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Stéatose</strong></td><td>Alcool / syndrome métabolique — foie hyperéchogène à l'écho</td></tr>
+        <tr><td><strong>Cirrhose</strong></td><td>FDR cirrhose — foie dur, bords bosselés, signes IH/HTP</td></tr>
+        <tr><td><strong>Insuffisance cardiaque</strong></td><td>FDR cardiaques — dyspnée, OMI, RHJ — veines hépatiques dilatées à l'imagerie</td></tr>
+        <tr><td><strong>Cholestase chronique</strong></td><td>Prurit, ictère — dilatation voies biliaires</td></tr>
+        <tr><td><strong>Infiltration tumorale</strong></td><td>Hémopathie (lymphome), cancer du sein — AEG</td></tr>
+        <tr><td><strong>Budd-Chiari</strong></td><td>Ascite — veines hépatiques non visualisées à l'imagerie</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Hépatomégalie avec lésion(s) focale(s) — orientation
+    </div>
+    <table class="table-teal">
+      <thead><tr><th>Étiologie</th><th>Arguments</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tumeur primitive (CHC)</strong></td><td>Hépatopathie chronique / cirrhose sous-jacente — alpha-fœtoprotéine augmentée</td></tr>
+        <tr><td><strong>Métastases</strong></td><td>Contexte de cancer connu — signes liés au cancer primitif</td></tr>
+        <tr><td><strong>Abcès hépatique</strong></td><td>Syndrome septique</td></tr>
+        <tr><td><strong>Parasitoses</strong></td><td>Séjour en zone d'endémie (hydatidose, amibiase)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan biologique de 1<sup>re</sup> intention (hépatomégalie)
+  </div>
+  <div class="pills">
+    <span class="pill pill-amber">Plaquettes</span>
+    <span class="pill pill-amber">Albuminémie</span>
+    <span class="pill pill-amber">TP</span>
+    <span class="pill pill-amber">Transaminases (ASAT/ALAT)</span>
+    <span class="pill pill-amber">Phosphatases alcalines</span>
+    <span class="pill pill-amber">Gamma-GT</span>
+    <span class="pill pill-amber">Bilirubinémie</span>
+  </div>
+  <div style="margin-top:10px;font-size:.82rem;color:var(--muted);">Complété selon contexte : hémocultures + sérologie Entamoeba histolytica (abcès) — sérologie échinococcoses (kyste hydatique)</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Masse abdominale (autre qu'hépatomégalie) — bilan de 1<sup>re</sup> intention
+  </div>
+  <div class="kv-row"><span class="kv-key">Examen de 1<sup>re</sup> intention</span><span class="kv-val">TDM abdominopelvienne avec injection</span></div>
+  <div class="kv-row"><span class="kv-key">Contre-indications injection</span><span class="kv-val">Insuffisance rénale — Allergie prouvée</span></div>
+  <div style="margin-top:8px;font-size:.82rem;color:var(--muted);">Confirme l'organe atteint, la nature (liquidienne/tissulaire), les rapports avec les organes de voisinage, et les métastases à distance si cancer suspecté.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : BIOPSIE HÉPATIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Ponction-biopsie hépatique (PBH)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications de la PBH (bilan clinicobiologique et imagerie insuffisants)</div>
+  <div class="obj-line">Distinguer voie transpariétale et voie transjugulaire, et leurs contre-indications respectives</div>
+  <div class="obj-line">Lister les complications de la PBH et la surveillance post-procédure</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Indications
+    </div>
+    <ul class="lst">
+      <li>Bilan clinique + biologique + imagerie insuffisants pour établir le diagnostic</li>
+      <li>Lésion focale non étiquetée par l'imagerie</li>
+      <li>Information du patient + consentement éclairé obligatoires</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Modalités — voies d'abord
+    </div>
+    <ul class="lst">
+      <li><strong>Transpariétale :</strong> guidage écho (habituel) ou TDM, anesthésie locale</li>
+      <li><strong>Transveineuse (transjugulaire) :</strong> abord jugulaire, anesthésie locale</li>
+      <li><strong>Chirurgicale :</strong> si autres voies impossibles</li>
+    </ul>
+    <div style="margin-top:8px;font-size:.82rem;color:var(--muted);">En cas de lésion focale : 2 prélèvements obligatoires (lésion + parenchyme non lésionnel) — voie transpariétale guidée par imagerie uniquement.</div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Contre-indications à la voie transpariétale → voie transjugulaire
+  </div>
+  <table>
+    <thead><tr><th>Condition</th><th>Seuil / détail</th></tr></thead>
+    <tbody>
+      <tr><td>Thrombopénie</td><td>&lt; 60 000 / mm³</td></tr>
+      <tr><td>TP bas</td><td>&lt; 50 %</td></tr>
+      <tr><td>TCA allongé</td><td>&gt; 1,5 × le témoin</td></tr>
+      <tr><td>Anticoagulants / AAP / AINS</td><td>(si impossible à arrêter)</td></tr>
+      <tr><td>Hémodialyse</td><td>—</td></tr>
+      <tr><td>Ascite (même minime)</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> troubles de l'hémostase et ascite ne sont PAS des contre-indications absolues à la PBH — ils imposent le recours à la voie transjugulaire, pas l'abandon du geste.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Contre-indications absolues à la PBH (toutes voies)
+  </div>
+  <ul class="lst">
+    <li>Dilatation des voies biliaires intra-hépatiques</li>
+    <li>Suspicion d'échinococcose kystique (hydatidose) — risque de dissémination/choc anaphylactique</li>
+    <li>Thrombose des 3 veines sus-hépatiques (contre-indique aussi la voie transjugulaire)</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--muted);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Complications et surveillance post-PBH
+  </div>
+  <div class="grid2">
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">Complications</div>
+      <ul class="lst">
+        <li>Douleurs abdominales</li>
+        <li>Saignement : hématome, hémopéritoine, choc hémorragique</li>
+        <li>Effraction pleurale ou biliaire</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.83rem;margin-bottom:6px;">Surveillance</div>
+      <div class="kv-row"><span class="kv-key">Durée minimale</span><span class="kv-val">6 heures</span></div>
+      <div class="kv-row"><span class="kv-key">Paramètres</span><span class="kv-val">Pouls + TA</span></div>
+      <div class="kv-row"><span class="kv-key">Alitement</span><span class="kv-val">6 heures (voie transpariétale)</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : ICONOGRAPHIE TDM -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Aspects TDM des lésions hépatiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire l'aspect TDM typique du CHC chez le patient cirrhotique (rehaussement artériel + wash-out portal)</div>
+  <div class="obj-line">Reconnaître l'aspect TDM des métastases hépatiques</div>
+  <div class="obj-line">Reconnaître l'aspect TDM d'un kyste hépatique typique</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      CHC typique
+    </div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-red">Cirrhose sous-jacente</span>
+    </div>
+    <ul class="lst">
+      <li><strong>Phase artérielle :</strong> hypervascularisation (rehaussement artériel intense)</li>
+      <li><strong>Phase portale/tardive :</strong> wash-out (lésion devient hypodense)</li>
+      <li>Aspect pathognomonique = pas besoin de biopsie si critères remplis</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Métastases hépatiques
+    </div>
+    <ul class="lst">
+      <li>Lésions multiples (souvent)</li>
+      <li>Hypodenses au temps portal (la plupart)</li>
+      <li>Anneau périphérique rehaussé (aspect en "cocarde" pour méta hypervascularisées)</li>
+      <li>Contexte de cancer primitif connu ++</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Kyste hépatique typique
+    </div>
+    <ul class="lst">
+      <li>Hypodense spontanément (densité liquidienne)</li>
+      <li>Contours nets, parois fines</li>
+      <li>Absence de rehaussement après injection</li>
+      <li>Bénin si aspect typique — pas de biopsie</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège iconographie :</strong> kyste hydatique — suspicion sur morphologie TDM (cloisons internes, calcifications) + contexte géographique → contre-indication formelle à la ponction diagnostique.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 7 : POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      À ne pas manquer
+    </div>
+    <ul class="lst">
+      <li>Foie palpable = pathologique le plus souvent</li>
+      <li>Écho-doppler abdominale = examen de 1<sup>re</sup> intention pour l'hépatomégalie</li>
+      <li>TDM abdomino-pelvienne avec injection = 1<sup>re</sup> intention pour masse abdominale</li>
+      <li>CHC sur cirrhose : diagnostic TDM sans biopsie si aspect typique (wash-out)</li>
+      <li>PBH non étiquetée : 2 prélèvements (lésion + parenchyme sain)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Pièges tombables à l'ECNi
+    </div>
+    <ul class="lst">
+      <li><strong>Kyste hydatique :</strong> ponction contre-indiquée (risque choc anaphylactique + dissémination)</li>
+      <li><strong>Ascite même minime :</strong> impose voie transjugulaire — pas de contre-indication absolue à la PBH</li>
+      <li><strong>Troubles de l'hémostase :</strong> idem — voie transjugulaire, pas d'annulation</li>
+      <li><strong>Dilatation VBIH :</strong> contre-indique toutes les voies de PBH</li>
+      <li><strong>Adénopathie de Troisier :</strong> toujours chercher à l'examen clinique d'une masse abdominale</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Retenir :</strong> les 3 causes les plus fréquentes d'hépatomégalie sont la stéatose hépatique, la cirrhose et les métastases hépatiques des cancers digestifs.</div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

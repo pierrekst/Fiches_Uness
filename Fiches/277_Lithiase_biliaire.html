@@ -2,510 +2,581 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="../favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IC-277 — Lithiase biliaire et complications</title>
+<title>Item 277 — Lithiase biliaire et complications</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
 <style>
   :root {
-    --bg: #f5f6fa; --card: #ffffff; --text: #1e1e2e; --text-muted: #6b7280;
-    --border: rgba(0,0,0,0.08); --purple: #534AB7; --teal: #1D9E75;
-    --coral: #D85A30; --blue: #378ADD; --red: #E24B4A; --amber: #D97706;
-    --green: #16a34a; --rank-a: #D85A30; --rank-b: #378ADD;
-    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #0f0f1a; --card: #1a1a2e; --text: #e2e8f0; --text-muted: #94a3b8;
-      --border: rgba(255,255,255,0.08); --shadow: 0 1px 4px rgba(0,0,0,0.3); }
-    .step-num { background: #2d2d4e !important; }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: transparent; color: var(--text); font-family: system-ui,-apple-system,sans-serif;
-    font-size: 14px; line-height: 1.6; padding: 16px; max-width: 960px; margin: 0 auto; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
 
-  .page-header { background: linear-gradient(135deg, var(--coral) 0%, var(--amber) 100%);
-    border-radius: 16px; padding: 24px; color: #fff; margin-bottom: 24px; }
-  .page-header h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
-  .page-header p { opacity: .85; font-size: .9rem; }
-  .header-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-  .header-tag { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 3px 12px;
-    font-size: .78rem; font-weight: 600; }
+  .header{background:linear-gradient(135deg,#C97B2A 0%,#D85A30 40%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
 
-  .vue-ensemble { background: rgba(217,119,6,0.07); border: 1px solid rgba(217,119,6,0.2);
-    border-radius: 14px; padding: 16px 18px; margin-bottom: 24px; font-size: .85rem; line-height: 1.7; }
-  .vue-ensemble strong { color: var(--coral); }
+  .objectifs{background:var(--amber-light);border-left:4px solid var(--amber);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--amber);}
+  .objectifs strong{font-weight:800;}
 
-  .section-title { display: flex; align-items: center; gap: 10px; font-size: 1.05rem;
-    font-weight: 700; margin: 24px 0 14px; color: var(--text); }
-  .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex;
-    align-items: center; justify-content: center; flex-shrink: 0; }
-  .section-icon svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 1.8;
-    stroke-linecap: round; stroke-linejoin: round; }
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
 
-  .oic-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-  .oic-badge { display: inline-flex; align-items: center; gap: 4px; border-radius: 20px;
-    padding: 2px 10px; font-size: .72rem; font-weight: 700; letter-spacing: .03em; }
-  .oic-a { background: rgba(216,90,48,.12); color: var(--rank-a); border: 1px solid rgba(216,90,48,.3); }
-  .oic-b { background: rgba(55,138,221,.12); color: var(--rank-b); border: 1px solid rgba(55,138,221,.3); }
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 
-  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: 14px;
-    padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px; }
-  .card-title { font-size:.88rem; font-weight:700; color:var(--text); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-  .card-icon { width:28px; height:28px; border-radius:7px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
-  .card-icon svg { width:15px; height:15px; fill:none; stroke:#fff; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
 
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-  @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
 
-  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .pill { border-radius: 20px; padding: 3px 10px; font-size: .75rem; font-weight: 600; }
-  .pill-green { background: rgba(22,163,74,.12); color: var(--green); border: 1px solid rgba(22,163,74,.25); }
-  .pill-red { background: rgba(226,75,74,.12); color: var(--red); border: 1px solid rgba(226,75,74,.25); }
-  .pill-blue { background: rgba(55,138,221,.12); color: var(--blue); border: 1px solid rgba(55,138,221,.25); }
-  .pill-amber { background: rgba(217,119,6,.12); color: var(--amber); border: 1px solid rgba(217,119,6,.25); }
-  .pill-purple { background: rgba(83,74,183,.12); color: var(--purple); border: 1px solid rgba(83,74,183,.25); }
-  .pill-teal { background: rgba(29,158,117,.12); color: var(--teal); border: 1px solid rgba(29,158,117,.25); }
-  .pill-coral { background: rgba(216,90,48,.12); color: var(--coral); border: 1px solid rgba(216,90,48,.25); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
 
-  .alert { border-radius: 10px; padding: 12px 14px; margin-bottom: 12px;
-    display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; }
-  .alert svg { width:18px; height:18px; flex-shrink:0; margin-top:1px; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
-  .alert-red { background: rgba(226,75,74,.1); border: 1px solid rgba(226,75,74,.3); color: #b91c1c; }
-  .alert-red svg { stroke: #b91c1c; }
-  .alert-blue { background: rgba(55,138,221,.1); border: 1px solid rgba(55,138,221,.3); color: var(--blue); }
-  .alert-blue svg { stroke: var(--blue); }
-  .alert-green { background: rgba(22,163,74,.1); border: 1px solid rgba(22,163,74,.3); color: var(--green); }
-  .alert-green svg { stroke: var(--green); }
-  .alert-amber { background: rgba(217,119,6,.1); border: 1px solid rgba(217,119,6,.3); color: var(--amber); }
-  .alert-amber svg { stroke: var(--amber); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
 
-  .compl-card { background: var(--card); border: 0.5px solid var(--border); border-left: 4px solid;
-    border-radius: 0 10px 10px 0; padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); }
-  .compl-title { font-weight: 700; font-size: .85rem; margin-bottom: 4px; }
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
 
-  .steps { list-style: none; padding: 0; }
-  .steps li { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; font-size: .84rem; }
-  .step-num { width: 24px; height: 24px; border-radius: 50%; background: #e5e7eb;
-    color: var(--text-muted); font-weight: 700; font-size: .75rem;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
 
-  .tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
-  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
-  th { background: var(--bg); padding: 8px 10px; text-align: left; font-weight: 700;
-    border-bottom: 1.5px solid var(--border); font-size: .78rem; letter-spacing: .03em;
-    text-transform: uppercase; color: var(--text-muted); }
-  td { padding: 8px 10px; border-bottom: 0.5px solid var(--border); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
 
-  .kv { display: flex; flex-direction: column; gap: 6px; }
-  .kv-row { display: flex; gap: 8px; font-size: .83rem; }
-  .kv-key { font-weight: 700; min-width: 160px; flex-shrink: 0; color: var(--text-muted); }
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
 
-  .num-highlight { font-size: 1.1rem; font-weight: 700; color: var(--coral); }
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
 
-  hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
-  ul { padding-left: 18px; }
-  li { margin-bottom: 3px; }
-  .text-muted { color: var(--text-muted); font-size: .82rem; }
-  .mt8 { margin-top: 8px; }
-  .mt12 { margin-top: 12px; }
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
 </style>
 </head>
 <body>
+<div class="page">
 
-<div class="page-header">
-  <h1>IC-277 — Lithiase biliaire et complications</h1>
-  <p>Colique hépatique · Cholécystite · Migration · Angiocholite</p>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 277</div>
+  <h1>Lithiase biliaire et complications</h1>
+  <div class="header-sub">Colique hépatique · Cholécystite · Migration lithiasique · Angiocholite · Pancréatite</div>
   <div class="header-tags">
-    <span class="header-tag">Définitions</span>
-    <span class="header-tag">Types de calculs</span>
-    <span class="header-tag">Complications</span>
-    <span class="header-tag">Imagerie</span>
-    <span class="header-tag">Traitement</span>
+    <span class="htag">Gastro-entérologie</span>
+    <span class="htag">Chirurgie digestive</span>
+    <span class="htag">Urgences</span>
   </div>
 </div>
 
-<div class="vue-ensemble">
-  <strong>Fil conducteur.</strong> La lithiase biliaire est très fréquente (20 % de la population), mais <strong>80 % des porteurs sont asymptomatiques</strong> — pas de dépistage. L'enjeu clinique est de reconnaître et hiérarchiser ses complications : la <strong>colique hépatique</strong> (simple, sans fièvre ni ictère), la <strong>cholécystite</strong> (infection vésiculaire par obstruction du cystique), la <strong>migration lithiasique</strong> (calcul dans la VBP sans infection), et l'<strong>angiocholite</strong> (urgence infectieuse sur obstruction du cholédoque — potentiellement mortelle). Chaque entité a un tableau clinique, un bilan biologique et une imagerie spécifiques, et une stratégie thérapeutique propre.
-</div>
-
-<!-- PARTIE 1 — DÉFINITIONS & ÉPIDÉMIOLOGIE -->
-
-<div class="section-title">
-  <div class="section-icon" style="background:var(--coral)">
-    <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
-  </div>
-  Définitions &amp; Épidémiologie
-</div>
-
-<div class="oic-row">
-  <span class="oic-badge oic-a">OIC-277-01 A</span>
-  <span class="oic-badge oic-b">OIC-277-02 B</span>
-</div>
-
-<div class="tbl-wrap">
-  <table>
-    <thead><tr><th>Entité</th><th>Définition</th><th>Mécanisme</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><strong>Lithiase biliaire</strong></td>
-        <td>Présence de calcul(s) dans l'arbre biliaire (vésicule et/ou VBP)</td>
-        <td>Formation à partir de la bile (cholestérol ou bilirubine)</td>
-      </tr>
-      <tr>
-        <td><strong>Colique hépatique</strong></td>
-        <td>Douleur par mise en tension brutale des voies biliaires</td>
-        <td>Blocage <em>transitoire</em> d'un calcul dans le cystique ou la VBP</td>
-      </tr>
-      <tr>
-        <td><strong>Cholécystite aiguë</strong></td>
-        <td>Infection aiguë de la vésicule biliaire</td>
-        <td>Obstruction <em>prolongée</em> du canal cystique par un calcul</td>
-      </tr>
-      <tr>
-        <td><strong>Migration lithiasique</strong></td>
-        <td>Passage de petits calculs dans la VBP sans infection ni pancréatite</td>
-        <td>Migration spontanée depuis la vésicule</td>
-      </tr>
-      <tr>
-        <td><strong>Angiocholite aiguë</strong></td>
-        <td>Infection bactérienne de la VBP</td>
-        <td>Enclavement d'un calcul à l'ampoule de Vater → stase + infection</td>
-      </tr>
-      <tr>
-        <td><strong>Pancréatite aiguë biliaire</strong></td>
-        <td>Inflammation aiguë du pancréas d'origine biliaire</td>
-        <td>Migration d'un calcul dans l'ampoule de Vater</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--teal)">
-      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
-    </div>
-    Épidémiologie — chiffres clés
-  </div>
-  <div class="grid2" style="margin-bottom:0;">
-    <div class="kv">
-      <div class="kv-row"><span class="kv-key">Prévalence générale</span><span><span class="num-highlight">20 %</span> de la population</span></div>
-      <div class="kv-row"><span class="kv-key">Après 80 ans</span><span><span class="num-highlight">60 %</span> de la population</span></div>
-    </div>
-    <div class="kv">
-      <div class="kv-row"><span class="kv-key">Asymptomatiques</span><span><span class="num-highlight">80 %</span> des porteurs</span></div>
-      <div class="kv-row"><span class="kv-key">Risque cumulé de complication</span><span><span class="num-highlight">20 %</span> — dépistage non indiqué</span></div>
-    </div>
-  </div>
+<!-- OBJECTIFS GLOBAUX -->
+<div class="objectifs">
+  <strong>Vision globale :</strong> La lithiase biliaire touche 20 % des occidentaux mais reste asymptomatique dans 80 % des cas. L'item porte sur la chaîne événementielle du calcul : formation (cholestérolique vs pigmentaire), douleur de colique hépatique, puis les complications majeures (cholécystite, migration, angiocholite, pancréatite). Il faut savoir diagnostiquer chaque complication cliniquement et biologiquement, choisir le bon examen d'imagerie en 1re/2e intention, et connaître les principes thérapeutiques — dont la désobstruction biliaire en urgence lors de l'angiocholite.
 </div>
 
 <hr>
 
-<!-- PARTIE 2 — TYPES DE CALCULS & FACTEURS DE RISQUE -->
-
+<!-- SECTION 1 : ÉPIDÉMIOLOGIE & PHYSIOPATHOLOGIE -->
 <div class="section-title">
-  <div class="section-icon" style="background:var(--amber)">
-    <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
-  </div>
-  Types de calculs &amp; Facteurs de risque
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie &amp; Physiopathologie
 </div>
 
-<div class="oic-row">
-  <span class="oic-badge oic-b">OIC-277-03 B</span>
-  <span class="oic-badge oic-b">OIC-277-05 B</span>
-  <span class="oic-badge oic-b">OIC-277-15 B</span>
-  <span class="oic-badge oic-b">OIC-277-16 B</span>
+<div class="obj-list">
+  <div class="obj-line">Connaître la fréquence de la lithiase vésiculaire et l'absence d'indication au dépistage</div>
+  <div class="obj-line">Distinguer calculs cholestéroliques et pigmentaires : physiopathologie et facteurs de risque respectifs</div>
+  <div class="obj-line">Connaître la fréquence des complications (20 % des porteurs)</div>
 </div>
 
 <div class="grid2">
   <div class="card">
-    <div class="card-title">
-      <div class="card-icon" style="background:var(--amber)">
-        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
-      </div>
-      Calculs cholestéroliques — 80 %
-    </div>
-    <p style="font-size:.82rem; margin-bottom:8px;">Sursaturation de la bile en cholestérol → précipitation. Règle des <strong>4F</strong> :</p>
-    <div class="pills">
-      <span class="pill pill-amber">Fat (surpoids/obésité)</span>
-      <span class="pill pill-amber">Female (sexe féminin)</span>
-      <span class="pill pill-amber">Forty (âge)</span>
-      <span class="pill pill-amber">Fertile (grossesse)</span>
-    </div>
-    <p style="font-size:.82rem; margin-top:10px; color:var(--text-muted);">+ Jeûne prolongé / nutrition parentérale · Gastrectomie ou bypass · Médicaments : œstrogènes, fibrates, analogues somatostatine</p>
+    <div class="kv-row"><span class="kv-key">Prévalence occidentale</span><span class="kv-val">~20 %</span></div>
+    <div class="kv-row"><span class="kv-key">Après 80 ans</span><span class="kv-val">~60 %</span></div>
+    <div class="kv-row"><span class="kv-key">Asymptomatiques</span><span class="kv-val">80 %</span></div>
+    <div class="kv-row"><span class="kv-key">Risque cumulé de complication</span><span class="kv-val">20 %</span></div>
+    <div class="kv-row"><span class="kv-key">Dépistage systématique</span><span class="kv-val">Non indiqué</span></div>
   </div>
   <div class="card">
+    <div class="kv-row"><span class="kv-key">Calculs cholestéroliques</span><span class="kv-val">80 %</span></div>
+    <div class="kv-row"><span class="kv-key">Calculs pigmentaires</span><span class="kv-val">20 %</span></div>
+  </div>
+</div>
+
+<table class="table-amber">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Mécanisme</th>
+      <th>Facteurs de risque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Cholestérolique</strong></td>
+      <td>Sursaturation en cholestérol → précipitation lithiasique</td>
+      <td>Âge · Sexe féminin · Obésité · Grossesse · Jeûne/nutrition parentérale · Chirurgie bariatrique (gastrectomie, bypass) · Médicaments (oestrogènes, fibrates, analogues somatostatine)</td>
+    </tr>
+    <tr>
+      <td><strong>Pigmentaire</strong></td>
+      <td>Précipitation bilirubine non conjuguée (insoluble)</td>
+      <td>Hémolyse chronique (drépanocytose, thalassémie) · Obstacles biliaires · Infections biliaires chroniques · Origine asiatique</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 2 : CLINIQUE DE LA DOULEUR BILIAIRE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Douleur biliaire &amp; Diagnostics différentiels
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les caractéristiques sémiologiques de la colique hépatique</div>
+  <div class="obj-line">Citer les 3 principaux diagnostics différentiels devant une colique hépatique</div>
+  <div class="obj-line">Connaître le diagnostic positif de la lithiase vésiculaire symptomatique simple</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
     <div class="card-title">
-      <div class="card-icon" style="background:var(--purple)">
-        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
       </div>
-      Calculs pigmentaires — 20 %
+      Colique hépatique — sémiologie
     </div>
-    <p style="font-size:.82rem; margin-bottom:8px;">Précipitation de bilirubine non conjuguée (insoluble).</p>
-    <div class="pills">
-      <span class="pill pill-purple">Hémolyse chronique</span>
-      <span class="pill pill-purple">Drépanocytose / thalassémie</span>
-      <span class="pill pill-purple">Obstacles biliaires</span>
-      <span class="pill pill-purple">Infections biliaires chroniques</span>
-      <span class="pill pill-purple">Origine asiatique</span>
-    </div>
+    <ul class="lst">
+      <li>Douleur <strong>brutale, intense, continue</strong> (broiement/crampe)</li>
+      <li>Siège : <strong>épigastre ou hypochondre droit</strong></li>
+      <li>Irradiation en hémi-ceinture → omoplate / épaule droite</li>
+      <li>Inhibition inspiratoire · Nausées · Vomissements</li>
+      <li>Durée : <strong>quelques min à quelques heures (&lt; 6 h)</strong></li>
+      <li>Signe de Murphy : palpation HCD → douleur inhibant l'inspiration</li>
+    </ul>
   </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      3 diagnostics différentiels
+    </div>
+    <ul class="lst">
+      <li><strong>Syndrome coronaire aigu</strong></li>
+      <li><strong>Ulcère gastroduodénal</strong></li>
+      <li><strong>Pancréatite aiguë</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Lithiase vésiculaire symptomatique simple :</strong> douleur de colique hépatique + calcul(s) à l'échographie (sensibilité 95 %, supérieure au scanner et à l'IRM) + <strong>bilan hépatique normal</strong></div>
 </div>
 
 <hr>
 
-<!-- PARTIE 3 — DOULEUR BILIAIRE -->
-
+<!-- SECTION 3 : COMPLICATIONS -->
 <div class="section-title">
-  <div class="section-icon" style="background:var(--coral)">
-    <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
-  </div>
-  La douleur biliaire — Colique hépatique
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications — Diagnostic différentiel clinico-biologique
 </div>
 
-<div class="oic-row">
-  <span class="oic-badge oic-a">OIC-277-06 A</span>
-  <span class="oic-badge oic-a">OIC-277-07 A</span>
+<div class="obj-list">
+  <div class="obj-line">Connaître les mécanismes des complications de la lithiase vésiculaire</div>
+  <div class="obj-line">Diagnostiquer une cholécystite aiguë : clinique + biologie + échographie</div>
+  <div class="obj-line">Diagnostiquer une migration lithiasique par le profil des transaminases</div>
+  <div class="obj-line">Diagnostiquer une angiocholite aiguë (triade de Charcot) et connaître ses 3 évolutions possibles</div>
 </div>
 
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--coral)">
-      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
-    </div>
-    Sémiologie de la colique hépatique
-  </div>
-  <div class="grid2" style="margin-bottom:0;">
-    <div class="kv">
-      <div class="kv-row"><span class="kv-key">Début</span><span style="font-size:.83rem;">Brutal</span></div>
-      <div class="kv-row"><span class="kv-key">Type</span><span style="font-size:.83rem;">Continue, broiement ou crampe (pas de colique au sens strict)</span></div>
-      <div class="kv-row"><span class="kv-key">Siège</span><span style="font-size:.83rem;">Épigastre ou hypochondre droit</span></div>
-      <div class="kv-row"><span class="kv-key">Irradiation</span><span style="font-size:.83rem;">Hémi-ceinture droite · omoplate / épaule droite</span></div>
-    </div>
-    <div class="kv">
-      <div class="kv-row"><span class="kv-key">Durée</span><span style="font-size:.83rem;"><strong>&lt; 6 h</strong> (si &gt; 6 h → évoquer cholécystite)</span></div>
-      <div class="kv-row"><span class="kv-key">Signes associés</span><span style="font-size:.83rem;">Nausées, vomissements, inhibition inspiratoire</span></div>
-      <div class="kv-row"><span class="kv-key">Signe de Murphy</span><span style="font-size:.83rem;">Palpation HD → douleur inhibant l'inspiration profonde</span></div>
-    </div>
-  </div>
-</div>
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Complication</th>
+      <th>Mécanisme</th>
+      <th>Clinique / Biologie</th>
+      <th>Échographie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Colique hépatique</strong></td>
+      <td>Blocage <em>transitoire</em> d'un calcul (cystique ou VBP)</td>
+      <td>Douleur typique &lt; 6 h · Pas de fièvre · Bilan hépatique normal</td>
+      <td>Calcul(s) vésiculaire(s)</td>
+    </tr>
+    <tr>
+      <td><strong>Cholécystite aiguë</strong></td>
+      <td>Obstruction <em>prolongée</em> du canal cystique → infection vésiculaire</td>
+      <td>Douleur HCD ± défense · Fièvre-frissons · Hyperleucocytose PNN · CRP/PCT élevée · <strong>Bilan hépatique normal</strong></td>
+      <td>Paroi vésiculaire &gt; 4 mm (triple feuillet) · Distension · Calculs</td>
+    </tr>
+    <tr>
+      <td><strong>Migration lithiasique</strong></td>
+      <td>Migration de petits calculs dans la VBP sans infection ni pancréatite</td>
+      <td>Douleur · <strong>Pas de fièvre</strong> · <strong>Transaminases très élevées puis &gt; 50 % en &lt; 48 h</strong></td>
+      <td>Calculs vésiculaires · Rarement dilatation VBP visible</td>
+    </tr>
+    <tr>
+      <td><strong>Lithiase VBP</strong></td>
+      <td>Obstruction VBP sans infection ni pancréatite</td>
+      <td>Ictère possible si obstruction prolongée · Cholestase</td>
+      <td>Dilatation VBP · Calcul cholédocien</td>
+    </tr>
+    <tr>
+      <td><strong>Angiocholite aiguë</strong></td>
+      <td>Enclavement calcul à l'ampoule de Vater → infection bactérienne VBP</td>
+      <td><strong>Triade douleur → fièvre → ictère</strong> (apparue en 48 h, souvent incomplète) · Cholestase + syndrome infectieux</td>
+      <td>Lithiase vésiculaire + dilatation VBP (inconstante)</td>
+    </tr>
+    <tr>
+      <td><strong>Pancréatite aiguë</strong></td>
+      <td>Migration d'un calcul dans l'ampoule de Vater → inflammation pancréas</td>
+      <td>Lipasémie &gt; 3N · Douleur en barre</td>
+      <td>TDM avec injection (bilan de gravité)</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--amber)">
-      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    </div>
-    3 diagnostics différentiels à éliminer en priorité
-  </div>
-  <div class="grid2" style="margin-bottom:10px;">
-    <div style="background:rgba(226,75,74,.07); border:1px solid rgba(226,75,74,.2); border-radius:10px; padding:10px;">
-      <p style="font-weight:700; font-size:.83rem; color:var(--red); margin-bottom:4px;">Syndrome coronaire aigu</p>
-      <p style="font-size:.82rem;">ECG + troponines si doute (douleur épigastrique peut mimer)</p>
-    </div>
-    <div style="background:rgba(217,119,6,.07); border:1px solid rgba(217,119,6,.2); border-radius:10px; padding:10px;">
-      <p style="font-weight:700; font-size:.83rem; color:var(--amber); margin-bottom:4px;">Ulcère gastroduodénal</p>
-      <p style="font-size:.82rem;">ATCD, AINS/aspirine, douleur postprandiale ou nocturne</p>
-    </div>
-  </div>
-  <div style="background:rgba(83,74,183,.07); border:1px solid rgba(83,74,183,.2); border-radius:10px; padding:10px;">
-    <p style="font-weight:700; font-size:.83rem; color:var(--purple); margin-bottom:4px;">Pancréatite aiguë</p>
-    <p style="font-size:.82rem;">Lipase ≥ 3×N, douleur transfixiante irradiant dans le dos</p>
-  </div>
-</div>
-
-<hr>
-
-<!-- PARTIE 4 — COMPLICATIONS : DIAGNOSTIC -->
-
-<div class="section-title">
-  <div class="section-icon" style="background:var(--red)">
+<div class="alert alert-amber">
+  <div class="alert-icon">
     <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
   </div>
-  Complications — Diagnostic positif &amp; Imagerie
-</div>
-
-<div class="oic-row">
-  <span class="oic-badge oic-b">OIC-277-04 B</span>
-  <span class="oic-badge oic-a">OIC-277-08 A</span>
-  <span class="oic-badge oic-a">OIC-277-09 A</span>
-  <span class="oic-badge oic-a">OIC-277-10 A</span>
-  <span class="oic-badge oic-a">OIC-277-11 A</span>
-  <span class="oic-badge oic-a">OIC-277-14 A</span>
-  <span class="oic-badge oic-a">OIC-277-17 A</span>
-  <span class="oic-badge oic-a">OIC-277-18 A</span>
-  <span class="oic-badge oic-a">OIC-277-19 A</span>
-  <span class="oic-badge oic-a">OIC-277-20 A</span>
-  <span class="oic-badge oic-b">OIC-277-21 B</span>
-</div>
-
-<div class="tbl-wrap">
-  <table>
-    <thead>
-      <tr>
-        <th>Complication</th>
-        <th>Clinique</th>
-        <th>Biologie</th>
-        <th>Imagerie (1re intention)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Lithiase symptomatique simple</strong></td>
-        <td>Colique hépatique · sans fièvre · sans ictère</td>
-        <td>Bilan hépatique <strong>normal</strong></td>
-        <td>Échographie (Se 95 %) · Scanner ou bili-IRM en 2e</td>
-      </tr>
-      <tr>
-        <td><strong>Cholécystite aiguë</strong></td>
-        <td>Colique hépatique + <strong>fièvre</strong> ± défense HD · Murphy +</td>
-        <td>Hyperleucocytose PNN · CRP/PCT · Bilan hépatique normal</td>
-        <td>Échographie : paroi &gt; 4 mm (triple feuillet) + distension + calcul · Scanner en 2e</td>
-      </tr>
-      <tr>
-        <td><strong>Migration lithiasique</strong></td>
-        <td>Colique hépatique · <strong>sans fièvre</strong> · sans ictère</td>
-        <td><strong>Transaminases très élevées</strong> → &gt; 50 % en &lt; 48h · Pas de syndrome inflammatoire</td>
-        <td>Échographie (mauvaise Se pour VBP) · Bili-IRM ou écho-endoscopie (meilleure Se cholédoque)</td>
-      </tr>
-      <tr>
-        <td><strong>Angiocholite aiguë</strong></td>
-        <td><strong>Triade de Charcot</strong> (48h) : Douleur → Fièvre → Ictère<br><span style="font-size:.78rem; color:var(--text-muted);">Incomplète possible : cholestase + syndrome infectieux suffit</span></td>
-        <td>Cholestase (bili, PAL, GGT) · Hyperleucocytose · CRP élevée</td>
-        <td>Échographie en urgence · Scanner si non contributive · IRM / écho-endoscopie en 3e ligne</td>
-      </tr>
-    </tbody>
-  </table>
+  <div><strong>Piège migration lithiasique :</strong> cytolyse massive transitoire qui chute de &gt; 50 % en &lt; 48 h — SANS fièvre. Ne pas confondre avec une hépatite aiguë. La dilatation VBP est souvent absente à l'écho.</div>
 </div>
 
 <div class="alert alert-red">
-  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-  <span><strong>Évolutions de l'angiocholite (OIC-277-14 A) :</strong> abcès hépatiques · choc septique · défaillance multiviscérale → décès. Urgence absolue.</span>
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>3 évolutions de l'angiocholite :</strong> abcès hépatiques · choc septique · défaillance multiviscérale (décès)</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Complications septiques de la cholécystite aiguë
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Abcès péri-vésiculaire ou hépatique</span>
+    <span class="pill pill-red">Péritonite biliaire (perforation)</span>
+    <span class="pill pill-red">Fistule bilio-digestive</span>
+    <span class="pill pill-amber">Iléus biliaire (rare)</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : IMAGERIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Examens d'imagerie — Indications
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir quel examen demander en 1re et 2e intention selon la situation clinique</div>
+  <div class="obj-line">Connaître les performances de chaque examen pour le diagnostic de calcul de la VBP</div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr>
+      <th>Situation</th>
+      <th>1re intention</th>
+      <th>2e / 3e intention</th>
+      <th>Remarque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lithiase vésiculaire symptomatique simple</td>
+      <td><strong>Échographie abdominale</strong> (Se 95 %)</td>
+      <td>Scanner ou bili-IRM</td>
+      <td>Écho meilleure sensibilité que scanner/IRM pour calculs vésiculaires</td>
+    </tr>
+    <tr>
+      <td>Cholécystite aiguë</td>
+      <td><strong>Échographie abdominale</strong></td>
+      <td>Scanner (si doute diagnostique)</td>
+      <td>Paroi &gt; 4 mm + distension + calculs</td>
+    </tr>
+    <tr>
+      <td>Migration lithiasique</td>
+      <td><strong>Échographie</strong> (faible Se pour calcul cholédocien)</td>
+      <td><strong>Bili-IRM</strong> ou <strong>Écho-endoscopie</strong> (meilleures Se)</td>
+      <td>Diagnostic souvent clinico-biologique. TDM inférieur à bili-IRM et écho-endoscopie</td>
+    </tr>
+    <tr>
+      <td>Angiocholite aiguë</td>
+      <td><strong>Échographie</strong> (lithiase + dilatation VBP)</td>
+      <td>Scanner sans + avec injection si écho non contributive · IRM/écho-endo en 3e ligne</td>
+      <td>Dilatation VBP inconstante à l'écho</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 5 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Principes thérapeutiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le traitement de la lithiase vésiculaire symptomatique simple et le délai de cholécystectomie</div>
+  <div class="obj-line">Connaître le traitement de la cholécystite aiguë et son délai chirurgical (urgence)</div>
+  <div class="obj-line">Connaître les deux principes du traitement de l'angiocholite et les modalités de la CPRE</div>
+  <div class="obj-line">Savoir gérer un sepsis sévère/choc septique sur angiocholite</div>
+  <div class="obj-line">Connaître les 2 options de désobstruction de la VBP hors urgence septique</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Lithiase vésiculaire symptomatique simple
+    </div>
+    <ul class="lst">
+      <li>Antalgiques (crise)</li>
+      <li>Cholécystectomie rapide <strong>&lt; 1 mois</strong> (éviter récidive/complication)</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Cholécystite aiguë
+    </div>
+    <ul class="lst">
+      <li>Antalgiques</li>
+      <li>Antibiothérapie large spectre (germes digestifs) → adaptée à l'antibiogramme</li>
+      <li>Cholécystectomie <strong>en urgence (le plus tôt possible)</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Angiocholite aiguë — Traitement
+  </div>
+  <ol class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Antalgiques + Antibiothérapie</div>
+        <div class="step-content">Large spectre (germes digestifs) sans délai après prélèvements bactériologiques, secondairement adaptée à l'antibiogramme</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Désobstruction biliaire en urgence</div>
+        <div class="step-content">Par voie endoscopique (CPRE) en 1re intention — drainage percutané si non disponible ou échec</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Cholécystectomie secondaire</div>
+        <div class="step-content">Selon terrain (âge physiologique) et présence ou non d'une cholécystite associée</div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div><strong>Angiocholite + sepsis sévère / choc septique :</strong><br>1. Réanimation d'abord : remplissage + amines vasopressives + antibiothérapie sans délai + prise en charge des défaillances d'organe<br>2. Désobstruction biliaire APRES stabilisation hémodynamique — jamais avant</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    CPRE — Modalités
+  </div>
+  <ul class="lst">
+    <li>Geste endoscopique interventionnel sous <strong>anesthésie générale</strong></li>
+    <li>Matériel : duodénoscope à vision latérale</li>
+    <li>Technique : abord VBP → <strong>sphinctérotomie endoscopique biliaire</strong> → extraction instrumentale du calcul</li>
+  </ul>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Désobstruction VBP hors urgence septique — 2 options
+  </div>
+  <div class="grid2" style="margin-top:8px;margin-bottom:0;">
+    <div class="bl-teal">
+      <strong>Chirurgical en 1 temps</strong><br>
+      <span style="font-size:.82rem;color:var(--muted);">Cholécystectomie + désobstruction peropératoire VBP</span>
+    </div>
+    <div class="bl-blue">
+      <strong>En 2 temps endoscopique + chirurgical</strong><br>
+      <span style="font-size:.82rem;color:var(--muted);">Sphinctérotomie endoscopique biliaire → puis cholécystectomie</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : POINTS-CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Épidémio :</strong> 20 % de la population · 80 % asymptomatiques · risque cumulé de complication 20 % · pas de dépistage systématique</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Colique hépatique :</strong> douleur continue &lt; 6 h, HCD/épigastre, irradiation omoplate droite, bilan hépatique normal, échographie 1re intention (Se 95 %)</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div><strong>Cholécystite :</strong> obstruction cystique prolongée → infection → paroi &gt; 4 mm à l'écho, bilan hépatique normal. Cholécystectomie en urgence.</div>
 </div>
 
 <div class="alert alert-amber">
-  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-  <span><strong>Piège :</strong> la triade de Charcot n'est pas toujours complète. Si cholestase (ictérique ou non) + syndrome inflammatoire/infectieux → évoquer l'angiocholite.</span>
-</div>
-
-<hr>
-
-<!-- PARTIE 5 — TRAITEMENT -->
-
-<div class="section-title">
-  <div class="section-icon" style="background:var(--teal)">
-    <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
-  </div>
-  Traitement
-</div>
-
-<div class="oic-row">
-  <span class="oic-badge oic-a">OIC-277-22 A</span>
-  <span class="oic-badge oic-a">OIC-277-23 A</span>
-  <span class="oic-badge oic-b">OIC-277-24 B</span>
-  <span class="oic-badge oic-a">OIC-277-25 A</span>
-  <span class="oic-badge oic-b">OIC-277-26 B</span>
-  <span class="oic-badge oic-b">OIC-277-27 B</span>
-  <span class="oic-badge oic-a">OIC-277-28 A</span>
-</div>
-
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--teal)">
-      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
-    </div>
-    Lithiase symptomatique simple — OIC-277-22 A
-  </div>
-  <p style="font-size:.83rem;">Antalgiques pour la crise. Une fois la crise calmée et en l'absence d'obstacle sur la VBP : <strong>cholécystectomie rapide (&lt; 1 mois)</strong> pour éviter récidive ou complication.</p>
-</div>
-
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--amber)">
-      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
-    </div>
-    Cholécystite aiguë — OIC-277-23 A &amp; 26 B
-  </div>
-  <ul class="steps">
-    <li><div class="step-num">1</div><div><strong>Antalgiques</strong></div></li>
-    <li><div class="step-num">2</div><div><strong>Antibiothérapie</strong> large spectre (germes digestifs) → adaptée à l'antibiogramme</div></li>
-    <li><div class="step-num">3</div><div><strong>Cholécystectomie en urgence</strong> — le plus tôt possible</div></li>
-  </ul>
-  <div class="compl-card" style="border-left-color:var(--red); margin-top:4px;">
-    <div class="compl-title" style="color:var(--red);">Complications septiques (OIC-277-28 A)</div>
-    <div class="pills">
-      <span class="pill pill-red">Abcès péri-vésiculaire ou hépatique</span>
-      <span class="pill pill-red">Péritonite biliaire (perforation)</span>
-      <span class="pill pill-red">Fistule bilio-digestive</span>
-    </div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--red)">
-      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
-    </div>
-    Angiocholite aiguë — OIC-277-24 B &amp; 25 A
-  </div>
-  <ul class="steps">
-    <li><div class="step-num">1</div><div><strong>Antibiothérapie large spectre sans délai</strong> après prélèvements bactériologiques</div></li>
-    <li><div class="step-num">2</div><div><strong>Désobstruction VBP en urgence</strong> — CPRE (sphinctérotomie endoscopique + extraction du calcul sous AG avec duodénoscope à vision latérale)</div></li>
-    <li><div class="step-num">3</div><div><strong>Cholécystectomie secondaire</strong> selon terrain et présence ou non d'une cholécystite</div></li>
-  </ul>
-  <div class="alert alert-red mt8">
+  <div class="alert-icon">
     <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span><strong>Choc septique (OIC-277-25 A) :</strong> remplissage + amines + ATB IV immédiate → désobstruction endoscopique dès stabilisation hémodynamique. Si CPRE impossible : drainage percutané.</span>
   </div>
-  <div class="card mt12" style="background:rgba(55,138,221,.05); border-color:rgba(55,138,221,.2);">
-    <div class="card-title" style="margin-bottom:6px;">
-      <div class="card-icon" style="background:var(--blue)">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </div>
-      Désobstruction VBP hors urgence septique — OIC-277-27 B
-    </div>
-    <div class="grid2" style="margin-bottom:0;">
-      <div style="background:rgba(55,138,221,.07); border:1px solid rgba(55,138,221,.2); border-radius:10px; padding:10px;">
-        <p style="font-weight:700; font-size:.83rem; color:var(--blue); margin-bottom:4px;">En 1 temps chirurgical</p>
-        <p style="font-size:.82rem;">Cholécystectomie + désobstruction peropératoire VBP</p>
-      </div>
-      <div style="background:rgba(29,158,117,.07); border:1px solid rgba(29,158,117,.2); border-radius:10px; padding:10px;">
-        <p style="font-weight:700; font-size:.83rem; color:var(--teal); margin-bottom:4px;">En 2 temps</p>
-        <p style="font-size:.82rem;">Sphinctérotomie endoscopique (CPRE) → puis cholécystectomie</p>
-      </div>
-    </div>
-  </div>
+  <div><strong>Piège migration :</strong> cytolyse massive transitoire (&gt; 50 % en 48 h) SANS fièvre. Ne pas confondre avec hépatite aiguë. Dilatation VBP souvent absente à l'écho.</div>
 </div>
 
-<hr>
-
-<!-- SYNTHÈSE À RETENIR -->
-
-<div class="section-title">
-  <div class="section-icon" style="background:var(--green)">
-    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+<div class="alert alert-amber">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
   </div>
-  Synthèse — Points rang A à retenir absolument
+  <div><strong>Piège angiocholite :</strong> triade de Charcot souvent incomplète. Suffit : cholestase + syndrome infectieux. 3 évolutions graves = abcès hépatiques · choc septique · défaillance multiviscérale.</div>
 </div>
 
-<div class="card">
-  <div class="card-title">
-    <div class="card-icon" style="background:var(--green)">
-      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    Essentiels pour l'examen
+<div class="alert alert-red">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
   </div>
-  <ul style="font-size:.84rem; line-height:1.9;">
-    <li><strong>80 % des lithiases sont asymptomatiques</strong> → pas de dépistage. Risque cumulé de complication : 20 %.</li>
-    <li><strong>Colique hépatique = douleur &lt; 6 h, sans fièvre, sans ictère, bilan hépatique normal.</strong> Si durée &gt; 6 h → suspecter une cholécystite.</li>
-    <li><strong>3 DD à éliminer en priorité :</strong> SCA, UGD, pancréatite aiguë.</li>
-    <li><strong>Échographie = 1re intention</strong> dans toutes les situations lithiasiques (sensibilité 95 % pour calcul vésiculaire).</li>
-    <li><strong>Migration lithiasique :</strong> transaminases très élevées diminuant de &gt; 50 % en &lt; 48h, sans fièvre — signe clé du diagnostic.</li>
-    <li><strong>Triade de Charcot (48h) :</strong> douleur → fièvre → ictère = angiocholite. Incomplète dans de nombreux cas.</li>
-    <li><strong>Angiocholite = urgence :</strong> antibiothérapie immédiate + désobstruction biliaire (CPRE). Si choc : réanimation d'abord, CPRE après stabilisation.</li>
-    <li><strong>Cholécystite aiguë :</strong> antibiotiques + cholécystectomie en urgence (le plus tôt possible).</li>
-    <li><strong>Complications septiques de la cholécystite :</strong> abcès, péritonite biliaire, fistule bilio-digestive.</li>
-  </ul>
+  <div><strong>Urgence absolue :</strong> choc septique sur angiocholite = réanimation PUIS désobstruction (jamais l'inverse). CPRE = traitement étiologique prioritaire.</div>
 </div>
 
+<div class="alert alert-blue">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  </div>
+  <div><strong>Imagerie :</strong> échographie = 1re intention dans TOUTES les situations. Bili-IRM et écho-endoscopie = meilleurs examens pour calcul cholédocien (pas en 1re intention). TDM inférieur à ces deux pour les calculs VBP.</div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
 </body>
 </html>
