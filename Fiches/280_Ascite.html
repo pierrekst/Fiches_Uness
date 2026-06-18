@@ -1,371 +1,607 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-<link rel="icon" href="../favicon.svg">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item 280 - Ascite</title>
-    <style>
-        :root {
-            --purple: #534AB7;
-            --teal: #1D9E75;
-            --coral: #D85A30;
-            --blue: #378ADD;
-            --red: #E24B4A;
-            --bg-color: transparent;
-            --text-color: #333333;
-            --card-bg: #FFFFFF;
-            --card-border: rgba(0,0,0,0.1);
-            --pill-green-bg: #e6f4ea; --pill-green-text: #137333;
-            --pill-red-bg: #fce8e6; --pill-red-text: #c5221f;
-            --pill-blue-bg: #e8f0fe; --pill-blue-text: #1967d2;
-            --pill-amber-bg: #fef7e0; --pill-amber-text: #b06000;
-            --alert-blue-bg: #e8f0fe; --alert-blue-border: #8ab4f8;
-            --alert-red-bg: #fce8e6; --alert-red-border: #f28b82;
-            --alert-green-bg: #e6f4ea; --alert-green-border: #81c995;
-            --alert-amber-bg: #fef7e0; --alert-amber-border: #fde293;
-            --hr-color: #eaeaea;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 280 — Ascite</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --text-color: #e8eaed;
-                --card-bg: #202124;
-                --card-border: rgba(255,255,255,0.1);
-                --pill-green-bg: rgba(29, 158, 117, 0.2); --pill-green-text: #81c995;
-                --pill-red-bg: rgba(226, 75, 74, 0.2); --pill-red-text: #f28b82;
-                --pill-blue-bg: rgba(55, 138, 221, 0.2); --pill-blue-text: #8ab4f8;
-                --pill-amber-bg: rgba(216, 90, 48, 0.2); --pill-amber-text: #fde293;
-                --alert-blue-bg: rgba(55, 138, 221, 0.1); --alert-blue-border: #378ADD;
-                --alert-red-bg: rgba(226, 75, 74, 0.1); --alert-red-border: #E24B4A;
-                --alert-green-bg: rgba(29, 158, 117, 0.1); --alert-green-border: #1D9E75;
-                --alert-amber-bg: rgba(216, 90, 48, 0.1); --alert-amber-border: #D85A30;
-                --hr-color: #3c4043;
-            }
-        }
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
 
-        h1, h2, h3 {
-            color: var(--text-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
 
-        .oic-code {
-            display: block;
-            font-size: 0.85em;
-            color: #888;
-            margin-bottom: 15px;
-            font-weight: normal;
-        }
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 
-        .badge {
-            font-size: 0.5em;
-            padding: 4px 8px;
-            border-radius: 12px;
-            color: white;
-            vertical-align: middle;
-            font-weight: bold;
-        }
-        .badge-a { background-color: var(--coral); }
-        .badge-b { background-color: var(--blue); }
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
 
-        .card {
-            background-color: var(--card-bg);
-            border: 0.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
 
-        .card-complication {
-            border-left: 4px solid var(--red);
-        }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr; }
-        }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
 
-        .pill {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 16px;
-            font-size: 0.9em;
-            margin: 2px;
-            font-weight: 500;
-        }
-        .pill-green { background-color: var(--pill-green-bg); color: var(--pill-green-text); }
-        .pill-red { background-color: var(--pill-red-bg); color: var(--pill-red-text); }
-        .pill-blue { background-color: var(--pill-blue-bg); color: var(--pill-blue-text); }
-        .pill-amber { background-color: var(--pill-amber-bg); color: var(--pill-amber-text); }
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
 
-        .alert {
-            padding: 15px;
-            border-left: 4px solid;
-            border-radius: 4px 8px 8px 4px;
-            margin-bottom: 20px;
-        }
-        .alert-red { background-color: var(--alert-red-bg); border-color: var(--alert-red-border); }
-        .alert-blue { background-color: var(--alert-blue-bg); border-color: var(--alert-blue-border); }
-        .alert-green { background-color: var(--alert-green-bg); border-color: var(--alert-green-border); }
-        .alert-amber { background-color: var(--alert-amber-bg); border-color: var(--alert-amber-border); }
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
 
-        .step {
-            display: flex;
-            margin-bottom: 15px;
-        }
-        .step-number {
-            background-color: #888;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9em;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--card-border);
-        }
-        th {
-            background-color: rgba(0,0,0,0.02);
-            font-weight: bold;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            th { background-color: rgba(255,255,255,0.05); }
-        }
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
 
-        hr {
-            border: 0;
-            height: 1px;
-            background: var(--hr-color);
-            margin: 40px 0;
-        }
-        
-        .icon {
-            width: 28px;
-            height: 28px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-    </style>
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
 </head>
 <body>
+<div class="page">
 
-    <!-- SECTION 1 -->
-    <h2>
-        <svg class="icon" viewBox="0 0 24 24"><path d="M12 9h.01"/><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z"/><path d="M12 12v4"/></svg>
-        1. Définition et Présentation Clinique
-        <span class="badge badge-a">Rang A</span>
-        <span class="badge badge-b">Rang B</span>
-    </h2>
-    <span class="oic-code">OIC-280-01-A • OIC-280-04-B</span>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 280</div>
+  <h1>Ascite</h1>
+  <div class="header-sub">Épanchement liquidien libre dans la cavité péritonéale — démarche diagnostique et étiologique</div>
+  <div class="header-tags">
+    <span class="htag">Gastro-entérologie</span>
+    <span class="htag">Hépato-gastro</span>
+    <span class="htag">Urgence si cirrhose</span>
+  </div>
+</div>
 
-    <div class="card">
-        <div class="alert alert-blue">
-            <strong>Définition :</strong> L'ascite est un <b>épanchement libre dans la cavité péritonéale</b>.
-            <br><em>L'hémopéritoine est exclu de cette définition.</em>
-        </div>
+<!-- VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Vision globale de l'item :</strong> Cet item demande de savoir reconnaître une ascite cliniquement, d'en conduire la démarche diagnostique (clinique + ponction exploratrice systématique + imagerie), d'interpréter les caractéristiques biochimiques du liquide pour identifier l'étiologie, et de connaître les deux causes majeures en France. Le fil rouge : <strong>toute ascite doit être ponctionnée</strong> — la ponction est à la fois diagnostique et urgente chez le cirrhotique (dépistage d'infection spontanée potentiellement asymptomatique). Les valeurs seuils (protides 25 g/L, gradient albumine 11 g/L, PNN 250/mm³) sont directement tombables à l'examen.
+</div>
 
-        <h3>Signes d'appel cliniques</h3>
-        <p>En cas de distension abdominale, on recherche :</p>
-        <ul>
-            <li>Une <strong>matité déclive dans les flancs</strong> (sensibilité et spécificité de 70%, témoigne d'un volume > 1500 mL).</li>
-            <li>Une <strong>dyspnée</strong> (si volume important ou épanchement pleural associé).</li>
-            <li>Chez le patient obèse, les signes cliniques peuvent être difficiles à mettre en évidence.</li>
-        </ul>
-        
-        <div class="alert alert-amber">
-            <strong>Diagnostics différentiels :</strong>
-            <br>• Globe vésical (matité hypogastrique à limite supérieure concave, non mobile)
-            <br>• Volumineux kyste (ovarien, rénal, hépatique)
-        </div>
+<hr>
 
-        <div class="card-complication card" style="margin-top: 15px;">
-            <strong>Complication mécanique :</strong> En cas de volumineuse ascite, une hernie abdominale peut apparaître, avec un <b>risque d'étranglement et de rupture</b> (surtout ombilicale).
-        </div>
+<!-- SECTION 1 — DÉFINITION & CAUSES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition et causes principales
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir l'ascite et connaître ce qu'elle exclut (hémopéritoine)</div>
+  <div class="obj-line">Citer les deux causes les plus fréquentes en France et leurs critères d'orientation biochimiques</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Définition
     </div>
-
-    <hr>
-
-    <!-- SECTION 2 -->
-    <h2>
-        <svg class="icon" viewBox="0 0 24 24"><path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z" stroke-width="0" fill="currentColor"/></svg>
-        2. La Ponction d'Ascite et Analyse du Liquide
-        <span class="badge badge-b">Rang B</span>
-    </h2>
-    <span class="oic-code">OIC-280-03-B</span>
-
-    <div class="card">
-        <p>L’étude du liquide est primordiale. <b>La ponction exploratrice est systématique devant toute suspicion d’ascite.</b></p>
-        
-        <div class="alert alert-red">
-            La ponction est <strong>urgente</strong> en cas de cirrhose ou de suspicion d’infection du liquide d’ascite.
-        </div>
-
-        <div class="grid-2">
-            <div>
-                <h3>Technique</h3>
-                <div class="step"><div class="step-number">1</div><div>Patient allongé. Désinfection cutanée (± anesthésie locale).</div></div>
-                <div class="step"><div class="step-number">2</div><div>Ponction dans la <b>fosse iliaque gauche</b>, en pleine matité, au tiers externe de la ligne ombilic-épine iliaque antéro-supérieure gauche.</div></div>
-                <div class="step"><div class="step-number">3</div><div>Prélèvements (biochimie, bactério, cytologie) puis évacuation si besoin (max 6 à 8 litres).</div></div>
-                <div class="alert alert-blue" style="padding: 10px; margin-top: 10px;">
-                    <strong>Chez le cirrhotique :</strong> Compensation systématique avec de l'albumine (1 flacon à 20% pour 2 litres ponctionnés).
-                </div>
-            </div>
-            <div>
-                <h3>Aspect macroscopique</h3>
-                <ul>
-                    <li><span class="pill pill-blue">Citrin</span> : le plus fréquent.</li>
-                    <li><span class="pill pill-amber">Chyleux</span> : évoque une compression lymphatique.</li>
-                    <li><span class="pill pill-red">Hémorragique</span> : évoque une néoplasie (demander l'hématocrite pour éliminer un hémopéritoine si < 1%).</li>
-                </ul>
-                <p><em>Attention : l'aspect n'est pas spécifique et ne remplace pas l'analyse.</em></p>
-            </div>
-        </div>
-
-        <h3>Analyses indispensables du liquide</h3>
-        
-        <h4>1. Biochimie (Taux de protides)</h4>
-        <p>C'est l'examen de première intention pour classer l'ascite :</p>
-        <ul>
-            <li><strong>Ascite pauvre en protides</strong> : &lt; 25 g/L (ex: Cirrhose).</li>
-            <li><strong>Ascite riche en protides</strong> : &gt; 25 g/L.</li>
-        </ul>
-        <div class="alert alert-green">
-            <strong>Gradient d'albumine (Sérum - Ascite) :</strong> S'il est <b>&gt; 11 g/L</b>, il est très spécifique d'une ascite liée à une <strong>hypertension portale</strong>.
-        </div>
-
-        <h4>2. Cytologie (Comptage cellulaire)</h4>
-        <div class="card-complication card">
-            <strong>Infection Spontanée du Liquide d'Ascite (ISLA) :</strong>
-            <br>• Complication fréquente de la cirrhose (asymptomatique dans >20% des cas).
-            <br>• Met en jeu le pronostic vital à court terme.
-            <br>• Diagnostic : <strong>PNN &gt; 250/mm³</strong>.
-            <br><em>Un taux de PNN à plusieurs milliers fait rechercher une perforation d'organe creux.</em>
-        </div>
-
-        <h4>3. Bactériologie</h4>
-        <p>Ensemencement dans des flacons d'hémocultures aéro/anaérobies. Un germe n'est identifié que dans 40% des cas.</p>
+    <div class="kv-row"><span class="kv-key">Ascite</span><span class="kv-val">Épanchement <em>libre</em> dans la cavité péritonéale</span></div>
+    <div class="kv-row"><span class="kv-key">Hémopéritoine</span><span class="kv-val">Exclu de la définition</span></div>
+    <div class="kv-row"><span class="kv-key">Volume détectable cliniquement</span><span class="kv-val">&ge; 1 500 mL</span></div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Deux causes majeures en France
     </div>
-
-    <hr>
-
-    <!-- SECTION 3 -->
-    <h2>
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 14h6v6h-6z"/></svg>
-        3. Les Grandes Étiologies
-        <span class="badge badge-a">Rang A</span>
-        <span class="badge badge-b">Rang B</span>
-    </h2>
-    <span class="oic-code">OIC-280-02-A • OIC-280-04-B</span>
-
-    <div class="card">
-        <p>Les deux causes les plus fréquentes en France sont la <strong>cirrhose</strong> et la <strong>carcinose péritonéale</strong>.</p>
-        
-        <h3>Tableau Comparatif des Étiologies</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Cause</th>
-                    <th>Éléments Cliniques</th>
-                    <th>Taux de Protides</th>
-                    <th>Gradient Albumine</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Cirrhose</strong></td>
-                    <td>Signes d'insuffisance hépatocellulaire et d'HTP. Ascite volumineuse (++++).</td>
-                    <td><span class="pill pill-blue">&lt; 25 g/L</span></td>
-                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Carcinose péritonéale</strong></td>
-                    <td>Cancer connu, douleurs (++), signes obstructifs (++).</td>
-                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
-                    <td><span class="pill pill-blue">&lt; 11 g/L</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Syndrome de Budd-Chiari</strong></td>
-                    <td>Sujet jeune, thrombophilie.</td>
-                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
-                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Insuffisance cardiaque droite / Péricardite constrictive</strong></td>
-                    <td>Cardiopathie connue. <br><em>Péricardite: post-chirurgie card, tuberculose.</em></td>
-                    <td><span class="pill pill-red">&gt; 25 g/L</span></td>
-                    <td><span class="pill pill-red">&ge; 11 g/L</span></td>
-                </tr>
-                <tr>
-                    <td><strong>Syndrome néphrotique</strong></td>
-                    <td>Œdèmes importants, prise de poids, protéinurie &gt; 3g/L.</td>
-                    <td><span class="pill pill-blue">&lt; 25 g/L</span></td>
-                    <td><span class="pill pill-blue">&lt; 11 g/L</span></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="pills" style="margin-top:8px;">
+      <span class="pill pill-teal">1. Cirrhose</span>
+      <span class="pill pill-red">2. Carcinose péritonéale</span>
     </div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:10px;">Ces deux étiologies représentent la très grande majorité des ascites rencontrées en pratique clinique.</p>
+  </div>
+</div>
 
-    <hr>
-
-    <!-- SECTION 4 -->
-    <h2>
-        <svg class="icon" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2"/><path d="M4 16v2a2 2 0 0 0 2 2h2"/><path d="M16 4h2a2 2 0 0 1 2 2v2"/><path d="M16 20h2a2 2 0 0 0 2-2v-2"/><path d="M9 10l.01 0"/><path d="M15 10l.01 0"/><path d="M9.5 15a3.5 3.5 0 0 0 5 0"/></svg>
-        4. Bilan d'Imagerie
-        <span class="badge badge-a">Rang A</span>
-    </h2>
-    <span class="oic-code">OIC-280-05-A</span>
-
-    <div class="card">
-        <h3>L'Échographie-Doppler abdominale</h3>
-        <p>C'est l'examen radiologique de <strong>première intention</strong>. Ses intérêts :</p>
-        <ul>
-            <li>Détecter de très faibles volumes de liquide.</li>
-            <li>Rechercher des signes d'hypertension portale et de cirrhose.</li>
-            <li><strong>Guider la paracentèse</strong> (ponction) pour éviter les complications (surtout si ascite de faible abondance, cloisonnée, ou patient obèse).</li>
-        </ul>
-
-        <div class="alert alert-amber">
-            <strong>Imageries en coupe :</strong>
-            <br>Le scanner ou l'IRM ne sont <b>pas indiqués en première intention</b> pour l'exploration de l'ascite.
-            <br>Ils sont utiles pour le diagnostic étiologique, notamment en <em>l'absence de cirrhose</em> (ex: Scanner TAP ou IRM hépatique).
-        </div>
+<!-- Tableau causes -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
     </div>
+    Tableau étiologique — Caractéristiques biochimiques selon la cause
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Organe</th>
+        <th>Pathologie</th>
+        <th>Éléments d'orientation</th>
+        <th>Protides ascite</th>
+        <th>Gradient albumine<br><small>(sang – ascite)</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>Foie</strong></td>
+        <td><span class="badge badge-green">1re cause</span> Cirrhose</td>
+        <td>Facteurs de risque hépatique, signes de cirrhose</td>
+        <td><span class="badge badge-blue">&lt; 25 g/L</span></td>
+        <td><span class="badge badge-green">&ge; 11 g/L</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>Péritoine</strong></td>
+        <td><span class="badge badge-red">2e cause</span> Carcinose péritonéale</td>
+        <td>Cancer connu, syndrome occlusif</td>
+        <td><span class="badge badge-red">&gt; 25 g/L</span></td>
+        <td><span class="badge badge-amber">&lt; 11 g/L</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>Vaisseaux</strong></td>
+        <td>Sd. de Budd-Chiari</td>
+        <td>Sujet jeune, thrombophilie</td>
+        <td><span class="badge badge-red">&gt; 25 g/L</span></td>
+        <td><span class="badge badge-green">&ge; 11 g/L</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;" rowspan="2"><strong>Cœur</strong></td>
+        <td>Insuffisance cardiaque droite</td>
+        <td>Cardiopathie connue, signes ICD</td>
+        <td><span class="badge badge-red">&gt; 25 g/L</span></td>
+        <td><span class="badge badge-green">&ge; 11 g/L</span></td>
+      </tr>
+      <tr>
+        <td>Péricardite constrictive</td>
+        <td>Chirurgie cardiaque récente, tuberculose</td>
+        <td><span class="badge badge-red">&gt; 25 g/L</span></td>
+        <td><span class="badge badge-green">&ge; 11 g/L</span></td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center;"><strong>Rein</strong></td>
+        <td>Syndrome néphrotique</td>
+        <td>Protéinurie &gt; 3 g/L, oedèmes importants</td>
+        <td><span class="badge badge-blue">&lt; 25 g/L</span></td>
+        <td><span class="badge badge-amber">&lt; 11 g/L</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Gradient albumine sang-ascite &ge; 11 g/L</strong> = très spécifique d'une ascite par hypertension portale (cirrhose, Budd-Chiari, insuffisance cardiaque)</div>
+  </div>
+</div>
 
+<hr>
+
+<!-- SECTION 2 — DÉMARCHE DIAGNOSTIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Démarche diagnostique clinique et paraclinique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les étapes successives de la démarche diagnostique devant une ascite (affirmer, mécanisme, cause)</div>
+  <div class="obj-line">Savoir orienter selon les signes cliniques différentiels (cirrhose vs carcinose)</div>
+  <div class="obj-line">Connaître les diagnostics différentiels de la matité abdominale</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Examen clinique — points-clés
+    </div>
+    <ul class="lst">
+      <li>Matité déclive dans les flancs : sensibilité/spécificité ~70%, signe &ge; 1 500 mL</li>
+      <li>Distension abdominale + signe du flot</li>
+      <li>Hernie abdominale possible si volumineuse ascite (risque d'étranglement)</li>
+      <li>Dyspnée si ascite volumineuse ou épanchement pleural associé</li>
+      <li>Obèse : signes difficiles à mettre en évidence</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Diagnostics différentiels à évoquer
+    </div>
+    <ul class="lst">
+      <li><strong>Globe vésical</strong> : matité hypogastrique, limite supérieure concave vers le bas, non mobile</li>
+      <li><strong>Kyste volumineux</strong> : ovarien, rénal ou hépatique</li>
+      <li>Obésité : masse graisseuse abdominale</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Comparatif clinique cirrhose vs carcinose -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Comparatif clinique : Cirrhose vs Carcinose péritonéale
+  </div>
+  <table class="table-teal">
+    <thead>
+      <tr>
+        <th>Critère clinique</th>
+        <th>Cirrhose</th>
+        <th>Carcinose péritonéale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Volume de l'ascite</td>
+        <td><span class="pill pill-teal">Volumineux ++++</span></td>
+        <td><span class="pill pill-amber">Modéré +</span></td>
+      </tr>
+      <tr>
+        <td>Douleur abdominale</td>
+        <td><span class="pill pill-gray">Absent</span></td>
+        <td><span class="pill pill-red">Présente ++</span></td>
+      </tr>
+      <tr>
+        <td>Signes obstructifs</td>
+        <td><span class="pill pill-gray">Absent</span></td>
+        <td><span class="pill pill-red">Présents ++</span></td>
+      </tr>
+      <tr>
+        <td>Ascite cloisonnée</td>
+        <td><span class="pill pill-gray">Non</span></td>
+        <td><span class="pill pill-red">Oui ++</span></td>
+      </tr>
+      <tr>
+        <td>Oedèmes membres inférieurs</td>
+        <td><span class="pill pill-teal">Présents +++</span></td>
+        <td><span class="pill pill-amber">Inconstants +/-</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Interrogatoire -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Interrogatoire ciblé — antécédents à rechercher
+  </div>
+  <div class="grid2" style="margin-top:8px;margin-bottom:0;">
+    <ul class="lst">
+      <li>Facteurs de risque d'hépatopathie chronique (alcool, VHB, VHC, NASH)</li>
+      <li>Cancer solide ou hémopathie connu(e)</li>
+      <li>Cardiopathie / péricardite</li>
+    </ul>
+    <ul class="lst">
+      <li>Néphropathie</li>
+      <li>Tuberculose</li>
+      <li>Chirurgie ou traumatisme abdominal</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 — PONCTION D'ASCITE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Ponction d'ascite — technique et analyse du liquide
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications, la technique et les conditions de la ponction exploratrice (site, volume max, compensation albumine)</div>
+  <div class="obj-line">Interpréter les caractéristiques biochimiques (protides, gradient albumine) et cytologiques (PNN) du liquide</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Indication systématique :</strong> Ponction exploratrice devant <em>toute</em> suspicion d'ascite. <strong>Urgente</strong> en cas de cirrhose ou de suspicion d'infection du liquide (ISLA asymptomatique dans &gt; 20% des cas).</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Technique de ponction
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><div class="step-title">Position et site</div><div class="step-content">Patient allongé — FIG en pleine matité, 1/3 externe de la ligne ombilic–épine iliaque antéro-supérieure gauche</div></div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><div class="step-title">Asepsie ± ALR</div><div class="step-content">Désinfection cutanée, anesthésie locale possible, cathéter mis en place</div></div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><div class="step-title">Prélèvements</div><div class="step-content">Biochimie + cytologie + bactériologie (flacons hémocultures aéro/anaérobies)</div></div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div><div class="step-title">Évacuation</div><div class="step-content">Max <strong>6–8 litres</strong> par ponction</div></div>
+      </li>
+      <li>
+        <span class="step-num">5</span>
+        <div><div class="step-title">Compensation (cirrhose)</div><div class="step-content"><strong>1 flacon albumine 20% pour 2 L ponctionnés</strong></div></div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Aspect macroscopique — valeur limitée
+    </div>
+    <div class="kv-row"><span class="kv-key">Citrin</span><span class="kv-val">Le plus fréquent (peu spécifique)</span></div>
+    <div class="kv-row"><span class="kv-key">Chyleux</span><span class="kv-val">Compression lymphatique possible</span></div>
+    <div class="kv-row"><span class="kv-key">Hémorragique</span><span class="kv-val">Peut évoquer néoplasie — doser hématocrite</span></div>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> Aspect macroscopique très peu spécifique — ne peut jamais se substituer à l'analyse biochimique et cytologique.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Analyse du liquide — tableau complet -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Analyse du liquide d'ascite — valeurs seuils et interprétation
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Examen</th>
+        <th>Seuil / Valeur clé</th>
+        <th>Interprétation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Protides</strong></td>
+        <td><span class="badge badge-blue">Seuil : 25 g/L</span></td>
+        <td>&lt; 25 g/L = ascite pauvre (cirrhose, SN) — &gt; 25 g/L = ascite riche (carcinose, Budd-Chiari, IC)</td>
+      </tr>
+      <tr>
+        <td><strong>Gradient albumine</strong><br><small>(sérum – ascite)</small></td>
+        <td><span class="badge badge-green">Seuil : 11 g/L</span></td>
+        <td>&ge; 11 g/L = très spécifique d'une hypertension portale</td>
+      </tr>
+      <tr>
+        <td><strong>PNN</strong></td>
+        <td><span class="badge badge-red">Seuil : 250/mm³</span></td>
+        <td>ISLA si &gt; 250/mm³ (en l'absence de foyer infectieux contiguë)<br>Plusieurs milliers/mm³ : chercher une perforation d'organe creux</td>
+      </tr>
+      <tr>
+        <td><strong>Hématocrite</strong> (liquide hémorragique)</td>
+        <td>&lt; 1%</td>
+        <td>Exclut un hémopéritoine si &lt; 1%</td>
+      </tr>
+      <tr>
+        <td><strong>Bactériologie</strong></td>
+        <td>Flacons hémocultures aéro/anaérobies</td>
+        <td>Germe identifié dans ~40% des ISLA seulement</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège ISLA :</strong> Seule l'ascite de la cirrhose peut s'infecter spontanément. L'ISLA est asymptomatique dans &gt; 20% des cas — le comptage des PNN doit être réalisé en urgence chez tout cirrhotique avec ascite de novo ou récidivante. Tout retard diagnostique augmente significativement la mortalité.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 — IMAGERIE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Imagerie de première intention
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'examen radiologique de première intention et ses apports diagnostiques</div>
+  <div class="obj-line">Connaître les indications des imageries en coupe dans ce contexte (2e intention, bilan étiologique)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      1re intention — Échographie-Doppler abdominale
+    </div>
+    <ul class="lst">
+      <li>Innocuité + facilité d'accès = examen de référence</li>
+      <li>Détecte de très faibles volumes</li>
+      <li>Recherche signes d'hypertension portale et de cirrhose</li>
+      <li>Guide la paracentèse (obésité, ascite de faible abondance ou cloisonnée)</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Imageries en coupe — 2e intention uniquement
+    </div>
+    <ul class="lst">
+      <li><strong>Non indiquées en première intention</strong></li>
+      <li>Scanner abdomino-pelvien avec injection : bilan étiologique en l'absence de cirrhose (attention à la fonction rénale)</li>
+      <li>IRM hépatique : alternative selon contexte</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège examen :</strong> Le scanner n'est <em>pas</em> l'examen de première intention — c'est l'échographie-Doppler abdominale. Le scanner est réservé au bilan étiologique, notamment en l'absence de cirrhose.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 — POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Algorithme décisionnel condensé
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="step-num">1</span>
+        <div><div class="step-title">Affirmer l'ascite</div><div class="step-content">Matité déclive + échographie abdominale (1re intention)</div></div>
+      </li>
+      <li>
+        <span class="step-num">2</span>
+        <div><div class="step-title">Ponction exploratrice systématique</div><div class="step-content">Biochimie + cytologie (PNN en urgence si cirrhose) + bactériologie</div></div>
+      </li>
+      <li>
+        <span class="step-num">3</span>
+        <div><div class="step-title">Interpréter protides + gradient albumine</div><div class="step-content">Orienter vers l'étiologie</div></div>
+      </li>
+      <li>
+        <span class="step-num">4</span>
+        <div><div class="step-title">PNN &gt; 250/mm³ → ISLA</div><div class="step-content">Traitement antibiotique sans délai + compensation albumine</div></div>
+      </li>
+      <li>
+        <span class="step-num">5</span>
+        <div><div class="step-title">Scanner/IRM si étiologie non cirrhosique</div><div class="step-content">2e intention — bilan complémentaire selon orientation clinique</div></div>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence absolue :</strong> Ascite cirrhotique — toujours ponctionner pour rechercher l'ISLA, même en l'absence de symptôme infectieux.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège classique :</strong> L'aspect macroscopique du liquide (citrin, chyleux, hémorragique) est peu spécifique — ne peut jamais se substituer à l'analyse biochimique et cytologique.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Chiffres tombables :</strong> Seuil protides = <strong>25 g/L</strong> — Gradient albumine = <strong>11 g/L</strong> — Seuil ISLA (PNN) = <strong>250/mm³</strong> — Volume max ponction = <strong>6–8 L</strong> — Albumine 20% : <strong>1 flacon / 2 L</strong> ponctionnés</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>À retenir absolument :</strong> Seule l'ascite de la <strong>cirrhose</strong> peut s'infecter spontanément (ISLA). La carcinose et les autres causes ne donnent pas d'ISLA.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
 
-**Avancement : 155 / 367 items (42.2%)**
+**Avancement : 158 / 367 items (43.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -248,9 +248,9 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant_v2.html |
 | 239 | [ ] | Acrosyndromes | — |
 | 240 | [x] | Hypoglycémie chez l adulte et l enfant | 240_hypoglycemie.html |
-| 241 | [ ] | Goitre | — |
-| 242 | [ ] | Hyperthyroïdie | — |
-| 243 | [ ] | Hypothyroïdie | — |
+| 241 | [x] | Goitre | 241_Goitre_nodules_cancers_thyroidiens.html |
+| 242 | [x] | Hyperthyroïdie | 242_Hyperthyroidie.html |
+| 243 | [x] | Hypothyroïdie | 243_Hypothyroidie.html |
 | 244 | [ ] | Adénome hypophysaire | — |
 | 245 | [ ] | Insuffisance surrénale chez l adulte et l enfant | — |
 | 246 | [ ] | Gynécomastie | — |

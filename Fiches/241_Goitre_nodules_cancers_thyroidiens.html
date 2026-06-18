@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 241 — Goitre, nodules thyroïdiens et cancers thyroïdiens</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* OBJECTIFS */
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  /* LISTES */
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  /* PHASES */
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  /* BORDER-LEFT SHORTCUTS */
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  /* SECTION BADGE */
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  /* PILLS supplémentaires */
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  /* TABLEAUX COLORÉS */
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  /* HEADER VARIANTES */
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  /* BORDER LEFT CARDS */
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  /* SECTION TITLES */
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* OBJ LIST */
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-num">Item 241</div>
+    <h1>Goitre, nodules thyroïdiens et cancers thyroïdiens</h1>
+    <div class="header-sub">Endocrinologie — Pathologie thyroïdienne</div>
+    <div class="header-tags">
+      <span class="htag">Goitre</span>
+      <span class="htag">Nodule thyroïdien</span>
+      <span class="htag">Eu-TIRADS</span>
+      <span class="htag">Cytoponction / Bethesda</span>
+      <span class="htag">Cancers thyroïdiens</span>
+    </div>
+  </div>
+
+  <!-- VISION GLOBALE -->
+  <div class="objectifs">
+    <strong>Vision globale.</strong> Cet item couvre deux grandes pathologies fréquentes en pratique courante. D'abord le <strong>goitre</strong> : savoir le définir, connaître ses étiologies principales (Basedow, Hashimoto, De Quervain) et ses trois complications évolutives clés. Ensuite le <strong>nodule thyroïdien</strong> : maîtriser le bilan de première intention, l'utilisation de l'échographie (Eu-TIRADS) et la place de la cytoponction (Bethesda) pour trancher entre bénin et malin. Enfin, connaître les types histologiques des cancers thyroïdiens et les principes généraux de prise en charge.
+  </div>
+
+  <!-- ============================
+       SECTION 1 — GOITRE
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    Définition, étiologies et complications du goitre
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Définir un goitre et distinguer goitre simple de goitre nodulaire</div>
+    <div class="obj-line">Citer les trois principaux diagnostics étiologiques de goitre</div>
+    <div class="obj-line">Citer les trois principales complications évolutives d'un goitre</div>
+    <div class="obj-line">Identifier les facteurs favorisants de goitre, nodules et cancer</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Définitions
+      </div>
+      <div class="kv-row"><span class="kv-key">Goitre</span><span class="kv-val">Augmentation du volume thyroïdien (diffuse ou nodulaire)</span></div>
+      <div class="kv-row"><span class="kv-key">Goitre simple</span><span class="kv-val">Augmentation sans nodule, en euthyroïdie</span></div>
+      <div class="kv-row"><span class="kv-key">Nodule thyroïdien</span><span class="kv-val">Hypertrophie localisée de la thyroïde</span></div>
+    </div>
+
+    <div class="card card-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Facteurs favorisants
+      </div>
+      <table>
+        <thead>
+          <tr><th>Goitre / Nodules</th><th>Cancer thyroïdien</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Déficience iodée <em>(principal)</em></td><td>Irradiation cervicale dans l'enfance (×7)</td></tr>
+          <tr><td>Prédisposition familiale</td><td>ATCD familial de NEM2 (mutation RET)</td></tr>
+          <tr><td>Facteurs hormonaux (puberté, grossesse)</td><td rowspan="2" style="vertical-align:middle; text-align:center;">Antécédents familiaux de CMT</td></tr>
+          <tr><td>Tabac, lithium</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3 étiologies de goitre -->
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      3 étiologies principales de goitre
+    </div>
+    <table class="table-blue">
+      <thead>
+        <tr><th>Maladie</th><th>Profil typique</th><th>Goitre</th><th>Biologie / Clé</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Basedow</strong></td>
+          <td>Femme jeune</td>
+          <td>Diffus, souple</td>
+          <td>Hyperthyroïdie + Ac anti-RTSH ; orbitopathie possible</td>
+        </tr>
+        <tr>
+          <td><strong>Hashimoto</strong></td>
+          <td>Femme d'âge moyen</td>
+          <td>Ferme, homogène</td>
+          <td>Hypothyroïdie + Ac anti-TPO / anti-Tg positifs</td>
+        </tr>
+        <tr>
+          <td><strong>De Quervain</strong></td>
+          <td>Adulte, rare</td>
+          <td>Douloureux, très ferme, irrégulier, brutal</td>
+          <td>CRP élevée + hyperthyroïdie transitoire</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3 complications évolutives -->
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      3 complications évolutives du goitre
+    </div>
+    <div class="grid3">
+      <div>
+        <div class="pills"><span class="pill-red">1 — Hyperthyroïdie</span></div>
+        <ul class="lst">
+          <li>TSH basse</li>
+          <li>Signes de thyrotoxicose</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pills"><span class="pill-amber">2 — Compression</span></div>
+        <ul class="lst">
+          <li>Dysphagie (œsophage)</li>
+          <li>Dyspnée, stridor (trachée)</li>
+          <li>Turgescence jugulaire, circulation collatérale (veines)</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pills"><span class="pill-red">3 — Cancer</span></div>
+        <ul class="lst">
+          <li>4-5 % des goitres plurinodulaires</li>
+          <li>Nodules suspects &gt; 1 cm → cytoponction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 2 — BILAN DU GOITRE ET DU NODULE
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Bilan de première intention : goitre et nodule
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Prescrire les examens d'imagerie appropriés devant un goitre ou un nodule</div>
+    <div class="obj-line">Indiquer les examens complémentaires de première intention devant un goitre</div>
+    <div class="obj-line">Connaître les indications du scanner cervico-thoracique et de la scintigraphie</div>
+    <div class="obj-line">Lister le bilan de première intention devant un nodule thyroïdien</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Bilan devant un goitre
+      </div>
+      <ul class="steps">
+        <li>
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">TSH</div>
+            <div class="step-content">Évalue la fonction thyroïdienne (eu-, hypo-, hyperthyroïdie)</div>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Échographie thyroïdienne</div>
+            <div class="step-content">Volume, parenchyme (thyroïdite ?), nodules, suivi évolutif</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Examens d'imagerie — indications spécifiques
+      </div>
+      <table>
+        <thead><tr><th>Examen</th><th>Indication</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Scanner cervico-thoracique</strong></td><td>Goitre plongeant : extension endothoracique, retentissement trachéal</td></tr>
+          <tr><td><strong>Scintigraphie thyroïdienne</strong></td><td>Hyperthyroïdie avérée (nodule chaud ?)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bilan nodule -->
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Bilan de 1ère intention devant un nodule thyroïdien
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Échographie thyroïdienne</div>
+          <div class="step-content">Caractérise le nodule, localise, estime le risque de malignité <strong>(classification Eu-TIRADS)</strong>, suit l'évolution</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">TSH</div>
+          <div class="step-content">Dépiste hyper- ou hypothyroïdie associée</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Calcitonine</div>
+          <div class="step-content">Indiquée si : ATCD familial CMT, suspicion de malignité à la cytoponction, avant toute intervention thyroïdienne</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 3 — ÉVALUATION CLINIQUE DU NODULE
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    Évaluation clinique du nodule thyroïdien
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Identifier les éléments de l'interrogatoire et de l'examen clinique orientant vers un nodule fonctionnel ou cancéreux</div>
+    <div class="obj-line">Décrire les deux problématiques à résoudre devant tout nodule</div>
+  </div>
+
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>2 problématiques fondamentales devant tout nodule :</strong><br>
+    1. Nodule <strong>fonctionnel ou non</strong> ? (10 % sont hyperfonctionnels « chauds » → risque hyperthyroïdie)<br>
+    2. Nodule <strong>bénin ou malin</strong> ? (environ 5 % sont des cancers)</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Interrogatoire
+      </div>
+      <table>
+        <thead><tr><th>Question</th><th>Oriente vers</th></tr></thead>
+        <tbody>
+          <tr><td>Signes de thyrotoxicose</td><td>Nodule fonctionnel</td></tr>
+          <tr><td>Irradiation cervicale dans l'enfance</td><td>Cancer</td></tr>
+          <tr><td>ATCD familiaux de CMT</td><td>Carcinome médullaire</td></tr>
+          <tr><td>Dysphagie, dyspnée, dysphonie</td><td>Signes compressifs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--coral);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Examen clinique
+      </div>
+      <table>
+        <thead><tr><th>Signe</th><th>Signification</th></tr></thead>
+        <tbody>
+          <tr><td>Nodule dur ou pierreux</td><td>Suspect de malignité</td></tr>
+          <tr><td>Adénopathies cervicales</td><td>Métastase ganglionnaire → cancer</td></tr>
+          <tr><td>Turgescence jugulaire, circulation collatérale</td><td>Compression veineuse</td></tr>
+          <tr><td>Consistance, volume, contours, évolutivité</td><td>Caractérisation du nodule</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 4 — CYTOPONCTION / BETHESDA
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    Cytoponction et classification de Bethesda
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Connaître les indications de la cytoponction à l'aiguille fine</div>
+    <div class="obj-line">Connaître la classification de Bethesda et son utilité pour estimer le risque de malignité</div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Indications de la cytoponction
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Condition préalable :</strong> TSH normale ou élevée (si TSH basse → scintigraphie d'abord pour éliminer un nodule chaud, qui ne sera pas ponctionné)</div>
+    </div>
+    <p style="font-size:.84rem;margin-bottom:8px;">Réaliser si au moins un critère :</p>
+    <ul class="lst">
+      <li>Nodule <strong>&gt; 1 cm suspect</strong> à l'écho : fortement hypoéchogène ET/OU microcalcifications ET/OU contours irréguliers ET/OU forme non ovalaire</li>
+      <li>Nodule + <strong>adénopathie(s) cervicale(s) suspecte(s)</strong></li>
+      <li>Nodule <strong>fixant en TEP-FDG</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Classification de Bethesda — 6 catégories
+    </div>
+    <table class="table-blue">
+      <thead>
+        <tr><th>Catégorie</th><th>Intitulé</th><th>Risque de malignité</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>I</strong></td><td>Non diagnostique</td><td><span class="badge badge-amber">Indéterminé</span></td></tr>
+        <tr><td><strong>II</strong></td><td>Bénin</td><td><span class="badge badge-green">Très faible &lt; 3 %</span></td></tr>
+        <tr><td><strong>III</strong></td><td>Atypies de signification indéterminée (AUS/FLUS)</td><td><span class="badge badge-amber">~10–30 %</span></td></tr>
+        <tr><td><strong>IV</strong></td><td>Lésion folliculaire / suspect de néoplasie folliculaire</td><td><span class="badge badge-amber">~25–40 %</span></td></tr>
+        <tr><td><strong>V</strong></td><td>Suspect de malignité</td><td><span class="badge badge-red">~60–75 %</span></td></tr>
+        <tr><td><strong>VI</strong></td><td>Malin</td><td><span class="badge badge-red">&gt; 97 %</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 5 — CANCERS THYROÏDIENS
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    Types histologiques des cancers thyroïdiens
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Connaître les cinq grands types histologiques et leur fréquence relative</div>
+    <div class="obj-line">Distinguer les cancers d'origine vésiculaire des cancers médullaires</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Classification histologique des cancers thyroïdiens
+    </div>
+    <table class="table-red">
+      <thead>
+        <tr><th>Type</th><th>Origine</th><th>Fréquence</th><th>Particularité clé</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Carcinome papillaire différencié</strong></td>
+          <td rowspan="4" style="vertical-align:middle; text-align:center;">Cellules folliculaires (épithéliales)</td>
+          <td><span class="badge badge-red">85 %</span></td>
+          <td>Le plus fréquent, bon pronostic</td>
+        </tr>
+        <tr>
+          <td><strong>Carcinome vésiculaire différencié</strong></td>
+          <td><span class="badge badge-amber">5 %</span></td>
+          <td>Diffusion hématogène</td>
+        </tr>
+        <tr>
+          <td><strong>Carcinome peu différencié / oncocytaire</strong></td>
+          <td><span class="badge badge-amber">2–5 %</span></td>
+          <td>Pronostic intermédiaire</td>
+        </tr>
+        <tr>
+          <td><strong>Carcinome anaplasique</strong></td>
+          <td><span class="badge badge-red">~1 %</span></td>
+          <td>Sujet âgé, pronostic très sombre</td>
+        </tr>
+        <tr>
+          <td><strong>Carcinome médullaire (CMT)</strong></td>
+          <td>Cellules C (parafolliculaires)</td>
+          <td><span class="badge badge-amber">5 %</span></td>
+          <td>Sécrète calcitonine ; forme sporadique ou NEM2 (mutation RET)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Les cancers vésiculaires d'origine folliculaire représentent <strong>90–95 %</strong> des cancers thyroïdiens au total. Le carcinome médullaire (CMT) est d'origine différente (cellules C) et a un marqueur spécifique : la <strong>calcitonine</strong>.</div>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 6 — PRISE EN CHARGE
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    Principes de prise en charge (hors cancer)
+  </div>
+
+  <div class="obj-list">
+    <div class="obj-line">Connaître les options thérapeutiques pour les goitres selon leur caractère symptomatique, fonctionnel ou suspect</div>
+    <div class="obj-line">Distinguer la prise en charge des nodules hyperfonctionnels de celle des nodules non fonctionnels</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card card-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Goitre — prise en charge
+      </div>
+      <table>
+        <thead><tr><th>Situation</th><th>Conduite à tenir</th></tr></thead>
+        <tbody>
+          <tr><td>Goitre multinodulaire en euthyroïdie, asymptomatique, sans suspicion</td><td>Surveillance</td></tr>
+          <tr><td>Gêne cervicale, évolution vers l'hyperthyroïdie, nodule suspect, goitre endothoracique</td><td>Chirurgie (thyroïdectomie)</td></tr>
+          <tr><td>Hyperthyroïdie, sujet âgé ou fragile</td><td>Iode 131 (irathérapie)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Nodules — prise en charge
+      </div>
+      <table>
+        <thead><tr><th>Type de nodule</th><th>Option</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hyperfonctionnel</strong> (nodule chaud)</td><td>Lobectomie <em>ou</em> Iode 131 (si âgé/fragile)</td></tr>
+          <tr><td><strong>Non fonctionnel bénin</strong></td><td>Surveillance clinique + écho</td></tr>
+          <tr><td>Bénin &gt; 40 mm symptomatique ou en progression</td><td>Chirurgie</td></tr>
+          <tr><td>Nodule <strong>suspect ou malin</strong></td><td>Chirurgie</td></tr>
+          <tr><td>Nodule <strong>indéterminé</strong> (Bethesda III/IV)</td><td>Discussion au cas par cas</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ============================
+       SECTION 7 — POINTS-CLÉS
+       ============================ -->
+  <div class="section-title">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    Points-clés à retenir
+  </div>
+
+  <div class="grid2">
+    <div class="card card-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Pièges classiques ECNi
+      </div>
+      <ul class="lst">
+        <li>Un nodule <strong>chaud</strong> (hyperfonctionnel) en scintigraphie → <strong>ne pas ponctionner</strong> (cancer exceptionnel)</li>
+        <li>La cytoponction est indiquée si TSH <strong>normale ou haute</strong>, jamais si TSH basse sans scintigraphie préalable</li>
+        <li>Le <strong>scanner cervico-thoracique</strong> est réservé au goitre <strong>plongeant</strong> — ne pas le prescrire en première intention devant un nodule simple</li>
+        <li>La calcitonine est dosée <strong>avant tout geste chirurgical</strong> thyroïdien pour ne pas rater un CMT</li>
+        <li>Radiothérapie cervicale dans l'enfance → facteur de risque majeur de cancer (×7)</li>
+        <li>Goitre de De Quervain : <strong>rare</strong>, douloureux, fièvre, CRP élevée — ne pas confondre avec Basedow ou Hashimoto</li>
+      </ul>
+    </div>
+
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Chiffres à retenir
+      </div>
+      <div class="kv-row"><span class="kv-key">Cancer dans goitre plurinodulaire</span><span class="kv-val">4–5 %</span></div>
+      <div class="kv-row"><span class="kv-key">Nodules cancéreux (tous confondus)</span><span class="kv-val">~5 %</span></div>
+      <div class="kv-row"><span class="kv-key">Nodules hyperfonctionnels</span><span class="kv-val">~10 %</span></div>
+      <div class="kv-row"><span class="kv-key">Carcinome papillaire (fréquence)</span><span class="kv-val">85 % des cancers</span></div>
+      <div class="kv-row"><span class="kv-key">Carcinomes d'origine folliculaire</span><span class="kv-val">90–95 % des cancers</span></div>
+      <div class="kv-row"><span class="kv-key">Carcinome médullaire</span><span class="kv-val">5 % des cancers</span></div>
+      <div class="kv-row"><span class="kv-key">Carcinome anaplasique</span><span class="kv-val">~1 %, pronostic très sombre</span></div>
+      <div class="kv-row"><span class="kv-key">Irradiation cervicale enfance</span><span class="kv-val">Risque cancer ×7</span></div>
+    </div>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Fil conducteur clinique.</strong> Devant tout goitre ou nodule : TSH + échographie en 1ère intention. Si TSH basse → scintigraphie. Si nodule suspect (&gt;1 cm avec critères écho) et TSH normale/haute → cytoponction + Bethesda. Calcitonine avant chirurgie. Scanner uniquement si goitre plongeant.</div>
+  </div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
