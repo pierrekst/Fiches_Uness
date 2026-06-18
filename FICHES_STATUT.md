@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
 
-**Avancement : 152 / 367 items (41.4%)**
+**Avancement : 154 / 367 items (42.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -174,7 +174,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 164 | [ ] | Exanthèmes fébriles de l enfant | — |
 | 165 | [ ] | Oreillons | — |
 | 166 | [ ] | Grippe | — |
-| 167 | [ ] | Hépatites virales | — |
+| 167 | [x] | Hépatites virales | 167_Hepatites_virales.html |
 | 168 | [ ] | Infections à herpès virus du sujet immunocompétent | — |
 | 169 | [ ] | Infections à VIH | — |
 | 170 | [ ] | Paludisme | — |
@@ -279,8 +279,8 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 269 | [ ] | Douleurs abdominales aiguës chez l enfant et chez l adulte | — |
 | 270 | [ ] | Douleurs lombaires aiguës | — |
 | 271 | [x] | Reflux gastro-œsophagien chez le nourrisson | 271_RGO.html |
-| 272 | [x] | Ulcère gastrique et duodénal | 272_Ulceres.pdf |
-| 273 | [ ] | Dysphagie | — |
+| 272 | [x] | Ulcère gastrique et duodénal | 272_Ulceres_Gastrite.html |
+| 273 | [x] | Dysphagie | 273_Dysphagie.html |
 | 274 | [x] | Vomissements du nourrisson | 274_Vomissements.html |
 | 275 | [ ] | Splénomégalie | — |
 | 276 | [ ] | Hépatomégalie et masse abdominale | — |

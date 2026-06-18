@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 167 — Hépatites virales</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 167</div>
+  <h1>Hépatites virales</h1>
+  <div class="header-sub">Diagnostic, évolution, traitement et prévention des hépatites A, B, C, D et E</div>
+  <div class="header-tags">
+    <span class="htag">Hépato-gastroentérologie</span>
+    <span class="htag">Infectiologie</span>
+    <span class="htag">Urgences</span>
+    <span class="htag">Vaccination</span>
+  </div>
+</div>
+
+<!-- INTRO / VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Vision globale du chapitre :</strong> Maîtriser les hépatites virales A à E — leurs modes de transmission, leurs marqueurs biologiques spécifiques, leurs critères de gravité (en aigu) et de chronicité, puis les principes de traitement et de prévention/vaccination. L'enjeu clinique est double : ne pas manquer une hépatite fulminante (urgence transplantation) et savoir dépister/traiter une hépatite chronique avant la cirrhose.
+</div>
+
+<hr>
+
+<!-- SECTION 1 : DÉFINITIONS ET VIRUS A-E -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions &amp; caractéristiques des virus
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir hépatite aiguë et hépatite chronique (seuil 6 mois)</div>
+  <div class="obj-line">Connaître les 5 virus hépatotropes, leur génome, leur mode de transmission et leur prévalence mondiale</div>
+  <div class="obj-line">Savoir quels virus peuvent évoluer vers la chronicité</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hépatite aiguë
+    </div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">&lt; 6 mois</span></div>
+    <div class="kv-row"><span class="kv-key">Transaminases</span><span class="kv-val">souvent &gt; 10 N</span></div>
+    <div class="kv-row"><span class="kv-key">Condition</span><span class="kv-val">Foie antérieurement sain</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Hépatite chronique
+    </div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">&gt; 6 mois</span></div>
+    <div class="kv-row"><span class="kv-key">Transaminases</span><span class="kv-val">souvent &lt; 5 N</span></div>
+    <div class="kv-row"><span class="kv-key">Gravité</span><span class="kv-val">Fibrose → Cirrhose</span></div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Mécanisme :</strong> Les virus hépatotropes (A–E) n'ont pas d'action directement cytopathogène. C'est la <strong>réponse immunitaire de l'hôte</strong> qui est responsable des lésions hépatiques.</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Virus</th>
+      <th>Génome</th>
+      <th>Transmission</th>
+      <th>Chronique ?</th>
+      <th>Vaccin</th>
+      <th>Traitement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VHA</strong></td>
+      <td>ARN nu</td>
+      <td>Entérique / féco-oral<br>HSH, voyageurs</td>
+      <td><span class="pill-teal pill">NON</span></td>
+      <td><span class="pill-teal pill">Oui</span></td>
+      <td>Non (guérison spontanée)</td>
+    </tr>
+    <tr>
+      <td><strong>VHB</strong></td>
+      <td>ADN enveloppé</td>
+      <td>Sexuelle, parentérale, périnatale</td>
+      <td><span class="pill-red pill">OUI</span> 90% NN / 10% adulte</td>
+      <td><span class="pill-teal pill">Oui</span></td>
+      <td>Antiviraux directs si chronique</td>
+    </tr>
+    <tr>
+      <td><strong>VHC</strong></td>
+      <td>ARN enveloppé</td>
+      <td>Parentérale, sexuelle (HSH), périnatale (&lt;5%)</td>
+      <td><span class="pill-red pill">OUI</span> 80% des cas</td>
+      <td><span class="pill-amber pill">Non</span></td>
+      <td>Antiviraux directs (guérison &gt;95%)</td>
+    </tr>
+    <tr>
+      <td><strong>VHD</strong></td>
+      <td>ARN enveloppé</td>
+      <td>Idem VHB (virus défectif)</td>
+      <td><span class="pill-red pill">OUI</span> (depend VHB)</td>
+      <td><span class="pill-teal pill">Celui du VHB</span></td>
+      <td>Antiviraux récents (AMM)</td>
+    </tr>
+    <tr>
+      <td><strong>VHE</strong></td>
+      <td>ARN nu</td>
+      <td>Entérique (pays dev.) / Zoonotique France (porc, gibier)</td>
+      <td><span class="pill-amber pill">OUI si immunodéprimé</span> (60%)</td>
+      <td><span class="pill-amber pill">Non en France</span></td>
+      <td>Oui si chronique</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège VHD :</strong> Virus défectif — impossible sans co-infection VHB. Toute hépatite B impose le dépistage VHD.<br><strong>Piège VHE en France :</strong> 1ère cause d'hépatite aiguë virale en France (transmission zoonotique, pas entérique).</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège VHB chronique :</strong> Risque de chronicité inversement proportionnel à l'âge — 90% nouveau-nés, 30% enfant, 10% adulte.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : DIAGNOSTIC BIOLOGIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic biologique — hépatite aiguë et chronique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les examens biologiques de 1ère intention devant une hépatite aiguë</div>
+  <div class="obj-line">Connaître les examens biologiques de 1ère intention devant une hépatite chronique</div>
+  <div class="obj-line">Savoir distinguer les principales causes non virales d'élévation des transaminases</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan de 1ère intention — hépatite aiguë
+  </div>
+  <ul class="list">
+    <li>Bilirubine, ASAT, ALAT, GGT, phosphatases alcalines (PAL)</li>
+    <li>Marqueurs virologiques : IgM anti-VHA, AgHBs + IgM anti-HBc, Ac anti-VHC + ARN VHC simultanément, IgM anti-VHE</li>
+    <li>Si VHB positif → IgM anti-VHD obligatoire</li>
+    <li>Échographie-doppler hépatique systématique (cause vasculaire/biliaire, hépatopathie sous-jacente)</li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège VHC :</strong> En hépatite <em>aiguë</em> → Ac anti-VHC ET ARN VHC demandés simultanément (la sérologie peut être négative en début d'infection).<br>En hépatite <em>chronique</em> → Ac anti-VHC en 1ère intention, ARN VHC seulement si sérologie positive.</div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr>
+      <th>Virus</th>
+      <th>Hépatite aiguë (immunocompétent)</th>
+      <th>Infection guérie</th>
+      <th>Vaccination VHB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VHA</strong></td>
+      <td>IgM anti-VHA +</td>
+      <td>IgG anti-VHA +</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>VHB</strong></td>
+      <td>AgHBs + / IgM anti-HBc +</td>
+      <td>AgHBs – / Ac anti-HBs + / IgG anti-HBc +</td>
+      <td>AgHBs – / Ac anti-HBs + / IgG anti-HBc –</td>
+    </tr>
+    <tr>
+      <td><strong>VHC</strong></td>
+      <td>Ac anti-VHC + et/ou ARN VHC +</td>
+      <td>Ac anti-VHC + / ARN VHC –</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>VHD</strong></td>
+      <td>IgM anti-VHD +</td>
+      <td>IgG anti-VHD + / CV –</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>VHE</strong></td>
+      <td>IgM anti-VHE +</td>
+      <td>IgG anti-VHE +</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card card-purple" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Causes non virales d'élévation des transaminases
+  </div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <strong style="font-size:.82rem;color:var(--purple);">Causes hépatiques</strong>
+      <ul class="list" style="margin-top:6px;">
+        <li>Stéato-hépatite alcoolique ou métabolique (cytolyse &lt; 10 N)</li>
+        <li>Médicament/toxique (paracétamol, compléments, champignons) → peut être &gt; 10 N</li>
+        <li>Hémochromatose (cytolyse modérée)</li>
+        <li>Hépatite auto-immune (IgG ↑, Ac anti-nucléaires, anti-muscle lisse)</li>
+        <li>Maladie de Wilson (adulte jeune, atteinte neuro)</li>
+        <li>Budd-Chiari, foie de choc, lithiase biliaire (ASAT prédominant)</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;color:var(--purple);">Causes extra-hépatiques</strong>
+      <ul class="list" style="margin-top:6px;">
+        <li>Atteinte musculaire : rhabdomyolyse, effort, myocardite</li>
+        <li>ASAT prédominant + CPK élevées = origine musculaire</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> Alcool seul → cytolyse &lt; 10 N. Une cytolyse &gt; 10 N chez un alcoolique doit faire chercher une autre cause.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : GRAVITÉ HÉPATITE AIGUË -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Signes de gravité — hépatite aiguë
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les critères de sévérité et de fulminance d'une hépatite aiguë</div>
+  <div class="obj-line">Connaître les examens à réaliser en urgence pour évaluer la gravité</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Hépatite aiguë sévère
+    </div>
+    <div class="kv-row"><span class="kv-key">Critère biologique</span><span class="kv-val">TP &lt; 50% + facteur V ↓</span></div>
+    <div class="kv-row"><span class="kv-key">Sans encéphalopathie</span><span class="kv-val">= sévère</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Hépatite fulminante / subfulminante
+    </div>
+    <div class="kv-row"><span class="kv-key">Critère</span><span class="kv-val">TP &lt; 50% + encéphalopathie</span></div>
+    <div class="kv-row"><span class="kv-key">Fulminante</span><span class="kv-val">Encéphalo &lt; 2 sem après ictère</span></div>
+    <div class="kv-row"><span class="kv-key">Subfulminante</span><span class="kv-val">Encéphalo 2 sem – 3 mois</span></div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence absolue :</strong> TP &lt; 50% → transfert immédiat en centre de transplantation hépatique. Seul traitement de la forme fulminante : transplantation hépatique.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Bilan de gravité en urgence
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="list">
+        <li>Constantes hémodynamiques, signes de choc</li>
+        <li>État de vigilance, astérixis</li>
+        <li>Glycémie capillaire</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="list">
+        <li><strong>TP, facteur V, INR</strong> (clé)</li>
+        <li>Créatininémie</li>
+        <li>Lactatémie</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : ÉVOLUTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Mode évolutif des hépatites virales
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les délais d'incubation, la fréquence de fulminance et le risque de passage à la chronicité pour chaque virus</div>
+  <div class="obj-line">Comprendre l'évolution naturelle de l'hépatite B chronique et ses phases sérologiques</div>
+  <div class="obj-line">Connaître les risques à long terme : cirrhose et carcinome hépatocellulaire</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Virus</th>
+      <th>Incubation (j)</th>
+      <th>Hépatite fulminante</th>
+      <th>Passage à la chronicité</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VHA</strong></td>
+      <td>10–45</td>
+      <td>0,5%</td>
+      <td><span class="pill-teal pill">Jamais</span></td>
+    </tr>
+    <tr>
+      <td><strong>VHB</strong></td>
+      <td>60–150</td>
+      <td>1%</td>
+      <td>5–10% adulte / 90% nouveau-né</td>
+    </tr>
+    <tr>
+      <td><strong>VHC</strong></td>
+      <td>15–90</td>
+      <td>Exceptionnelle</td>
+      <td><span class="pill-red pill">80%</span></td>
+    </tr>
+    <tr>
+      <td><strong>VHD</strong></td>
+      <td>30–45</td>
+      <td>1–5%</td>
+      <td>Fonction du VHB</td>
+    </tr>
+    <tr>
+      <td><strong>VHE</strong></td>
+      <td>10–40</td>
+      <td>&lt;5%*</td>
+      <td>60% si immunodéprimé</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-size:.78rem;color:var(--muted);margin-top:4px;">*Principalement si hépatopathie chronique sous-jacente en France</p>
+
+<div class="alert alert-amber" style="margin-top:12px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Point clé :</strong> L'hépatite D expose au risque le plus élevé de cirrhose et de carcinome hépatocellulaire parmi toutes les hépatites virales chroniques.</div>
+</div>
+
+<div class="card card-teal" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Profils sérologiques VHB — tableau de référence
+  </div>
+  <table class="table-teal" style="margin-top:8px;">
+    <thead>
+      <tr>
+        <th>Marqueur</th>
+        <th>Hépatite aiguë B</th>
+        <th>Portage chronique</th>
+        <th>Infection guérie</th>
+        <th>Vaccination efficace</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>AgHBs</strong></td>
+        <td>+</td>
+        <td>+</td>
+        <td>–</td>
+        <td>–</td>
+      </tr>
+      <tr>
+        <td><strong>Ac anti-HBc</strong></td>
+        <td>+ (IgM)</td>
+        <td>+ (IgG)</td>
+        <td>+</td>
+        <td>–</td>
+      </tr>
+      <tr>
+        <td><strong>Ac anti-HBs</strong></td>
+        <td>–</td>
+        <td>–</td>
+        <td>+/–</td>
+        <td>+</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> Vaccination → Ac anti-HBs isolés (pas d'Ac anti-HBc). Infection guérie → Ac anti-HBs + Ac anti-HBc. Ce qui distingue les deux !</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : MANIFESTATIONS EXTRA-HÉPATIQUES -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Manifestations extra-hépatiques des hépatites chroniques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales manifestations extra-hépatiques du VHB et du VHC</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      VHB — manifestations extra-hépatiques
+    </div>
+    <ul class="list">
+      <li><strong>Vascularite :</strong> Périartérite noueuse (PAN) — précoce</li>
+      <li><strong>Rénale :</strong> Glomérulonéphrite extra-membraneuse (la + fréquente) ou membrano-proliférative</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      VHC — manifestations extra-hépatiques
+    </div>
+    <ul class="list">
+      <li><strong>Cryoglobulinémie mixte :</strong> 20–50% (la + fréquente) — triade purpura + arthralgies + asthénie</li>
+      <li><strong>Rénale :</strong> Glomérulonéphrite membrano-proliférative (20%)</li>
+      <li>Asthénie chronique (la + difficile à traiter)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : TRAITEMENT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Principes de traitement
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes du traitement des hépatites aiguës et chroniques</div>
+  <div class="obj-line">Savoir quand orienter vers un centre de transplantation</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Hépatite aiguë — traitement
+  </div>
+  <ul class="list">
+    <li>Traitement <strong>symptomatique</strong> avant tout</li>
+    <li>Contre-indiquer médicaments hépatotoxiques (paracétamol) et sédatifs (antiémétiques)</li>
+    <li>Si TP &lt; 50% → transfert centre transplantation sans délai</li>
+    <li>Hépatite fulminante → seul traitement = transplantation hépatique</li>
+  </ul>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Hépatite chronique — mesures générales (tous virus)
+  </div>
+  <ul class="list">
+    <li>Éliminer facteurs aggravants : sevrage alcool, prise en charge syndrome métabolique</li>
+    <li>Vacciner contre VHA et VHB (si pas d'immunité)</li>
+    <li>Dépister et traiter les complications si cirrhose</li>
+    <li>Mise sous ALD 100%</li>
+  </ul>
+</div>
+
+<table class="table-blue" style="margin-top:10px;">
+  <thead>
+    <tr>
+      <th>Virus</th>
+      <th>Traitement spécifique</th>
+      <th>Particularités</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>VHB chronique</strong></td>
+      <td>Antiviraux à action directe (prise quotidienne)</td>
+      <td>Indication non systématique — dépend fibrose + charge virale<br>Pas de traitement hépatite B/D <em>aiguë</em></td>
+    </tr>
+    <tr>
+      <td><strong>VHC aigu ou chronique</strong></td>
+      <td>Combinaison d'antiviraux directs</td>
+      <td>Guérison &gt;95%. Sérologie reste positive après guérison (pas de protection contre réinfection)</td>
+    </tr>
+    <tr>
+      <td><strong>VHD chronique</strong></td>
+      <td>Nouveaux antiviraux (AMM récente)</td>
+      <td>Indication non systématique</td>
+    </tr>
+    <tr>
+      <td><strong>VHE chronique</strong></td>
+      <td>Antiviraux si immunodéprimé</td>
+      <td>Réduction immunosuppression en 1er</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- SECTION 7 : VACCINATION ET PRÉVENTION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Prévention et vaccination
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales indications du vaccin contre l'hépatite A</div>
+  <div class="obj-line">Connaître les principales indications du vaccin contre l'hépatite B et le schéma vaccinal</div>
+  <div class="obj-line">Connaître les mesures de prévention pour le VHC (pas de vaccin)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Vaccin hépatite A — indications
+    </div>
+    <ul class="list">
+      <li>Maladie chronique du foie / mucoviscidose (risque de forme sévère)</li>
+      <li>Personnels exposés professionnellement</li>
+      <li>Contact d'un cas diagnostiqué</li>
+      <li>Voyageurs en pays de forte endémie</li>
+      <li>Hommes ayant des rapports sexuels avec des hommes (HSH)</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Hépatite A = <strong>déclaration obligatoire</strong></div>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Vaccin hépatite B — schéma et indications
+    </div>
+    <div class="kv-row"><span class="kv-key">Schéma vaccinal</span><span class="kv-val">3 injections</span></div>
+    <div class="kv-row"><span class="kv-key">Obligation nourrissons</span><span class="kv-val">Dès 2e mois (hexavalent)</span></div>
+    <div class="kv-row"><span class="kv-key">Rattrapage adolescents</span><span class="kv-val">11–15 ans si non vaccinés</span></div>
+    <div style="margin-top:8px;">
+      <strong style="font-size:.82rem;">Groupes à risque à vacciner :</strong>
+      <ul class="list" style="margin-top:4px;">
+        <li>Personnes handicapées en collectivité</li>
+        <li>Partenaires sexuels multiples, usagers de drogue, détenus</li>
+        <li>Dialysés, transfusés, candidats à greffe, hépatopathie chronique</li>
+        <li>Contact d'une hépatite B aiguë ou chronique</li>
+        <li><strong>Professionnels et étudiants de santé (obligatoire)</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Sérovaccination — nouveau-né de mère AgHBs+
+  </div>
+  <ul class="list">
+    <li>En salle de travail : injection d'immunoglobulines anti-HBs (Ig spécifiques)</li>
+    <li>Première injection vaccin VHB avant la sortie de maternité</li>
+    <li>Justification : risque de transmission périnatale + chronicité 90% si contamination néonatale</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    VHC — prévention (pas de vaccin)
+  </div>
+  <ul class="list">
+    <li>Préservatifs, matériel à usage unique (soins et toxicomanie)</li>
+    <li>Sécurisation des dons de sang et d'organes</li>
+    <li>Dépistage large : populations carcérale, toxicomanes, HSH</li>
+    <li>Dépistage prioritaire car traitement curatif disponible (&gt;95% guérison)</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 8 : POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>
+    <strong>Transmission :</strong> VHA et VHE = entérique/féco-oral (VHE = zoonotique en France). VHB, VHC, VHD = parentérale, sexuelle, périnatale. VHD = impossible sans VHB.
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>
+    <strong>Chronicité :</strong> VHA et VHE (immunocompétent) = jamais chroniques. VHB = 10% adulte, 90% nouveau-né. VHC = 80%. VHD = dépend VHB. VHE = 60% si immunodéprimé.
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>
+    <strong>Sévérité :</strong> TP &lt; 50% = hépatite sévère → transfert centre transplantation. TP &lt; 50% + encéphalopathie = fulminante → transplantation hépatique.
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>
+    <strong>Pièges à l'ECNi :</strong><br>
+    1. VHC aiguë → Ac anti-VHC ET ARN VHC simultanément (la sérologie peut être négative).<br>
+    2. Vaccination VHB → Ac anti-HBs seuls (sans Ac anti-HBc). Infection guérie → les deux.<br>
+    3. VHE = 1ère cause d'hépatite aiguë virale en France (pas le VHA).<br>
+    4. Alcool seul → transaminases &lt; 10 N (jamais d'hépatite aiguë fortement cytolytique).<br>
+    5. Hépatite A = déclaration obligatoire.
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>
+    <strong>Traitement VHC :</strong> Guérison &gt;95% avec antiviraux directs — mais sérologie reste positive à vie (ne confondre pas avec réinfection). Pas de vaccin VHC.
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>
+    <strong>Sérovaccination obligatoire :</strong> Tout nouveau-né de mère AgHBs+ → immunoglobulines anti-HBs en salle de travail + 1ère injection vaccin avant sortie de maternité.
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
