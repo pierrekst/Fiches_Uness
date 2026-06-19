@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 23 — Grossesse normale</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-num-teal{background:var(--teal-light);color:var(--teal);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 23</div>
+  <h1>Grossesse normale</h1>
+  <div class="header-sub" style="opacity:.85;font-size:.9rem;margin-top:6px;">Suivi de la femme enceinte sans complication — de la déclaration à l'accouchement</div>
+  <div class="header-tags">
+    <span class="htag">Gynécologie-Obstétrique</span>
+    <span class="htag">Médecine générale</span>
+    <span class="htag">Sage-femme</span>
+    <span class="htag">7 consultations obligatoires</span>
+    <span class="htag">3 échographies</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Vue d'ensemble du chapitre
+  </div>
+  <p style="font-size:.85rem;color:var(--muted);line-height:1.6;">
+    La grossesse normale est un état physiologique qui modifie profondément l'organisme maternel. Ce chapitre couvre l'intégralité du suivi prénatal : reconnaître une grossesse, dater le terme, stratifier les risques, organiser les consultations et les examens (biologiques + échographies), dépister la trisomie 21, gérer les petits maux courants, identifier précocement une complication, et intégrer les dimensions psychosociales, administratives (déclaration, couverture) et éthiques (violences obstétricales). Le fil conducteur : <strong>anticiper, dépister, orienter au bon niveau de recours</strong>.
+  </p>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 : MODIFICATIONS PHYSIOLOGIQUES -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Modifications physiologiques de la grossesse
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les modifications physiologiques par système et leurs valeurs seuil pathologiques</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Ces modifications physiologiques font baisser Hb, créatinine, PA et augmenter la FR — ne pas les confondre avec des valeurs pathologiques. Retenir les <strong>seuils de rupture</strong> ci-dessous.</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Système</th>
+      <th>Modification physiologique</th>
+      <th>Seuil pathologique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Poids</strong></td>
+      <td>Prise de poids 11–16 kg (IMC normal)</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Hématologie</strong></td>
+      <td>↑ volume plasmatique &gt; ↑ masse GR → hémodilution<br>Hyperleucocytose physiologique<br>↑ besoins fer, folates, B12<br>Ferritine variable<br>Hypercoagulabilité (↑ risque TEV)</td>
+      <td><span class="badge badge-red">Anémie si Hb &lt; 11 g/dL</span><br><span class="badge badge-amber">Thrombopénie si plt &lt; 100 Giga/L</span></td>
+    </tr>
+    <tr>
+      <td><strong>Cardio-vasculaire</strong></td>
+      <td>↑ débit cardiaque, vasodilatation périphérique<br>↓ PA T1–T2, retour à la normale au T3<br>Stase veineuse et dilatation veineuse ↑</td>
+      <td><span class="badge badge-red">HTA si PAS ≥ 140 ou PAD ≥ 90 après 20 SA</span></td>
+    </tr>
+    <tr>
+      <td><strong>Rénal</strong></td>
+      <td>↑ DFG → ↓ urée et créatinine plasmatiques<br>Glycosurie et protéinurie physiologiquement augmentées</td>
+      <td><span class="badge badge-amber">Protéinurie significative ≥ 0,3 g/24h</span></td>
+    </tr>
+    <tr>
+      <td><strong>Respiratoire</strong></td>
+      <td>↑ FR de 40–50 %, ↑ besoins en O₂<br>↑ volume courant, ↓ CRF (diaphragme refoulé)<br>Capacité vitale préservée<br>Dyspnée fréquente <em>sans hypoxie</em></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Digestif</strong></td>
+      <td>Nausées/vomissements T1 (début &lt; 8 SA, disparaissent 12–22 SA)<br>RGO fréquent surtout T3<br>Transit ralenti → constipation (progestérone)</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>Endocrinien</strong></td>
+      <td>↑ Prolactine<br>Insulino-résistance au T3<br>Modifications thyroïdiennes sans conséquences cliniques</td>
+      <td><span class="badge badge-amber">Diabète gestationnel si GAJ ≥ 0,92 g/L</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 : DIAGNOSTIC ET TERME -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic de grossesse et détermination du terme
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Poser le diagnostic de grossesse cliniquement et biologiquement</div>
+  <div class="obj-line">Calculer le terme par échographie et comprendre la règle des semaines d'aménorrhée</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostic de grossesse
+    </div>
+    <div class="kv-row"><span class="kv-key">Évoquer si</span><span class="kv-val">Retard de règles + absence contraception</span></div>
+    <div class="kv-row"><span class="kv-key">Signes sympathiques</span><span class="kv-val">Tension mammaire, nausées, pollakiurie, asthénie</span></div>
+    <div class="kv-row"><span class="kv-key">Confirmation</span><span class="kv-val">βhCG urinaire ou sanguin &gt; 5 UI/L</span></div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      Détermination du terme
+    </div>
+    <div class="kv-row"><span class="kv-key">Outil de référence</span><span class="kv-val">LCC écho T1 (11–13 SA + 6 j)</span></div>
+    <div class="kv-row"><span class="kv-key">SA = </span><span class="kv-val">Date début grossesse + 14 jours</span></div>
+    <div class="kv-row"><span class="kv-key">Terme</span><span class="kv-val">Date début grossesse + 9 mois = 41 SA</span></div>
+    <div class="kv-row"><span class="kv-key">FIV transfert frais</span><span class="kv-val">Date de début = date de ponction (fécondation)</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 : SUIVI GLOBAL -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Organisation du suivi — Risques, Maternités, Déclaration
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Évaluer les facteurs de risque médicaux et psychosociaux lors de la 1re consultation</div>
+  <div class="obj-line">Adapter le niveau de suivi et le choix de la maternité en fonction du risque</div>
+  <div class="obj-line">Connaître les modalités et le délai de déclaration de grossesse</div>
+  <div class="obj-line">Connaître les professionnels pouvant assurer le suivi</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Niveaux de suivi HAS
+    </div>
+    <div class="kv-row"><span class="kv-key"><strong>Suivi A</strong></span><span class="kv-val">Faible risque — SF ou médecin au choix</span></div>
+    <div class="kv-row"><span class="kv-key"><strong>Suivi A1</strong></span><span class="kv-val">Avis gynéco-obstétricien conseillé</span></div>
+    <div class="kv-row"><span class="kv-key"><strong>Suivi A2</strong></span><span class="kv-val">Avis gynéco-obstétricien nécessaire</span></div>
+    <div class="kv-row"><span class="kv-key"><strong>Suivi B</strong></span><span class="kv-val">Risque élevé — gynéco-obstétricien d'emblée</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7l9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      Types de maternité
+    </div>
+    <div class="kv-row"><span class="kv-key">Type I</span><span class="kv-val">Pas d'unité néonatalogie</span></div>
+    <div class="kv-row"><span class="kv-key">Type II</span><span class="kv-val">Avec unité de néonatalogie</span></div>
+    <div class="kv-row"><span class="kv-key">Type III</span><span class="kv-val">Avec unité de réanimation néonatale</span></div>
+    <div style="margin-top:8px;font-size:.8rem;color:var(--muted);">Choix selon désirs des parents + risque évalué au cours du suivi</div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </div>
+    Déclaration de grossesse
+  </div>
+  <div class="kv-row"><span class="kv-key">Délai</span><span class="kv-val">Avant 14 semaines de grossesse (16 SA)</span></div>
+  <div class="kv-row"><span class="kv-key">Destinataires</span><span class="kv-val">CPAM + CAF</span></div>
+  <div class="kv-row"><span class="kv-key">Par qui</span><span class="kv-val">Professionnel de santé (en ligne ou formulaire papier)</span></div>
+  <div class="kv-row"><span class="kv-key">Condition préalable</span><span class="kv-val">Examens cliniques et complémentaires obligatoires réalisés</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    Professionnels impliqués dans le suivi
+  </div>
+  <div style="font-size:.84rem;margin-top:6px;">
+    <div style="margin-bottom:6px;"><strong>Grossesse normale (suivi A) :</strong> médecin traitant, sage-femme, gynécologue médical ou gynécologue-obstétricien — <em>au choix de la patiente</em></div>
+    <div><strong>Fin de grossesse (à partir du 8e mois) :</strong> sage-femme ou gynécologue de la maternité choisie pour l'accouchement</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 : CONSULTATIONS ET EXAMENS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+  Consultations, Examens biologiques et Échographies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le contenu des 7 consultations obligatoires et ce que l'on y surveille</div>
+  <div class="obj-line">Distinguer les examens biologiques obligatoires, systématiques, et selon indication</div>
+  <div class="obj-line">Connaître le timing et les objectifs des 3 échographies de dépistage</div>
+</div>
+
+<!-- Consultations -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    7 consultations obligatoires — contenu de chaque visite
+  </div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Interrogatoire systématique</div>
+      <ul class="lst">
+        <li>Facteurs de stress / vulnérabilité psychosociale</li>
+        <li>Métrorragies</li>
+        <li>Fièvre</li>
+        <li>Signes fonctionnels urinaires</li>
+        <li>Leucorrhées pathologiques</li>
+        <li>Contractions utérines (CU) régulières et douloureuses</li>
+        <li>Mouvements actifs fœtaux (MAF) — à partir de 18–20 SA</li>
+        <li>Anomalies biologiques</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem;font-weight:700;color:var(--blue);margin-bottom:6px;">Examen physique</div>
+      <ul class="lst">
+        <li>Pression artérielle</li>
+        <li>Poids</li>
+        <li>Hauteur utérine (HU)</li>
+        <li>Cœur fœtal au Doppler — à partir de 12–14 SA</li>
+        <li>Examen gynécologique si plainte ou dépistage CCU nécessaire</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Examens biologiques en tableau -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+    </div>
+    Examens biologiques — Récapitulatif chronologique
+  </div>
+  <table style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Moment</th>
+        <th>Examens obligatoires</th>
+        <th>Proposés systématiquement</th>
+        <th>Selon indication</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:700;white-space:nowrap;">Déclaration<br><span style="font-weight:400;font-size:.78rem;color:var(--muted);">(avant 16 SA)</span></td>
+        <td>
+          Groupe ABO + phénotypes Rhésus complet + Kell<br>
+          RAI<br>
+          Sérologies : toxoplasmose, rubéole, syphilis<br>
+          Ag HBs<br>
+          BU + protéinurie
+        </td>
+        <td>
+          Sérologie VIH 1 et 2<br>
+          Dépistage combiné T21 T1
+        </td>
+        <td>
+          ECBU (ATCD inf. urinaire, diabète, BU+)<br>
+          GAJ +/- HGPO75 (FDR diabète)<br>
+          NFS (FDR anémie)<br>
+          Électrophorèse Hb (origines Afrique/Antilles/Méditerranée)<br>
+          Génotypage RH1 (si mère Rh- et conjoint Rh+)<br>
+          Sérologie CMV (si souhaitée)
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">Chaque mois</td>
+        <td colspan="3">
+          BU + protéinurie sur échantillon<br>
+          Sérologie toxoplasmose (si négatif précédent)<br>
+          Sérologie rubéole (si négatif + non vaccinée — jusqu'à 18 SA)
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">6e mois<br><span style="font-weight:400;font-size:.78rem;color:var(--muted);">(24–28 SA)</span></td>
+        <td colspan="3">
+          RAI (si Rh- ou ATCD transfusion)<br>
+          NFS<br>
+          HGPO 75g entre 24 et 28 SA (si FDR diabète gestationnel et GAJ T1 normale)
+        </td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">8e mois</td>
+        <td colspan="3">
+          RAI (si Rh- ou ATCD transfusion)<br>
+          2e détermination du groupe sanguin
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Échographies -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+    </div>
+    3 échographies de dépistage obligatoires
+  </div>
+  <table class="table-teal" style="margin-top:10px;">
+    <thead>
+      <tr>
+        <th>Trimestre</th>
+        <th>Moment</th>
+        <th>Objectifs principaux</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>T1</strong></td>
+        <td style="white-space:nowrap;">11–13 SA + 6 j</td>
+        <td>
+          Datation (LCC) · Vitalité · Gémellité + chronicité<br>
+          Dépistage précoce malformations (anencéphalie…)<br>
+          Mesure clarté nucale (risque T21)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>T2</strong></td>
+        <td style="white-space:nowrap;">20–25 SA</td>
+        <td><strong>Morphologique</strong> — dépistage des malformations fœtales</td>
+      </tr>
+      <tr>
+        <td><strong>T3</strong></td>
+        <td style="white-space:nowrap;">30–35 SA</td>
+        <td>
+          Croissance fœtale (RCIU ?)<br>
+          Certaines malformations tardives<br>
+          Localisation du placenta<br>
+          Présentation fœtale
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>La possibilité de refuser ces examens doit être clairement énoncée. Les échographies ne sont pas infaillibles — leur principale limite est de ne pas tout pouvoir dépister.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 : DÉPISTAGE TRISOMIE 21 -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+  Dépistage de la trisomie 21
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le dépistage combiné du 1er trimestre et ses composantes</div>
+  <div class="obj-line">Connaître la conduite à tenir selon le niveau de risque calculé</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Dépistage combiné T1 (avec consentement signé)
+  </div>
+  <div class="pills" style="margin:8px 0 12px;">
+    <span class="pill pill-purple">Clarté nucale (11–13 SA + 6 j)</span>
+    <span class="pill pill-purple">βhCG libre</span>
+    <span class="pill pill-purple">PAPP-A</span>
+    <span class="pill pill-purple">Âge maternel</span>
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Risque calculé</th>
+        <th>Conduite à tenir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>&gt; 1/50</strong> <span class="badge badge-red">Élevé</span></td>
+        <td>Caryotype fœtal — biopsie de trophoblaste <em>ou</em> amniocentèse</td>
+      </tr>
+      <tr>
+        <td><strong>1/51 – 1/1 000</strong> <span class="badge badge-amber">Intermédiaire</span></td>
+        <td>DPN non invasif : ADNlc T21 (analyse ADN libre fœtal maternel)<br><span style="font-size:.78rem;color:var(--muted);">Si demande d'amniocentèse possible mais non remboursée SS</span></td>
+      </tr>
+      <tr>
+        <td><strong>&lt; 1/1 000</strong> <span class="badge badge-green">Faible</span></td>
+        <td>Pas d'examen complémentaire recommandé — arrêt du dépistage</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 : PETITS MAUX -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Petits maux de la grossesse
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier les motifs de consultation fréquents liés aux petits maux</div>
+  <div class="obj-line">Connaître les traitements médicamenteux et non médicamenteux de chaque plainte</div>
+  <div class="obj-line">Connaître la règle des antalgiques pendant la grossesse</div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr>
+      <th>Plainte</th>
+      <th>Mécanisme</th>
+      <th>Mesures non médicamenteuses</th>
+      <th>Traitement médicamenteux</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nausées / Vomissements</strong><br><span style="font-size:.78rem;color:var(--muted);">&gt; 50% des femmes, début &lt; 8 SA, disparaissent 12–22 SA</span></td>
+      <td>Hormonaux (T1)</td>
+      <td>Fractionner les repas, boire à distance des repas, adapter les aliments</td>
+      <td>Formes légères : pyridoxine, gingembre<br>Formes intenses : antiémétiques (anti-H1, antidopaminergiques, anti-5HT3)</td>
+    </tr>
+    <tr>
+      <td><strong>Constipation</strong></td>
+      <td>Progestérone → ralentissement transit</td>
+      <td>Hydratation, régime riche en fibres, activité physique</td>
+      <td>Laxatifs si échec</td>
+    </tr>
+    <tr>
+      <td><strong>Hémorroïdes</strong></td>
+      <td>Compression veines bassin par utérus gravide + post-partum</td>
+      <td>Traiter la constipation</td>
+      <td>Lubrifiant ou anesthésique local ; paracétamol si douleur<br>Avis spécialisé si persistance</td>
+    </tr>
+    <tr>
+      <td><strong>RGO / Pyrosis</strong><br><span style="font-size:.78rem;color:var(--muted);">Très fréquent, surtout T3</span></td>
+      <td>Reflux gastro-œsophagien</td>
+      <td>Fractionnement repas, adaptation posturale, éviter efforts post-prandiaux</td>
+      <td>Antiacides (courtes périodes) ; IPP si nécessaire</td>
+    </tr>
+    <tr>
+      <td><strong>Crampes</strong></td>
+      <td>Fuite urinaire de magnésium + compression pelvienne</td>
+      <td>Hydratation, activité physique, étirements</td>
+      <td>Supplémentation magnésium</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card card-red" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Douleur et Fièvre — Règles d'utilisation des antalgiques pendant la grossesse
+  </div>
+  <div class="kv-row"><span class="kv-key">Palier 1 de référence</span><span class="kv-val">Paracétamol — quel que soit le terme</span></div>
+  <div class="kv-row"><span class="kv-key">AINS</span><span class="kv-val"><span class="badge badge-red">CI à partir de 24 SA</span> — y compris aspirine (sauf &lt; 160 mg/j anti-agrégant)</span></div>
+  <div class="kv-row"><span class="kv-key">AINS avant 24 SA</span><span class="kv-val">À éviter même sans données formelles de CI</span></div>
+  <div class="kv-row"><span class="kv-key">Corticoïdes</span><span class="kv-val">Utilisables à tout terme, toutes voies, toutes doses (précaution si diabète)</span></div>
+  <div class="kv-row"><span class="kv-key">Palier 2 si nécessaire</span><span class="kv-val">Codéine (préférable, innocuité incertaine T1 — risque dépression respi néonatale si fortes doses)</span></div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 7 : COMPLICATIONS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Reconnaître les complications et orienter
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Repérer cliniquement les signes d'alerte qui orientent vers une complication</div>
+  <div class="obj-line">Connaître les seuils définissant les complications les plus fréquentes</div>
+  <div class="obj-line">Savoir quand adresser en urgence</div>
+</div>
+
+<table class="table-red">
+  <thead>
+    <tr>
+      <th>Signe / Complication</th>
+      <th>Définition / Seuil</th>
+      <th>Orientation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Métrorragies T1</strong></td>
+      <td>Saignements génitaux au 1er trimestre</td>
+      <td>Évoquer menace de FC ou GEU — bilan urgent</td>
+    </tr>
+    <tr>
+      <td><strong>Métrorragies T2/T3</strong></td>
+      <td>Placenta inséré bas ou hématome rétroplacentaire (HRP)</td>
+      <td><span class="badge badge-red">Avis urgent</span></td>
+    </tr>
+    <tr>
+      <td><strong>HTA gravidique</strong></td>
+      <td>PAS ≥ 140 mmHg <em>et/ou</em> PAD ≥ 90 mmHg au-delà de 20 SA</td>
+      <td>Consultation spécialisée urgente (risque prééclampsie)</td>
+    </tr>
+    <tr>
+      <td><strong>Diabète gestationnel</strong></td>
+      <td>GAJ ≥ 0,92 g/L ou ≥ 1 valeur patho lors HGPO 75g</td>
+      <td>Prise en charge diététique + endocrinologique</td>
+    </tr>
+    <tr>
+      <td><strong>Protéinurie significative</strong></td>
+      <td>≥ 0,3 g/24h ou 30 mg/mmol</td>
+      <td>Surveillance renforcée (risque prééclampsie)</td>
+    </tr>
+    <tr>
+      <td><strong>Œdèmes</strong></td>
+      <td>Physiologiques aux MI en fin de grossesse — pathologiques si mains + visage</td>
+      <td>Rechercher prééclampsie si atypiques</td>
+    </tr>
+    <tr>
+      <td><strong>Contractions utérines (CU)</strong></td>
+      <td>Physiologiques &lt; 10/j en fin de journée ; pathologiques si régulières et douloureuses</td>
+      <td>Rechercher menace d'accouchement prématuré (MAP)</td>
+    </tr>
+    <tr>
+      <td><strong>PAG / RCIU</strong></td>
+      <td>Suspecté si HU faible — diagnostic échographique</td>
+      <td>Échographie de croissance urgente</td>
+    </tr>
+    <tr>
+      <td><strong>Absence de MAF</strong></td>
+      <td>À partir de 20 SA</td>
+      <td><span class="badge badge-red">Consultation en urgence</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 8 : PSYCHOSOCIAL, SOCIAL, ADMINISTRATIF -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  Dimensions psychosociales, sociales et éthiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le rôle de l'entretien prénatal précoce (EPP) et sa place dans la préparation à la naissance</div>
+  <div class="obj-line">Connaître la couverture sociale pendant la grossesse et ses seuils</div>
+  <div class="obj-line">Connaître les 7 types de violences obstétricales et leurs conséquences</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      Entretien prénatal précoce (EPP)
+    </div>
+    <div class="kv-row"><span class="kv-key">Timing</span><span class="kv-val">Autour du 4e mois (peut être adapté)</span></div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">45 minutes</span></div>
+    <div class="kv-row"><span class="kv-key">Par qui</span><span class="kv-val">Sage-femme ou médecin formé</span></div>
+    <div class="kv-row"><span class="kv-key">Place</span><span class="kv-val">1re séance parmi les 8 de préparation à la naissance</span></div>
+    <div style="font-size:.8rem;color:var(--muted);margin-top:8px;">Permet de repérer vulnérabilités psychosociales, VIF, et d'organiser un suivi coordonné. Conduit à la rédaction du <strong>projet de naissance</strong>.</div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3l-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      Couverture sociale — Assurance maternité
+    </div>
+    <div class="kv-row"><span class="kv-key">Mois 1 à 5</span><span class="kv-val">Remboursement tarifs habituels SS</span></div>
+    <div class="kv-row"><span class="kv-key">À partir du 1er j du 6e mois</span><span class="kv-val"><strong>100 %</strong> — tous frais médicaux (y compris non liés à la grossesse)</span></div>
+    <div class="kv-row"><span class="kv-key">Durée de la prise en charge 100%</span><span class="kv-val">Jusqu'à 12 jours après l'accouchement</span></div>
+    <div class="kv-row"><span class="kv-key">Consultation post-natale (6–8 sem)</span><span class="kv-val">Prise en charge à 100%</span></div>
+    <div class="kv-row"><span class="kv-key">Congé maternité</span><span class="kv-val">Indemnités journalières (durée selon situation familiale)</span></div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Violences obstétricales
+  </div>
+  <div style="font-size:.83rem;margin-bottom:10px;color:var(--muted);">Pratiques exercées volontairement ou non par les soignants lors de l'accouchement, vécues comme violentes par la femme.</div>
+  <div class="grid2">
+    <div>
+      <div style="font-size:.82rem;font-weight:700;margin-bottom:6px;">7 types</div>
+      <ul class="lst">
+        <li>Violences physiques</li>
+        <li>Violences sexuelles</li>
+        <li>Violences verbales</li>
+        <li>Stigmatisation et discrimination (sexisme, racisme, homophobie, grossophobie)</li>
+        <li>Non-respect des standards de soins / non-consentement</li>
+        <li>Mauvais rapports entre femmes et soignants</li>
+        <li>Mauvaises conditions ou contraintes systémiques</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Conséquences</div>
+      <div style="font-size:.82rem;margin-bottom:4px;"><strong>Court terme :</strong> douleurs, craintes</div>
+      <div style="font-size:.82rem;"><strong>Long terme :</strong></div>
+      <ul class="lst">
+        <li>État de stress post-traumatique</li>
+        <li>Peur de l'accouchement ou des soins gynécologiques</li>
+        <li>Image corporelle négative</li>
+        <li>Sentiment de déshumanisation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SYNTHÈSE FINALE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir — Pièges et tombables ECNi
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège n°1 :</strong> La créatinine, l'Hb et la PA sont physiologiquement <em>basses</em> chez la femme enceinte — des valeurs normales chez une non-enceinte peuvent déjà être pathologiques ici.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège n°2 :</strong> Les AINS sont CI à partir de <strong>24 SA</strong> (y compris aspirine sauf dose anti-agrégante &lt; 160 mg). Le paracétamol est toujours l'antalgique de référence.</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège n°3 :</strong> Le terme est calculé par <strong>LCC à l'écho T1</strong> (11–13 SA+6j), pas par la DDR seule. En FIV transfert frais = date de ponction.</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence :</strong> Absence de MAF après 20 SA = consultation <em>urgente</em>. Métrorragies T2/T3 = avis urgent (placenta/HRP).</div>
+</div>
+
+<div class="card card-teal" style="margin-top:10px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Chiffres clés à mémoriser
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Déclaration grossesse</span><span class="kv-val">≤ 16 SA</span></div>
+      <div class="kv-row"><span class="kv-key">T21 — risque élevé</span><span class="kv-val">&gt; 1/50 → caryotype</span></div>
+      <div class="kv-row"><span class="kv-key">T21 — risque intermédiaire</span><span class="kv-val">1/51–1/1000 → ADNlc</span></div>
+      <div class="kv-row"><span class="kv-key">Anémie grossesse</span><span class="kv-val">Hb &lt; 11 g/dL</span></div>
+      <div class="kv-row"><span class="kv-key">HTA gravidique</span><span class="kv-val">PAS ≥ 140 ou PAD ≥ 90 après 20 SA</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">Diabète gestationnel</span><span class="kv-val">GAJ ≥ 0,92 g/L ou 1 val HGPO patho</span></div>
+      <div class="kv-row"><span class="kv-key">Protéinurie significative</span><span class="kv-val">≥ 0,3 g/24h ou 30 mg/mmol</span></div>
+      <div class="kv-row"><span class="kv-key">Consultations obligatoires</span><span class="kv-val">7 (remboursées SS)</span></div>
+      <div class="kv-row"><span class="kv-key">Couverture 100%</span><span class="kv-val">Dès 1er j du 6e mois → J+12 post-partum</span></div>
+      <div class="kv-row"><span class="kv-key">EPP (entretien prénatal)</span><span class="kv-val">4e mois — 1re séance des 8 de prépa naissance</span></div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

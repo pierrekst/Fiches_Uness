@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-19. Ne pas éditer à la main._
 
-**Avancement : 158 / 367 items (43.1%)**
+**Avancement : 159 / 367 items (43.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -30,7 +30,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 20 | [ ] | La méthodologie de la recherche en santé | — |
 | 21 | [ ] | Mesure de l état de santé de la population | — |
 | 22 | [x] | Maladies rares | 22_Maladies_rares.html |
-| 23 | [ ] | Grossesse normale | — |
+| 23 | [x] | Grossesse normale | 23_Grossesse_normale.html |
 | 24 | [x] | Principales complications de la grossesse | 024_Complications_grossesse.html |
 | 25 | [x] | Grossesse extra-utérine | 25_GEU.html |
 | 26 | [ ] | Douleur abdominale aiguë chez une femme enceinte | — |
