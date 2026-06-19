@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 3 – Raisonnement, EBM, Décision, SADM, Controverse</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.6rem;font-weight:800;margin-bottom:8px;}
+  .header-sub{font-size:.88rem;opacity:.9;margin-top:6px;line-height:1.6;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 10px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:16px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .card-red   {border-left:4px solid var(--red);  }
+  .card-blue  {border-left:4px solid var(--blue); }
+  .card-teal  {border-left:4px solid var(--teal); }
+  .card-amber {border-left:4px solid var(--amber);}
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;flex:2;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .table-red th{background:var(--red-light);color:var(--red);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .sub{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:10px 0 5px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 3</div>
+  <h1>Raisonnement et décision en médecine — EBM — Décision partagée — SADM — Controverse</h1>
+  <div class="header-sub">
+    Maîtriser les fondements de l'EBM (définition, PICOT, niveaux de preuve, recommandations) ; identifier les 5 modes de raisonnement clinique ; distinguer les modèles décisionnels (partagée, paternaliste, collégiale) et le cadre légal de la personne de confiance ; comprendre les systèmes d'aide à la décision (SADM) et l'interopérabilité des systèmes d'information de santé ; savoir définir et contextualiser une controverse médicale.
+  </div>
+  <div class="header-tags">
+    <span class="htag">EBM</span>
+    <span class="htag">Décision partagée</span>
+    <span class="htag">Personne de confiance</span>
+    <span class="htag">SADM / TICE</span>
+    <span class="htag">Interopérabilité</span>
+    <span class="htag">Controverse</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 1 : EBM -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Médecine fondée sur les preuves (EBM)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir l'EBM et ses trois piliers ; connaître les quatre étapes de la démarche et l'acronyme PICOT</div>
+  <div class="obj-line">Connaître les niveaux de preuve, les grades de recommandation et les principales sources (HAS, Cochrane, grille AGREE)</div>
+  <div class="obj-line">Distinguer savoirs, connaissances et incertitude ; situer l'EBM face à l'incertitude diagnostique</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Définition et triade EBM
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>EBM :</strong> utilisation consciencieuse et judicieuse des meilleures données scientifiques actuelles dans la prise en charge <strong>personnalisée</strong> de chaque patient. Conceptualisée à l'université McMaster (Canada), années 1980.</div>
+  </div>
+  <div class="grid2" style="margin-top:10px">
+    <div>
+      <div class="sub">Triade de la décision EBM (Sackett)</div>
+      <div class="pills">
+        <span class="pill pill-teal">Expérience clinique du médecin</span>
+        <span class="pill pill-blue">Données scientifiques actuelles</span>
+        <span class="pill pill-purple">Préférences du patient</span>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:8px">70 % des consultations en médecine générale = situations non caractéristiques → incertitude diagnostique normale.</div>
+    </div>
+    <div>
+      <div class="sub">Types de savoirs</div>
+      <ul class="lst">
+        <li>Savoirs médicaux / scientifiques</li>
+        <li>Savoirs profanes / experts</li>
+        <li>Savoirs expérientiels</li>
+      </ul>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:6px">Le savoir n'est pas une simple accumulation de connaissances.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    4 étapes de la démarche EBM
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Formuler une question clinique claire — acronyme <span class="badge badge-blue">PICOT</span></div>
+        <div class="step-content">
+          <table class="table-blue" style="margin-top:6px">
+            <thead><tr><th>Lettre</th><th>Signification</th><th>Traitement</th><th>Diagnostic</th></tr></thead>
+            <tbody>
+              <tr><td><strong>P</strong></td><td>Patient / Problème clinique</td><td colspan="2">Population concernée</td></tr>
+              <tr><td><strong>I</strong></td><td>Intervention</td><td>Traitement évalué</td><td>Nouveau test</td></tr>
+              <tr><td><strong>C</strong></td><td>Comparator</td><td>Contrôle / traitement de référence</td><td>Test de référence</td></tr>
+              <tr><td><strong>O</strong></td><td>Outcome (critère de jugement)</td><td>Survie, évolution</td><td>Validité diagnostique</td></tr>
+              <tr><td><strong>T</strong></td><td>Time (horizon temporel)</td><td colspan="2">Moment de l'évaluation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Identifier les publications pertinentes</div>
+        <div class="step-content">PubMed/Medline, Cochrane (www.cochrane.fr), CiSMef, BMJ Clinical Evidence, ACP Journal Club</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Évaluer critiquement la méthodologie et les résultats</div>
+        <div class="step-content">
+          Apprécier : validité (niveau de preuve) + impact (taille d'effet) + utilité pratique (grade de recommandation).<br>
+          <strong>Revue systématique :</strong> synthèse exhaustive de la littérature.<br>
+          <strong>Méta-analyse :</strong> combinaison statistique des résultats de plusieurs études (si données combinables).
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Déduire une conduite personnalisée</div>
+        <div class="step-content">Extrapolation des résultats + pertinence contextuelle + balance bénéfice/risque + préférences du patient (révélées informellement ou via outils : EVA, arbitrage temporel, pari standard)</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Niveaux de preuve et recommandations
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub">Hiérarchie des niveaux de preuve (croissant)</div>
+      <div class="pills">
+        <span class="pill pill-red">Opinion d'experts</span>
+        <span class="pill pill-amber">Étude cas-témoins</span>
+        <span class="pill pill-blue">Cohorte</span>
+        <span class="pill pill-teal">ECR</span>
+        <span class="pill pill-teal">Méta-analyse d'ECR</span>
+      </div>
+      <div class="sub" style="margin-top:12px">Systèmes de graduation</div>
+      <div class="pills">
+        <span class="pill pill-purple">GRADE (OMS)</span>
+        <span class="pill pill-blue">Oxford CEBM</span>
+        <span class="pill pill-blue">SIGN</span>
+      </div>
+    </div>
+    <div>
+      <div class="sub">Recommandations de pratique clinique (RPC)</div>
+      <ul class="lst">
+        <li>Éditées par la <strong>HAS</strong> et les sociétés savantes</li>
+        <li>Intègrent données scientifiques + avis d'experts + organisation des soins + culture nationale</li>
+        <li>Situations cibles : haute prévalence, coût élevé, haut risque d'accident</li>
+        <li>Évaluation qualité : grille <strong>AGREE</strong> (pertinence, validité interne/externe, biais)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 2 : RAISONNEMENT CLINIQUE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Raisonnement clinique et démarche médicale
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître et distinguer les 5 styles de raisonnement clinique</div>
+  <div class="obj-line">Connaître les supports au raisonnement : démarche hypothético-déductive, examens complémentaires, logique thérapeutique</div>
+  <div class="obj-line">Distinguer efficacité théorique, effectivité, efficience et utilité d'une décision médicale</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Les 5 styles de raisonnement clinique
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Mode</th><th>Mécanisme</th><th>Contexte / limite</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Reconnaissance archétypale</strong><br><em>(pattern recognition)</em></td>
+        <td>Symptomatologie typique → réponse codifiée directe, sans raisonnement analytique explicite</td>
+        <td>Situations simples, répétées, codifiées par les RPC</td>
+      </tr>
+      <tr>
+        <td><strong>Hypothético-déductif</strong></td>
+        <td>Triade <em>hypothèses → indices → confirmation/infirmation</em> par anamnèse + examen clinique</td>
+        <td>Méthode de référence pour situations complexes courantes</td>
+      </tr>
+      <tr>
+        <td><strong>Intuitif / analogique</strong></td>
+        <td>« C'est comme d'habitude » — routines, très opérationnel</td>
+        <td>Médecine de premier recours, situations fréquentes</td>
+      </tr>
+      <tr>
+        <td><strong>Algorithmique</strong></td>
+        <td>Démarche binaire (oui/non) indépendante du contexte</td>
+        <td>Protocoles, urgences, checklist</td>
+      </tr>
+      <tr>
+        <td><strong>Exhaustif</strong></td>
+        <td>Exploration systématique face au doute — très coûteuse en temps et énergie</td>
+        <td>Situations très complexes — risque d'incidentalomes</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:12px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Prévention quaternaire :</strong> éviter l'inscription du malade dans des filières de soins déraisonnables. Garder à l'esprit le danger des bilans inutiles. Motifs de consultation souvent multiples (2,6/consultation en moyenne).</div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Examens complémentaires et logique thérapeutique
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="sub">4 catégories d'examens complémentaires</div>
+      <div class="pills">
+        <span class="pill pill-blue">Imagerie</span>
+        <span class="pill pill-teal">Biologie</span>
+        <span class="pill pill-purple">Endoscopie</span>
+        <span class="pill pill-amber">Épreuves fonctionnelles</span>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:8px">Toute prescription doit intégrer : information apportée (probabilité post-test) + risques + coût + conséquences sur la prise en charge.</div>
+    </div>
+    <div>
+      <div class="sub">Logique thérapeutique — 4 concepts</div>
+      <div class="kv-row"><span class="kv-key">Efficacité théorique</span><span class="kv-val" style="font-size:.8rem">Résultats en conditions idéales (essai)</span></div>
+      <div class="kv-row"><span class="kv-key">Effectivité</span><span class="kv-val" style="font-size:.8rem">Résultats en conditions réelles</span></div>
+      <div class="kv-row"><span class="kv-key">Efficience</span><span class="kv-val" style="font-size:.8rem">Objectifs au coût optimal de ressources</span></div>
+      <div class="kv-row"><span class="kv-key">Utilité</span><span class="kv-val" style="font-size:.8rem">Valeur morale/sociale + préférences patient</span></div>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:4px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Démarche thérapeutique : nommer la situation clinique → décider de façon négociée (situation clinique + préférences patient + caractéristiques médecin + éléments conjoncturels)</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 3 : DÉCISION MÉDICALE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Décision médicale — Modèles et cadre légal
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir la décision médicale (y compris la décision de ne pas agir)</div>
+  <div class="obj-line">Distinguer décision partagée, paternaliste et collégiale ; connaître la position de la HAS (2013)</div>
+  <div class="obj-line">Connaître le cadre légal de la personne de confiance (Loi Claeys-Leonetti) et les directives anticipées</div>
+  <div class="obj-line">Connaître les représentations, attentes et préférences des patients ; connaître l'analyse décisionnelle</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Décision médicale — Définitions fondamentales
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Décision médicale :</strong> arbitrer, choisir, conclure — les décisions sont diverses (introduction d'un traitement, signalement…). <strong>Ne pas traiter = décision médicale à part entière.</strong></div>
+  </div>
+  <div class="grid2" style="margin-top:4px">
+    <div>
+      <div class="sub">Analyse décisionnelle</div>
+      <ul class="lst">
+        <li>Technique de modélisation décomposant un problème complexe en «&nbsp;loteries&nbsp;»</li>
+        <li>Représentation graphique : <strong>arbre de décision</strong></li>
+        <li>Usage : diagnostic, pronostic, thérapeutique</li>
+        <li>Utilité moyenne = somme des utilités des issues × probabilité de survenue</li>
+      </ul>
+    </div>
+    <div>
+      <div class="sub">Analyse médico-économique coût-utilité</div>
+      <ul class="lst">
+        <li>Intègre l'utilité <strong>et</strong> les coûts des différentes options</li>
+        <li>Compare les stratégies par le coût additionnel par <strong>AVSS</strong> (année de vie sauvée supplémentaire)</li>
+        <li>Outils : ratio bénéfice/risque, ratio coût/efficacité, méta-analyses avec modélisation mathématique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Modèles décisionnels — comparaison
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Modèle</th><th>Caractéristiques</th><th>Dynamiques selon Sackett</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Décision partagée</strong><br><em>(Shared Decision Making)</em></td>
+        <td>
+          Partage bilatéral d'information médicale.<br>
+          Soutien du patient pour envisager toutes les options (dont <em>ne pas agir</em>).<br>
+          Choix éclairé <strong>mutuellement accepté</strong>.<br>
+          <span class="badge badge-green">HAS 2013</span>
+        </td>
+        <td>Homogénéité des 3 piliers (expérience + données + patient) → équilibre</td>
+      </tr>
+      <tr>
+        <td><strong>Décision paternaliste</strong></td>
+        <td>Prépondérance de l'art médical et des données scientifiques — le «&nbsp;sujet patient&nbsp;» est effacé</td>
+        <td>Déséquilibre : données/médecin dominant</td>
+      </tr>
+      <tr>
+        <td><strong>Décision collégiale</strong></td>
+        <td>Délibération interdisciplinaire (médecins, soignants, famille, patient) pour situations éthiquement complexes</td>
+        <td>Extension du modèle partagé à l'équipe</td>
+      </tr>
+      <tr>
+        <td><strong>Scientisme</strong></td>
+        <td>Aliénation aux données de la science — médicalisation de la société</td>
+        <td>Négligence des préférences patient</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Représentations/attentes/préférences du patient :</strong> la prise en charge passe par une négociation intégrant ses attentes (guérison, réparation…), ses représentations, ses normes et ses connaissances.</div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red)">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Personne de confiance — Loi Claeys-Leonetti
+  </div>
+  <table class="table-red">
+    <thead><tr><th>Point clé</th><th>Détail</th></tr></thead>
+    <tbody>
+      <tr><td>Qui peut la désigner ?</td><td>Toute personne <strong>majeure</strong></td></tr>
+      <tr><td>Qui peut être désigné ?</td><td>Parent, proche, ou médecin traitant</td></tr>
+      <tr><td>Quand est-elle consultée ?</td><td>Si le patient est <strong>hors d'état d'exprimer sa volonté</strong></td></tr>
+      <tr><td>Valeur juridique</td><td>Son témoignage <strong>prévaut sur tout autre témoignage</strong> (y compris famille)</td></tr>
+      <tr><td>Directives anticipées</td><td>S'assure que les directives anticipées sont bien respectées</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> la personne de confiance <em>témoigne</em> de la volonté du patient — elle ne décide pas à sa place. Son avis prévaut sur celui de la famille mais reste consultatif (sauf cadre spécifique Claeys-Leonetti pour arrêt des soins).</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 4 : TICE ET SADM -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  TICE et Systèmes d'aide à la décision médicale (SADM)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les 4 étapes de la prise de décision assistée par TICE ; distinguer SADM basé sur les connaissances, les données et l'IA générative</div>
+  <div class="obj-line">Connaître les types de SADM selon le domaine (dépistage, diagnostic, thérapeutique, prescription — LAP)</div>
+  <div class="obj-line">Connaître les 3 niveaux d'interopérabilité (technique, syntaxique, sémantique) et les principales normes et terminologies</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Les 3 types de SADM (Clinical Decision Support Systems)
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Type</th><th>Principe</th><th>Exemples</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Basé sur les connaissances</strong><br><span class="badge badge-purple">Logico-symbolique</span></td>
+        <td>
+          Règles SI-ALORS, arbres de décision, inférences logiques.<br>
+          <em>Chaînage avant</em> (SI → ALORS) ou <em>chaînage arrière</em> (hypothèse → vérification).<br>
+          3 types d'inférences : déduction (propage le vrai), induction, abduction.
+        </td>
+        <td>Systèmes experts (années 70), DXplain, logiciels aide à la prescription (LAP)</td>
+      </tr>
+      <tr>
+        <td><strong>Basé sur les données</strong><br><span class="badge badge-green">Machine learning</span></td>
+        <td>
+          Apprentissage supervisé (données résolues) ou non supervisé (clustering).<br>
+          Algorithmes : arbres de décision, SVM, random forests, deep learning.<br>
+          Partition 80/20 (apprentissage/évaluation). Métriques : précision, rappel, F1-score.
+        </td>
+        <td>Analyse d'images en radiologie, prédiction pronostique</td>
+      </tr>
+      <tr>
+        <td><strong>IA générative</strong><br><span class="badge badge-blue">LLMs</span></td>
+        <td>
+          Entraînés sur vastes corpus textuels (GPT, BERT…).<br>
+          Répondent en langage naturel à des questions en langage naturel.<br>
+          Performances variables : 8 à 92 % de bonnes propositions.
+        </td>
+        <td>ChatGPT, Gemini — risque d'<strong>hallucinations</strong>, confidentialité des données</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège LAP :</strong> le logiciel d'aide à la prescription vérifie dosage, interactions et contre-indications — mais <em>ne signale pas une prescription inadaptée</em> (ex : antibiotiques chez un diabétique). Un SADM en mode «&nbsp;aide&nbsp;» laisse toujours la décision finale au clinicien.</div>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue)">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    SADM par domaine d'application
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="lst">
+        <li><strong>Dépistage :</strong> cancers sein/utérus/colorectal, rappels vaccinaux</li>
+        <li><strong>Pronostic :</strong> scores de risque cardiovasculaire, rechute de cancer</li>
+        <li><strong>Diagnostic :</strong> DXplain (1984), symptom checkers (Mayo Clinic, Symptomate FR)</li>
+      </ul>
+    </div>
+    <div>
+      <ul class="lst">
+        <li><strong>Prise en charge thérapeutique :</strong> basés sur les GBP (HAS, NICE) — cadre EBM</li>
+        <li><strong>Prescription médicamenteuse (LAP) :</strong> sécurise l'ordonnance mais pas le choix thérapeutique</li>
+        <li><strong>Scores cliniques :</strong> Wells (EP), Fagerström (tabac), Predict Breast Cancer</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple)">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Interopérabilité des systèmes d'information de santé
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Interopérabilité :</strong> capacité des systèmes à fonctionner ensemble et à échanger des données sans perte. Condition d'efficacité des SADM intégrés au DPI (depuis 2005).</div>
+  </div>
+  <table class="table-purple" style="margin-top:8px">
+    <thead><tr><th style="background:var(--purple-light);color:var(--purple)">Niveau</th><th style="background:var(--purple-light);color:var(--purple)">Définition</th><th style="background:var(--purple-light);color:var(--purple)">Standards / Normes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Technique</strong></td>
+        <td>Connectique, réseau, protocoles bas niveau — non spécifique à la santé</td>
+        <td>TCP/IP, adressage internet</td>
+      </tr>
+      <tr>
+        <td><strong>Syntaxique</strong></td>
+        <td>Reconnaissance de la structure des informations échangées</td>
+        <td><strong>HL7/CDA R2</strong>, <strong>FHIR</strong> (évolution CDA), <strong>DICOM</strong> (images)</td>
+      </tr>
+      <tr>
+        <td><strong>Sémantique</strong></td>
+        <td>Sens partagé des données — codage unique non ambigu → qualité des données capitale</td>
+        <td>Référentiels terminologiques (voir ci-dessous)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="sub" style="margin-top:14px">Terminologies de référence (niveau sémantique)</div>
+  <div class="pills">
+    <span class="pill pill-purple">CIM-10 (OMS — PMSI hospitalier)</span>
+    <span class="pill pill-blue">SNOMED CT (toute la médecine)</span>
+    <span class="pill pill-teal">LOINC (biologie — examens)</span>
+    <span class="pill pill-coral">CCAM (actes médicaux — tarification)</span>
+    <span class="pill pill-amber">CISP-2 (médecine de ville — WONCA)</span>
+    <span class="pill pill-purple">HeTOP (portail multi-terminologies — CHU Rouen)</span>
+  </div>
+  <div class="sub" style="margin-top:14px">Accès aux données de santé (Health Data Hub)</div>
+  <div class="grid2" style="margin-top:0">
+    <div>
+      <ul class="lst">
+        <li>Données <strong>parfaitement anonymes</strong> : accès libre</li>
+        <li>Données non anonymisées : autorisation <strong>CNIL</strong> requise</li>
+        <li>Validation éthique : <strong>CESREES</strong></li>
+      </ul>
+    </div>
+    <div>
+      <ul class="lst">
+        <li>Health Data Hub regroupe SNDS + Assurance Maladie + hôpitaux</li>
+        <li>ANS (Agence du numérique en santé) : cadre d'interopérabilité français (CDA)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SECTION 5 : CONTROVERSE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Controverse scientifique et médicale
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir une controverse et ses caractéristiques (arènes, acteurs, modalités)</div>
+  <div class="obj-line">Connaître les particularités de la controverse en santé : enjeux médicaux, économiques, politiques ; exemples emblématiques</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber)">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Définition et caractéristiques d'une controverse
+  </div>
+  <div class="grid2">
+    <div>
+      <table class="table-amber">
+        <thead><tr><th>Dimension</th><th>Contenu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Définition</strong></td><td>Désaccord public sur des savoirs (véracité, stabilité ou applicabilité)</td></tr>
+          <tr><td><strong>Statut</strong></td><td>État <strong>normal de la recherche</strong> — opposé aux savoirs stabilisés</td></tr>
+          <tr><td><strong>Modalités</strong></td><td>Publication et contre-publication, débat et contestation</td></tr>
+          <tr><td><strong>Arènes</strong></td><td>Revues, congrès, médias, tribunaux, parlements</td></tr>
+          <tr><td><strong>Acteurs</strong></td><td>Chercheurs, praticiens, patients, industriels, administrations</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="sub">Particularités en santé</div>
+      <ul class="lst">
+        <li>Maladie et responsabilité <strong>partagée</strong> pour le corps du patient</li>
+        <li>Enjeux : méthodologiques, économiques, politiques</li>
+      </ul>
+      <div class="sub" style="margin-top:10px">Exemples emblématiques</div>
+      <ul class="lst">
+        <li><strong>Hésitation vaccinale :</strong> hépatite B et affections démyélinisantes (infondée) — concept central</li>
+        <li>Médicaments, risques environnementaux, alimentation</li>
+        <li>Fake news médicales — combats d'autorité récurrents</li>
+      </ul>
+      <div class="alert alert-blue" style="margin-top:8px">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Responsabilité du professionnel : sanction <strong>pénale ou disciplinaire</strong> + indemnisation via RCP obligatoire (assurance RC professionnelle)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- SYNTHÈSE FINALE -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="card card-teal" style="background:var(--teal-light)">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal)">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>EBM ≠ seules données scientifiques</strong> — la triade intègre toujours expérience clinique + préférences patient</li>
+    <li><strong>PICOT :</strong> Patient / Intervention / Comparator / Outcome / Time — indispensable pour formuler une question clinique structurée</li>
+    <li>Revue systématique ≠ méta-analyse : la méta-analyse implique une combinaison statistique des résultats (pas la revue seule)</li>
+    <li>70 % des consultations = situations non caractéristiques → incertitude diagnostique normale, pas d'exhaustivité systématique</li>
+    <li><strong>Personne de confiance (Claeys-Leonetti) :</strong> son témoignage <em>prévaut</em> sur tout autre — elle témoigne, ne décide pas</li>
+    <li>Décision partagée = idéal HAS 2013 — à distinguer de la décision paternaliste (patient effacé) et de la décision collégiale (pluridisciplinarité éthique)</li>
+    <li><strong>LAP ≠ aide au choix thérapeutique :</strong> vérifie dosage/interactions/CI, pas la pertinence clinique</li>
+    <li>SADM efficaces = intégrés au DPI → nécessite les 3 niveaux d'interopérabilité (technique + syntaxique + sémantique)</li>
+    <li>Terminologies clés : CIM-10 (hospitalier/OMS), SNOMED CT, LOINC (biologie), CCAM (actes), CISP-2 (médecine de ville)</li>
+    <li>Controverse = état normal de la recherche — hésitation vaccinale = exemple phare à connaître</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:12px">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Pièges classiques :</strong><br>
+    — Croire que la démarche exhaustive est toujours la meilleure : coûteuse en temps et génératrice d'incidentalomes<br>
+    — Oublier que « ne pas traiter » est une décision médicale à part entière<br>
+    — Confondre LLM / hallucinations et SADM basé sur les connaissances (logico-symbolique fiable)<br>
+    — Oublier que la qualité du codage sémantique est du ressort du professionnel de santé lui-même</div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

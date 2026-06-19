@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-18. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-19. Ne pas éditer à la main._
 
 **Avancement : 158 / 367 items (43.1%)**
 
@@ -10,7 +10,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 |---:|:---:|:---|:---|
 | 1 | [x] | La relation médecin-malade dans le cadre du colloque singulier ou au s… | 1_Relation_medecin_malade.html |
 | 2 | [x] | Les valeurs professionnelles du médecin et des autres professions de s… | 2_valeurs_professionnelles.html |
-| 3 | [x] | Le raisonnement et la décision en médecine | 3_raisonnement_EBM_decision.html |
+| 3 | [x] | Le raisonnement et la décision en médecine | 3_raisonnement_EBM_decision_v2.html |
 | 4 | [x] | Qualité et sécurité des soins | 4_qualite_securite_soins_EIAS_v2.html |
 | 5 | [x] | Responsabilités médicale pénale | 5_Responsabilites_medicales_v2.html |
 | 6 | [x] | L organisation de l exercice clinique et les méthodes qui permettent d… | 6_Exercice_clinique_securite_v2.html |
