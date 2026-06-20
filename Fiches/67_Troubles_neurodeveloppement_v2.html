@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 67 — Troubles du neurodéveloppement</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 55%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.88rem;opacity:.92;line-height:1.6;margin-top:6px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  .mini-label{font-weight:700;font-size:.76rem;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 5px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 67 · Pédopsychiatrie / Psychiatrie</div>
+  <h1>Troubles du Neurodéveloppement</h1>
+  <div class="header-sub">
+    Deux grands TND à maîtriser : le <strong>TSA</strong> (Trouble du Spectre de l'Autisme) et le <strong>TDAH</strong> (Trouble Déficit de l'Attention avec/sans Hyperactivité). L'enjeu est triple : reconnaître leur sémiologie spécifique, appliquer les critères DSM-5, et organiser une prise en charge pluridisciplinaire adaptée (psychosociale, scolaire, médicamenteuse).
+  </div>
+  <div class="header-tags">
+    <span class="htag">TSA</span>
+    <span class="htag">TDAH</span>
+    <span class="htag">DSM-5</span>
+    <span class="htag">Méthylphénidate</span>
+    <span class="htag">MDPH / Aménagements scolaires</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 : TSA — Définition & Sémiologie
+     ═══════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  TSA — Définition &amp; Sémiologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le TSA comme trouble du neurodéveloppement et en expliquer la définition clinique</div>
+  <div class="obj-line">Décrire la sémiologie des deux domaines obligatoires : communication/interactions sociales et comportements/intérêts restreints</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>TSA = <strong>anomalies de la communication et des interactions sociales</strong> + <strong>comportements/intérêts/activités restreints et répétitifs</strong> — présents depuis la petite enfance, avec retentissement fonctionnel systématique (variable en intensité).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Domaine 1 — Communication &amp; interactions sociales
+    </div>
+    <div class="mini-label" style="color:var(--purple);">Communication non-verbale</div>
+    <ul class="lst">
+      <li>Contact oculaire rare ou variable</li>
+      <li>Rareté/absence de pointage et gestes de communication</li>
+      <li>Manque/retard des gestes instrumentaux à valeur sociale</li>
+    </ul>
+    <div class="mini-label" style="color:var(--purple);">Communication verbale (pragmatique)</div>
+    <ul class="lst">
+      <li>Difficultés d'accès au langage figuré</li>
+      <li>Faible valeur fonctionnelle du langage</li>
+    </ul>
+    <div class="mini-label" style="color:var(--purple);">Réciprocité sociale &amp; relationnelle</div>
+    <ul class="lst">
+      <li>Peu de sourires-réponse — manque d'attention conjointe</li>
+      <li>Difficulté à mener une conversation réciproque</li>
+      <li>Isolement relationnel, faible motivation sociale</li>
+      <li>Rareté du jeu social</li>
+    </ul>
+  </div>
+
+  <div class="card card-coral">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Domaine 2 — Comportements restreints &amp; répétitifs
+    </div>
+    <div class="mini-label" style="color:var(--coral);">Comportements répétitifs / stéréotypés</div>
+    <ul class="lst">
+      <li>Utilisation répétitive des objets</li>
+      <li>Stéréotypies verbales, écholalie, langage idiosyncrasique</li>
+    </ul>
+    <div class="mini-label" style="color:var(--coral);">Intolérance au changement</div>
+    <ul class="lst">
+      <li>Adhésion rigide aux routines — comportements ritualisés</li>
+    </ul>
+    <div class="mini-label" style="color:var(--coral);">Intérêts restreints</div>
+    <ul class="lst">
+      <li>Attachement à des objets parfois insolites</li>
+      <li>Intérêts circonscrits et persévérants</li>
+    </ul>
+    <div class="mini-label" style="color:var(--coral);">Particularités sensorielles</div>
+    <ul class="lst">
+      <li>Hyper- ou hyporéactivité (bruit, douleur, stimulations visuelles)</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 2 : TSA — Critères DSM-5, Comorbidités & DD
+     ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  TSA — Critères DSM-5, Comorbidités &amp; Diagnostics différentiels
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les critères diagnostiques DSM-5 du TSA et les outils d'évaluation pluridisciplinaire (ADI-R, ADOS)</div>
+  <div class="obj-line">Identifier les spécifications à préciser en cas de diagnostic positif (sévérité, TDI, langage, pathologie associée)</div>
+  <div class="obj-line">Citer les principales comorbidités avec leurs fréquences et les diagnostics différentiels à éliminer</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostic positif — Évaluation pluridisciplinaire
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div><span class="step-title">Examen clinique</span></div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div><span class="step-title">Anamnèse développementale</span> + entretien semi-structuré avec les parents
+          <div class="step-content">Outil : ADI-R (Autism Diagnostic Interview-Revised)</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div><span class="step-title">Observation de l'enfant</span>
+          <div class="step-content">Outil : ADOS (Autism Diagnostic Observation Scale)</div>
+        </div>
+      </li>
+    </ul>
+    <div class="mini-label" style="color:var(--blue); margin-top:12px;">À préciser si TSA confirmé</div>
+    <ul class="lst">
+      <li>Sévérité des symptômes</li>
+      <li>Trouble du développement intellectuel associé</li>
+      <li>Trouble du langage associé</li>
+      <li>Pathologie génétique / médicale / facteur environnemental</li>
+      <li>Troubles co-existants (comorbidités)</li>
+    </ul>
+    <div class="mini-label" style="color:var(--muted); margin-top:12px;">Démarche complémentaire</div>
+    <ul class="lst">
+      <li>Enquête étiologique orientée (bilan génétique, examens complémentaires)</li>
+      <li>Recherche de comportements-problèmes (agressivité, auto-mutilation)</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Comorbidités TSA — Fréquences-clés
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Trouble du développement intellectuel</span>
+        <span class="kv-val"><span class="pill pill-red">40%</span></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">TDAH associé</span>
+        <span class="kv-val"><span class="pill pill-amber">30–40%</span></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Sans langage verbal</span>
+        <span class="kv-val"><span class="pill pill-coral">20%</span></span>
+      </div>
+      <div class="kv-row">
+        <span class="kv-key">Épilepsie</span>
+        <span class="kv-val"><span class="pill pill-red">20%</span></span>
+      </div>
+      <div style="margin-top:8px; font-size:.8rem; color:var(--muted);">Autres : Tics, troubles spécifiques des apprentissages, trouble des coordinations motrices, anxiété, TOC, dépression, troubles du sommeil, syndrome catatonique</div>
+    </div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        Diagnostics différentiels TSA
+      </div>
+      <div class="pills">
+        <span class="pill pill-red">Surdité</span>
+        <span class="pill pill-blue">Autres TND</span>
+        <span class="pill pill-purple">Troubles schizophréniques</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> les comportements-problèmes (agressivité, automutilation) ne sont <strong>pas</strong> inhérents au TSA — chercher systématiquement une douleur, une infection, un facteur environnemental avant d'attribuer au trouble.</div>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     SECTION 3 : TDAH — Sémiologie, DSM-5 & Évolution selon l'âge
+     ══════════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  TDAH — Sémiologie, Critères DSM-5 &amp; Évolution selon l'âge
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le TDAH et décrire ses trois présentations cliniques</div>
+  <div class="obj-line">Appliquer les critères DSM-5 : début avant 12 ans, durée > 6 mois, retentissement dans ≥ 2 domaines — et comprendre que le diagnostic est clinique</div>
+  <div class="obj-line">Connaître l'évolution de la sémiologie selon l'âge et les spécificités du diagnostic chez la fille et l'adulte</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Critères DSM-5 TDAH — À retenir
+    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td style="color:var(--muted); font-weight:600; width:38%;">Symptômes</td>
+          <td>Inattention et/ou hyperactivité/impulsivité en nombre suffisant</td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted); font-weight:600;">Retentissement</td>
+          <td><strong>≥ 2 domaines</strong> de fonctionnement</td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted); font-weight:600;">Début</td>
+          <td><strong>Avant 12 ans</strong></td>
+        </tr>
+        <tr>
+          <td style="color:var(--muted); font-weight:600;">Durée</td>
+          <td><strong>&gt; 6 mois</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mini-label" style="color:var(--amber); margin-top:12px;">3 présentations cliniques</div>
+    <div class="pills">
+      <span class="pill pill-blue">Inattention prédominante</span>
+      <span class="pill pill-red">Hyperactivité/Impulsivité prédominante</span>
+      <span class="pill pill-purple">Forme combinée</span>
+    </div>
+    <div class="alert alert-amber" style="margin-top:12px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Diagnostic clinique !</strong> Les tests neuropsychologiques et le QI (souvent altérés) aident à profiler mais n'ont <strong>aucune valeur diagnostique.</strong></div>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Évolution selon l'âge
+    </div>
+    <table>
+      <thead class="table-teal">
+        <tr>
+          <th>Âge</th>
+          <th>Caractéristiques</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:700; white-space:nowrap;">Jeune enfant</td>
+          <td>Signes d'hyperactivité/impulsivité dès l'âge de la marche — <strong>peu stables avant 4 ans</strong></td>
+        </tr>
+        <tr>
+          <td style="font-weight:700; white-space:nowrap;">Scolaire</td>
+          <td>Inattention repérée quand les exigences augmentent (élémentaire, collège) — diagnostic tardif si inattention prédominante</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700; white-space:nowrap;">Ado / Adulte</td>
+          <td>Hyperactivité motrice diminue — impulsivité + inattention persistent chez <strong>2/3</strong> — comorbidités (dépression, addictions) au 1er plan → <strong>risque d'errance diagnostique</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:12px; margin-bottom:0;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège chez la fille :</strong> inattention prédominante, hyperactivité discrète — diagnostic souvent retardé.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Comorbidités &amp; Diagnostics différentiels TDAH
+  </div>
+  <div class="grid2" style="margin-top:4px; margin-bottom:0;">
+    <div>
+      <div class="mini-label" style="color:var(--red);">Comorbidités</div>
+      <div class="kv-row"><span class="kv-key">Autres TND</span><span class="kv-val"><span class="pill pill-red">50–80%</span></span></div>
+      <div class="kv-row"><span class="kv-key">Troubles anxieux</span><span class="kv-val"><span class="pill pill-amber">33%</span></span></div>
+      <div class="pills" style="margin-top:8px;">
+        <span class="pill pill-purple">Trouble oppositionnel</span>
+        <span class="pill pill-red">Trouble des conduites</span>
+        <span class="pill pill-blue">TOC</span>
+        <span class="pill pill-teal">Troubles de l'humeur</span>
+        <span class="pill pill-gray">Troubles du sommeil</span>
+        <span class="pill pill-gray">Abus de substances</span>
+      </div>
+    </div>
+    <div>
+      <div class="mini-label" style="color:var(--blue);">Diagnostics différentiels</div>
+      <div class="pills">
+        <span class="pill pill-blue">Autres TND</span>
+        <span class="pill pill-purple">Trouble bipolaire</span>
+        <span class="pill pill-red">Causes iatrogènes</span>
+      </div>
+      <div class="alert alert-red" style="margin-top:12px; margin-bottom:0;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>TDAH = risque accru de conduites à risque, d'accidents, de comportements délictuels et <strong>suicidaires.</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4 : Organisation de la prise en charge
+     ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Organisation de la prise en charge des TND
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les principes généraux de la prise en charge pluridisciplinaire des TND (précoce, intensive, coordonnée)</div>
+  <div class="obj-line">Connaître l'organisation graduée en 3 niveaux (repérage → CMP/CAMSP → centres de référence)</div>
+  <div class="obj-line">Distinguer les aménagements scolaires (PPRE, PAP, PAI, PPS) et savoir lequel nécessite une notification MDPH</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Organisation graduée — 3 niveaux
+    </div>
+    <div class="bl-teal" style="margin-bottom:10px;">
+      <div style="font-weight:700; font-size:.84rem; color:var(--teal);">Niveau 1 — Repérage précoce</div>
+      <div style="font-size:.83rem; color:var(--muted); margin-top:2px;">Médecine de ville · médecine scolaire · PMI</div>
+    </div>
+    <div class="bl-blue" style="margin-bottom:10px;">
+      <div style="font-weight:700; font-size:.84rem; color:var(--blue);">Niveau 2 — Diagnostic &amp; traitement</div>
+      <div style="font-size:.83rem; color:var(--muted); margin-top:2px;">CMP · CMPP · CAMSP</div>
+    </div>
+    <div class="bl-amber">
+      <div style="font-weight:700; font-size:.84rem; color:var(--amber);">Niveau 3 — Centres de référence</div>
+      <div style="font-size:.83rem; color:var(--muted); margin-top:2px;">Consultations hospitalières pour diagnostics complexes</div>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      MDPH — Accompagnement du handicap
+    </div>
+    <div style="font-size:.82rem; color:var(--muted); margin-bottom:10px;">Dossier MDPH = <strong>3 volets :</strong> parents · scolaire · certificat médical argumenté<br><span style="font-size:.78rem;">(MDPH parfois regroupées dans les Maisons de l'Autonomie — MDA)</span></div>
+    <div class="mini-label" style="color:var(--purple);">Mesures de compensation</div>
+    <div class="pills" style="margin-bottom:10px;">
+      <span class="pill pill-purple">AEEH</span>
+      <span class="pill pill-purple">AESH</span>
+      <span class="pill pill-purple">Ordinateur</span>
+    </div>
+    <div class="mini-label" style="color:var(--purple);">Orientations possibles</div>
+    <div class="pills">
+      <span class="pill pill-blue">SESSAD</span>
+      <span class="pill pill-blue">ULIS</span>
+      <span class="pill pill-blue">IME</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Aménagements scolaires — Tableau comparatif
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr>
+        <th>Dispositif</th>
+        <th>Niveau d'intervention</th>
+        <th style="text-align:center;">Notification MDPH</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PPRE</strong></td>
+        <td>Mesures pédagogiques simples</td>
+        <td style="text-align:center;"><span class="pill pill-teal">Non</span></td>
+      </tr>
+      <tr>
+        <td><strong>PAP</strong></td>
+        <td>Mesures pédagogiques plus importantes</td>
+        <td style="text-align:center;"><span class="pill pill-teal">Non</span></td>
+      </tr>
+      <tr>
+        <td><strong>PAI</strong></td>
+        <td>Prise de médicament sur temps scolaire / adaptations</td>
+        <td style="text-align:center;"><span class="pill pill-teal">Non</span></td>
+      </tr>
+      <tr>
+        <td><strong>PPS</strong></td>
+        <td>Mesures importantes : AESH, AEEH, ordinateur, orientation spécialisée</td>
+        <td style="text-align:center;"><span class="pill pill-red">Oui !</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 : Traitements — Synthèse par TND
+     ══════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitements — Synthèse par TND
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Énoncer les mesures psychosociales pour le TSA, le TDAH, le TDI et les tics</div>
+  <div class="obj-line">Citer les modalités de prescription du méthylphénidate (âge, initiation, modalités d'ordonnance)</div>
+  <div class="obj-line">Connaître les traitements médicamenteux spécifiques des symptômes associés au TSA</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Tableau comparatif des traitements
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>TND</th>
+        <th>Mesures psychosociales</th>
+        <th>Traitements médicamenteux</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700; color:var(--purple); white-space:nowrap;">TSA</td>
+        <td>
+          Psychoéducation / guidance parentale<br>
+          Rééducation orthophonique spécialisée<br>
+          Pictogrammes / communication augmentée<br>
+          Entraînement habiletés sociales<br>
+          Thérapies socio-émotionnelles<br>
+          Scolarité adaptée : UEMA · UEEA · IME
+        </td>
+        <td>
+          <div class="kv-row"><span class="kv-key">Sommeil</span><span class="kv-val"><span class="pill pill-teal">Mélatonine</span></span></div>
+          <div class="kv-row"><span class="kv-key">Irritabilité / comportement</span><span class="kv-val"><span class="pill pill-coral">Antipsychotiques 2G</span></span></div>
+          <div class="kv-row"><span class="kv-key">Humeur / TOC</span><span class="kv-val"><span class="pill pill-blue">ISRS</span></span></div>
+          <div class="kv-row"><span class="kv-key">TDAH associé</span><span class="kv-val"><span class="pill pill-amber">Méthylphénidate</span></span></div>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700; color:var(--amber); white-space:nowrap;">TDAH</td>
+        <td>
+          Psychoéducation / ETP<br>
+          Renforcement habiletés parentales<br>
+          Rééducations / remédiation cognitive<br>
+          TCC individuelle ou de groupe<br>
+          Aménagements scolaires (PPRE / PAP / PPS)
+        </td>
+        <td>
+          <div class="bl-amber">
+            <div style="font-weight:700; font-size:.83rem; color:var(--amber); margin-bottom:4px;">Méthylphénidate — 1re ligne</div>
+            <div class="kv-row"><span class="kv-key">Indication</span><span class="kv-val">Insuffisance mesures psychosociales</span></div>
+            <div class="kv-row"><span class="kv-key">Âge minimal</span><span class="kv-val">6 ans</span></div>
+            <div class="kv-row"><span class="kv-key">Efficacité</span><span class="kv-val">80% des TDAH</span></div>
+            <div class="kv-row"><span class="kv-key">Initiation</span><span class="kv-val">Pédiatre / psychiatre</span></div>
+            <div class="kv-row"><span class="kv-key">Ordonnance</span><span class="kv-val">Sécurisée · en toutes lettres · 28 j</span></div>
+            <div class="kv-row"><span class="kv-key">Réévaluation</span><span class="kv-val">Annuelle par le spécialiste</span></div>
+          </div>
+          <div style="margin-top:8px; font-size:.8rem; color:var(--muted);">2e ligne : médicaments non-psychostimulants</div>
+        </td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700; color:var(--blue); white-space:nowrap;">TDI / TSA<br><span style="font-size:.76rem; font-weight:400;">(trouble dév. intellectuel)</span></td>
+        <td>
+          Psychoéducation / ETP<br>
+          Rééducations<br>
+          Communication augmentée<br>
+          Aménagements scolaires (PPS)<br>
+          Orientation ULIS / IME
+        </td>
+        <td>Médicaments pour troubles associés si retentissement fonctionnel important</td>
+      </tr>
+      <tr>
+        <td style="vertical-align:middle; text-align:center; font-weight:700; color:var(--teal); white-space:nowrap;">Tics</td>
+        <td>
+          Psychoéducation / ETP<br>
+          TCC<br>
+          Modification de l'environnement<br>
+          Comportements alternatifs
+        </td>
+        <td><span class="pill pill-coral">Antipsychotiques 2G</span> (formes sévères)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Méthylphénidate :</strong> ordonnance sécurisée en toutes lettres, avec mention de la pharmacie, renouvelable tous les <strong>28 jours.</strong> Renouvellement par tout médecin après initiation par un spécialiste.</div>
+</div>
+
+<hr>
+
+<!-- ════════════════════════════
+     SECTION 6 : Points-clés
+     ════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        TSA — Les 2 domaines obligatoires
+      </div>
+      (1) Anomalies communication/interactions sociales <strong>ET</strong> (2) comportements/intérêts restreints/répétitifs — les DEUX domaines sont requis, présents dès la petite enfance.
+    </div>
+    <div class="card card-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+        </div>
+        TDAH — Critères à cocher
+      </div>
+      Début &lt; 12 ans · durée &gt; 6 mois · retentissement ≥ 2 domaines · diagnostic <strong>clinique</strong> (pas de biomarqueur). Présentation peut évoluer avec le temps.
+    </div>
+    <div class="card card-red">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--red);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Comorbidités à ne pas manquer
+      </div>
+      TSA + épilepsie (20%) · TSA + TDAH (30–40%) · TDAH + anxiété (33%) · TDAH + risque suicidaire accru.
+    </div>
+  </div>
+
+  <div>
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        PPS = seul dispositif nécessitant la MDPH
+      </div>
+      PPRE / PAP / PAI = sans notification MDPH.<br>PPS seul = notification MDPH <strong>obligatoire.</strong>
+    </div>
+    <div class="card card-blue">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+        </div>
+        Méthylphénidate — Règles de prescription
+      </div>
+      À partir de 6 ans · initiation par spécialiste · ordonnance sécurisée en toutes lettres · renouvellement 28 jours · efficace chez <strong>80%</strong> des TDAH · réévaluation annuelle.
+    </div>
+    <div class="card card-amber">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--amber);">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        Piège TDAH féminin et de l'adulte
+      </div>
+      Filles : inattention prédominante, hyperactivité peu visible → diagnostic retardé.<br>Adulte : comorbidités (dépression, addiction) masquent le TDAH → errance diagnostique fréquente.
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Principe général :</strong> prise en charge toujours <strong>pluridisciplinaire, précoce et intensive</strong>, coordonnée par un médecin référent, avec éducation thérapeutique parentale. Le traitement médicamenteux complète les mesures psychosociales — il ne se substitue jamais à elles.</div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

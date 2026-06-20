@@ -74,7 +74,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 64 | [x] | Troubles bipolaires de l adolescent et de l adulte | 64_Troubles_bipolaires.html |
 | 65 | [ ] | Trouble délirant persistant | — |
 | 66 | [x] | Troubles dépressifs, anxieux, TOC, TSPT, adaptation et personnalité | 66_Troubles_psychiatriques.html |
-| 67 | [x] | Troubles du neurodéveloppement | 67_Troubles_neurodeveloppement.html |
+| 67 | [x] | Troubles du neurodéveloppement | 67_Troubles_neurodeveloppement_v2.html |
 | 68 | [ ] | Troubles du comportement de l enfant et de l adolescent | — |
 | 69 | [ ] | Troubles psychiques de la grossesse et du post-partum | — |
 | 70 | [ ] | Troubles psychiques du sujet âgé | — |
