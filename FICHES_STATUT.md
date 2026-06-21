@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-20. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-21. Ne pas éditer à la main._
 
-**Avancement : 159 / 367 items (43.3%)**
+**Avancement : 160 / 367 items (43.6%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -313,7 +313,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 303 | [x] | Tumeurs de l estomac | 303_tumeurs_estomac.html |
 | 304 | [x] | Tumeurs du foie | 304_Tumeurs_foie_v2.html |
 | 305 | [x] | Tumeurs de l œsophage | 305_Tumeurs_oesophage.html |
-| 306 | [ ] | Tumeurs de l ovaire | — |
+| 306 | [x] | Tumeurs de l ovaire | 306_Tumeurs_ovaire.html |
 | 307 | [ ] | Tumeurs des os primitives et secondaires | — |
 | 308 | [ ] | Tumeurs du pancréas | — |
 | 309 | [x] | Tumeurs du poumon | 309_tumeurs_poumon.html |
