@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 53 — Retard de croissance staturo-pondérale</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light); color:var(--blue);}
+  .table-teal th{background:var(--teal-light); color:var(--teal);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .table-red th{background:var(--red-light); color:var(--red);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 53</div>
+  <h1>Retard de croissance staturo-pondérale</h1>
+  <div class="header-sub" style="opacity:.85;font-size:.9rem;margin-top:6px;">Pédiatrie — Endocrinologie pédiatrique</div>
+  <div class="header-tags">
+    <span class="htag">Croissance normale</span>
+    <span class="htag">Retard pondéral</span>
+    <span class="htag">Retard statural</span>
+    <span class="htag">Age osseux</span>
+    <span class="htag">Turner · GHD · Hypothyroïdie</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>La croissance est le <strong>reflet de la santé de l'enfant</strong> : tout retard est un symptôme qui justifie une évaluation. Le raisonnement clé est d'abord chronologique (pondéral avant statural ou simultané ?) puis mécanistique (carence énergétique vs cause hormonale/génétique). L'âge osseux est un outil précieux pour apprécier le potentiel de croissance résiduel.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 1 : CROISSANCE NORMALE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Croissance normale de l'enfant
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les points de repère staturo-pondéraux selon l'âge</div>
+  <div class="obj-line">Comprendre les 4 phases de la croissance staturale et leurs vitesses normales</div>
+  <div class="obj-line">Savoir calculer et interpréter la taille cible génétique</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Points de repère clés
+    </div>
+    <table>
+      <thead><tr><th>Âge</th><th>Taille</th><th>Poids</th><th>PC</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Naissance</strong></td><td>50 cm</td><td>3,5 kg</td><td>35 cm</td></tr>
+        <tr><td><strong>4 mois</strong></td><td>60 cm</td><td>7 kg (×2)</td><td>—</td></tr>
+        <tr><td><strong>9 mois</strong></td><td>70 cm</td><td>9 kg</td><td>PC = T/2 + 10</td></tr>
+        <tr><td><strong>1 an</strong></td><td>75 cm</td><td>10 kg (×3)</td><td>—</td></tr>
+        <tr><td><strong>4 ans</strong></td><td>100 cm (×2)</td><td>16 kg</td><td>50 cm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Paramètres d'interprétation
+    </div>
+    <div class="kv-row"><span class="kv-key">Normale statistique</span><span class="kv-val">± 2 DS (−2 à +2)</span></div>
+    <div class="kv-row"><span class="kv-key">95% des enfants</span><span class="kv-val">± 2 DS de la moyenne</span></div>
+    <div class="kv-row"><span class="kv-key">Taille cible (garçon)</span><span class="kv-val">(T père + T mère)/2 + 6,5 cm</span></div>
+    <div class="kv-row"><span class="kv-key">Taille cible (fille)</span><span class="kv-val">(T père + T mère)/2 − 6,5 cm</span></div>
+    <div class="kv-row"><span class="kv-key">Intervalle taille cible</span><span class="kv-val">± 1,5 DS</span></div>
+    <div class="kv-row"><span class="kv-key">Taille adulte ♂</span><span class="kv-val">177 cm</span></div>
+    <div class="kv-row"><span class="kv-key">Taille adulte ♀</span><span class="kv-val">165 cm</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Les 4 phases de la croissance staturale
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Phase</th><th>Période</th><th>Vitesse</th><th>Particularité</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Fœtale</strong></td>
+        <td>In utero</td>
+        <td>50 cm en 9 mois</td>
+        <td>Phase la plus rapide ; reflétée par les paramètres de naissance</td>
+      </tr>
+      <tr>
+        <td><strong>Petite enfance</strong></td>
+        <td>0 → 4 ans</td>
+        <td>25 cm (an 1), puis ~10 cm/an (an 2–3)</td>
+        <td>Mise sur le couloir génétique</td>
+      </tr>
+      <tr>
+        <td><strong>Enfance</strong></td>
+        <td>4 ans → début puberté</td>
+        <td>5–6 cm/an <span class="badge badge-red">Patho si &lt; 4 cm/an</span></td>
+        <td>Phase linéaire stable</td>
+      </tr>
+      <tr>
+        <td><strong>Puberté</strong></td>
+        <td>Puberté</td>
+        <td>8–10 cm/an (pic)</td>
+        <td>Gain total ♀ 20–25 cm / ♂ 25–30 cm</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : DÉFINITIONS ET ORIENTATION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Définitions et orientation diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le retard pondéral et le retard statural selon des critères chiffrés</div>
+  <div class="obj-line">Distinguer les deux grandes orientations : retard pondéral isolé/antérieur vs retard statural prédominant</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Retard pondéral — définition
+    </div>
+    <ul class="lst">
+      <li>IMC &lt; courbe IOTF 18,5</li>
+      <li>Perte de poids ≥ 5% en 1 mois ou ≥ 10% par rapport au poids habituel</li>
+      <li>Stagnation aboutissant à un poids &lt; −2 DS du couloir habituel</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Retard statural — définition
+    </div>
+    <ul class="lst">
+      <li>Taille &lt; −2 DS (courbes population générale)</li>
+      <li>Taille &lt; −1,5 DS par rapport à la taille cible génétique</li>
+      <li>Ralentissement de la vitesse de croissance (&lt; 4 cm/an après 4 ans)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Clé de lecture de la courbe :</strong> La chronologie poids/taille est l'élément d'orientation essentiel — <strong>retard pondéral isolé ou antérieur = déséquilibre énergétique</strong> ; <strong>retard statural prédominant (poids en rapport ou excessif) = cause hormonale, génétique ou osseuse</strong>.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : RETARD PONDÉRAL ISOLÉ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Retard pondéral isolé ou antérieur au retard statural
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les mécanismes (carence d'apports, malabsorption, augmentation de la dépense, pertes excessives) et leurs principales causes</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Mécanismes et étiologies — déséquilibre de la balance énergétique
+  </div>
+  <table>
+    <thead><tr><th>Mécanisme</th><th>Principales causes</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Carence d'apports</strong></td>
+        <td>Négligence, régimes carencés (végétalisme)<br>Anorexie psychogène ou organique<br>Vomissements, troubles de l'oralité</td>
+      </tr>
+      <tr>
+        <td><strong>Malabsorption</strong></td>
+        <td>Maladie cœliaque <span class="badge badge-amber">piège</span><br>Allergie aux protéines du lait de vache (APLV)<br>MICI (Crohn, RCH)</td>
+      </tr>
+      <tr>
+        <td><strong>Augmentation de la dépense énergétique</strong></td>
+        <td>Respiratoire : dyspnée obstructive, SAOS, insuffisance respiratoire<br>Cardiaque : cardiopathie congénitale, cardiomyopathie<br>Immunitaire : infections répétées, déficit immunitaire<br>Inflammatoire : maladies de système<br>Maladies héréditaires du métabolisme<br><span class="badge badge-red">Hyperthyroïdie</span> : seul cas avec accélération staturale associée</td>
+      </tr>
+      <tr>
+        <td><strong>Pertes excessives</strong></td>
+        <td>Digestives : diarrhées chroniques, stomies<br>Urinaires : diabète sucré, diabète insipide, néphropathie<br>Cutanées : brûlés, eczéma sévère, épidermolyse bulleuse</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> La maladie cœliaque et les MICI peuvent se manifester par une anomalie de taille <strong>isolée</strong>, sans insuffisance pondérale évidente — ne pas écarter le bilan digestif devant un retard statural.</div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : RETARD STATURAL PRÉDOMINANT -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Retard statural prédominant
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier et caractériser le nanisme psychosocial</div>
+  <div class="obj-line">Reconnaître les causes endocriniennes : hypothyroïdie, hypercorticisme, déficit en hormone de croissance (GHD)</div>
+  <div class="obj-line">Connaître la présentation du syndrome de Turner et sa fréquence</div>
+  <div class="obj-line">Distinguer les autres causes (RCIU, retard simple, petite taille constitutionnelle)</div>
+</div>
+
+<!-- Profil commun causes hormonales -->
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Profil commun des causes endocriniennes :</strong> ralentissement statural + <strong>poids excessif en regard de la taille</strong> + <strong>âge osseux retardé</strong>. Ce trépied oriente vers une cause hormonale.</div>
+</div>
+
+<!-- Nanisme psychosocial -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Nanisme psychosocial
+  </div>
+  <ul class="lst">
+    <li>Carence de soins/négligence → carence d'apports + déficit hormonal d'origine psychologique</li>
+    <li>Diagnostic et traitement <strong>a posteriori</strong> : l'éloignement du milieu familial permet la reprise de la croissance</li>
+  </ul>
+</div>
+
+<!-- Causes endocriniennes -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Hypothyroïdie
+    </div>
+    <div class="bl-blue" style="margin-bottom:8px;">
+      <strong>Congénitale</strong><br>
+      <span style="font-size:.83rem;color:var(--muted);">Dysgénésie thyroïdienne (athyréose/ectopie) ou trouble hormonosynthèse. Dépistage néonatal J3 (TSH) — si traité précocement : évolution favorable. Sans dépistage : retard statural + retard psychomoteur dès la 1<sup>re</sup> année.</span>
+    </div>
+    <div class="bl-blue">
+      <strong>Acquise</strong> (Hashimoto)<br>
+      <span style="font-size:.83rem;color:var(--muted);">Pic à l'adolescence chez la fille. Ralentissement statural + prise de poids + asthénie + frilosité + constipation.<br>TSH élevée, T4l basse, Ac anti-TPO +, thyroïde hétérogène.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Hypercorticisme
+    </div>
+    <div class="bl-amber" style="margin-bottom:8px;">
+      <strong>Iatrogène +++</strong> (corticothérapie prolongée)<br>
+      <span style="font-size:.83rem;color:var(--muted);">Cause la plus fréquente à garder en tête.</span>
+    </div>
+    <div class="bl-red">
+      <strong>Endogène</strong> (Cushing)<br>
+      <span style="font-size:.83rem;color:var(--muted);">Adénome hypophysaire (ACTH) ou production surrénalienne de cortisol.<br>Diagnostic : CLU/24h élevé + perte du cycle nycthéméral + absence de freinage à la déxaméthasone.</span>
+    </div>
+  </div>
+</div>
+
+<!-- GHD -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Déficit en hormone de croissance (GHD)
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="bl-blue" style="margin-bottom:8px;">
+        <strong>Congénital</strong><br>
+        <span style="font-size:.83rem;color:var(--muted);">Malformation hypothalamo-hypophysaire. Hypoglycémies néonatales prolongées. Autres déficits (thyréotrope, corticotrope, gonadotrope). Anomalies ligne médiane (colobome, palais, luette). Mensurations naissance normales.</span>
+      </div>
+    </div>
+    <div>
+      <div class="bl-red">
+        <strong>Acquis</strong><br>
+        <span style="font-size:.83rem;color:var(--muted);">Évoquer une tumeur hypothalamo-hypophysaire (craniopharyngiome). Chercher : HTIC (céphalées + vomissements matinaux), signes neuro, DI. FO + champ visuel : œdème papillaire, hémianopsie bitemporale. IRM hypothalamo-hypophysaire <span style="color:var(--red);font-weight:700;">EN URGENCE</span>.</span>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Toute cassure de la vitesse de croissance associée à des signes d'HTIC → IRM hypothalamo-hypophysaire en urgence sans attendre les bilans hormonaux.</div>
+  </div>
+  <div style="font-size:.83rem;color:var(--muted);margin-top:6px;">Diagnostic GHD hors urgence : clinique + IGF1 ± test stimulation pharmacologique + IRM. Tout déficit hypophysaire → explorer toutes les lignées hypophysaires.</div>
+</div>
+
+<!-- Syndrome de Turner -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M9 11a4 4 0 1 0 8 0a4 4 0 0 0-8 0"/><path d="M6 21v-1a4 4 0 0 1 4-4h.5"/><path d="M18 22l3.35-3.284a2.143 2.143 0 0 0 .005-3.071a2.242 2.242 0 0 0-3.129-.006l-.224.22l-.223-.22a2.242 2.242 0 0 0-3.128-.006a2.143 2.143 0 0 0-.006 3.071L18 22z"/></svg></div>
+    Syndrome de Turner <span class="badge badge-purple">1/2 500 filles</span>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Caryotype</span><span class="kv-val">45,X ou mosaïque</span></div>
+      <div class="kv-row"><span class="kv-key">RCIU</span><span class="kv-val">50% des cas</span></div>
+      <div class="kv-row"><span class="kv-key">Taille adulte sans ttt</span><span class="kv-val">142 cm</span></div>
+      <div class="kv-row"><span class="kv-key">Intellect</span><span class="kv-val">Normal (habituellement)</span></div>
+    </div>
+    <div>
+      <strong style="font-size:.83rem;">Signes morphologiques</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Hypertélorisme, fentes palpébrales orientées en bas et dehors</li>
+        <li>Cou court et large, implantation basse des cheveux</li>
+        <li>Écartement mamelonnaire, cubitus valgus</li>
+        <li>Insuffisance ovarienne → absence puberté + infertilité</li>
+        <li>Cardiopathie (coarctation aorte, bicuspidie) — rein en fer à cheval</li>
+        <li>Infections ORL répétées</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège Turner :</strong> Les formes mosaïques sont pauci-symptomatiques — un <strong>caryotype systématique</strong> est indiqué chez toute fille présentant un retard statural, même sans signes morphologiques évocateurs.</div>
+</div>
+
+<!-- Maladies osseuses + autres causes -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Maladies osseuses constitutionnelles
+    </div>
+    <ul class="lst">
+      <li>Petite taille <strong>disproportionnée</strong> (membres ou tronc)</li>
+      <li>Mesure segments : envergure ≈ taille, taille assise ≈ ½ taille debout</li>
+      <li>Tailles parentales pouvant être basses</li>
+      <li>Diagnostic : radio de squelette + analyses génétiques ciblées</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--muted);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Autres causes
+    </div>
+    <div class="bl-amber" style="margin-bottom:8px;font-size:.83rem;">
+      <strong>RCIU sans rattrapage</strong> : 10% des enfants nés petits. Risque de puberté avancée + syndrome métabolique.
+    </div>
+    <div class="bl-blue" style="margin-bottom:8px;font-size:.83rem;">
+      <strong>Retard simple de croissance et de puberté</strong> : cause la plus fréquente à l'adolescence chez le garçon. Âge osseux très retardé (&lt; 13 ans), ATCD familiaux. Pronostic statural satisfaisant. Diagnostic d'élimination.
+    </div>
+    <div class="bl-teal" style="font-size:.83rem;">
+      <strong>Petite taille constitutionnelle/idiopathique</strong> : ~85% des cas. Tailles parentales petites, vitesse régulière, âge osseux en rapport avec l'âge chronologique. Diagnostic d'élimination.
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : ÂGE OSSEUX -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Âge osseux
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les méthodes radiologiques de détermination de l'âge osseux et leur utilité</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Méthodes et interprétation
+  </div>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.84rem;">Technique</strong>
+      <ul class="lst">
+        <li><strong>Radio main + poignet gauche de face</strong> → comparaison à l'atlas de Greulich et Pyle</li>
+        <li><strong>Radio coude gauche</strong> → présence/taille/fusion des noyaux d'ossification (méthode de Sauvegrain et Nahum)</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.84rem;">Intérêt clinique</strong>
+      <div class="kv-row"><span class="kv-key">Renseigne sur</span><span class="kv-val">Potentiel de croissance résiduel</span></div>
+      <div class="kv-row"><span class="kv-key">Ne permet PAS de</span><span class="kv-val">Déterminer l'étiologie</span></div>
+      <div class="kv-row"><span class="kv-key">AO retardé</span><span class="kv-val">Causes hormonales, retard simple</span></div>
+      <div class="kv-row"><span class="kv-key">AO en rapport avec âge civil</span><span class="kv-val">Petite taille constitutionnelle</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- POINTS CLÉS -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>
+      <strong>Raisonnement chronologique :</strong> pondéral avant statural = étiologie énergétique/digestive ; statural prédominant avec poids excessif = étiologie hormonale/génétique.
+    </div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>
+      <strong>Trépied hormonal :</strong> ralentissement statural + poids excessif en regard de la taille + âge osseux retardé → bilan endocrinien (TSH, IGF1, CLU).
+    </div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>
+      <strong>Piège Turner :</strong> caryotype systématique chez toute fille avec retard statural, même sans signe morphologique — les mosaïques passent inaperçues.
+    </div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>
+      <strong>Urgence craniopharyngiome :</strong> cassure de croissance + HTIC → IRM hypothalamo-hypophysaire en urgence, sans attendre le bilan hormonal.
+    </div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>
+      <strong>Hyperthyroïdie :</strong> seule cause où insuffisance pondérale s'associe à une accélération staturale (et non un retard) — piège de l'item.
+    </div>
+  </div>
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>
+      <strong>Taille cible :</strong> retard statural si taille &lt; −1,5 DS de la taille cible génétique, même si &gt; −2 DS de la population générale.
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

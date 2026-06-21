@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-21. Ne pas éditer à la main._
 
-**Avancement : 160 / 367 items (43.6%)**
+**Avancement : 161 / 367 items (43.9%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -60,7 +60,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 50 | [ ] | Pathologie génito-scrotale chez le garçon et chez l homme | — |
 | 51 | [ ] | Troubles de la miction chez l enfant | — |
 | 52 | [ ] | Strabisme et amblyopie de l enfant | — |
-| 53 | [ ] | Retard de croissance staturo-pondérale | — |
+| 53 | [x] | Retard de croissance staturo-pondérale | 53_Retard_croissance.html |
 | 54 | [ ] | Boiterie chez l enfant | — |
 | 55 | [ ] | Développement psychomoteur du nourrisson et de l enfant | — |
 | 56 | [ ] | L enfant handicapé | — |
