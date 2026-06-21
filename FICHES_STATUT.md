@@ -52,8 +52,8 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 42 | [ ] | Aménorrhée | — |
 | 43 | [ ] | Hémorragie génitale chez la femme | — |
 | 44 | [ ] | Tuméfaction pelvienne chez la femme | — |
-| 45 | [x] | Spécificités des maladies génétiques | 45_maladies_genetiques.html |
-| 46 | [x] | Médecine génomique | 46_Medecine_genomique_v2.html |
+| 45 | [x] | Spécificités des maladies génétiques | 45_maladies_genetiques_v2.html |
+| 46 | [x] | Médecine génomique | 46_Medecine_genomique_v3.html |
 | 47 | [ ] | Suivi d un nourrisson | — |
 | 48 | [ ] | Alimentation et besoins nutritionnels du nourrisson et de l enfant | — |
 | 49 | [ ] | Puberté normale et pathologique | — |

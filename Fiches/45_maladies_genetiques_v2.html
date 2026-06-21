@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 45 – Spécificités des maladies génétiques</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  /* HEADER */
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-summary{font-size:.85rem;opacity:.9;line-height:1.6;background:rgba(255,255,255,.13);border-radius:10px;padding:12px 16px;margin-top:12px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  /* CARDS */
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  /* GRILLES */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  /* ALERTES */
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  /* PILLS */
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  /* KV ROWS */
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  /* TABLEAUX */
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light); color:var(--red); }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  /* STEPS */
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-content{font-size:.83rem;}
+
+  /* LISTES */
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  /* BADGES */
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  /* BORDER-LEFT */
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  /* SECTION */
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 4px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  /* OBJECTIFS */
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  /* SUBHEAD */
+  .subhead{font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 6px;}
+
+  /* SYNTHÈSE FINALE */
+  .synth-card{background:linear-gradient(135deg,var(--purple-light) 0%,var(--blue-light) 100%);border:1px solid var(--purple);border-radius:14px;padding:18px;margin-top:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 45</div>
+  <h1>Spécificités des maladies génétiques</h1>
+  <div class="header-summary">
+    Trois maladies paradigmatiques à maîtriser : la <strong>trisomie 21</strong> (anomalie chromosomique la plus fréquente, 1/700 naissances), la <strong>mucoviscidose</strong> (maladie monogénique autosomique récessive la plus grave en Europe, 1/4 700) et le <strong>syndrome du X fragile</strong> (1re cause de déficience intellectuelle familiale). Pour chacune : dépistage et diagnostic anténatal, manifestations cliniques par âge, prise en charge, et règles du conseil génétique (risques de récurrence, éthique, obligations légales). L'axe transversal est l'articulation entre information, consentement, autonomie du patient et impératif médical.
+  </div>
+  <div class="header-tags">
+    <span class="htag">Conseil génétique</span>
+    <span class="htag">Trisomie 21</span>
+    <span class="htag">Mucoviscidose</span>
+    <span class="htag">X Fragile</span>
+    <span class="htag">DPN / DPNI</span>
+    <span class="htag">Éthique génétique</span>
+  </div>
+</div>
+
+<!-- ===== PARTIE 1 : CONSEIL GÉNÉTIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  <span class="section-badge" style="background:var(--purple);">Partie 1</span>
+  Conseil génétique — Bases, éthique, caryotype fœtal
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir le conseil génétique et savoir quand le proposer (avant conception, pendant grossesse, après naissance, à l'âge adulte)</div>
+  <div class="obj-line">Connaître les quatre principes éthiques qui guident le médecin généticien (autonomie, non-malveillance, bienveillance, justice)</div>
+  <div class="obj-line">Savoir annoncer un diagnostic génétique à une famille : posture, soutien, variabilité évolutive</div>
+  <div class="obj-line">Connaître les modalités de réalisation et les risques d'un caryotype fœtal (PVC vs amniocentèse), les délais de résultat et le cadre réglementaire</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition et moments du conseil génétique
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Informer patient/famille du <strong>risque de survenue ou de récurrence</strong> d'une maladie génétique : nature, probabilité de transmission, options de planification familiale.</p>
+    <div class="subhead">Quand proposer ?</div>
+    <div class="pills">
+      <span class="pill pill-purple">Avant conception</span>
+      <span class="pill pill-blue">Pendant grossesse</span>
+      <span class="pill pill-teal">À la naissance</span>
+      <span class="pill pill-teal">Enfance</span>
+      <span class="pill pill-amber">Âge adulte</span>
+      <span class="pill pill-red">Post mortem</span>
+    </div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Loi Bioéthique 2011 :</strong> si anomalie génétique grave identifiée, le patient doit en informer sa parentèle potentiellement concernée.</div>
+    </div>
+    <div class="subhead">Options offertes au couple (risque identifié)</div>
+    <ul class="lst">
+      <li>Pas d'intervention — assumer le risque</li>
+      <li>Adoption</li>
+      <li>Diagnostic prénatal (DPN)</li>
+      <li>Diagnostic pré-implantatoire (DPI)</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>IMG :</strong> possible quel que soit le terme si la maladie est de <strong>particulière gravité</strong> et <strong>incurable</strong> au moment du diagnostic — décision en CPDPN.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Principes éthiques
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Principe</th><th>Contenu</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Autonomie</strong></td><td>Consentement éclairé, droit de ne pas savoir</td></tr>
+        <tr><td><strong>Non-malveillance</strong></td><td>Primum non nocere</td></tr>
+        <tr><td><strong>Bienveillance</strong></td><td>Améliorer le bien-être de la personne</td></tr>
+        <tr><td><strong>Justice</strong></td><td>Égalité d'accès aux soins et aux examens</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Le dépistage T21 est parfois perçu comme eugénique — mais il est <strong>proposé, non imposé</strong>, et la patiente peut sortir du processus à tout moment (principe d'autonomie préservé).</div>
+    </div>
+    <div class="subhead">Examens génétiques prénataux selon indication</div>
+    <table>
+      <tbody>
+        <tr><td>Anomalie de nombre chromosomique</td><td><strong>Caryotype fœtal</strong></td></tr>
+        <tr><td>Anomalie chromosomique déséquilibrée (non-nombre)</td><td>ACPA (CGH array)</td></tr>
+        <tr><td>Syndrome génique avec orientation précise</td><td>Séquençage ciblé</td></tr>
+        <tr><td>Syndrome génique sans orientation</td><td>Séquençage d'exome</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Annonce familiale et retentissement du diagnostic
+  </div>
+  <div class="grid2">
+    <div>
+      <ul class="lst">
+        <li>Soutien médical <strong>et psychologique</strong> proposé aux parents et à la fratrie</li>
+        <li>Ne pas asséner une liste de complications : se focaliser sur les objectifs à court terme</li>
+        <li>Valoriser les compétences de l'enfant</li>
+        <li>Placer <strong>l'enfant</strong>, non la maladie, au premier plan</li>
+        <li>Variabilité évolutive : impossible de prédire la trajectoire individuelle</li>
+        <li>Informer sur l'existence d'associations de parents (si souhait)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="subhead">Caryotype fœtal — Prélèvements</div>
+      <table class="table-teal">
+        <thead><tr><th>Prélèvement</th><th>Terme</th><th>Risque FC</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Villosités choriales (PVC)</strong></td><td>12–14 SA</td><td>0,5 %</td></tr>
+          <tr><td><strong>Amniocentèse (PLA)</strong></td><td>≥ 15 SA</td><td>0,2 %</td></tr>
+          <tr><td>Sang fœtal</td><td>&gt; 24 SA</td><td>Bradycardie</td></tr>
+        </tbody>
+      </table>
+      <div class="subhead" style="margin-top:10px;">Délais de résultat</div>
+      <div class="kv-row"><span class="kv-key">PVC — examen direct</span><span class="kv-val">2–3 jours</span></div>
+      <div class="kv-row"><span class="kv-key">PVC / PLA — culture définitive</span><span class="kv-val">2–3 semaines</span></div>
+      <div class="kv-row"><span class="kv-key">FISH (chr. 13/18/21/X/Y)</span><span class="kv-val">24–48 h</span></div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Risques spécifiques PVC :</strong> discordance fœto-placentaire 1–2 %. <strong>Toujours :</strong> allo-immunisation Rh(D) → prophylaxie anti-D obligatoire chez les femmes Rh négatif.</div>
+      </div>
+      <div class="subhead">Réglementaire (tout caryotype fœtal)</div>
+      <ul class="lst">
+        <li>Prescription médicale + entente préalable AM</li>
+        <li>Consentement signé de la patiente</li>
+        <li>Attestation de conseil génétique (prescripteur)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 2 : TRISOMIE 21 ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  <span class="section-badge" style="background:var(--blue);">Partie 2</span>
+  Trisomie 21 — Syndrome de Down
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'algorithme de dépistage anténatal T21 (test combiné T1, DPNI, caryotype fœtal) et ses seuils de risque</div>
+  <div class="obj-line">Connaître les signes échographiques évocateurs de T21 aux trois trimestres</div>
+  <div class="obj-line">Connaître les risques de récurrence selon le type de T21 (libre, mosaïque, translocation) et l'indication (ou non) du caryotype parental</div>
+  <div class="obj-line">Savoir prescrire un caryotype constitutionnel postnatal : tube, consentement, information obligatoire, limites du test</div>
+  <div class="obj-line">Reconnaître la triade néonatale diagnostique et la dysmorphie caractéristique</div>
+  <div class="obj-line">Connaître les complications à surveiller tout au long de la vie et les structures médico-sociales d'accompagnement</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Types de trisomie 21
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Type</th><th>Fréq.</th><th>Mécanisme</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Libre, complète, homogène</strong></td>
+          <td><span class="badge badge-blue">95 %</span></td>
+          <td>Non-disjonction méiotique (de novo)</td>
+        </tr>
+        <tr>
+          <td><strong>Mosaïque</strong></td>
+          <td><span class="badge badge-green">2–3 %</span></td>
+          <td>2 populations cellulaires (46 + 47)</td>
+        </tr>
+        <tr>
+          <td><strong>Translocation robertsonienne</strong></td>
+          <td><span class="badge badge-amber">2–3 %</span></td>
+          <td>Fusion acrocentriques (ex. 14;21)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Pas de différence phénotypique entre les types, sauf mosaïques faibles (&lt; 50 %) et T21 partielles.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Conseil génétique — Risques de récurrence
+    </div>
+    <table>
+      <thead><tr><th>Type de T21</th><th>Risque récurrence</th><th>Caryotype parents ?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Libre, complète</td>
+          <td>~1 % (ou selon âge maternel si &gt; 40 ans)</td>
+          <td><span class="badge badge-green">Non (de novo)</span></td>
+        </tr>
+        <tr>
+          <td>Mosaïque</td>
+          <td>Faible</td>
+          <td><span class="badge badge-amber">Discuter</span></td>
+        </tr>
+        <tr>
+          <td>Transloc. (14;21) maternelle</td>
+          <td><span class="badge badge-red">10–15 %</span></td>
+          <td rowspan="3" style="vertical-align:middle;text-align:center;"><span class="badge badge-red">OUI obligatoire</span><br><small>+ exploration branche familiale</small></td>
+        </tr>
+        <tr>
+          <td>Transloc. (14;21) paternelle</td>
+          <td><span class="badge badge-amber">2–5 %</span></td>
+        </tr>
+        <tr>
+          <td>Transloc. (21;21) héritée</td>
+          <td><span class="badge badge-red">100 %</span><br><small>monosomie 21 non viable</small></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Fertilité T21 — Hommes : très réduite. Femmes : grossesses possibles ; risque T21 pour leurs enfants <strong>~30 %</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Dépistage anténatal -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Dépistage anténatal T21 — Algorithme décisionnel
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Dépistage proposé (non obligatoire), pris en charge par l'AM. Consentement écrit exigé. Évalue un <strong>risque</strong> — pas un diagnostic de certitude.</div>
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Test combiné T1 (âge + clarté nucale + PAPP-A + ß-HCG libre)</th><th>Conduite à tenir</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="badge badge-green">Risque &lt; 1/1000</span></td>
+        <td>Surveillance simple de la grossesse</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-amber">Risque 1/51–1/1000</span></td>
+        <td><strong>DPNI</strong> (ADN fœtal libre dans sang maternel)<br>— DPNI négatif → surveillance habituelle<br>— DPNI positif → proposition d'un caryotype fœtal</td>
+      </tr>
+      <tr>
+        <td><span class="badge badge-red">Risque ≥ 1/50</span></td>
+        <td>Caryotype fœtal d'emblée (DPNI possible à la demande de la patiente)</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> aucune IMG sur un DPNI positif seul — le diagnostic de certitude repose sur le <strong>caryotype fœtal</strong>.<br>Si dépistage T1 impossible : marqueurs sériques T2 (hCG + AFP + oestriol).</div>
+  </div>
+  <div class="subhead" style="margin-top:10px;">Signes échographiques évocateurs</div>
+  <table class="table-teal">
+    <thead><tr><th>Trimestre</th><th>Signes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge badge-blue">T1</span></td><td>Nuque &gt; 3,5 mm</td></tr>
+      <tr><td><span class="badge badge-blue">T2</span></td><td>Cardiopathie, hypoplasie/aplasie os propres du nez, fémurs courts, sténose duodénale (signes indirects)</td></tr>
+      <tr><td><span class="badge badge-blue">T3</span></td><td>RCIU sans cause placentaire, cardiopathie</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Prescription caryotype constitutionnel -->
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Prescription d'un caryotype constitutionnel postnatal
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">Type d'examen</span><span class="kv-val">Caryotype constitutionnel sur lymphocytes</span></div>
+      <div class="kv-row"><span class="kv-key">Prélèvement</span><span class="kv-val">2 mL sang veineux, tube hépariné</span></div>
+      <div class="kv-row"><span class="kv-key">Délai résultat T21</span><span class="kv-val">4–5 jours</span></div>
+      <div class="kv-row"><span class="kv-key">FISH (préliminaire)</span><span class="kv-val">24–48 h</span></div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Consentement + attestation de conseil génétique obligatoires avant tout caryotype.</div>
+      </div>
+    </div>
+    <div>
+      <div class="subhead">Information obligatoire au patient</div>
+      <ul class="lst">
+        <li><strong>Objectif</strong> du test (finalité diagnostique)</li>
+        <li><strong>Nature</strong> du test (caryotype)</li>
+        <li><strong>Limites :</strong> pas de détection &lt; 5 Mb, mosaïques faibles &lt; 10 %, variants nucléotidiques, risque d'échec de culture</li>
+        <li><strong>Délai</strong> de rendu du résultat</li>
+        <li>Nécessité d'informer la <strong>parentèle</strong> si affection grave identifiée</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Tableau clinique T21 -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Tableau clinique — Du diagnostic à l'évolution naturelle
+  </div>
+  <div class="alert alert-blue" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>80–90 % des cas diagnostiqués en anténatal. Si non, triade néonatale : <strong>hypotonie axiale + souffle cardiaque + dysmorphie faciale.</strong><br>Diagnostic tardif possible sur trisomie 21 en mosaïque (retard psychomoteur + difficultés d'apprentissage).</div>
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="subhead">Dysmorphie faciale (signe diagnostique)</div>
+      <ul class="lst">
+        <li>Microcéphalie, profil plat</li>
+        <li>Fentes palpébrales obliques en haut et dehors</li>
+        <li>Pavillons petits et ronds, nuque plate avec excès de peau</li>
+        <li>Hyperlaxité articulaire et cutanée</li>
+        <li>Clinodactylie du 5e doigt</li>
+        <li>Pli palmaire transverse unique (2/3 des cas)</li>
+        <li>Espacement accru 1er–2e orteil</li>
+      </ul>
+      <div class="subhead" style="margin-top:10px;">Rééducations (à débuter tôt)</div>
+      <div class="pills">
+        <span class="pill pill-purple">Kiné dès 2–3 mois</span>
+        <span class="pill pill-purple">Ortho dès naissance ou 9 mois</span>
+        <span class="pill pill-purple">Psychomot. 1–2 ans</span>
+        <span class="pill pill-purple">Ergo selon évolution</span>
+      </div>
+      <div class="subhead" style="margin-top:10px;">Structures médico-sociales</div>
+      <div class="pills">
+        <span class="pill pill-blue">CAMSP (0–6 ans)</span>
+        <span class="pill pill-blue">SESSAD (&lt; 20 ans)</span>
+        <span class="pill pill-blue">ULIS / IME / IMPro</span>
+        <span class="pill pill-blue">ESAT (adulte)</span>
+        <span class="pill pill-teal">MDPH : protocole soins + certificat médical</span>
+      </div>
+    </div>
+    <div>
+      <div class="subhead">Complications à surveiller (tout âge)</div>
+      <table class="table-red">
+        <thead><tr><th>Complication</th><th>Fréq. / Surveillance</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Cardiopathie</strong> (CAV, CIV, CIA)</td><td><span class="badge badge-red">40–50 %</span> — écho cardiaque</td></tr>
+          <tr><td><strong>Apnées du sommeil</strong></td><td>~50 % — polysomnographie</td></tr>
+          <tr><td><strong>Hypothyroïdie</strong></td><td>TSHus + T4l annuel</td></tr>
+          <tr><td><strong>Leucémie aiguë</strong></td><td>×10 — NFS annuelle (LAM)</td></tr>
+          <tr><td><strong>Épilepsie</strong></td><td>5 % (Sd de West)</td></tr>
+          <tr><td><strong>TSA</strong></td><td>5–10 %</td></tr>
+          <tr><td><strong>Instabilité C1/C2</strong></td><td>IRM si signes neurologiques</td></tr>
+          <tr><td><strong>Obésité</strong></td><td>Mesures hygiéno-diététiques</td></tr>
+          <tr><td><strong>Alzheimer / vieillissement précoce</strong></td><td>Dès ~50 ans</td></tr>
+        </tbody>
+      </table>
+      <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Espérance de vie</span><span class="kv-val">~60 ans</span></div>
+      <div class="kv-row"><span class="kv-key">Marche (acquisition)</span><span class="kv-val">2–3 ans (vs 9–18 mois normale)</span></div>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>À l'âge adulte : penser à tutelle / curatelle / habilitation administrative familiale pour la protection financière.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 3 : MUCOVISCIDOSE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  <span class="section-badge" style="background:var(--teal);">Partie 3</span>
+  Mucoviscidose (Fibrose kystique — CFTR)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les modalités du dépistage anténatal de la mucoviscidose (situations à risque, technique DPN/DPI)</div>
+  <div class="obj-line">Connaître le protocole du dépistage néonatal systématique (TIR + mutations CFTR) et la confirmation par test de la sueur</div>
+  <div class="obj-line">Décrire les manifestations cliniques selon l'âge (néonatal, nourrisson, enfant/adulte) et connaître les germes respiratoires chroniques</div>
+  <div class="obj-line">Connaître les grands principes de la prise en charge au sein des CRCM et l'apport des modulateurs CFTR</div>
+  <div class="obj-line">Savoir prescrire les examens d'imagerie de suivi pulmonaire et digestif</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie clé
+    </div>
+    <div class="kv-row"><span class="kv-key">Transmission</span><span class="kv-val">Autosomique récessive</span></div>
+    <div class="kv-row"><span class="kv-key">Gène</span><span class="kv-val">CFTR</span></div>
+    <div class="kv-row"><span class="kv-key">Mutation la + fréquente (France)</span><span class="kv-val">F508del</span></div>
+    <div class="kv-row"><span class="kv-key">Incidence</span><span class="kv-val">1 / 4 700 naissances</span></div>
+    <div class="kv-row"><span class="kv-key">Porteur hétérozygote</span><span class="kv-val">1 / 35</span></div>
+    <div class="kv-row"><span class="kv-key">Espérance de vie</span><span class="kv-val">&gt; 40 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Pénétrance</span><span class="kv-val">Complète (expressivité très variable)</span></div>
+    <div class="kv-row"><span class="kv-key">Suivi spécialisé</span><span class="kv-val">CRCM</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Dépistage néonatal &amp; confirmation diagnostique
+    </div>
+    <div class="alert alert-teal" style="margin-bottom:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Buvard de sang à 48–72 h de vie</strong> (dépistage néonatal systématique)</div>
+    </div>
+    <ul class="lst">
+      <li>Dosage <strong>TIR</strong> (trypsine immuno-réactive) — sensible, peu spécifique</li>
+      <li>+ Recherche des mutations CFTR les plus fréquentes</li>
+      <li>TIR élevée + 2 mutations causales = <strong>diagnostic</strong></li>
+    </ul>
+    <div class="subhead" style="margin-top:10px;">Test de la sueur (confirmation, gold standard)</div>
+    <p style="font-size:.83rem;margin-bottom:6px;">Stimulation à la pilocarpine, recueil sur les deux avant-bras, dosage du chlore :</p>
+    <div class="kv-row"><span class="kv-key">Chlore <strong>&gt; 60 mEq/L</strong></span><span class="kv-val"><span class="badge badge-red">Diagnostic confirmé</span></span></div>
+    <div class="kv-row"><span class="kv-key">Chlore 40–60 mEq/L</span><span class="kv-val"><span class="badge badge-amber">Intermédiaire — répéter</span></span></div>
+    <div class="kv-row"><span class="kv-key">Chlore &lt; 40 mEq/L</span><span class="kv-val"><span class="badge badge-green">Négatif</span></span></div>
+  </div>
+</div>
+
+<!-- DPN mucoviscidose -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Diagnostic anténatal de la mucoviscidose
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="subhead">Situations à risque</div>
+      <ul class="lst">
+        <li><strong>Intestin hyperéchogène</strong> à l'écho → étude CFTR du couple<br>(mucoviscidose dans ~5 % des cas ; risque majoré si absence de vésicule biliaire)</li>
+        <li><strong>2 parents hétérozygotes</strong> : risque 1/4 à chaque grossesse → DPN ou DPI</li>
+        <li><strong>1 parent atteint</strong> : étude exhaustive CFTR du conjoint → si hétérozygote, risque 1/2 → DPN ou DPI</li>
+      </ul>
+    </div>
+    <div>
+      <div class="subhead">Technique de DPN</div>
+      <ul class="lst">
+        <li>PVC (ponction villosités choriales) dès <strong>11 SA</strong></li>
+        <li>Amniocentèse dès <strong>16 SA</strong></li>
+        <li>Biologie moléculaire : recherche des mutations CFTR parentales dans l'ADN fœtal</li>
+        <li>DPI (diagnostic pré-implantatoire) : alternative possible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Manifestations + PEC -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Manifestations cliniques et prise en charge
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="subhead">Chronologie des manifestations</div>
+      <table>
+        <tbody>
+          <tr><td><span class="badge badge-blue">Néonatal (10–20 %)</span></td><td>Iléus méconial, retard à l'émission du méconium</td></tr>
+          <tr><td><span class="badge badge-blue">Nourrisson (80 %)</span></td><td>Stéatorrhée, infections respiratoires à répétition, retard staturo-pondéral</td></tr>
+          <tr><td><span class="badge badge-blue">Enfant–adulte (10–20 %)</span></td><td>Formes tardives ou modérées</td></tr>
+        </tbody>
+      </table>
+      <div class="subhead" style="margin-top:10px;">Atteinte respiratoire</div>
+      <ul class="lst">
+        <li>Toux chronique, dyspnée, expectorations mucopurulentes</li>
+        <li>Bronchites, pneumopathies, sinusites, polypes nasaux</li>
+        <li>Progression bactérienne : <strong>H. influenzae → S. aureus → P. aeruginosa</strong></li>
+      </ul>
+      <div class="subhead" style="margin-top:10px;">Atteinte digestive et pancréatique</div>
+      <ul class="lst">
+        <li>Stéatorrhée, malabsorption, dénutrition</li>
+        <li>Constipation ± prolapsus rectal</li>
+        <li>Insuffisance pancréatique exocrine → diabète</li>
+        <li>Cirrhose biliaire (hépatomégalie)</li>
+      </ul>
+      <div class="subhead" style="margin-top:10px;">Atteinte génitale</div>
+      <ul class="lst">
+        <li><strong>Homme :</strong> atrésie des déférents (98 %) → azoospermie obstructive → infertilité</li>
+        <li><strong>Femme :</strong> hypofertilité inconstante (glaire cervicale épaisse)</li>
+      </ul>
+      <div class="alert alert-amber" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Autres : syndrome de perte de sel (déshydratation + alcalose métabolique), arthrites, douleurs articulaires.</div>
+      </div>
+    </div>
+    <div>
+      <div class="subhead">Prise en charge — Grands principes (CRCM)</div>
+      <ul class="steps">
+        <li><span class="step-num">1</span><span class="step-content"><strong>Sel :</strong> supplémentation régulière (prévention hyponatrémie)</span></li>
+        <li><span class="step-num">2</span><span class="step-content"><strong>Digestif :</strong> régime hypercalorique riche en graisses + enzymes pancréatiques + vitamines liposolubles (A, D, E, K)</span></li>
+        <li><span class="step-num">3</span><span class="step-content"><strong>Pulmonaire :</strong> antibiotiques à fortes doses + mucolytiques + kinésithérapie respiratoire quotidienne</span></li>
+        <li><span class="step-num">4</span><span class="step-content"><strong>Formes graves :</strong> transplantation pulmonaire ± hépatique</span></li>
+        <li><span class="step-num">5</span><span class="step-content"><strong>Infertilité masculine :</strong> AMP / FIV</span></li>
+        <li><span class="step-num">6</span><span class="step-content"><strong>Modulateurs CFTR :</strong> petites molécules mutation-spécifiques (theratyping) — thérapies ciblées récentes</span></li>
+      </ul>
+      <div class="subhead" style="margin-top:10px;">Imagerie de suivi</div>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>Pulmonaire</strong></td>
+            <td>Radiographie thoracique annuelle (et si nouveau symptôme)<br>Scanner ± IRM pulmonaire ± angio-scanner si aggravation / urgence</td>
+          </tr>
+          <tr>
+            <td><strong>Digestif</strong></td>
+            <td>Échodoppler hépatique 1×/an<br>IRM ou scanner abdominal si urgence / aggravation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 4 : SYNDROME DU X FRAGILE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  <span class="section-badge" style="background:var(--coral);">Partie 4</span>
+  Syndrome du X Fragile (FMR1)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes cliniques du syndrome du X fragile chez les garçons (déficience intellectuelle + TSA + dysmorphie + macro-orchidie) et les filles</div>
+  <div class="obj-line">Comprendre le mécanisme d'expansion des répétitions CGG (allèles normaux, intermédiaires, prémutation, mutation complète) et ses conséquences transcriptionnelles</div>
+  <div class="obj-line">Savoir évoquer le diagnostic devant une déficience intellectuelle familiale (1re cause) ou un TSA génétique (1re cause génétique)</div>
+  <div class="obj-line">Connaître les formes liées aux prémutations (FXPOI, FXTAS, FXAND) et adapter le conseil génétique selon le sexe du porteur</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Épidémiologie et rangs à mémoriser
+    </div>
+    <div class="alert alert-red" style="margin-bottom:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>
+        <strong>1re cause</strong> de déficience intellectuelle (DI) familiale<br>
+        <strong>2e cause</strong> de DI génétique (après T21)<br>
+        <strong>1re cause génétique</strong> de TSA
+      </div>
+    </div>
+    <div class="kv-row"><span class="kv-key">Prévalence hommes</span><span class="kv-val">~1 / 5 000</span></div>
+    <div class="kv-row"><span class="kv-key">Prévalence femmes</span><span class="kv-val">~1 / 8 000</span></div>
+    <div class="kv-row"><span class="kv-key">Prémutation — femmes</span><span class="kv-val">1 / 250</span></div>
+    <div class="kv-row"><span class="kv-key">Prémutation — hommes</span><span class="kv-val">1 / 500</span></div>
+    <div class="kv-row"><span class="kv-key">Transmission</span><span class="kv-val">Liée à l'X (pénétrance incomplète chez la fille)</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Mécanisme génétique — Gène FMR1 (Xq27.3)
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Répétitions <strong>CGG</strong> dans la région 5' non traduite du gène FMR1.</p>
+    <table class="table-blue">
+      <thead><tr><th>Nb CGG</th><th>Statut</th><th>Conséquence</th></tr></thead>
+      <tbody>
+        <tr><td>&lt; 45</td><td><span class="badge badge-green">Normal</span></td><td>1–4 interruptions AGG stabilisatrices</td></tr>
+        <tr><td>45–54</td><td><span class="badge badge-blue">Intermédiaire</span></td><td>Instable, peut évoluer vers prémutation en quelques générations</td></tr>
+        <tr><td>55–200</td><td><span class="badge badge-amber">Prémutation</span></td><td>Instable à la transmission — sans hyperméthylation — porteurs sains</td></tr>
+        <tr><td>&gt; 200</td><td><span class="badge badge-red">Mutation complète</span></td><td>Méthylation → répression de FMR1 → déficience intellectuelle</td></tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> passage prémutation → mutation complète = <strong>uniquement lors des transmissions maternelles.</strong> Un père porteur de prémutation ne transmettra jamais une mutation complète. Risque corrélé à la taille de la prémutation maternelle.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tableau clinique X fragile -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Tableau clinique selon le statut génétique
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="subhead">Garçons / Hommes (mutation complète)</div>
+      <ul class="lst">
+        <li><strong>Déficience intellectuelle modérée à sévère</strong> (QI &lt; 50)</li>
+        <li>Retard psychomoteur, retard de langage marqué</li>
+        <li>TDAH, impulsivité, intolérance à la frustration</li>
+        <li>Anxiété, timidité, évitement du regard</li>
+        <li><strong>TSA chez 50 %</strong></li>
+        <li>Épilepsie chez 20 %</li>
+        <li>Troubles du sommeil, otites récidivantes</li>
+        <li><strong>Dysmorphie :</strong> visage allongé/étroit, prognathisme, front large et haut, oreilles décollées, palais ogival, macrocéphalie relative</li>
+        <li>Hyperlaxité articulaire (doigts), pieds plats, scoliose</li>
+        <li>Prolapsus mitral, reflux vésico-urétéral, strabisme, myopie</li>
+        <li><strong>Macro-orchidie post-pubertaire</strong> (signe quasi pathognomonique)</li>
+      </ul>
+      <div class="subhead" style="margin-top:10px;">Filles / Femmes (mutation complète)</div>
+      <ul class="lst">
+        <li>50 % : difficultés cognitives modérées (QI 50–70)</li>
+        <li>50 % : QI dans la partie basse de la normale</li>
+        <li>Anxiété, troubles relationnels, timidité</li>
+        <li>Peu ou pas de dysmorphie</li>
+      </ul>
+    </div>
+    <div>
+      <div class="subhead">Formes liées aux prémutations (toxicité gain de fonction)</div>
+      <table class="table-amber">
+        <thead><tr><th>Syndrome</th><th>Population</th><th>Caractéristiques clés</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>FXPOI</strong><br><small>Insuffisance ovarienne prématurée</small></td>
+            <td>20 % des porteuses de prémutation</td>
+            <td>Ménopause &lt; 40 ans — consulter endocrino pour réserve ovarienne — cryoconservation ovarienne ou DPI à discuter</td>
+          </tr>
+          <tr>
+            <td><strong>FXTAS</strong><br><small>Tremblement-ataxie</small></td>
+            <td>40 % des H / 16 % des F<br>Début après 60 ans<br>Surtout si &gt; 70 CGG</td>
+            <td>Tremblement d'action, ataxie cérébelleuse, syndrome parkinsonien, troubles cognitifs<br><strong>IRM :</strong> hypersignaux pédoncules cérébelleux moyens + splénium corps calleux</td>
+          </tr>
+          <tr>
+            <td><strong>FXAND</strong><br><small>Troubles neuropsychiatriques</small></td>
+            <td>Variable</td>
+            <td>TDAH, TSA, dépression, phobies sociales, fibromyalgie (douleurs chroniques)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-amber" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Conseil génétique chez l'homme porteur de prémutation :</strong> risque de FXTAS → le test génétique revêt les caractéristiques d'un <strong>test présymptomatique</strong>. Aborder avec prudence. Antécédent familial d'insuffisance ovarienne précoce ou de syndrome neurodégénératif de l'adulte = argument fort en faveur du X fragile.</div>
+      </div>
+      <div class="alert alert-blue" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>Diagnostic moléculaire :</strong> PCR optimisée + Southern blot — les expansions CGG sont réfractaires au séquençage classique.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SYNTHÈSE FINALE ===== -->
+<div class="synth-card">
+  <div class="card-title" style="color:var(--purple);">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir — Pièges ECNi
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège T21 :</strong> DPNI positif ≠ diagnostic. Aucune IMG sans caryotype fœtal confirmatoire.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>T21 libre :</strong> caryotype parents inutile (de novo). <strong>T21 par translocation :</strong> caryotype parents OBLIGATOIRE + exploration familiale.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Transloc. (21;21) héritée :</strong> risque de récurrence <strong>100 %</strong> (monosomie 21 non viable). Cas le + grave à connaître.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Mucoviscidose :</strong> test de la sueur — seuil de positivité = <strong>60 mEq/L</strong>. Entre 40 et 60 = intermédiaire, à répéter.</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>X fragile :</strong> passage prémutation → mutation complète = voie <strong>maternelle uniquement</strong>. Un père porteur de prémutation ne transmet jamais une mutation complète.</div>
+      </div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div><strong>PVC vs PLA :</strong> PVC plus précoce (12–14 SA), risque discordance fœto-placentaire 1–2 %. PLA plus tardive (≥ 15 SA), risque FC 0,2 % vs 0,5 %.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>À retenir :</strong> X fragile = 1re DI familiale + 1re génétique TSA. <strong>Macro-orchidie post-pubertaire</strong> = signe quasi pathognomonique. FXPOI chez 20 % des porteuses de prémutation.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>IMG :</strong> exige maladie de <strong>particulière gravité + incurable</strong> au moment du diagnostic. Décision collégiale en CPDPN. Possible quel que soit le terme.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 46 — Médecine génomique</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 50%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-summary{font-size:.85rem;opacity:.9;line-height:1.6;background:rgba(255,255,255,.13);border-radius:10px;padding:12px 16px;margin-top:12px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th{background:var(--blue-light);color:var(--blue);}
+  .table-teal th{background:var(--teal-light);color:var(--teal);}
+  .table-red  th{background:var(--red-light);color:var(--red);}
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-content{font-size:.83rem;}
+
+  ul.lst{padding-left:16px;margin-top:6px;}
+  ul.lst li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 4px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  .subhead{font-size:.76rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:10px 0 6px;}
+
+  .synth-card{background:linear-gradient(135deg,var(--purple-light) 0%,var(--blue-light) 100%);border:1px solid var(--purple);border-radius:14px;padding:18px;margin-top:20px;}
+
+  /* Classes de variants colorées */
+  .cl{display:inline-block;padding:2px 9px;border-radius:5px;font-size:.78rem;font-weight:700;}
+  .cl-1,.cl-2{background:var(--teal-light);color:var(--teal);}
+  .cl-3{background:var(--amber-light);color:var(--amber);}
+  .cl-4,.cl-5{background:var(--red-light);color:var(--red);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 46</div>
+  <h1>Médecine génomique</h1>
+  <div class="header-summary">
+    La médecine génomique intègre l'information génétique individuelle dans la prise en charge clinique. Ce chapitre répond à trois questions pratiques : <strong>quand suspecter</strong> une maladie génétique (signes d'appel), <strong>comment prescrire</strong> un test génétique (cadre légal, consentement, information à la parentèle) et <strong>quel examen choisir</strong> (CGH-array, panel, exome, génome) selon la présentation clinique. Comprendre la classification des variants en 5 classes et savoir lire un compte rendu génétique sont des compétences directement examinables.
+  </div>
+  <div class="header-tags">
+    <span class="htag">Maladies rares</span>
+    <span class="htag">Oncogénétique</span>
+    <span class="htag">Loi de bioéthique</span>
+    <span class="htag">Consentement</span>
+    <span class="htag">CGH-array / Exome / Génome</span>
+    <span class="htag">Classification des variants</span>
+  </div>
+</div>
+
+<!-- ===== PARTIE 1 : DÉFINITION ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  <span class="section-badge" style="background:var(--purple);">Partie 1</span>
+  Définition &amp; Médecine des 4P
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir la médecine génomique selon le NHGRI et comprendre pourquoi le terme "médecine personnalisée" est un abus de langage</div>
+  <div class="obj-line">Distinguer médecine prédictive, préventive et génomique</div>
+  <div class="obj-line">Connaître les 4P et les bénéfices concrets apportés par la médecine génomique</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Définition (NHGRI)
+    </div>
+    <p style="font-size:.84rem;">Discipline médicale qui utilise l'<strong>information génomique des individus</strong> dans leur prise en charge clinique (diagnostic, choix thérapeutique) et en mesure les implications sur la santé.</p>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>"Médecine personnalisée" = abus de langage (HAS)</strong> — la validation reste toujours populationnelle. Terme correct : <strong>médecine génomique</strong>.</div>
+    </div>
+    <div class="subhead">Les 3 termes à distinguer</div>
+    <table class="table-amber">
+      <thead><tr><th>Terme</th><th>Nuance</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Prédictive</strong></td><td>Prévoir une susceptibilité avant les symptômes (notion de risque, pré-symptomatique)</td></tr>
+        <tr><td><strong>Préventive</strong></td><td>Institutionnelle : dépistage prénatal, néonatal (médecine scolaire, du travail…)</td></tr>
+        <tr><td><strong>Génomique</strong></td><td>Intègre la composante génétique individuelle — terme à privilégier</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <div class="card card-teal">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+        </div>
+        Médecine des 4P
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;">
+        <div style="background:var(--teal-light);border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--teal);">P</div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--teal);">Personnalisée</div>
+        </div>
+        <div style="background:var(--blue-light);border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--blue);">P</div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--blue);">Préventive</div>
+        </div>
+        <div style="background:var(--purple-light);border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--purple);">P</div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--purple);">Prédictive</div>
+        </div>
+        <div style="background:var(--amber-light);border-radius:8px;padding:10px;text-align:center;">
+          <div style="font-size:1.4rem;font-weight:800;color:var(--amber);">P</div>
+          <div style="font-size:.78rem;font-weight:700;color:var(--amber);">Participative</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Ce que permet la médecine génomique
+      </div>
+      <ul class="lst">
+        <li>Réduire l'<strong>errance diagnostique</strong> des maladies rares → adresser aux centres de référence/compétence</li>
+        <li>Proposer un <strong>conseil génétique</strong> fiable</li>
+        <li>Proposer un <strong>diagnostic prénatal</strong> si réalisable</li>
+        <li>Adapter une prise en charge <strong>préventive</strong> pour le patient et ses apparentés</li>
+        <li><strong>Personnaliser les soins</strong> (thérapies ciblées) — surtout en cancérologie</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 2 : QUAND SUSPECTER ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <span class="section-badge" style="background:var(--blue);">Partie 2</span>
+  Quand suspecter une maladie génétique ?
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les signes d'appel cliniques qui doivent faire évoquer une origine génétique et déclencher un bilan spécialisé</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Signes d'appel — à évoquer systématiquement
+    </div>
+    <table class="table-blue">
+      <thead><tr><th>Signe clinique</th><th>Point clé</th></tr></thead>
+      <tbody>
+        <tr><td>Contexte familial (arbre généalogique)</td><td>Transmission mendélienne ou non mendélienne</td></tr>
+        <tr><td><strong>Déficience intellectuelle / retard psychomoteur</strong></td><td><span class="badge badge-blue">Cause la + fréquente de demande</span> — diagnostic génétique dans ~50 % des cas</td></tr>
+        <tr><td>Syndrome malformatif (surtout polymalformatif)</td><td>CGH-array en 1re intention</td></tr>
+        <tr><td>Retard de croissance staturo-pondérale</td><td>—</td></tr>
+        <tr><td>Forme atypique d'une maladie</td><td>Sujet jeune ou sévérité inhabituelle</td></tr>
+        <tr><td>Infertilité / difficulté à procréer</td><td>Débuter par un caryotype</td></tr>
+        <tr><td>Convulsions néonatales ou du nourrisson</td><td>Causes génétiques fréquentes</td></tr>
+        <tr><td>Troubles du langage / phonation</td><td>Après évaluation neuropédiatrique</td></tr>
+        <tr><td>Surdité pré-linguale</td><td><span class="badge badge-amber">50 % d'origine génétique</span></td></tr>
+        <tr><td>Association de symptômes sans cadre nosologique</td><td>Analyse pangénomique à discuter</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Infertilité :</strong> débuter obligatoirement par un caryotype (recherche de remaniements équilibrés non détectables par CGH-array), puis adresser au spécialiste si normal.</div>
+    </div>
+    <div class="alert alert-blue">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div><strong>Déficience intellectuelle :</strong> plus de 1 000 gènes impliqués. CGH-array puis exome/génome sont les deux étapes diagnostiques séquentielles.</div>
+    </div>
+    <div class="card card-teal" style="margin-top:14px;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        Réflexe pratique
+      </div>
+      <p style="font-size:.84rem;">Dès qu'une cause génétique est suspectée → adresser à un <strong>centre de référence ou de compétence maladies rares</strong> pour orienter la prescription des examens.</p>
+      <div class="subhead" style="margin-top:8px;">3 situations illustratives</div>
+      <ul class="lst">
+        <li><strong>Périnatal :</strong> dépistage T21 → caryotype fœtal (cf. item 45)</li>
+        <li><strong>Déficience intellectuelle :</strong> 2,5 % de la population → CGH-array puis exome</li>
+        <li><strong>Cancer :</strong> syndrome sein-ovaire (HBOC) et Lynch (HNPCC) → panels de gènes après consultation d'oncogénétique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 3 : PRESCRIRE UN TEST GÉNÉTIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  <span class="section-badge" style="background:var(--teal);">Partie 3</span>
+  Prescrire un test génétique — Cadre légal &amp; Choix de l'examen
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les conditions légales de prescription : information loyale, consentement écrit exprès en triple exemplaire, information préalable à la parentèle (obligatoire depuis 2013)</div>
+  <div class="obj-line">Distinguer génétique constitutionnelle (consentement obligatoire) et génomique somatique tumorale (pas de consentement spécifique)</div>
+  <div class="obj-line">Choisir le bon examen selon la situation : caryotype, CGH-array, panel, exome ou génome</div>
+  <div class="obj-line">Savoir ce que ne détecte pas la CGH-array (remaniements équilibrés) et pourquoi l'exome/génome est réservé aux centres spécialisés</div>
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="card card-purple">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--purple);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        Loi de bioéthique 2004 — Points-clés
+      </div>
+      <ul class="lst">
+        <li>Tout médecin peut prescrire <em>s'il est capable d'en expliquer le résultat</em></li>
+        <li>Finalité médicale ou scientifique obligatoire</li>
+        <li><strong>Consentement écrit</strong> exprès, préalable, révocable à tout moment</li>
+        <li>Consentement en <strong>triple exemplaire</strong> : patient / prescripteur / laboratoire</li>
+        <li>Prescripteur signe l'<strong>attestation de conseil génétique</strong></li>
+        <li>Seuls les <strong>laboratoires autorisés</strong> peuvent réaliser des tests génétiques constitutionnels</li>
+      </ul>
+    </div>
+
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège :</strong> l'information à la parentèle est obligatoire <strong>avant</strong> la réalisation du test (depuis 2013). Le médecin doit informer le patient que ses apparentés pourraient être concernés.</div>
+    </div>
+
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Génomique somatique tumorale</strong> (altérations des tumeurs/cancers) : <strong>pas de consentement spécifique requis</strong> — régime distinct de la génétique constitutionnelle.</div>
+    </div>
+
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Tests en libre accès (internet) :</strong> illégaux en France, aucune valeur médicale, inutilisables pour la prise en charge.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--blue);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        Quel examen prescrire ? — Arbre décisionnel
+      </div>
+      <table class="table-blue">
+        <thead><tr><th>Situation</th><th>Examen de 1re intention</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Syndrome malformatif ou DI <em>sans diagnostic clinique évident</em></td>
+            <td><strong>CGH-array</strong> (ACPA)</td>
+          </tr>
+          <tr>
+            <td>Trisomie 21 cliniquement évidente</td>
+            <td><strong>Caryotype</strong> (pas CGH-array)</td>
+          </tr>
+          <tr>
+            <td>Troubles de la fertilité</td>
+            <td><strong>Caryotype</strong><br><small>ACPA non indiquée — ne détecte pas les remaniements équilibrés</small></td>
+          </tr>
+          <tr>
+            <td>Prédisposition génétique au cancer (sein/ovaire HBOC, côlon Lynch/HNPCC)</td>
+            <td><strong>Panel de gènes</strong> après consultation d'oncogénétique</td>
+          </tr>
+          <tr>
+            <td>DI après CGH-array normale, ou maladie rare complexe sans orientation</td>
+            <td><strong>Exome (ES)</strong> voire <strong>Génome (GS)</strong> — prescrit par le généticien ou spécialiste formé en centre référence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card card-teal" style="margin-top:0;">
+      <div class="card-title">
+        <div class="card-icon" style="background:var(--teal);">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+        </div>
+        CGH-array (ACPA) — à connaître
+      </div>
+      <div class="kv-row"><span class="kv-key">Ce qu'elle détecte</span><span class="kv-val">Déséquilibres génomiques (CNV) &gt; 50 kb</span></div>
+      <div class="kv-row"><span class="kv-key">Résolution vs caryotype</span><span class="kv-val">×100 plus précise</span></div>
+      <div class="kv-row"><span class="kv-key">Ce qu'elle ne détecte PAS</span><span class="kv-val">Remaniements équilibrés (translocations, inversions)</span></div>
+      <div class="kv-row"><span class="kv-key">Limite inférieure de détection</span><span class="kv-val">&gt; 50 kb (vs &gt; 5 Mb pour caryotype)</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== PARTIE 4 : SÉQUENÇAGE HAUT DÉBIT & RÉSULTAT ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  <span class="section-badge" style="background:var(--coral);">Partie 4</span>
+  Séquençage haut débit — Avantages, Limites &amp; Lecture des résultats
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Comprendre les différents niveaux d'analyse (panel, exome, génome) et savoir qui peut les prescrire</div>
+  <div class="obj-line">Connaître les avantages (rendement diagnostique, ré-analyse) et les limites (données additionnelles, variants incertains, coût, bio-informatique)</div>
+  <div class="obj-line">Connaître les 3 types de variants identifiés (SNV/Delins, CNV, BSV) et maîtriser la classification en 5 classes</div>
+  <div class="obj-line">Comprendre ce qu'est un compte rendu conclusif vs non conclusif et savoir gérer les données additionnelles</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Niveaux de séquençage — du plus ciblé au plus large
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Technique</th><th>Ce qui est analysé</th><th>Qui prescrit</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Séquençage d'un gène</strong></td>
+        <td>1 gène entier</td>
+        <td>Tout médecin</td>
+      </tr>
+      <tr>
+        <td><strong>Panel de gènes</strong></td>
+        <td>Plusieurs gènes ciblés (ex : BRCA1/2, MLH1/MSH2…)</td>
+        <td>Tout médecin (après consultation oncogénétique pour les cancers)</td>
+      </tr>
+      <tr>
+        <td><strong>Exome (ES)</strong></td>
+        <td>Toutes les régions codantes (~1,5 % du génome = ~20 000 gènes)</td>
+        <td><strong>Généticien ou spécialiste d'organe formé</strong> — centre de référence/compétence</td>
+      </tr>
+      <tr>
+        <td><strong>Génome entier (GS)</strong></td>
+        <td>Totalité du génome (régions codantes + non codantes)</td>
+        <td>Idem exome — prescription très encadrée, interprétation complexe</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Avantages du séquençage haut débit
+    </div>
+    <ul class="lst">
+      <li>Analyse simultanée de nombreux gènes voire du génome entier</li>
+      <li>Augmentation majeure du <strong>rendement diagnostique</strong></li>
+      <li><strong>Ré-analyse régulière</strong> des données sans nouveau prélèvement (à la lumière des nouvelles connaissances — plusieurs centaines de maladies génétiques nouvellement identifiées par an)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Limites / Inconvénients
+    </div>
+    <ul class="lst">
+      <li>Non remboursé par la Sécurité sociale</li>
+      <li>Nécessité d'une équipe de <strong>bio-informatique</strong> dédiée</li>
+      <li>Identification de <strong>données additionnelles</strong> (variants sans rapport avec la pathologie initiale)</li>
+      <li>Identification de <strong>variants de signification incertaine</strong> (classe 3) imposant des analyses complémentaires</li>
+      <li>Formation spécialisée requise pour les biologistes (4–5 nouvelles maladies génétiques identifiées par semaine)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Types de variants identifiés
+    </div>
+    <table>
+      <thead><tr><th>Acronyme</th><th>Type</th><th>Taille</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>SNV</strong> / Delins</td>
+          <td>Variant nucléotidique ponctuel, petites insertions/délétions</td>
+          <td>1–49 nt</td>
+        </tr>
+        <tr>
+          <td><strong>CNV</strong></td>
+          <td>Copy Number Variant (délétions / duplications déséquilibrées)</td>
+          <td>≥ 50 nt</td>
+        </tr>
+        <tr>
+          <td><strong>BSV</strong></td>
+          <td>Balanced Structural Variant (inversions, translocations équilibrées)</td>
+          <td>Variable</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Classification en 5 classes — à maîtriser absolument
+    </div>
+    <table>
+      <thead><tr><th>Classe</th><th>Interprétation</th><th>Rendu ?</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="cl cl-1">Classe 1</span></td>
+          <td>Variant <strong>bénin</strong></td>
+          <td style="color:var(--muted);">Non rendu</td>
+        </tr>
+        <tr>
+          <td><span class="cl cl-2">Classe 2</span></td>
+          <td>Variant <strong>probablement bénin</strong></td>
+          <td style="color:var(--muted);">Non rendu</td>
+        </tr>
+        <tr>
+          <td><span class="cl cl-3">Classe 3</span></td>
+          <td>Variant de <strong>signification incertaine</strong> (VUS)</td>
+          <td>Discuté en RCP / réunion clinico-biologique</td>
+        </tr>
+        <tr>
+          <td><span class="cl cl-4">Classe 4</span></td>
+          <td>Variant <strong>probablement pathogène</strong></td>
+          <td>Rendu + annonce au patient</td>
+        </tr>
+        <tr>
+          <td><span class="cl cl-5">Classe 5</span></td>
+          <td>Variant <strong>pathogène</strong></td>
+          <td>Rendu + annonce au patient</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Seuls les variants de <strong>classe 4 et 5</strong> sont rendus par le biologiste. La classe 3 nécessite des analyses complémentaires (ségrégation familiale, tests fonctionnels…).</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Lire un compte rendu génétique
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key"><strong>Conclusif</strong></span><span class="kv-val" style="color:var(--teal);">Variant(s) classe 4 ou 5 identifié(s)</span></div>
+      <div class="kv-row"><span class="kv-key"><strong>Non conclusif</strong></span><span class="kv-val" style="color:var(--amber);">Aucun variant retenu OU classe 3 nécessitant analyses complémentaires</span></div>
+      <div class="alert alert-blue" style="margin-top:10px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <div>Le compte rendu est adressé au <strong>seul prescripteur</strong>. Il ne peut le partager qu'avec l'accord du patient. Si variant 4/5 : DPN ou DPI possible si maladie grave incurable.</div>
+      </div>
+    </div>
+    <div>
+      <div class="subhead">Données additionnelles — spécificité ES/GS</div>
+      <p style="font-size:.84rem;margin-bottom:8px;">Variations génétiques <strong>sans rapport avec la pathologie initiale</strong> mais à impact potentiel sur le patient ou sa famille.</p>
+      <ul class="lst">
+        <li>Le prescripteur doit informer le patient si une donnée additionnelle est identifiée</li>
+        <li>Orienter les apparentés potentiellement concernés vers un généticien</li>
+      </ul>
+      <div class="alert alert-green" style="margin-top:8px;">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Ré-analyse :</strong> les données de séquençage stockées sont régulièrement réanalysées à la lumière des nouvelles connaissances — utile surtout si résultat initialement non conclusif.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SYNTHÈSE FINALE -->
+<div class="synth-card">
+  <div class="card-title" style="color:var(--purple);">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Points-clés à retenir — Pièges ECNi
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> information à la parentèle obligatoire <strong>avant</strong> le test (pas après). En vigueur depuis 2013.</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège CGH-array :</strong> ne détecte <strong>pas</strong> les remaniements équilibrés → jamais en 1re intention pour troubles de la fertilité (caryotype à la place).</div>
+      </div>
+      <div class="alert alert-amber">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><strong>Piège :</strong> génomique <strong>somatique tumorale</strong> = pas de consentement spécifique requis (contrairement à la génétique constitutionnelle).</div>
+      </div>
+    </div>
+    <div>
+      <div class="alert alert-red">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div>Exome/génome : <strong>jamais prescrit</strong> par le médecin non spécialiste — réservé aux centres de référence/compétence maladies rares.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div><strong>Retenir :</strong> "Médecine personnalisée" = abus de langage (HAS). Terme correct = médecine génomique ou <strong>médecine des 4P</strong>.</div>
+      </div>
+      <div class="alert alert-green">
+        <div class="alert-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div>Classes <strong>4 et 5</strong> = seuls variants rendus. Classe 3 = discutée en RCP. Classes 1 et 2 = non rendues.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
