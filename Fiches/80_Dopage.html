@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 80 — Dopage et conduites dopantes</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 80 — voir aussi item 256</div>
+  <h1>Dopage et conduites dopantes</h1>
+  <div class="header-sub">Définitions · Substances · Lutte anti-dopage · Rôle du médecin</div>
+  <div class="header-tags">
+    <span class="htag">Conduites dopantes ≠ Dopage</span>
+    <span class="htag">AFLD · AMA · AMPD</span>
+    <span class="htag">AUT</span>
+    <span class="htag">Passeport biologique</span>
+    <span class="htag">Loi 2006</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Ce chapitre en un coup d'œil :</strong> Distinguer conduites dopantes (tout individu) du dopage (sportifs + compétition + liste AMA). Connaître la classification des substances interdites (S0 à S9, P1) et des méthodes, les conditions d'interdiction (permanent / compétition / certains sports), ainsi que le système de lutte (AFLD, AMA, passeport biologique). Maîtriser le rôle du médecin : vérifier toute prescription sur le site AFLD, connaître la procédure AUT, et savoir orienter vers l'AMPD en cas de dopage détecté.
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 : DÉFINITIONS & CHAMP D'APPLICATION -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions &amp; Champ d'application
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition du dopage et des conduites dopantes — distinguer les deux notions</div>
+  <div class="obj-line">Savoir comment un produit ou une méthode est qualifié de dopant</div>
+  <div class="obj-line">Savoir à qui s'applique la réglementation anti-dopage</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Conduites dopantes
+    </div>
+    <p style="font-size:.84rem;">Utilisation <strong>intentionnelle</strong> de produits ou méthodes pour modifier certaines compétences afin d'affronter un obstacle (réel ou ressenti) ou améliorer ses performances physiques, intellectuelles, artistiques…</p>
+    <div class="pills" style="margin-top:10px;">
+      <span class="pill pill-amber">Tout individu</span>
+      <span class="pill pill-amber">Pas forcément sportif</span>
+      <span class="pill pill-amber">Pas de liste officielle</span>
+    </div>
+  </div>
+
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Dopage (sens strict)
+    </div>
+    <p style="font-size:.84rem;">Comportement concernant <strong>uniquement les sportifs</strong> utilisant des substances ou méthodes inscrites sur la <strong>liste AMA</strong> dans le cadre de <strong>compétitions ou manifestations organisées par les fédérations</strong>.</p>
+    <div class="pills" style="margin-top:10px;">
+      <span class="pill pill-red">Sportifs licenciés ou en compétition</span>
+      <span class="pill pill-red">Liste AMA (mise à jour annuellement)</span>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège classique :</strong> Conduites dopantes ≠ Dopage. Les conduites dopantes concernent n'importe qui (étudiant qui prend du Ritalin avant un examen). Le dopage est réservé aux sportifs soumis à la liste AMA.</span>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Qualification dopant — Comment ?
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.83rem;font-weight:700;margin-bottom:6px;">Liste AMA</p>
+      <ul class="lst">
+        <li>Publiée et mise à jour <strong>chaque année</strong> par l'Agence Mondiale Anti-dopage</li>
+        <li>Certaines substances : interdites <strong>en permanence</strong></li>
+        <li>D'autres : interdites <strong>uniquement en compétition</strong></li>
+        <li>D'autres : interdites <strong>dans certains sports seulement</strong></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.83rem;font-weight:700;margin-bottom:6px;">Exception : AUT</p>
+      <p style="font-size:.83rem;"><strong>Autorisation d'Usage à des fins Thérapeutiques</strong> — permet à un sportif de suivre un traitement contenant une substance interdite pour des raisons médicales légitimes.</p>
+      <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Vérification médicament</span><span class="kv-val">Site AFLD (afld.fr)</span></div>
+      <div class="kv-row"><span class="kv-key">Prévalence contrôles positifs</span><span class="kv-val">5 à 10 %</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 : SUBSTANCES & MÉTHODES DOPANTES -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Substances &amp; Méthodes dopantes
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales substances dopantes et leurs catégories (S0-S9, P1)</div>
+  <div class="obj-line">Connaître les effets recherchés pour chaque classe</div>
+  <div class="obj-line">Connaître les principales méthodes dopantes interdites</div>
+</div>
+
+<!-- Substances interdites en et hors compétition -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Substances interdites <strong>en et hors compétition</strong>
+  </div>
+  <table class="table-red">
+    <tr>
+      <th>Code</th>
+      <th>Classe</th>
+      <th>Exemples</th>
+      <th>Effet recherché</th>
+    </tr>
+    <tr>
+      <td><strong>S0</strong></td>
+      <td>Substances non approuvées</td>
+      <td>Tout médicament non approuvé chez l'Homme (phase préclinique/clinique)</td>
+      <td>Variable</td>
+    </tr>
+    <tr>
+      <td><strong>S1</strong></td>
+      <td>Agents anabolisants</td>
+      <td>Stéroïdes anabolisants androgènes (SAA)</td>
+      <td>Augmentation masse musculaire, performance, résistance à la fatigue</td>
+    </tr>
+    <tr>
+      <td><strong>S2</strong></td>
+      <td>Hormones peptidiques, facteurs de croissance</td>
+      <td>EPO (érythropoïétine)</td>
+      <td>Augmentation érythropoïèse → transport O₂ → endurance</td>
+    </tr>
+    <tr>
+      <td><strong>S3</strong></td>
+      <td>Bêta-2-agonistes</td>
+      <td>Tous interdits <em>sauf</em> salbutamol, formotérol, salmétérol</td>
+      <td>Amélioration fonction respiratoire, endurance</td>
+    </tr>
+    <tr>
+      <td><strong>S4</strong></td>
+      <td>Modulateurs hormonaux et métaboliques</td>
+      <td>Inhibiteurs d'aromatase, modulateurs récepteurs aux œstrogènes</td>
+      <td>Suppression EI des anabolisants, augmentation masse musculaire</td>
+    </tr>
+    <tr>
+      <td><strong>S5</strong></td>
+      <td>Diurétiques et agents masquants</td>
+      <td>(Voir site AFLD)</td>
+      <td>Perte de poids, masquage d'autres dopants</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Substances interdites en compétition seulement -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Substances interdites <strong>en compétition uniquement</strong>
+  </div>
+  <table class="table-amber">
+    <tr>
+      <th>Code</th>
+      <th>Classe</th>
+      <th>Exemples</th>
+      <th>Effet recherché</th>
+    </tr>
+    <tr>
+      <td><strong>S6</strong></td>
+      <td>Stimulants</td>
+      <td>Amphétamines, cocaïne, cathinones, méthylphénidate, modafinil</td>
+      <td>Réduction fatigue, amélioration temps de réaction, concentration</td>
+    </tr>
+    <tr>
+      <td><strong>S7</strong></td>
+      <td>Narcotiques</td>
+      <td>Morphine, buprénorphine, méthadone (dérivés opiacés)</td>
+      <td>Analgésie, effet euphorisant, sédation</td>
+    </tr>
+    <tr>
+      <td><strong>S8</strong></td>
+      <td>Cannabinoïdes</td>
+      <td>Cannabis naturels ou synthétiques (sauf CBD)</td>
+      <td>Relâchement musculaire, diminution anxiété, amélioration sommeil</td>
+    </tr>
+    <tr>
+      <td><strong>S9</strong></td>
+      <td>Glucocorticoïdes</td>
+      <td>Tous les glucocorticoïdes</td>
+      <td>Psychostimulant, endurance, tolérance à la douleur</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Substances dans certains sports + méthodes -->
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Interdits dans certains sports seulement
+    </div>
+    <div class="kv-row"><span class="kv-key"><strong>P1</strong> Bêtabloquants</span><span class="kv-val"></span></div>
+    <p style="font-size:.82rem;color:var(--muted);margin:4px 0;">Effet : anxiolyse, réduction FC, diminution tremblements</p>
+    <ul class="lst" style="margin-top:8px;">
+      <li><strong>En compétition :</strong> automobile, billard, fléchettes, golf, ski, sport subaquatique</li>
+      <li><strong>En et hors compétition :</strong> tir, tir à l'arc</li>
+    </ul>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Méthodes interdites (en et hors compétition)
+    </div>
+    <ul class="lst">
+      <li><strong>Manipulation de sang</strong> — transfusions autologues/hétérologues, amélioration transport O₂</li>
+      <li><strong>Manipulations chimiques et physiques</strong> — modifier les échantillons du contrôle (cathétérisation, substitution, perfusions)</li>
+      <li><strong>Dopage génétique</strong> — modification séquences génomiques par acides nucléiques, utilisation de cellules modifiées</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège S3 :</strong> Les bêta-2-agonistes sont <strong>tous</strong> interdits, sauf 3 exceptions : <strong>salbutamol, formotérol, salmétérol</strong>. À connaître pour ne pas contre-indiquer un traitement asthme légitime.</span>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 : LUTTE ANTI-DOPAGE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Organisation de la lutte anti-dopage
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les acteurs de la lutte anti-dopage (AFLD, AMA) et leurs rôles respectifs</div>
+  <div class="obj-line">Connaître le passeport biologique de l'athlète et ses deux modules</div>
+  <div class="obj-line">Connaître les modalités des contrôles et les sanctions en cas de résultat positif</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Instances anti-dopage
+    </div>
+    <div class="kv-row"><span class="kv-key"><strong>AMA</strong></span><span class="kv-val">Agence Mondiale Anti-dopage</span></div>
+    <p style="font-size:.8rem;color:var(--muted);padding:2px 0 6px;">Supervision mondiale — Code mondial antidopage — publie la liste des substances interdites</p>
+    <div class="kv-row"><span class="kv-key"><strong>AFLD</strong></span><span class="kv-val">Agence Française de Lutte contre le Dopage</span></div>
+    <p style="font-size:.8rem;color:var(--muted);padding:2px 0 6px;">Contrôles antidopage en France — conformité au Code AMA — site de vérification des médicaments</p>
+    <div class="kv-row"><span class="kv-key"><strong>AMPD</strong></span><span class="kv-val">Antennes Médicales de Prévention et de lutte contre le Dopage</span></div>
+    <p style="font-size:.8rem;color:var(--muted);padding:2px 0 0;">En hôpital, rattachées à médecine du sport ou addictologie</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Passeport biologique de l'athlète
+    </div>
+    <p style="font-size:.83rem;">Suivi longitudinal de variables biologiques pour détecter des anomalies indirectes de dopage.</p>
+    <table style="margin-top:10px;">
+      <tr><th>Module</th><th>Matrice</th><th>Cible</th></tr>
+      <tr>
+        <td><strong>Hématologique</strong></td>
+        <td>Sang</td>
+        <td>Méthodes d'amélioration transport O₂ (transfusions, EPO)</td>
+      </tr>
+      <tr>
+        <td><strong>Endocrinien</strong></td>
+        <td>Urines</td>
+        <td>Stéroïdes anabolisants androgènes endogènes</td>
+      </tr>
+      <tr>
+        <td><em>En cours</em></td>
+        <td>—</td>
+        <td>Hormone de croissance (3ème module)</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Contrôles &amp; Sanctions
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Contrôles antidopage</p>
+      <ul class="lst">
+        <li>Tout sportif peut être contrôlé (professionnel <strong>ou amateur</strong>)</li>
+        <li>En compétition et <strong>hors compétition</strong></li>
+        <li>Refus de contrôle = <strong>sanction identique au dopage</strong></li>
+        <li>Prévalence des contrôles positifs : <strong>5 à 10 %</strong></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Sanctions en cas de contrôle positif</p>
+      <ul class="lst">
+        <li>Sportives : suspension à <strong>radiation à vie</strong></li>
+        <li>Pénales possibles</li>
+        <li>Entourage et soignants aussi sanctionnés (s'ils ont facilité ou incité)</li>
+        <li>Obligation de suivi médical auprès de l'AMPD</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 : RÔLE DU MÉDECIN & PRESCRIPTIONS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Rôle du médecin &amp; Prescriptions médicales
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir rechercher le caractère dopant ou non d'une prescription médicale</div>
+  <div class="obj-line">Connaître les obligations du médecin face à un patient dopé (loi 2006)</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Vérifier une prescription chez un sportif
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Consulter le site AFLD</div><div class="step-content">Moteur de recherche afld.fr/finder/produits-dopants — vérifier chaque médicament prescrit</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Si substance interdite → AUT</div><div class="step-content">Demander une Autorisation d'Usage à des fins Thérapeutiques si le traitement est médicalement indispensable</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Informer le patient</div><div class="step-content">Le sportif est personnellement responsable de s'assurer que tout produit consommé est conforme à la liste AMA</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Obligations du médecin face au dopage — Loi du 5 avril 2006
+  </div>
+  <ul class="lst">
+    <li><strong>Refuser</strong> la délivrance de tout certificat médical lié au dopage</li>
+    <li><strong>Informer</strong> le patient des risques sanitaires et institutionnels</li>
+    <li><strong>Orienter</strong> vers l'AMPD pour prise en charge et suivi</li>
+    <li><strong>Transmettre</strong> au médecin responsable de l'AMPD (tout en respectant le secret médical et l'anonymat)</li>
+  </ul>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Sanctions disciplinaires</strong> prévues contre les médecins qui n'auraient pas signalé un cas de dopage à l'AMPD.</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 : RISQUES & PRÉVENTION -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Risques &amp; Prévention
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les risques liés au dopage et aux conduites dopantes</div>
+  <div class="obj-line">Connaître les grands principes de la politique de prévention du dopage</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Risques du dopage
+    </div>
+    <div class="kv-row"><span class="kv-key">Institutionnels</span><span class="kv-val">Sanctions sportives et pénales</span></div>
+    <div class="kv-row"><span class="kv-key">Sanitaires — pharmacologiques</span><span class="kv-val">Action toxique propre à chaque molécule</span></div>
+    <div class="kv-row"><span class="kv-key">Sanitaires — addictifs</span><span class="kv-val">Évolution vers conduite addictive</span></div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">La prise en charge varie selon le produit, ses conséquences psychiatriques/non-psychiatriques et le niveau d'utilisation.</p>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Prévention — Dispositifs
+    </div>
+    <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Niveau individuel — AMPD</p>
+    <ul class="lst">
+      <li>Consultations <strong>anonymes</strong> pour personnes ayant eu recours au dopage</li>
+      <li>Suivi médical obligatoire pour sportifs positifs (certificat de soins)</li>
+      <li>Coordination prise en charge multidisciplinaire</li>
+      <li>Enseignement, prévention, recherche, épidémiologie</li>
+      <li><strong>Numéro vert</strong> "Écoute et dopage"</li>
+    </ul>
+    <p style="font-size:.82rem;font-weight:700;margin:10px 0 6px;">Niveau collectif</p>
+    <ul class="lst">
+      <li>Coordination AFLD + AMA + fédérations + AMPD</li>
+      <li>Loi du 5 avril 2006 : volet répressif + suivi médical longitudinal</li>
+      <li>France = un des premiers pays à avoir légiféré</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- POINTS-CLÉS À RETENIR -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés &amp; Pièges à retenir
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège fondamental :</strong> Conduites dopantes (tout individu, pas de liste) ≠ Dopage (sportifs + liste AMA + compétition). Ne pas confondre les deux définitions.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège S3 :</strong> Tous les bêta-2-agonistes sont interdits SAUF salbutamol, formotérol et salmétérol. Important pour ne pas contre-indiquer un traitement asthmatiforme légitime.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège Refus :</strong> Le refus de contrôle antidopage entraîne une sanction <strong>identique à celle du dopage</strong> lui-même.</span>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Médecin :</strong> Obligation de refuser les certificats, d'informer, d'orienter vers l'AMPD et de transmettre — sanctions disciplinaires en cas de non-signalement.</span>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <span><strong>À retenir :</strong> AFLD (France) + AMA (monde) + AMPD (prévention individuelle). Passeport biologique = 2 modules : hématologique (sang, EPO) + endocrinien (urines, SAA). AUT = exception pour traitement médicalement nécessaire.</span>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>À retenir :</strong> Bêtabloquants (P1) : interdits uniquement dans certains sports de précision (tir à l'arc, tir). Glucocorticoïdes (S9) : interdits seulement en compétition. Cannabinoïdes (S8) : CBD autorisé, le reste interdit en compétition.</span>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

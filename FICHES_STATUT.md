@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-22. Ne pas éditer à la main._
 
-**Avancement : 162 / 367 items (44.1%)**
+**Avancement : 163 / 367 items (44.4%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -87,7 +87,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 77 | [ ] | Addiction aux médicaments psychotropes | — |
 | 78 | [ ] | Addiction au cannabis | — |
 | 79 | [ ] | Addictions comportementales | — |
-| 80 | [ ] | Dopage et conduites dopantes | — |
+| 80 | [x] | Dopage et conduites dopantes | 80_Dopage.html |
 | 81 | [x] | Altération chronique de la vision | 81_Alteration_vision_chronique.html |
 | 82 | [ ] | Altération aiguë de la vision | — |
 | 83 | [ ] | Infections et inflammations oculaires | — |
