@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-22. Ne pas éditer à la main._
 
-**Avancement : 163 / 367 items (44.4%)**
+**Avancement : 164 / 367 items (44.7%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -274,7 +274,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 264 | [ ] | Insuffisance rénale chronique chez l adulte et l enfant | — |
 | 265 | [ ] | Lithiase urinaire | — |
 | 266 | [ ] | Polykystose rénale | — |
-| 267 | [ ] | Troubles de l équilibre acido-basique et désordres hydro-électrolytiqu… | — |
+| 267 | [x] | Troubles de l équilibre acido-basique et désordres hydro-électrolytiqu… | 267_Troubles_hydroelectrolytiques.html |
 | 268 | [x] | Hypercalcémie | 268_Hypercalcemie.html |
 | 269 | [ ] | Douleurs abdominales aiguës chez l enfant et chez l adulte | — |
 | 270 | [ ] | Douleurs lombaires aiguës | — |

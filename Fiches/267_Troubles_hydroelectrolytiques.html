@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>267 — Troubles acido-basiques et hydro-électrolytiques</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.92;margin-top:4px;line-height:1.5;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .ic-red{background:var(--red);}.ic-blue{background:var(--blue);}.ic-teal{background:var(--teal);}
+  .ic-amber{background:var(--amber);}.ic-purple{background:var(--purple);}.ic-coral{background:var(--coral);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* OBJ-LIST sobre */
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  /* ===== ARBRES DÉCISIONNELS (flow HTML) ===== */
+  .flow{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:10px 0 4px;}
+  .fnode{border-radius:10px;padding:10px 14px;font-size:.82rem;text-align:center;line-height:1.4;}
+  .fnode b{font-weight:800;}
+  .f-q{background:var(--purple-light);color:var(--purple);font-weight:700;border:1px solid var(--purple);}
+  .f-start{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:800;}
+  .f-red{background:var(--red-light);color:var(--red);border:1px solid var(--red);}
+  .f-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue);}
+  .f-teal{background:var(--teal-light);color:var(--teal);border:1px solid var(--teal);}
+  .f-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber);}
+  .f-arrow{align-self:center;color:var(--muted);font-size:1rem;line-height:1;padding:5px 0;}
+  .f-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px;}
+  .f-split3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:6px;}
+  @media(max-width:640px){.f-split,.f-split3{grid-template-columns:1fr;}}
+  .f-col{display:flex;flex-direction:column;gap:6px;}
+  .f-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;text-align:center;color:var(--muted);}
+  .f-leaf{background:var(--card);border:1px dashed var(--border);border-radius:9px;padding:9px 11px;font-size:.8rem;line-height:1.4;}
+  .f-leaf b{color:var(--text);}
+</style>
+</head>
+<body data-annot-version="1">
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 267</div>
+  <h1>Troubles acido-basiques &amp; désordres hydro-électrolytiques</h1>
+  <div class="header-sub">Un item de <strong>raisonnement</strong> : devant chaque anomalie, dérouler un arbre décisionnel (gaz du sang · osmolalité · volémie · hormones) plutôt que mémoriser des listes de causes.</div>
+  <div class="header-tags">
+    <span class="htag">Acido-basique</span>
+    <span class="htag">Kaliémie</span>
+    <span class="htag">Natrémie / Eau</span>
+    <span class="htag">Calcémie</span>
+    <span class="htag">ECG &amp; urgences</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Cinq grands désordres, une même logique : <strong>(1)</strong> affirmer le trouble par un seuil biologique, <strong>(2)</strong> juger la gravité (clinique + ECG), <strong>(3)</strong> dérouler un raisonnement étiologique guidé par 2-3 examens simples (trou anionique pour l'acidose ; kaliurèse pour le K⁺ ; <strong>osmolalité → Uosm → volémie</strong> pour le Na⁺ ; PTH pour le Ca²⁺), <strong>(4)</strong> traiter en respectant une <strong>vitesse de correction</strong> sous peine de complication neurologique (myélinolyse, œdème cérébral).
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 1 — ACIDO-BASIQUE -->
+<!-- ============================================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  1 · Équilibre acido-basique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications de la gazométrie et les mécanismes de régulation acide-base (poumon / rein / tampons).</div>
+  <div class="obj-line">Définir un trouble acido-basique et son caractère métabolique ou ventilatoire ; reconnaître les anomalies graves.</div>
+  <div class="obj-line">Diagnostiquer une acidose métabolique (IRA, diarrhée, acidose lactique, acidocétose), rechercher causes toxiques et acidoses tubulaires.</div>
+  <div class="obj-line">Connaître les causes d'acidose respiratoire et la prise en charge des troubles aigus sévères / acidose métabolique chronique.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon ic-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Indications de la gazométrie</div>
+    <ul class="lst">
+      <li>Dyspnée ; suspicion de pathologie pulmonaire hypoxémiante</li>
+      <li>Suspicion de déséquilibre acido-basique ; acido-cétose</li>
+      <li>IRA sévère ; intoxications responsables d'acidose</li>
+      <li>État de choc ; troubles de conscience / coma</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title"><span class="card-icon ic-purple"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></span>Régulation acide-base</div>
+    <div style="font-size:.82rem;line-height:1.5">Tampon principal : <strong>H⁺ + HCO₃⁻ ⇔ H₂CO₃ ⇔ CO₂ + H₂O</strong> (système « ouvert »).<br>
+    <strong>Henderson-Hasselbalch :</strong> pH = 6,1 + log([HCO₃⁻]/0,03·PCO₂).<br>
+    <strong>Poumon</strong> = élimine le CO₂ (régulation rapide). <strong>Rein</strong> = réabsorbe HCO₃⁻ (proximal) + excrète la charge acide fixe ~60 mEq/j sous forme de NH₄⁺ (distal).</div>
+  </div>
+</div>
+
+<table class="table-blue">
+  <thead><tr><th>Désordre simple</th><th>pH</th><th>HCO₃⁻</th><th>PCO₂</th><th>Compensation</th></tr></thead>
+  <tbody>
+    <tr><td><b>Acidose métabolique</b></td><td>↓</td><td><b>↓ (primitif)</b></td><td>↓</td><td>PaCO₂ attendue = 1,5 × [HCO₃⁻] + 8 ± 2</td></tr>
+    <tr><td><b>Alcalose métabolique</b></td><td>↑</td><td><b>↑ (primitif)</b></td><td>↑</td><td>Hypoventilation</td></tr>
+    <tr><td><b>Acidose respiratoire</b></td><td>↓</td><td>↑</td><td><b>↑ (primitif)</b></td><td>Génération rénale de HCO₃⁻ (si chronique)</td></tr>
+    <tr><td><b>Alcalose respiratoire</b></td><td>↑</td><td>↓</td><td><b>↓ (primitif)</b></td><td>↓ HCO₃⁻</td></tr>
+  </tbody>
+</table>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Urgence vitale</strong> si <strong>pH &lt; 7,10</strong> ou <strong>bicarbonatémie &lt; 8 mmol/L</strong> : ↓ débit cardiaque, dyspnée, résistance aux catécholamines, arythmies ventriculaires, coma.</span>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="card-icon ic-coral"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Démarche devant une acidose métabolique — le trou anionique</div>
+  <div class="flow">
+    <div class="fnode f-start">Acidose métabolique confirmée<br><span style="font-weight:600;font-size:.78rem;">pH &lt; 7,38 &nbsp;+&nbsp; HCO₃⁻ &lt; 22</span></div>
+    <div class="f-arrow">▼</div>
+    <div class="fnode f-q">Calculer le <b>Trou Anionique</b> : TA = (Na⁺ + K⁺) − (Cl⁻ + HCO₃⁻) &nbsp;<span style="font-weight:600">[N = 16 ± 4]</span></div>
+    <div class="f-split">
+      <div class="f-col">
+        <div class="f-label">TA augmenté (&gt; 20)</div>
+        <div class="fnode f-red">Ajout d'H⁺ + anion indosé<br><span style="font-weight:600;font-size:.78rem">« gain d'AH »</span></div>
+        <div class="f-leaf"><b>Acidose lactique</b> — choc/hypoxie, biguanides (surdosage si IRA) → doser lactates</div>
+        <div class="f-leaf"><b>Acidocétose</b> — diabétique ++, alcoolique, jeûne → cétonémie/cétonurie</div>
+        <div class="f-leaf"><b>Insuffisance rénale</b> sévère (TA peu élevé &lt; 26)</div>
+        <div class="f-leaf"><b>Toxiques</b> — salicylés, éthylène glycol, méthanol</div>
+      </div>
+      <div class="f-col">
+        <div class="f-label">TA normal (hyperchlorémie)</div>
+        <div class="fnode f-blue">Perte de HCO₃⁻ (gain d'HCl)<br><span style="font-weight:600;font-size:.78rem">→ calculer le TA <u>urinaire</u></span></div>
+        <div class="f-leaf"><b>TAU &lt; 0</b> (NH₄⁺ ↑, réponse adaptée) → <b>perte digestive</b> : diarrhée, iléostomie</div>
+        <div class="f-leaf"><b>TAU &gt; 0</b> (NH₄⁺ ↓, réponse inadaptée) → <b>acidose tubulaire rénale</b></div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:.78rem;color:var(--muted);margin-top:8px">TAU = (U<sub>Na</sub> + U<sub>K</sub>) − U<sub>Cl</sub> — reflet inverse de l'ammoniurie.</div>
+</div>
+
+<table class="table-amber">
+  <thead><tr><th>Acidose tubulaire rénale</th><th>Proximale (type 2)</th><th>Distale (type 1)</th><th>Distale hyperK (type 4)</th></tr></thead>
+  <tbody>
+    <tr><td><b>Mécanisme</b></td><td>Défaut de réabsorption proximale de HCO₃⁻</td><td>Défaut d'acidification distale</td><td>Défaut NH₄⁺ + hypoaldostéronisme</td></tr>
+    <tr><td><b>Kaliémie</b></td><td><span class="pill pill-blue">Basse</span></td><td><span class="pill pill-blue">Basse</span></td><td><span class="pill pill-red">Élevée</span></td></tr>
+    <tr><td><b>pH urinaire</b></td><td>Variable, &lt; 5,5 à l'état stable</td><td><b>&gt; 5,5</b></td><td>&lt; 5,5</td></tr>
+    <tr><td><b>Signes</b></td><td>Sd de Fanconi, ostéomalacie</td><td>Néphrocalcinose, lithiase, ostéomalacie</td><td>Sd d'insuffisance minéralocorticoïde</td></tr>
+    <tr><td><b>Causes</b></td><td>Myélome, cystinose, acétazolamide, ifosfamide, ténofovir</td><td>Sjögren, lupus, hypercalciurie, drépanocytose, amphotéricine B</td><td>Diabète (hyporéninisme), IEC/ARA2, AINS, spironolactone, amiloride, anticalcineurines, triméthoprime</td></tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon ic-amber"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span>Acidose respiratoire (hypoventilation)</div>
+    <ul class="lst">
+      <li><b>Contrôle ventilatoire</b> : AVC tronc, sédatifs, SAS central, hypothyroïdie ; atteinte médullaire (&gt; C5), SEP</li>
+      <li><b>Pompe ventilatoire</b> : SLA, Guillain-Barré, myasthénie, botulisme, myopathies ; cyphoscoliose, épanchement, obésité</li>
+      <li><b>Origine pulmonaire</b> : BPCO/emphysème sévère, réduction parenchymateuse</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon ic-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement acido-basique</div>
+    <ul class="lst">
+      <li><b>Chronique</b> : maintenir HCO₃⁻ &gt; 22 → bicarbonate de Na PO (1-6 g/j)</li>
+      <li><b>Aigu sévère</b> : <strong>traiter la cause +++</strong> ; corriger un bas débit / VA</li>
+      <li><b>Alcalinisation</b> : indispensable si hyperchlorémique ou intoxication (cible pH &gt; 7,20) ; <em>non</em> dans l'acidocétose (insuline + réhydratation) ; discutée si lactique</li>
+      <li>À éviter si surcharge / hypoK / hypoCa ; EER si IRA organique</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================= -->
+<!-- SECTION 2 — KALIÉMIE -->
+<!-- ============================================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  2 · Dyskaliémies (K⁺ : 3,5–5,0 mmol/L)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la régulation de la kaliémie (NaK-ATPase : insuline, catécholamines β, état acido-basique ; aldostérone).</div>
+  <div class="obj-line">Définir hyper- et hypokaliémie, leurs indications de dosage, symptômes, signes ECG et étiologies.</div>
+  <div class="obj-line">Connaître le traitement d'urgence de l'hyperkaliémie sévère et de l'hypokaliémie sévère, et l'hyperkaliémie chronique modérée.</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Régulation interne (transferts, NaK-ATPase)</strong> : insuline et catécholamines β <strong>font entrer</strong> le K⁺ dans la cellule ; l'<strong>acidose</strong> le fait sortir (hyperK de transfert). <strong>Régulation externe</strong> : aldostérone (excrétion rénale).</span>
+</div>
+
+<div class="grid2">
+  <!-- HYPERKALIEMIE -->
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon ic-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>HYPERKALIÉMIE (&gt; 5,0)</div>
+    <div style="font-size:.82rem"><strong>Clinique</strong> (hypoexcitabilité) : paresthésies, <strong>paralysie flasque ascendante</strong> (= ECG anormal + arrêt imminent), hypotension.</div>
+    <div class="alert alert-red" style="margin-top:8px"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span><span><strong>ECG (par gravité croissante)</strong> : T amples/pointues/symétriques → ↓ puis disparition de P, BAV → QRS larges → bradycardie « sine wave » → asystolie. <strong>ECG immédiat à toute suspicion, avant la confirmation.</strong></span></div>
+    <div style="font-size:.82rem"><strong>Étiologies :</strong></div>
+    <ul class="lst">
+      <li><b>Transfert</b> : acidose métabolique à TA normal, lyse cellulaire (rhabdomyolyse, brûlures, lyse tumorale), β-bloquants, digitaliques</li>
+      <li><b>↓ excrétion rénale</b> : IRA/IRC, hypoaldostéronisme (Addison, diabète)</li>
+      <li><b>Iatrogène ++ (les + fréquentes)</b> : IEC/ARA2, spironolactone/amiloride, AINS, ciclosporine/tacrolimus, triméthoprime</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:6px"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span><span><strong>Fausse hyperK</strong> : garrot serré/hémolyse, centrifugation tardive, hyperleucocytose &gt; 100 000 ou thrombocytémie &gt; 1 M. Y penser si K &gt; 6 sans aucun signe ECG.</span></div>
+  </div>
+
+  <!-- HYPOKALIEMIE -->
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon ic-blue"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><circle cx="12" cy="12" r="9"/></svg></span>HYPOKALIÉMIE (&lt; 3,5)</div>
+    <div style="font-size:.82rem"><strong>Clinique</strong> : crampes, myalgies, <strong>faiblesse/paralysie ascendante</strong>, rhabdomyolyse ; constipation, iléus (Ogilvie) ; sd polyuro-polydipsique, alcalose métabolique.</div>
+    <div class="alert alert-blue" style="margin-top:8px"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></span><span><strong>ECG (hyperexcitabilité)</strong> : ↓ ST → onde T plate/inversée → <strong>onde U</strong> → QT long → TdR supraV puis V (ESV, TV, <strong>torsade de pointe</strong> si hypoMg associée).</span></div>
+    <div style="font-size:.82rem"><strong>Étiologies (clé = kaliurèse) :</strong></div>
+    <ul class="lst">
+      <li><b>Carence d'apport</b> : anorexie, vomissements, NP exclusive</li>
+      <li><b>Transfert</b> : alcalose, insuline, β-mimétiques, ↑ hématopoïèse (B12), paralysie périodique, thyrotoxicose</li>
+      <li><b>Pertes digestives</b> : kaliurèse &lt; 20 → diarrhée ++, fistules</li>
+      <li><b>Pertes rénales</b> : kaliurèse &gt; 20 → <em>avec HTA</em> : hyperaldostéronisme I/II, Cushing, réglisse ; <em>sans HTA</em> : diurétiques ++, Bartter/Gitelman, vomissements</li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon ic-red"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement hyperK sévère (&gt; 7 ou ECG menaçant)</div>
+    <ul class="steps">
+      <li><span class="step-num step-num-red">1</span><div><div class="step-title">Antagoniste membranaire</div><div class="step-content">Sels de <strong>Ca²⁺ IV</strong> (10-30 mL) — sauf digitaliques : sel de <strong>magnésium</strong>. Protège le cœur, ne baisse pas le K.</div></div></li>
+      <li><span class="step-num step-num-red">2</span><div><div class="step-title">Transfert intracellulaire</div><div class="step-content"><strong>Insuline-glucose</strong> (G10% 500 mL + 10-15 U) ; <strong>β2 (salbutamol</strong> néb) ; alcalinisation (bicar) si acidose à TA normal — CI si OAP.</div></div></li>
+      <li><span class="step-num step-num-red">3</span><div><div class="step-title">Élimination</div><div class="step-content"><strong>Hémodialyse</strong> (ttt de choix si IR sévère) ; diurétiques de l'anse. + Arrêt des médicaments hyperkaliémiants.</div></div></li>
+    </ul>
+    <div style="font-size:.79rem;color:var(--muted);margin-top:6px"><strong>HyperK chronique modérée</strong> : ↓ apports, adapter médicaments, bicar PO si acidose, résines (Kayexalate), diurétiques ; fludrocortisone si hypoaldostéronisme.</div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon ic-blue"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement hypoK sévère</div>
+    <ul class="lst">
+      <li>Si troubles cardiaques / QT long / signes neuromusculaires : <strong>KCl IV</strong> pour ramener K &gt; 3 mmol/L</li>
+      <li><strong>0,5–1,5 g/h</strong>, patient <strong>scopé</strong>, surveillance kaliémie + veine perfusée (veinotoxicité)</li>
+      <li><strong>Éviter le glucose initial</strong> (l'insuline induite aggrave l'hypoK)</li>
+      <li><strong>Corriger systématiquement une hypomagnésémie</strong></li>
+      <li>Sinon : supplémentation orale (aliments, KCl PO) en règle suffisante</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================= -->
+<!-- SECTION 3 — NATRÉMIE / EAU  (cœur de la fiche) -->
+<!-- ============================================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  3 · Troubles de l'eau — Natrémie <span class="badge badge-purple">le raisonnement clé</span>
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Comprendre que la natrémie reflète le bilan de l'<strong>EAU</strong> (osmolalité), pas le stock de sodium.</div>
+  <div class="obj-line">Définir et classer la sévérité de l'hypo- et l'hypernatrémie ; reconnaître les symptômes de gravité (neurologiques).</div>
+  <div class="obj-line">Dérouler la démarche étiologique : osmolalité plasmatique → osmolalité urinaire → évaluation de la volémie extracellulaire.</div>
+  <div class="obj-line">Connaître les principes et surtout la <strong>vitesse</strong> de correction (myélinolyse / œdème cérébral).</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Le principe fondateur.</strong> Na⁺ est le déterminant principal de l'osmolalité.
+  <strong>Posm efficace ≈ 2 × [Na⁺] + glycémie</strong> (≈ 285 mOsm/kg ; l'urée est exclue car librement diffusible).
+  Donc : <strong>hyponatrémie = hyper-hydratation intracellulaire (HIC)</strong> = excès d'eau ; <strong>hypernatrémie = déshydratation intracellulaire (DIC)</strong> = déficit d'eau. Le secteur <em>extra</em>cellulaire (volémie), lui, dépend du stock de <strong>sodium</strong> — d'où la nécessité de l'évaluer séparément.</span>
+</div>
+
+<!-- ===== HYPONATREMIE ===== -->
+<div class="card card-blue">
+  <div class="card-title"><span class="card-icon ic-blue"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>HYPONATRÉMIE — démarche en 3 étapes</div>
+  <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Na⁺ &lt; 135 mmol/L</span></div>
+  <div class="kv-row"><span class="kv-key">Sévère (biologique)</span><span class="kv-val">&lt; 120 mmol/L</span></div>
+  <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Hyper-hydratation intracellulaire (excès d'eau)</span></div>
+
+  <div class="flow" style="margin-top:14px">
+    <div class="fnode f-start">Hyponatrémie (Na⁺ &lt; 135)</div>
+    <div class="f-arrow">▼</div>
+    <div class="fnode f-q">① Mesurer l'<b>OSMOLALITÉ PLASMATIQUE</b> — est-elle basse ?</div>
+    <div class="f-split">
+      <div class="f-col">
+        <div class="f-label">Posm normale / élevée → fausse piste</div>
+        <div class="f-leaf"><b>Iso-osmolaire</b> : « fausse » hypoNa (hyperprotidémie, hyperlipidémie)</div>
+        <div class="f-leaf"><b>Hyper-osmolaire</b> : hyperglycémie majeure, méthanol/éthanol (DIC associée)</div>
+      </div>
+      <div class="f-col">
+        <div class="f-label">Posm &lt; 280 = vraie hypoNa hypotonique</div>
+        <div class="fnode f-q">② <b>OSMOLALITÉ URINAIRE</b> — le rein dilue-t-il ?</div>
+        <div class="f-leaf"><b>Uosm &lt; 100</b> (dilution adaptée) → excès d'eau pur : <b>potomanie</b>, <b>tea &amp; toast</b> (apport osmolaire bas)</div>
+        <div class="fnode f-q" style="margin-top:4px">Uosm &gt; 100 → ADH active inadaptée → ③ évaluer la <b>VOLÉMIE</b></div>
+      </div>
+    </div>
+    <div class="f-arrow">▼</div>
+    <div class="f-label">③ Examen clinique du secteur extracellulaire (= bilan du sodium)</div>
+    <div class="f-split3">
+      <div class="f-col">
+        <div class="fnode f-red">DEC<br><span style="font-weight:600;font-size:.76rem">Na corporel ↓↓</span></div>
+        <div class="f-leaf"><b>Perte de NaCl</b> (eau &lt; Na) : digestive, cutanée, rénale (diurétiques) ; ADH adaptée à l'hypovolémie</div>
+      </div>
+      <div class="f-col">
+        <div class="fnode f-blue">Euvolémie<br><span style="font-weight:600;font-size:.76rem">Na normal</span></div>
+        <div class="f-leaf"><b>SIADH</b> (cf. critères) ; potomanie ; hypothyroïdie, insuff. surrénale</div>
+      </div>
+      <div class="f-col">
+        <div class="fnode f-amber">HEC<br><span style="font-weight:600;font-size:.76rem">Na ↑ (œdèmes)</span></div>
+        <div class="f-leaf"><b>Hyperhydratation globale</b> : insuff. cardiaque, cirrhose, sd néphrotique, IRC (ADH volo-dépendante)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon ic-amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>SIADH — critères diagnostiques</div>
+    <ul class="lst">
+      <li>Posm &lt; 275 &nbsp;<b>+</b>&nbsp; Uosm &gt; 100 (en hypoNa)</li>
+      <li><strong>Euvolémie</strong> clinique &nbsp;<b>+</b>&nbsp; U<sub>Na</sub> &gt; 30</li>
+      <li>Pas d'hypothyroïdie / insuff. surrénale ; fonction rénale normale, pas de diurétique récent</li>
+      <li><strong>Uricémie &lt; 240 µmol/L</strong></li>
+    </ul>
+    <div style="font-size:.79rem;color:var(--muted);margin-top:6px"><strong>Causes :</strong> SNC (méningite, AVC, TC), pulmonaires (pneumopathie, K bronchique), post-op, nausées, médicaments (carbamazépine, ISRS ++, psychotropes), sécrétion ectopique (K bronchique).</div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon ic-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Gravité (ERBP 2014)</div>
+    <div style="font-size:.82rem"><strong>Symptômes liés à la sévérité ET à la rapidité d'installation</strong> (œdème cérébral) :</div>
+    <div style="margin-top:6px"><span class="pill pill-amber">Modérément sévères</span></div>
+    <div style="font-size:.82rem;margin-top:4px">Nausées sans vomissement · céphalées · confusion</div>
+    <div style="margin-top:8px"><span class="pill pill-red">Sévères</span></div>
+    <div style="font-size:.82rem;margin-top:4px">Vomissements · somnolence profonde · comitialité · détresse cardio-respiratoire · coma (Glasgow ≤ 8)</div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title"><span class="card-icon ic-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement de l'hyponatrémie — guidé par symptômes &amp; volémie</div>
+  <table class="table-teal">
+    <thead><tr><th>Situation</th><th>Conduite</th></tr></thead>
+    <tbody>
+      <tr><td><b>Symptômes sévères</b> (Na &lt; 120, troubles de conscience, comitialité, vomissements) — <em>quel que soit le caractère aigu/chronique</em></td><td><strong>NaCl hypertonique 3% : 150 mL IV / 20 min</strong>, renouvelable ×2, objectif <strong>+5 mmol/L</strong> initial. USI, correction de l'hypoxie. Puis relais NaCl 9‰.</td></tr>
+      <tr><td><b>Chronique / asymptomatique</b></td><td><strong>Traitement étiologique</strong> + <strong>restriction hydrique 500 mL/j</strong> (base de toute hypoNa chronique).</td></tr>
+      <tr><td>… avec <b>DEC</b></td><td>Apport de NaCl (PO ou sérum salé isotonique 9‰).</td></tr>
+      <tr><td>… avec <b>euvolémie (SIADH)</b></td><td>Restriction hydrique ; si insuffisante : urée PO ; en dernier recours tolvaptan (V2-antagoniste, avis spécialisé).</td></tr>
+      <tr><td>… avec <b>HEC</b></td><td>Restriction sodée + diurétiques de l'anse.</td></tr>
+    </tbody>
+  </table>
+  <div class="alert alert-red" style="margin-top:10px">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Vitesse +++ — la règle qui tombe.</strong> Ne pas dépasser <strong>10 mmol/L les 24 premières h</strong>, 8 mmol/L les 24 h suivantes (≤ 18 sur 48 h).<br>Correction trop rapide d'une hypoNa <strong>chronique</strong> → <strong>myélinolyse centro-pontine</strong> (démyélinisation osmotique) ; risque ↑ si dénutrition, éthylisme, hypoxie, hypoK corrigée.</span>
+  </div>
+</div>
+
+<!-- ===== HYPERNATREMIE ===== -->
+<div class="card card-red">
+  <div class="card-title"><span class="card-icon ic-red"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>HYPERNATRÉMIE — démarche par la volémie</div>
+  <div class="kv-row"><span class="kv-key">Définition</span><span class="kv-val">Na⁺ &gt; 145 mmol/L &nbsp;+&nbsp; Posm &gt; 300</span></div>
+  <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Déshydratation intracellulaire (déficit d'eau)</span></div>
+  <div class="kv-row"><span class="kv-key">Condition</span><span class="kv-val">Soif inopérante (coma, âge extrême, sédation, pas d'accès à l'eau)</span></div>
+
+  <div class="alert alert-blue" style="margin-top:10px"><span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span><span><strong>Clinique :</strong> soif (parfois intense), muqueuses sèches (face interne des joues), perte de poids ; <strong>signes neurologiques = gravité</strong> (somnolence, irritabilité, fièvre centrale, convulsions, coma) — corrélés au degré et à la rapidité. Risque d'hémorragie cérébrale/HSD chez le nourrisson et le sujet âgé.</span></div>
+
+  <div class="flow" style="margin-top:6px">
+    <div class="fnode f-start">Hypernatrémie (Na⁺ &gt; 145)</div>
+    <div class="f-arrow">▼</div>
+    <div class="fnode f-q">Évaluer le <b>VOLUME EXTRACELLULAIRE</b> (3 situations)</div>
+    <div class="f-split3">
+      <div class="f-col">
+        <div class="fnode f-red">Déshydratation globale<br><span style="font-weight:600;font-size:.76rem">perte H₂O &gt; perte Na</span></div>
+        <div class="f-leaf">Pertes (digestive, cutanée, rénale) ou défaut d'apport d'eau ET NaCl, eau &lt; Na</div>
+      </div>
+      <div class="f-col">
+        <div class="fnode f-amber">DIC isolée (euvolémie)<br><span style="font-weight:600;font-size:.76rem">perte d'eau pure</span></div>
+        <div class="f-leaf"><b>Extrarénale</b> (U/P osm &gt; 1) : cutanée (coup de chaleur, brûlure), respiratoire, digestive</div>
+        <div class="f-leaf"><b>Rénale</b> (U/P osm ≤ 1, polyurie) : <b>diabète insipide</b> central ou néphrogénique → test au dDAVP (Minirin®)</div>
+        <div class="f-leaf">Défaut d'apport : adipsie, sujets dépendants, désert</div>
+      </div>
+      <div class="f-col">
+        <div class="fnode f-blue">HEC + DIC<br><span style="font-weight:600;font-size:.76rem">apport massif de Na</span></div>
+        <div class="f-leaf">Soluté bicarbonaté hypertonique (enfant, post-ACR), intoxication au NaCl</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title"><span class="card-icon ic-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement de l'hypernatrémie</div>
+  <div class="grid2" style="margin-bottom:6px">
+    <div class="bl-teal">
+      <div style="font-size:.82rem"><strong>Apport d'eau</strong> (déficit = 60% × poids × [Na/140 − 1]) :</div>
+      <ul class="lst">
+        <li>Eau de boisson PO / sonde gastrique</li>
+        <li>G5% (ou G2,5%) IV</li>
+        <li>NaCl hypo-osmotique 4,5‰</li>
+        <li><strong>Jamais d'eau pure IV</strong> (hémolyse)</li>
+      </ul>
+    </div>
+    <div class="bl-teal">
+      <div style="font-size:.82rem"><strong>Selon la volémie :</strong></div>
+      <ul class="lst">
+        <li><b>DG</b> : restaurer la volémie d'abord (salé hypotonique 4,5‰)</li>
+        <li><b>DIC pure</b> : eau de boisson</li>
+        <li><b>HEC associée</b> : diurétique + eau pure PO / soluté hypotonique</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-red"><span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span><strong>Vitesse +++ :</strong> hypernatrémie <strong>aiguë</strong> symptomatique → 2 mmol/L/h (max 10-12/j) ; hypernatrémie <strong>ancienne</strong> → ≤ 0,5 mmol/L/h (10-12/24 h) pour ne pas provoquer d'<strong>œdème cérébral</strong> et de convulsions.</span></div>
+</div>
+
+<hr>
+
+<!-- ============================================================= -->
+<!-- SECTION 4 — CALCEMIE -->
+<!-- ============================================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  4 · Hypocalcémie (Ca total &lt; 2,20 · Ca ionisé &lt; 1,15 mmol/L)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir prescrire une calcémie, définir l'hypocalcémie et corriger en fonction de l'albuminémie.</div>
+  <div class="obj-line">Comprendre les mécanismes (PTH, calcitriol) ; reconnaître signes cliniques et ECG.</div>
+  <div class="obj-line">Connaître les examens du bilan étiologique et l'arbre diagnostique (PTH), puis les principes du traitement.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title"><span class="card-icon ic-blue"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></span>Préalables &amp; clinique</div>
+    <ul class="lst">
+      <li><strong>Éliminer une fausse hypoCa</strong> : Ca corrigée = (40 − albumine) × 0,025 + Ca total ; <strong>pas de tube citraté</strong> (chélation)</li>
+      <li><strong>Signes</strong> (selon profondeur + rapidité) : paresthésies distales, crampes, spasme laryngé, <strong>tétanie, convulsions</strong>, signes de <strong>Chvostek</strong> et <strong>Trousseau</strong></li>
+      <li><strong>ECG :</strong> <strong>allongement du QT</strong> → BAV → fibrillation ventriculaire</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title"><span class="card-icon ic-teal"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></span>Traitement</div>
+    <ul class="lst">
+      <li><strong>Cause</strong> : carence en vit. D, hypomagnésémie…</li>
+      <li><strong>Symptomatique</strong> : Ca PO (carbonate, 0,5–1,5 g/j) ; <strong>Ca IV</strong> (gluconate) si sévère symptomatique — éviter l'extravasation</li>
+      <li><strong>IRC / hypoparathyroïdie</strong> : vit. D 1-α ou 1,25-OH (Un-Alfa®/Rocaltrol®) + Ca, surveiller la calciurie</li>
+      <li><strong>Rhabdomyolyse</strong> : Ca seulement si symptomatique (risque d'hyperCa rebond)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><span class="card-icon ic-purple"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>Arbre diagnostique — la PTH oriente tout</div>
+  <div class="flow">
+    <div class="fnode f-start">Hypocalcémie vraie (Ca ionisé ↓)</div>
+    <div class="f-arrow">▼</div>
+    <div class="fnode f-q">Doser la <b>PTH</b> &nbsp;(+ phosphate, vit. D, calcitriol, calciurie)</div>
+    <div class="f-split">
+      <div class="f-col">
+        <div class="fnode f-red">PTH basse &lt; 10 (inadaptée)</div>
+        <div class="f-leaf"><b>Origine parathyroïdienne</b> : hypoparathyroïdie (post-chirurgicale ++), hypomagnésémie</div>
+      </div>
+      <div class="f-col">
+        <div class="fnode f-blue">PTH élevée &gt; 65 (adaptée)</div>
+        <div class="f-leaf"><b>Origine extra-parathyroïdienne</b> : carence/résistance en vit. D, IRC, hyperphosphorémie, chélation</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================= -->
+<!-- SYNTHESE -->
+<!-- ============================================================= -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><span class="card-icon ic-amber"><svg viewBox="0 0 24 24"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>Les réflexes « raisonnement »</div>
+    <ul class="lst">
+      <li><strong>Acidose métabolique</strong> → <strong>trou anionique</strong> ; si normal → trou anionique <em>urinaire</em></li>
+      <li><strong>Dyskaliémie</strong> → <strong>ECG immédiat</strong> + <strong>kaliurèse</strong> (transfert vs pertes)</li>
+      <li><strong>Natrémie = bilan d'EAU</strong> : Posm → Uosm → volémie (3 étages)</li>
+      <li><strong>Hypernatrémie</strong> = soif inopérante ; classer par la volémie</li>
+      <li><strong>Hypocalcémie</strong> → corriger l'albumine puis doser la <strong>PTH</strong></li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title"><span class="card-icon ic-red"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Pièges &amp; urgences tombables</div>
+    <ul class="lst">
+      <li><strong>Calcium IV en 1er</strong> dans l'hyperK menaçante (Mg si digitaliques)</li>
+      <li>Corriger l'hypoNa chronique <strong>&lt; 10 mmol/L/24 h</strong> → sinon <strong>myélinolyse</strong></li>
+      <li>Corriger l'hyperNa ancienne lentement → sinon <strong>œdème cérébral</strong></li>
+      <li><strong>Pas de glucose</strong> au début d'une hypoK sévère ; corriger le <strong>Mg</strong></li>
+      <li>K &gt; 6 sans signe ECG → penser <strong>fausse hyperkaliémie</strong></li>
+      <li>HyperK et hypoNa <strong>iatrogènes</strong> (IEC/ARA2, diurétiques, ISRS) : les + fréquentes</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title"><span class="card-icon ic-teal"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>Vitesses de correction — le tableau à connaître par cœur</div>
+  <table class="table-teal">
+    <thead><tr><th>Trouble</th><th>Vitesse max</th><th>Complication redoutée</th></tr></thead>
+    <tbody>
+      <tr><td><b>HypoNa</b> (surtout chronique)</td><td>≤ 10 mmol/L / 24 h (≤ 18 / 48 h)</td><td>Myélinolyse centro-pontine</td></tr>
+      <tr><td><b>HyperNa</b> aiguë</td><td>2 mmol/L / h (max 10-12 / j)</td><td>Œdème cérébral, convulsions</td></tr>
+      <tr><td><b>HyperNa</b> ancienne</td><td>≤ 0,5 mmol/L / h (10-12 / 24 h)</td><td>Œdème cérébral</td></tr>
+      <tr><td><b>Acidose sévère</b></td><td>Cible pH &gt; 7,20 / HCO₃⁻ &gt; 10</td><td>Surcharge, hypoK, hypoCa</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
