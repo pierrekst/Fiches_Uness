@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 75 — Addiction au tabac</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#8B2020 0%,#C97B2A 55%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 75</div>
+  <h1>Addiction au tabac</h1>
+  <div class="header-sub">Épidémiologie · Dépendance · Complications · Sevrage</div>
+  <div class="header-tags">
+    <span class="htag">75 000 décès/an en France</span>
+    <span class="htag">1ère cause de décès évitable</span>
+    <span class="htag">30,4 % de fumeurs</span>
+    <span class="htag">Fagerström</span>
+    <span class="htag">TSN · Varénicline</span>
+  </div>
+</div>
+
+<!-- VISION GLOBALE -->
+<div class="objectifs">
+  <strong>Ce chapitre en un coup d'œil :</strong> Comprendre le tabac comme une addiction à part entière — connaître son épidémiologie (qui fume, combien meurent), sa pharmacologie (nicotine, goudrons, CO), les mécanismes de dépendance et leur évaluation (Fagerström, PA), les complications multisystémiques (cancers, cardiovasculaire, respiratoire, obstétrique), et maîtriser la stratégie de sevrage : conseil minimal aux 5A, substitution nicotinique en 1ère intention, varénicline/bupropion en recours, avec gestion des comorbidités psychiatriques et prévention des rechutes.
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 : ÉPIDÉMIOLOGIE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'âge de début, le pourcentage de fumeurs et la mortalité mondiale et française liée au tabac</div>
+  <div class="obj-line">Connaître les tendances du tabagisme dans le temps et selon le sexe</div>
+  <div class="obj-line">Connaître l'épidémiologie chez les jeunes, chez la femme enceinte et les inégalités sociales</div>
+  <div class="obj-line">Connaître la part du tabac dans la mortalité, notamment cardiovasculaire et par cancer</div>
+  <div class="obj-line">Connaître l'épidémiologie du tabagisme passif et ses sur-risques</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Mortalité — chiffres clés
+    </div>
+    <div class="kv-row"><span class="kv-key">Décès France / an</span><span class="kv-val">75 000</span></div>
+    <div class="kv-row"><span class="kv-key">Rang français</span><span class="kv-val">1ère cause évitable</span></div>
+    <div class="kv-row"><span class="kv-key">Mondial</span><span class="kv-val">1 décès / 10 dans le monde</span></div>
+    <div class="kv-row"><span class="kv-key">Cancers liés au tabac</span><span class="kv-val">25 % de tous les cancers</span></div>
+    <div class="kv-row"><span class="kv-key">Cancer broncho-pulm.</span><span class="kv-val">80 % attribuables au tabac</span></div>
+    <div class="kv-row"><span class="kv-key">Ordre mortalité</span><span class="kv-val">Cancers > CV > Respiratoire</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Prévalence en France (18-75 ans)
+    </div>
+    <div class="kv-row"><span class="kv-key">Global</span><span class="kv-val">30,4 %</span></div>
+    <div class="kv-row"><span class="kv-key">Hommes</span><span class="kv-val">34,6 %</span></div>
+    <div class="kv-row"><span class="kv-key">Femmes</span><span class="kv-val">26,5 %</span></div>
+    <div class="kv-row"><span class="kv-key">Fumeurs quotidiens (2018)</span><span class="kv-val">25,4 %</span></div>
+    <div class="kv-row"><span class="kv-key">Fumeurs occasionnels (2018)</span><span class="kv-val">6,6 %</span></div>
+    <div class="kv-row"><span class="kv-key">Dépendants parmi fumeurs réguliers</span><span class="kv-val">49 %</span></div>
+  </div>
+</div>
+
+<div class="grid3">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Jeunes
+    </div>
+    <div class="kv-row"><span class="kv-key">1ère cigarette</span><span class="kv-val">14 ans</span></div>
+    <div class="kv-row"><span class="kv-key">Quotidien</span><span class="kv-val">15 ans</span></div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">Âge stable dans le temps</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Femme enceinte
+    </div>
+    <p style="font-size:.83rem;">La <strong>moitié</strong> des femmes enceintes continue de fumer pendant la grossesse.</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">Plus fréquent chez les femmes jeunes et les moins diplômées</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Inégalités sociales
+    </div>
+    <p style="font-size:.83rem;">Tabac = puissant <strong>marqueur social</strong> : plus le revenu est élevé, moins la prévalence du tabagisme quotidien est élevée.</p>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">Chômage : prévalence ~40 % (2018)</p>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Relation dose-durée : règle fondamentale
+  </div>
+  <table class="table-amber">
+    <tr><th>Paramètre</th><th>Effet sur le risque de cancer</th></tr>
+    <tr><td>Doubler la <strong>dose</strong> quotidienne</td><td>Risque × 2</td></tr>
+    <tr><td>Doubler la <strong>durée</strong> d'intoxication</td><td>Risque × 23</td></tr>
+  </table>
+  <p style="font-size:.8rem;color:var(--amber);margin-top:8px;">La durée est le facteur de risque le plus important — pas de seuil sécurisé.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Tendances récentes &amp; tabagisme passif
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Tendances (2016-2018)</p>
+      <ul class="lst">
+        <li>Diminution de 12 % entre 2016 et 2018 (−1,6 M de fumeurs)</li>
+        <li>Facteurs : hausse des prix, paquet neutre, Mois Sans Tabac</li>
+        <li>Diminution hommes : toutes classes d'âge</li>
+        <li>Femmes 55-75 ans : légère augmentation</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Tabagisme passif — sur-risques</p>
+      <div class="kv-row"><span class="kv-key">Cancer broncho-pulm.</span><span class="kv-val">RR +26 %</span></div>
+      <div class="kv-row"><span class="kv-key">Cardiopathies ischémiques</span><span class="kv-val">Reconnu</span></div>
+      <div class="kv-row"><span class="kv-key">Enfant</span><span class="kv-val">Otite, asthme, bronchite</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 : PHARMACOLOGIE & TOXICOLOGIE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Pharmacologie &amp; Toxicologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la toxicité de la nicotine, des goudrons et de la fumée de tabac</div>
+  <div class="obj-line">Connaître le mécanisme d'atteinte artérielle (thrombogénicité, vasomotricité, inflammation)</div>
+  <div class="obj-line">Connaître la définition de la cigarette électronique</div>
+</div>
+
+<table class="table-red">
+  <tr>
+    <th>Composant</th>
+    <th>Propriétés</th>
+    <th>Effets principaux</th>
+  </tr>
+  <tr>
+    <td><strong>Nicotine</strong></td>
+    <td>Non cancérigène<br>Principal agent de dépendance</td>
+    <td>Dépendance physique et psychologique<br>Stimulation récepteurs nicotiniques</td>
+  </tr>
+  <tr>
+    <td><strong>Goudrons</strong></td>
+    <td>69 substances cancérigènes (sur 7 000 composés)</td>
+    <td>Modifications cellules épithéliales → cancérogénèse<br>(réversibles à l'arrêt)</td>
+  </tr>
+  <tr>
+    <td><strong>Monoxyde de carbone (CO)</strong></td>
+    <td>Particules 0,3 microns → toute la filière respiratoire</td>
+    <td>Responsable des troubles <strong>cardiovasculaires</strong><br>Dysfonction endothéliale</td>
+  </tr>
+  <tr>
+    <td><strong>Radicaux libres</strong></td>
+    <td>Oxydants</td>
+    <td>Dégradation paroi alvéolaire → emphysème<br>Inhibition enzymes de protection</td>
+  </tr>
+</table>
+
+<div class="card card-red" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Mécanisme d'atteinte artérielle (CO + fumée)
+  </div>
+  <div class="pills" style="margin-bottom:10px;">
+    <span class="pill pill-red">Dysfonction endothéliale</span>
+    <span class="pill pill-red">Agrégation plaquettaire</span>
+    <span class="pill pill-red">Thrombose artérielle</span>
+    <span class="pill pill-amber">Inflammation systémique</span>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>Piège :</strong> le tabac joue un rôle dans la <strong>thrombose artérielle</strong> mais <strong>pas veineuse</strong>. Ne pas confondre avec les autres FDR de TVP.</span>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Cigarette électronique (e-cig)
+  </div>
+  <p style="font-size:.84rem;">Mélange : <strong>propylène-glycol + nicotine + eau + arômes + glycérol</strong> propulsé sous forme de vapeur et inhalé.</p>
+  <ul class="lst" style="margin-top:8px;">
+    <li>Considérée comme <strong>produit de consommation</strong> (pas produit de santé)</li>
+    <li>Aide complémentaire possible pour diminuer ou arrêter le tabac</li>
+    <li>Possible réactions allergiques — aucun cas d'intoxication rapporté à ce jour</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 : DÉPENDANCE — DIAGNOSTIC & ÉVALUATION -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Dépendance — Diagnostic &amp; Évaluation
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les types de dépendance tabagique et comment l'évaluer</div>
+  <div class="obj-line">Connaître les critères diagnostiques de la dépendance au tabac (CIM-10)</div>
+  <div class="obj-line">Savoir dépister la consommation de tabac et calculer les paquets-années</div>
+  <div class="obj-line">Connaître les signes du syndrome de sevrage tabagique</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Dépendance CIM-10 — ≥ 3 critères sur 6
+    </div>
+    <ul class="lst">
+      <li>Désir puissant ou compulsif de fumer (<em>craving</em>)</li>
+      <li>Difficultés à contrôler l'usage (début, interruption, niveau)</li>
+      <li>Syndrome de sevrage à la réduction ou à l'arrêt</li>
+      <li>Tolérance (augmentation des doses pour même effet)</li>
+      <li>Abandon d'autres sources de plaisir au profit du tabac</li>
+      <li>Poursuite malgré les conséquences nocives connues</li>
+    </ul>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <span><strong>Usage nocif</strong> (sans dépendance) : consommation préjudiciable sans que ≥3 critères soient réunis. Le patient ne fait pas le lien entre sa consommation et ses dommages.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Dépistage &amp; Quantification
+    </div>
+    <div class="kv-row"><span class="kv-key">Question de dépistage</span><span class="kv-val">"Fumez-vous ?"</span></div>
+    <div class="kv-row"><span class="kv-key">Formule Paquets-Années</span><span class="kv-val">PA = nb paquets/j × nb années</span></div>
+    <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">Suivi de tout patient → évaluation tabagisme systématique puis algorithme décisionnel jusqu'à l'arrêt.</p>
+  </div>
+</div>
+
+<!-- Fagerström -->
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    Test de Fagerström — 6 questions (score 0-10)
+  </div>
+  <div class="alert alert-amber" style="margin-bottom:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <span><strong>À retenir :</strong> les questions <strong>Q1</strong> (délai avant 1ère cigarette le matin) et <strong>Q4</strong> (nb cigarettes/jour) sont les plus caractéristiques de l'intoxication tabagique.</span>
+  </div>
+  <table class="table-amber">
+    <tr><th>Question</th><th>Réponse</th><th>Score</th></tr>
+    <tr>
+      <td rowspan="4" style="vertical-align:middle; text-align:center;"><strong>Q1</strong><br>Délai 1ère cigarette après réveil</td>
+      <td>≤ 5 min</td><td><strong>3</strong></td>
+    </tr>
+    <tr><td>6-30 min</td><td>2</td></tr>
+    <tr><td>31-60 min</td><td>1</td></tr>
+    <tr><td>&gt; 60 min</td><td>0</td></tr>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Q2</strong><br>Difficile de s'abstenir là où c'est interdit</td>
+      <td>Oui</td><td>1</td>
+    </tr>
+    <tr><td>Non</td><td>0</td></tr>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Q3</strong><br>Cigarette la plus difficile à abandonner</td>
+      <td>La 1ère de la journée</td><td>1</td>
+    </tr>
+    <tr><td>Une autre</td><td>0</td></tr>
+    <tr>
+      <td rowspan="4" style="vertical-align:middle; text-align:center;"><strong>Q4</strong><br>Nb cigarettes/jour</td>
+      <td>≤ 10</td><td>0</td>
+    </tr>
+    <tr><td>11-20</td><td>1</td></tr>
+    <tr><td>21-30</td><td>2</td></tr>
+    <tr><td>≥ 31</td><td><strong>3</strong></td>
+    </tr>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Q5</strong><br>Fume plus tôt le matin</td>
+      <td>Oui</td><td>1</td>
+    </tr>
+    <tr><td>Non</td><td>0</td></tr>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Q6</strong><br>Fume même malade au lit</td>
+      <td>Oui</td><td>1</td>
+    </tr>
+    <tr><td>Non</td><td>0</td></tr>
+  </table>
+  <div class="pills" style="margin-top:12px;">
+    <span class="pill pill-teal">0-2 : très faible</span>
+    <span class="pill pill-blue">3-4 : faible</span>
+    <span class="pill pill-amber">5-6 : modérée</span>
+    <span class="pill pill-red">7-10 : forte à très forte</span>
+  </div>
+</div>
+
+<!-- Sevrage -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Syndrome de sevrage — signes apparaissant rapidement après arrêt
+  </div>
+  <div class="grid2">
+    <div class="pills">
+      <span class="pill pill-red">Humeur dépressive</span>
+      <span class="pill pill-red">Irritabilité</span>
+      <span class="pill pill-red">Frustration / Colère</span>
+      <span class="pill pill-red">Insomnie</span>
+    </div>
+    <div class="pills">
+      <span class="pill pill-amber">Anxiété</span>
+      <span class="pill pill-amber">Difficultés de concentration</span>
+      <span class="pill pill-amber">Augmentation de l'appétit</span>
+      <span class="pill pill-amber">Prise de poids</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 : COMPLICATIONS MÉDICALES -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications médicales
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les complications néoplasiques, pulmonaires, cardiovasculaires, obstétricales et autres du tabagisme actif</div>
+  <div class="obj-line">Connaître les complications du tabagisme passif</div>
+  <div class="obj-line">Connaître les comorbidités psychiatriques et les co-addictions associées au tabac</div>
+</div>
+
+<table class="table-red">
+  <tr>
+    <th>Système</th>
+    <th>Complications</th>
+    <th>Données clés</th>
+  </tr>
+  <tr>
+    <td><strong>Néoplasique</strong></td>
+    <td>Broncho-pulmonaire, œsophage, vessie, oro-pharynx, larynx, pancréas, rein</td>
+    <td>25 % de tous les cancers<br>80 % des K broncho-pulm.</td>
+  </tr>
+  <tr>
+    <td><strong>Cardiovasculaire</strong></td>
+    <td>Insuffisance coronarienne, AOMI, HTA, cardiopathie hypertensive, AAA, AVC</td>
+    <td>1ère cause mortalité CV évitable<br>1er FDR CV femme non ménopausée</td>
+  </tr>
+  <tr>
+    <td><strong>Pulmonaire</strong></td>
+    <td>BPCO, emphysème, bronchite chronique, IRC</td>
+    <td>BPCO : complication majeure</td>
+  </tr>
+  <tr>
+    <td><strong>Gynéco-obstétrique</strong></td>
+    <td>Infertilité, accouchement prématuré, RCIU, MFIU, GEU, fausse couche</td>
+    <td>MFIU incluse dans mortalité liée au tabac</td>
+  </tr>
+  <tr>
+    <td><strong>Dermatologique</strong></td>
+    <td>Acné, vieillissement cutané, coloration ongles, sécheresse cutanée</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td><strong>Dentaire / ORL</strong></td>
+    <td>Coloration dents, parodontopathie, déchaussement</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td><strong>Hématologique</strong></td>
+    <td>Polyglobulie, polynucléose</td>
+    <td>—</td>
+  </tr>
+  <tr>
+    <td><strong>Tabagisme passif</strong></td>
+    <td>Cardiopathies ischémiques, K broncho-pulm., coronaropathie<br>Enfant : otite, asthme, bronchite</td>
+    <td>RR K broncho-pulm. +26 %</td>
+  </tr>
+</table>
+
+<div class="card card-purple" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Comorbidités psychiatriques &amp; co-addictions
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Prévalence du tabagisme dans les troubles psy</p>
+      <div class="kv-row"><span class="kv-key">Schizophrénie</span><span class="kv-val">82 %</span></div>
+      <div class="kv-row"><span class="kv-key">Trouble bipolaire</span><span class="kv-val">56 %</span></div>
+      <div class="kv-row"><span class="kv-key">Trouble panique</span><span class="kv-val">Favorisé par le tabac</span></div>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Avant tout sevrage : rechercher</p>
+      <ul class="lst">
+        <li>Troubles anxieux</li>
+        <li>Épisode dépressif caractérisé</li>
+        <li>Co-addiction : alcool, cannabis, autres SPA</li>
+      </ul>
+      <p style="font-size:.8rem;color:var(--muted);margin-top:6px;">Manifestations anxio-dépressives induites par sevrage : si quelques semaines → soutien seul ; au-delà → traitement psychiatrique spécifique.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 : PRISE EN CHARGE & SEVRAGE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge &amp; Sevrage
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la règle des 5A à appliquer à chaque consultation avec un fumeur</div>
+  <div class="obj-line">Connaître les traitements de substitution nicotinique (formes, indications, effets indésirables)</div>
+  <div class="obj-line">Connaître la varénicline et le bupropion (mécanisme, place thérapeutique, EI)</div>
+  <div class="obj-line">Connaître les ressources institutionnelles et les moyens non pharmacologiques</div>
+  <div class="obj-line">Connaître la prise en charge après un événement aigu et le suivi long terme</div>
+  <div class="obj-line">Connaître les mesures de prévention primaire et secondaire (lois, programmes)</div>
+</div>
+
+<!-- 5A -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Conseil minimal — Règle des 5A (à chaque consultation)
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">A</div>
+      <div><div class="step-title">Ask — Demander</div><div class="step-content">Demander si le patient fume à chaque consultation</div></div>
+    </li>
+    <li>
+      <div class="step-num">A</div>
+      <div><div class="step-title">Assess — Évaluer</div><div class="step-content">Évaluer l'intoxication tabagique (PA, Fagerström, motivations)</div></div>
+    </li>
+    <li>
+      <div class="step-num">A</div>
+      <div><div class="step-title">Advise — Conseiller</div><div class="step-content">Conseiller à chaque fumeur d'arrêter de fumer</div></div>
+    </li>
+    <li>
+      <div class="step-num">A</div>
+      <div><div class="step-title">Assist — Aider</div><div class="step-content">Évoquer la palette des aides disponibles (TSN, pharmacologie, soutien psy)</div></div>
+    </li>
+    <li>
+      <div class="step-num">A</div>
+      <div><div class="step-title">Arrange — Organiser</div><div class="step-content">Proposer un support écrit d'information, orienter vers Tabac Info Service</div></div>
+    </li>
+  </ul>
+  <div class="alert alert-teal" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <span><strong>TOUS les professionnels de santé</strong> doivent appliquer les 5A à CHAQUE consultation — le conseil minimal augmente les taux de sevrage.</span>
+  </div>
+</div>
+
+<!-- Traitements -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitements pharmacologiques — hiérarchie
+  </div>
+  <table class="table-blue">
+    <tr>
+      <th>Rang</th>
+      <th>Traitement</th>
+      <th>Mécanisme</th>
+      <th>Formes / EI notables</th>
+    </tr>
+    <tr>
+      <td><span class="phase phase-prod">1ère intention</span></td>
+      <td><strong>Substituts nicotiniques (TSN)</strong></td>
+      <td>Apport de nicotine sans les toxiques de la fumée</td>
+      <td>
+        Patchs 16h ou 24h (prurit au point d'application)<br>
+        Gommes, pastilles, sprays, inhaleurs<br>
+        EI : céphalées, nausées, hoquets, palpitations<br>
+        Formes orales + patchs combinables
+      </td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-mod">2ème intention</span></td>
+      <td><strong>Varénicline</strong> (Champix®)</td>
+      <td>Agoniste partiel récepteurs nicotiniques α4β2</td>
+      <td>
+        EI : nausées, céphalées, cauchemars, insomnie,<br>dépression, risque CV<br>
+        <strong>Remboursé</strong> par l'Assurance Maladie<br>
+        Indication : échec TSN + dépendance forte
+      </td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-sev">3ème intention</span></td>
+      <td><strong>Bupropion</strong> (Zyban®)</td>
+      <td>Inhibiteur recapture noradrénaline + dopamine</td>
+      <td>Dernière ligne — CI épilepsie, TCA</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Non pharmacologique -->
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Traitements non pharmacologiques
+    </div>
+    <ul class="lst">
+      <li><strong>Entretien motivationnel</strong> : approche centrée patient pour renforcer la motivation au changement</li>
+      <li><strong>TCC</strong> (thérapie cognitivo-comportementale)</li>
+      <li>Psychothérapie de soutien</li>
+      <li>Accompagnement téléphonique : <strong>Tabac Info Service 3989</strong></li>
+      <li>Site : tabac-info-service.fr</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Suivi long terme &amp; rechutes
+    </div>
+    <div class="kv-row"><span class="kv-key">Sevrage "réussi"</span><span class="kv-val">Abstinence totale ≥ 1 an</span></div>
+    <div class="kv-row"><span class="kv-key">Suivi</span><span class="kv-val">6 à 12 mois</span></div>
+    <ul class="lst" style="margin-top:8px;">
+      <li><strong>Rechutes = la règle</strong> → toujours proposer l'arrêt</li>
+      <li>Facteurs de rechute : craving, sevrage, alcool, cannabis</li>
+      <li>Dédramatiser la rechute, analyser les circonstances</li>
+      <li>Facteurs prédictifs de succès : bon niveau socio-économique, faible consommation, absence d'entourage fumeur, forte motivation</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Prévention -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Prévention primaire — Lois &amp; Programmes
+  </div>
+  <div class="grid2">
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Législation française</p>
+      <ul class="lst">
+        <li>Loi Veil 1976</li>
+        <li>Loi Évin 1991</li>
+        <li>Décret Bertrand 2006</li>
+      </ul>
+      <p style="font-size:.82rem;font-weight:700;margin:8px 0 6px;">Mesures clés</p>
+      <ul class="lst">
+        <li>Interdiction publicité directe et indirecte</li>
+        <li>Hausse dissuasive des prix</li>
+        <li>Protection tabagisme passif (lieux publics)</li>
+        <li>Avertissements sanitaires illustrés sur paquets</li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-size:.82rem;font-weight:700;margin-bottom:6px;">Programme National 2014-2019 (PNRT)</p>
+      <ul class="lst">
+        <li>Paquet neutre</li>
+        <li>Remboursement TSN et varénicline</li>
+        <li>Mois Sans Tabac (novembre)</li>
+      </ul>
+      <p style="font-size:.82rem;font-weight:700;margin:8px 0 6px;">PNLT 2018-2022 — Objectif 2032</p>
+      <ul class="lst">
+        <li>Enfants nés depuis 2014 → 1ère génération non-fumeurs (&lt;5 %)</li>
+        <li>Actions régionales, protection des jeunes, économie du tabac</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 : POINTS-CLÉS À RETENIR -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés &amp; Pièges à retenir
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Chiffres impératifs :</strong> 75 000 décès/an — 1ère cause de décès évitable — 25 % de tous les cancers — 80 % des K broncho-pulm. — 30,4 % de fumeurs en France — 1ère cigarette à 14 ans.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège :</strong> La durée d'intoxication est le facteur de risque le plus important (×23 pour doubler la durée vs ×2 pour doubler la dose). Ne pas confondre avec la dose.</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège :</strong> Le tabac favorise la <strong>thrombose artérielle</strong> (pas veineuse). Le CO est le responsable des troubles cardiovasculaires (pas la nicotine, non cancérigène).</span>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège :</strong> Fagerström : Q1 et Q4 sont les plus importantes. Score ≥7 = dépendance forte → TSN renforcée ± varénicline d'emblée après échec.</span>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <span><strong>À retenir :</strong> TSN 1ère intention → varénicline 2ème → bupropion 3ème. Formes orales de TSN combinables avec les patchs. Rechutes = étape normale → ne jamais abandonner le suivi.</span>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>À retenir :</strong> Tabac = 1er FDR cardiovasculaire de la <strong>femme non ménopausée</strong>. L'arrêt du tabac réduit la mortalité CV et par cancer broncho-pulmonaire. Tabac Info Service : <strong>3989</strong>.</span>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>À retenir :</strong> La <strong>moitié des femmes enceintes</strong> continue de fumer. Schizophrénie : 82 % de fumeurs. Avant tout sevrage → chercher dépression et anxiété.</span>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

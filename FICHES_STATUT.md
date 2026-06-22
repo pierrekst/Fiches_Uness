@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-21. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-22. Ne pas éditer à la main._
 
-**Avancement : 161 / 367 items (43.9%)**
+**Avancement : 162 / 367 items (44.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -82,7 +82,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 72 | [ ] | Troubles à symptomatologie somatique et apparentés à tous les âges | — |
 | 73 | [ ] | Différents types de techniques psychothérapeutiques | — |
 | 74 | [x] | Prescription et surveillance des psychotropes | 74_Psychotropes.html |
-| 75 | [ ] | Addiction au tabac | — |
+| 75 | [x] | Addiction au tabac | 75_Addiction_tabac.html |
 | 76 | [ ] | Addiction à l alcool | — |
 | 77 | [ ] | Addiction aux médicaments psychotropes | — |
 | 78 | [ ] | Addiction au cannabis | — |
