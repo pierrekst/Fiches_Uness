@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-23. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-24. Ne pas éditer à la main._
 
-**Avancement : 164 / 367 items (44.7%)**
+**Avancement : 165 / 367 items (45.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -214,7 +214,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 204 | [ ] | Toux chez l enfant et chez l adulte | — |
 | 205 | [x] | Hémoptysie | 205_hemoptysie.html |
 | 206 | [ ] | Épanchement pleural liquidien | — |
-| 207 | [ ] | Opacités et masses intra-thoraciques chez l enfant et chez l adulte | — |
+| 207 | [x] | Opacités et masses intra-thoraciques chez l enfant et chez l adulte | 207_Opacites_masses_intrathoraciques_v2.html |
 | 208 | [ ] | Insuffisance respiratoire chronique | — |
 | 209 | [ ] | Bronchopneumopathie chronique obstructive chez l adulte | — |
 | 210 | [x] | Pneumopathie interstitielle diffuse | 210_Pneumopathies_interstitielles.html |
