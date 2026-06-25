@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 309 — Tumeurs du poumon</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#D85A30 0%,#E24B4A 40%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+
+  .intro-box{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:20px;font-size:.86rem;line-height:1.6;}
+  .intro-box p{margin-bottom:8px;}
+  .intro-box p:last-child{margin-bottom:0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 309 — Oncologie / Pneumologie</div>
+  <h1>Tumeurs du poumon</h1>
+  <div class="header-sub">Primitives et secondaires</div>
+  <div class="header-tags">
+    <span class="htag">1re cause de mortalité par cancer</span>
+    <span class="htag">85 % liés au tabac</span>
+    <span class="htag">CBNPC 80 % · CPC 15 %</span>
+    <span class="htag">Survie 5 ans : 17 %</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Le cancer broncho-pulmonaire est le <strong>cancer le plus meurtrier en France</strong>. L'enjeu pédagogique est triple : savoir distinguer les deux grandes familles histologiques (CBNPC vs CPC) car elles commandent des stratégies thérapeutiques radicalement différentes ; reconnaître les manifestations cliniques souvent tardives et parfois para-néoplasiques ; maîtriser la démarche diagnostique (preuve histologique + bilan d'extension TNM) et les examens d'imagerie hiérarchisés.</p>
+  <p>Le fil directeur : <strong>type histologique → bilan d'extension → opérabilité → traitement</strong>. Tout traitement repose sur une discussion en RCP d'oncologie thoracique.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 1 : ÉPIDÉMIOLOGIE & FACTEURS DE RISQUE -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie &amp; Facteurs de risque
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'épidémiologie descriptive du cancer broncho-pulmonaire en France et dans le monde</div>
+  <div class="obj-line">Identifier les facteurs de risque professionnels (amiante, silice, HAP, diesel) et environnementaux (radon, pollution)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Données clés France
+    </div>
+    <div class="kv-row"><span class="kv-key">Incidence</span><span class="kv-val">&gt; 46 000 cas/an (3e rang)</span></div>
+    <div class="kv-row"><span class="kv-key">Décès/an</span><span class="kv-val">&gt; 33 000 (20 % des décès/cancer)</span></div>
+    <div class="kv-row"><span class="kv-key">Rang mortalité</span><span class="kv-val">1re cause cancer hommes &amp; femmes</span></div>
+    <div class="kv-row"><span class="kv-key">Survie à 5 ans</span><span class="kv-val">17 %</span></div>
+    <div class="kv-row"><span class="kv-key">Découverte stade III/IV</span><span class="kv-val">60 – 75 % des cas</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Données mondiales
+    </div>
+    <div class="kv-row"><span class="kv-key">Incidence</span><span class="kv-val">2,1 millions cas/an</span></div>
+    <div class="kv-row"><span class="kv-key">Mortalité</span><span class="kv-val">1,8 millions décès/an</span></div>
+    <div class="kv-row"><span class="kv-key">Rang mondial</span><span class="kv-val">1re cause de mortalité par cancer</span></div>
+    <div class="kv-row" style="border-bottom:none;"><span class="kv-key">Tendance</span><span class="kv-val">Diminution H · Augmentation F</span></div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+      </div>
+      Tabagisme — facteur principal
+    </div>
+    <ul class="lst">
+      <li>85 % des cancers bronchiques</li>
+      <li>Actif <strong>et</strong> passif</li>
+      <li>Risque lié à la <strong>DURÉE</strong> (pas à la quantité)</li>
+      <li>Précocité du début aggrave le risque</li>
+      <li>Risque décroît à l'arrêt mais <strong>ne revient jamais</strong> au niveau non-fumeur</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Autres facteurs de risque
+    </div>
+    <p style="font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:4px;margin-top:4px;">Professionnels</p>
+    <div class="pills">
+      <span class="pill pill-amber">Amiante</span>
+      <span class="pill pill-amber">Silice</span>
+      <span class="pill pill-amber">HAP</span>
+      <span class="pill pill-amber">Diesel</span>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:4px;margin-top:10px;">Environnementaux</p>
+    <div class="pills">
+      <span class="pill pill-coral">Radon</span>
+      <span class="pill pill-coral">Pollution (PM 2,5)</span>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted);font-weight:700;margin-bottom:4px;margin-top:10px;">Personnels</p>
+    <div class="pills">
+      <span class="pill pill-purple">Prédisposition familiale</span>
+      <span class="pill pill-purple">BPCO / PID fibrosante</span>
+      <span class="pill pill-purple">ATCD cancer pulmonaire</span>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Maladie professionnelle :</strong> rechercher systématiquement une exposition professionnelle à risque — faire appel à un spécialiste en pathologie professionnelle si besoin. En cas d'exposition suffisante : <strong>déclaration obligatoire en maladie professionnelle</strong>.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 2 : TYPES HISTOLOGIQUES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Types histologiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Distinguer les carcinomes non à petites cellules (CBNPC) des carcinomes à petites cellules (CPC) et leurs sous-types</div>
+  <div class="obj-line">Connaître les marqueurs immunohistochimiques caractéristiques de chaque type</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Fréquence</th>
+      <th>Localisation</th>
+      <th>Histologie / IHC</th>
+      <th>Caractéristiques clés</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Adénocarcinome</strong></td>
+      <td><span class="badge badge-blue">+ fréquent</span></td>
+      <td>Périphérique</td>
+      <td>Différenciation glandulaire<br><span class="pill pill-blue" style="font-size:.72rem;padding:2px 8px;">TTF-1 +</span></td>
+      <td>1er chez les non-fumeurs, femmes</td>
+    </tr>
+    <tr>
+      <td><strong>Carcinome épidermoïde</strong></td>
+      <td></td>
+      <td>Proximale</td>
+      <td>Différenciation malpighienne<br><span class="pill pill-blue" style="font-size:.72rem;padding:2px 8px;">p40 +</span></td>
+      <td>Fortement lié au tabac</td>
+    </tr>
+    <tr>
+      <td><strong>Carcinome indifférencié</strong></td>
+      <td></td>
+      <td>Variable</td>
+      <td>—</td>
+      <td>Moins fréquent</td>
+    </tr>
+    <tr style="background:var(--red-light);">
+      <td><strong>CPC <span class="badge badge-red">15 %</span></strong></td>
+      <td><span class="badge badge-red">Urgence</span></td>
+      <td>Proximale + médiastin</td>
+      <td>Neuroendocrine peu différencié<br><span class="pill pill-red" style="font-size:.72rem;padding:2px 8px;">CD56 · Synaptophysine +</span></td>
+      <td>Évolution rapide, chimiosensible, para-néoplasique fréquent</td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-size:.78rem;color:var(--muted);margin-top:6px;">CBNPC = Carcinomes Non à Petites Cellules (~80 %) · CPC = Carcinome à Petites Cellules (~15 %)</p>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 3 : MANIFESTATIONS CLINIQUES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Manifestations cliniques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les circonstances de découverte : signes respiratoires, loco-régionaux, métastatiques</div>
+  <div class="obj-line">Reconnaître et nommer les syndromes para-néoplasiques associés au cancer bronchique</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>60 – 75 % des diagnostics sont posés au stade localement avancé (III) ou métastatique (IV).</strong> La maladie peut aussi être découverte fortuitement sur une imagerie thoracique chez un patient asymptomatique.</div>
+</div>
+
+<table class="table-teal" style="margin-bottom:14px;">
+  <thead>
+    <tr>
+      <th>Catégorie</th>
+      <th>Signes cliniques</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Généraux</strong></td>
+      <td>Asthénie · Anorexie · Amaigrissement</td>
+    </tr>
+    <tr>
+      <td><strong>Respiratoires</strong></td>
+      <td>Toux persistante · Dyspnée · <span class="badge badge-red">Hémoptysie</span></td>
+    </tr>
+    <tr>
+      <td><strong>Extension loco-régionale</strong></td>
+      <td>
+        Syndrome cave supérieur (compression VCS) · Dysphagie · <strong>Dysphonie</strong> (nerf récurrent) · Paralysie phrénique<br>
+        Épanchement pleural · Douleur pariétale · Cornage/wheezing (obstruction bronchique)<br>
+        <span class="badge badge-amber">Pancoast-Tobias</span> : tumeur de l'apex → névralgie C8-T1, syndrome de Claude-Bernard-Horner
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Métastatiques</strong></td>
+      <td>Signes neurologiques (méta cérébrales) · Douleurs osseuses · Lésion cutanée · Ictère (méta hépatiques)</td>
+    </tr>
+    <tr>
+      <td><strong>Pro-coagulant</strong></td>
+      <td>Maladie thrombo-embolique veineuse (TVP, EP)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Syndromes para-néoplasiques — à connaître
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Syndrome</th><th>Mécanisme</th><th>Type histologique ++</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SIADH</strong> → hyponatrémie</td>
+        <td>Sécrétion ectopique ADH</td>
+        <td><span class="badge badge-red">CPC +++</span></td>
+      </tr>
+      <tr>
+        <td><strong>Cushing ectopique</strong></td>
+        <td>Sécrétion ectopique ACTH</td>
+        <td><span class="badge badge-red">CPC</span></td>
+      </tr>
+      <tr>
+        <td><strong>Pseudo-myasthénie</strong> (Lambert-Eaton)</td>
+        <td>Auto-Ac anti-canaux Ca²+</td>
+        <td><span class="badge badge-red">CPC</span></td>
+      </tr>
+      <tr>
+        <td><strong>Encéphalite limbique</strong></td>
+        <td>Auto-Ac anti-Hu/anti-NMDAR</td>
+        <td><span class="badge badge-red">CPC</span></td>
+      </tr>
+      <tr>
+        <td><strong>Neuropathie périphérique</strong></td>
+        <td>Auto-Ac</td>
+        <td>CPC / adénoK</td>
+      </tr>
+      <tr>
+        <td><strong>OAHP</strong> (hippocratisme digital + périostite + œdème douloureux extrémités)</td>
+        <td>Ostéoarthropathie hypertrophiante pneumique</td>
+        <td>CBNPC</td>
+      </tr>
+      <tr>
+        <td><strong>Hippocratisme digital isolé</strong></td>
+        <td>—</td>
+        <td>Tous types</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 4 : IMAGERIE & INVESTIGATIONS DIAGNOSTIQUES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Imagerie &amp; Investigations diagnostiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le rôle de chaque examen d'imagerie (radio thorax, TDM, IRM, TEP) et leurs indications</div>
+  <div class="obj-line">Savoir interpréter une radiographie de thorax face montrant un adénocarcinome pulmonaire (opacité arrondie polylobée, signe de la silhouette)</div>
+  <div class="obj-line">Savoir interpréter une TDM thoracique en fenêtre parenchymateuse (masse à contours spiculés/lobulés, &gt;3 cm)</div>
+  <div class="obj-line">Connaître les modalités d'obtention de la preuve histologique selon la localisation tumorale</div>
+  <div class="obj-line">Connaître les analyses pré-thérapeutiques sur le prélèvement (PD-L1, mutations EGFR/KRAS/ALK/ROS)</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Hiérarchie des examens d'imagerie
+  </div>
+  <table class="table-blue">
+    <thead>
+      <tr><th>Examen</th><th>Rôle</th><th>Indications / Limites</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Radio thorax</strong></td>
+        <td>Souvent initiale</td>
+        <td><span class="badge badge-red">NE diagnostique PAS</span> NE bilanise PAS. <strong>Normale n'élimine pas le diagnostic</strong></td>
+      </tr>
+      <tr>
+        <td><strong>TDM thoracique + injection</strong></td>
+        <td><span class="badge badge-green">INDISPENSABLE</span></td>
+        <td>Caractérise la lésion (nodule ou masse &gt;3 cm, contours spiculés/lobulés), guide la biopsie, évalue T et N (adénomégalies médiastinales)</td>
+      </tr>
+      <tr>
+        <td><strong>TDM abdomino-pelvienne</strong></td>
+        <td>Bilan M sous-diaphragmatique</td>
+        <td>Métastases hépatiques et surrénaliennes</td>
+      </tr>
+      <tr>
+        <td><strong>IRM cérébrale</strong></td>
+        <td>Bilan M cérébral <span class="badge badge-green">préférée</span></td>
+        <td>Systématique ; supérieure à la TDM pour méta cérébrales</td>
+      </tr>
+      <tr>
+        <td><strong>IRM thoracique</strong></td>
+        <td>Rarement indiquée</td>
+        <td>Uniquement tumeurs de l'<strong>apex</strong> (Pancoast-Tobias)</td>
+      </tr>
+      <tr>
+        <td><strong>TEP au 18-FDG</strong></td>
+        <td>Imagerie métabolique</td>
+        <td>Affiner le staging médiastinal si maladie localisée/localement avancée (VPN élevée) · Caractérisation d'un nodule ≥ 8 mm</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> Une radiographie thoracique normale n'élimine pas un cancer bronchique. La TDM thoracique avec injection est l'examen de référence.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Obtention de la preuve histologique
+  </div>
+  <table>
+    <thead>
+      <tr><th>Site prélevé</th><th>Technique</th><th>Condition</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tumeur primitive proximale</strong></td>
+        <td>Bronchoscopie souple</td>
+        <td>Accessible endobronchiquement</td>
+      </tr>
+      <tr>
+        <td><strong>Tumeur primitive distale</strong></td>
+        <td>Ponction trans-pariétale (guidage scanner ou écho)</td>
+        <td>Contact pleural requis si guidage écho</td>
+      </tr>
+      <tr>
+        <td><strong>Tumeur non accessible</strong></td>
+        <td>Thoracoscopie chirurgicale</td>
+        <td>Échec des 2 premières techniques</td>
+      </tr>
+      <tr>
+        <td><strong>Ganglions médiastinaux</strong></td>
+        <td>Ponction transbronchique sous écho-endoscopie (EBUS)<br>ou médiastinoscopie chirurgicale</td>
+        <td>Adénomégalies médiastinales</td>
+      </tr>
+      <tr>
+        <td><strong>Métastase accessible</strong></td>
+        <td>Biopsie selon site (cutanée, hépatique, osseuse, ganglionnaire...)</td>
+        <td>Site facilement accessible</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-green" style="margin-top:12px;margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Analyses pré-thérapeutiques systématiques sur le prélèvement :</strong><br>
+    · <strong>PD-L1</strong> en immunohistochimie → orientation vers l'immunothérapie<br>
+    · <strong>Mutations moléculaires</strong> : EGFR, KRAS, ALK, ROS → thérapies ciblées (inhibiteurs de tyrosine kinase)</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 5 : DÉMARCHE DIAGNOSTIQUE & CLASSIFICATION TNM -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Démarche diagnostique &amp; Classification TNM
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la démarche diagnostique globale : preuve histologique + bilan d'extension TNM</div>
+  <div class="obj-line">Comprendre la signification de T, N, M et les trois grands stades (localisé, localement avancé, métastatique)</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Démarche diagnostique globale
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-num">1</div>
+        <div><div class="step-title">Preuve histologique</div><div class="step-content">Tumeur primitive ou métastase accessible</div></div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div><div class="step-title">Bilan d'extension TNM</div><div class="step-content">Clinique + fibroscopie + imagerie + ponctions cytologiques éventuelles</div></div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div><div class="step-title">Analyses pré-thérapeutiques</div><div class="step-content">PD-L1, EGFR, KRAS, ALK, ROS sur pièce biopsique</div></div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div><div class="step-title">RCP oncologie thoracique</div><div class="step-content">Proposition de Plan Personnalisé de Soins (PPS)</div></div>
+      </li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Classification TNM (CBNPC uniquement)
+    </div>
+    <div class="kv-row"><span class="kv-key"><strong>T</strong> — Tumeur</span><span class="kv-val">Extension loco-régionale</span></div>
+    <div class="kv-row"><span class="kv-key"><strong>N</strong> — Node (ganglion)</span><span class="kv-val">Extension ganglionnaire</span></div>
+    <div class="kv-row"><span class="kv-key"><strong>M</strong> — Métastase</span><span class="kv-val">Extension à distance</span></div>
+    <div style="margin-top:12px;">
+      <div style="margin-bottom:6px;"><span class="phase phase-prod">Stades I-II</span> <span style="font-size:.83rem;">Cancer localisé au poumon</span></div>
+      <div style="margin-bottom:6px;"><span class="phase phase-mod">Stade III</span> <span style="font-size:.83rem;">Cancer localement avancé</span></div>
+      <div><span class="phase phase-sev">Stade IV</span> <span style="font-size:.83rem;">Cancer métastatique</span></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 6 : CANCER À PETITES CELLULES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Particularités du Cancer à Petites Cellules (CPC)
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques propres au CPC : origine neuroendocrine, évolution rapide, chimiosensibilité initiale</div>
+  <div class="obj-line">Savoir que la chimiothérapie doit être débutée en urgence et connaître les principes du traitement</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>CPC = chimio EN URGENCE.</strong> Évolution rapide et fatale sans traitement. Doublet à base de sel de platine ± immunothérapie si métastatique.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Caractéristiques du CPC
+    </div>
+    <ul class="lst">
+      <li>Origine <strong>neuroendocrine</strong> (CD56+, Synaptophysine+)</li>
+      <li>Localisation <strong>proximale</strong>, envahissement médiastinal fréquent</li>
+      <li>Fréquemment associé à un syndrome para-néoplasique</li>
+      <li><strong>Mauvais pronostic</strong>, évolution rapide sans traitement</li>
+      <li><strong>Très chimiosensible</strong> initialement → rechute(s) et chimiorésistance secondaire</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Traitement du CPC
+    </div>
+    <div style="margin-bottom:8px;"><span class="phase phase-prod">Localisé au thorax</span></div>
+    <p style="font-size:.84rem;margin-bottom:12px;">Chimiothérapie + <strong>radiothérapie</strong> (radio-chimiothérapie)</p>
+    <div style="margin-bottom:8px;"><span class="phase phase-sev">Métastatique</span></div>
+    <p style="font-size:.84rem;">Doublet platine + <strong>immunothérapie</strong> (traitement systémique exclusif)</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 7 : PRINCIPES THÉRAPEUTIQUES (CBNPC) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Principes thérapeutiques — CBNPC
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les 3 situations thérapeutiques selon le stade TNM pour les CBNPC</div>
+  <div class="obj-line">Connaître les éléments du bilan d'opérabilité et le rôle de la RCP</div>
+  <div class="obj-line">Connaître les principes des soins de support et de la prise en charge des tumeurs secondaires</div>
+</div>
+
+<table class="table-teal" style="margin-bottom:14px;">
+  <thead>
+    <tr><th>Stade</th><th>Situation</th><th>Traitement principal</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="phase phase-prod">I – II</span></td>
+      <td><strong>Cancer localisé</strong></td>
+      <td>Chirurgie ± traitement systémique péri-opératoire<br><em>Si inopérable :</em> radiothérapie</td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-mod">III</span></td>
+      <td><strong>Localement avancé</strong></td>
+      <td>Radio-chimiothérapie concomitante<br><em>Ou :</em> chirurgie + traitement systémique</td>
+    </tr>
+    <tr>
+      <td><span class="phase phase-sev">IV</span></td>
+      <td><strong>Métastatique</strong></td>
+      <td>Traitement systémique exclusif :<br>· Immunothérapie (si PD-L1 élevé)<br>· Thérapie ciblée (si mutation EGFR/ALK/ROS → ITK)<br>· Chimiothérapie</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Bilan d'opérabilité
+    </div>
+    <ul class="lst">
+      <li>État général (PS OMS)</li>
+      <li>Comorbidités cardiovasculaires</li>
+      <li>EFR ± épreuve d'effort (bilan fonctionnel respiratoire)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Soins de support (toujours)
+    </div>
+    <ul class="lst">
+      <li>Support nutritionnel</li>
+      <li>Traitement antalgique (médicamenteux + radiothérapie antalgique)</li>
+      <li>Prise en charge de la dyspnée</li>
+      <li>Support psychologique</li>
+      <li>Débutés dès le diagnostic</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Tumeurs secondaires du poumon :</strong> la prise en charge dépend de l'origine de la tumeur primitive (traitement de la maladie primitive). <br><strong>RCP obligatoire</strong> pour tout cancer bronchique → Plan Personnalisé de Soins (PPS) → consultation d'annonce.</div>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 8 : POINTS-CLÉS À RETENIR -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Incontournables ECNi
+  </div>
+  <ul class="lst">
+    <li><strong>1re cause de mortalité par cancer</strong> en France et dans le monde.</li>
+    <li>Tabagisme = 85 % des cas ; risque lié à la <strong>durée</strong>, pas la quantité.</li>
+    <li><strong>CBNPC (80 %)</strong> : adénocarcinome (TTF1+, périphérique) et épidermoïde (p40+, proximal).</li>
+    <li><strong>CPC (15 %)</strong> : urgence thérapeutique — chimio doublet platine sans délai.</li>
+    <li>Radio thorax <strong>ne suffit pas</strong> au diagnostic ni au bilan ; la TDM thoracique est indispensable.</li>
+    <li>IRM cérébrale préférée à la TDM cérébrale pour le bilan des métastases.</li>
+    <li>TEP utile si maladie localisée/localement avancée (staging médiastinal) ou nodule ≥ 8 mm.</li>
+    <li>Preuve histologique obligatoire + analyse PD-L1 et mutations EGFR/KRAS/ALK/ROS.</li>
+    <li>SIADH (hyponatrémie) et syndrome de Lambert-Eaton : penser CPC.</li>
+    <li>Pancoast-Tobias = tumeur apex → IRM thoracique.</li>
+    <li>Toujours rechercher exposition professionnelle → <strong>déclaration en maladie professionnelle</strong>.</li>
+    <li>RCP → PPS → consultation d'annonce pour tout cancer bronchique.</li>
+  </ul>
+</div>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 1 :</strong> Radio thorax normale n'élimine PAS le diagnostic.</div>
+  </div>
+  <div class="alert alert-amber">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège 2 :</strong> Risque tabagique proportionnel à la DURÉE, pas à la quantité.</div>
+  </div>
+  <div class="alert alert-red">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Urgence :</strong> CPC = chimio immédiate (doublet platine ± immunothérapie).</div>
+  </div>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>À retenir :</strong> SIADH + CPC · Lambert-Eaton + CPC · Pancoast → IRM thoracique.</div>
+  </div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

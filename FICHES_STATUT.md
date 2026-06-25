@@ -316,7 +316,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 306 | [x] | Tumeurs de l ovaire | 306_Tumeurs_ovaire.html |
 | 307 | [ ] | Tumeurs des os primitives et secondaires | — |
 | 308 | [ ] | Tumeurs du pancréas | — |
-| 309 | [x] | Tumeurs du poumon | 309_tumeurs_poumon.html |
+| 309 | [x] | Tumeurs du poumon | 309_tumeurs_poumon_v2.html |
 | 310 | [ ] | Tumeurs de la prostate | — |
 | 311 | [ ] | Tumeurs du rein de l adulte | — |
 | 312 | [ ] | Tumeurs du sein | — |
