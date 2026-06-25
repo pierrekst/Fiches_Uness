@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-25. Ne pas éditer à la main._
 
-**Avancement : 165 / 367 items (45.0%)**
+**Avancement : 166 / 367 items (45.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -64,7 +64,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 54 | [ ] | Boiterie chez l enfant | — |
 | 55 | [ ] | Développement psychomoteur du nourrisson et de l enfant | — |
 | 56 | [ ] | L enfant handicapé | — |
-| 57 | [ ] | Maltraitance et enfants en danger | — |
+| 57 | [x] | Maltraitance et enfants en danger | 57_Maltraitance_enfants.html |
 | 58 | [ ] | Sexualité normale et ses troubles | — |
 | 59 | [ ] | Sujets en situation de précarité | — |
 | 60 | [ ] | Connaître les facteurs de risque | — |
