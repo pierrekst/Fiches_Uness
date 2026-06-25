@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-24. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-25. Ne pas éditer à la main._
 
 **Avancement : 165 / 367 items (45.0%)**
 
