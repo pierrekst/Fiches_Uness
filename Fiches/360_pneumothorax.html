@@ -2,285 +2,585 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="../favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>360 — Pneumothorax</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
 <style>
   :root {
-    --purple: #534AB7;
-    --teal: #1D9E75;
-    --coral: #D85A30;
-    --blue: #378ADD;
-    --red: #E24B4A;
-    --bg-color: transparent;
-    --text-color: #333;
-    --card-bg: #fff;
-    --border-color: #e0e0e0;
-    --pill-green: #e6f4ea;
-    --pill-green-text: #1e8e3e;
-    --pill-red: #fce8e6;
-    --pill-red-text: #d93025;
-    --pill-blue: #e8f0fe;
-    --pill-blue-text: #1a73e8;
-    --pill-amber: #fef7e0;
-    --pill-amber-text: #f29900;
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --text-color: #e8eaed;
-      --card-bg: #202124;
-      --border-color: #5f6368;
-      --pill-green: #1e8e3e;
-      --pill-green-text: #e6f4ea;
-      --pill-red: #d93025;
-      --pill-red-text: #fce8e6;
-      --pill-blue: #1a73e8;
-      --pill-blue-text: #e8f0fe;
-      --pill-amber: #f29900;
-      --pill-amber-text: #fef7e0;
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
     }
   }
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-  }
-  .card {
-    background: var(--card-bg);
-    border: 0.5px solid var(--border-color);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .complication-card {
-    border-left: 4px solid var(--red);
-  }
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  .badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.85em;
-    font-weight: bold;
-    color: white;
-    margin-left: 10px;
-  }
-  .badge-a { background-color: var(--coral); }
-  .badge-b { background-color: var(--blue); }
-  .oic-code {
-    display: block;
-    font-size: 0.8em;
-    color: gray;
-    margin-bottom: 15px;
-  }
-  .alert {
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-  .alert-red { background-color: rgba(226,75,74,0.1); border-left: 4px solid var(--red); }
-  .alert-blue { background-color: rgba(55,138,221,0.1); border-left: 4px solid var(--blue); }
-  .alert-green { background-color: rgba(29,158,117,0.1); border-left: 4px solid var(--teal); }
-  .alert-amber { background-color: rgba(242,153,0,0.1); border-left: 4px solid #f29900; }
-  
-  .pill {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.85em;
-    margin: 2px;
-  }
-  .pill-green { background: var(--pill-green); color: var(--pill-green-text); }
-  .pill-red { background: var(--pill-red); color: var(--pill-red-text); }
-  .pill-blue { background: var(--pill-blue); color: var(--pill-blue-text); }
-  .pill-amber { background: var(--pill-amber); color: var(--pill-amber-text); }
-  
-  .step {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .step-num {
-    background: gray;
-    color: white;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-    font-size: 0.9em;
-    flex-shrink: 0;
-  }
-  table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-  th, td { border: 0.5px solid var(--border-color); padding: 8px; text-align: left; }
-  .kv-line { display: flex; justify-content: space-between; border-bottom: 0.5px dashed var(--border-color); padding: 4px 0; }
-  h1, h2, h3 { color: var(--purple); display: flex; align-items: center; }
-  svg { width: 24px; height: 24px; margin-right: 8px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#1D9E75 0%,#378ADD 55%,#534AB7 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
 </style>
 </head>
 <body>
+<div class="page">
 
-<h1>
-  <svg viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 10h12" /><path d="M6 14h12" /><path d="M6 18h12" /><path d="M6 6h12" /><path d="M4 4h16v16H4z" /></svg>
-  Pneumothorax (IC-360)
-</h1>
-
-<div class="card">
-  <h2>
-    <svg viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" /><line x1="13.5" y1="6.5" x2="17.5" y2="10.5" /></svg>
-    1. Définition & Étiologies (Terrain)
-    <span class="badge badge-a">Rang A</span>
-    <span class="badge badge-b">Rang B</span>
-  </h2>
-  <span class="oic-code">OIC-360-01-A | OIC-360-02-B | OIC-360-07-A</span>
-  
-  <p><b>Définition :</b> Épanchement gazeux dans la cavité pleurale pouvant aboutir à un collapsus pulmonaire (partiel/complet) et, s'il retentit sur les cavités cardiaques, à une tamponnade gazeuse.</p>
-
-  <div class="grid-2">
-    <div>
-      <h3>Pneumothorax Spontané</h3>
-      <ul>
-        <li><b>Primaire (Primitif) :</b> Poumon sain.
-          <br><span class="pill pill-green">Homme jeune longiligne</span>
-          <br><span class="pill pill-amber">Notion d'effort à glotte fermée (Valsalva)</span>
-        </li>
-        <li><b>Secondaire :</b> Poumon pathologique.
-          <br><span class="pill pill-red">Emphysème / BPCO</span>
-          <br><span class="pill pill-red">Caverne/excavation (Tuberculose, Cancer)</span>
-          <br><span class="pill pill-amber">Tabac (facteur favorisant majeur)</span>
-        </li>
-      </ul>
-    </div>
-    <div>
-      <h3>Pneumothorax Traumatique</h3>
-      <ul>
-        <li><b>Traumatisme direct :</b> Plaie, fracture de côte.</li>
-        <li><b>Iatrogène :</b> Ponction pleurale, pose de voie veineuse centrale (VVC), biopsie trans-bronchique.</li>
-        <li><b>Barotraumatique :</b> Ventilation mécanique.</li>
-      </ul>
-    </div>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 360</div>
+  <h1>Pneumothorax</h1>
+  <div class="header-sub">Diagnostic, étiologies, gravité et prise en charge thérapeutique</div>
+  <div class="header-tags">
+    <span class="htag">Urgence respiratoire</span>
+    <span class="htag">Pleurologie</span>
+    <span class="htag">Pneumologie</span>
+    <span class="htag">Geste technique</span>
   </div>
 </div>
 
-<div class="card complication-card">
-  <h2>
-    <svg viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9v2m0 4v.01" /><path d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" /></svg>
-    2. Clinique & Urgences
-    <span class="badge badge-a">Rang A</span>
-  </h2>
-  <span class="oic-code">OIC-360-03-A | OIC-360-08-A</span>
-  
-  <div class="grid-2">
-    <div>
-      <h3>Diagnostic Clinique</h3>
-      <p><b>Signes fonctionnels :</b></p>
-      <ul>
-        <li>Douleur thoracique brutale "en coup de poignard", rythmée par la respiration, augmentée à la toux</li>
-        <li>Dyspnée (pouvant être sévère)</li>
-        <li>Toux sèche</li>
-      </ul>
-      <p><b>Signes physiques (Syndrome d'épanchement gazeux) :</b></p>
-      <ul>
-        <li><b>Inspection :</b> Baisse de mobilité et distension de l'hémithorax (vue rasante)</li>
-        <li><b>Percussion :</b> Tympanisme franc</li>
-        <li><b>Auscultation :</b> Diminution ou abolition du murmure vésiculaire</li>
-      </ul>
-      <p><i>Signe indirect : Emphysème sous-cutané.</i></p>
-    </div>
-    <div>
-      <h3>Signes de Gravité</h3>
-      <div class="alert alert-red">
-        <b>Détresse respiratoire aiguë :</b><br>
-        Désaturation, polypnée, cyanose. Un PNO même partiel peut être mal toléré si pathologie pulmonaire sous-jacente.
-      </div>
-      <div class="alert alert-red">
-        <b>Tamponnade Gazeuse (PNO compressif) :</b><br>
-        Défaillance cardiaque droite, état de choc, arrêt cardiaque. L'importance clinique prime sur le volume radiologique.
-      </div>
-    </div>
-  </div>
+<!-- VUE D'ENSEMBLE -->
+<div class="objectifs">
+  <strong>Ce chapitre en un coup d'œil —</strong> Le pneumothorax (PNO) est un épanchement d'air dans l'espace pleural. L'enjeu clinique est triple : <strong>reconnaître</strong> le tableau (douleur + dyspnée + tympanisme), <strong>évaluer la gravité</strong> immédiate (PNO sous tension = urgence absolue), et <strong>choisir le geste</strong> adapté (abstention / exsufflation / drainage). La distinction primitif vs secondaire conditionne la stratégie. La prévention des récidives repose sur l'arrêt du tabac.
+</div>
+
+<!-- ===== SECTION 1 : DÉFINITION & PHYSIOPATHOLOGIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition &amp; Physiopathologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Définir précisément le pneumothorax et ses conséquences hémodynamiques</div>
+  <div class="obj-line">Distinguer les mécanismes du PNO primitif (sujet sain) et secondaire (pathologie sous-jacente)</div>
 </div>
 
 <div class="card">
-  <h2>
-    <svg viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 8h.01" /><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" /><path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" /></svg>
-    3. Imagerie (Sémiologie Radiologique)
-    <span class="badge badge-a">Rang A</span>
-  </h2>
-  <span class="oic-code">OIC-360-04-A | OIC-360-05-A | OIC-360-06-A</span>
-  
-  <div class="alert alert-blue"><b>Indispensable</b> pour confirmer le diagnostic (sauf urgence extrême).</div>
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Définition
+  </div>
+  <div class="kv-row"><span class="kv-key">Mécanisme</span><span class="kv-val">Épanchement gazeux dans la cavité pleurale</span></div>
+  <div class="kv-row"><span class="kv-key">Conséquence pulmonaire</span><span class="kv-val">Collapsus pulmonaire partiel ou complet</span></div>
+  <div class="kv-row"><span class="kv-key">Forme sévère</span><span class="kv-val">Tamponnade gazeuse → défaillance hémodynamique</span></div>
+</div>
 
-  <table>
-    <tr>
-      <th>Examen</th>
-      <th>Sémiologie & Indications</th>
-    </tr>
-    <tr>
-      <td><b>Radiographie standard</b><br>(Thorax de face, debout, inspiration)</td>
-      <td>
-        <ul>
-          <li><b>Signe direct :</b> Croissant clair périphérique (hyperclarté avec disparition trame vasculaire), bord externe de la plèvre viscérale visible. Si faible : apical.</li>
-          <li><b>PNO sous tension :</b> Rétractation parenchyme sur hile, aplatissement coupole, refoulement médiastin.</li>
-          <li><b>Hydropneumothorax :</b> Niveau hydro-aérique horizontal si épanchement liquidien associé.</li>
-          <li><b>Piège :</b> PNO incomplet (chercher ligne sur silhouette cardiaque/coupole).</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><b>Scanner thoracique</b></td>
-      <td>Non systématique. Si doute, ou pour guider drainage complexe (décollement partiel), ou si PNO récidivant (recherche pathologie sous-jacente).</td>
-    </tr>
-    <tr>
-      <td><b>Échographie pleurale</b></td>
-      <td>Au lit du patient (ex. en réanimation). Spécialisé.</td>
-    </tr>
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      PNO Spontané Primitif
+    </div>
+    <ul class="lst">
+      <li>Rupture de <strong>bulles sous-pleurales</strong> (blebs) sur <strong>poumon macroscopiquement sain</strong></li>
+      <li>Terrain : homme jeune longiligne, tabac ++</li>
+      <li>Contexte : effort physique, manœuvre de Valsalva</li>
+      <li>Brèche tend à se refermer rapidement</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      PNO Spontané Secondaire
+    </div>
+    <ul class="lst">
+      <li>Complication d'une <strong>pathologie pulmonaire préexistante</strong></li>
+      <li>Emphysème / BPCO — Caverne TB — Cancer</li>
+      <li>Mucoviscidose, histiocytose, lymphangioléiomyomatose</li>
+      <li>Brèche lente à se fermer → drainage souvent nécessaire</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-red" style="margin-top:0;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    PNO Traumatique
+  </div>
+  <p style="font-size:.84rem;">Notion de <strong>traumatisme thoracique</strong> (contusion, plaie pénétrante, barotraumatisme iatrogène : ponction, voie veineuse centrale, biopsie). Prise en charge selon le contexte traumatologique.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : DIAGNOSTIC ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic Clinique et Radiologique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les éléments cliniques du diagnostic positif (signes fonctionnels et physiques)</div>
+  <div class="obj-line">Interpréter une radiographie thoracique de pneumothorax d'abondance moyenne et de pneumothorax complet</div>
+  <div class="obj-line">Connaître la place du scanner et de l'échographie pleurale</div>
+</div>
+
+<!-- Clinique -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Triade clinique
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Examen</th><th>Signe</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Inspection</strong></td><td>Diminution mobilité + distension hémithorax atteint (vue rasante)</td></tr>
+      <tr><td><strong>Percussion</strong></td><td><span class="badge badge-blue">Tympanisme</span> franc de l'hémithorax atteint</td></tr>
+      <tr><td><strong>Auscultation</strong></td><td>Diminution / abolition du murmure vésiculaire</td></tr>
+    </tbody>
+  </table>
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-red">Douleur thoracique brutale "coup de poignard"</span>
+    <span class="pill pill-amber">Dyspnée variable</span>
+    <span class="pill pill-gray">Toux sèche</span>
+    <span class="pill pill-purple">Emphysème sous-cutané (signe indirect)</span>
+  </div>
+</div>
+
+<!-- Radiologie -->
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Sémiologie radiologique — Radio thorax debout, inspiration
+  </div>
+  <table class="table-teal">
+    <thead><tr><th>Signe</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Ligne pleurale</strong></td>
+        <td>Fine opacité linéaire = bord externe de la plèvre viscérale, séparée de la paroi par une hyperclarté sans trame vasculaire (croissant clair périphérique)</td>
+      </tr>
+      <tr>
+        <td><strong>PNO de faible abondance</strong></td>
+        <td>Décollement visible seulement à l'apex</td>
+      </tr>
+      <tr>
+        <td><strong>PNO sous tension</strong> <span class="badge badge-red">Urgence</span></td>
+        <td>Rétractation parenchyme sur le hile + aplatissement coupole homolatérale + <strong>déviation médiastin controlatérale</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Hydropneumothorax</strong></td>
+        <td>Niveau hydro-aérique horizontal (position debout)</td>
+      </tr>
+      <tr>
+        <td><strong>Signes indirects</strong></td>
+        <td>Emphysème sous-cutané, pneumomédiastin</td>
+      </tr>
+    </tbody>
   </table>
 </div>
 
-<div class="card">
-  <h2>
-    <svg viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
-    4. Prise en charge & Prévention
-    <span class="badge badge-a">Rang A</span>
-    <span class="badge badge-b">Rang B</span>
-  </h2>
-  <span class="oic-code">OIC-360-09-A | OIC-360-10-B | OIC-360-11-B</span>
-  
-  <div class="alert alert-amber"><b>En parallèle :</b> Oxygénothérapie, antalgie, et expansion volémique si désamorçage (choc).</div>
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège radiologique —</strong> PNO incomplet avec décollement <em>apical, inférieur ou antérieur</em> : chercher une <strong>ligne hyperclaire sur la silhouette cardiaque ou la coupole diaphragmatique</strong>. Ne pas confondre avec une bulle d'emphysème (présence de travées).</div>
+</div>
 
-  <div class="grid-2">
-    <div>
-      <h3>Étape 1 : Exsufflation Pleurale (A)</h3>
-      <p><b>Indications :</b> PNO sous pression avec gravité OU complet avec décollement > 2cm. <br><i>(Si jeune + grande abondance = urgence moindre, parfois drainé d'emblée).</i></p>
-      <div class="step"><div class="step-num">1</div><div>Asepsie chirurgicale. Ponction au cathéter gros calibre.</div></div>
-      <div class="step"><div class="step-num">2</div><div>Voie antérieure : 2ème espace intercostal (ligne médio-claviculaire). Bord supérieur de la côte inférieure.</div></div>
-      <div class="step"><div class="step-num">3</div><div>Succès : "pchit" (air) + amélioration clinique.</div></div>
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Scanner thoracique
     </div>
-    
-    <div>
-      <h3>Étape 2 : Drainage Pleural (B)</h3>
-      <p><b>Indications :</b> PNO primitif avec échec d'exsufflation, ou PNO secondaire (brèche longue à fermer). Asepsie, anxiolyse/analgésie.</p>
-      <ul>
-        <li><b>Percutané (Seldinger) :</b> Voie antérieure (2ème EIC). Drain "queue de cochon". Aspiration -5 à -20 cm H2O. Radio de contrôle. Surveillance (hospit courte ou ambu si robinet fermé).</li>
-        <li><b>Chirurgical (si échec/épanch. liquidien) :</b> Voie antérieure (2ème EIC) ou axillaire (4ème ou 5ème EIC, bord ant grand dorsal). Trocart avec mandrin mousse.</li>
-      </ul>
-    </div>
+    <ul class="lst">
+      <li><strong>Non systématique</strong></li>
+      <li>Si doute diagnostique</li>
+      <li>PNO partiel : guide le drainage (topographie)</li>
+      <li>PNO récidivant : recherche anomalie parenchymateuse</li>
+    </ul>
   </div>
-
-  <div class="alert alert-green" style="margin-top: 15px;">
-    <b>Prévention des récidives (OIC-360-11-B) :</b> 
-    Arrêt du tabac systématique (++). 
-    Discussion spécialisée de la pleurodèse selon le nombre de récidives et pathologie sous-jacente.
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--muted);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Échographie pleurale
+    </div>
+    <ul class="lst">
+      <li>Examen spécialisé, réalisable au lit du patient</li>
+      <li>Plus difficile à interpréter</li>
+      <li>Abolition du glissement pleural + ligne A sans ligne B</li>
+    </ul>
   </div>
 </div>
 
+<hr>
+
+<!-- ===== SECTION 3 : ÉTIOLOGIES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Diagnostic Étiologique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Distinguer les trois grands types étiologiques : traumatique, spontané primitif, spontané secondaire</div>
+  <div class="obj-line">Identifier les éléments anamnestiques et de terrain qui orientent vers chaque type</div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Anamnèse</th>
+      <th>Terrain</th>
+      <th>Spécificités</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge badge-purple">Traumatique</span></td>
+      <td>Notion de <strong>traumatisme</strong> thoracique récent</td>
+      <td>Tout patient</td>
+      <td>Contusion, plaie, iatrogène (VVC, ponction, biopsie)</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-teal">Spontané primitif</span></td>
+      <td>Effort physique, manœuvre de Valsalva</td>
+      <td><strong>Homme jeune longiligne</strong>, tabac ++</td>
+      <td>Poumon sous-jacent sain, pronostic favorable</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-amber">Spontané secondaire</span></td>
+      <td>Contexte de pathologie chronique</td>
+      <td>IRC, emphysème, BPCO, tabac ++</td>
+      <td>Emphysème, caverne TB, cancer, excavation — brèche lente à fermer</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SECTION 4 : GRAVITÉ ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Diagnostic de Gravité
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier les signes de gravité respiratoires et hémodynamiques d'un pneumothorax</div>
+  <div class="obj-line">Comprendre que la gravité n'est pas corrélée à l'abondance</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Signes respiratoires
+    </div>
+    <ul class="lst">
+      <li>Détresse respiratoire aiguë</li>
+      <li>Désaturation SpO2</li>
+      <li>Polypnée, tirage</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Tamponnade gazeuse
+    </div>
+    <ul class="lst">
+      <li>Défaillance cardiaque droite</li>
+      <li>État de choc (hypotension, tachycardie)</li>
+      <li>Arrêt cardiaque</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Règle fondamentale —</strong> La gravité n'est <strong>pas corrélée à l'abondance</strong> du pneumothorax. Un PNO partiel peut être <strong>très mal toléré</strong> chez un patient avec insuffisance respiratoire préexistante (BPCO, emphysème). Toujours évaluer la tolérance clinique.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 : PRISE EN CHARGE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en Charge Thérapeutique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications et la technique de l'exsufflation pleurale</div>
+  <div class="obj-line">Connaître les indications et les deux techniques de drainage pleural</div>
+  <div class="obj-line">Connaître les mesures de prévention des récidives</div>
+</div>
+
+<!-- Arbre décisionnel -->
+<div class="card" style="margin-bottom:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Stratégie globale selon le type et la tolérance
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Situation</th><th>Geste</th></tr></thead>
+    <tbody>
+      <tr><td>PNO partiel bien toléré, primitif</td><td><span class="badge badge-green">Surveillance ± O2</span> — abstention possible</td></tr>
+      <tr><td>PNO sous tension (signes de gravité) <span class="badge badge-red">Urgence</span></td><td><strong>Exsufflation immédiate</strong></td></tr>
+      <tr><td>PNO complet décollement &gt; 2 cm, bien toléré</td><td>Exsufflation (primitif) ou drainage (secondaire)</td></tr>
+      <tr><td>PNO primitif — échec exsufflation</td><td>Drainage</td></tr>
+      <tr><td>PNO secondaire (quelle qu'en soit l'abondance)</td><td>Drainage (brèche lente)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Exsufflation -->
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Exsufflation pleurale — Technique
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div><div class="step-title">Asepsie chirurgicale</div><div class="step-content">Règles strictes — antisepsie cutanée, gants stériles, champ stérile</div></div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div><div class="step-title">Repère anatomique</div><div class="step-content"><strong>2e espace intercostal — ligne médioclaviculaire — bord supérieur de la côte inférieure</strong> (évite le paquet vasculo-nerveux sous-costal)</div></div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div><div class="step-title">Cathéter de gros calibre</div><div class="step-content">Ponction à la seringue, aspiration de l'air</div></div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div><div class="step-title">Succès = "pchit"</div><div class="step-content">Évacuation de l'air sous pression + amélioration clinique immédiate</div></div>
+    </li>
+    <li>
+      <div class="step-num">5</div>
+      <div><div class="step-title">Mesures associées</div><div class="step-content">Oxygénothérapie, expansion volémique si désamorçage, antalgie</div></div>
+    </li>
+  </ul>
+</div>
+
+<!-- Drainage -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Drainage pleural — Deux techniques
+  </div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <div style="font-size:.83rem;font-weight:700;color:var(--teal);margin-bottom:6px;">Technique percutanée (Seldinger)</div>
+      <ul class="lst">
+        <li>Drain "queue de cochon" sur guide</li>
+        <li>Repères identiques à l'exsufflation (2e EIC / ligne médioclaviculaire)</li>
+        <li>Aspiration <strong>-5 à -20 cmH2O</strong></li>
+        <li>Succès → surveillance courte durée ou ambulatoire</li>
+        <li>Échec → technique chirurgicale</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:.83rem;font-weight:700;color:var(--teal);margin-bottom:6px;">Technique chirurgicale (trocart)</div>
+      <ul class="lst">
+        <li>Indications : PNO difficile, épanchement liquidien associé</li>
+        <li><strong>Voie antérieure</strong> : 2e EIC / ligne médioclaviculaire</li>
+        <li><strong>Voie axillaire</strong> : 4e-5e EIC / entre grand pectoral et grand dorsal (ligne mamelonnaire)</li>
+        <li>Aspiration identique -5 à -20 cmH2O</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;margin-bottom:0;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Surveillance : radio thorax pour contrôler la position du drain et le ré-accolement pulmonaire à la paroi.</div>
+  </div>
+</div>
+
+<!-- Prévention -->
+<div class="card card-teal" style="margin-top:14px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Prévention des Récidives
+  </div>
+  <div class="kv-row"><span class="kv-key">Mesure systématique</span><span class="kv-val" style="color:var(--red);">Arrêt du tabac ++</span></div>
+  <div class="kv-row"><span class="kv-key">Pleurodèse</span><span class="kv-val">Discussion spécialisée (récidives homo/controlatérales, pathologie sous-jacente)</span></div>
+  <div class="kv-row"><span class="kv-key">Indication pleurodèse</span><span class="kv-val">≥ 2 récidives homolatérales, 1 récidive controlatérale, ou 1er épisode bilatéral</span></div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 6 : POINTS CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points Clés &amp; Pièges ECNi
+</div>
+
+<div class="alert alert-red" style="margin-bottom:10px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Urgence absolue —</strong> PNO sous tension = déviation médiastinale controlatérale sur la radio + signes de choc → <strong>exsufflation immédiate sans attendre l'imagerie</strong> si tableau hémodynamique instable.</div>
+</div>
+
+<div class="alert alert-amber" style="margin-bottom:10px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège —</strong> Voie d'abord : toujours au <strong>bord supérieur de la côte inférieure</strong> (jamais sous la côte supérieure où chemine le paquet vasculo-nerveux intercostal).</div>
+</div>
+
+<div class="alert alert-amber" style="margin-bottom:10px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège radiologique —</strong> PNO apical / antérieur / inférieur : la ligne pleurale est invisible en face. Chercher une ligne hyperclaire longeant la silhouette cardiaque ou la coupole. Scanner si doute.</div>
+</div>
+
+<div class="alert alert-amber" style="margin-bottom:10px;">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Corrélation abondance / gravité —</strong> Un PNO <em>partiel</em> peut mettre en jeu le pronostic vital chez un patient avec <strong>IRC ou emphysème sévère</strong>. Toujours coter la tolérance clinique avant l'abondance.</div>
+</div>
+
+<div class="card card-teal" style="margin-top:4px;">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Synthèse à retenir
+  </div>
+  <div class="kv-row"><span class="kv-key">Triade clinique</span><span class="kv-val">Douleur "coup de poignard" + tympanisme + abolition MV</span></div>
+  <div class="kv-row"><span class="kv-key">Imagerie 1re intention</span><span class="kv-val">Radio thorax debout inspiration (pas de scanner d'emblée)</span></div>
+  <div class="kv-row"><span class="kv-key">Signe radio sous tension</span><span class="kv-val">Déviation médiastin + aplatissement coupole homolatérale</span></div>
+  <div class="kv-row"><span class="kv-key">Repère exsufflation/drainage antérieur</span><span class="kv-val">2e EIC / ligne médioclaviculaire / bord sup côte inf</span></div>
+  <div class="kv-row"><span class="kv-key">PNO secondaire</span><span class="kv-val">→ Drainage systématique (brèche lente)</span></div>
+  <div class="kv-row"><span class="kv-key">Aspiration drain</span><span class="kv-val">-5 à -20 cmH2O</span></div>
+  <div class="kv-row"><span class="kv-key">Prévention récidive n°1</span><span class="kv-val">Arrêt du tabac (toujours mentionner)</span></div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
 </body>
 </html>
