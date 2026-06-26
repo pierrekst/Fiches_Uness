@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-25. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-26. Ne pas éditer à la main._
 
-**Avancement : 166 / 367 items (45.2%)**
+**Avancement : 167 / 367 items (45.5%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -27,7 +27,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 17 | [x] | Télémédecine | 17_Telemedecine.html |
 | 18 | [ ] | Santé et numérique | — |
 | 19 | [x] | La sécurité sociale | 19_protection_sociale_economie_sante.html |
-| 20 | [ ] | La méthodologie de la recherche en santé | — |
+| 20 | [x] | La méthodologie de la recherche en santé | 20_Methodologie_recherche.html |
 | 21 | [ ] | Mesure de l état de santé de la population | — |
 | 22 | [x] | Maladies rares | 22_Maladies_rares.html |
 | 23 | [x] | Grossesse normale | 23_Grossesse_normale.html |
