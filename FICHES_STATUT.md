@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-26. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-29. Ne pas éditer à la main._
 
-**Avancement : 167 / 367 items (45.5%)**
+**Avancement : 168 / 367 items (45.8%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -58,7 +58,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 48 | [ ] | Alimentation et besoins nutritionnels du nourrisson et de l enfant | — |
 | 49 | [ ] | Puberté normale et pathologique | — |
 | 50 | [ ] | Pathologie génito-scrotale chez le garçon et chez l homme | — |
-| 51 | [ ] | Troubles de la miction chez l enfant | — |
+| 51 | [x] | Troubles de la miction chez l enfant | 51_Troubles_miction_enfant.html |
 | 52 | [ ] | Strabisme et amblyopie de l enfant | — |
 | 53 | [x] | Retard de croissance staturo-pondérale | 53_Retard_croissance.html |
 | 54 | [ ] | Boiterie chez l enfant | — |
