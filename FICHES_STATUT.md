@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-06-29. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-07. Ne pas éditer à la main._
 
 **Avancement : 168 / 367 items (45.8%)**
 
@@ -46,7 +46,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 36 | [ ] | Contraception | — |
 | 37 | [ ] | Interruption volontaire de grossesse | — |
 | 38 | [ ] | Infertilité du couple | — |
-| 39 | [x] | Assistance médicale à la procréation | 39_AMP.html |
+| 39 | [x] | Assistance médicale à la procréation | 39_AMP_v2.html |
 | 40 | [ ] | Algies pelviennes chez la femme | — |
 | 41 | [ ] | Endométriose | — |
 | 42 | [ ] | Aménorrhée | — |
