@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-09. Ne pas éditer à la main._
 
-**Avancement : 168 / 367 items (45.8%)**
+**Avancement : 169 / 367 items (46.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -335,7 +335,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 325 | [x] | Identification et gestion des risques liés aux médicaments et aux biom… | 325_risque_iatrogenemedicamenteux_v2.html |
 | 326 | [x] | Cadre réglementaire de la prescription thérapeutique et recommandation… | 326_prescription_reglementaire.html |
 | 327 | [ ] | Principes de la médecine intégrative | — |
-| 328 | [ ] | Thérapeutiques non médicamenteuses et dispositifs médicaux | — |
+| 328 | [x] | Thérapeutiques non médicamenteuses et dispositifs médicaux | 328_Therapeutiques_non_medicamenteuses.html |
 | 329 | [x] | Connaître les caractéristiques des produits sanguins labiles | 329_Transfusion_PSL.html |
 | 330 | [x] | Prescription et surveillance des classes de médicaments les plus coura… | 330_Prescription_surveillance_medicaments.html |
 | 331 | [ ] | Arrêt cardio-circulatoire | — |

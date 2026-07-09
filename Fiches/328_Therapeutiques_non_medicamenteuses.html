@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 328 - Thérapeutiques non médicamenteuses et dispositifs médicaux</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 328</div>
+  <h1>Thérapeutiques non médicamenteuses et dispositifs médicaux</h1>
+  <div class="header-sub">Évaluation, cadre réglementaire, appareillage orthopédique, aides techniques, fauteuil roulant et cure thermale</div>
+  <div class="header-tags">
+    <span class="htag">Petit / grand appareillage</span>
+    <span class="htag">Orthèses & prothèses</span>
+    <span class="htag">Aides techniques</span>
+    <span class="htag">Fauteuil roulant</span>
+    <span class="htag">Cure thermale</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vision d'ensemble —</strong> Ce chapitre couvre tout ce qui « soigne » sans médicament : dispositifs médicaux, orthèses, prothèses, chaussage orthopédique, aides techniques, fauteuils roulants et cures thermales. Le fil conducteur est toujours le même : une thérapeutique non médicamenteuse se prescrit après un bilan fonctionnel (déficience / activité / participation / environnement), pour un objectif précis, avec des règles de prescription et de remboursement spécifiques selon qu'il s'agit de <strong>petit</strong> ou de <strong>grand appareillage</strong>. Retenez la distinction série/sur-mesure, qui prescrit quoi, et les taux de remboursement.
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Principes généraux et cadre réglementaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Expliquer les principes d'évaluation d'une thérapeutique non médicamenteuse</div>
+  <div class="obj-line">Connaître la définition d'un dispositif médical</div>
+  <div class="obj-line">Connaître les aspects réglementaires et médico-économiques des thérapeutiques non médicamenteuses</div>
+  <div class="obj-line">Connaître la définition du petit appareillage et du grand appareillage</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Évaluation d'une thérapeutique non médicamenteuse
+  </div>
+  <ul class="lst">
+    <li><strong>Bilan initial</strong> posant l'indication selon : déficiences, limitations d'activité, restrictions de participation, facteurs environnementaux (modèle CIF)</li>
+    <li>Prescription pour un <strong>objectif thérapeutique défini</strong></li>
+    <li><strong>Suivi</strong> (consultation d'une pathologie chronique) : rapport efficacité (déficience, activité, participation) / tolérance (complications) ; observance, conditions d'utilisation, entretien, facilité d'usage, surveillance, renouvellement</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Dispositif médical — définition
+    </div>
+    <p>Tout instrument, appareil, équipement, matière ou produit (hors produits d'origine humaine), y compris accessoires et logiciels, utilisé seul ou associé, à des fins médicales chez l'homme, dont l'action principale voulue <strong>n'est pas obtenue par des moyens pharmacologiques, immunologiques ou métaboliques</strong> (définition ANSM).</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Piège
+    </div>
+    <p>Le règlement européen UE 2017/745 (mai 2021) uniformise la <strong>mise sur le marché et la mise en service</strong> des dispositifs médicaux au sein de l'UE, mais <strong>ne réglemente ni les prix ni les remboursements</strong> par les organismes sociaux (compétence nationale).</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Aspects réglementaires — qui prescrit, qui rembourse
+  </div>
+  <table class="table-teal">
+    <tr><th>Prescripteur</th><th>Dispositif</th></tr>
+    <tr><td><strong>Médecin spécialiste</strong> (prescription initiale)</td><td>Podo-orthèses (dont chaussures orthopédiques), orthèses sur mesure, prothèses, fauteuils roulants électriques</td></tr>
+    <tr><td><strong>Médecin généraliste</strong></td><td>Renouvellement des dispositifs ci-dessus</td></tr>
+    <tr><td><strong>Kinésithérapeute</strong> (remboursable)</td><td>Certaines aides prévention d'escarre, aides à la déambulation, orthèses de série articulaires et rachidiennes</td></tr>
+    <tr><td><strong>IDE</strong> (remboursable)</td><td>Certaines aides prévention d'escarre, aides à la cicatrisation, contention élastique</td></tr>
+  </table>
+  <div class="pills" style="margin-top:12px;">
+    <span class="pill pill-teal">Inscription LPPR (Liste des Produits et Prestations Remboursables)</span>
+    <span class="pill pill-blue">Remboursement 60 à 100 % selon ALD</span>
+    <span class="pill pill-amber">Grand appareillage : entente préalable + formulaire spécifique</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></div>
+    Modes de financement
+  </div>
+  <div class="grid2">
+    <div>
+      <span class="badge badge-purple">Hôpital</span>
+      <p style="margin-top:6px;">Financement du DM (usage individuel ou lié à un acte) supporté par le <strong>tarif du séjour (GHS)</strong>, sauf si le DM est inscrit sur la liste « en sus » → financement par la LPPR. Anticiper l'organisation de sortie d'hospitalisation.</p>
+    </div>
+    <div>
+      <span class="badge badge-blue">Ville</span>
+      <p style="margin-top:6px;">DM financé directement par l'<strong>acte</strong>, ou par le <strong>tarif LPPR</strong> en cas d'usage individuel.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Petit appareillage vs grand appareillage
+  </div>
+  <table>
+    <tr><th></th><th>Petit appareillage</th><th>Grand appareillage</th></tr>
+    <tr><td><strong>Définition</strong></td><td>Compense une fonction organique déficiente, le plus souvent de série</td><td>Orthèse/prothèse complexe, y compris technologies sophistiquées (domotique)</td></tr>
+    <tr><td><strong>Exemple</strong></td><td>Bas de contention, chaussure thérapeutique, ceinture lombaire</td><td>Prothèse d'avant-bras myoélectrique, orthèse cruro-pédieuse articulée sur mesure, synthèse vocale</td></tr>
+    <tr><td><strong>Fabrication</strong></td><td>Série ou thermoplastique basse température</td><td>Sur mesure</td></tr>
+    <tr><td><strong>Prescription</strong></td><td>Ordonnance simple, tout médecin</td><td>Imprimé spécifique + entente préalable ; initiale par spécialiste, renouvellement par généraliste</td></tr>
+    <tr><td><strong>Remboursement</strong></td><td>LPPR, 60 %</td><td>LPPR, 100 % si ALD</td></tr>
+    <tr><td><strong>Réalisation</strong></td><td>Pharmacie, podo-orthésiste, orthoprothésiste</td><td>Orthoprothésiste, podo-orthésiste</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Orthèses
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les généralités sur les orthèses</div>
+  <div class="obj-line">Connaître les principales orthèses et leurs indications</div>
+  <div class="obj-line">Connaître les modalités de prescription des orthèses</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Généralités
+  </div>
+  <p><strong>Orthèse</strong> : dispositif qui supplée un membre ou un segment de membre déficient, ou le rachis. Peut relever du petit ou du grand appareillage.</p>
+  <div class="pills">
+    <span class="pill pill-teal">Immobilisation</span>
+    <span class="pill pill-teal">Repos</span>
+    <span class="pill pill-teal">Stabilisation</span>
+    <span class="pill pill-teal">Correction</span>
+    <span class="pill pill-teal">Suppléance</span>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège —</strong> le traitement <strong>orthétique</strong> (par orthèse) est différent du traitement <strong>orthopédique</strong> (après traumatisme ou chirurgie).</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Catégories d'orthèses
+  </div>
+  <table>
+    <tr><th>Catégorie</th><th>Objectif</th><th>Fabrication</th><th>Exemples d'indications</th></tr>
+    <tr><td>Immobilisation</td><td>Immobiliser une articulation</td><td>Série ou grand appareillage</td><td>Traumatisme, post-chirurgie, plexus brachial (coude au corps)</td></tr>
+    <tr><td>Stabilisation</td><td>Stabiliser une articulation, améliorer une fonction</td><td>Série ou grand appareillage</td><td>Entorse, pathologie articulaire, instabilité du genou, faiblesse musculaire</td></tr>
+    <tr><td>Posture statique</td><td>Améliorer un secteur de mobilité, lutter contre l'enraidissement</td><td>Série ou grand appareillage</td><td>Fracture, pathologie neuro, douleur, tendinopathie, post-chirurgie</td></tr>
+    <tr><td>Posture dynamique</td><td>Améliorer une amplitude, une fonction</td><td>Grand appareillage</td><td>Pathologie rhumato/neuro, paralysie, lésion tendineuse, post-chirurgie</td></tr>
+    <tr><td>Fonction</td><td>Améliorer la fonction</td><td>Grand appareillage</td><td>Plexus brachial (orthèse hélicoïdale), pied tombant (orthèse suro-pédieuse)</td></tr>
+    <tr><td>Décharge / semi-décharge</td><td>Décharger le membre inférieur</td><td>Série ou grand appareillage</td><td>Mal perforant, fracture, neuroarthropathie, infection, tumeur</td></tr>
+    <tr><td>Tronc (corset, coutil, ceinture lombaire)</td><td>Corriger une déformation, immobiliser, soulager une douleur</td><td>Série ou grand appareillage</td><td>Fracture vertébrale, scoliose, pathologie dégénérative/neuro/rhumato, lombalgie</td></tr>
+    <tr><td>Cervicale (minerve, collier)</td><td>Stabiliser, immobiliser, soulager une douleur</td><td>Série ou grand appareillage</td><td>Entorse, pathologie dégénérative/neuro/rhumato</td></tr>
+  </table>
+  <div class="kv-row" style="margin-top:10px;">
+    <span class="kv-key">Modalités de prescription des orthèses</span>
+    <span class="kv-val">= mêmes règles que petit/grand appareillage</span>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Prothèses de membre et chaussage orthopédique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les généralités sur les prothèses</div>
+  <div class="obj-line">Connaître la définition du chaussage orthopédique</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Prothèse de membre
+    </div>
+    <p><strong>Prothèse</strong> : dispositif qui remplace un membre ou un segment de membre manquant. Le <strong>membre résiduel</strong> = segment restant.</p>
+    <p style="margin-top:8px;"><strong>Éléments constitutifs</strong> (ex. prothèse fémorale) :</p>
+    <ul class="lst">
+      <li>Manchon (enfilé sur le membre résiduel)</li>
+      <li>Emboîture (accueille membre résiduel + manchon)</li>
+      <li>Pièces de liaison articulaires ou non articulaires</li>
+      <li>Effecteur terminal : pied, pilon… (mb inf) ou main, crochet… (mb sup)</li>
+      <li>Habillage esthétique</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Règles générales — rééducation des amputés <span class="badge badge-blue">Rang B</span>
+    </div>
+    <ul class="lst">
+      <li>Appareillage <strong>précoce</strong>, intégré à la rééducation en centre spécialisé</li>
+      <li>Choix de l'appareillage selon le <strong>projet de vie</strong> du sujet</li>
+      <li>Interactions précoces avec l'environnement du patient</li>
+      <li><strong>Membre inférieur</strong> : but fonctionnel, rarement esthétique</li>
+      <li><strong>Membre supérieur</strong> : but fonctionnel <em>et</em> esthétique</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Chaussage orthopédique
+  </div>
+  <table>
+    <tr><th>Type</th><th>Remboursement / prescription</th><th>Indications</th><th>Réalisation</th></tr>
+    <tr><td><strong>Chaussures orthopédiques sur mesure</strong> (grand appareillage)</td><td>60 à 100 % ; 1<sup>re</sup> paire prescrite par spécialiste</td><td>Pathologie neuro, trouble volumétrique, instabilité, inégalité de longueur, boiterie, déficit sensitivomoteur, chute du sujet âgé</td><td>Podo-orthésiste, voire orthoprothésiste</td></tr>
+    <tr><td><strong>Chaussures thérapeutiques de série</strong> (CHUT / CHUP)</td><td>60 % ; prescrites par tout médecin</td><td>Troubles trophiques, œdème</td><td>—</td></tr>
+    <tr><td><strong>Orthèses plantaires</strong></td><td>60 %</td><td>—</td><td>Podologue-pédicure, podo-orthésiste, orthoprothésiste</td></tr>
+    <tr><td><strong>Orthoplastie</strong></td><td>—</td><td>Protège les orteils</td><td>—</td></tr>
+    <tr><td><strong>Chaussure de décharge de série</strong></td><td>—</td><td>—</td><td>—</td></tr>
+  </table>
+  <div class="kv-row" style="margin-top:8px;">
+    <span class="kv-key">CHUT vs CHUP</span>
+    <span class="kv-val">Usage Temporaire vs Usage Permanent</span>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Aides techniques et fauteuil roulant
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition et les indications des différentes aides techniques</div>
+  <div class="obj-line">Connaître les modalités de prescription d'un fauteuil roulant</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Aides techniques — définition et catégories
+  </div>
+  <p><strong>Aide technique</strong> : tout dispositif (instrument, système…) <strong>non appliqué sur le corps</strong>, qui diminue les limitations d'activité et améliore l'autonomie, la sécurité et le bien-être d'une personne en situation de handicap.</p>
+  <table style="margin-top:10px;">
+    <tr><th>Catégorie</th><th>Exemple</th><th>Objectif</th><th>Indication</th></tr>
+    <tr><td>Déambulation</td><td>Cannes</td><td>Stabiliser la marche</td><td>Arthrose des mb inf, paralysie, trouble de l'équilibre</td></tr>
+    <tr><td>Déplacement</td><td>Fauteuil roulant électrique</td><td>Se déplacer</td><td>Pathologie neuro touchant les 4 membres</td></tr>
+    <tr><td>Station debout</td><td>Verticalisateur</td><td>Station debout</td><td>Paraplégie, tétraplégie</td></tr>
+    <tr><td>Manipulation / préhension</td><td>Planche de bain, guidon de transfert, lève-personne</td><td>Hygiène, transferts</td><td>Pathologie neuro, rhumato, traumato</td></tr>
+    <tr><td>Décubitus / position assise</td><td>Lit médicalisé, matelas anti-escarre</td><td>Autonomie au lit, prévention d'escarre</td><td>Décubitus prolongé (neuro, rhumato, traumato)</td></tr>
+    <tr><td>Contrôle d'environnement</td><td>Domotique</td><td>Autonomie à domicile</td><td>Tétraplégie</td></tr>
+    <tr><td>Communication</td><td>Synthèse vocale</td><td>Communiquer</td><td>Pathologie neuro</td></tr>
+    <tr><td>Audition</td><td>Appareils auditifs</td><td>Entendre</td><td>Baisse de l'audition, surdité</td></tr>
+    <tr><td>Vision</td><td>Braille</td><td>Voir</td><td>Cécité</td></tr>
+    <tr><td>Ventilation</td><td>Respirateur</td><td>Respirer</td><td>Myopathie, tétraplégie, apnée du sommeil, ronflements</td></tr>
+    <tr><td>Vésico-sphinctérien</td><td>Sondes urinaires</td><td>Vidange vésicale</td><td>Vessie neurologique</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Prescription du fauteuil roulant
+  </div>
+  <table class="table-teal">
+    <tr><th></th><th>Fauteuil roulant manuel</th><th>Fauteuil roulant électrique</th></tr>
+    <tr><td><strong>Prescription</strong></td><td>Ordonnance simple, par tout médecin</td><td>Ordonnance simple + certificat d'essai</td></tr>
+    <tr><td><strong>Validation</strong></td><td>—</td><td>Essai de validation de l'adéquation au handicap et de la non-dangerosité par médecin de MPR + kiné ou ergothérapeute</td></tr>
+    <tr><td><strong>Financement</strong></td><td>Achat ou location, pris en charge par l'assurance maladie</td><td>Achat uniquement ; entente préalable auprès de l'assurance maladie ; complément possible par la MDPH</td></tr>
+    <tr><td><strong>Accessoire</strong></td><td colspan="2" style="text-align:center;">Associé ou non à la prescription d'un coussin anti-escarre</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Cure thermale
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition d'une cure thermale</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Définition
+  </div>
+  <p>Ensemble des thérapeutiques appliquées à un patient pendant son séjour en station thermale : <strong>crénothérapie</strong>, mais aussi repos, dépaysement, climat, et éventuellement soins non thermaux (rééducation fonctionnelle, éducation thérapeutique). ~<strong>600 000 curistes/an</strong> en France.</p>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — à ne pas confondre :</strong><br>Médecine thermale ≠ hydrothérapie (eau quelconque, sans tenir compte de sa composition)<br>Médecine thermale ≠ thalassothérapie (eau de mer, sans suivi médical systématique, non remboursée)<br>Médecine thermale ≠ Médecine Physique et de Réadaptation</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Eaux thermales
+    </div>
+    <p><strong>Thermalité</strong> (température) : froides (8-15°C, diurèse), mésothermales (25-34°C, bains prolongés), hyperthermales (inhalation, douche, bain).</p>
+    <p style="margin-top:6px;"><strong>Minéralité</strong> : sulfurées (respiratoire), sulfatées (urinaire/métabolique), chlorurées sodiques, bicarbonatées gazeuses, à élément rare, faiblement minéralisées.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Techniques thermales
+    </div>
+    <ul class="lst">
+      <li><strong>Hydrothérapie interne</strong> : cures de boisson (100-300 mL/j), cures de diurèse (jusqu'à 3 L/j)</li>
+      <li><strong>Cures de contact</strong> : inhalations, aérosols, balnéothérapie, bain nasal, lavage de sinus</li>
+      <li><strong>Hydrothérapie externe</strong> : bains, douches (locales/régionales/générales)</li>
+      <li>+ rééducation fonctionnelle, kinésithérapie, éducation sanitaire</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Indications et orientations thérapeutiques
+  </div>
+  <p>Pathologies <strong>chroniques, incomplètement améliorées</strong>. Répartition : <strong>rhumatologie (3/4)</strong>, voies respiratoires (1/10), phlébologie (1/20). Indications les mieux validées : rhumatologie (arthrose, lombalgie chronique, rhumatismes inflammatoires hors poussée), artérites, troubles anxieux généralisés.</p>
+  <p style="margin-top:8px;">12 orientations thérapeutiques reconnues par la Sécurité sociale (une station peut en avoir 2, exceptionnellement 3) :</p>
+  <div class="pills" style="margin-top:6px;">
+    <span class="pill pill-teal">RH — Rhumatologie</span>
+    <span class="pill pill-blue">VR — Voies respiratoires</span>
+    <span class="pill pill-purple">MCA — Cardio-artériel</span>
+    <span class="pill pill-amber">AU — Appareil urinaire</span>
+    <span class="pill pill-coral">AD — Appareil digestif</span>
+    <span class="pill pill-teal">PHL — Phlébologie</span>
+    <span class="pill pill-blue">GYN — Gynécologie</span>
+    <span class="pill pill-purple">DER — Dermatologie</span>
+    <span class="pill pill-amber">AMB — Muqueuses bucco-linguales</span>
+    <span class="pill pill-coral">NEU — Neurologie</span>
+    <span class="pill pill-teal">PSY — Affections psychosomatiques</span>
+    <span class="pill pill-blue">TDE — Développement de l'enfant</span>
+  </div>
+  <div class="kv-row" style="margin-top:10px;">
+    <span class="kv-key">3 principales stations</span>
+    <span class="kv-val">Balaruc (RH, PHL) · Dax (RH, PHL) · Gréoux (RH, VR)</span>
+  </div>
+  <div class="kv-row">
+    <span class="kv-key">Répartition régionale</span>
+    <span class="kv-val">Occitanie (200 000/an) > Nouvelle-Aquitaine (150 000) > Auvergne-Rhône-Alpes (130 000)</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Effets indésirables / contre-indications
+    </div>
+    <p><strong>EI</strong> : très rares, souvent non graves — asthénie en début de cure (« crise thermale »), complications des techniques.</p>
+    <p style="margin-top:6px;"><strong>CI</strong> : infections, cancers, maladies en poussée, maladies cardiovasculaires récentes, immunodépression.</p>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Prescription et remboursement
+    </div>
+    <div class="kv-row"><span class="kv-key">Prescripteur</span><span class="kv-val">Médecin traitant</span></div>
+    <div class="kv-row"><span class="kv-key">Durée</span><span class="kv-val">3 semaines</span></div>
+    <div class="kv-row"><span class="kv-key">Remboursement standard</span><span class="kv-val">65 %</span></div>
+    <div class="kv-row"><span class="kv-key">Si ALD / MP / AT</span><span class="kv-val">100 %</span></div>
+    <div class="kv-row"><span class="kv-key">Pratiques complémentaires</span><span class="kv-val">70 %</span></div>
+    <div class="kv-row"><span class="kv-key">Forfait surveillance médicale</span><span class="kv-val">3 consultations (début/milieu/fin)</span></div>
+    <div class="kv-row"><span class="kv-key">Fréquence</span><span class="kv-val">1 cure/an remboursée, renouvelable chaque année</span></div>
+  </div>
+</div>
+
+<hr>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>Dispositif médical</strong> : action principale non pharmacologique/immunologique/métabolique (ANSM)</li>
+    <li><strong>Petit appareillage</strong> = série, ordonnance simple, tout médecin, LPPR 60 % — <strong>Grand appareillage</strong> = sur mesure, entente préalable, prescription initiale par spécialiste, LPPR 100 % si ALD</li>
+    <li>Orthèse ≠ traitement orthopédique : suppléance/immobilisation/stabilisation/correction/posture/fonction/décharge</li>
+    <li>Chaussures orthopédiques sur mesure = grand appareillage ; CHUT/CHUP = série (temporaire/permanent)</li>
+    <li>Aide technique = dispositif <strong>non appliqué sur le corps</strong>, améliore l'autonomie en situation de handicap</li>
+    <li>Fauteuil électrique : essai obligatoire (médecin MPR + kiné/ergothérapeute), achat uniquement, entente préalable + MDPH possible</li>
+    <li>Cure thermale : 3 semaines, prescrite par le médecin traitant, remboursée 65 % (100 % si ALD/MP/AT) ; 1 seule cure/an remboursée ; principale indication = rhumatologie</li>
+    <li><strong>Piège</strong> : ne pas confondre médecine thermale, hydrothérapie et thalassothérapie (cette dernière non remboursée)</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
