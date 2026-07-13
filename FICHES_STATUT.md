@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-09. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-13. Ne pas éditer à la main._
 
-**Avancement : 169 / 367 items (46.0%)**
+**Avancement : 170 / 367 items (46.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -77,7 +77,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 67 | [x] | Troubles du neurodéveloppement | 67_Troubles_neurodeveloppement_v2.html |
 | 68 | [ ] | Troubles du comportement de l enfant et de l adolescent | — |
 | 69 | [ ] | Troubles psychiques de la grossesse et du post-partum | — |
-| 70 | [ ] | Troubles psychiques du sujet âgé | — |
+| 70 | [x] | Troubles psychiques du sujet âgé | 70_Troubles_psychiques_sujet_age.html |
 | 71 | [x] | Troubles des conduites alimentaires chez l adolescent et l adulte | 71_TCA.html |
 | 72 | [ ] | Troubles à symptomatologie somatique et apparentés à tous les âges | — |
 | 73 | [ ] | Différents types de techniques psychothérapeutiques | — |
