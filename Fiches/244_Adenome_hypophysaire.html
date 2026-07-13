@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>244 - Adénome hypophysaire</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 244</div>
+  <h1>Adénome hypophysaire</h1>
+  <div class="header-sub">Syndrome tumoral · Hypersécrétions · Insuffisance antéhypophysaire · Hyperprolactinémie</div>
+  <div class="header-tags">
+    <span class="htag">Syndrome chiasmatique</span>
+    <span class="htag">Prolactine</span>
+    <span class="htag">Acromégalie</span>
+    <span class="htag">Cushing ACTH-dépendant</span>
+    <span class="htag">IRM hypophysaire</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Un adénome hypophysaire se révèle par 3 grands mécanismes, souvent combinés : un <strong>effet de masse</strong> (syndrome tumoral — céphalées, syndrome chiasmatique), une <strong>hypersécrétion</strong> hormonale spécifique (prolactine ++, GH, ACTH) et/ou une <strong>insuffisance antéhypophysaire</strong> par compression du tissu sain. Le <strong>diabète insipide n'est pas un signe d'adénome</strong> — sa présence doit faire évoquer une autre lésion (ou une complication post-opératoire/apoplexie). Le bilan hormonal statique et l'IRM hypophysaire orientent le diagnostic ; devant une hyperprolactinémie, il faut d'abord éliminer grossesse, médicaments et déconnexion avant de retenir un prolactinome.
+</div>
+
+<!-- ==================== SECTION 1 : SYNDROME TUMORAL ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Syndrome tumoral hypophysaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier les éléments cliniques d'un syndrome tumoral neuro-hypophysaire</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Céphalées
+    </div>
+    <p style="font-size:.84rem;">Typiquement frontales ou rétro-orbitaires, <strong>sans proportionnalité</strong> avec la taille de l'adénome.</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Troubles visuels
+    </div>
+    <p style="font-size:.84rem;">Compression des voies optiques (syndrome chiasmatique) : <strong>quadranopsie temporale supérieure</strong> puis <strong>hémianopsie bitemporale</strong>. Périmétrie de Goldman/automatisée + acuité visuelle œil par œil.</p>
+  </div>
+</div>
+
+<div class="kv-row" style="background:var(--card);border:0.5px solid var(--border);border-radius:10px;padding:10px 16px;margin-bottom:14px;">
+  <span class="kv-key">HTIC (exceptionnelle)</span><span class="kv-val">Céphalées tenaces, vomissements en jet, mydriase bilatérale</span>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Apoplexie hypophysaire</strong> : infarcissement hémorragique d'un adénome parfois méconnu.<br>Céphalées brutales et violentes + photophobie + ptosis + paralysie oculomotrice + tableau pseudo-méningé.</div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 2 : HYPERSECRETIONS ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Signes cliniques des hypersécrétions
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier les signes cliniques orientant vers une hypersécrétion anté-hypophysaire (prolactine, GH, ACTH, TSH, gonadotrophines)</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Hyperprolactinémie
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="step-title" style="font-size:.83rem;margin-bottom:4px;">Chez la femme</div>
+      <ul class="lst"><li>Oligoménorrhée, aménorrhée secondaire</li><li>Galactorrhée spontanée ou provoquée</li></ul>
+    </div>
+    <div>
+      <div class="step-title" style="font-size:.83rem;margin-bottom:4px;">Chez l'homme</div>
+      <ul class="lst"><li>Dysfonction érectile</li><li>Gynécomastie possible</li></ul>
+    </div>
+  </div>
+  <p style="font-size:.84rem;margin-top:6px;">Dans les deux sexes : baisse de la libido, infertilité.</p>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>L'association <strong>aménorrhée-galactorrhée</strong> chez la femme en âge de procréer doit systématiquement faire évoquer une hyperprolactinémie.</div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Acromégalie (excès de GH)
+  </div>
+  <p style="font-size:.84rem;">Installation <strong>progressive</strong> (clichés antérieurs comparatifs utiles).</p>
+  <ul class="lst">
+    <li>Extrémités : élargissement des mains/pieds, signe de la bague, changement de pointure</li>
+    <li>Dysmorphie faciale : nez élargi, bosses frontales, sillons nasogéniens marqués, prognathisme, macroglossie, perte de l'articulé dentaire</li>
+    <li>Squelette (moins fréquent) : cyphose dorsale, projection antérieure du sternum</li>
+    <li>Fonctionnels : sueurs nocturnes, paresthésies (canal carpien), arthralgies, HTA, sommeil non récupérateur, asthénie</li>
+  </ul>
+  <div class="pills">
+    <span class="pill pill-teal">Comorbidités à évoquer : SAOS</span>
+    <span class="pill pill-teal">HTA</span>
+    <span class="pill pill-teal">Diabète sucré</span>
+    <span class="pill pill-teal">Goitre</span>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Maladie de Cushing (excès d'ACTH → hypercortisolisme)
+  </div>
+  <p style="font-size:.84rem;">Anomalies morphologiques <strong>acquises</strong> (effet catabolisant/anti-anabolisant des glucocorticoïdes).</p>
+  <ul class="lst">
+    <li>Amyotrophie des ceintures, ecchymoses faciles, vergetures pourpres larges, télangiectasies du visage</li>
+    <li>Obésité facio-tronculaire, « bosse de bison », comblement des creux sus-claviculaires</li>
+    <li>Troubles de l'humeur (dépression, irritabilité, tableau psychotique aigu), anxiété</li>
+    <li>Baisse de libido/impuissance (homme), spanio/aménorrhée (femme)</li>
+    <li>Si hyperandrogénie associée : hirsutisme modéré, séborrhée</li>
+  </ul>
+  <div class="pills">
+    <span class="pill pill-red">Comorbidités : diabète sucré</span>
+    <span class="pill pill-red">HTA résistante</span>
+    <span class="pill pill-red">Ostéoporose</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Excès de TSH (rare)
+    </div>
+    <p style="font-size:.84rem;">Thyrotoxicose + goitre homogène + syndrome tumoral hypophysaire associé.</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Excès de gonadotrophines (LH/FSH)
+    </div>
+    <p style="font-size:.84rem;">Exceptionnel cliniquement : hyperstimulation ovarienne (macrokystes), macro-orchidie. La majorité des adénomes gonadotropes sont en réalité <strong>non fonctionnels</strong> cliniquement (sous-unités inactives, sécrétion non pulsatile).</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 3 : INSUFFISANCE ANTEHYPOPHYSAIRE + DI ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Insuffisance antéhypophysaire et diabète insipide
+</div>
+<div class="obj-list">
+  <div class="obj-line">Identifier un tableau d'insuffisance antéhypophysaire associée</div>
+  <div class="obj-line">Connaître les signes d'un diabète insipide et savoir qu'il n'est pas lié à l'adénome lui-même</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Signes généraux + par axe
+  </div>
+  <p style="font-size:.84rem;">Tableau dépendant de la profondeur et de la durée d'installation. Signes généraux : pâleur, dépilation, dépigmentation (aréoles, OGE), peau fine et fragile.</p>
+  <table>
+    <tr><th>Axe</th><th>Signes cliniques</th></tr>
+    <tr><td>Corticotrope</td><td>Asthénie importante, hypotension artérielle, anorexie, amaigrissement</td></tr>
+    <tr><td>Thyréotrope</td><td>Signes d'hypothyroïdie, à un degré moindre</td></tr>
+    <tr><td>Gonadotrope</td><td>Aménorrhée, baisse de libido, dépilation (visage, OGE), troubles de l'érection, dyspareunie, infertilité</td></tr>
+    <tr><td>Somatotrope</td><td>Asthénie ; peu de traduction clinique chez l'adulte</td></tr>
+    <tr><td>Lactotrope</td><td>Absence de montée laiteuse</td></tr>
+  </table>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Diabète insipide
+  </div>
+  <div class="kv-row"><span class="kv-key">Signe cardinal</span><span class="kv-val">Syndrome polyuro-polydipsique</span></div>
+  <div class="kv-row"><span class="kv-key">Polyurie</span><span class="kv-val">Hypotonique &lt; 250-300 mOsm/kg, &gt; 2,5 L/24h (30-40 mL/kg)</span></div>
+  <div class="kv-row"><span class="kv-key">Polydipsie</span><span class="kv-val">Ingesta &gt; 3 L/24h</span></div>
+  <div class="kv-row"><span class="kv-key">Risque si pertes &gt; entrées</span><span class="kv-val">Hypernatrémie, déshydratation intracellulaire</span></div>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège classique.</strong> Un adénome hypophysaire ne s'accompagne <strong>jamais</strong> de diabète insipide au diagnostic — sauf apoplexie hypophysaire ou après chirurgie. Un DI d'emblée doit faire évoquer une <strong>autre lésion</strong> qu'un adénome.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 4 : BILAN HORMONAL STATIQUE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Bilan hormonal antéhypophysaire statique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir prescrire un bilan hormonal antéhypophysaire « statique » selon le contexte clinique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    4 indications au bilan
+  </div>
+  <div class="pills">
+    <span class="pill pill-blue">1. Syndrome tumoral découvrant une lésion sellaire</span>
+    <span class="pill pill-blue">2. Symptômes d'hypersécrétion</span>
+    <span class="pill pill-blue">3. Signes d'insuffisance antéhypophysaire</span>
+    <span class="pill pill-blue">4. Découverte fortuite (incidentalome)</span>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Syndrome tumoral → dosage de prolactine +++
+  </div>
+  <p style="font-size:.84rem;">Un syndrome tumoral implique un traitement rapide ; il s'agit alors d'un <strong>macroadénome</strong>.</p>
+  <div class="kv-row"><span class="kv-key">Prolactine &gt; 200 ng/mL</span><span class="kv-val">Confirme le macroadénome à prolactine</span></div>
+  <div class="kv-row"><span class="kv-key">Prolactine &lt; 200 ng/mL</span><span class="kv-val">Hyperprolactinémie de déconnexion → traitement chirurgical</span></div>
+  <div class="alert alert-green" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Si prolactinome confirmé : agoniste dopaminergique → diminution rapide du volume tumoral et disparition du syndrome tumoral.</div>
+  </div>
+  <p style="font-size:.84rem;margin-top:8px;">Devant un macroadénome (ou toute lésion comprimant les structures voisines), la recherche d'une <strong>insuffisance antéhypophysaire</strong> est indispensable +++</p>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Recherche d'insuffisance antéhypophysaire — par axe
+  </div>
+  <table class="table-teal">
+    <tr><th>Axe</th><th>Dosage statique</th><th>Interprétation</th></tr>
+    <tr><td>Corticotrope</td><td>Cortisol à 8h</td><td>Élevé = élimine ; effondré = confirme ; intermédiaire → test au Synacthène</td></tr>
+    <tr><td>Gonadotrope (homme)</td><td>Testostérone + FSH/LH</td><td>Testostérone basse + FSH/LH non élevées = confirme</td></tr>
+    <tr><td>Gonadotrope (femme)</td><td>17β-œstradiol + FSH/LH</td><td>Œstradiol bas + FSH/LH non élevées (en aménorrhée) = confirme</td></tr>
+    <tr><td>Thyréotrope</td><td>T4L + TSH</td><td>T4L basse + TSH normale/non élevée = confirme</td></tr>
+    <tr><td>Somatotrope</td><td>IGF1 (+ GH)</td><td>IGF1 basse en faveur ; test dynamique (hypoglycémie insulinique) indispensable</td></tr>
+  </table>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège — contexte de stress</strong> (céphalée aiguë, masse kystique, apoplexie) : ne pas attendre 8h du matin, prélever le cortisol immédiatement <strong>avant</strong> l'hydrocortisone en urgence.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Diagnostic d'acromégalie
+    </div>
+    <div class="kv-row"><span class="kv-key">Statique</span><span class="kv-val">IGF1 élevée ; GH jamais &lt; 1 mUI/L</span></div>
+    <div class="kv-row"><span class="kv-key">Dynamique</span><span class="kv-val">Freinage GH sous HGPO</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Diagnostic d'hypercortisolisme
+    </div>
+    <div class="kv-row"><span class="kv-key">Statique</span><span class="kv-val">Cortisol minuit non bas ; FLU/créat. augmenté</span></div>
+    <div class="kv-row"><span class="kv-key">Dynamique</span><span class="kv-val">Freinage minute à la dexaméthasone</span></div>
+    <div class="kv-row"><span class="kv-key">Origine ACTH-dépendante</span><span class="kv-val">ACTH non basse</span></div>
+    <div class="kv-row"><span class="kv-key">Hypophysaire vs ectopique</span><span class="kv-val">Freinage fort, test au CRH, test desmopressine</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Bilan complet devant un syndrome tumoral
+  </div>
+  <p style="font-size:.84rem;">Cortisol 8h · Testostérone (homme) ou 17β-œstradiol (femme) · FSH · LH · T4L · TSH · Prolactine · +/- IGF1, GH.</p>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Microadénome
+    </div>
+    <p style="font-size:.84rem;">Recherche d'hypersécrétion uniquement ; pas d'insuffisance (sauf gonadotrope si microprolactinome).</p>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Macroadénome
+    </div>
+    <p style="font-size:.84rem;">Recherche systématique d'hypersécrétion <strong>et</strong> d'insuffisance.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 5 : IRM ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Indications de l'IRM hypophysaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications de l'IRM hypophysaire en fonction du contexte clinique et biologique</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>L'IRM est l'examen de <strong>référence</strong> de la région hypothalamo-hypophysaire.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Situations indiquant une IRM
+  </div>
+  <ul class="lst">
+    <li>Syndrome tumoral hypophysaire (céphalées, atteinte chiasmatique, atteinte du sinus caverneux, diplopie, apoplexie)</li>
+    <li>Signes cliniques ou biologiques d'hypersécrétion (acromégalie, Cushing ACTH-dépendant, insuffisance gonadotrope secondaire à une hyperprolactinémie)</li>
+    <li>Signes cliniques et biologiques d'insuffisance antéhypophysaire (hyponatrémie, cortisol bas à 8h avec ACTH non élevé, T4 basse avec TSH non élevée, testostérone/œstradiol bas avec FSH-LH non élevées)</li>
+    <li>Découverte d'un incidentalome hypophysaire (anomalie vue sur scanner/IRM cérébrale)</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Signes de diabète insipide (polyuro-polydipsie, glycémie/calcémie/kaliémie normales) : l'adénome hypophysaire <strong>n'en est pas responsable</strong> (sauf post-op/apoplexie) → évoquer une autre lésion.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 6 : HYPERPROLACTINEMIE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Diagnostic différentiel d'une hyperprolactinémie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Rechercher les autres causes d'hyperprolactinémie en cas de suspicion d'un adénome à prolactine</div>
+</div>
+
+<div class="card">
+  <p style="font-size:.84rem;">Fréquente (1-1,5 % des adultes). Dans la <strong>majorité des cas, d'origine médicamenteuse</strong>.</p>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Vérifier la réalité de l'hyperprolactinémie</div>
+        <div class="step-content">Contrôle en laboratoire d'hormonologie spécialisé — écarter une macroprolactinémie (agrégats inactifs, faussement élevée ; seule la forme monomérique est active). Se demander pourquoi la prolactine a été dosée.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">2</div>
+      <div>
+        <div class="step-title">Éliminer grossesse, causes médicamenteuses et générales</div>
+        <div class="step-content">hCG systématique. Interrogatoire soigneux sur les traitements en cours.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Médicaments hyperprolactinémiants
+  </div>
+  <div class="pills">
+    <span class="pill pill-amber">Neuroleptiques +++</span>
+    <span class="pill pill-amber">Antidépresseurs (tricycliques, IMAO)</span>
+    <span class="pill pill-amber">Métoclopramide / dompéridone</span>
+    <span class="pill pill-amber">Œstrogènes</span>
+    <span class="pill pill-amber">Morphiniques</span>
+    <span class="pill pill-amber">Vérapamil</span>
+    <span class="pill pill-amber">Méthyldopa</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Physiopathologie des étiologies
+  </div>
+  <p style="font-size:.84rem;">La sécrétion de PRL par la cellule lactotrope est freinée en permanence par la <strong>dopamine hypothalamique</strong>.</p>
+  <table>
+    <tr><th>Mécanisme</th><th>Cause</th></tr>
+    <tr><td>Antagonisme du récepteur dopaminergique</td><td>Neuroleptiques +++</td></tr>
+    <tr><td>Déconnexion (interruption du trafic dopaminergique dans la tige pituitaire)</td><td>Section ou compression par une tumeur <strong>non lactotrope</strong></td></tr>
+    <tr><td>Sécrétion tumorale directe</td><td>Adénome à prolactine (prolactinome) — tumeur des cellules lactotropes</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>3 mécanismes de révélation :</strong> syndrome tumoral (céphalées non proportionnelles à la taille, hémianopsie bitemporale), hypersécrétion (prolactine, GH, ACTH ++), insuffisance antéhypophysaire.</li>
+    <li><strong>Diabète insipide :</strong> jamais dû à l'adénome lui-même (sauf apoplexie/post-op) — évoquer une autre lésion.</li>
+    <li><strong>Syndrome tumoral :</strong> doser la prolactine en premier — &gt; 200 ng/mL = macroadénome à prolactine, traitement médical (agoniste dopaminergique) ; &lt; 200 ng/mL = déconnexion, traitement chirurgical.</li>
+    <li><strong>Bilan corticotrope en urgence</strong> (apoplexie, masse kystique) : prélever le cortisol avant l'hydrocortisone, ne pas attendre 8h.</li>
+    <li><strong>Hyperprolactinémie :</strong> éliminer macroprolactinémie, grossesse, médicaments (neuroleptiques +++) avant de retenir un prolactinome.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

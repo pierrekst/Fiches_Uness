@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>144 - Deuil normal et pathologique</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 144</div>
+  <h1>Deuil normal et pathologique</h1>
+  <div class="header-sub">Processus normal · Deuil complexe persistant · Troubles psychiatriques concomitants · Prise en charge</div>
+  <div class="header-tags">
+    <span class="htag">Deuil complexe persistant</span>
+    <span class="htag">Risque suicidaire</span>
+    <span class="htag">Facteurs de risque</span>
+    <span class="htag">Pas d'antidépresseur systématique</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Le deuil est un processus <strong>normal</strong> d'accommodation à la perte d'un proche, évoluant spontanément vers l'apaisement en 2-3 mois. Il devient <strong>pathologique</strong> soit par blocage du processus lui-même (deuil complexe persistant, durée &gt; 12 mois), soit par la survenue d'un authentique trouble psychiatrique (épisode dépressif caractérisé ++, risque suicidaire, ESPT, troubles anxieux, addictions). Certains facteurs liés au contexte du décès ou à l'endeuillé augmentent le risque de complication. La prise en charge du deuil normal repose sur l'écoute et l'accompagnement, <strong>sans médicalisation ni antidépresseur</strong> ; le deuil complexe persistant relève d'une psychothérapie de type TCC.
+</div>
+
+<!-- ==================== SECTION 1 : DEUIL NORMAL ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Deuil normal
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques d'un deuil normal : définition, durée, réactions successives</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Définition
+  </div>
+  <p style="font-size:.85rem;">Processus <strong>normal</strong> émotionnel, cognitif et comportemental en réponse au décès d'un proche, dont le but est l'<strong>accommodation à la perte</strong>. Varie selon la culture de l'individu. Évolue <strong>spontanément vers l'amélioration</strong>.</p>
+  <div class="kv-row"><span class="kv-key">Durée habituelle</span><span class="kv-val">2 à 3 mois</span></div>
+  <div class="kv-row"><span class="kv-key">Durée prolongée si</span><span class="kv-val">Proximité du lien, âge, contexte du décès</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Trois types de réactions (se superposent ou se succèdent)
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Choc, dénégation de la perte</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Tristesse, douleur morale</div>
+        <div class="step-content">Sentiment d'absence, état de manque, colère, anxiété, perplexité</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Réorganisation</div>
+        <div class="step-content">Acceptation de la perte, réinvestissement du quotidien en l'absence du défunt</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Le <strong>comportement favorise</strong> le processus de deuil : canaliser l'émotion, organiser le souvenir, s'adapter à la perte, donner du sens à la vie sans le défunt.</div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 2 : DEUIL PATHOLOGIQUE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Deuil pathologique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques du deuil complexe persistant (critères DSM-5)</div>
+  <div class="obj-line">Connaître les troubles psychiatriques pouvant survenir ou récidiver dans un contexte de deuil</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Le deuil devient pathologique si le processus <strong>n'évolue pas vers l'apaisement</strong> (deuil complexe persistant) <strong>ou</strong> si survient un trouble psychiatrique.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Deuil complexe persistant — critères diagnostiques (DSM-5)
+  </div>
+  <ul class="lst">
+    <li>Décès d'un proche</li>
+    <li>Tristesse intense, douleur morale, préoccupations autour du défunt ou de son décès</li>
+    <li>Difficulté à accepter le décès, évitement de ce qui rappelle le décès (anxiété)</li>
+    <li>Rupture sociale ou identitaire : idées suicidaires pour rejoindre le défunt, méfiance, perte de sens</li>
+    <li>Symptômes <strong>ne correspondant pas à la culture</strong> de l'individu</li>
+    <li>Dysfonctionnement psychosocial</li>
+  </ul>
+  <div class="kv-row" style="margin-top:6px;"><span class="kv-key">Durée seuil (adulte)</span><span class="kv-val">&gt; 12 mois</span></div>
+  <div class="kv-row"><span class="kv-key">Durée seuil (enfant)</span><span class="kv-val">&gt; 6 mois</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Troubles psychiatriques concomitants
+  </div>
+  <p style="font-size:.84rem;">Le deuil est un facteur de stress environnemental majeur : tout trouble psychiatrique peut survenir ou récidiver.</p>
+  <table class="table-red">
+    <tr><th>Trouble</th><th>Point clé</th></tr>
+    <tr><td>Épisode dépressif caractérisé</td><td><strong>Le plus fréquent</strong></td></tr>
+    <tr><td>Risque suicidaire</td><td><strong>Majeur, notamment la 1<sup>re</sup> semaine</strong></td></tr>
+    <tr><td>Trouble de stress post-traumatique</td><td>Contexte de mort violente/brutale</td></tr>
+    <tr><td>Troubles anxieux</td><td>Trouble anxieux généralisé notamment</td></tr>
+    <tr><td>Trouble de l'usage d'alcool ou de substance</td><td>—</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 3 : FACTEURS DE RISQUE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Facteurs de risque de complication du deuil
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les facteurs de risque de complications du deuil (contexte du décès, caractéristiques de l'endeuillé)</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Contexte du décès
+    </div>
+    <ul class="lst">
+      <li>Mort brutale, inattendue, violente ou par suicide</li>
+      <li>Défunt plus jeune que l'endeuillé</li>
+      <li>Défunt conjoint ou enfant</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Caractéristiques de l'endeuillé
+    </div>
+    <ul class="lst">
+      <li>Âge jeune, sexe féminin</li>
+      <li>Relation proche, deuil répété</li>
+      <li>Antécédents de trouble psychiatrique</li>
+      <li>Ressources internes médiocres de gestion du stress</li>
+      <li>Idées de culpabilité</li>
+      <li>Faible réseau social, incompréhension de la situation</li>
+      <li>Absence de rituel de deuil</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Les facteurs de risque des troubles psychiatriques concomitants sont les <strong>mêmes</strong> qu'ils surviennent ou non dans un contexte de deuil.</div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 4 : PRISE EN CHARGE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de la prise en charge d'un deuil normal et pathologique</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Deuil normal — principes de consultation
+  </div>
+  <ul class="lst">
+    <li>Écoute empathique</li>
+    <li><strong>Pas de médicalisation</strong> d'un deuil normal, mais écarter au préalable un deuil complexe persistant</li>
+    <li>Écarter un épisode dépressif caractérisé ou un autre trouble psychiatrique</li>
+    <li><strong>Évaluer le risque suicidaire</strong></li>
+    <li>Informer sur le processus normal de deuil, notamment la phase de réorganisation</li>
+    <li>Informer sur l'intérêt de partager sa douleur (réseau social proche, associations de soutien)</li>
+    <li>Psychothérapie de soutien</li>
+    <li>Mettre en place une surveillance (phases du deuil, ressources internes et externes)</li>
+  </ul>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège.</strong> Pas de prescription d'<strong>antidépresseur</strong> dans un deuil normal. Les anxiolytiques/hypnotiques sont <strong>souvent inefficaces</strong> sur les perturbations du sommeil dans ce contexte.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Deuil complexe persistant
+    </div>
+    <ul class="lst">
+      <li>Examen clinique complet (notamment cardiovasculaire)</li>
+      <li>Psychothérapie de type <strong>cognitivo-comportementale (TCC)</strong></li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Trouble psychiatrique concomitant
+    </div>
+    <ul class="lst">
+      <li>Épisode dépressif caractérisé : prise en charge identique à un EDC hors contexte de deuil</li>
+      <li>Autres troubles : prise en charge identique à un trouble survenant hors contexte de deuil</li>
+      <li><strong>Évaluation systématique du risque suicidaire</strong> dans tous les cas</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>Deuil normal :</strong> 2-3 mois, évolution spontanée vers l'apaisement, 3 réactions successives/superposées (choc → tristesse → réorganisation).</li>
+    <li><strong>Deuil complexe persistant :</strong> non-évolution vers l'apaisement, durée &gt; 12 mois (adulte) / &gt; 6 mois (enfant), symptômes hors norme culturelle, dysfonctionnement psychosocial.</li>
+    <li><strong>Trouble psychiatrique le plus fréquent :</strong> épisode dépressif caractérisé. Risque suicidaire majeur dès la 1<sup>re</sup> semaine — à évaluer systématiquement.</li>
+    <li><strong>Facteurs de risque :</strong> mort brutale/violente/suicide, défunt jeune/conjoint/enfant, endeuillé jeune, femme, ATCD psychiatriques, faible réseau social, absence de rituel.</li>
+    <li><strong>Prise en charge du deuil normal :</strong> écoute, information, soutien — jamais d'antidépresseur systématique. Deuil complexe persistant → TCC.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

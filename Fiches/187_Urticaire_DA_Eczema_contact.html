@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>187 - Hypersensibilités et allergies cutanéomuqueuses</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 187</div>
+  <h1>Hypersensibilités et allergies cutanéomuqueuses</h1>
+  <div class="header-sub">Urticaire · Dermatite atopique · Eczéma de contact</div>
+  <div class="header-tags">
+    <span class="htag">Mastocyte / IgE</span>
+    <span class="htag">Anaphylaxie</span>
+    <span class="htag">Hypersensibilité retardée type IV</span>
+    <span class="htag">Dermocorticoïdes</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Trois maladies inflammatoires cutanées fréquentes, mécanismes immunologiques différents à bien distinguer. L'<strong>urticaire</strong> : œdème dermique (superficiel) ou dermo-hypodermique (profond) par dégranulation mastocytaire — savoir reconnaître une anaphylaxie associée, urgence vitale. La <strong>dermatite atopique</strong> : maladie chronique du nourrisson liée à un déficit de barrière cutanée (filaggrine) sur terrain atopique, évoluant par poussées — connaître les localisations selon l'âge et les complications infectieuses. L'<strong>eczéma de contact allergique</strong> : hypersensibilité retardée type IV médiée par les LT CD8+, nécessitant une sensibilisation préalable — savoir mener l'enquête allergologique et interpréter les patch-tests.
+</div>
+
+<!-- ==================== SECTION 1 : URTICAIRE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Urticaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition, la physiopathologie et le diagnostic clinique de l'urticaire superficielle et profonde</div>
+  <div class="obj-line">Savoir reconnaître une anaphylaxie associée à une urticaire</div>
+  <div class="obj-line">Connaître les principales causes d'urticaire et le traitement de l'urticaire aiguë</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Définition et physiopathologie
+  </div>
+  <p style="font-size:.85rem;">Dermatose inflammatoire fréquente (15-20 % de la population dans sa forme aiguë), secondaire à l'<strong>activation des mastocytes</strong> (mécanismes immunologiques ou non). Diagnostic <strong>clinique</strong>. Évolution le plus souvent aiguë ; <strong>chronique</strong> si poussées quasi quotidiennes &gt; 6 semaines. L'urticaire aiguë est le plus souvent non allergique.</p>
+  <div class="kv-row"><span class="kv-key">Médiateur principal</span><span class="kv-val">Histamine</span></div>
+  <div class="kv-row"><span class="kv-key">Mécanisme immunologique</span><span class="kv-val">IgE ou auto-Ac IgG</span></div>
+  <div class="kv-row"><span class="kv-key">Mécanisme non immunologique</span><span class="kv-val">Activation directe mastocyte (ex : AINS)</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Urticaire superficielle
+    </div>
+    <ul class="lst">
+      <li>Papule œdémateuse érythémateuse, bordure nette, centre parfois clair</li>
+      <li>Pas de topographie particulière ; formes annulaires/polycycliques possibles</li>
+      <li>3 caractères majeurs : <strong>prurigineuse, fugace, migratrice</strong></li>
+      <li>Isolée dans 50 % des cas ; associée à la profonde dans 40 %</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Urticaire profonde (angio-œdème)
+    </div>
+    <ul class="lst">
+      <li>Œdème blanc rosé, ferme, <strong>non prurigineux</strong>, tension/douleur</li>
+      <li>Régresse en 72h, sans cicatrice</li>
+      <li>Zones riches en mastocytes : visage, extrémités, OGE</li>
+      <li>Isolée dans 10 % des cas ; si laryngo-pharyngé → pronostic vital</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Anaphylaxie</strong> — l'urticaire aiguë peut être une hypersensibilité immédiate.<br>L'urticaire <strong>chronique n'est jamais</strong> secondaire à une anaphylaxie.<br>Signes associés évocateurs : respiratoires (dysphonie, dyspnée, bronchospasme) · cardio-vasculaires (tachy/bradycardie, hypoTA) · digestifs (nausées, vomissements, diarrhée) · neurologiques (céphalées, convulsions). À l'extrême : <strong>choc anaphylactique avec arrêt cardio-respiratoire</strong>.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Principales causes d'urticaire
+  </div>
+  <table class="table-teal">
+    <tr><th>Type</th><th>Caractéristiques</th></tr>
+    <tr><td><strong>Inductibles / physiques</strong></td><td>Dermographisme, froid, cholinergique (effort, émotion, bain chaud), retardée à la pression, solaire, aquagénique, vibratoire</td></tr>
+    <tr><td><strong>Contact</strong></td><td>Latex (immunologique, risque anaphylaxie) vs orties (non immunologique, localisé)</td></tr>
+    <tr><td><strong>Alimentaire</strong></td><td>Rare d'être IgE-dépendante ; anaphylaxie si délai &lt; 2h, signes associés, résolution &lt; 12h, récidive systématique</td></tr>
+    <tr><td><strong>Médicamenteuse</strong></td><td>Histamino-libérateurs non allergiques (AINS, bêtalactamines, morphiniques, PCI) : délai de plusieurs jours. Rares formes IgE-médiées (anaphylaxie) : délai &lt; 2h</td></tr>
+    <tr><td><strong>Infectieuse</strong></td><td>Virale, bactérienne, parasitaire, post-vaccinale — le plus souvent aiguë</td></tr>
+  </table>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement de l'urticaire aiguë
+  </div>
+  <div class="kv-row"><span class="kv-key">Étiologique</span><span class="kv-val">Éviction du facteur déclenchant</span></div>
+  <div class="kv-row"><span class="kv-key">Symptomatique 1<sup>re</sup> ligne</span><span class="kv-val">Anti-H1 2<sup>e</sup> génération, 1-2 cp/j</span></div>
+  <div class="kv-row"><span class="kv-key">Si chronicisation / mauvaise réponse</span><span class="kv-val">Anti-H1 jusqu'à 4 cp/j</span></div>
+  <div class="alert alert-red" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    <div>Si anaphylaxie : <strong>adrénaline IM</strong> si choc/angio-œdème asphyxiant, oxygénothérapie si désaturation, remplissage vasculaire si choc, β2-mimétiques inhalés si bronchospasme.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 2 : DERMATITE ATOPIQUE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Dermatite atopique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les facteurs responsables de l'atopie</div>
+  <div class="obj-line">Décrire les aspects cliniques de la dermatite atopique selon le stade et l'âge, et son mode évolutif</div>
+  <div class="obj-line">Connaître les principales complications infectieuses de la dermatite atopique</div>
+  <div class="obj-line">Connaître les grands principes du traitement de la dermatite atopique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Atopie : terrain et physiopathologie
+  </div>
+  <p style="font-size:.85rem;">Terrain prédisposant à une réactivité immunologique anormale <strong>IgE-médiée</strong> vis-à-vis d'allergènes environnementaux. La DA est la manifestation la plus fréquente et la plus précoce de l'atopie. Maladie <strong>polygénique</strong> : gènes de la barrière épidermique (<strong>filaggrine</strong> ++) et gènes de l'immunité innée/adaptative. Facteurs environnementaux favorisants mal identifiés (ex : exposition précoce aux chats).</p>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Diagnostic <strong>exclusivement clinique</strong>. Début tardif à l'âge adulte rare : diagnostic d'élimination (gale, eczéma de contact, lymphome cutané T).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Phase aiguë
+    </div>
+    <p style="font-size:.84rem;">Érythème, œdème, vésicules → rupture → suintement → croûtes. Prurit. Contours émiettés.</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Phase chronique
+    </div>
+    <p style="font-size:.84rem;">Lésions érythémato-squameuses et/ou <strong>lichénification</strong> (épaississement, aspect quadrillé) induite par le grattage chronique.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Localisations selon l'âge
+  </div>
+  <table class="table-teal">
+    <tr><th>Âge</th><th>Localisation</th></tr>
+    <tr><td>Nourrisson</td><td>Visage, cuir chevelu, faces d'extension des membres, tronc — <strong>siège et zone médio-faciale (nez) épargnés</strong></td></tr>
+    <tr><td>Petite enfance</td><td>Plis de flexion (genoux, coudes ++), chevilles</td></tr>
+    <tr><td>Grand enfant</td><td>Lichénification fréquente</td></tr>
+    <tr><td>Adolescent / adulte</td><td>Visage et cou ++ ; chéilite atopique, paupières (kérato-conjonctivite), MI (lichénification, prurigo)</td></tr>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — mode évolutif.</strong> Début &lt; 12 mois. Poussées d'aggravation hivernale, parfois continues (formes sévères). Amélioration/guérison dans l'enfance, mais <strong>3-5 %</strong> évoluent vers une forme adulte (surtout formes sévères).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Surinfection staphylococcique
+    </div>
+    <ul class="lst">
+      <li>Diagnostic clinique difficile</li>
+      <li>Écoulement purulent, lésions vésiculo-bulleuses, croûtes mélicériques</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Piège : le suintement jaune clair des lésions aiguës <strong>n'est pas</strong> un signe de surinfection.</div>
+    </div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Surinfection herpétique (HSV-1)
+    </div>
+    <ul class="lst">
+      <li>Classique mais rare (5 %) — primo-infection, récurrence, contact avec sujet porteur</li>
+      <li>Aggravation brutale, vésicules multiples → érosions punctiformes ombiliquées</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Urgence</strong> : dermocorticoïdes contre-indiqués. Antiviral (aciclovir PO/IV) sans délai.</div>
+    </div>
+  </div>
+</div>
+
+<div class="pills">
+  <span class="pill pill-gray">Autres complications : retentissement qualité de vie</span>
+  <span class="pill pill-gray">Eczéma de contact aux topiques (émollients ++)</span>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement — 4 axes
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Soins d'hygiène</div>
+        <div class="step-content">Gel sans savon doux non parfumé · lavage 1×/j ou tous les 2 jours · pas de bain chaud prolongé · émollient après toilette sur peau non inflammatoire · textiles doux (pas de laine) · éviter surchauffe de l'habitation</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Dermocorticoïdes (DC)</div>
+        <div class="step-content">Triple action anti-inflammatoire, immunosuppressive, antimitotique. Choix selon âge, localisation, étendue, caractère suintant. 1 application/jour suffit.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Émollients</div>
+        <div class="step-content">Dès les premiers signes de sécheresse, en entretien continu. Interrompre en poussée très inflammatoire. Sans parfum/conservateur.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Éducation thérapeutique</div>
+        <div class="step-content">Autonomie du patient/famille, adhésion, lutte contre la corticophobie.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Choix du dermocorticoïde
+  </div>
+  <table>
+    <tr><th>Critère</th><th>Règle</th></tr>
+    <tr><td>Galénique</td><td>Pommade (lichénifié, sec) · Crème (suintant, plis, grandes surfaces) · Lotion/gel (zones pileuses, cuir chevelu — peu utilisés chez l'enfant)</td></tr>
+    <tr><td>Activité très forte</td><td>Contre-indiquée chez nourrisson/jeune enfant, visage, plis, siège</td></tr>
+    <tr><td>Activité forte</td><td>Cure courte 4-7j : lésions lichénifiées, extrémités, résistance aux DC modérés</td></tr>
+    <tr><td>Activité modérée</td><td>Nourrisson/enfant : visage et corps</td></tr>
+    <tr><td>Activité faible</td><td>Peu/pas efficace — pas d'intérêt</td></tr>
+  </table>
+  <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Entretien enfant (DC modéré)</span><span class="kv-val">≤ 30 g/mois</span></div>
+  <div class="kv-row"><span class="kv-key">Entretien adulte (DC fort)</span><span class="kv-val">≤ 60 g/mois</span></div>
+  <div class="kv-row"><span class="kv-key">Traitement proactif</span><span class="kv-val">DC fort 2×/sem, 4 mois, zones habituelles</span></div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Autres traitements :</strong> anti-H1 sans efficacité démontrée sur le prurit (hydroxyzine possible si troubles du sommeil chez le jeune enfant) · tacrolimus topique si résistance/CI aux DC (visage ++) · formes sévères : photothérapie, ciclosporine, dupilumab, anti-JAK. <strong>Corticothérapie générale non indiquée</strong> (rebond à l'arrêt).</div>
+</div>
+
+<hr>
+
+<!-- ==================== SECTION 3 : ECZEMA DE CONTACT ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Eczéma de contact allergique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Comprendre la physiopathologie de l'eczéma de contact allergique (hypersensibilité retardée de type IV)</div>
+  <div class="obj-line">Reconnaître les signes cliniques d'un eczéma aigu</div>
+  <div class="obj-line">Connaître la démarche diagnostique étiologique et les principaux allergènes responsables</div>
+  <div class="obj-line">Connaître le principe et l'interprétation des tests épicutanés</div>
+  <div class="obj-line">Connaître les grands principes du traitement</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Physiopathologie — hypersensibilité type IV (Gell &amp; Coombs)
+  </div>
+  <p style="font-size:.85rem;">Réaction inflammatoire adaptative, médiée par les <strong>LT CD8+</strong>, spécifique d'un allergène donné.</p>
+  <ul class="steps">
+    <li>
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Phase de sensibilisation (asymptomatique)</div>
+        <div class="step-content">L'allergène pénètre l'épiderme, capté par les cellules dendritiques qui migrent vers les ganglions et présentent l'allergène aux LT CD8+ naïfs → différenciation en LT CD8+ mémoire cytotoxiques circulants. Durée : quelques jours à quelques années, corrélée à la durée/concentration d'exposition.</div>
+      </div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">2</div>
+      <div>
+        <div class="step-title">Phase de révélation (eczéma clinique)</div>
+        <div class="step-content">Nouveau contact → LT CD8+ mémoire réagissent contre les kératinocytes recouverts d'allergène → inflammation : exocytose (infiltrat lymphocytaire épidermique) + spongiose (œdème épidermique). Délai <strong>24-48h</strong> après contact chez un sujet déjà sensibilisé.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Signes cliniques de l'eczéma aigu
+  </div>
+  <p style="font-size:.85rem;margin-bottom:8px;">Évolution classique en 4 phases souvent superposées :</p>
+  <ul class="lst">
+    <li><strong>Érythémateuse</strong> : rougeur mal limitée + œdème</li>
+    <li><strong>Vésiculeuse</strong> : petites vésicules à liquide clair</li>
+    <li><strong>Suintante</strong> : ouverture des vésicules (parfois bulles)</li>
+    <li><strong>Croûteuse</strong> : croûtes tombant en 1-2 semaines, cicatrices rosées transitoires</li>
+  </ul>
+  <p style="font-size:.85rem;margin-top:8px;"><strong>Prurit constant.</strong> Formes selon localisation : classique (corps hors visage), œdémateuse (paupières), dysidrosique (vésicules enchâssées, paumes/plantes). Dans l'eczéma allergique : début sur la <strong>zone de contact</strong> puis extension possible.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Enquête étiologique — 4 sources d'allergènes
+  </div>
+  <p style="font-size:.85rem;margin-bottom:8px;">Croiser à l'interrogatoire : site de début, produit appliqué sur ce site, métier du patient.</p>
+  <div class="grid2">
+    <div>
+      <div class="kv-row"><span class="kv-key">1. Vestimentaire</span><span class="kv-val">Teintures, cuir, colle, nickel</span></div>
+      <div class="kv-row"><span class="kv-key">2. Cosmétique</span><span class="kv-val">Parfum, shampoing, vernis, teinture</span></div>
+    </div>
+    <div>
+      <div class="kv-row"><span class="kv-key">3. Topique médicamenteux</span><span class="kv-val">Antiseptiques, anti-inflammatoires</span></div>
+      <div class="kv-row"><span class="kv-key">4. Professionnel</span><span class="kv-val">Selon métier</span></div>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Photoallergènes</strong> : certains médicaments/cosmétiques ne déclenchent l'eczéma qu'après exposition aux UV.</div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Tests épicutanés (patch-tests)
+  </div>
+  <div class="kv-row"><span class="kv-key">Principe</span><span class="kv-val">Allergène déposé sous occlusion 48h</span></div>
+  <div class="kv-row"><span class="kv-key">Positif</span><span class="kv-val">Eczéma (érythème + vésicules) sur le site</span></div>
+  <div class="kv-row"><span class="kv-key">Irritatif (non allergique)</span><span class="kv-val">Simple érythème, disparaît en quelques heures</span></div>
+  <div class="kv-row"><span class="kv-key">Négatif</span><span class="kv-val">Absence stricte d'érythème</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Traitement de l'eczéma de contact
+    </div>
+    <ul class="lst">
+      <li><strong>Éviction de l'allergène</strong> — pilier du traitement (prévention secondaire)</li>
+      <li>Dermocorticoïde 1 application/j jusqu'à guérison (≈ 10 jours)</li>
+      <li>Crème (plis, lésions suintantes) ou pommade (reste du corps)</li>
+      <li>Crème hydratante après la poussée (lutte contre desquamation)</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Pièges classiques
+    </div>
+    <ul class="lst">
+      <li>Latex : urticaire de contact <strong>immunologique</strong> → risque d'anaphylaxie</li>
+      <li>Orties : urticaire de contact <strong>non immunologique</strong>, localisée</li>
+      <li>Urticaire chronique ≠ anaphylaxie (jamais)</li>
+      <li>Suintement jaune clair de DA ≠ surinfection</li>
+      <li>Herpès sur DA = urgence, DC contre-indiqués</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>Urticaire :</strong> dégranulation mastocytaire → histamine ; superficielle = papule prurigineuse fugace/migratrice ; profonde = œdème ferme non prurigineux. Anti-H1 2<sup>e</sup> génération en 1<sup>re</sup> intention ; adrénaline IM si anaphylaxie.</li>
+    <li><strong>Dermatite atopique :</strong> déficit de barrière (filaggrine) + terrain atopique IgE ; localisation évolue avec l'âge ; poussées hivernales ; 4 axes de traitement (hygiène, DC, émollients, éducation) ; surveiller surinfections staph et HSV.</li>
+    <li><strong>Eczéma de contact :</strong> hypersensibilité retardée type IV (LT CD8+), délai 24-48h après contact chez sujet sensibilisé ; enquête sur 4 sources d'allergènes ; patch-tests 48h ; éviction = traitement clé.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

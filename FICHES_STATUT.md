@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-13. Ne pas éditer à la main._
 
-**Avancement : 170 / 367 items (46.3%)**
+**Avancement : 173 / 367 items (47.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -151,7 +151,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 141 | [ ] | Soins palliatifs pluridisciplinaires chez un malade en phase palliativ… | — |
 | 142 | [ ] | Connaître les aspects spécifiques des soins palliatifs en pédiatrie | — |
 | 143 | [ ] | Connaître les aspects spécifiques des soins palliatifs en réanimation | — |
-| 144 | [ ] | Deuil normal et pathologique | — |
+| 144 | [x] | Deuil normal et pathologique | 144_Deuil_normal_pathologique.html |
 | 145 | [ ] | Surveillance des maladies infectieuses transmissibles | — |
 | 146 | [ ] | Vaccinations | — |
 | 147 | [ ] | Fièvre aiguë chez l enfant et l adulte | — |
@@ -194,7 +194,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 184 | [ ] | Accidents du travail et maladies professionnelles | — |
 | 185 | [ ] | Réaction inflammatoire | — |
 | 186 | [x] | Hypersensibilités et allergies chez l enfant et l adulte | 186_hypersensibilites_allergies.html |
-| 187 | [ ] | Hypersensibilités et allergies cutanéomuqueuses chez l enfant et l adu… | — |
+| 187 | [x] | Hypersensibilités et allergies cutanéomuqueuses chez l enfant et l adu… | 187_Urticaire_DA_Eczema_contact.html |
 | 188 | [ ] | Hypersensibilité et allergies respiratoires chez l enfant et chez l ad… | — |
 | 189 | [ ] | Déficit immunitaire | — |
 | 190 | [ ] | Fièvre prolongée | — |
@@ -251,7 +251,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 241 | [x] | Goitre | 241_Goitre_nodules_cancers_thyroidiens.html |
 | 242 | [x] | Hyperthyroïdie | 242_Hyperthyroidie.html |
 | 243 | [x] | Hypothyroïdie | 243_Hypothyroidie.html |
-| 244 | [ ] | Adénome hypophysaire | — |
+| 244 | [x] | Adénome hypophysaire | 244_Adenome_hypophysaire.html |
 | 245 | [ ] | Insuffisance surrénale chez l adulte et l enfant | — |
 | 246 | [ ] | Gynécomastie | — |
 | 247 | [x] | Diabète sucré de type 1 et 2 de l enfant et de l adulte | 247_Diabete_sucre.html |
