@@ -2,141 +2,155 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="../favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Item 74 — Prescription et surveillance des psychotropes</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
 <style>
   :root {
-    --purple: #534AB7;
-    --teal: #1D9E75;
-    --coral: #D85A30;
-    --blue: #378ADD;
-    --red: #E24B4A;
-    --amber: #D97706;
-    --bg: #f7f8fc;
-    --card-bg: #ffffff;
-    --text: #1a1d2e;
-    --text-muted: #6b7280;
-    --border: rgba(0,0,0,0.08);
-    --radius: 14px;
-    --shadow: 0 1px 4px rgba(0,0,0,0.07);
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
   }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#111318;--card-bg:#1c1f2a;--text:#e8eaf0;--text-muted:#9ca3af;--border:rgba(255,255,255,0.08);--shadow:0 1px 4px rgba(0,0,0,0.3); }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
   }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.87rem;line-height:1.55;padding:20px 16px 48px;max-width:980px;margin:0 auto;}
-
-  .page-header{background:linear-gradient(135deg,var(--purple) 0%,#7B6FD4 100%);border-radius:var(--radius);padding:22px 24px 20px;margin-bottom:6px;color:#fff;}
-  .page-header .item-tag{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
-  .page-header h1{font-size:1.35rem;font-weight:800;line-height:1.25;margin-bottom:10px;}
-  .page-header .overview{font-size:.82rem;opacity:.92;line-height:1.6;background:rgba(255,255,255,0.12);border-radius:9px;padding:11px 14px;}
-
-  hr{border:none;border-top:1.5px solid var(--border);margin:18px 0;}
-  .card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 18px;margin-bottom:14px;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
   .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
   .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
   .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-  .icon-purple{background:var(--purple);}.icon-teal{background:var(--teal);}.icon-coral{background:var(--coral);}
-  .icon-blue{background:var(--blue);}.icon-red{background:var(--red);}.icon-amber{background:var(--amber);}
-
-  .section-title{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:22px 0 10px;}
-
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
-  @media(max-width:640px){.grid-2,.grid-3{grid-template-columns:1fr;}}
-
-  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
-  .pill{display:inline-block;font-size:.74rem;font-weight:600;border-radius:20px;padding:3px 10px;}
-  .pill-green{background:#d1fae5;color:#065f46;}.pill-red{background:#fee2e2;color:#991b1b;}
-  .pill-blue{background:#dbeafe;color:#1e40af;}.pill-amber{background:#fef3c7;color:#92400e;}
-  .pill-purple{background:#ede9fe;color:#4c1d95;}.pill-coral{background:#ffedd5;color:#9a3412;}
-  @media(prefers-color-scheme:dark){
-    .pill-green{background:#064e3b;color:#6ee7b7;}.pill-red{background:#7f1d1d;color:#fca5a5;}
-    .pill-blue{background:#1e3a5f;color:#93c5fd;}.pill-amber{background:#78350f;color:#fcd34d;}
-    .pill-purple{background:#3b0764;color:#c4b5fd;}.pill-coral{background:#7c2d12;color:#fdba74;}
-  }
-
-  .alert{border-radius:9px;padding:10px 13px;font-size:.82rem;margin:8px 0;display:flex;gap:9px;align-items:flex-start;}
-  .alert svg{flex-shrink:0;margin-top:1px;}
-  .alert-red{background:#fee2e2;color:#991b1b;border-left:3px solid var(--red);}
-  .alert-blue{background:#dbeafe;color:#1e40af;border-left:3px solid var(--blue);}
-  .alert-green{background:#d1fae5;color:#065f46;border-left:3px solid var(--teal);}
-  .alert-amber{background:#fef3c7;color:#92400e;border-left:3px solid var(--amber);}
-  @media(prefers-color-scheme:dark){
-    .alert-red{background:#450a0a;color:#fca5a5;}.alert-blue{background:#0c1e3d;color:#93c5fd;}
-    .alert-green{background:#052e16;color:#6ee7b7;}.alert-amber{background:#3d1a00;color:#fcd34d;}
-  }
-
-  .kv-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:0.5px solid var(--border);font-size:.82rem;}
+  .sub-title{font-size:.82rem;font-weight:700;margin-bottom:8px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
   .kv-row:last-child{border-bottom:none;}
-  .kv-key{color:var(--text-muted);font-weight:500;min-width:120px;}
-  .kv-val{font-weight:600;text-align:right;flex:1;}
-
-  table{width:100%;border-collapse:collapse;font-size:.79rem;}
-  th{background:var(--bg);font-weight:700;padding:6px 8px;text-align:left;border-bottom:1.5px solid var(--border);font-size:.73rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);}
-  td{padding:5px 8px;border-bottom:0.5px solid var(--border);vertical-align:top;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
   tr:last-child td{border-bottom:none;}
-  tr:hover td{background:rgba(83,74,183,0.04);}
-
-  .compl-card{border-left:3px solid var(--purple);border-radius:0 9px 9px 0;background:var(--card-bg);padding:10px 13px;margin-bottom:8px;border-top:0.5px solid var(--border);border-right:0.5px solid var(--border);border-bottom:0.5px solid var(--border);}
-  .compl-card.red{border-left-color:var(--red);}
-  .compl-card.amber{border-left-color:var(--amber);}
-  .compl-card.teal{border-left-color:var(--teal);}
-  .compl-card.blue{border-left-color:var(--blue);}
-  .compl-card.coral{border-left-color:var(--coral);}
-  .compl-card-title{font-weight:700;font-size:.84rem;margin-bottom:4px;}
-
-  ul.ul-clean{list-style:none;}
-  ul.ul-clean li{padding:2px 0 2px 14px;position:relative;font-size:.82rem;}
-  ul.ul-clean li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--text-muted);}
-
-  /* Classe header chips */
-  .class-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:10px;}
-  .chip-purple{background:var(--purple);color:#fff;}
-  .chip-blue{background:var(--blue);color:#fff;}
-  .chip-teal{background:var(--teal);color:#fff;}
-  .chip-amber{background:var(--amber);color:#fff;}
-  .chip-coral{background:var(--coral);color:#fff;}
-  .chip-red{background:var(--red);color:#fff;}
-
-  /* Urgence badge */
+  tr:hover td{background:var(--bg);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
   .urgence-badge{display:inline-block;background:var(--red);color:#fff;font-size:.7rem;font-weight:800;border-radius:5px;padding:2px 7px;text-transform:uppercase;letter-spacing:.06em;vertical-align:middle;margin-left:6px;}
-
-  /* Duration band */
-  .duration-band{display:flex;gap:8px;align-items:center;background:var(--bg);border-radius:9px;padding:8px 12px;margin-top:6px;}
-  .duration-label{font-size:.75rem;font-weight:700;color:var(--text-muted);flex:1;}
-  .duration-val{font-size:.88rem;font-weight:800;color:var(--purple);}
 </style>
 </head>
 <body>
+<div class="page">
 
 <!-- HEADER -->
-<div class="page-header">
-  <div class="item-tag">Item 74 · Psychiatrie · Pharmacologie</div>
+<div class="header">
+  <div class="header-num">Item 74</div>
   <h1>Prescription et surveillance des psychotropes</h1>
-  <div class="overview">
-    <strong>Vision globale :</strong> Maîtriser les <strong>6 classes de psychotropes</strong> (antipsychotiques, antidépresseurs, anxiolytiques, hypnotiques, thymorégulateurs, psychostimulants) avec pour chacune : les molécules à connaître, les indications principales, les contre-indications clés, les règles de bon usage (durées limites, populations fragiles), et les effets indésirables graves à savoir reconnaître — notamment le <strong>syndrome malin des neuroleptiques</strong> et le <strong>syndrome sérotoninergique</strong>, deux urgences vitales. Vigilance particulière chez le sujet âgé (surdosage, confusion, chutes) et chez l'enfant/adolescent (idées suicidaires sous antidépresseurs). La France est l'un des plus grands consommateurs mondiaux de psychotropes — mésusage et prescription hors durée réglementaire sont des enjeux majeurs.
+  <div class="header-sub">Antipsychotiques, antidépresseurs, anxiolytiques, hypnotiques, thymorégulateurs, psychostimulants</div>
+  <div class="header-tags">
+    <span class="htag">Psychiatrie</span>
+    <span class="htag">Pharmacologie</span>
+    <span class="htag">Sujet âgé</span>
+    <span class="htag">Urgences vitales</span>
   </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Six classes de psychotropes à maîtriser, chacune selon la même grille : molécules à connaître, indications/non-indications/contre-indications, règles de bon usage (durées limites, populations fragiles), effets indésirables graves et interactions, modalités en urgence. Deux urgences vitales transversales à savoir reconnaître immédiatement : le <strong>syndrome malin des neuroleptiques</strong> (sous antipsychotiques) et le <strong>syndrome sérotoninergique</strong> (sous antidépresseurs). Vigilance renforcée chez le sujet âgé (surdosage, confusion, chutes, demi-doses) et chez l'enfant/adolescent (idées suicidaires sous antidépresseurs). La France reste l'un des plus grands consommateurs mondiaux de psychotropes : le mésusage (durées hors recommandation) est un enjeu de santé publique majeur.</p>
 </div>
 
 <hr>
 
-<!-- ==================== 1. DÉFINITIONS + ÉPIDÉMIO ==================== -->
-<div class="section-title">Définition et épidémiologie</div>
-<div class="grid-2">
+<!-- ==================== 1. DÉFINITION + ÉPIDÉMIOLOGIE ==================== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition et épidémiologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition et les principales classes de psychotropes</div>
+  <div class="obj-line">Connaître les principaux chiffres d'utilisation des psychotropes en France, notamment chez le sujet âgé (usage et mésusage, pharmaco-épidémiologie)</div>
+</div>
+
+<div class="grid2">
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-purple">
+      <div class="card-icon" style="background:var(--purple);">
         <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
       </div>
       Définition et 6 classes
     </div>
-    <p style="font-size:.82rem;margin-bottom:8px;">Substances chimiques (naturelles ou artificielles) à <strong>tropisme psychologique</strong> — modifient l'activité mentale.</p>
+    <p style="font-size:.84rem;margin-bottom:8px;">Substances chimiques (naturelles ou artificielles) à <strong>tropisme psychologique</strong> — modifient l'activité mentale.</p>
     <div class="pills">
       <span class="pill pill-purple">Antipsychotiques</span>
       <span class="pill pill-blue">Antidépresseurs</span>
-      <span class="pill pill-teal" style="background:#d1fae5;color:#065f46;">Anxiolytiques</span>
+      <span class="pill pill-teal">Anxiolytiques</span>
       <span class="pill pill-amber">Hypnotiques</span>
       <span class="pill pill-coral">Thymorégulateurs</span>
       <span class="pill pill-red">Psychostimulants</span>
@@ -144,23 +158,23 @@
   </div>
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-blue">
+      <div class="card-icon" style="background:var(--blue);">
         <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
       </div>
       Pharmaco-épidémiologie (France)
     </div>
-    <table>
+    <table class="table-blue">
       <thead><tr><th>Classe</th><th>Prévalence</th><th>Mésusage</th></tr></thead>
       <tbody>
-        <tr><td><strong>Anxiolytiques</strong></td><td>~10% (25% chez ≥ 80 ans) · 69% femmes</td><td>20% &gt; 3 mois</td></tr>
-        <tr><td><strong>Hypnotiques</strong></td><td>~6% (17% chez ≥ 80 ans)</td><td>30% &gt; 1 mois</td></tr>
-        <tr><td><strong>Antidépresseurs</strong></td><td>~8% (18% ≥ 75 ans) · 2× plus chez les femmes</td><td>80% &lt; 6 mois</td></tr>
-        <tr><td><strong>Antipsychotiques</strong></td><td>~2% (4% ≥ 65 ans)</td><td>—</td></tr>
+        <tr><td><strong>Anxiolytiques</strong></td><td>~10 % (25 % chez ≥ 80 ans) · 69 % femmes</td><td>20 % &gt; 3 mois</td></tr>
+        <tr><td><strong>Hypnotiques</strong></td><td>~6 % (17 % chez ≥ 80 ans)</td><td>30 % &gt; 1 mois</td></tr>
+        <tr><td><strong>Antidépresseurs</strong></td><td>~8 % (18 % ≥ 75 ans) · 2× plus chez les femmes</td><td>80 % &lt; 6 mois</td></tr>
+        <tr><td><strong>Antipsychotiques</strong></td><td>~2 % (4 % ≥ 65 ans)</td><td>—</td></tr>
       </tbody>
     </table>
     <div class="alert alert-blue" style="margin-top:8px;">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>16 millions de personnes (11–75 ans) avaient déjà pris des psychotropes en France en 2014.</span>
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      <span>16 millions de personnes (11–75 ans) avaient déjà pris des psychotropes en France en 2014 (baromètre santé).</span>
     </div>
   </div>
 </div>
@@ -168,121 +182,149 @@
 <hr>
 
 <!-- ==================== 2. ANTIPSYCHOTIQUES ==================== -->
-<div class="section-title">Antipsychotiques</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Antipsychotiques
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules d'antipsychotiques</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les règles de bon usage à tous les âges, notamment chez le sujet âgé et/ou dément</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+  <div class="obj-line">Connaître les modalités de prescription en situation d'urgence</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-purple">
+    <div class="card-icon" style="background:var(--purple);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
     Molécules — 2 générations
   </div>
-  <div class="grid-2">
-    <div class="compl-card">
-      <div class="compl-card-title">1ère génération (typiques / neuroleptiques)</div>
-      <p style="font-size:.76rem;color:var(--text-muted);margin-bottom:4px;">Antagonistes D2 — risque extrapyramidal ++</p>
+  <div class="grid2">
+    <div class="card card-purple">
+      <div class="sub-title">1ère génération (typiques / neuroleptiques)</div>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:4px;">Antagonistes D2 — risque extrapyramidal ++</p>
       <div class="pills">
         <span class="pill pill-purple">Chlorpromazine</span><span class="pill pill-purple">Cyamémazine</span>
         <span class="pill pill-purple">Alimémazine</span><span class="pill pill-purple">Lévomépromazine</span>
         <span class="pill pill-purple">Halopéridol</span><span class="pill pill-purple">Loxapine</span>
       </div>
     </div>
-    <div class="compl-card teal">
-      <div class="compl-card-title" style="color:var(--teal);">2ème génération (atypiques) — 1ère ligne</div>
-      <p style="font-size:.76rem;color:var(--text-muted);margin-bottom:4px;">Meilleur profil neurologique, risque métabolique ++</p>
+    <div class="card card-teal">
+      <div class="sub-title" style="color:var(--teal);">2ème génération (atypiques) — 1ère ligne</div>
+      <p style="font-size:.78rem;color:var(--muted);margin-bottom:4px;">Meilleur profil neurologique, risque métabolique ++</p>
       <div class="pills">
-        <span class="pill pill-green">Amisulpride</span><span class="pill pill-green">Olanzapine</span>
-        <span class="pill pill-green">Clozapine</span><span class="pill pill-green">Quétiapine</span>
-        <span class="pill pill-green">Risperidone</span><span class="pill pill-green">Palipéridone</span>
-        <span class="pill pill-green">Aripiprazole</span>
+        <span class="pill pill-teal">Amisulpride</span><span class="pill pill-teal">Olanzapine</span>
+        <span class="pill pill-teal">Clozapine</span><span class="pill pill-teal">Quétiapine</span>
+        <span class="pill pill-teal">Risperidone</span><span class="pill pill-teal">Palipéridone</span>
+        <span class="pill pill-teal">Aripiprazole</span>
       </div>
     </div>
   </div>
 </div>
 
-<div class="grid-2">
+<div class="grid2">
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-purple">
+      <div class="card-icon" style="background:var(--teal);">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       Indications
     </div>
-    <ul class="ul-clean">
+    <ul class="lst">
       <li><strong>Troubles psychotiques :</strong> épisode psychotique bref, schizophrénie, trouble schizo-affectif, trouble délirant persistant</li>
       <li><strong>Troubles de l'humeur :</strong> épisode maniaque sévère ± psychose, EDC avec symptômes psychotiques, épisode dépressif bipolaire (quétiapine uniquement)</li>
-      <li><strong>Anxiété :</strong> échec thérapeutiques habituelles (cyamémazine)</li>
-      <li><strong>Agitation / SCPD de la démence :</strong> hors AMM, balance B/R</li>
+      <li><strong>Anxiété :</strong> échec des thérapeutiques habituelles (cyamémazine)</li>
+      <li><strong>Agitation / SCPD de la démence :</strong> hors AMM, balance bénéfice-risque</li>
       <li><strong>Insomnie rebelle :</strong> alimémazine (sédatif)</li>
     </ul>
     <div class="alert alert-amber" style="margin-top:8px;">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span><strong>Maladie de Parkinson / DCL :</strong> CI relative à tous les AP sauf <strong>clozapine</strong>.</span>
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Piège — Maladie de Parkinson / démence à corps de Lewy : CI relative à tous les antipsychotiques <strong>sauf la clozapine</strong>.</span>
     </div>
   </div>
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-red">
+      <div class="card-icon" style="background:var(--red);">
         <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       </div>
       Contre-indications clés
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">ABSOLUES (selon molécule) :</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">ABSOLUES (selon molécule) — pas de CI absolue commune :</p>
     <div class="pills" style="margin-bottom:8px;">
-      <span class="pill pill-red">Allongement QT / Bradycardie &lt;65/min + hypokaliémie</span>
+      <span class="pill pill-red">Allongement QT / bradycardie &lt; 65/min + hypokaliémie</span>
       <span class="pill pill-red">Glaucome à angle fermé (anticholinergiques)</span>
       <span class="pill pill-red">Agranulocytose toxique antérieure</span>
-      <span class="pill pill-red">SMN antérieur → CI molécule incriminée</span>
+      <span class="pill pill-red">SMN antérieur → CI de la molécule incriminée</span>
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">RELATIVES :</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">RELATIVES :</p>
     <div class="pills">
-      <span class="pill pill-amber">Médicaments allongeant QT</span>
+      <span class="pill pill-amber">Médicaments allongeant le QT</span>
       <span class="pill pill-amber">Épilepsie</span>
       <span class="pill pill-amber">HTO, arythmies</span>
       <span class="pill pill-amber">Parkinson / DCL (sauf clozapine)</span>
       <span class="pill pill-amber">Diabète / syndrome métabolique</span>
       <span class="pill pill-amber">Grossesse / allaitement</span>
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin:8px 0 4px;">BILAN PRÉ-THÉRAPEUTIQUE :</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin:8px 0 4px;">BILAN PRÉ-THÉRAPEUTIQUE :</p>
     <div class="pills">
       <span class="pill pill-blue">ECG</span><span class="pill pill-blue">Recherche grossesse</span>
-      <span class="pill pill-blue">Bilan métabolique</span><span class="pill pill-blue">Médicaments associés</span>
+      <span class="pill pill-blue">Bilan métabolique</span><span class="pill pill-blue">Traitements associés</span>
     </div>
   </div>
 </div>
 
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-red">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Règles de bon usage
+  </div>
+  <ul class="lst">
+    <li>Molécules de première ligne : <strong>antipsychotiques de seconde génération</strong></li>
+    <li>Choix selon la réponse aux traitements antérieurs, les CI et les préférences du patient</li>
+    <li>Privilégier la molécule avec le moins d'effets indésirables · rechercher la monothérapie et la posologie minimale efficace</li>
+    <li>Ne jamais associer deux médicaments allongeant le QT</li>
+    <li>En urgence : voie IM réservée aux états d'agitation intense, éviter l'escalade ou la répétition de dose</li>
+    <li>Surveiller l'efficacité clinique et les effets indésirables</li>
+  </ul>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
     Syndrome malin des neuroleptiques <span class="urgence-badge">Urgence vitale</span>
   </div>
-  <div class="grid-2">
+  <div class="grid2">
     <div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">CLINIQUE (début rapidement progressif) :</p>
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">CLINIQUE (début rapidement progressif) :</p>
       <div class="pills">
         <span class="pill pill-red">Hyperthermie 40–41°C</span>
         <span class="pill pill-red">Rigidité extrapyramidale</span>
         <span class="pill pill-red">Sueurs profuses</span>
         <span class="pill pill-red">Tachycardie</span>
         <span class="pill pill-red">Hypotension artérielle</span>
-        <span class="pill pill-red">Troubles de vigilance</span>
+        <span class="pill pill-red">Troubles de la vigilance</span>
         <span class="pill pill-red">Troubles cardiorespiratoires</span>
         <span class="pill pill-red">Convulsions possibles</span>
       </div>
     </div>
     <div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">BIOLOGIQUE :</p>
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">BIOLOGIQUE :</p>
       <div class="pills" style="margin-bottom:8px;">
         <span class="pill pill-amber">Hyperleucocytose</span>
         <span class="pill pill-amber">CPK ++ / LDH ++ / ALAT-ASAT ++</span>
-        <span class="pill pill-amber">Perturbations ionogramme</span>
+        <span class="pill pill-amber">Perturbations de l'ionogramme</span>
       </div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">CONDUITE À TENIR :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">CONDUITE À TENIR :</p>
+      <ul class="lst">
         <li>Arrêt immédiat de l'antipsychotique</li>
         <li>Transfert en réanimation</li>
-        <li>CI définitive à la molécule incriminée + aux AP action prolongée</li>
+        <li>CI définitive à la molécule incriminée + aux antipsychotiques d'action prolongée</li>
         <li>Réintroduction ultérieure : prudence extrême</li>
       </ul>
     </div>
@@ -291,53 +333,63 @@
 
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-amber">
+    <div class="card-icon" style="background:var(--amber);">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
     Autres effets indésirables — Antipsychotiques
   </div>
-  <div class="grid-3">
+  <div class="grid3">
     <div>
-      <p style="font-size:.76rem;font-weight:700;color:var(--purple);margin-bottom:4px;">Neurologiques</p>
-      <ul class="ul-clean"><li>Dystonies, syndrome parkinsonien</li><li>Akathisie, dyskinésies tardives</li><li>Épilepsie</li><li>AVC chez sujets âgés déments</li></ul>
+      <p style="font-size:.78rem;font-weight:700;color:var(--purple);margin-bottom:4px;">Neurologiques</p>
+      <ul class="lst"><li>Dystonies, syndrome parkinsonien</li><li>Akathisie, dyskinésies tardives</li><li>Crise d'épilepsie</li><li>AVC chez le sujet âgé dément</li></ul>
     </div>
     <div>
-      <p style="font-size:.76rem;font-weight:700;color:var(--coral);margin-bottom:4px;">Métaboliques</p>
-      <ul class="ul-clean"><li>Prise de poids</li><li>Dyslipidémie, diabète</li><li>Syndrome métabolique</li><li>Hyperprolactinémie</li></ul>
+      <p style="font-size:.78rem;font-weight:700;color:var(--coral);margin-bottom:4px;">Métaboliques / endocriniens</p>
+      <ul class="lst"><li>Prise de poids</li><li>Dyslipidémie, diabète</li><li>Syndrome métabolique</li><li>Hyperprolactinémie</li></ul>
     </div>
     <div>
-      <p style="font-size:.76rem;font-weight:700;color:var(--red);margin-bottom:4px;">Cardio / Autres</p>
-      <ul class="ul-clean"><li>Allongement QT, mort subite</li><li>Hypotension orthostatique</li><li>Effets anticholinergiques</li><li>Agranulocytose (clozapine ++)</li></ul>
+      <p style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px;">Cardio / autres</p>
+      <ul class="lst"><li>Allongement du QT, mort subite</li><li>Hypotension orthostatique</li><li>Effets anticholinergiques</li><li>Agranulocytose (clozapine ++)</li></ul>
     </div>
   </div>
 </div>
 
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-coral">
+    <div class="card-icon" style="background:var(--coral);">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    Urgence — Agitation / Crise suicidaire
+    Urgence — Agitation / crise suicidaire
   </div>
-  <div class="kv-row"><span class="kv-key">Voie 1ère intention</span><span class="kv-val">Per os si possible</span></div>
+  <div class="kv-row"><span class="kv-key">Voie de 1ère intention</span><span class="kv-val">Per os si possible</span></div>
   <div class="kv-row"><span class="kv-key">Molécules PO</span><span class="kv-val">Olanzapine · Aripiprazole · Lévomépromazine</span></div>
   <div class="kv-row"><span class="kv-key">Voie IM si agitation majeure</span><span class="kv-val">Olanzapine · Aripiprazole · Lévomépromazine</span></div>
   <div class="kv-row"><span class="kv-key">Cyamémazine</span><span class="kv-val">Risque d'hypotension artérielle — vigilance</span></div>
-  <div class="kv-row"><span class="kv-key">ECG pré-thérapeutique</span><span class="kv-val">Si possible avant · Sinon après, justifié au dossier</span></div>
+  <div class="kv-row"><span class="kv-key">ECG pré-thérapeutique</span><span class="kv-val">Si possible avant · sinon après, justifié au dossier</span></div>
 </div>
 
 <hr>
 
 <!-- ==================== 3. ANTIDÉPRESSEURS ==================== -->
-<div class="section-title">Antidépresseurs</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Antidépresseurs
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules d'antidépresseurs</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications</div>
+  <div class="obj-line">Connaître les règles de bon usage à tous les âges, notamment chez l'enfant/l'adolescent et le sujet âgé</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-blue">
+    <div class="card-icon" style="background:var(--blue);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
     Classes et molécules principales
   </div>
-  <table>
+  <table class="table-blue">
     <thead><tr><th>Classe</th><th>Molécules à connaître</th><th>Spécificités</th></tr></thead>
     <tbody>
       <tr>
@@ -348,90 +400,93 @@
       <tr>
         <td><strong>IRSN</strong> — 1ère ligne</td>
         <td>Venlafaxine · Duloxétine</td>
-        <td>Efficaces aussi sur douleurs neuropathiques</td>
+        <td>Efficaces aussi sur les douleurs neuropathiques</td>
       </tr>
       <tr>
         <td><strong>Autres</strong> — 1ère/2ème ligne</td>
         <td>Vortioxétine · Miansérine · Mirtazapine · Agomélatine</td>
-        <td>Agomélatine : bilan hépatique obligatoire (réglementaire)</td>
+        <td>Agomélatine : bilan hépatique obligatoire (réglementaire) — CI absolue si insuffisance hépatique</td>
       </tr>
       <tr>
         <td><strong>Imipraminiques</strong> — 3ème ligne</td>
         <td>Amitriptyline · Clomipramine</td>
-        <td>ECG + bilan ophtalmo + bilan rénal/hépatique + EEG (si épilepsie). Nombreuses CI cardiaques.</td>
+        <td>Bilan : ECG + ophtalmo + rénal/hépatique + EEG (si épilepsie). Nombreuses CI cardiaques.</td>
       </tr>
     </tbody>
   </table>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span>Les IMAO sont une famille d'antidépresseurs très peu utilisée, à ne <strong>jamais associer à un autre antidépresseur</strong> (risque de syndrome sérotoninergique).</span>
+  </div>
 </div>
 
-<div class="grid-2">
+<div class="grid2">
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-blue">
+      <div class="card-icon" style="background:var(--blue);">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      Indications / Non-indications
+      Indications / non-indications
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--teal);margin-bottom:4px;">INDICATIONS :</p>
-    <ul class="ul-clean" style="margin-bottom:8px;">
-      <li>EDC : initiation + consolidation (cf item 66)</li>
-      <li>Trouble dépressif récurrent : maintenance (prévention récidives)</li>
-      <li>Troubles anxieux (TOC, TSPT → double dose souvent)</li>
-      <li>Douleurs neuropathiques · Céphalées rebelles</li>
+    <p style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px;">INDICATIONS :</p>
+    <ul class="lst" style="margin-bottom:8px;">
+      <li>Épisode dépressif caractérisé : initiation + consolidation (cf. item 66)</li>
+      <li>Trouble dépressif récurrent : maintenance (prévention des récidives)</li>
+      <li>Troubles anxieux (TOC, TSPT → posologie souvent doublée)</li>
+      <li>Douleurs neuropathiques · céphalées rebelles et migraines</li>
       <li>Certains troubles du sommeil (insomnie, énurésie, narcolepsie)</li>
     </ul>
     <div class="alert alert-red">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span><strong>NON indiqué :</strong> Trouble de l'adaptation</span>
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span><strong>Non indiqué :</strong> trouble de l'adaptation.</span>
     </div>
   </div>
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-blue">
+      <div class="card-icon" style="background:var(--blue);">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
       Règles de bon usage
     </div>
-    <div class="kv-row"><span class="kv-key">Délai d'efficacité</span><span class="kv-val"><strong>~3 semaines</strong> — informer le patient</span></div>
-    <div class="kv-row"><span class="kv-key">Durée minimale</span><span class="kv-val"><strong>≥ 6 mois</strong> après rémission (plus si récurrent ou âgé)</span></div>
-    <div class="kv-row"><span class="kv-key">Sujet âgé</span><span class="kv-val">Demi-dose initiale, augmentation progressive. Surveiller natrémie + équilibre.</span></div>
-    <div class="kv-row"><span class="kv-key">Patient anxieux</span><span class="kv-val">Démarrer à demi-dose quelques jours</span></div>
-    <div class="kv-row"><span class="kv-key">Enfant/Ado</span><span class="kv-val">Taille d'effet faible · Seule <strong>fluoxétine</strong> démontrée · Surveiller idées suicidaires</span></div>
-    <div class="kv-row"><span class="kv-key">Arrêt</span><span class="kv-val">Jamais brutal — risque de syndrome de sevrage</span></div>
-    <div class="kv-row"><span class="kv-key">Traitement entretien</span><span class="kv-val">Même molécule + posologie qu'en phase aiguë · Monothérapie privilégiée</span></div>
+    <div class="kv-row"><span class="kv-key">Délai d'efficacité</span><span class="kv-val"><strong>~3 semaines</strong></span></div>
+    <div class="kv-row"><span class="kv-key">Durée minimale</span><span class="kv-val"><strong>≥ 6 mois</strong> après rémission (plus si récurrent/âgé)</span></div>
+    <div class="kv-row"><span class="kv-key">Sujet âgé</span><span class="kv-val">Demi-dose initiale, hausse progressive · natrémie</span></div>
+    <div class="kv-row"><span class="kv-key">Patient anxieux</span><span class="kv-val">Demi-dose quelques jours</span></div>
+    <div class="kv-row"><span class="kv-key">Enfant/ado</span><span class="kv-val">Taille d'effet faible · seule fluoxétine validée</span></div>
+    <div class="kv-row"><span class="kv-key">Arrêt</span><span class="kv-val">Jamais brutal (syndrome de sevrage)</span></div>
   </div>
 </div>
 
-<div class="card">
+<div class="card card-red">
   <div class="card-title">
-    <div class="card-icon icon-red">
+    <div class="card-icon" style="background:var(--red);">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    Syndrome sérotoninergique <span class="urgence-badge">Urgence</span> · Effets indésirables graves
+    Syndrome sérotoninergique <span class="urgence-badge">Urgence</span> — effets indésirables graves
   </div>
-  <div class="grid-2">
+  <div class="grid2">
     <div>
-      <p style="font-size:.76rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">SYNDROME SÉROTONINERGIQUE :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:4px;">SYNDROME SÉROTONINERGIQUE :</p>
+      <ul class="lst">
         <li><strong>Digestif :</strong> nausées, diarrhée</li>
         <li><strong>Neurologique :</strong> confusion, agitation, tremblements, myoclonies, rigidité, hyperréflexie, mydriase, akathisie, hallucinations</li>
         <li><strong>Neurovégétatif :</strong> tachycardie, polypnée, hyperthermie, sudation, TA variable</li>
-        <li><strong>TTT :</strong> réanimation, arrêt du médicament, rééquilibration hydroélectrique, antipyrétiques</li>
+        <li><strong>Traitement :</strong> réanimation, arrêt du médicament, rééquilibration hydro-électrolytique, lutte contre la fièvre</li>
       </ul>
     </div>
     <div>
-      <p style="font-size:.76rem;font-weight:700;color:var(--text-muted);margin-bottom:4px;">AUTRES EI IMPORTANTS :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:4px;">AUTRES EI IMPORTANTS :</p>
+      <ul class="lst">
         <li><strong>Virage maniaque</strong> (tous âges)</li>
-        <li><strong>Idées suicidaires</strong> chez &lt; 24 ans</li>
+        <li><strong>Idées suicidaires</strong> chez les patients &lt; 24 ans</li>
         <li><strong>Levée d'inhibition</strong> : amélioration psychomotrice avant amélioration thymique</li>
         <li>Troubles sexuels potentiellement persistants</li>
       </ul>
-      <p style="font-size:.76rem;font-weight:700;color:var(--text-muted);margin:6px 0 4px;">INTERACTIONS :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin:6px 0 4px;">INTERACTIONS :</p>
+      <ul class="lst">
         <li>ISRS + AVK → potentialisation (risque hémorragique)</li>
         <li>ISRS + IMAO → syndrome sérotoninergique (association formellement contre-indiquée)</li>
-        <li>Antidépresseurs + Lithium ou Triptans → syndrome sérotoninergique</li>
+        <li>Antidépresseurs + lithium ou triptans → risque de syndrome sérotoninergique</li>
       </ul>
     </div>
   </div>
@@ -440,31 +495,42 @@
 <hr>
 
 <!-- ==================== 4. ANXIOLYTIQUES ==================== -->
-<div class="section-title">Anxiolytiques</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Anxiolytiques
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules d'anxiolytiques</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les règles de bon usage à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+  <div class="obj-line">Connaître les modalités de prescription en situation d'urgence</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-teal">
+    <div class="card-icon" style="background:var(--teal);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
     Classes et molécules
   </div>
-  <table>
+  <table class="table-teal">
     <thead><tr><th>Classe</th><th>Molécules</th><th>Caractéristiques</th></tr></thead>
     <tbody>
       <tr>
         <td><strong>Benzodiazépines</strong> (1ère ligne)</td>
         <td>Oxazépam · Lorazépam · Alprazolam · Bromazépam · Diazépam · Clorazépate · Prazépam</td>
-        <td>Efficacité rapide dès 1ère prise · Effets : anxiolyse, hypnose, myorelaxation, sédation, anticonvulsivant, amnésie · Risque de dépendance/tolérance · Antidote : <strong>flumazénil</strong></td>
+        <td>Effets : anxiolytique, hypnotique, myorelaxant, sédatif, anticonvulsivant, amnésiant · Efficacité dès la 1ère prise · Risque de dépendance/tolérance · Antidote : <strong>flumazénil</strong></td>
       </tr>
       <tr>
         <td><strong>Azapirones</strong></td>
         <td>Buspirone</td>
-        <td>Action retardée (&gt; 1 semaine) · Pas de dépendance · Efficacité inconstante et faible</td>
+        <td>Action retardée (&gt; 1 semaine) · pas de dépendance · efficacité inconstante et faible</td>
       </tr>
       <tr>
         <td><strong>Antihistaminiques H1</strong></td>
         <td>Hydroxyzine</td>
-        <td>Anxiolyse modérée · Dépendance moins marquée · Effets anticholinergiques · Allongement QT</td>
+        <td>Anxiolyse modérée · dépendance moins marquée · effets anticholinergiques · allongement QT</td>
       </tr>
       <tr>
         <td><strong>Autres</strong></td>
@@ -475,29 +541,29 @@
   </table>
 </div>
 
-<div class="grid-2">
+<div class="grid2">
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-teal">
+      <div class="card-icon" style="background:var(--teal);">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       Indications / CI absolues
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--teal);margin-bottom:4px;">INDICATIONS :</p>
-    <ul class="ul-clean" style="margin-bottom:8px;">
+    <p style="font-size:.78rem;font-weight:700;color:var(--teal);margin-bottom:4px;">INDICATIONS :</p>
+    <ul class="lst" style="margin-bottom:8px;">
       <li>Manifestations anxieuses intenses et/ou invalidantes</li>
       <li>Prévention du sevrage alcoolique (delirium tremens)</li>
       <li>Crises convulsives et épilepsies</li>
       <li>Douleurs neuropathiques</li>
     </ul>
-    <p style="font-size:.77rem;font-weight:700;color:var(--red);margin-bottom:4px;">CI ABSOLUES BZD :</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--red);margin-bottom:4px;">CI ABSOLUES (BZD) :</p>
     <div class="pills">
       <span class="pill pill-red">Insuffisance respiratoire sévère</span>
       <span class="pill pill-red">Insuffisance hépatique (sauf oxazépam)</span>
       <span class="pill pill-red">Apnées du sommeil non appareillées</span>
       <span class="pill pill-red">Myasthénie</span>
     </div>
-    <p style="font-size:.77rem;font-weight:700;color:var(--amber);margin:8px 0 4px;">CI RELATIVES :</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--amber);margin:8px 0 4px;">CI RELATIVES :</p>
     <div class="pills">
       <span class="pill pill-amber">Grossesse / allaitement</span>
       <span class="pill pill-amber">Insuffisance rénale</span>
@@ -507,25 +573,25 @@
   </div>
   <div class="card">
     <div class="card-title">
-      <div class="card-icon icon-teal">
+      <div class="card-icon" style="background:var(--teal);">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </div>
       Règles de bon usage — BZD
     </div>
     <div class="alert alert-red" style="margin-bottom:8px;">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span>Durée maximale réglementaire : <strong>12 semaines</strong> pour les anxiolytiques (sevrage inclus)</span>
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Durée maximale réglementaire : <strong>12 semaines</strong> pour les anxiolytiques (sevrage inclus).</span>
     </div>
-    <ul class="ul-clean">
-      <li>Dose minimale efficace · Ne pas associer 2 BZD ni 2 anxiolytiques</li>
+    <ul class="lst">
+      <li>Dose minimale efficace · ne jamais associer 2 BZD ni 2 anxiolytiques</li>
       <li>Jamais d'arrêt brutal (sevrage progressif sur semaines à mois)</li>
-      <li>Réévaluation régulière · Ne pas reconduire sans réévaluation</li>
+      <li>Réévaluation régulière · ne pas reconduire sans réévaluation</li>
       <li>Posologies réduites chez le sujet âgé</li>
       <li>Informer des risques : somnolence, conduite, potentialisation par l'alcool</li>
     </ul>
     <div class="alert alert-amber" style="margin-top:6px;">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <span>Urgence / agitation majeure : préférer les <strong>antipsychotiques</strong> — voie IM des BZD : mauvaise biodisponibilité. BZD IV en cas de sevrage alcoolique sévère.</span>
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span>Urgence / agitation majeure : préférer les <strong>antipsychotiques</strong> — la voie IM des BZD a une mauvaise biodisponibilité. BZD IV possible en cas de sevrage alcoolique sévère.</span>
     </div>
   </div>
 </div>
@@ -533,43 +599,53 @@
 <hr>
 
 <!-- ==================== 5. HYPNOTIQUES ==================== -->
-<div class="section-title">Hypnotiques</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Hypnotiques
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules d'hypnotiques</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les règles de bon usage à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-amber">
+    <div class="card-icon" style="background:var(--amber);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
     Molécules, indication et règles
   </div>
-  <div class="grid-2">
+  <div class="grid2">
     <div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">MOLÉCULES :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">MOLÉCULES :</p>
+      <ul class="lst">
         <li><strong>BZD :</strong> loprazolam, nitrazépam, lormétazépam, estazolam</li>
-        <li><strong>Z-drugs (apparentés BZD) :</strong> Zolpidem · Zopiclone</li>
-        <li><strong>Antihistaminiques / AP sédatifs :</strong> alimémazine</li>
+        <li><strong>Z-drugs (apparentés BZD) :</strong> zolpidem · zopiclone</li>
+        <li><strong>Antihistaminiques / antipsychotiques sédatifs :</strong> alimémazine</li>
       </ul>
       <div class="alert alert-green" style="margin-top:8px;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        <span><strong>Indication unique :</strong> Insomnies <em>aiguës transitoires</em> uniquement — <strong>pas un traitement de fond</strong>.</span>
+        <span class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        <span><strong>Indication unique :</strong> insomnies <em>aiguës transitoires</em> — <strong>pas un traitement de fond</strong>.</span>
       </div>
     </div>
     <div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin-bottom:5px;">RÈGLES DE BON USAGE :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;">RÈGLES DE BON USAGE :</p>
+      <ul class="lst">
         <li><strong>Durée max réglementaire : 4 semaines</strong></li>
-        <li>Dose minimale efficace · Arrêt non brutal</li>
+        <li>Dose minimale efficace · arrêt non brutal</li>
         <li>Sujet âgé : posologies plus faibles</li>
         <li>Insomnie d'endormissement → demi-vie courte (idem sujet âgé)</li>
-        <li>Insomnie 2ème moitié de nuit → demi-vie plus longue</li>
-        <li>Informer : potentialisation alcool, somnolence, conduite</li>
-        <li><strong>Zolpidem : ordonnance sécurisée, 28j maximum</strong></li>
+        <li>Insomnie de 2ème partie de nuit → demi-vie plus longue</li>
+        <li>Informer : potentialisation par l'alcool, somnolence, conduite</li>
+        <li><strong>Zolpidem : ordonnance sécurisée, 28 j maximum</strong></li>
       </ul>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin:6px 0 4px;">CI ZOLPIDEM / ZOPICLONE :</p>
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin:6px 0 4px;">CI ZOLPIDEM / ZOPICLONE :</p>
       <div class="pills">
         <span class="pill pill-red">Grossesse / allaitement</span>
         <span class="pill pill-red">Enfant &lt; 15 ans</span>
-        <span class="pill pill-red">IRC / IH sévère</span>
+        <span class="pill pill-red">Insuffisance respiratoire/hépatique/rénale sévère</span>
         <span class="pill pill-red">Myasthénie</span>
         <span class="pill pill-red">Apnées du sommeil non appareillées</span>
       </div>
@@ -580,20 +656,29 @@
 <hr>
 
 <!-- ==================== 6. THYMORÉGULATEURS ==================== -->
-<div class="section-title">Thymorégulateurs</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Thymorégulateurs
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules de thymorégulateurs</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications à tous les âges, notamment chez le sujet âgé</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-coral">
+    <div class="card-icon" style="background:var(--coral);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
     Molécules et indications dans le trouble bipolaire
   </div>
-  <table>
+  <table class="table-red">
     <thead><tr><th>Molécule</th><th>Épisode maniaque</th><th>Épisode dépressif</th><th>Prévention récidives</th><th>Ligne</th></tr></thead>
     <tbody>
-      <tr><td><strong>Lithium</strong></td><td>✓</td><td>✓</td><td>✓</td><td><span class="pill pill-green">Référence</span></td></tr>
-      <tr><td><strong>Valproate / Valpromide</strong></td><td>✓</td><td>✓</td><td>✓</td><td><span class="pill pill-green">1ère ligne</span></td></tr>
-      <tr><td><strong>Lamotrigine</strong></td><td>—</td><td>✓</td><td>✓</td><td><span class="pill pill-green">1ère ligne</span></td></tr>
+      <tr><td><strong>Lithium</strong></td><td>✓</td><td>✓</td><td>✓</td><td><span class="pill pill-teal">Référence</span></td></tr>
+      <tr><td><strong>Valproate / Valpromide</strong></td><td>✓</td><td>✓</td><td>✓</td><td><span class="pill pill-teal">1ère ligne</span></td></tr>
+      <tr><td><strong>Lamotrigine</strong></td><td>—</td><td>✓</td><td>✓</td><td><span class="pill pill-teal">1ère ligne</span></td></tr>
       <tr><td><strong>Carbamazépine</strong></td><td>✓</td><td>—</td><td>✓</td><td><span class="pill pill-amber">2ème ligne</span></td></tr>
     </tbody>
   </table>
@@ -601,32 +686,31 @@
 
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-coral">
+    <div class="card-icon" style="background:var(--coral);">
       <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    Contre-indications et effets indésirables — Thymorégulateurs
+    Contre-indications et effets indésirables
   </div>
-  <div class="grid-2">
-    <div class="compl-card coral">
-      <div class="compl-card-title" style="color:var(--coral);">Lithium — CI absolues</div>
+  <div class="grid2">
+    <div class="card card-red">
+      <div class="sub-title" style="color:var(--red);">Lithium — CI absolues</div>
       <div class="pills">
         <span class="pill pill-red">Insuffisance rénale sévère</span>
         <span class="pill pill-red">Déplétion hydro-sodée / hyponatrémie</span>
         <span class="pill pill-red">Régime sans sel</span>
         <span class="pill pill-red">Association aux salidiurétiques</span>
-        <span class="pill pill-red">IC instable · Coronaropathie sévère</span>
+        <span class="pill pill-red">IC instable · coronaropathie sévère</span>
         <span class="pill pill-red">Allaitement</span>
       </div>
-      <p style="font-size:.77rem;font-weight:700;color:var(--text-muted);margin:6px 0 3px;">EI LITHIUM :</p>
-      <ul class="ul-clean">
+      <p style="font-size:.78rem;font-weight:700;color:var(--muted);margin:6px 0 3px;">EI LITHIUM :</p>
+      <ul class="lst">
         <li>Tremblements (fréquents), asthénie</li>
-        <li>Hypothyroïdie · Goitre · Prise de poids</li>
-        <li>Syndrome polyuro-polydipsique · Néphropathie</li>
-        <li>Nausées · Goût métallique · Diarrhée</li>
-        <li>Troubles conduction cardiaque · Myocardite</li>
-        <li>Acné · Psoriasis</li>
+        <li>Hypothyroïdie · goitre · prise de poids</li>
+        <li>Syndrome polyuro-polydipsique · néphropathie</li>
+        <li>Nausées · goût métallique · diarrhée</li>
+        <li>Troubles de conduction cardiaque · myocardite</li>
       </ul>
-      <p style="font-size:.77rem;font-weight:700;color:var(--red);margin:5px 0 3px;">INTERACTIONS (augmentent lithémie) :</p>
+      <p style="font-size:.78rem;font-weight:700;color:var(--red);margin:5px 0 3px;">INTERACTIONS (↑ lithémie) :</p>
       <div class="pills">
         <span class="pill pill-red">AINS</span>
         <span class="pill pill-red">Diurétiques</span>
@@ -636,23 +720,23 @@
       </div>
     </div>
     <div>
-      <div class="compl-card amber" style="margin-bottom:8px;">
-        <div class="compl-card-title" style="color:var(--amber);">Valproate / Valpromide — Points clés</div>
+      <div class="card card-amber" style="margin-bottom:8px;">
+        <div class="sub-title" style="color:var(--amber);">Valproate / Valpromide — points clés</div>
         <div class="pills">
-          <span class="pill pill-red">CI : Grossesse (tératogène ++)</span>
-          <span class="pill pill-red">CI : Femme en âge de procréer (si pas contraception)</span>
-          <span class="pill pill-red">CI : Hépatite aiguë / ATCD hépatite sévère</span>
+          <span class="pill pill-red">CI : grossesse (tératogène ++)</span>
+          <span class="pill pill-red">CI : femme en âge de procréer sans contraception</span>
+          <span class="pill pill-red">CI : hépatite aiguë / ATCD hépatite sévère</span>
         </div>
-        <p style="font-size:.78rem;margin-top:5px;">EI : hépatite médicamenteuse · cytopénies · alopécie · confusion · somnolence</p>
-        <p style="font-size:.78rem;margin-top:3px;">IAM : risque syndrome de Lyell avec lamotrigine</p>
+        <p style="font-size:.8rem;margin-top:5px;">EI : hépatite médicamenteuse · cytopénies · alopécie · confusion · somnolence</p>
+        <p style="font-size:.8rem;margin-top:3px;">IAM : risque de syndrome de Lyell avec la lamotrigine</p>
       </div>
-      <div class="compl-card blue">
-        <div class="compl-card-title" style="color:var(--blue);">Lamotrigine — Points clés</div>
-        <ul class="ul-clean">
-          <li>Risque éruptions cutanées graves (Stevens-Johnson, Lyell) → <strong>débuter à dose très progressive</strong></li>
-          <li>Valproate augmente concentration lamotrigine (CI association)</li>
-          <li>Carbamazépine / phénobarbital / phénytoïne → diminuent concentration</li>
-          <li>Contraception oestroprogestative → diminue concentration</li>
+      <div class="card card-blue">
+        <div class="sub-title" style="color:var(--blue);">Lamotrigine — points clés</div>
+        <ul class="lst">
+          <li>Risque d'éruptions cutanées graves (Stevens-Johnson, Lyell) → <strong>débuter à dose très progressive</strong></li>
+          <li>Valproate augmente la concentration de lamotrigine (CI d'association)</li>
+          <li>Carbamazépine / phénobarbital / phénytoïne → diminuent sa concentration</li>
+          <li>Contraception œstroprogestative → diminue sa concentration</li>
         </ul>
       </div>
     </div>
@@ -662,81 +746,98 @@
 <hr>
 
 <!-- ==================== 7. PSYCHOSTIMULANTS ==================== -->
-<div class="section-title">Psychostimulants</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Psychostimulants
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales classes et molécules de psychostimulants</div>
+  <div class="obj-line">Connaître les indications, non-indications et contre-indications</div>
+  <div class="obj-line">Connaître les effets indésirables fréquents ou graves et les principales interactions médicamenteuses</div>
+</div>
+
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-red">
+    <div class="card-icon" style="background:var(--red);">
       <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
     </div>
-    Méthylphénidate et Modafinil
+    Méthylphénidate et modafinil
   </div>
-  <table>
+  <table class="table-red">
     <thead><tr><th></th><th>Méthylphénidate</th><th>Modafinil</th></tr></thead>
     <tbody>
       <tr>
         <td><strong>Indications</strong></td>
-        <td>TDAH (enfant ≥ 6 ans + adulte) · Narcolepsie (si échec modafinil)</td>
-        <td>Narcolepsie · Hypersomnie idiopathique</td>
+        <td>TDAH (enfant ≥ 6 ans + adulte) · narcolepsie (si échec du modafinil)</td>
+        <td>Narcolepsie · hypersomnie idiopathique</td>
       </tr>
       <tr>
         <td><strong>CI absolues</strong></td>
-        <td>Hypersensibilité · Valvulopathie · IC · Arythmie · HTA modérée-sévère · Angor · AVC · Trouble psychiatrique non équilibré · Psychose · Enfant &lt; 6 ans · IMAO · Grossesse/allaitement</td>
-        <td>Hypersensibilité · Allaitement · Troubles cardiovasculaires (valvulopathie, IC, arythmie, HTA)</td>
+        <td>Hypersensibilité · valvulopathie · IC · arythmie · HTA modérée-sévère · angor · AVC · trouble psychiatrique non équilibré · psychose · enfant &lt; 6 ans · IMAO · grossesse/allaitement</td>
+        <td>Hypersensibilité · allaitement · troubles cardiovasculaires (valvulopathie, IC, arythmie, HTA)</td>
       </tr>
       <tr>
         <td><strong>Prescription</strong></td>
-        <td><strong>Stupéfiant — ordonnance sécurisée 28j max</strong> · Initiation hospitalière (pédiatre/pédopsychiatre/psychiatre/neurologue) · Renouvellement mensuel par tout médecin · Avis cardiologique adulte avant Ritaline LP</td>
-        <td>Ordonnance médicament d'exception · Initiation hospitalière (neurologue/pneumologue) · ECG avant traitement · Réévaluation annuelle</td>
+        <td><strong>Stupéfiant — ordonnance sécurisée 28 j max</strong> · initiation hospitalière (pédiatre/pédopsychiatre/psychiatre/neurologue) · renouvellement mensuel par tout médecin · avis cardiologique adulte avant Ritaline LP</td>
+        <td>Ordonnance médicament d'exception · initiation hospitalière (neurologue/pneumologue) · ECG avant traitement · réévaluation annuelle</td>
       </tr>
       <tr>
         <td><strong>EI principaux</strong></td>
-        <td>Céphalées · Tics · Anxiété · Insomnie · Tachycardie · HTA · Anorexie/perte de poids · Ralentissement staturo-pondéral · Cytopénies</td>
-        <td>Céphalées · Nervosité · Insomnie · Tachycardie · HTA · Nausées · Eosinophilie · Urticaire</td>
+        <td>Céphalées · tics · anxiété · insomnie · tachycardie · HTA · anorexie/perte de poids · ralentissement staturo-pondéral · cytopénies</td>
+        <td>Céphalées · nervosité · insomnie · tachycardie · HTA · nausées · éosinophilie · urticaire</td>
       </tr>
       <tr>
         <td><strong>IAM</strong></td>
-        <td>Antidépresseurs tricycliques · Anesthésiques volatils · Vasopresseurs</td>
-        <td>Inactive contraceptifs oraux · Inactive ciclosporine</td>
+        <td>Antidépresseurs tricycliques · anesthésiques volatils · vasopresseurs</td>
+        <td>Inactive les contraceptifs oraux · inactive la ciclosporine</td>
       </tr>
     </tbody>
   </table>
   <div class="alert alert-amber" style="margin-top:8px;">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span><strong>Sportifs :</strong> prévenir que méthylphénidate ET modafinil sont des produits dopants.</span>
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Sportifs :</strong> prévenir que méthylphénidate et modafinil sont tous deux des produits dopants.</span>
   </div>
 </div>
 
 <hr>
 
 <!-- ==================== SYNTHÈSE ==================== -->
-<div class="section-title">Synthèse — Durées réglementaires et règles impératives</div>
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
 <div class="card">
   <div class="card-title">
-    <div class="card-icon icon-teal">
+    <div class="card-icon" style="background:var(--teal);">
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
-    Tableau récapitulatif — À retenir absolument
+    Tableau récapitulatif — durées réglementaires et urgences
   </div>
-  <table>
+  <table class="table-teal">
     <thead><tr><th>Classe</th><th>Durée max réglementaire</th><th>Ordonnance spéciale</th><th>Urgence à connaître</th></tr></thead>
     <tbody>
       <tr><td><strong>Antipsychotiques</strong></td><td>Selon indication (long cours possible)</td><td>Non</td><td><span class="pill pill-red">Syndrome malin des neuroleptiques</span></td></tr>
-      <tr><td><strong>Antidépresseurs</strong></td><td>≥ 6 mois après rémission</td><td>Non</td><td><span class="pill pill-red">Syndrome sérotoninergique</span> · Virage maniaque · Idées suicidaires &lt; 24 ans</td></tr>
+      <tr><td><strong>Antidépresseurs</strong></td><td>≥ 6 mois après rémission</td><td>Non</td><td><span class="pill pill-red">Syndrome sérotoninergique</span> · virage maniaque · idées suicidaires &lt; 24 ans</td></tr>
       <tr><td><strong>Anxiolytiques BZD</strong></td><td><strong>12 semaines</strong> (sevrage inclus)</td><td>Non</td><td>Antidote : flumazénil</td></tr>
-      <tr><td><strong>Hypnotiques BZD / z-drugs</strong></td><td><strong>4 semaines</strong></td><td><strong>Zolpidem : ordonnance sécurisée 28j max</strong></td><td>Somnolence · Actes automatiques amnésiques</td></tr>
-      <tr><td><strong>Thymorégulateurs — Lithium</strong></td><td>Long cours (récurrences bipolaires)</td><td>Non</td><td>Surveillance lithémie · IAM AINS/diurétiques/IEC</td></tr>
-      <tr><td><strong>Méthylphénidate</strong></td><td>Réévaluation annuelle</td><td><strong>Stupéfiant · Ordonnance sécurisée 28j</strong></td><td>Retentissement cardiovasculaire</td></tr>
+      <tr><td><strong>Hypnotiques BZD / z-drugs</strong></td><td><strong>4 semaines</strong></td><td><strong>Zolpidem : ordonnance sécurisée 28 j max</strong></td><td>Somnolence · actes automatiques amnésiques</td></tr>
+      <tr><td><strong>Thymorégulateurs — lithium</strong></td><td>Long cours (récurrences bipolaires)</td><td>Non</td><td>Surveillance lithémie · IAM AINS/diurétiques/IEC</td></tr>
+      <tr><td><strong>Méthylphénidate</strong></td><td>Réévaluation annuelle</td><td><strong>Stupéfiant · ordonnance sécurisée 28 j</strong></td><td>Retentissement cardiovasculaire</td></tr>
       <tr><td><strong>Modafinil</strong></td><td>Réévaluation annuelle</td><td>Médicament d'exception</td><td>Inactive contraceptifs oraux + ciclosporine</td></tr>
     </tbody>
   </table>
   <div class="alert alert-red" style="margin-top:8px;">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span>Règle universelle BZD + hypnotiques : <strong>jamais d'arrêt brutal, jamais d'association entre eux, jamais de reconduction automatique sans réévaluation.</strong></span>
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span>Piège classique — Règle universelle BZD + hypnotiques : <strong>jamais d'arrêt brutal, jamais d'association entre eux, jamais de reconduction automatique sans réévaluation.</strong></span>
   </div>
   <div class="alert alert-amber" style="margin-top:6px;">
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-    <span><strong>Sujet âgé :</strong> demi-doses initiales pour tous les psychotropes · risque de confusion, chutes, hypotension orthostatique · réévaluation régulière obligatoire · Valproate et lithium : CI relatives grossesse 1er trimestre / femme en âge de procréer.</span>
+    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+    <span><strong>Sujet âgé :</strong> demi-doses initiales pour tous les psychotropes · risque de confusion, chutes, hypotension orthostatique · réévaluation régulière obligatoire.</span>
   </div>
 </div>
+
+</div>
+<!-- ANNOTATIONS partagées (surlignage + notes). Pour invalider les annotations
+     existantes après régénération du contenu : <body data-annot-version="2"> etc. -->
+<script src="../Config/annotations.js" defer></script>
 </body>
 </html>
