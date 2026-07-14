@@ -31,7 +31,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 21 | [ ] | Mesure de l état de santé de la population | — |
 | 22 | [x] | Maladies rares | 22_Maladies_rares.html |
 | 23 | [x] | Grossesse normale | 23_Grossesse_normale.html |
-| 24 | [x] | Principales complications de la grossesse | 024_Complications_grossesse.html |
+| 24 | [x] | Principales complications de la grossesse | 24_Complications_grossesse.html |
 | 25 | [x] | Grossesse extra-utérine | 25_GEU.html |
 | 26 | [ ] | Douleur abdominale aiguë chez une femme enceinte | — |
 | 27 | [ ] | Prévention des risques fœtaux | — |
