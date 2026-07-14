@@ -114,7 +114,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 104 | [x] | Sclérose en plaques | 104_SEP.html |
 | 105 | [x] | Épilepsie de l enfant et de l adulte | 105_Epilepsie.html |
 | 106 | [x] | Maladie de Parkinson | 106_Parkinson.html |
-| 107 | [x] | Mouvements anormaux | 107_mouvements_anormaux.html |
+| 107 | [x] | Mouvements anormaux | 107_mouvements_anormaux_v2.html |
 | 108 | [x] | Confusion | 108_confusion_demences.html |
 | 109 | [x] | Troubles de la marche et de l équilibre | 109_troubles_marche_equilibre.html |
 | 110 | [x] | Troubles du sommeil de l enfant et de l adulte | 110_Troubles_sommeil_v2.html |

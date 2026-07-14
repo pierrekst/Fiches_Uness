@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 107 — Mouvements anormaux</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 107 — Neurologie</div>
+  <h1>Mouvements anormaux</h1>
+  <div class="header-sub">Tremblement · Chorée · Dystonie · Myoclonies · Tics · Dyskinésies</div>
+  <div class="header-tags">
+    <span class="htag">Sémiologie</span>
+    <span class="htag">Iatrogénie</span>
+    <span class="htag">Huntington</span>
+    <span class="htag">Gilles de la Tourette</span>
+  </div>
+</div>
+
+<!-- OBJECTIFS -->
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Ce chapitre pose la <strong>sémiologie des 6 grands mouvements anormaux</strong> (tremblement, chorée, dystonie, myoclonies, tics, dyskinésies) pour les reconnaître cliniquement et sur vidéo. Il détaille les <strong>5 types de tremblement</strong> selon repos/action et leurs causes, la longue liste des <strong>médicaments inducteurs</strong> de chaque mouvement anormal (réflexe iatrogène systématique), la <strong>maladie de Huntington</strong> (chorée héréditaire triade mouvements-psychiatrie-cognition), les <strong>tics</strong> et le syndrome de Gilles de la Tourette, et les <strong>dyskinésies</strong> induites par la L-dopa ou les antipsychotiques.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 : SÉMIOLOGIE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Sémiologie des mouvements anormaux
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Décrire les principaux mouvements anormaux : tremblement, chorée et dyskinésies, myoclonies, tics, dystonies (crampe de l'écrivain, torticolis spasmodique), blépharospasme et hémispasme facial.</div>
+  <div class="obj-line">Reconnaître les principaux mouvements anormaux sur des cas vidéo typiques.</div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead>
+      <tr><th>Type</th><th>Caractères essentiels</th><th>Tonus de fond</th><th>Repos / action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tremblement</strong></td>
+        <td>Oscillation rythmique involontaire autour de la position d'équilibre</td>
+        <td>Normal</td>
+        <td>Selon type</td>
+      </tr>
+      <tr>
+        <td><strong>Chorée</strong></td>
+        <td>Brusque, aléatoire, anarchique, non stéréotypée, arythmique, sans finalité — territoires variés (visage, cou, tronc, membres)</td>
+        <td>Hypotonie</td>
+        <td>Repos + action</td>
+      </tr>
+      <tr>
+        <td><strong>Ballisme</strong></td>
+        <td>Chorée proximale de grande amplitude — lésion vasculaire du noyau subthalamique</td>
+        <td>Hypotonie</td>
+        <td>Repos + action</td>
+      </tr>
+      <tr>
+        <td><strong>Dystonie</strong></td>
+        <td>Contractions prolongées → posture anormale et/ou mouvements répétitifs <em>stéréotypés</em>, aggravés au voisinage de la zone atteinte</td>
+        <td>Hypertonie focale</td>
+        <td>Aggravée à l'action</td>
+      </tr>
+      <tr>
+        <td><strong>Myoclonies</strong></td>
+        <td>Secousses brusques d'origine centrale, focales/multifocales/généralisées, isolées ou répétitives. Myoclonies négatives = astérixis (résolution brusque du tonus)</td>
+        <td>Variable</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td><strong>Tics</strong></td>
+        <td>Soudains, brefs, stéréotypés, sans but ; sensation prémonitoire ; <em>contrôlables volontairement</em> quelques minutes puis rebond. Mouvement anormal le plus fréquent</td>
+        <td>Normal</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td><strong>Dyskinésies</strong></td>
+        <td>Terme générique : mouvement anormal choréique et/ou dystonique, le plus souvent induit (L-dopa, antipsychotiques)</td>
+        <td>Variable</td>
+        <td>Variable</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </span>
+      Dystonies focales — formes
+    </div>
+    <ul class="lst">
+      <li><strong>Torticolis spasmodique</strong> (dystonie cervicale) — torsion du cou</li>
+      <li><strong>Blépharospasme</strong> — dystonie des orbiculaires, occlusions palpébrales anormales, itératives, prolongées</li>
+      <li><strong>Dystonie de fonction</strong> — crampe de l'écrivain, crampe du musicien</li>
+      <li><strong>Hémidystonie</strong> — atteinte d'un hémicorps</li>
+      <li><strong>Dystonie généralisée</strong> — ≥ 1 membre inférieur + tronc</li>
+    </ul>
+  </div>
+  <div class="card card-coral">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Myoclonies — origine
+    </div>
+    <ul class="lst">
+      <li>Corticale</li>
+      <li>Sous-corticale (ganglions de la base)</li>
+      <li>Réticulaire pontique</li>
+      <li>Spinale</li>
+      <li><strong>Astérixis</strong> (flapping tremor) = myoclonies <em>négatives</em>, résolution brusque du tonus</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 : TREMBLEMENTS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Tremblements — types et causes
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Citer les principales causes de tremblement en fonction du type sémiologique (repos ou action).</div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead>
+      <tr><th style="width:16%;">Type</th><th>Caractères cliniques</th><th>Fréquence</th><th>Étiologie principale</th><th>Bilan</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Repos</strong><br><span class="pill pill-red">Parkinsonien</span></td>
+        <td>Disparaît à la contraction et au sommeil — distal, lèvres, menton (jamais chef ni voix) — unilatéral/asymétrique — aggravé par émotions et calcul mental</td>
+        <td>4–6 Hz</td>
+        <td>Maladie de Parkinson (voie nigro-striée), maladie de Wilson, iatrogène</td>
+        <td>&gt; 40 ans : aucun examen nécessaire. &lt; 40 ans : IRM cérébrale + bilan cuprique (cuprémie, céruléoplasminémie, cuprurie des 24h)</td>
+      </tr>
+      <tr>
+        <td><strong>Postural</strong><br><span class="pill pill-blue">Essentiel</span></td>
+        <td>Bilatéral, symétrique — membres sup + chef — bras tendus (serment), index à l'horizontale (bretteur), épreuve des verres, tremblement de la voix. Évolution lente sur années/décennies</td>
+        <td>Variable</td>
+        <td>Tremblement essentiel — cause la plus fréquente de tremblement postural</td>
+        <td>Clinique</td>
+      </tr>
+      <tr>
+        <td><strong>Intentionnel</strong><br><span class="pill pill-amber">Cérébelleux</span></td>
+        <td>Apparaît/maximal à l'arrivée à la cible — doigt-nez, talon-genou. Associé : dysarthrie, asynergie, dyschronométrie, hypotonie, danse des tendons, Romberg négatif, marche cérébelleuse (polygone élargi, embardées)</td>
+        <td>~3 Hz</td>
+        <td>Lésion cérébelleuse, ivresse aiguë, Gayet-Wernicke, AVC cérébelleux</td>
+        <td>Imagerie en urgence si aigu (AVC, compression V4, hydrocéphalie, HTIC). Dosage/supplémentation B1 systématique si syndrome cérébelleux aigu</td>
+      </tr>
+      <tr>
+        <td><strong>Physiologique exagéré</strong></td>
+        <td>Tremblement normal, d'origine musculaire, amplifié — non lié à une atteinte du SNC</td>
+        <td>—</td>
+        <td>Médicaments (cf. tableau iatrogénie), hyperthyroïdie, caféine excessive</td>
+        <td>TSH</td>
+      </tr>
+      <tr>
+        <td><strong>Fonctionnel</strong><br><span class="pill pill-coral">Psychogène</span></td>
+        <td>Début brutal (contexte émotionnel) — distractible — entraînement en fréquence — présent au repos ET à l'action (inhabituel) — polymorphe, atypies — antécédents de somatisation</td>
+        <td>Variable</td>
+        <td>Trouble fonctionnel neurologique</td>
+        <td>Clinique</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> le tremblement de repos est très évocateur de maladie de Parkinson mais <strong>non obligatoire</strong> au diagnostic. Avant 40 ans, toujours éliminer une maladie de Wilson (bilan cuprique + IRM cérébrale).</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Syndrome cérébelleux aigu :</strong> imagerie cérébrale en urgence (AVC ischémique ou hémorragique cérébelleux → compression du V4 → hydrocéphalie/HTIC → déficit neurologique associé possible). Doser/supplémenter la vitamine B1 (encéphalopathie de Gayet-Wernicke). Penser à l'ivresse aiguë et à la prévention des risques liés à l'alcool.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 : MÉDICAMENTS INDUCTEURS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Médicaments inducteurs de mouvements anormaux
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Citer les principaux médicaments susceptibles d'induire les différents types de mouvements anormaux.</div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead><tr><th>Mouvement anormal</th><th>Médicaments / substances incriminés</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Syndrome parkinsonien<br>(tremblement de repos)</strong></td>
+        <td>
+          <div class="pills">
+            <span class="pill pill-red">Neuroleptiques (antipsychotiques)</span>
+            <span class="pill pill-red">Neuroleptiques cachés</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Tremblement physiologique exagéré</strong></td>
+        <td>
+          <div class="pills">
+            <span class="pill pill-amber">Amiodarone</span>
+            <span class="pill pill-amber">Amitriptyline</span>
+            <span class="pill pill-amber">Antidépresseurs</span>
+            <span class="pill pill-amber">Salbutamol</span>
+            <span class="pill pill-amber">Théophylline</span>
+            <span class="pill pill-amber">Tacrolimus</span>
+            <span class="pill pill-amber">Interféron</span>
+            <span class="pill pill-amber">Ciclosporine</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Chorée</strong></td>
+        <td>
+          <div class="pills">
+            <span class="pill pill-blue">L-dopa</span>
+            <span class="pill pill-blue">Agonistes dopaminergiques</span>
+            <span class="pill pill-red">Antipsychotiques</span>
+            <span class="pill pill-amber">Antiépileptiques</span>
+            <span class="pill pill-amber">Lithium</span>
+            <span class="pill pill-amber">Inhibiteurs calciques</span>
+            <span class="pill pill-coral">Cocaïne</span>
+            <span class="pill pill-coral">Amphétamines</span>
+            <span class="pill pill-coral">CO (toxique)</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Dystonie</strong></td>
+        <td><div class="pills"><span class="pill pill-red">Antipsychotiques (parfois cachés)</span></div></td>
+      </tr>
+      <tr>
+        <td><strong>Myoclonies</strong></td>
+        <td>
+          <div class="pills">
+            <span class="pill pill-blue">Antidépresseurs</span>
+            <span class="pill pill-blue">IRS</span>
+            <span class="pill pill-blue">L-dopa</span>
+            <span class="pill pill-amber">Valproate</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Réflexe systématique :</strong> devant tout tremblement (repos ou physiologique exagéré), toute chorée, toute dystonie ou toute myoclonie, toujours rechercher une prise médicamenteuse — y compris des <strong>neuroleptiques cachés</strong> (antiémétiques type métoclopramide, dompéridone, métopimazine).</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 : MALADIE DE HUNTINGTON -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Maladie de Huntington
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principaux signes cliniques de la maladie de Huntington.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Génétique
+    </div>
+    <div class="kv-row"><span class="kv-key">Transmission</span><span class="kv-val">Autosomique dominante, pénétrance complète</span></div>
+    <div class="kv-row"><span class="kv-key">Gène</span><span class="kv-val">HTT (huntingtine) — chromosome 4</span></div>
+    <div class="kv-row"><span class="kv-key">Mutation</span><span class="kv-val">Expansion de triplets CAG</span></div>
+    <div class="kv-row"><span class="kv-key">Sévérité</span><span class="kv-val">Plus de CAG → début plus précoce, plus sévère</span></div>
+    <div class="kv-row"><span class="kv-key">Diagnostic</span><span class="kv-val">Analyse génétique (triplets CAG)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </span>
+      Triade clinique
+    </div>
+    <div class="bl-red" style="margin-bottom:10px;"><strong>Mouvements anormaux</strong><br>Chorée progressive (mains, pieds, visage, tronc) → phase évoluée : dystonie + syndrome parkinsonien</div>
+    <div class="bl-amber" style="margin-bottom:10px;"><strong>Troubles psychiatriques</strong><br>Modification de la personnalité, désinhibition, dépression, anxiété, risque suicidaire, psychose (rare)</div>
+    <div class="bl-blue"><strong>Déclin cognitif</strong><br>Syndrome dysexécutif sous-cortico-frontal → démence. Apathie et anosognosie fréquentes</div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — formes d'allure sporadique :</strong> décès précoce d'un parent (censure), fausse paternité ou anticipation (aggravation d'une génération à l'autre) peuvent masquer le caractère familial.</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Annonce d'une maladie chronique et grave :</strong> évolution inéluctable vers décès, perte d'autonomie, grabatisation, démence, troubles de l'élocution/déglutition. Risque suicidaire élevé — toujours prévoir une consultation de suivi et le traitement de fond du trouble psychiatrique chronique.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 : TICS -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Tics et syndrome de Gilles de la Tourette
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales expressions des tics.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </span>
+      Caractères et types de tics
+    </div>
+    <ul class="lst">
+      <li>Soudain, bref, intermittent, stéréotypé, sans but ; sensation prémonitoire ; contrôlable volontairement quelques minutes → rebond</li>
+      <li><strong>Mouvement anormal le plus fréquent</strong>. Diagnostic clinique</li>
+    </ul>
+    <div class="kv-row"><span class="kv-key">Moteurs simples</span><span class="kv-val">Clignement des yeux, secousse de la tête, haussement d'épaules</span></div>
+    <div class="kv-row"><span class="kv-key">Moteurs complexes</span><span class="kv-val">Séquence motrice élaborée</span></div>
+    <div class="kv-row"><span class="kv-key">Vocaux</span><span class="kv-val">Cri, reniflement, raclement de gorge, expiration forcée</span></div>
+    <div class="kv-row"><span class="kv-key">Coprolalie</span><span class="kv-val">Tics vocaux obscènes (rare)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <span class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </span>
+      Syndrome de Gilles de la Tourette
+    </div>
+    <div class="bl-blue" style="margin-bottom:12px;"><strong>Définition</strong><br>Tics moteurs <em>et</em> vocaux, simples et complexes, présents tous les jours, avec retentissement sur le fonctionnement et l'adaptation socioprofessionnelle. Diagnostic clinique.</div>
+    <div style="font-size:.83rem;color:var(--muted);font-weight:700;margin-bottom:6px;">Comorbidités fréquentes</div>
+    <div class="pills">
+      <span class="pill pill-amber">TOC</span>
+      <span class="pill pill-amber">Dépression</span>
+      <span class="pill pill-amber">Anxiété</span>
+      <span class="pill pill-amber">TDAH</span>
+      <span class="pill pill-red">Automutilation</span>
+      <span class="pill pill-blue">Autisme</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 : DYSKINÉSIES -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Dyskinésies
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales formes de dyskinésies.</div>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+  <table>
+    <thead><tr><th>Contexte</th><th>Type</th><th>Description clinique</th><th>Remarques</th></tr></thead>
+    <tbody>
+      <tr>
+        <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>L-dopa / agonistes dopaminergiques</strong><br>(maladie de Parkinson)</td>
+        <td><span class="pill pill-blue">Pic de dose</span><br>(milieu de dose)</td>
+        <td>Mouvements choréiques ± dystoniques au moment du pic plasmatique de L-dopa</td>
+        <td>Dose-dépendant</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-coral">Biphasiques</span></td>
+        <td>Surviennent en début ET fin de dose (phases de montée/descente)</td>
+        <td>Plus difficiles à traiter</td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Antipsychotiques</strong></td>
+        <td><span class="pill pill-red">Aiguës</span></td>
+        <td>Dystonie cervicale, crises oculogyres, trismus — surtout sujets jeunes</td>
+        <td>Début précoce</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-amber">Tardives</span></td>
+        <td>Dyskinésies bucco-facio-masticatoires → troubles de la phonation, de la déglutition, mauvais état dentaire</td>
+        <td>Cures prolongées — difficiles à traiter</td>
+      </tr>
+      <tr>
+        <td><span class="pill pill-purple">Akathisie</span></td>
+        <td>Piétinement incessant</td>
+        <td>Souvent confondue avec anxiété</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<!-- SECTION 7 : SYNTHÈSE -->
+<!-- ============================================================ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="grid2">
+  <div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Tremblement de repos</strong> = évocateur de Parkinson (4–6 Hz, distal, asymétrique, disparaît à l'action) mais non obligatoire au diagnostic. Bilan cuprique + IRM si &lt; 40 ans.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Tremblement essentiel</strong> = postural et intentionnel, bilatéral symétrique, chef et membres supérieurs — cause la plus fréquente de tremblement postural.</div>
+    </div>
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Tic</strong> = mouvement anormal le plus fréquent, contrôlable volontairement, sensation prémonitoire et rebond.</div>
+    </div>
+  </div>
+  <div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Neuroleptiques cachés</strong> (métoclopramide…) = cause fréquente de syndrome parkinsonien ou dystonie iatrogènes — à rechercher systématiquement.</div>
+    </div>
+    <div class="alert alert-amber">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Huntington</strong> = triade chorée + psychiatrie + cognition. Transmission AD, pénétrance complète, triplets CAG sur HTT. Risque suicidaire élevé, diagnostic génétique.</div>
+    </div>
+    <div class="alert alert-red">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Syndrome cérébelleux aigu</strong> → imagerie cérébrale en urgence + vitamine B1 systématique (Gayet-Wernicke).</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
