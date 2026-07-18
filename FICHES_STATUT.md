@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-18. Ne pas éditer à la main._
 
-**Avancement : 174 / 367 items (47.4%)**
+**Avancement : 175 / 367 items (47.7%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -34,7 +34,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 24 | [x] | Principales complications de la grossesse | 24_Complications_grossesse_v2.html |
 | 25 | [x] | Grossesse extra-utérine | 25_GEU.html |
 | 26 | [x] | Douleur abdominale aiguë chez une femme enceinte | 26_Douleur_abdo_femme_enceinte.html |
-| 27 | [ ] | Prévention des risques fœtaux | — |
+| 27 | [x] | Prévention des risques fœtaux | 27_Prevention_risques_foetaux.html |
 | 28 | [ ] | Connaître les particularités de l infection urinaire au cours de la gr… | — |
 | 29 | [ ] | Connaître les principaux risques professionnels pour la maternité | — |
 | 30 | [ ] | Prématurité et retard de croissance intra-utérin | — |

@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>27 – Prévention des risques fœtaux : infection, médicaments, toxiques, irradiation</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .card-coral {border-left:4px solid var(--coral); }
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 27</div>
+  <h1>Prévention des risques fœtaux : infection, médicaments, toxiques, irradiation</h1>
+  <div class="header-sub">Identifier les agressions materno-fœtales évitables et connaître les stratégies de prévention primaire et secondaire</div>
+  <div class="header-tags">
+    <span class="htag">Toxoplasmose</span>
+    <span class="htag">Rubéole / CMV / HSV</span>
+    <span class="htag">VHB / VIH / VZV</span>
+    <span class="htag">Listériose / Strepto B</span>
+    <span class="htag">Allo-immunisation</span>
+    <span class="htag">Médicaments tératogènes</span>
+    <span class="htag">Tabac / alcool / addictions</span>
+    <span class="htag">Irradiation</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vision d'ensemble —</strong> Le fœtus peut être agressé par quatre grandes catégories de risques évitables : les infections materno-fœtales (bactériennes, virales, parasitaires), les médicaments tératogènes, les toxiques (tabac, alcool, drogues) et l'irradiation. Pour chaque agent, le raisonnement est le même : connaître le mécanisme de transmission ou d'action, la période de sensibilité fœtale maximale, les conséquences possibles, et surtout les leviers de prévention primaire (hygiène, vaccination, éviction) et secondaire (dépistage, surveillance, traitement précoce). C'est un item transversal de dépistage et d'éducation qui structure une grande partie du suivi de grossesse.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Infections materno-fœtales — généralités
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de l'infection materno-fœtale (IMF) et son épidémiologie microbienne.</div>
+  <div class="obj-line">Connaître les principaux mécanismes de contamination materno-fœtale.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Définition et conséquences possibles
+  </div>
+  <p style="font-size:.84rem;margin-bottom:8px;">L'IMF fait suite à une contamination du fœtus au cours de la grossesse ou de l'accouchement par des germes d'origine maternelle (= infection néonatale bactérienne précoce si bactérienne). Fréquence : 1 à 4 % des naissances, 2-4× plus chez les prématurés.</p>
+  <div class="pills">
+    <span class="pill pill-red">Fausse couche</span>
+    <span class="pill pill-red">Embryopathie</span>
+    <span class="pill pill-red">Fœtopathie</span>
+    <span class="pill pill-red">MFIU / mort néonatale</span>
+    <span class="pill pill-amber">Infection post-natale précoce ou à distance</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Agents en cause (classement par fréquence)
+    </div>
+    <ul class="lst">
+      <li><strong>Bactéries</strong> : Streptocoque B (1er), E. coli (2e), Listeria (3e), tréponème</li>
+      <li><strong>Parasite</strong> : toxoplasmose (1,5/1000 naissances)</li>
+      <li><strong>Virus</strong> : CMV (1 % des naissances, 1re cause de surdité congénitale non génétique), VHB, Zika, HSV, VZV, rubéole (1/100 000), VIH (&lt; 1 % si charge virale contrôlée), parvovirus B19, SARS-CoV-2 (3-5 % après infection maternelle)</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></div>
+      Deux voies de contamination
+    </div>
+    <div class="kv-row"><span class="kv-key">Voie vaginale ascendante</span><span class="kv-val">Strepto B, VHB, HSV</span></div>
+    <div class="kv-row"><span class="kv-key">Voie hématogène transplacentaire</span><span class="kv-val">CMV, rubéole, Listeria</span></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">Suspicion clinique : signes maternels (fièvre), signes fœtaux (échographie, RCF), et/ou dépistage sérologique.</p>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Toxoplasmose
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les conséquences de l'IMF, les modalités de surveillance d'une femme séronégative et les conseils de prévention.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Transmission et sévérité — relation inverse avec le terme
+  </div>
+  <table class="table-amber">
+    <tr><th>Terme</th><th>Taux de transmission</th><th>Sévérité si atteinte</th></tr>
+    <tr><td>0-7 SA (périconceptionnel)</td><td>1 %</td><td rowspan="1" style="vertical-align:middle; text-align:center;">—</td></tr>
+    <tr><td>Jusqu'à 13 SA (1er trimestre)</td><td>6-10 %</td><td>Embryo/fœtopathies sévères : 61 %</td></tr>
+    <tr><td>2e trimestre</td><td>≈ 40 %</td><td>Fœtopathies ou formes infracliniques : 25 %</td></tr>
+    <tr><td>3e trimestre</td><td>72 %</td><td>Formes sérologiques pures (pas de répercussion fœtale)</td></tr>
+  </table>
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-teal">70 % infraclinique</span>
+    <span class="pill pill-amber">25 % forme légère (choriorétinite)</span>
+    <span class="pill pill-red">&lt; 5 % forme grave (neurologique)</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Surveillance sérologique
+    </div>
+    <ul class="lst">
+      <li>IgG/IgM obligatoires à la déclaration de grossesse (sauf immunité documentée)</li>
+      <li>Si séronégative : sérologie <strong>mensuelle</strong> jusqu'à l'accouchement (80 % des formes maternelles sont inapparentes)</li>
+      <li>Si sérologie positive : dater la contamination (séroconversion évidente, ou indice d'avidité des IgG si IgG+IgM d'emblée)</li>
+      <li>Séroconversion avérée → CPDPN + traitement antiparasitaire immédiat ; PCR sur liquide amniotique peut faire adapter le traitement</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Prévention
+    </div>
+    <strong style="font-size:.82rem;">Primaire (hygiéno-diététique)</strong>
+    <ul class="lst" style="margin-top:6px;">
+      <li>Viande bien cuite, préférer le congelé</li>
+      <li>Lavage des mains avant/après manipulation d'aliments</li>
+      <li>Laver crudités et salades</li>
+      <li>Éviter le contact avec les chats, gants pour litière/jardinage</li>
+    </ul>
+    <strong style="font-size:.82rem;display:block;margin-top:8px;">Secondaire</strong>
+    <p style="font-size:.83rem;color:var(--muted);">Dépistage mensuel + antiparasitaire si séroconversion + surveillance CPDPN (amniocentèse, échographies ± IRM fœtale).</p>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Virus tératogènes et à transmission materno-fœtale
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les conséquences d'une rubéole, d'une rougeole et d'une infection à CMV pendant la grossesse, ainsi que les mécanismes de transmission des virus les plus fréquents et leurs éléments de prévention.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Rubéole — virus tératogène
+  </div>
+  <div class="kv-row"><span class="kv-key">Risque d'infection fœtale avant 11 SA</span><span class="kv-val">≈ 90 %</span></div>
+  <div class="kv-row"><span class="kv-key">Risque à 24-26 SA (nadir)</span><span class="kv-val">25 %</span></div>
+  <div class="kv-row"><span class="kv-key">Risque en fin de grossesse</span><span class="kv-val">100 %</span></div>
+  <div class="kv-row"><span class="kv-key">Anomalies fœtales majeures si infection &lt; 11 SA</span><span class="kv-val">≈ 90 %</span></div>
+  <div class="kv-row"><span class="kv-key">Risque après 18 SA</span><span class="kv-val">quasi nul</span></div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <strong style="font-size:.82rem;">Syndrome polymalformatif</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Neuro : microcéphalie</li>
+        <li>Ophtalmo : cataracte, microphtalmie, glaucome, choriorétinite</li>
+        <li>Auditif : surdité neurosensorielle</li>
+        <li>Cardiaque : sténose pulmonaire, PCA, CIV</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">Rubéole congénitale évolutive</strong>
+      <p style="font-size:.83rem;color:var(--muted);margin-top:6px;">Infection virale chronique généralisée, nouveau-nés très contagieux. RCIU, purpura thrombopénique, ictère, hépato-splénomégalie, convulsions, anomalies osseuses.</p>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>OMS — <strong>CRS</strong> : 2 signes groupe A (cataracte/glaucome, cardiopathie, surdité, rétinopathie) ou 1 groupe A + 1 groupe B (purpura, splénomégalie, microcéphalie, retard psychomoteur…). <strong>CRI</strong> : IgM néonatales positives sans critères de CRS.</div>
+  </div>
+  <div class="grid2" style="margin-top:10px;">
+    <div class="alert alert-green">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><strong>Prévention primaire</strong> — vaccination (vivant, CI pendant grossesse). A quasi fait disparaître la rubéole congénitale ; 5 % des femmes enceintes restent non immunisées.</div>
+    </div>
+    <div class="alert alert-teal">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <div><strong>Prévention secondaire</strong> — IgG obligatoires à la déclaration ; si négatif, contrôle à 20 SA (au-delà, risque négligeable). Infection avant 20 SA → CPDPN.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Rougeole
+  </div>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.82rem;">Conséquences maternelles/fœtales</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Grippe maternelle plus grave : pneumonie (hospitalisation 30 %), défaillance cardiaque</li>
+        <li>Fausse couche, MFIU, prématurité accrus</li>
+        <li>Pas d'augmentation du risque malformatif</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">Rougeole néonatale (« congénitale »)</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Éruption dans les 10 premiers jours de vie</li>
+        <li>Risque majoré si infection maternelle dans les 3 semaines avant naissance</li>
+        <li>Décès fréquent, panencéphalite sclérosante subaiguë</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Prévention —</strong> vérifier statut vaccinal en cas de contage ; sérologie en urgence ; si séronégative, Ig IV possibles dans les 6 jours (protection 1 mois) ; vaccination ROR en post-partum. Ni arrêt de travail, ni antibiothérapie systématique.</div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Cytomégalovirus (CMV)
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">1re cause d'infection congénitale virale</span>
+    <span class="pill pill-red">1re cause non génétique de surdité et retard mental</span>
+  </div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <div class="kv-row"><span class="kv-key">Périconceptionnel</span><span class="kv-val">15 %</span></div>
+      <div class="kv-row"><span class="kv-key">1er trimestre</span><span class="kv-val">36 %</span></div>
+      <div class="kv-row"><span class="kv-key">2e trimestre</span><span class="kv-val">40 %</span></div>
+      <div class="kv-row"><span class="kv-key">3e trimestre</span><span class="kv-val">65 %</span></div>
+    </div>
+    <div>
+      <ul class="lst">
+        <li>10 % infection prénatale sévère (RCIU, microcéphalie, calcifications, MFIU)</li>
+        <li>10 % sains à la naissance mais séquelles ultérieures (surdité)</li>
+        <li>80 % asymptomatiques</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège —</strong> gravité inversement corrélée au terme (moins de transmission mais plus de formes graves au 1er trimestre). Dépistage sérologique systématique <strong>non recommandé</strong> en France. Valaciclovir à forte dose peut réduire le risque congénital si infection au 1er trimestre, introduit rapidement.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      HSV — herpès néonatal
+  </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Rare (20-30 cas/an) mais grave (&gt; 50 % décès ou séquelles neuro). 80 % par passage dans la filière génitale infectée à l'accouchement.</p>
+    <table>
+      <tr><th>Contexte</th><th>Risque de transmission</th></tr>
+      <tr><td>Primo-infection dans le mois précédent</td><td>50 %</td></tr>
+      <tr><td>Récurrence dans la semaine précédente</td><td>2-5 %</td></tr>
+      <tr><td>ATCD herpès génital sans lésion visible</td><td>1/1000</td></tr>
+      <tr><td>Sans antécédent connu</td><td>1/10 000</td></tr>
+    </table>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Le risque le plus faible reste le contexte le plus fréquent : 20 % des femmes sont HSV2+ et excrètent par intermittence sans le savoir → la majorité des cas surviennent en l'absence d'antécédent connu.</div>
+    </div>
+    <div class="steps" style="margin-top:10px;">
+      <li><div class="step-num">1</div><div><div class="step-title">Primo-infection</div><div class="step-content">Aciclovir 1g/5 prises (ou valaciclovir 2g/2 prises) 5-10 j + césarienne si infection &lt; 6 sem. avant travail (sauf RPM &gt; 4h)</div></div></li>
+      <li><div class="step-num">2</div><div><div class="step-title">Récurrence</div><div class="step-content">Pas de prélèvement ; voie basse possible si RPM &gt; 4h</div></div></li>
+      <li><div class="step-num">3</div><div><div class="step-title">Prévention</div><div class="step-content">Valaciclovir 1g/2 prises de 36 SA jusqu'à la naissance</div></div></li>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      VZV — varicelle
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Séroprévalence chez la femme enceinte : 98,8 %.</p>
+    <ul class="lst">
+      <li><strong>Embryofœtopathie</strong> : 2-2,5 % si contamination &lt; 20 SA — brides amniotiques, atteintes cutanées dermatomiques, hypoplasie des membres, microcéphalie, choriorétinite</li>
+      <li><strong>Zona du nourrisson</strong> si varicelle entre 21 et 36 SA</li>
+      <li><strong>Varicelle néonatale</strong> si varicelle maternelle dans les jours entourant la naissance — risque de varicelle pulmonaire grave</li>
+    </ul>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Vaccination recommandée chez les femmes en âge de procréer sans antécédent de varicelle : test négatif de grossesse préalable + contraception efficace 3 mois après chaque dose.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Infections à prévention vaccinale ou par dépistage : VHB, VIH
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître l'infection à VHB materno-fœtale et sa prévention par la vaccination, ainsi que la prévention du VIH par le dépistage.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    VHB
+  </div>
+  <div class="kv-row"><span class="kv-key">Prévalence chez la femme enceinte</span><span class="kv-val">1 %</span></div>
+  <div class="kv-row"><span class="kv-key">Transmission si ADN viral détectable</span><span class="kv-val">90 %</span></div>
+  <div class="kv-row"><span class="kv-key">Transmission si Ac anti-HBe présents</span><span class="kv-val">≈ 0 %</span></div>
+  <div class="kv-row"><span class="kv-key">Passage à la chronicité chez le nouveau-né infecté</span><span class="kv-val">90 %</span></div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Transmission surtout <strong>per- et post-natale</strong>, indépendante du mode d'accouchement. Césarienne non indiquée pour cette seule infection. Charge virale &gt; 200 000 copies/mL → avis hépato + traitement antiviral.</div>
+  </div>
+  <div style="margin-top:10px;">
+    <strong style="font-size:.82rem;">Prévention</strong>
+    <ul class="lst" style="margin-top:6px;">
+      <li>Dépistage Ag HBs recommandé (HAS) dès la déclaration de grossesse</li>
+      <li>Vaccination des femmes à risque (possible pendant la grossesse)</li>
+      <li>Si Ag HBs+ : sérovaccination du nouveau-né avant la 12e heure de vie (Ig spécifiques IM + vaccin puis 2 injections à 1 mois d'intervalle + rappel à 1 an)</li>
+      <li>Allaitement non contre-indiqué si sérovaccination effectuée</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    VIH
+  </div>
+  <div class="kv-row"><span class="kv-key">Transmission sans traitement</span><span class="kv-val">15-20 %</span></div>
+  <div class="kv-row"><span class="kv-key">Transmission sous trithérapie</span><span class="kv-val">&lt; 1 %</span></div>
+  <div class="kv-row"><span class="kv-key">Transmission à l'accouchement</span><span class="kv-val">2/3 des enfants infectés</span></div>
+  <p style="font-size:.83rem;color:var(--muted);margin-top:8px;">Virus non tératogène. Trois stades possibles : pré-partum (transplacentaire), intra-partum, post-partum (allaitement).</p>
+  <div class="alert alert-green" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Dépistage <strong>systématiquement proposé</strong> en début de grossesse (non obligatoire).</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Infections bactériennes : listériose, streptocoque B, vaginose, grippe
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les mécanismes de transmission et la prévention de la listériose et du streptocoque B, la prise en charge de la vaginose bactérienne, et la conduite à tenir en cas de grippe.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Listériose materno-fœtale
+  </div>
+  <p style="font-size:.84rem;margin-bottom:8px;">Bactériémie maternelle à Listeria monocytogenes → colonisation placentaire → chorioamniotite. 3e cause de méningite néonatale (après E. coli K1 et Strepto B). Mortalité des formes graves : 50-75 %.</p>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.82rem;">Aliments à éviter</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Fromages à pâte molle au lait cru, fromages râpés</li>
+        <li>Poissons fumés, coquillages crus, surimi, tarama, sushis</li>
+        <li>Graines germées crues</li>
+        <li>Charcuterie cuite consommée telle quelle</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">Examens si suspicion</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Hémocultures systématiques devant toute fièvre chez la femme enceinte (préciser recherche de listériose)</li>
+        <li>À l'accouchement : bactériologie du placenta/lochies (quasi toujours +)</li>
+        <li>Nouveau-né : culture sang, LCR, liquide gastrique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Streptocoque B et vaginose
+    </div>
+    <div class="kv-row"><span class="kv-key">Portage vaginal en France</span><span class="kv-val">10-20 %</span></div>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:8px;">Contamination par voie vaginale ascendante, lors du passage dans la filière génitale ou de la RPM.</p>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Vaginose bactérienne (Gardnerella)</strong> : métronidazole PO (1g/j × 7j ou 2g dose unique), à traiter systématiquement si symptomatique en cours de grossesse. Lien avec l'accouchement prématuré actuellement remis en question.</div>
+    </div>
+  </div>
+
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Grippe et grossesse
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Risque augmenté de complications respiratoires et de mortalité chez la femme enceinte.</p>
+    <ul class="lst">
+      <li>Vaccin <strong>inactivé</strong> seul autorisé, à tous les stades de grossesse</li>
+      <li>Passage transplacentaire des anticorps → protection du nourrisson &lt; 6 mois</li>
+      <li>Femme grippée : oseltamivir 75mg × 2/j 5j, ± amoxicilline si signes de gravité, hospitalisation seulement si gravité</li>
+      <li>Traitement débuté sans attendre la confirmation biologique, dans les 48h</li>
+      <li>Allaitement toujours possible</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Allo-immunisation antiérythrocytaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la physiopathologie, le diagnostic et la prévention de l'allo-immunisation antiérythrocytaire pendant la grossesse et dans le post-partum.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Physiopathologie
+  </div>
+  <p style="font-size:.84rem;">Anticorps irrégulier (non A, non B) chez la mère, dirigé contre un antigène érythrocytaire du fœtus → hémolyse fœtale → <strong>1re cause d'anémie fœtale</strong>. Anti-D (Rh1), anti-c (Rh4) et anti-Kell sont les plus fréquents et les plus graves. Complication ultime : anasarque puis mort fœtale.</p>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>L'immunisation survient lors d'une hémorragie fœto-maternelle (passage d'hématies fœtales incompatibles vers la mère).</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Diagnostic
+    </div>
+    <ul class="lst">
+      <li>Groupe rhésus phénotype + RAI systématiques au 1er trimestre</li>
+      <li>Si RhD- ou antécédent de transfusion : RAI répétées aux 6e, 8e, 9e mois</li>
+      <li>RAI+ : identification (anti-D, anti-Kell, anti-c…) + titrage/dosage pondéral</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Prévention pendant la grossesse
+    </div>
+    <ul class="lst">
+      <li>Seule l'allo-immunisation <strong>anti-D</strong> est prévenue médicamenteusement (Ig anti-D, Rhophylac®)</li>
+      <li>Indiquée si RhD- et fœtus RhD+ certain ou présumé</li>
+      <li>Situations à risque : métrorragies, FCS, IVG, GEU, prélèvements ovulaires, traumatisme, VME, accouchement — injection dans les 72h</li>
+      <li>Injection systématique de 300 µg à 28 SA (hémorragies « silencieuses »)</li>
+      <li>RAI &lt; 1 semaine obligatoire avant toute injection</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Prévention en post-partum
+  </div>
+  <ul class="lst">
+    <li>Phénotype RhD du nouveau-né à connaître ; vérification néonatale si génotypage antérieur négatif</li>
+    <li>Si enfant RhD+ : test de Kleihauer sur sang maternel ≥ 30 min après la délivrance</li>
+    <li>Prophylaxie anti-D adaptée au résultat du Kleihauer</li>
+    <li>Rattrapage possible jusqu'à 30 jours après l'accouchement (précédé d'une RAI) en cas d'oubli à 72h</li>
+    <li>Test de Coombs néonatal positif chez 10 % des RhD+ après injection systématique à 28 SA — sans exploration complémentaire si asymptomatique</li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Médicaments et grossesse
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la conduite à tenir en cas d'exposition médicamenteuse, les principaux médicaments à risque et leurs conséquences, ainsi que les recommandations vaccinales pendant la grossesse.</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Conduite à tenir en cas d'exposition
+  </div>
+  <p style="font-size:.83rem;color:var(--muted);margin-bottom:8px;">Prévalence des malformations fœtales en population générale : 2-3 %, dont moins de 5 % d'origine médicamenteuse. 3 situations distinctes :</p>
+  <ul class="lst">
+    <li><strong>Patiente traitée non informée de sa grossesse</strong> — consigner durée, quantité, indication ; savoir si prise au 1er trimestre (organogenèse) ; balance bénéfice maternel / risque fœtal ; discussion CPDPN si besoin</li>
+    <li><strong>Patiente désirant une grossesse</strong> — adapter le traitement en préconceptionnel, avis pharmacovigilance / spécialiste</li>
+    <li><strong>Malformation découverte à la naissance</strong> — reprise rétrospective de la chronologie du traitement, déclaration au centre de pharmacovigilance</li>
+  </ul>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Le <strong>CRAT</strong> (Centre de Référence sur les Agents Tératogènes) est la ressource à consulter pour tout avis sur la tératogénicité d'un médicament.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Principaux médicaments à risque tératogène
+  </div>
+  <table class="table-red">
+    <tr><th>Famille (DCI)</th><th>Malformations principales</th><th>Conduite à tenir</th></tr>
+    <tr><td>Isotrétinoïne / acitrétine</td><td>SNC, oreille externe, cœur, squelette</td><td>Contraception orale exclusive obligatoire ; grossesse contre-indiquée 2 ans après acitrétine ; CPDPN si grossesse</td></tr>
+    <tr><td>Lithium</td><td>Cardiaques (canal artériel, CIV) 4-8 %</td><td>CPDPN + échocardiographie fœtale</td></tr>
+    <tr><td>Warfarine (AVK)</td><td>Warfarin fetal syndrome 4-6 % ; anomalies cérébrales 2 %</td><td>Relais HBPM en préconceptionnel ; pas d'indication à l'IVG</td></tr>
+    <tr><td>Valproate de sodium / carbamazépine</td><td>Spina-bifida, CIV, CIA, fentes, hypospadias, polydactylie</td><td>Consultation préconceptionnelle + avis neuro ; acide folique 5 mg/j ; CPDPN ; échocardiographie</td></tr>
+    <tr><td>Misoprostol (PGE1)</td><td>Syndrome de Möbius (paires crâniennes VI-VII), MFIU au 3e trimestre</td><td>Échographie ciblée ; surveillance CPDPN</td></tr>
+    <tr><td>Mycophénolate</td><td>FCS 50 % ; oreille externe, fente labiopalatine, micrognathie</td><td>Changer de traitement avant conception</td></tr>
+    <tr><td>Méthotrexate</td><td>Craniosténose, dysmorphie, RCIU, cardiopathies</td><td>Risque important d'arrêt de grossesse</td></tr>
+    <tr><td>Carbimazole / PTU</td><td>Aplasie du cuir chevelu, atrésie des choanes, fistule œsotrachéale</td><td>PTU au 1er trimestre puis carbimazole (hépatotoxicité PTU) ; surveiller thyroïde fœtale</td></tr>
+    <tr><td>Ribavirine / éfavirenz</td><td>Malformations faciales, membres, tube digestif (animal)</td><td>Contraception ; CPDPN si grossesse ; éviter au 1er trimestre</td></tr>
+  </table>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Vaccins et grossesse
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="pills">
+        <span class="pill pill-teal">Possibles à tout terme</span>
+      </div>
+      <ul class="lst" style="margin-top:8px;">
+        <li>Inactivés : tétanos, diphtérie, hépatite A/B, méningocoque, pneumocoque, grippe</li>
+        <li>Vivant atténué : fièvre jaune si voyage en zone d'endémie non reportable</li>
+      </ul>
+    </div>
+    <div>
+      <div class="pills">
+        <span class="pill pill-red">Contre-indiqués</span>
+      </div>
+      <ul class="lst" style="margin-top:8px;">
+        <li>Vivants atténués : ROR, varicelle, BCG, rotavirus</li>
+        <li>Innocuité non prouvée : choléra, typhoïde (sauf zone à risque)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Grippe recommandée surtout si terrain à risque (diabète, obésité). Vaccin coqueluche non encore autorisé en France pendant la grossesse ; si fait par erreur, rassurer.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Toxiques : tabac, alcool, addictions
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les conséquences du tabagisme et sa prise en charge, le syndrome d'alcoolisation fœtale et le dépistage de l'alcool, les principales substances addictives et le repérage des conduites à risque, ainsi que la prise en charge obstétricale, addictologique et l'accueil de l'enfant.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Tabac
+  </div>
+  <p style="font-size:.83rem;color:var(--muted);margin-bottom:8px;">Effet dose-dépendant, plus marqué au 3e trimestre. Un sevrage précoce (1er-2e trimestre) normalise le poids de naissance.</p>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.82rem;">1er trimestre</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>GEU : RR &gt; 2</li>
+        <li>Fausse couche spontanée : RR = 2 (dose-dépendant)</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">2e-3e trimestres</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>RCIU (proportionnel à la consommation, même passif)</li>
+        <li>Accouchement prématuré, placenta prævia (+30 %)</li>
+        <li>HRP (risque doublé), MIN (risque doublé)</li>
+        <li>Infections respiratoires/otites (+50 %), obésité de l'adolescent</li>
+        <li>Césarienne si &gt; 20 cig/j</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Prise en charge</strong> — sevrage bénéfique à tout stade. Substitution nicotinique adaptée après évaluation Fagerström ± CO expiré. Approches : conseil minimal, intervention brève, entretien motivationnel, TCC, consultation addictologie.</div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Alcool — SAF et ETCAF
+  </div>
+  <div class="kv-row"><span class="kv-key">Fréquence SAF complet en France</span><span class="kv-val">1-2/1000 (sous-diagnostiqué)</span></div>
+  <div class="kv-row"><span class="kv-key">Fréquence ETCAF</span><span class="kv-val">jusqu'à 5/1000</span></div>
+  <div class="grid2" style="margin-top:10px;">
+    <div>
+      <strong style="font-size:.82rem;">SAF — 4 éléments</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>RCIU modéré</li>
+        <li>Dysmorphie faciale : lèvre supérieure mince, philtrum bombant, ensellure nasale, fentes palpébrales étroites, ptosis, menton effacé, oreilles basses</li>
+        <li>Malformations (10-30 % des formes sévères) : neuro, cardiaques, squelettiques, faciales</li>
+        <li>Retard des acquisitions à distance (troubles cognitifs/comportementaux)</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">Relation dose-effet</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>&gt; 2 verres/j : risque de SAF bien documenté</li>
+        <li>1-2 verres/j : pas de dysmorphie, données rassurantes (occasionnelle/légère), contradictoires si modérée</li>
+        <li>Binge drinking isolé précoce : pas d'impact démontré si épisode unique ; en 2e-3e trimestre, altération de la migration neuronale possible</li>
+      </ul>
+    </div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Dépistage —</strong> intensifier en cas d'ATCD de SAF, toxicomanie, violences, troubles psychiatriques, tabagisme important, ou RCIU échographique. Questionnaire <strong>T-ACE</strong> (Tolérance, Agacement, Consommation, Eye-opener) — score ≥ 2 points = positif.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Addictologie : substances et prise en charge
+  </div>
+  <table>
+    <tr><th>Substance</th><th>Effets principaux</th></tr>
+    <tr><td>Cannabis</td><td>RCIU, prématurité, syndrome de sevrage modéré, troubles de l'attention/apprentissage</td></tr>
+    <tr><td>Cocaïne</td><td>HTA, vasoconstriction, FCS, prématurité, RCIU, RPM, HRP, syndrome d'imprégnation néonatal, atteintes digestives/neuro sévères</td></tr>
+    <tr><td>Héroïne</td><td>FCS, prématurité, RCIU, syndrome de sevrage néonatal</td></tr>
+  </table>
+  <div style="margin-top:10px;">
+    <strong style="font-size:.82rem;">Prise en charge multidisciplinaire</strong>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:4px;">Généraliste, obstétricien/sage-femme, pédiatre, psychiatre, addictologue, sage-femme tabacologue et PMI, assistante sociale.</p>
+  </div>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Traitement de substitution aux opiacés</strong> — méthadone ou buprénorphine (Subutex® préféré à la Suboxone® pendant grossesse/allaitement). Posologie efficace à maintenir, souvent à augmenter en fin de grossesse (volémie ↑). Sévérité du sevrage néonatal non corrélée à la posologie.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Accueil de l'enfant — SSNN
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Syndrome de sevrage néonatal : ≈ 60 % des enfants exposés aux opiacés in utero. Sévérité/durée non corrélées à la posologie maternelle mais majorées par la prise associée de benzodiazépines.</p>
+    <ul class="lst">
+      <li>Neurovégétatif : excitabilité, hypertonie, trémulations, cri aigu</li>
+      <li>Respiratoire : rhinorrhée, bâillements</li>
+      <li>Digestif : mauvaise succion, régurgitations, diarrhées</li>
+    </ul>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Dépistage</span><span class="kv-val">Score de Finnegan / 4h</span></div>
+    <div class="kv-row"><span class="kv-key">Seuil de traitement</span><span class="kv-val">&gt; 8 sur 3 évaluations</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Conséquences à long terme
+    </div>
+    <ul class="lst">
+      <li>Liées à l'environnement : lien parent-enfant, troubles psychiques maternels</li>
+      <li>Liées à l'exposition alcool : malformations, retard mental, troubles des conduites</li>
+      <li>Séquelles de prématurité ou de souffrance fœtale</li>
+    </ul>
+    <div class="alert alert-green" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div>Deux clés : environnement de soignants bienveillants + travail multidisciplinaire.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+  Irradiation et grossesse
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les mécanismes d'action de l'irradiation sur le fœtus et la conduite pratique en imagerie chez la femme enceinte.</div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Deux mécanismes d'action
+  </div>
+  <div class="grid2">
+    <div>
+      <strong style="font-size:.82rem;">Mort cellulaire — seuil 100-200 mGy</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Neurones sensibles dès 100-200 mGy, effet dose franc dès 500 mGy</li>
+        <li>Fenêtre de sensibilité maximale : 10-27 SA</li>
+        <li>10-17 SA (multiplication neuronale) : QI −30 points possible, 40 % d'arriération mentale profonde à 1000 mGy</li>
+        <li>18-27 SA (migration neuronale) : baisse du QI moindre</li>
+        <li>Conséquences : microcéphalie, cataracte, RCIU, décès in utero à très forte dose</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="font-size:.82rem;">Lésions de l'ADN — sans seuil</strong>
+      <ul class="lst" style="margin-top:6px;">
+        <li>Augmentation de 40 % (×1,4) du risque de leucémie/cancer</li>
+        <li>Relation dose-effet dès les petites irradiations</li>
+        <li>Risque de base 0,2-0,3 % → 0,3-0,4 % après irradiation fœtale : reste faible à l'échelle individuelle</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    En pratique — ce qu'il faut retenir
+  </div>
+  <div class="steps">
+    <li><div class="step-num">1</div><div><div class="step-title">Utérus hors du faisceau</div><div class="step-content">Crâne, thorax, membres : rassurer, examen possible avec tablier de plomb</div></div></li>
+    <li><div class="step-num">2</div><div><div class="step-title">Utérus dans le faisceau, examen standard</div><div class="step-content">Dose exceptionnellement &gt; 100 mGy : rassurer (risque mutagène modéré excepté)</div></div></li>
+    <li><div class="step-num">3</div><div><div class="step-title">Utérus dans le faisceau, examen inhabituel</div><div class="step-content">Nombre de clichés/scopie très élevés : avis spécialisé pour calcul dose-gonades (IRSN)</div></div></li>
+    <li><div class="step-num-red">!</div><div><div class="step-title">Femme à proximité d'un patient irradié</div><div class="step-content">Utérus hors faisceau, irradiation négligeable : rassurer</div></div></li>
+  </div>
+  <ul class="lst" style="margin-top:10px;">
+    <li>Demander systématiquement un risque de grossesse avant tout examen irradiant chez une femme en âge de procréer</li>
+    <li>Privilégier échographie/IRM en cas de grossesse en cours si possible</li>
+    <li>Tablier de plomb sur l'abdomen par principe</li>
+    <li>Limiter le nombre de clichés / temps de scopie au strict nécessaire</li>
+    <li>Ne jamais contre-indiquer un examen nécessaire du seul fait de la grossesse (balance bénéfice/risque)</li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>Toxoplasmose</strong> : transmission ↑ avec le terme, gravité ↓ avec le terme. Sérologie mensuelle si séronégative ; prévention hygiéno-diététique.</li>
+    <li><strong>Rubéole</strong> : risque malformatif majeur si infection &lt; 11 SA (90 %), quasi nul après 18 SA. Vaccin vivant contre-indiqué pendant la grossesse.</li>
+    <li><strong>CMV</strong> : 1re cause de surdité congénitale non génétique ; dépistage sérologique systématique non recommandé en France.</li>
+    <li><strong>HSV</strong> : 80 % des herpès néonatals surviennent chez des femmes sans antécédent connu — l'interrogatoire seul est insuffisant.</li>
+    <li><strong>VHB/VIH</strong> : dépistage systématique en début de grossesse ; sérovaccination néonatale pour VHB ; trithérapie ARV réduit la transmission du VIH à &lt; 1 %.</li>
+    <li><strong>Listériose</strong> : hémocultures systématiques devant toute fièvre chez la femme enceinte.</li>
+    <li><strong>Allo-immunisation anti-D</strong> : prévention par Ig anti-D dans les 72h après tout événement à risque + injection systématique à 28 SA.</li>
+    <li><strong>Médicaments à risque</strong> : isotrétinoïne, lithium, AVK, valproate, misoprostol, méthotrexate, antithyroïdiens — toujours vérifier via le CRAT.</li>
+    <li><strong>Tabac/alcool</strong> : effet dose-dépendant ; le sevrage reste bénéfique à tout moment de la grossesse ; pas de seuil sûr connu pour l'alcool.</li>
+    <li><strong>Irradiation</strong> : aucun examen usuel ne dépasse 100 mGy ; ne jamais retarder un examen nécessaire du seul fait de la grossesse.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
