@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-14. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-18. Ne pas éditer à la main._
 
 **Avancement : 173 / 367 items (47.1%)**
 
@@ -31,7 +31,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 21 | [ ] | Mesure de l état de santé de la population | — |
 | 22 | [x] | Maladies rares | 22_Maladies_rares.html |
 | 23 | [x] | Grossesse normale | 23_Grossesse_normale.html |
-| 24 | [x] | Principales complications de la grossesse | 24_Complications_grossesse.html |
+| 24 | [x] | Principales complications de la grossesse | 24_Complications_grossesse_v2.html |
 | 25 | [x] | Grossesse extra-utérine | 25_GEU.html |
 | 26 | [ ] | Douleur abdominale aiguë chez une femme enceinte | — |
 | 27 | [ ] | Prévention des risques fœtaux | — |
