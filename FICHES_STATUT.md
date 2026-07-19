@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-19. Ne pas éditer à la main._
 
-**Avancement : 177 / 367 items (48.2%)**
+**Avancement : 178 / 367 items (48.5%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -38,7 +38,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 28 | [x] | Connaître les particularités de l infection urinaire au cours de la gr… | 28_Infection_urinaire_grossesse.html |
 | 29 | [ ] | Connaître les principaux risques professionnels pour la maternité | — |
 | 30 | [x] | Prématurité et retard de croissance intra-utérin | 30_Prematurite_RCIU.html |
-| 31 | [ ] | Accouchement | — |
+| 31 | [x] | Accouchement | 31_Accouchement_delivrance_suites_couches.html |
 | 32 | [ ] | Évaluation et soins du nouveau-né à terme | — |
 | 33 | [ ] | Allaitement maternel | — |
 | 34 | [ ] | Suites de couches pathologiques | — |
