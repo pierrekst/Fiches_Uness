@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-19. Ne pas éditer à la main._
 
-**Avancement : 178 / 367 items (48.5%)**
+**Avancement : 179 / 367 items (48.8%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -40,7 +40,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 30 | [x] | Prématurité et retard de croissance intra-utérin | 30_Prematurite_RCIU.html |
 | 31 | [x] | Accouchement | 31_Accouchement_delivrance_suites_couches.html |
 | 32 | [ ] | Évaluation et soins du nouveau-né à terme | — |
-| 33 | [ ] | Allaitement maternel | — |
+| 33 | [x] | Allaitement maternel | 33_Allaitement_maternel.html |
 | 34 | [ ] | Suites de couches pathologiques | — |
 | 35 | [ ] | Anomalies du cycle menstruel | — |
 | 36 | [ ] | Contraception | — |

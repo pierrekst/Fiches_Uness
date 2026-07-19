@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 33 — Allaitement maternel</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 33</div>
+  <h1>Allaitement maternel</h1>
+  <div class="header-sub">Bénéfices, modalités pratiques, complications mammaires et sécurité (médicaments, infections, toxiques)</div>
+  <div class="header-tags">
+    <span class="htag">Pédiatrie / Périnatalité</span>
+    <span class="htag">Santé publique</span>
+    <span class="htag">Pathologie mammaire</span>
+    <span class="htag">Prescription et allaitement</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>L'allaitement maternel apporte des bénéfices démontrés pour la mère et l'enfant, mais sa poursuite dépend de facteurs sociaux, organisationnels et de la qualité de l'accompagnement pratique. Le chapitre suit une logique simple : connaître les bénéfices et la prévalence pour argumenter, maîtriser les conseils pratiques pour prévenir les complications, savoir reconnaître et différencier les 5 complications mammaires classiques (insuffisance de lait, engorgement, crevasses, mastite, abcès), et enfin connaître les règles de sécurité en cas de traitement, d'infection ou de toxique chez la mère qui allaite.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : BÉNÉFICES ET PRÉVALENCE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Bénéfices, prévalence et facteurs influençant l'allaitement
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les bénéfices de l'allaitement maternel</div>
+  <div class="obj-line">Connaître la prévalence et les facteurs influençant l'allaitement</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Bénéfices maternels
+    </div>
+    <ul class="lst">
+      <li>Diminution dépression du post-partum</li>
+      <li>Diminution cancer du sein et de l'ovaire</li>
+      <li>Diminution obésité, diabète de type 2</li>
+      <li>Diminution dyslipidémie, HTA, maladies cardiovasculaires (bénéfice persistant après ménopause)</li>
+      <li>Avantage financier</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+      </div>
+      Bénéfices néonataux
+    </div>
+    <ul class="lst">
+      <li>Diminution allergies, asthme</li>
+      <li>Diminution infections pédiatriques (surtout ORL)</li>
+      <li>Diminution leucémies pédiatriques</li>
+      <li>Meilleur développement cognitif, diminution malocclusion dentaire</li>
+      <li>Diminution mort subite du nourrisson</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Bénéfice commun mère-enfant : <strong>favorise le lien mère-enfant</strong>.</div>
+</div>
+
+<div class="kv-row"><span class="kv-key">Allaitement à la maternité (France)</span><span class="kv-val">~70 % (60 % exclusif, 10 % partiel)</span></div>
+<div class="kv-row"><span class="kv-key">Durée médiane d'allaitement</span><span class="kv-val">15 semaines</span></div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    5 catégories de facteurs influençant négativement l'allaitement
+  </div>
+  <table class="table-amber">
+    <thead><tr><th>Catégorie</th><th>Facteurs</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Liés à la mère</strong></td><td>Jeune âge, célibat, précarité, immigration récente, primiparité, ambivalence/non-désir d'allaiter, manque de connaissances, perception d'insuffisance de lait, manque de confiance, dépression postnatale, tétine précoce, tabagisme, obésité, activité professionnelle</td></tr>
+      <tr><td><strong>Liés au nouveau-né</strong></td><td>Perte de poids &gt; 10 %, faible prise de poids, troubles de succion</td></tr>
+      <tr><td><strong>Liés à l'entourage</strong></td><td>Absence de soutien du partenaire, perception négative du père</td></tr>
+      <tr><td><strong>Organisation des soins</strong></td><td>Mise au sein différée, peau à peau retardé, horaires fixes, compléments de lait artificiel, manque de soutien des professionnels</td></tr>
+      <tr><td><strong>Politiques de santé</strong></td><td>Congé maternité court et peu rémunéré</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : MODALITÉS PRATIQUES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Modalités pratiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir expliquer les modalités pratiques de l'allaitement maternel</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Conseils à donner
+  </div>
+  <ul class="lst">
+    <li>Mise au sein <strong>immédiate</strong></li>
+    <li>Allaitement souple : horaires libres, <strong>à la demande</strong></li>
+    <li>Installation confortable : la bouche prend largement l'aréole (pas seulement le mamelon) ; donner les deux seins à chaque tétée</li>
+    <li>Hygiène de vie : boissons abondantes, alimentation riche en protéines/calcium, proscrire tabac/alcool/excitants (café, thé)</li>
+    <li>Lavage quotidien des seins à l'eau et au savon, compresse sèche pour protéger les mamelons (éviter macération)</li>
+    <li>Durée idéale recommandée : <strong>4 à 6 mois</strong></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : COMPLICATIONS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications de l'allaitement
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les complications de l'allaitement</div>
+  <div class="obj-line">Connaître les mécanismes et facteurs favorisant ces complications</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Insuffisance de lait :</strong> principale cause d'interruption précoce de l'allaitement. Facteurs favorisants : séparation mère/enfant, antécédent de chirurgie esthétique des seins.</div>
+</div>
+
+<table>
+  <thead><tr><th>Complication</th><th>Clinique</th><th>Fièvre</th><th>Mécanismes / facteurs favorisants</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Engorgement mammaire</strong></td>
+      <td>Sein gonflé, tendu, douloureux, brillant, œdème ± rougeur diffuse. Diagnostic clinique, aucun examen paraclinique</td>
+      <td>Absente ou minime</td>
+      <td>Initiation retardée de l'allaitement, mauvaise prise du sein, limitation arbitraire des tétées, compléments, canal lactifère bouché</td>
+    </tr>
+    <tr>
+      <td><strong>Crevasses</strong></td>
+      <td>Rupture de la barrière cutanée : mamelon douloureux → rouge/irrité → fissures/érosions ± saignements</td>
+      <td>Absente</td>
+      <td>Friction anormale mamelon/bouche : mauvaise prise du sein, troubles de succion, frein de langue court</td>
+    </tr>
+    <tr>
+      <td><strong>Mastite</strong> (lymphangite/galactophorite)</td>
+      <td>2<sup>e</sup>–12<sup>e</sup> semaine post-partum. Syndrome grippal brutal, douleur unilatérale, zone rouge indurée ± adénopathie</td>
+      <td>&gt; 38,5 °C, frissons</td>
+      <td>Stase de lait + engorgement ; crevasses surinfectées</td>
+    </tr>
+    <tr>
+      <td><strong>Abcès du sein</strong></td>
+      <td>Début insidieux, douleur chronique. Masse fluctuante, peau rouge violacée ± nécrose cutanée</td>
+      <td>Modérée voire absente</td>
+      <td>Stase de lait + engorgement ; crevasses surinfectées</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Mastite — bilan
+    </div>
+    <ul class="lst">
+      <li>NFS/CRP : syndrome inflammatoire, hyperleucocytose (n'oriente pas forcément vers une origine infectieuse)</li>
+      <li>Prélèvement bactério du lait : germe &gt; 10<sup>6</sup>/mL → galactophorite</li>
+      <li>Germe le + fréquent : <strong>staphylocoque doré</strong> ; puis E. coli ; streptocoque B rare (y penser si <strong>mastite bilatérale</strong>)</li>
+      <li>Signe de Budin (pus dans le lait) → en faveur d'une galactophorite</li>
+      <li>Échographie mammaire si forme atypique/traînante → éliminer un abcès</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Abcès — bilan
+    </div>
+    <ul class="lst">
+      <li>NFS/CRP : syndrome inflammatoire, hyperleucocytose</li>
+      <li>Échographie mammaire si doute : examen le <strong>plus spécifique</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> les signes cliniques seuls ne distinguent pas mastite inflammatoire (lymphangite) et infectieuse (galactophorite) — nécessite le prélèvement de lait. Une fièvre plus modérée voire absente avec masse <strong>fluctuante</strong> oriente vers un abcès plutôt qu'une mastite simple.</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : ALLAITEMENT ET SÉCURITÉ ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Allaitement et médicaments, infections, toxiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales règles de prescription médicamenteuse pendant l'allaitement</div>
+  <div class="obj-line">Connaître les infections contre-indiquant ou non l'allaitement</div>
+  <div class="obj-line">Connaître la conduite à tenir en cas de consommation de toxiques</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Médicaments — utilisation possible / à éviter
+  </div>
+  <table class="table-blue">
+    <thead><tr><th>Classe</th><th>Possible</th><th>Avec précaution</th><th>Non recommandé</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Antalgiques</strong></td><td>Paracétamol, aspirine dose anti-agrégante</td><td>Ibuprofène (au moment de la tétée), néfopam/tramadol/morphine (délai post-partum)</td><td>Aspirine dose AI, codéine, oxycodone</td></tr>
+      <tr><td><strong>HPP</strong></td><td>Acide tranexamique</td><td>Sulprostone (attendre 2h après perfusion)</td><td>—</td></tr>
+      <tr><td><strong>Antibiotiques</strong></td><td>Pénicillines, ceftriaxone, macrolides, fluoroquinolones (cipro/ofloxacine)</td><td>Cotrimoxazole, nitrofurantoïne (déficit G6PD), gentamicine, métronidazole</td><td>Clindamycine (sauf dose unique peropératoire), péfloxacine</td></tr>
+      <tr><td><strong>Antiémétiques</strong></td><td>Dompéridone, métoclopramide</td><td>—</td><td>Ondansétron</td></tr>
+      <tr><td><strong>Antihypertenseurs</strong></td><td>Propranolol, labétalol, nifédipine, nicardipine, alphaméthyldopa</td><td>Captopril, énalapril (prématurité/IR nourrisson)</td><td>—</td></tr>
+      <tr><td><strong>Anticoagulants</strong></td><td>HNF, HBPM, warfarine, acénocoumarol</td><td>—</td><td>Fluindione</td></tr>
+      <tr><td><strong>Psychotropes</strong></td><td>Zopiclone, oxazépam, paroxétine, sertraline</td><td>Zolpidem (après la dernière tétée du soir)</td><td>Diazépam, hydroxyzine</td></tr>
+      <tr><td><strong>Antiépileptiques</strong></td><td>Gabapentine, phénytoïne, acide valproïque</td><td>—</td><td>Lamotrigine, lévétiracétam, topiramate, oxcarbazépine, carbamazépine, vigabatrine</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Infections contre-indiquant l'allaitement :</strong> VIH · HTLV-1 et 2 (la congélation détruit toutefois le virus).</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Suspension temporaire
+    </div>
+    <ul class="lst">
+      <li><strong>Varicelle</strong> maternelle 5j avant à 2j après l'accouchement : isolement 7-10j, extraction et don du lait, surveillance rapprochée du nouveau-né. Zona : hygiène stricte, allaitement direct possible hors lésion</li>
+      <li><strong>Tuberculose</strong> pulmonaire active : isolement du nouveau-né ≥ 2 semaines de traitement</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      N'entraînent pas de contre-indication
+    </div>
+    <ul class="lst">
+      <li>Infections courantes (angine, bronchite, grippe, GEA, infection urinaire) : hygiène simple</li>
+      <li>Herpès : hygiène stricte, masque si labial ; sein lésé → lait extrait et donné ; sein sain → allaitement direct possible</li>
+      <li>CMV : sans risque à terme ; précautions si grande prématurité (congélation ↓ charge virale, pasteurisation la supprime)</li>
+      <li>Hépatite B : sérovaccination du nouveau-né (Ig dans les 12h + 3 injections), allaitement n'augmente pas le risque</li>
+      <li>Hépatite C</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Toxiques — pas de contre-indication absolue, informer et accompagner
+  </div>
+  <div class="kv-row"><span class="kv-key">Tabac</span><span class="kv-val">Déconseillé mais pas contre-indiqué — substituts nicotiniques ; délai ≥ 2h avant tétée si sevrage incomplet</span></div>
+  <div class="kv-row"><span class="kv-key">Alcool</span><span class="kv-val">Déconseillé — délai ≥ 2h après consommation ponctuelle modérée</span></div>
+  <div class="kv-row"><span class="kv-key">Drogues (cocaïne, héroïne, cannabis)</span><span class="kv-val">Déconseillées, pas de contre-indication — bénéfices de l'allaitement prévalent ; peut aider au sevrage</span></div>
+</div>
+
+<hr>
+
+<!-- ===== SYNTHÈSE FINALE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <ul class="lst">
+    <li>Allaitement à la maternité : ~70 % en France, mais durée médiane courte (15 semaines)</li>
+    <li>Complications : engorgement (sans fièvre) → crevasses (friction) → mastite (fièvre &gt; 38,5°C, unilatérale) → abcès (masse fluctuante, fièvre modérée/absente)</li>
+    <li>Mastite bilatérale → penser <strong>streptocoque B</strong></li>
+    <li>2 seules infections contre-indiquant l'allaitement : <strong>VIH</strong> et <strong>HTLV-1/2</strong></li>
+    <li>Varicelle périnatale et tuberculose active : suspension temporaire avec extraction du lait</li>
+    <li>Tabac, alcool et drogues : déconseillés mais jamais une contre-indication formelle à l'allaitement</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
