@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-19. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-20. Ne pas éditer à la main._
 
 **Avancement : 179 / 367 items (48.8%)**
 
@@ -132,7 +132,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 122 | [x] | Principales techniques de rééducation et de réadaptation | 122_reeducation_readaptation.html |
 | 123 | [x] | Vieillissement normal | 123_vieillissement_normal.html |
 | 124 | [x] | Ménopause | 124_Menopause_IOP_Andropause.html |
-| 125 | [x] | Troubles de la miction et incontinence urinaire de l adulte et du suje… | 125_troubles_miction_incontinence.html |
+| 125 | [x] | Troubles de la miction et incontinence urinaire de l adulte et du suje… | 125_troubles_miction_incontinence_v2.html |
 | 126 | [x] | Trouble de l érection | 126_trouble_erection.html |
 | 127 | [x] | Hypertrophie bénigne de la prostate | 127_Hypertrophie_benigne_prostate_v2.html |
 | 128 | [x] | Ostéopathies fragilisantes | 128_Osteopathies_fragilisantes.html |
