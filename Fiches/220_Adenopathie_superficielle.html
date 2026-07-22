@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 220 — Adénopathie superficielle</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 220</div>
+  <h1>Adénopathie superficielle de l'adulte et de l'enfant</h1>
+  <div class="header-sub">Démarche diagnostique, étiologies et indications des examens complémentaires</div>
+  <div class="header-tags">
+    <span class="htag">Hématologie / Pédiatrie</span>
+    <span class="htag">Adénopathie</span>
+    <span class="htag">Lymphome</span>
+    <span class="htag">Biopsie ganglionnaire</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Une adénopathie superficielle est une tuméfaction ganglionnaire acquise &gt; 1 cm. La démarche diagnostique repose sur trois axes complémentaires : <strong>adénopathie isolée vs poly-adénopathie</strong>, <strong>contexte évolutif</strong> (aigu/subaigu/chronique) et <strong>orientation clinique</strong> (infectieuse, tumorale, inflammatoire). Chez l'enfant, l'immense majorité des adénopathies cervicales sont bénignes et infectieuses ; chez l'adulte, toute adénopathie chronique doit faire craindre une hémopathie ou une tumeur solide et impose une démarche rigoureuse allant jusqu'à la biopsie. Le fil conducteur : bien caractériser cliniquement l'adénopathie, éliminer les diagnostics différentiels, puis raisonner selon isolée/généralisée pour guider le bilan biologique, d'imagerie et l'indication d'un prélèvement histologique.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : DÉMARCHE CLINIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Démarche clinique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les circonstances de découverte d'une adénopathie superficielle de l'enfant</div>
+  <div class="obj-line">Connaître l'examen des autres organes lymphoïdes</div>
+  <div class="obj-line">Connaître les éléments d'interrogatoire pour l'orientation étiologique</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Chez l'enfant, la découverte d'adénopathies est très fréquente, le plus souvent dans un <strong>cadre infectieux banal</strong> (satellite d'une infection ORL pour les ganglions cervicaux antérieurs) : ganglions petits (&lt; 10 mm), souples, non fixés.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Examen des aires ganglionnaires
+    </div>
+    <ul class="lst">
+      <li>Préciser : atteinte unique ou <strong>poly-adénopathie</strong> (plusieurs aires)</li>
+      <li>Toutes les aires superficielles : jugulo-carotidiennes, sous-mandibulaires, occipitales, sus-claviculaires, axillaires, épitrochléennes, inguinales</li>
+      <li>Caractéristiques : taille, consistance, forme, douleur, adhérence aux plans</li>
+      <li>Rechercher splénomégalie, hépatomégalie, hypertrophie amygdalienne</li>
+      <li><strong>Schéma daté</strong> précisant siège et taille</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Interrogatoire
+    </div>
+    <ul class="lst">
+      <li>Âge, symptômes ORL, vaccinations, voyages</li>
+      <li>Antécédents de cancer, tabagisme, médicaments (hydantoïnes)</li>
+      <li>Métier, contact/griffure/morsure animale (chat, chien, gibier)</li>
+      <li>AEG (asthénie, anorexie, amaigrissement), fièvre/frissons</li>
+      <li>Syndrome tumoral, sueurs nocturnes, douleurs osseuses</li>
+      <li>Éruption cutanée, prurit, signes hémorragiques/syndrome anémique</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : ORIENTATION DIAGNOSTIQUE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Orientation diagnostique
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'orientation diagnostique en fonction du contexte et des manifestations associées, adulte et enfant</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Orientation infectieuse
+    </div>
+    <ul class="lst">
+      <li>Fièvre</li>
+      <li>Signes inflammatoires généraux ou locorégionaux</li>
+      <li>Éruption cutanée spécifique (rougeole, rubéole, varicelle)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Orientation tumorale
+    </div>
+    <ul class="lst">
+      <li>Adénopathies <strong>froides</strong></li>
+      <li>AEG, sueurs, prurit, douleurs osseuses</li>
+      <li>Compression locale / syndrome tumoral</li>
+      <li>Signes d'insuffisance médullaire</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Orientation inflammatoire
+    </div>
+    <p style="font-size:.84rem;">Signes généraux et/ou atteinte multi-organes avec <strong>récurrences</strong></p>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> une adénopathie froide isolée d'évolution chronique (&gt; 2 mois) doit faire craindre une étiologie tumorale (leucémie, lymphome).</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    A — Adénopathie isolée : rechercher le territoire de drainage
+  </div>
+  <table>
+    <thead><tr><th>Cause</th><th>Éléments clés</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Infection locale</strong></td><td>Toujours rechercher une porte d'entrée (plaie, morsure, griffure) : maladie des griffes du chat, tularémie (gibier), IST (adénopathie inguinale : syphilis, chancre mou, Nicolas-Favre), tuberculose (adénopathie froide volumineuse), toxoplasmose</td></tr>
+      <tr><td><strong>Tumeur solide</strong></td><td>Selon territoire de drainage. <strong>Ganglion de Troisier</strong> (sus-claviculaire gauche) → sein, poumon/médiastin, tumeur abdomino-pelvienne. Rechercher un mélanome sur le territoire cutané correspondant</td></tr>
+      <tr><td><strong>Lymphome</strong></td><td>À éliminer si évolution &gt; 4-6 semaines ou symptômes B (amaigrissement, sueurs, fièvre) : Hodgkin, Burkitt, lymphomes anaplasiques (fréquents chez l'enfant). Taille pouvant fluctuer (Hodgkin), présentation inflammatoire possible (anaplasiques)</td></tr>
+      <tr><td><strong>Causes rares</strong></td><td>Maladie de Castleman, granulomatose chronique, maladie de Whipple, histiocytoses</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+    </div>
+    B — Poly-adénopathie
+  </div>
+  <table>
+    <thead><tr><th>Catégorie</th><th>Étiologies</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hémopathie maligne</strong></td><td>Lymphome (chronique + symptômes B) ; leucémie aiguë (cytopénies, blastes circulants)</td></tr>
+      <tr><td><strong>Infection</strong></td><td>VIH, CMV, toxoplasmose, tuberculose, mononucléose infectieuse, syphilis secondaire, brucellose, leishmaniose viscérale</td></tr>
+      <tr><td><strong>Inflammatoire</strong></td><td>Sarcoïdose, lupus, polyarthrite rhumatoïde, Kawasaki (enfant), maladie de Still</td></tr>
+      <tr><td><strong>Autres</strong></td><td>Toxicité médicamenteuse (hydantoïne), histiocytoses, syndrome d'activation macrophagique, granulomatose chronique, maladie de surcharge, eczéma/prurigo sévère</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : ADÉNITES CERVICALES ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Adénites cervicales aiguës, subaiguës et chroniques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les étiologies spécifiques des adénites cervicales, enfant et adulte</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      Infectieuses
+    </div>
+    <ul class="lst">
+      <li>ORL virale/bactérienne</li>
+      <li>EBV, CMV, toxoplasmose</li>
+      <li>Infections bucco-dentaires, HSV</li>
+      <li>Adénite à pyogènes (staph/strepto)</li>
+      <li>Tuberculose, mycobactérie atypique</li>
+      <li>Griffes du chat, pasteurellose, tularémie</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Tumorales
+    </div>
+    <ul class="lst">
+      <li>Leucémie</li>
+      <li>Lymphome hodgkinien / non-hodgkinien</li>
+      <li>Métastase ganglionnaire</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Inflammatoires
+    </div>
+    <ul class="lst">
+      <li>Granulomatoses</li>
+      <li>Maladie de Castleman</li>
+      <li>Histiocytose</li>
+      <li>Fièvres périodiques (hyper-IgD…), Still</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : DIAGNOSTICS DIFFÉRENTIELS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostics différentiels
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principaux diagnostics différentiels des adénopathies localisées</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Diagnostic clinique : tuméfaction acquise <strong>&gt; 1 cm</strong> dans un territoire ganglionnaire superficiel. <strong>Toute tuméfaction dans une aire ganglionnaire n'est pas une adénopathie.</strong> Toujours palper et ausculter.</div>
+</div>
+
+<div class="pills">
+  <span class="pill pill-purple">Lipome / sarcome (cervical)</span>
+  <span class="pill pill-blue">Tumeur parotidienne</span>
+  <span class="pill pill-blue">Tumeur sous-maxillaire</span>
+  <span class="pill pill-teal">Tumeur thyroïdienne (mobile à la déglutition)</span>
+  <span class="pill pill-amber">Kyste congénital cervical</span>
+  <span class="pill pill-coral">Hidrosadénite (zone axillaire)</span>
+  <span class="pill pill-red">Anévrisme artériel (pulsatile)</span>
+  <span class="pill pill-gray">Hernie inguinale/crurale</span>
+</div>
+
+<div class="kv-row"><span class="kv-key">En cas de doute clinique</span><span class="kv-val">Échographie pour préciser la nature de la tuméfaction</span></div>
+
+<hr>
+
+<!-- ===== SECTION 5 : ÉTIOLOGIES FRÉQUENTES DE L'ENFANT ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies fréquentes chez l'enfant
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les étiologies fréquentes de l'adénopathie superficielle de l'enfant</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div>Poly-adénopathie cervicale hivernale sur épisodes rhinopharyngés = tableau le plus fréquent. La crainte d'une cause maligne ou systémique doit imposer une démarche rigoureuse si adénopathie <strong>isolée</strong>, <strong>chronique</strong>, ou avec <strong>symptômes généraux</strong> — ne pas hésiter à revoir l'enfant.</div>
+</div>
+
+<table class="table-teal">
+  <thead><tr><th>Présentation</th><th>Étiologies</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Adénite isolée</strong></td><td>Pyogènes (strepto, staph) ; griffes du chat, BCGite, zona, toxoplasmose, BK, mycobactéries atypiques ; pasteurellose, tularémie, leishmaniose</td></tr>
+    <tr><td><strong>Polyadénite avec éruption</strong></td><td>Rubéole, VIH, adénovirose, rougeole, varicelle</td></tr>
+    <tr><td><strong>Polyadénite avec splénomégalie</strong></td><td>Kala-Azar, trypanosomiase, leishmaniose</td></tr>
+    <tr><td><strong>Polyadénite avec sd. mononucléosique</strong></td><td>MNI, VIH, CMV, toxoplasmose</td></tr>
+    <tr><td><strong>Inflammatoire</strong></td><td>Syndrome de Kawasaki, arthrite chronique juvénile (Still)</td></tr>
+    <tr><td><strong>Malignes (rares, à évoquer systématiquement)</strong></td><td>Leucémie aiguë lymphoblastique, lymphomes</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SECTION 6 : CYTOPONCTION / BIOPSIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Cytoponction, biopsie, exérèse
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître l'indication d'une cytoponction, d'une biopsie, d'une exérèse devant une adénopathie</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Cytoponction ganglionnaire
+    </div>
+    <ul class="lst">
+      <li>Geste facile, résultat rapide (quelques heures), étude microbiologique possible</li>
+      <li>Peut retrouver cellules lymphomateuses / cellules de Sternberg (Hodgkin)</li>
+      <li>Guidage échographique si non palpable ou pour cibler le ganglion</li>
+      <li>Utile pour orientation rapide — mais une cytoponction normale <strong>n'élimine pas un lymphome</strong></li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Biopsie ganglionnaire
+    </div>
+    <ul class="lst">
+      <li>Sous AG (si profonde) ou locale ; de plus en plus radio-guidée</li>
+      <li>Seul examen permettant la classification histologique du lymphome (&gt; 70 entités OMS)</li>
+      <li>Histologie + immuno-histochimie + biologie moléculaire ± caryotype ; congélation systématique</li>
+      <li>Équipe spécialisée indispensable pour l'acheminement du matériel</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Règle absolue :</strong> la biopsie ganglionnaire est indispensable devant toute adénopathie d'évolution <strong>chronique (&gt; 3-4 semaines) de l'adulte</strong>, pour éliminer une pathologie tumorale.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Enfant — biopsie en 2<sup>e</sup> intention si absence d'orientation
+  </div>
+  <div class="kv-row"><span class="kv-key">Adénopathie isolée &lt; 1-2 cm</span><span class="kv-val">Surveillance</span></div>
+  <div class="kv-row"><span class="kv-key">&gt; 1-2 cm, inflammatoire</span><span class="kv-val">Traitement d'épreuve antibiotique ou ponction ganglionnaire</span></div>
+  <div class="kv-row"><span class="kv-key">&gt; 1-2 cm, indolore</span><span class="kv-val">Ponction, voire plutôt biopsie sous AG</span></div>
+  <div class="kv-row"><span class="kv-key">Biopsie en 1<sup>re</sup> intention</span><span class="kv-val">Rare chez l'enfant</span></div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 7 : BILAN BIOLOGIQUE ET IMAGERIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Bilan biologique et examens d'imagerie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les examens biologiques de première intention selon le contexte</div>
+  <div class="obj-line">Connaître les examens d'imagerie à pratiquer devant une adénopathie</div>
+  <div class="obj-line">Adénopathie de l'enfant : connaître les examens complémentaires de première intention</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Biologie — adulte
+    </div>
+    <ul class="lst">
+      <li><strong>Hémogramme</strong> quasi systématique : anémie inflammatoire, sd. mononucléosique, polynucléose, cellules anormales, cytopénies</li>
+      <li>Sérologies virales/parasitaires selon la clinique</li>
+      <li><strong>CRP</strong> si orientation inflammatoire/bactérienne</li>
+      <li><strong>LDH</strong> si suspicion de lymphome ou leucémie aiguë</li>
+      <li>Bilan auto-immun si orientation inflammatoire non infectieuse</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Biologie — enfant
+    </div>
+    <ul class="lst">
+      <li><strong>Aucun examen</strong> nécessaire si virose ORL banale</li>
+      <li>Hémogramme, CRP, LDH selon orientation</li>
+      <li>IDR tuberculine selon contexte</li>
+      <li>Sérologies EBV/CMV/toxoplasmose si polyadénopathie sans orientation</li>
+      <li>Sérologie <em>Bartonella henselae</em> si suspicion griffes du chat</li>
+    </ul>
+  </div>
+</div>
+
+<table class="table-amber">
+  <thead><tr><th>Imagerie</th><th>Indication</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Échographie ganglionnaire</strong></td><td>Doute sur le diagnostic d'adénopathie ; loco-régionale chez l'enfant</td></tr>
+    <tr><td><strong>Échographie abdominale</strong></td><td>Adénopathies profondes, hépato-splénomégalie (si examen clinique difficile), tumeur solide</td></tr>
+    <tr><td><strong>Radiographie de thorax</strong></td><td>Atteinte parenchymateuse, adénopathies médiastinales (infection, tuberculose, cancer)</td></tr>
+    <tr><td><strong>TDM ciblée</strong></td><td>Adénopathie isolée : zone de drainage. Ganglion sus-claviculaire gauche → exploration abdomino-pelvienne systématique</td></tr>
+    <tr><td><strong>TDM cervico-thoraco-abdomino-pelvienne injectée</strong></td><td>Bilan d'extension de lymphome ou cancer solide</td></tr>
+    <tr><td><strong>TEP-scanner au 18-FDG</strong></td><td>Bilan d'extension lymphome/tumeur solide selon histologie</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SYNTHÈSE FINALE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <ul class="lst">
+    <li>Adénopathie = tuméfaction acquise <strong>&gt; 1 cm</strong> ; toujours éliminer un diagnostic différentiel non ganglionnaire</li>
+    <li>Isolée → penser au territoire de drainage ; froide + chronique (&gt; 2 mois) → craindre une tumeur</li>
+    <li><strong>Ganglion de Troisier</strong> (sus-claviculaire gauche) → bilan abdomino-pelvien systématique</li>
+    <li>Poly-adénopathie chez l'enfant : très souvent virale (contexte hivernal ORL) mais penser systématiquement à la leucémie/lymphome</li>
+    <li>Cytoponction : orientation rapide, mais ne remplace jamais la <strong>biopsie</strong> pour affirmer/typer un lymphome</li>
+    <li><strong>Biopsie ganglionnaire obligatoire</strong> devant toute adénopathie chronique (&gt; 3-4 semaines) de l'adulte</li>
+    <li>Chez l'enfant : biopsie en 2<sup>e</sup> intention seulement, rarement en 1<sup>re</sup> intention</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-20. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-22. Ne pas éditer à la main._
 
-**Avancement : 179 / 367 items (48.8%)**
+**Avancement : 180 / 367 items (49.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -227,7 +227,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 217 | [ ] | Syndrome mononucléosique | — |
 | 218 | [x] | Éosinophilie | 218_eosinophilie.html |
 | 219 | [ ] | Pathologie du fer chez l adulte et l enfant | — |
-| 220 | [ ] | Adénopathie superficielle de l adulte et de l enfant | — |
+| 220 | [x] | Adénopathie superficielle de l adulte et de l enfant | 220_Adenopathie_superficielle.html |
 | 221 | [x] | Athérome | 221_atherome.html |
 | 222 | [x] | Facteurs de risque cardio-vasculaire et prévention | 222_facteurs_risque_cv.html |
 | 223 | [x] | Dyslipidémies | 223_dyslipidémies.html |
