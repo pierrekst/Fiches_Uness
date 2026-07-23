@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-23. Ne pas éditer à la main._
 
-**Avancement : 181 / 367 items (49.3%)**
+**Avancement : 183 / 367 items (49.9%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -223,7 +223,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 213 | [ ] | Anémie chez l adulte et l enfant | — |
 | 214 | [ ] | Thrombopénie chez l adulte et l enfant | — |
 | 215 | [ ] | Purpuras chez l adulte et l enfant | — |
-| 216 | [ ] | Syndrome hémorragique d origine hématologique | — |
+| 216 | [x] | Syndrome hémorragique d origine hématologique | 216_Syndrome_hemorragique_hematologique.html |
 | 217 | [ ] | Syndrome mononucléosique | — |
 | 218 | [x] | Éosinophilie | 218_eosinophilie.html |
 | 219 | [ ] | Pathologie du fer chez l adulte et l enfant | — |
@@ -267,7 +267,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 257 | [ ] | Œdèmes des membres inférieurs localisés ou généralisés | — |
 | 258 | [ ] | Élévation de la créatininémie | — |
 | 259 | [ ] | Protéinurie et syndrome néphrotique chez l adulte et de l enfant | — |
-| 260 | [ ] | Hématurie | — |
+| 260 | [x] | Hématurie | 260_Hematurie.html |
 | 261 | [ ] | Néphropathie glomérulaire | — |
 | 262 | [x] | Néphropathies interstitielles | 262_nephropathies_interstitielles.html |
 | 263 | [ ] | Néphropathies vasculaires | — |
