@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-22. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-23. Ne pas éditer à la main._
 
-**Avancement : 180 / 367 items (49.0%)**
+**Avancement : 181 / 367 items (49.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -209,7 +209,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 199 | [ ] | Syndrome douloureux régional complexe | — |
 | 200 | [ ] | Douleur et épanchement articulaire | — |
 | 201 | [ ] | Transplantation d organes | — |
-| 202 | [ ] | Biothérapies et thérapies ciblées | — |
+| 202 | [x] | Biothérapies et thérapies ciblées | 202_Biotherapies_therapies_ciblees.html |
 | 203 | [ ] | Dyspnée aiguë et chronique | — |
 | 204 | [ ] | Toux chez l enfant et chez l adulte | — |
 | 205 | [x] | Hémoptysie | 205_hemoptysie.html |
