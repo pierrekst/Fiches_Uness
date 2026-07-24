@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>329 — Produits sanguins labiles (PSL)</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+  .intro-box p+p{margin-top:8px;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray  {background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 329</div>
+  <h1>Produits sanguins labiles (PSL) et transfusion</h1>
+  <div class="header-sub" style="font-size:.9rem;opacity:.9;margin-top:4px;">Groupes érythrocytaires, règles immunologiques, indications des CGR/plaquettes/plasma, étapes transfusionnelles, complications</div>
+  <div class="header-tags">
+    <span class="htag">Groupes sanguins</span>
+    <span class="htag">CGR / plaquettes / plasma</span>
+    <span class="htag">Complications immédiates</span>
+    <span class="htag">Allo-immunisation</span>
+    <span class="htag">Pédiatrie</span>
+  </div>
+</div>
+
+<div class="intro-box">
+  <p><strong>Vision d'ensemble.</strong> Transfuser, c'est apporter des antigènes étrangers (globules rouges, plaquettes, protéines plasmatiques) à un receveur qui peut déjà posséder, ou développer, des anticorps contre eux. Tout le raisonnement de l'item repose sur cette idée : éviter le conflit immunologique <em>immédiat</em> (compatibilité ABO/RH-KEL) et prévenir le conflit <em>futur</em> (allo-immunisation).</p>
+  <p>Le fil conducteur se déroule en 4 temps : 1) connaître les groupes sanguins et les règles de compatibilité qui en découlent ; 2) connaître les 3 PSL (CGR, plaquettes, plasma), leurs indications et leurs qualifications ; 3) maîtriser le déroulé pratique d'une transfusion, de la prescription à la surveillance ; 4) savoir reconnaître et traiter en urgence une complication, immédiate ou retardée.</p>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Groupes sanguins et règles immunologiques de la transfusion
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les groupes sanguins érythrocytaires (systèmes, antigènes, anticorps naturels vs immuns)</div>
+  <div class="obj-line">Connaître les règles immunologiques de transfusion des PSL (compatibilité ABO, RH-KEL, RAI)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Deux grandes familles d'antigènes de groupe sanguin
+  </div>
+  <p style="font-size:.85rem;">≈ 380 antigènes érythrocytaires, 43 systèmes. En routine transfusionnelle : <strong>6 systèmes, 14 antigènes</strong> explorés.</p>
+  <div class="grid2" style="margin-top:12px;">
+    <div class="bl-blue">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:4px;">Antigènes glucidiques — système ABO</div>
+      <div style="font-size:.83rem;color:var(--muted);">Anticorps <strong>naturels et réguliers</strong> (présents constamment, stimulation par le microbiote sans exposition transfusionnelle). Danger dès la <strong>première</strong> transfusion incompatible. Groupes tissulaires (endothélium, épithéliums) → compatibilité exigée en transplantation.</div>
+    </div>
+    <div class="bl-teal">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:4px;">Antigènes protéiques — RH, KEL, FY, JK, MNS</div>
+      <div style="font-size:.83rem;color:var(--muted);">Anticorps <strong>immuns et irréguliers</strong> (apparaissent seulement après stimulation inter-humaine : transfusion ou grossesse incompatible). Danger <strong>potentiel</strong>, détectés par la RAI.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Système ABO
+  </div>
+  <table class="table-blue">
+    <tr><th>Groupe</th><th>Antigènes sur GR</th><th>Anticorps plasmatiques</th><th>Génotypes</th></tr>
+    <tr><td><strong>A</strong></td><td>A</td><td>Anti-B</td><td>A/A ou A/O</td></tr>
+    <tr><td><strong>B</strong></td><td>B</td><td>Anti-A</td><td>B/B ou B/O</td></tr>
+    <tr><td><strong>AB</strong></td><td>A et B</td><td>Aucun</td><td>A/B</td></tr>
+    <tr><td><strong>O</strong></td><td>Aucun</td><td>Anti-A et Anti-B</td><td>O/O</td></tr>
+  </table>
+  <div class="pills">
+    <span class="pill pill-teal">Donneur O = donneur universel GR (ABO)</span>
+    <span class="pill pill-purple">Donneur AB = donneur universel plasma</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Systèmes explorés en routine (hors ABO)
+  </div>
+  <table class="table-teal">
+    <tr><th>Système</th><th>Antigènes recherchés</th><th>Analyse (antigènes)</th><th>Analyse (anticorps)</th></tr>
+    <tr><td>RH</td><td>D (RH1)</td><td>Groupage ABO-RH1/D</td><td rowspan="1" style="vertical-align:middle; text-align:center;">RAI</td></tr>
+    <tr><td>RH</td><td>C, E, c, e (RH2,3,4,5)</td><td rowspan="2" style="vertical-align:middle; text-align:center;">Phénotype RH-KEL1</td><td>RAI</td></tr>
+    <tr><td>KEL</td><td>K (KEL1)</td><td>RAI</td></tr>
+    <tr><td>Duffy (FY)</td><td>Fy<sup>a</sup>, Fy<sup>b</sup></td><td rowspan="3" style="vertical-align:middle; text-align:center;">Phénotype étendu</td><td rowspan="3" style="vertical-align:middle; text-align:center;">RAI</td></tr>
+    <tr><td>Kidd (JK)</td><td>Jk<sup>a</sup>, Jk<sup>b</sup></td></tr>
+    <tr><td>MNS</td><td>S, s</td></tr>
+  </table>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Antigène D (RH1) — règle réglementaire absolue :</strong> tout patient D négatif doit recevoir des CGR D négatif. C'est l'antigène le plus immunogène de tous les systèmes de groupe sanguin.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Compatibilité C/c, E/e, K — réglementaire</div>
+  <p style="font-size:.84rem;">Femmes <strong>jusqu'à la fin de la période procréative</strong> (avenir obstétrical, prévention de la maladie hémolytique du fœtus/nouveau-né).</p>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Compatibilité C/c, E/e, K — recommandée</div>
+    <p style="font-size:.84rem;">Patients <strong>polytransfusés</strong>, pour limiter le risque cumulé d'allo-immunisation.</p>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Groupe ABO + RAI en pré-transfusionnel = prévention du conflit immunologique. <strong>Contrôle Ultime au Lit du Malade (CULM)</strong> = dernière vérification de concordance ABO juste avant l'injection.</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Les 3 produits sanguins labiles
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques générales des PSL et leur processus de fabrication</div>
+  <div class="obj-line">Connaître les principales indications des concentrés de globules rouges (CGR)</div>
+  <div class="obj-line">Connaître les indications des principales qualifications et transformations des CGR</div>
+  <div class="obj-line">Connaître les indications de la transfusion de concentrés de plaquettes</div>
+  <div class="obj-line">Connaître les indications de la transfusion de plasma</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Du don au produit : 3 étapes</div>
+  <ul class="lst">
+    <li><strong>Qualification biologique</strong> : groupe sanguin + dépistage maladies transmissibles (VHB, VHC, VIH, syphilis…) → si positif : destruction du produit + information du donneur.</li>
+    <li><strong>Préparation</strong> : déleucocytation systématique (réduit le risque CMV) → séparation en CGR / plasma / couche plaquettaire → mélange de 6-8 couches plaquettaires (MCP) → atténuation des pathogènes (Amotosalen) pour plaquettes et une partie du plasma.</li>
+    <li><strong>Contrôle qualité</strong> : conformité volume, principe actif, déleucocytation.</li>
+  </ul>
+  <p style="font-size:.83rem;color:var(--muted);margin-top:8px;">Don en aphérèse → concentré de plaquettes d'aphérèse (CPA, dose thérapeutique d'un seul donneur) ou plasma d'aphérèse (volume plus important).</p>
+  <p style="font-size:.83rem;color:var(--muted);margin-top:4px;">Don de sang : bénévolat, anonymat, volontariat, non profit — organisé par l'Établissement Français du Sang (EFS), monopolistique.</p>
+</div>
+
+<div class="section-title" style="font-size:.92rem;margin-top:18px;">Concentrés de globules rouges (CGR)</div>
+<div class="card card-red">
+  <div class="card-title"><div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Seuils transfusionnels HAS (indication ≠ chiffre seul, tenir compte tolérance et rapport bénéfice/risque)</div>
+  <table class="table-red">
+    <tr><th>Contexte</th><th>Seuil Hb</th></tr>
+    <tr><td>Péri-opératoire, pas d'antécédent</td><td>7 g/dL</td></tr>
+    <tr><td>Antécédents cardio-vasculaires</td><td>8-9 g/dL</td></tr>
+    <tr><td>Intolérance, coronaropathie aiguë, bêtabloquant</td><td>10 g/dL</td></tr>
+    <tr><td>Traumatisé hors transfusion massive</td><td>8-9 g/dL</td></tr>
+    <tr><td>Hémopathie / greffe / tumeur solide</td><td>8 g/dL (10 si intolérance/CV)</td></tr>
+  </table>
+  <div class="pills">
+    <span class="pill pill-gray">Non recommandé : anémies carentielles (fer, B9, B12)</span>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Transfusion massive (TM)</strong> = &gt;10 CGR/24h ou masse sanguine remplacée à 50% en &lt;3h.<br>Objectif : prévenir la coagulopathie post-traumatique. <strong>Pack transfusionnel</strong> = 3 CGR + 3 PFC, + 1 concentré de plaquettes dès le 2ᵉ pack.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>Qualifications / transformations des CGR</div>
+  <table class="table-teal">
+    <tr><th>Type</th><th>Indication</th></tr>
+    <tr><td><strong>Phénotypé</strong></td><td>RAI positive, femme jusqu'à 50 ans, polytransfusé</td></tr>
+    <tr><td><strong>Compatibilisé</strong></td><td>RAI positive, drépanocytose</td></tr>
+    <tr><td><strong>Irradié</strong></td><td>Immunodépression sévère, greffe de CSH, don intrafamilial (prévention réaction du greffon contre l'hôte)</td></tr>
+    <tr><td><strong>Déplasmatisé</strong></td><td>Allergie sévère/récurrente aux protéines plasmatiques</td></tr>
+    <tr><td><strong>Volume réduit</strong></td><td>Transfusion pédiatrique/néonatale</td></tr>
+  </table>
+</div>
+
+<div class="section-title" style="font-size:.92rem;margin-top:18px;">Concentrés de plaquettes (CP)</div>
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title"><div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Thrombopénie centrale — seuils prophylactiques</div>
+    <div class="kv-row"><span class="kv-key">Aucun facteur de risque</span><span class="kv-val">10 G/L</span></div>
+    <div class="kv-row"><span class="kv-key">Fièvre, décroissance rapide, antiagrégant</span><span class="kv-val">20 G/L</span></div>
+    <div class="kv-row"><span class="kv-key">CIVD, geste invasif, anticoagulant</span><span class="kv-val">50 G/L</span></div>
+    <div class="kv-row"><span class="kv-key">Neurochirurgie, chirurgie oculaire postérieure</span><span class="kv-val">100 G/L</span></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">Avec syndrome hémorragique → CP en urgence, quel que soit le chiffre.</p>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Thrombopénie périphérique</div>
+    <p style="font-size:.84rem;">Transfuser <strong>uniquement</strong> si urgence vitale (les plaquettes transfusées sont détruites comme les autologues).</p>
+    <ul class="lst">
+      <li>CIVD des LAM promyélocytaires si NP &lt; 50 G/L</li>
+      <li>PTAI : uniquement urgence vitale</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Pratique et rendement</div>
+  <div class="kv-row"><span class="kv-key">Dose</span><span class="kv-val">0,5-0,7 × 10¹¹ / 10 kg</span></div>
+  <div class="kv-row"><span class="kv-key">Bilan pré-transfusionnel</span><span class="kv-val">groupe ABO seul</span></div>
+  <div class="kv-row"><span class="kv-key">Compatibilité ABO</span><span class="kv-val">préférable, non obligatoire</span></div>
+  <div class="kv-row"><span class="kv-key">Rendement prophylactique attendu</span><span class="kv-val">NP &gt;10 G/L à 24h, CCI &gt;7</span></div>
+  <div class="kv-row"><span class="kv-key">État réfractaire</span><span class="kv-val">2 échecs malgré dose/ABO/fraîcheur adaptés</span></div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">MCP et CPA = même efficacité hémostatique. CPA réservé si allo-immunisation anti-HLA/HPA (donneur unique = 1 seul phénotype). Certains CP contiennent des anti-A/B du donneur → transfusion isogroupe imposée dans ce cas.</p>
+</div>
+
+<div class="section-title" style="font-size:.92rem;margin-top:18px;">Plasma frais congelé (PFC)</div>
+<div class="card card-teal">
+  <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Indications</div>
+  <ul class="lst">
+    <li>Hémorragie aiguë (ou geste à risque) <strong>+</strong> anomalie profonde de l'hémostase : fibrinogène &lt;1 g/L, TP &lt;40%, TCA &gt;1,5-1,8×témoin — posologie 10-15 mL/kg</li>
+    <li>Échanges plasmatiques (épuration toxique, ex. microangiopathies thrombotiques) — 40-60 mL/kg</li>
+    <li>CIVD avec TP &lt;35-40% et hémorragie active/potentielle</li>
+  </ul>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Compatibilité <strong>inversée</strong> par rapport au CGR (ce sont les anti-A/B du plasma <em>donneur</em> qui comptent). <strong>AB = donneur universel de plasma.</strong> Plasma VHE-négatif : greffes, déficits immunitaires congénitaux, hépatopathies chroniques.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Parcours transfusionnel
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes généraux de l'épargne transfusionnelle</div>
+  <div class="obj-line">Connaître les étapes pré-transfusionnelles</div>
+  <div class="obj-line">Connaître les étapes transfusionnelles et post-transfusionnelles</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>Épargne transfusionnelle (péri-opératoire)</div>
+  <div class="grid3">
+    <div class="bl-teal"><strong style="font-size:.83rem;">Optimiser la masse érythrocytaire</strong><div style="font-size:.8rem;color:var(--muted);">Dépistage anémie/carence martiale, agents stimulants de l'érythropoïèse</div></div>
+    <div class="bl-blue"><strong style="font-size:.83rem;">Minimiser les pertes</strong><div style="font-size:.8rem;color:var(--muted);">Dépistage troubles hémostase, gestion anticoagulants/antiagrégants, hémostase chirurgicale</div></div>
+    <div class="bl-amber"><strong style="font-size:.83rem;">Tolérance à l'anémie</strong><div style="font-size:.8rem;color:var(--muted);">Seuil individualisé, débit cardiaque, ventilation, normothermie</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Étape pré-transfusionnelle</div>
+  <p style="font-size:.84rem;">Prescription conditionnée par un bilan pré-transfusionnel valide (groupe ABO-RH1, phénotype RH-KEL1, RAI selon contexte). Patient <strong>informé</strong> de la possibilité de transfusion → traçabilité dans le dossier transfusionnel. Délivrance par le site transfusionnel EFS ou un dépôt de sang conventionné.</p>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Étape trans- et post-transfusionnelle</div>
+  <ul class="lst">
+    <li>Contrôle ultime au lit du malade (concordance ABO) avant toute injection</li>
+    <li>Surveillance rapprochée pendant et dans les heures suivant la transfusion</li>
+    <li>Traçabilité : dossier transfusionnel + retour de traçabilité au site délivreur</li>
+    <li>Efficacité attendue : +1 g/dL Hb à 15 min pour 1 CGR chez un adulte de 70-80 kg</li>
+    <li>Sortie : lettre d'information + ordonnance de RAI à réaliser entre 1 et 3 mois</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> une absence de rendement transfusionnel peut être totalement asymptomatique — c'est parfois le seul signe d'un conflit immunologique par allo-anticorps.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications immédiates
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir identifier une complication immédiate de la transfusion</div>
+  <div class="obj-line">Connaître les principes de prise en charge d'une complication immédiate</div>
+</div>
+
+<div class="card">
+  <table>
+    <tr><th>Mécanisme</th><th>Tableau</th><th>Délai</th><th>Diagnostic / prévention</th></tr>
+    <tr><td>Incompatibilité érythrocytaire</td><td>Fièvre, douleurs abdomino-lombaires, hémoglobinurie, ± choc/CIVD</td><td>Immédiat</td><td>Coombs direct +. Prévention : identitovigilance stricte</td></tr>
+    <tr><td>TRALI</td><td>Dyspnée majeure, fébricule, hypotension, pas de surcharge, non résolutif sous furosémide</td><td>≤ 6h</td><td>Éviter anti-HLA dans PSL (plasma, plaquettes)</td></tr>
+    <tr><td>Allergie aux protéines</td><td>Urticaire → choc anaphylactique</td><td>≤ 4h</td><td>CGR/CP déplasmatisés si allergie grave/récurrente</td></tr>
+    <tr><td>Réaction fébrile non hémolytique</td><td>Décalage ~1°C, rarement &gt;39°C, diagnostic d'exclusion</td><td>≤ 4h</td><td>Paracétamol ; rare depuis déleucocytation</td></tr>
+    <tr><td>Contamination bactérienne</td><td>Fièvre &gt;39°C, troubles digestifs, choc septique (surtout plaquettes)</td><td>Immédiat</td><td>Hémoculture + culture du produit. Atténuation des pathogènes (Amotosalen)</td></tr>
+    <tr><td>TACO (surcharge)</td><td>OAP classique, réversible sous furosémide</td><td>≤ 6h</td><td>Débit lent (2h/poche) si &gt;80 ans ou cardiopathie</td></tr>
+  </table>
+</div>
+
+<div class="card card-red">
+  <div class="card-title"><div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>Signes d'alerte → diagnostics évoqués</div>
+  <table class="table-red">
+    <tr><th>Signe</th><th>Diagnostics à évoquer</th></tr>
+    <tr><td>Fièvre 38-39°C, &lt;4h</td><td>RFNH, TRALI (dyspnée 1er plan), allo-immunisation anti-HLA</td></tr>
+    <tr><td>Fièvre ≥39°C, &lt;15 min, frissons, choc</td><td>Contamination bactérienne, accident hémolytique</td></tr>
+    <tr><td>Hypotension ≥30 mmHg</td><td>Choc hémolytique, anaphylactique, septique, TRALI</td></tr>
+    <tr><td>Dyspnée sévère</td><td>TRALI (≤6h), TACO (≤6h), anaphylaxie (≤4h)</td></tr>
+    <tr><td>Hémoglobinurie</td><td>Hémolyse : immunologique, mécanique, thermique, toxique</td></tr>
+    <tr><td>Rash &gt;2/3 corps + dyspnée</td><td>Anaphylaxie</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>Conduite à tenir immédiate</div>
+  <ol class="steps">
+    <li><span class="step-num step-num-red">1</span><div><div class="step-title">Arrêt de la transfusion</div><div class="step-content">Maintien de la voie veineuse</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Appel du médecin</div><div class="step-content">Bilan des paramètres vitaux (T°, pouls, TA, auscultation, diurèse)</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">Traitement symptomatique</div><div class="step-content">Oxygène, diurétique selon le tableau</div></div></li>
+    <li><span class="step-num">4</span><div><div class="step-title">Vérification identitovigilance</div><div class="step-content">Lien patient-produit-documents, inspection du produit (couleur, hémolyse)</div></div></li>
+    <li><span class="step-num">5</span><div><div class="step-title">Récupération</div><div class="step-content">Contrôles ultimes + produit injecté pour analyse (sans contamination rétrograde)</div></div></li>
+    <li><span class="step-num">6</span><div><div class="step-title">Déclaration</div><div class="step-content">Signalement sans délai de l'EIR à l'hémovigilance (établissement + EFS)</div></div></li>
+  </ol>
+  <div class="pills" style="margin-top:10px;">
+    <span class="pill pill-blue">RFNH minime ou allergie mineure isolée : arrêt temporaire possible, reprise lente sous surveillance</span>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications retardées
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les complications retardées de la transfusion : allo-immunisation</div>
+  <div class="obj-line">Connaître les autres complications retardées</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>Allo-immunisation anti-érythrocytaire</div>
+  <p style="font-size:.84rem;">Immunisation primaire (IgM, peu hémolytique, détectée en RAI dès 1 mois) → à la réintroduction de l'antigène, réactivation rapide (3-5 jours) des B mémoires, destruction possible de <strong>tous</strong> les GR transfusés → accident hémolytique <strong>retardé</strong> (à la différence de l'incompatibilité ABO, toujours immédiate car anticorps préexistants).</p>
+  <div class="alert alert-green" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div><strong>Prévention :</strong> RAI avant chaque transfusion, respect des règles de compatibilité (D obligatoire, RH-KEL selon terrain), RAI de contrôle à distance (&gt;1 mois) pour ne pas perdre la mémoire d'un anticorps évanescent.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Allo-immunisation anti-HLA</div>
+    <p style="font-size:.84rem;">Femmes multipares, transfusions de plaquettes (Ag HLA classe I). Non préventible (polymorphisme extrême). Si état réfractaire : CPA HLA-compatibles.</p>
+  </div>
+  <div class="card">
+    <div class="card-title"><div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>Allo-immunisation anti-HPA</div>
+    <p style="font-size:.84rem;">Transfusion plaquettaire ou grossesse (HPA-1a). Si état réfractaire : CPA HPA-compatibles. Cause de thrombopénie néonatale immunologique.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title"><div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>Autres complications retardées</div>
+  <table>
+    <tr><th>Complication</th><th>Délai</th><th>Points clés</th></tr>
+    <tr><td>Purpura post-transfusionnel</td><td>5-12 j</td><td>Rare, chute plaquettaire brutale &lt;10 G/L, anti-HPA</td></tr>
+    <tr><td>Surcharge en fer</td><td>&gt;20 CGR</td><td>200-250 mg fer/CGR ; surveiller ferritine, chélation si &gt;1000 ng/mL</td></tr>
+    <tr><td>Risque infectieux résiduel</td><td>Variable</td><td>VHE, VHA (séroconversions rapportées) ; VIH/VHB/VHC extrêmement faibles</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Transfusion chez l'enfant
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les modalités de prescription d'un CGR chez l'enfant</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>Prescription pédiatrique</div>
+  <div class="kv-row"><span class="kv-key">Accord parental</span><span class="kv-val">requis</span></div>
+  <div class="kv-row"><span class="kv-key">Volume à transfuser</span><span class="kv-val">ΔHb × 3-4 × poids (kg), max 20 mL/kg</span></div>
+  <div class="kv-row"><span class="kv-key">Systématique</span><span class="kv-val">isogroupe, iso-Rhésus, déleucocyté</span></div>
+  <div class="kv-row"><span class="kv-key">Phénotypé</span><span class="kv-val">si transfusions itératives</span></div>
+  <div class="kv-row"><span class="kv-key">Compatibilisé</span><span class="kv-val">si RAI+ ou drépanocytose</span></div>
+  <div class="kv-row"><span class="kv-key">Irradié</span><span class="kv-val">cancer en cours de traitement, greffé, déficit immunitaire</span></div>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title"><div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Points-clés à retenir</div>
+  <ul class="lst">
+    <li>Anticorps ABO = <strong>naturels réguliers</strong>, danger dès la 1ère transfusion. Anticorps RH/KEL/FY/JK/MNS = <strong>immuns irréguliers</strong>, danger après stimulation (RAI).</li>
+    <li>Antigène D (RH1) : compatibilité <strong>réglementaire</strong> pour tous. C/c, E/e, K : réglementaire chez la femme jusqu'à 50 ans, recommandée chez le polytransfusé.</li>
+    <li>O = donneur universel GR, AB = donneur universel plasma.</li>
+    <li>Seuils CGR : 7 g/dL sans antécédent, 8-9 g/dL si cardiovasculaire, 10 g/dL si intolérance/coronaropathie aiguë.</li>
+    <li>Plaquettes : seuil prophylactique 10 G/L (sans FdR) à 100 G/L (neurochirurgie/œil) ; bilan pré-transfusionnel = groupe ABO seul.</li>
+    <li>Plasma : indiqué si hémorragie + coagulopathie sévère (fibrinogène &lt;1 g/L, TP &lt;40%, TCA &gt;1,5-1,8×témoin) — compatibilité <strong>inversée</strong> par rapport au CGR.</li>
+    <li>Toute suspicion de complication immédiate impose : <strong>arrêt de la transfusion</strong>, maintien de la voie veineuse, vérification identitovigilance, déclaration d'hémovigilance.</li>
+    <li><strong>Piège :</strong> l'accident hémolytique par allo-immunisation est <strong>retardé</strong> (RH/KEL…), contrairement à l'incompatibilité ABO, toujours <strong>immédiate</strong>.</li>
+    <li><strong>Piège :</strong> une absence de rendement transfusionnel peut être le seul signe d'un conflit immunologique, sans aucun signe clinique associé.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
