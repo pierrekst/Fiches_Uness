@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-23. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-24. Ne pas éditer à la main._
 
-**Avancement : 183 / 367 items (49.9%)**
+**Avancement : 184 / 367 items (50.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -361,7 +361,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 351 | [ ] | Agitation et délire aigu | — |
 | 352 | [ ] | Crise d angoisse aiguë et attaque de panique | — |
 | 353 | [ ] | Risque et conduite suicidaires chez l enfant | — |
-| 354 | [ ] | Syndrome occlusif de l enfant et de l adulte | — |
+| 354 | [x] | Syndrome occlusif de l enfant et de l adulte | 354_Syndrome_occlusif.html |
 | 355 | [x] | Hémorragie digestive | 355_Hemorragie_digestive.html |
 | 356 | [ ] | Appendicite de l enfant et de l adulte | — |
 | 357 | [x] | Péritonite aiguë chez l enfant et chez l adulte | 357_Peritonite_aigue.html |

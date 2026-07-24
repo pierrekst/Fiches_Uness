@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>354 - Syndrome occlusif de l'enfant et de l'adulte</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 354</div>
+  <h1>Syndrome occlusif de l'enfant et de l'adulte</h1>
+  <div class="header-sub">Arrêt du transit — organique ou fonctionnel, haut ou bas — urgence diagnostique et thérapeutique à tout âge</div>
+  <div class="header-tags">
+    <span class="htag">Occlusion grêle / colique</span>
+    <span class="htag">Strangulation vs obstruction</span>
+    <span class="htag">TDM abdomino-pelvien</span>
+    <span class="htag">Étiologies pédiatriques</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> Le syndrome occlusif se définit par un arrêt du transit, mécanique (obstacle) ou fonctionnel (iléus/Ogilvie). Chez l'adulte, la démarche est stéréotypée : diagnostic clinique sur les 4 signes cardinaux, recherche immédiate de signes de gravité (fièvre, choc, défense, douleur continue), TDM injecté systématique sauf hernie étranglée (diagnostic clinique pur), puis prise en charge symptomatique urgente ± chirurgie. Chez l'enfant, les étiologies changent radicalement avec l'âge (congénitales à la naissance, sténose du pylore et invagination chez le nourrisson, brides à l'adolescence) et l'échographie remplace le scanner en première intention.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Définition et mécanismes
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition du syndrome occlusif, différencier une occlusion haute et une occlusion basse.</div>
+  <div class="obj-line">Connaître les grands mécanismes d'occlusion et leurs complications.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Siège de l'occlusion
+    </div>
+    <div class="kv-row"><span class="kv-key">Occlusion haute</span><span class="kv-val">Intestin grêle</span></div>
+    <div class="kv-row"><span class="kv-key">Occlusion basse</span><span class="kv-val">Côlon / rectum</span></div>
+    <div class="kv-row"><span class="kv-key">Iléus</span><span class="kv-val">Occlusion fonctionnelle du grêle</span></div>
+    <div class="kv-row"><span class="kv-key">Syndrome d'Ogilvie</span><span class="kv-val">Occlusion fonctionnelle colique</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      Type d'obstacle mécanique
+    </div>
+    <div class="kv-row"><span class="kv-key">Intra-luminal</span><span class="kv-val">Fécalome, corps étranger</span></div>
+    <div class="kv-row"><span class="kv-key">Pariétal</span><span class="kv-val">Tumeur, sténose Crohn</span></div>
+    <div class="kv-row"><span class="kv-key">Extra-luminal</span><span class="kv-val">Bride, hernie, volvulus</span></div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Mécanisme strangulatoire</strong> (bride, hernie/éventration étranglée, volvulus) : révélation brutale, risque d'ischémie et de nécrose intestinale précoce → urgence chirurgicale immédiate. À l'inverse, un obstacle par simple obstruction est en général de révélation progressive.</span>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic positif — signes cardinaux
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes cardinaux de l'occlusion.</div>
+  <div class="obj-line">Connaître les éléments de l'interrogatoire et de l'examen clinique d'une occlusion.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Les 4 signes cardinaux
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Arrêt des gaz (constant)</span>
+    <span class="pill pill-blue">Arrêt des matières (absent dans 1/3 des cas)</span>
+    <span class="pill pill-amber">Douleur abdominale</span>
+    <span class="pill pill-teal">Nausées / vomissements</span>
+    <span class="pill pill-purple">Météorisme abdominal</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Interrogatoire
+    </div>
+    <ul class="lst">
+      <li>Mode d'apparition (brutal / progressif), précocité des vomissements et de l'arrêt des matières</li>
+      <li>Durée d'évolution, transit récent, AEG, rectorragies</li>
+      <li>ATCD : chirurgie abdominale, néoplasie, radiothérapie, MICI (Crohn), pathologie vasculaire</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Examen physique
+    </div>
+    <ul class="lst">
+      <li>Inspection : météorisme, cicatrices, orifices herniaires</li>
+      <li>Percussion : tympanisme</li>
+      <li>Auscultation : bruits hydro-aériques augmentés puis diminués</li>
+      <li>Palpation : douleur provoquée ; systématique des orifices herniaires + TR (masse, fécalome)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span><strong>Piège</strong> — le diagnostic de hernie/éventration étranglée est purement clinique et impose une chirurgie urgente immédiate, <strong>sans imagerie préopératoire.</strong></span>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Diagnostic de gravité
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principaux éléments de l'examen pour le diagnostic de gravité quel que soit l'âge.</div>
+  <div class="obj-line">Connaître les signes de gravité biologiques.</div>
+  <div class="obj-line">Connaître le bilan biologique à réaliser devant une occlusion.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Signes de gravité cliniques
+    </div>
+    <ul class="lst">
+      <li>Fièvre ≥ 38°C → souffrance digestive (translocation à péritonite)</li>
+      <li>Hypotension, tachycardie, marbrures (choc hypovolémique ou septique)</li>
+      <li>Douleur passant de paroxystique à continue → suspicion d'ischémie</li>
+      <li>Disparition de la douleur sans levée de l'occlusion → suspicion de nécrose</li>
+      <li>Érythème en regard d'une hernie/éventration étranglée</li>
+      <li>Défense, a fortiori contracture</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Signes de gravité biologiques
+    </div>
+    <ul class="lst">
+      <li>Insuffisance rénale fonctionnelle (déshydratation, 3ème secteur)</li>
+      <li>Hémoconcentration : hématocrite ↑, protidémie ↑</li>
+      <li>Hypokaliémie, hypochlorémie (vomissements)</li>
+      <li>Syndrome inflammatoire (translocation, péritonite)</li>
+      <li>Acidose métabolique → signe d'ischémie intestinale</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Bilan biologique systématique
+  </div>
+  <div class="pills">
+    <span class="pill pill-blue">Hémogramme</span>
+    <span class="pill pill-blue">Ionogramme, urée, créatinine</span>
+    <span class="pill pill-blue">CRP</span>
+    <span class="pill pill-purple">Bilan préopératoire : TP, TCA, groupe ABO/Rhésus (2 déterminations), RAI</span>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Étiologies chez l'adulte
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les étiologies les plus fréquentes d'occlusion.</div>
+</div>
+
+<table class="table-blue">
+  <tr><th>Mécanisme</th><th>Étiologies principales</th></tr>
+  <tr><td>Strangulation</td><td>Bride (post-chirurgicale), hernie/éventration étranglée, volvulus</td></tr>
+  <tr><td>Obstruction (intra-luminale/pariétale)</td><td>Tumeur colorectale, sténose de Crohn, fécalome</td></tr>
+  <tr><td>Fonctionnel</td><td>Iléus post-opératoire, syndrome d'Ogilvie</td></tr>
+</table>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Imagerie chez l'adulte
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître l'indication des examens d'imagerie devant un syndrome occlusif de l'adulte.</div>
+  <div class="obj-line">Connaître les signes tomodensitométriques d'une occlusion et leur présence en fonction du siège.</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <span><strong>TDM abdomino-pelvien injecté</strong> = examen de référence devant tout syndrome occlusif de l'adulte (sauf hernie étranglée : clinique). Sans injection si contre-indication (attention à l'IRA fréquente dans ce contexte). <strong>L'ASP n'a plus sa place</strong> en 1ère intention chez l'adulte.</span>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Signes tomodensitométriques
+  </div>
+  <div class="kv-row"><span class="kv-key">Diagnostic positif</span><span class="kv-val">Distension des anses ± NHA</span></div>
+  <div class="kv-row"><span class="kv-key">Occlusion mécanique</span><span class="kv-val">Syndrome jonctionnel (± feces sign)</span></div>
+  <div class="kv-row"><span class="kv-key">Occlusion fonctionnelle</span><span class="kv-val">Absence de syndrome jonctionnel</span></div>
+  <div class="kv-row"><span class="kv-key">Cause visible</span><span class="kv-val">Bride, volvulus (whirl sign), masse</span></div>
+  <div class="kv-row"><span class="kv-key">Signes de gravité TDM</span><span class="kv-val">Défaut de rehaussement pariétal, cæcum dilaté, épanchement, pneumopéritoine</span></div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge chez l'adulte
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de la prise en charge thérapeutique d'une occlusion chez l'adulte.</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement symptomatique commun
+  </div>
+  <ul class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Mise à jeun + sonde naso-gastrique</div><div class="step-content">Posée dès le diagnostic clinique, avant même le scanner : évite l'inhalation, diminue la distension</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Voie veineuse périphérique</div><div class="step-content">2 VVP de bon calibre si troubles hémodynamiques ; hydratation et rééquilibration hydro-électrolytique</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">Antalgiques, anti-spasmodiques, anti-émétiques</div><div class="step-content">Traitement symptomatique de la douleur et des vomissements</div></div></li>
+  </ul>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <span>Tout <strong>signe de gravité impose une chirurgie en urgence.</strong> Information du patient sur le risque de résection digestive et de stomie (si suspicion de péritonite). En l'absence de chirurgie immédiate : surveillance clinique pluriquotidienne et biologique.</span>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Particularités pédiatriques — étiologies
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les étiologies des syndromes occlusifs de l'enfant.</div>
+</div>
+
+<table class="table-teal">
+  <tr><th>Âge</th><th>Étiologies principales</th></tr>
+  <tr><td>Nouveau-né<br><span class="pill pill-gray">congénital</span></td><td>Atrésie intestinale (dont malformations ano-rectales), maladie de Hirschsprung, iléus méconial (révélateur de mucoviscidose)</td></tr>
+  <tr><td>Jeune enfant / nourrisson</td><td>Volvulus du grêle sur malrotation (tout âge), hernie inguinale étranglée, sténose hypertrophique du pylore (vomissements non bilieux), invagination intestinale aiguë</td></tr>
+  <tr><td>Enfant plus âgé</td><td>Occlusion sur bride, péritonite (étiologies « type adulte »)</td></tr>
+</table>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Particularités pédiatriques — imagerie et prise en charge
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications de l'imagerie devant un syndrome occlusif en période néonatale, chez le nourrisson et chez l'enfant.</div>
+  <div class="obj-line">Connaître les principes de la prise en charge thérapeutique d'une occlusion chez l'enfant.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Imagerie
+    </div>
+    <ul class="lst">
+      <li><strong>Échographie</strong> = 1ère intention (sténose du pylore, IIA, volvulus sur malrotation)</li>
+      <li>ASP : utile pour les occlusions néonatales ; couché &gt; debout (analyse de la distension)</li>
+      <li>Pas d'ASP si l'échographie répond, ni si hernie étranglée (diagnostic clinique)</li>
+      <li>Lavement : orientation dans Hirschsprung, <strong>traitement</strong> de l'invagination intestinale aiguë</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Prise en charge
+    </div>
+    <ul class="lst">
+      <li>Mise à jeun, réhydratation IV, sonde naso- (ou oro- avant 6 mois) gastrique en aspiration, antalgiques</li>
+      <li>Geste immédiat : réduction de hernie étranglée, nursing (Hirschsprung)</li>
+      <li>Urgence vitale : réduction du volvulus du grêle</li>
+      <li>Après correction hydro-électrolytique : pylorotomie extra-muqueuse</li>
+      <li>Après échec du traitement médical : adhésiolyse pour occlusion sur bride</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Synthèse
+  </div>
+  <ul class="lst">
+    <li>4 signes cardinaux : arrêt des gaz (constant), arrêt des matières (absent 1/3), douleur, vomissements + météorisme</li>
+    <li>Hernie/éventration étranglée = diagnostic <strong>clinique</strong>, chirurgie urgente <strong>sans imagerie</strong></li>
+    <li>Chez l'adulte : TDM abdomino-pelvien injecté = examen de référence ; ASP obsolète</li>
+    <li>Signes de gravité clinique = fièvre, choc, défense/contracture, douleur continue ; biologique = acidose métabolique (ischémie), syndrome inflammatoire</li>
+    <li>SNG posée dès le diagnostic clinique, avant le scanner</li>
+    <li>Chez l'enfant, étiologies dépendantes de l'âge : congénitales (NN), sténose du pylore/IIA/volvulus (nourrisson), brides (grand enfant) ; échographie en 1ère intention</li>
+    <li>Traitement médical initial commun : à jeun, SNG, hydratation IV, antalgiques ; chirurgie si signe de gravité ou échec médical</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
