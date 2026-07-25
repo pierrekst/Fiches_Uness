@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-24. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-25. Ne pas éditer à la main._
 
-**Avancement : 184 / 367 items (50.1%)**
+**Avancement : 186 / 367 items (50.7%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -51,7 +51,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 41 | [ ] | Endométriose | — |
 | 42 | [ ] | Aménorrhée | — |
 | 43 | [ ] | Hémorragie génitale chez la femme | — |
-| 44 | [ ] | Tuméfaction pelvienne chez la femme | — |
+| 44 | [x] | Tuméfaction pelvienne chez la femme | 44_Tumefaction_pelvienne.html |
 | 45 | [x] | Spécificités des maladies génétiques | 45_maladies_genetiques_v2.html |
 | 46 | [x] | Médecine génomique | 46_Medecine_genomique_v3.html |
 | 47 | [ ] | Suivi d un nourrisson | — |
@@ -216,7 +216,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 206 | [ ] | Épanchement pleural liquidien | — |
 | 207 | [x] | Opacités et masses intra-thoraciques chez l enfant et chez l adulte | 207_Opacites_masses_intrathoraciques_v2.html |
 | 208 | [ ] | Insuffisance respiratoire chronique | — |
-| 209 | [ ] | Bronchopneumopathie chronique obstructive chez l adulte | — |
+| 209 | [x] | Bronchopneumopathie chronique obstructive chez l adulte | 209_BPCO.html |
 | 210 | [x] | Pneumopathie interstitielle diffuse | 210_Pneumopathies_interstitielles.html |
 | 211 | [ ] | Sarcoïdose | — |
 | 212 | [ ] | Hémogramme chez l adulte et l enfant | — |

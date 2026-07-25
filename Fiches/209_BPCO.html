@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 209 — BPCO</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 209</div>
+  <h1>Bronchopneumopathie chronique obstructive chez l'adulte</h1>
+  <div class="header-sub">Maladie respiratoire chronique évitable et traitable — obstruction bronchique permanente</div>
+  <div class="header-tags">
+    <span class="htag">Pneumologie</span>
+    <span class="htag">Tabac</span>
+    <span class="htag">Exacerbation</span>
+    <span class="htag">Insuffisance respiratoire chronique</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>La BPCO associe des <strong>symptômes respiratoires chroniques</strong> (dyspnée, toux, expectoration, infections répétées) à une <strong>obstruction bronchique permanente et non réversible</strong> (VEMS/CVF &lt; 0,7 après bronchodilatateurs) — à distinguer de l'asthme, réversible. Le fil conducteur : comprendre la définition et le terrain (tabac +++), savoir poser le diagnostic positif et différentiel, reconnaître une exacerbation et ses signes de gravité, connaître la place des examens d'imagerie, puis maîtriser la prise en charge en état stable et pendant l'exacerbation.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : DÉFINITION, FACTEURS DE RISQUE, ÉPIDÉMIOLOGIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définition, facteurs de risque, épidémiologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de la BPCO</div>
+  <div class="obj-line">Connaître le principal facteur de risque et les comorbidités fréquemment associées</div>
+  <div class="obj-line">Connaître l'épidémiologie de la BPCO</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Définition :</strong> maladie chronique évitable et traitable définie par la coexistence de symptômes respiratoires chroniques ET d'un trouble ventilatoire obstructif (TVO) non réversible. <strong>Bronchite chronique</strong> = toux productive quotidienne ≥ 3 mois/an sur ≥ 2 années consécutives. <strong>Emphysème</strong> = élargissement anormal et permanent des espaces aériens distaux avec destruction alvéolaire, sans fibrose.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Facteurs de risque
+    </div>
+    <ul class="lst">
+      <li><strong>Tabac : &gt; 80 %</strong> des cas</li>
+      <li>Aéro-contaminants professionnels (~15 %)</li>
+      <li>Pollution domestique (combustion biomasse)</li>
+      <li>Pollution atmosphérique</li>
+      <li>Facteur génétique : déficit en <strong>alpha-1-antitrypsine</strong></li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Comorbidités associées
+    </div>
+    <ul class="lst">
+      <li>Maladies cardiovasculaires (HTA, coronaropathie, insuffisance cardiaque)</li>
+      <li>Ostéoporose</li>
+      <li>Anxiété / dépression</li>
+      <li>Dénutrition / obésité</li>
+      <li>Déconditionnement musculaire squelettique</li>
+      <li>Cancer bronchique</li>
+    </ul>
+  </div>
+</div>
+
+<div class="kv-row"><span class="kv-key">Prévalence</span><span class="kv-val">5 à 10 % des adultes &gt; 45 ans</span></div>
+<div class="kv-row"><span class="kv-key">Gravité</span><span class="kv-val">Morbi-mortalité importante (absentéisme, handicap, mortalité)</span></div>
+
+<hr>
+
+<!-- ===== SECTION 2 : DIAGNOSTIC POSITIF ET DIFFÉRENTIEL ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic positif et différentiel
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les éléments du diagnostic positif et du diagnostic différentiel</div>
+  <div class="obj-line">Connaître les signes paracliniques de gravité en état stable (classification GOLD)</div>
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Diagnostic positif :</strong> présentation clinique (facteurs de risque, symptômes, auscultation) <strong>ET</strong> confirmation par spirométrie avec test de réversibilité — TVO persistant après bronchodilatateurs (VEMS/CVF &lt; 0,7).</div>
+</div>
+
+<table class="table-blue">
+  <thead>
+    <tr><th>Diagnostic différentiel</th><th>Éléments distinctifs</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Asthme</strong></td>
+      <td>Sujets plus jeunes, symptômes variables, terrain allergique, atteinte ORL/oculaire associée, <strong>TVO réversible</strong> après bronchodilatateurs (gain VEMS ≥ 200 mL et ≥ 12 %)</td>
+    </tr>
+    <tr>
+      <td><strong>Dilatation des bronches</strong></td>
+      <td>Bronchorrhée au premier plan ; diagnostic par TDM thoracique</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+    </div>
+    Classification GOLD — sévérité fonctionnelle (VEMS)
+  </div>
+  <table>
+    <thead><tr><th>Grade</th><th>Sévérité</th><th>VEMS (% théorique)</th></tr></thead>
+    <tbody>
+      <tr><td>GOLD 1</td><td>Obstruction légère</td><td>≥ 80 %</td></tr>
+      <tr><td>GOLD 2</td><td>Obstruction modérée</td><td>50 – 80 %</td></tr>
+      <tr><td>GOLD 3</td><td>Obstruction sévère</td><td>30 – 49 %</td></tr>
+      <tr><td>GOLD 4</td><td>Obstruction très sévère</td><td>&lt; 30 %</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">Critère commun aux 4 grades : VEMS/CVF &lt; 70 %. L'évaluation globale de la sévérité reste avant tout <strong>clinique</strong> (classification A-B-C-D basée sur la dyspnée et la fréquence/sévérité des exacerbations), complétée par cette classification fonctionnelle.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : EXACERBATION — RECONNAISSANCE ET GRAVITÉ ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Exacerbation de BPCO — reconnaissance, gravité, facteurs précipitants
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier une exacerbation/décompensation de BPCO, en évaluer les signes de gravité</div>
+  <div class="obj-line">Connaître les facteurs précipitants d'une décompensation/exacerbation</div>
+  <div class="obj-line">Connaître les signes paracliniques de gravité d'une exacerbation</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Exacerbation :</strong> aggravation prolongée (&gt; 24 h) des symptômes respiratoires au-delà des variations habituelles, imposant une modification du traitement. Motif fréquent de recours aux soins, impact pronostique majeur.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Facteurs précipitants
+    </div>
+    <ul class="lst">
+      <li>Infection bactérienne : <em>Haemophilus influenzae</em>, <em>Streptococcus pneumoniae</em>, <em>Moraxella catarrhalis</em> ; <em>Pseudomonas aeruginosa</em> si BPCO sévère</li>
+      <li>Infection virale (hiver) : grippe, Rhinovirus, VRS, SARS-CoV-2</li>
+      <li>Pic de pollution, tabagisme massif</li>
+      <li>Arrêt impromptu du traitement de fond inhalé</li>
+      <li><strong>Cause inconnue : 1/3 des cas</strong></li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostics à évoquer systématiquement
+    </div>
+    <ul class="lst">
+      <li>Pneumonie aiguë communautaire (PAC)</li>
+      <li>Œdème pulmonaire</li>
+      <li>Embolie pulmonaire</li>
+      <li>Pneumothorax</li>
+      <li>Chirurgie thoracique/abdominale, traumatisme</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Critères justifiant une hospitalisation
+  </div>
+  <div class="pills">
+    <span class="pill pill-red">Signes de gravité immédiate (détresse respiratoire aiguë)</span>
+    <span class="pill pill-red">Aggravation rapide des symptômes</span>
+    <span class="pill pill-red">Dyspnée aux activités quotidiennes à l'état basal</span>
+    <span class="pill pill-red">Absence de réponse au traitement initial</span>
+    <span class="pill pill-red">Incertitude diagnostique</span>
+    <span class="pill pill-red">Âge avancé, fragilité</span>
+    <span class="pill pill-red">Absence de soutien à domicile</span>
+    <span class="pill pill-red">Assistance respiratoire à domicile (O2 long cours, VNI)</span>
+    <span class="pill pill-red">Antécédent de séjour en réanimation pour exacerbation</span>
+    <span class="pill pill-red">Comorbidités cardiovasculaires, alcoolisme, neuro-psychiatriques</span>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Signes paracliniques de gravité d'une exacerbation</strong> (gaz du sang) : acidose respiratoire (pH &lt; 7,35 ; PaCO2 &gt; 45 mmHg) et/ou hypoxémie sévère (PaO2 &lt; 60 mmHg).</div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : IMAGERIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Place de l'imagerie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les indications des examens d'imagerie devant une BPCO</div>
+</div>
+
+<table class="table-teal">
+  <thead>
+    <tr><th>Contexte</th><th>Examen</th><th>Indication / intérêt</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>État stable</strong></td>
+      <td>Radiographie thoracique</td>
+      <td>Pas d'intérêt diagnostique positif mais réalisée au diagnostic (recherche de comorbidités : cardiopathie, cancer) ; distension thoracique si atteinte sévère (diaphragme aplati, horizontalisation des côtes)</td>
+    </tr>
+    <tr>
+      <td>TDM thoracique</td>
+      <td>Non systématique — indiquée dans les formes sévères (type/étendue de l'emphysème, bronchectasies, dépistage cancer broncho-pulmonaire)</td>
+    </tr>
+    <tr>
+      <td rowspan="3" style="vertical-align:middle; text-align:center;"><strong>Exacerbation</strong></td>
+      <td>Aucun examen</td>
+      <td>Prise en charge ambulatoire, tableau typique sans signe de gravité</td>
+    </tr>
+    <tr>
+      <td>Radiographie thoracique</td>
+      <td>Systématique si exacerbation grave hospitalisée ou doute diagnostique</td>
+    </tr>
+    <tr>
+      <td>Angio-TDM</td>
+      <td>Discutée si suspicion d'embolie pulmonaire</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+
+<!-- ===== SECTION 5 : PRISE EN CHARGE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Prise en charge — état stable et exacerbation
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de l'initiation du traitement symptomatique en urgence</div>
+  <div class="obj-line">Connaître les principes de prise en charge de l'exacerbation et du traitement de fond</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Il n'existe pas de traitement symptomatique propre à la BPCO en urgence : le traitement est celui de la cause de la décompensation, y compris aux urgences.</div>
+</div>
+
+<!-- État stable -->
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Traitement de fond — état stable
+  </div>
+  <ul class="lst">
+    <li><strong>Sevrage tabagique</strong> — mesure prioritaire</li>
+    <li>Traitements inhalés : bronchodilatateurs (β2-mimétiques et/ou anticholinergiques) ± corticothérapie inhalée</li>
+    <li>Vaccinations : grippe, pneumocoque, COVID</li>
+    <li>Réhabilitation respiratoire / exercice physique (identifier un déconditionnement à l'effort)</li>
+    <li>Traitement de l'insuffisance respiratoire chronique : oxygénothérapie si hypoxémie chronique sévère ; VNI nocturne si hypercapnie sévère et exacerbations fréquentes</li>
+    <li>Conseils diététiques, bilan et prise en charge des comorbidités (notamment cardiovasculaires)</li>
+    <li>Chirurgie, transplantation pulmonaire, endoscopie interventionnelle : indications limitées et ciblées (formes sévères, sujets jeunes, centres spécialisés)</li>
+    <li>Éducation thérapeutique et consultation de suivi régulière</li>
+  </ul>
+</div>
+
+<!-- Exacerbation -->
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Prise en charge de l'exacerbation
+  </div>
+  <ul class="steps">
+    <li>
+      <div class="step-num step-num-red">1</div>
+      <div><div class="step-title">Bronchodilatateurs</div><div class="step-content">β2-mimétiques et/ou anticholinergiques — aérosols-doseurs en ambulatoire, nébulisations en hospitalisation</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">2</div>
+      <div><div class="step-title">Antibiotiques</div><div class="step-content">Amoxicilline ± acide clavulanique, pristinamycine, macrolides — si expectoration franchement purulente OU BPCO sous-jacente très sévère (VEMS &lt; 30 %) OU signes cliniques de gravité</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">3</div>
+      <div><div class="step-title">Corticothérapie systémique</div><div class="step-content">Non systématique — au cas par cas, 30 à 40 mg/j pendant 5 jours</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">4</div>
+      <div><div class="step-title">Assistance respiratoire</div><div class="step-content">VNI si acidose respiratoire (pH &lt; 7,35) ; oxygène si hypoxémie sévère — objectif 88 % ≤ SpO2 ≤ 92 %</div></div>
+    </li>
+    <li>
+      <div class="step-num step-num-red">5</div>
+      <div><div class="step-title">Autres mesures</div><div class="step-content">Kinésithérapie si encombrement ; HBPM préventif systématique en cas d'hospitalisation</div></div>
+    </li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> objectif de saturation en oxygène volontairement bas (88-92 %) chez le BPCO hypercapnique — une oxygénation excessive aggrave l'hypercapnie.</div>
+</div>
+
+<hr>
+
+<!-- ===== POINTS-CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Définition :</strong> symptômes respiratoires chroniques ET TVO non réversible (VEMS/CVF &lt; 0,7 post-bronchodilatateurs) — tabac responsable de &gt; 80 % des cas.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Diagnostic différentiel clé :</strong> asthme = TVO réversible ; DDB = bronchorrhée + TDM.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Exacerbation :</strong> aggravation &gt; 24 h imposant un changement de traitement ; gravité paraclinique = acidose respiratoire et/ou PaO2 &lt; 60 mmHg ; cause inconnue dans 1/3 des cas.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Imagerie :</strong> pas d'intérêt diagnostique positif en état stable ; radiographie systématique si exacerbation grave hospitalisée ou doute diagnostique.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Traitement :</strong> sevrage tabagique en 1re ligne ; exacerbation = bronchodilatateurs ± antibiotiques (purulence/sévérité) ± corticoïdes courts ± VNI/O2 titré.</div>
+</div>
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges tombables :</strong> pas de traitement symptomatique spécifique de la BPCO en urgence (traiter la cause) ; objectif SpO2 88-92 % chez l'hypercapnique ; devant toute exacerbation, éliminer systématiquement PAC, OAP, EP et pneumothorax.</div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
