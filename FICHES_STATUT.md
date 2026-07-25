@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-25. Ne pas éditer à la main._
 
-**Avancement : 186 / 367 items (50.7%)**
+**Avancement : 188 / 367 items (51.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -57,7 +57,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 47 | [ ] | Suivi d un nourrisson | — |
 | 48 | [ ] | Alimentation et besoins nutritionnels du nourrisson et de l enfant | — |
 | 49 | [ ] | Puberté normale et pathologique | — |
-| 50 | [ ] | Pathologie génito-scrotale chez le garçon et chez l homme | — |
+| 50 | [x] | Pathologie génito-scrotale chez le garçon et chez l homme | 50_Pathologie_genito_scrotale.html |
 | 51 | [x] | Troubles de la miction chez l enfant | 51_Troubles_miction_enfant.html |
 | 52 | [ ] | Strabisme et amblyopie de l enfant | — |
 | 53 | [x] | Retard de croissance staturo-pondérale | 53_Retard_croissance.html |
@@ -246,7 +246,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 236 | [x] | Troubles de la conduction intracardiaque | 236_Troubles_conduction_intracardiaque.html |
 | 237 | [ ] | Palpitations | — |
 | 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant_v2.html |
-| 239 | [ ] | Acrosyndromes | — |
+| 239 | [x] | Acrosyndromes | 239_Acrosyndromes.html |
 | 240 | [x] | Hypoglycémie chez l adulte et l enfant | 240_hypoglycemie.html |
 | 241 | [x] | Goitre | 241_Goitre_nodules_cancers_thyroidiens.html |
 | 242 | [x] | Hyperthyroïdie | 242_Hyperthyroidie.html |
