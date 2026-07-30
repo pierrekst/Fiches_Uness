@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-28. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-30. Ne pas éditer à la main._
 
 **Avancement : 188 / 367 items (51.2%)**
 
@@ -294,7 +294,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 284 | [x] | Colopathie fonctionnelle | 284_Colopathie_fonctionnelle.html |
 | 285 | [x] | Diarrhée chronique chez l adulte et l enfant | 285_Diarrhee_chronique_v2.html |
 | 286 | [x] | Diarrhée aiguë et déshydratation chez le nourrisson | 286_Diarrhee_aigue_Deshydratation_v2.html |
-| 287 | [x] | Diverticulose colique et diverticulite aiguë du sigmoïde | 287_Diverticulose_v2.html |
+| 287 | [x] | Diverticulose colique et diverticulite aiguë du sigmoïde | 287_Diverticulose_v3.html |
 | 288 | [x] | Pathologie hémorroïdaire | 288_Pathologie_hemorroidaire_v2.html |
 | 289 | [ ] | Hernie pariétale chez l enfant et l adulte | — |
 | 290 | [ ] | Épidémiologie | — |
