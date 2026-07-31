@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 282 — Maladies inflammatoires chroniques de l'intestin (MICI)</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#D85A30 55%,#E24B4A 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .card-coral {border-left:4px solid var(--coral); }
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 282</div>
+  <h1>Maladies inflammatoires chroniques de l'intestin (MICI) chez l'adulte</h1>
+  <div class="header-sub">Maladie de Crohn &amp; Rectocolite hémorragique — deux entités proches, deux logiques opposées</div>
+  <div class="header-tags">
+    <span class="htag">Hépato-gastro-entérologie</span>
+    <span class="htag">Sujet jeune</span>
+    <span class="htag">Poussées / rémissions</span>
+    <span class="htag">Risque de CCR</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Deux maladies chroniques du tube digestif, évoluant par <strong>poussées et rémissions</strong>, de cause inconnue (génétique + environnement + microbiote + immunité). Le fil conducteur de l'item : savoir <strong>les définir et les opposer</strong> (topographie, profondeur de l'inflammation, rôle du tabac), <strong>reconnaître les situations révélatrices</strong> (diarrhée chronique, douleurs, rectorragies, atteinte anopérinéale, manifestations extra-intestinales), <strong>poser le diagnostic</strong> par un faisceau d'arguments (iléocoloscopie + biopsies en 1<sup>re</sup> intention, entéro-IRM, calprotectine fécale) après avoir éliminé une colite infectieuse, et enfin <strong>connaître les complications</strong> — sténoses/fistules/abcès pour Crohn, colite aiguë grave et colectasie pour la RCH, cancer colorectal et thromboses pour les deux.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : DÉFINITIONS & PHYSIOPATHOLOGIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Définitions et physiopathologie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir définir la maladie de Crohn et la rectocolite hémorragique, et ce qui les rapproche ou les sépare</div>
+  <div class="obj-line">Connaître les principes physiopathologiques communs aux deux maladies</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    Définition commune
+  </div>
+  <ul class="lst">
+    <li><strong>Lésions inflammatoires chroniques du tube digestif</strong>, parfois associées à des lésions extra-intestinales</li>
+    <li>Évolution par <strong>poussées</strong> entrecoupées de <strong>rémissions</strong> (spontanées ou induites par le traitement)</li>
+    <li>Risque de <strong>destruction intestinale</strong> progressive</li>
+    <li>Prédisposition au <strong>cancer colorectal</strong> en cas d'atteinte colique</li>
+    <li>Sujets <strong>jeunes</strong> (enfants, adultes jeunes) — <strong>2<sup>e</sup> pic vers 60 ans dans la RCH</strong></li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Colite indéterminée :</strong> dans <strong>moins de 10 %</strong> des cas, le diagnostic hésite entre MC et RCH. Ne pas forcer le classement.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Physiopathologie — 4 facteurs
+    </div>
+    <ul class="lst">
+      <li><strong>Génétique</strong> : polymorphismes <strong>CARD15-NOD2</strong> dans la MC (aucune utilité diagnostique) — autres gènes impliqués</li>
+      <li><strong>Environnement</strong> : tabac au premier plan</li>
+      <li><strong>Microbiote fécal</strong></li>
+      <li><strong>Anomalies de la réponse immunitaire</strong> → cible des traitements</li>
+    </ul>
+    <div class="pills">
+      <span class="pill pill-gray">Cause non identifiée</span>
+      <span class="pill pill-gray">Physiopathologie mal connue</span>
+    </div>
+  </div>
+  <div class="card card-coral">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Le tabac : effet inversé
+    </div>
+    <div class="kv-row"><span class="kv-key">Maladie de Crohn</span><span class="kv-val">Aggravant</span></div>
+    <div class="kv-row"><span class="kv-key">Rectocolite hémorragique</span><span class="kv-val">Protecteur</span></div>
+    <ul class="lst">
+      <li>Le tabac favorise la MC <strong>et ses complications</strong> → <strong>l'arrêt du tabac est une priorité thérapeutique dans la MC</strong></li>
+      <li>Un <strong>arrêt du tabac quelques semaines/mois avant la 1<sup>re</sup> poussée</strong> oriente vers une <strong>RCH</strong></li>
+    </ul>
+    <div class="pills"><span class="pill pill-amber">Traitements = immunosuppresseurs ciblant les voies de l'inflammation</span></div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : CROHN vs RCH ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Crohn vs RCH — lésions macroscopiques et microscopiques
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales lésions macroscopiques et microscopiques des deux maladies</div>
+  <div class="obj-line">Savoir utiliser les critères qui permettent de trancher entre maladie de Crohn et rectocolite hémorragique</div>
+</div>
+
+<table class="table-blue">
+  <tr><th style="width:26%;">Critère</th><th style="width:37%;">Rectocolite hémorragique</th><th style="width:37%;">Maladie de Crohn</th></tr>
+  <tr><td><strong>Tabagisme</strong></td><td>Protecteur</td><td>Aggravant</td></tr>
+  <tr><td><strong>Rectorragies</strong></td><td><strong>Constantes</strong></td><td>Inconstantes</td></tr>
+  <tr><td colspan="3" style="background:var(--bg);font-weight:700;color:var(--muted);">Lésions macroscopiques</td></tr>
+  <tr><td>Atteinte continue</td><td>Constante</td><td>Parfois</td></tr>
+  <tr><td>Atteinte rectale</td><td><strong>Constante</strong></td><td>Inconstante</td></tr>
+  <tr><td>Intervalles de muqueuse saine</td><td><strong>Jamais</strong></td><td>Fréquents</td></tr>
+  <tr><td>Atteinte iléale</td><td><strong>Jamais</strong></td><td>Fréquente</td></tr>
+  <tr><td>Atteinte anopérinéale</td><td><strong>Jamais</strong></td><td>Fréquente (<strong>30 %</strong>)</td></tr>
+  <tr><td>Sténoses, fistules, abcès</td><td><strong>Jamais</strong></td><td>Fréquents</td></tr>
+  <tr><td colspan="3" style="background:var(--bg);font-weight:700;color:var(--muted);">Lésions microscopiques</td></tr>
+  <tr><td>Inflammation</td><td>Superficielle, <strong>homogène</strong></td><td><strong>Transmurale</strong>, hétérogène</td></tr>
+  <tr><td>Granulomes épithélioïdes</td><td><strong>Jamais</strong></td><td><strong>30 %</strong> (spécifiques)</td></tr>
+</table>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Maladie de Crohn — topographie
+    </div>
+    <ul class="lst">
+      <li><strong>Tout le tube digestif</strong>, de la bouche à l'anus</li>
+      <li>Atteintes les plus fréquentes : <strong>iléale / iléocæcale</strong>, colique, anopérinéale</li>
+      <li>Lésions <strong>transmurales</strong> → expliquent fistules, abcès, sténoses</li>
+      <li>Lésions <strong>hétérogènes et discontinues</strong> (macro et histo)</li>
+    </ul>
+    <div class="card-title" style="margin-top:12px;">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Atteinte anopérinéale (30 %)
+    </div>
+    <ul class="lst">
+      <li>Fistules <strong>simples ou complexes</strong></li>
+      <li>Fissures / ulcérations anales</li>
+      <li><strong>Sténose anale</strong></li>
+      <li><strong>Marisques</strong> (excroissances cutanées), parfois œdématiées ou ulcérées</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      RCH — topographie
+    </div>
+    <ul class="lst">
+      <li>Atteinte <strong>systématique du rectum</strong>, extension ascendante variable</li>
+      <li>Lésions limitées à la <strong>muqueuse et à la sous-muqueuse superficielle</strong></li>
+      <li>Atteinte <strong>continue</strong>, sans intervalle de muqueuse saine</li>
+      <li><strong>Jamais d'atteinte du grêle ni de l'anus</strong></li>
+    </ul>
+    <div class="card-title" style="margin-top:12px;">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      3 formes d'extension
+    </div>
+    <div class="kv-row"><span class="kv-key">Rectite</span><span class="kv-val">Rectum seul</span></div>
+    <div class="kv-row"><span class="kv-key">Colite gauche</span><span class="kv-val">≤ angle colique gauche</span></div>
+    <div class="kv-row"><span class="kv-key">Pancolite</span><span class="kv-val">&gt; angle colique gauche</span></div>
+    <div class="pills"><span class="pill pill-amber">Étendue = facteur de risque de cancer</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    Anatomopathologie — lire un compte rendu
+  </div>
+  <table class="table-teal">
+    <tr><th style="width:34%;">Type de lésion</th><th>Description</th></tr>
+    <tr><td><strong>Communes aux 2 MICI</strong></td><td>Ulcérations · raréfaction des glandes · infiltrat lymphoplasmocytaire</td></tr>
+    <tr><td><strong>Évocatrices de Crohn</strong></td><td><strong>Granulomes épithélioïdes</strong> (parfois gigantocellulaires, <strong>sans nécrose caséeuse</strong>) : 30 % des MC, jamais dans la RCH<br><strong>Infiltrat inflammatoire transmural</strong> (superficiel dans la RCH)</td></tr>
+    <tr><td><strong>Conséquences chroniques</strong></td><td><strong>Fibrose</strong> → sténose (surtout grêle dans la MC)<br><strong>Carcinogenèse</strong> → CCR (RCH et MC) et, plus rarement, cancer du grêle (MC)</td></tr>
+  </table>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Piège :</strong> granulome sans nécrose caséeuse = Crohn ; <strong>avec</strong> nécrose caséeuse = tuberculose intestinale. Et l'absence de granulome n'élimine pas une MC (présent dans 30 % seulement).</span>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : CLINIQUE RÉVÉLATRICE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Situations cliniques révélatrices
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les tableaux qui doivent faire évoquer une MICI</div>
+  <div class="obj-line">Connaître les manifestations propres à la maladie de Crohn et à la rectocolite hémorragique</div>
+  <div class="obj-line">Identifier les manifestations extra-intestinales et savoir si elles suivent ou non l'activité de la maladie</div>
+</div>
+
+<div class="alert alert-red">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Signal d'alarme majeur :</strong> des symptômes <strong>nocturnes</strong> (douleur, diarrhée) qui <strong>réveillent le patient</strong> signent une maladie organique et doivent faire évoquer une MICI.<br>Évolution typique : poussées de quelques semaines entrecoupées de rémissions.</span>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Maladie de Crohn
+    </div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-red">Diarrhée</span>
+      <span class="pill pill-red">Douleurs abdominales</span>
+      <span class="pill pill-red">Amaigrissement</span>
+    </div>
+    <ul class="lst">
+      <li>Fièvre possible</li>
+      <li>Douleurs de la <strong>fosse iliaque droite</strong> (atteinte iléale / iléocolique droite)</li>
+      <li><strong>Syndrome de Koenig</strong> si sténose du grêle</li>
+      <li><strong>Masse de la FID</strong> : soit abcès (douleur + fièvre), soit atteinte iléocæcale avec épaississement pariétal et des mésos — <strong>parfois indolore</strong></li>
+      <li><strong>Atteinte anopérinéale (⅓)</strong> : très évocatrice du diagnostic</li>
+      <li>Rectorragies parfois observées</li>
+      <li>Enfant : <strong>retard staturo-pondéral</strong></li>
+      <li>Peut être révélée par une <strong>complication inaugurale</strong></li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Rectocolite hémorragique
+    </div>
+    <div class="pills" style="margin-bottom:8px;">
+      <span class="pill pill-blue">Rectorragies constantes</span>
+      <span class="pill pill-blue">Syndrome rectal</span>
+      <span class="pill pill-blue">Syndrome dysentérique</span>
+    </div>
+    <ul class="lst">
+      <li><strong>Rectite</strong> : rectorragies parfois isolées, souvent + <strong>syndrome rectal</strong> — si sévère : évacuations glairo-sanglantes nombreuses et <strong>afécales</strong>, <strong>ténesme</strong>, <strong>épreintes</strong></li>
+      <li><strong>Atteinte colique</strong> : douleurs de type colique, diarrhée sanglante ou glairo-sanglante</li>
+      <li>Amaigrissement parfois</li>
+      <li><strong>Forme sévère</strong> : fièvre, syndrome inflammatoire, anémie</li>
+      <li>Manifestations extra-intestinales possibles ; peut être révélée par une <strong>complication</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    Manifestations extra-intestinales — classement clé
+  </div>
+  <table class="table-amber">
+    <tr><th style="width:40%;">Liées à l'activité (poussée)</th><th>Indépendantes de l'activité</th></tr>
+    <tr>
+      <td>
+        <ul class="lst" style="margin-top:0;">
+          <li>Arthralgies, arthrites</li>
+          <li>Érythème noueux</li>
+          <li>Aphtes buccaux</li>
+          <li>Uvéite</li>
+          <li>Pyoderma gangrenosum</li>
+        </ul>
+      </td>
+      <td>
+        <ul class="lst" style="margin-top:0;">
+          <li><strong>Spondylarthrite ankylosante</strong></li>
+          <li><strong>Cholangite sclérosante primitive</strong> — plus fréquente dans la <strong>RCH</strong></li>
+        </ul>
+        <div class="pills"><span class="pill pill-red">CSP = surveillance rapprochée du risque de CCR</span></div>
+      </td>
+    </tr>
+  </table>
+  <ul class="lst">
+    <li>Psoriasis également décrit dans la MC ; ces manifestations peuvent être <strong>isolées et révélatrices</strong>, avant tout signe digestif</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 4 : DIAGNOSTIC ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Démarche diagnostique et examens complémentaires
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Savoir que le diagnostic repose sur un faisceau d'arguments cliniques, biologiques, endoscopiques, histologiques et radiologiques</div>
+  <div class="obj-line">Connaître la place de l'endoscopie, de l'histologie et de l'imagerie (IRM) et les arguments qu'elles apportent</div>
+  <div class="obj-line">Savoir interpréter la calprotectine fécale et le bilan biologique d'une poussée</div>
+  <div class="obj-line">Évoquer et éliminer les principaux diagnostics différentiels, en premier lieu les colites infectieuses</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span><strong>Aucun examen n'est à lui seul diagnostique.</strong> Le diagnostic repose sur un <strong>faisceau d'arguments</strong> : clinique + biologie + endoscopie + anatomopathologie + radiologie.</span>
+</div>
+
+<ul class="steps">
+  <li>
+    <span class="step-num">1</span>
+    <div>
+      <div class="step-title">Iléocoloscopie avec biopsies — examen de 1<sup>re</sup> intention</div>
+      <div class="step-content">Biopsies <strong>en muqueuse saine ET pathologique</strong>. Endoscopie + biopsies = examens centraux du diagnostic (cf. tableau comparatif). Hors contexte de complication aiguë.</div>
+    </div>
+  </li>
+  <li>
+    <span class="step-num">2</span>
+    <div>
+      <div class="step-title">Imagerie</div>
+      <div class="step-content"><strong>Entéro-IRM</strong> (MC) : extension des lésions du grêle. <strong>IRM pelvienne</strong> si lésion anopérinéale clinique. <strong>TDM abdominopelvien</strong> : réservé aux <strong>suspicions de complication</strong> (perforation, abcès, occlusion).</div>
+    </div>
+  </li>
+  <li>
+    <span class="step-num">3</span>
+    <div>
+      <div class="step-title">Biologie</div>
+      <div class="step-content">Calprotectine fécale, CRP, NFS, albuminémie, bilan de malabsorption, <strong>coprocultures + recherche de </strong><em>Clostridioides</em>.</div>
+    </div>
+  </li>
+</ul>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Entéro-IRM — sémiologie
+    </div>
+    <ul class="lst">
+      <li><strong>Épaississement de la paroi</strong></li>
+      <li><strong>Prise de contraste de la muqueuse</strong></li>
+      <li>Aspect <strong>« en peigne »</strong> des vaisseaux des mésos</li>
+      <li>Adénopathies réactionnelles fréquentes</li>
+      <li>Recherche de complications : <strong>abcès, fistules, sténoses</strong></li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Biologie — ce qu'on attend
+    </div>
+    <div class="kv-row"><span class="kv-key">Calprotectine fécale</span><span class="kv-val">Marqueur le + sensible</span></div>
+    <div class="kv-row"><span class="kv-key">CRP</span><span class="kv-val">Élévation variable</span></div>
+    <div class="kv-row"><span class="kv-key">NFS en poussée</span><span class="kv-val">PNN ↑ · plaquettes ↑</span></div>
+    <div class="kv-row"><span class="kv-key">Anémie</span><span class="kv-val">Multifactorielle</span></div>
+    <div class="kv-row"><span class="kv-key">Albuminémie</span><span class="kv-val">↓ (exsudative/dénutrition)</span></div>
+    <ul class="lst">
+      <li><strong>Anémie</strong> : ferriprive · inflammatoire · <strong>carence en B12</strong> (iléite ou résection iléale) · <strong>folates</strong> (grêle proximal)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Calprotectine fécale — les 3 usages à connaître
+  </div>
+  <ul class="lst">
+    <li>Marqueur <strong>le plus sensible</strong> de l'inflammation intestinale — <strong>non spécifique</strong> (quelle qu'en soit la cause)</li>
+    <li>Taux <strong>bas</strong> → <strong>élimine une MICI active</strong> ; permet le diagnostic différentiel avec le <strong>syndrome de l'intestin irritable</strong></li>
+    <li><strong>Indispensable au suivi</strong> de l'évolution sous traitement</li>
+  </ul>
+  <div class="pills"><span class="pill pill-gray">Non prise en charge par l'assurance maladie (2021)</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Arguments d'orientation MC / RCH
+    </div>
+    <ul class="lst">
+      <li><strong>Très évocateur de MC</strong> : atteinte anopérinéale, atteinte du grêle ou du tube digestif haut, lésions hétérogènes avec intervalles de muqueuse saine, granulomes sur les biopsies</li>
+      <li><strong>Absence d'atteinte rectale → élimine une RCH</strong></li>
+      <li><strong>Arrêt du tabac</strong> quelques semaines/mois avant la 1<sup>re</sup> poussée → en faveur d'une <strong>RCH</strong></li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Diagnostics différentiels
+    </div>
+    <ul class="lst">
+      <li><strong>Colites infectieuses</strong> : contexte, examens bactériologiques des selles et des biopsies, <strong>absence de lésions chroniques</strong> à l'histologie</li>
+      <li><strong>Colite pseudomembraneuse</strong> à <em>Clostridioides</em></li>
+      <li><strong>Iléite aiguë à </strong><em>Yersinia enterocolitica</em> : tableau d'appendicite fébrile révélant une iléite</li>
+      <li><strong>IST</strong> devant une rectite</li>
+      <li><strong>Tuberculose intestinale</strong> (iléo-cæcale) : à évoquer, très rare en France</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+  <span><strong>Réflexe systématique :</strong> rechercher une <strong>surinfection bactérienne, notamment à </strong><em>Clostridioides</em>, <strong>au diagnostic</strong> et <strong>lors de chaque poussée colique</strong>. Ne pas confondre poussée et infection.</span>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 5 : COMPLICATIONS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les principales complications de la maladie de Crohn et de la rectocolite hémorragique</div>
+  <div class="obj-line">Savoir reconnaître une colite aiguë grave et ses signes d'alarme</div>
+  <div class="obj-line">Connaître le risque de cancer colorectal et le principe du dépistage</div>
+</div>
+
+<div class="alert alert-blue">
+  <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+  <span>Les complications peuvent <strong>révéler</strong> la MICI ou survenir au cours de l'évolution. Logique à retenir : <strong>transmural = Crohn</strong> (sténose, fistule, abcès) ; <strong>muqueux étendu = RCH</strong> (colite aiguë grave, colectasie).</span>
+</div>
+
+<table class="table-red">
+  <tr><th style="width:30%;">Complication</th><th style="width:35%;">Maladie de Crohn</th><th style="width:35%;">RCH</th></tr>
+  <tr><td><strong>Sténoses</strong></td><td>Très fréquentes (surtout iléales) — obstruction aiguë ou chronique</td><td>Non</td></tr>
+  <tr><td><strong>Fistules / abcès</strong></td><td>Fréquents (ulcération transmurale, souvent iléale)</td><td>Non</td></tr>
+  <tr><td><strong>Atteinte anopérinéale</strong></td><td>30 % des patients</td><td>Non</td></tr>
+  <tr><td><strong>Colite aiguë grave</strong></td><td>Possible</td><td><strong>Plus fréquente</strong> — risque de colectasie</td></tr>
+  <tr><td><strong>Hémorragie digestive basse</strong></td><td>Ulcération colique ou iléale</td><td>Oui</td></tr>
+  <tr><td><strong>Thromboses veineuses</strong></td><td colspan="2" style="vertical-align:middle; text-align:center;"><strong>Phlébite, embolie pulmonaire — commun aux 2 MICI</strong></td></tr>
+  <tr><td><strong>Adénocarcinome colorectal</strong></td><td>Dépistage si atteinte colique ancienne et étendue<br>(+ cancer du grêle, rare)</td><td>Dépistage de la <strong>dysplasie</strong> par coloscopie ; risque ↑ avec l'<strong>étendue</strong> et la <strong>durée d'évolution</strong></td></tr>
+  <tr><td><strong>Dénutrition</strong></td><td>Fréquente</td><td>Possible</td></tr>
+</table>
+
+<div class="grid2" style="margin-top:14px;">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+      </div>
+      Syndrome de Koenig — description exacte
+    </div>
+    <ul class="lst">
+      <li>Traduit une <strong>obstruction incomplète</strong> sur sténose (grêle, MC)</li>
+      <li>Douleur plutôt <strong>postprandiale</strong>, en regard de la sténose</li>
+      <li>Durée variable, <strong>intensité croissante</strong></li>
+      <li>Cède <strong>rapidement</strong> avec <strong>gargouillements</strong> et bruits hydroaériques très sonores</li>
+      <li>Parfois suivi d'une <strong>débâcle diarrhéique</strong></li>
+    </ul>
+    <div class="card-title" style="margin-top:12px;">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+      </div>
+      Fistules de la MC — trajets
+    </div>
+    <ul class="lst">
+      <li>Point de départ : <strong>ulcération transmurale</strong>, habituellement iléale</li>
+      <li>Peuvent donner : <strong>abcès</strong>, <strong>péritonite</strong></li>
+      <li>Ou se fistuliser vers : anse grêle, <strong>sigmoïde</strong>, <strong>vessie</strong>, voire la <strong>peau</strong> (patients déjà opérés)</li>
+    </ul>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Colite aiguë grave <span class="badge badge-red">Urgence</span>
+    </div>
+    <ul class="lst">
+      <li>Plus fréquente dans la <strong>RCH</strong></li>
+      <li>Risque : <strong>colectasie</strong> = dilatation colique → <strong>perforation</strong> → <strong>péritonite stercorale</strong> → <strong>pronostic vital engagé</strong></li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+      <span><strong>Hospitalisation en urgence si :</strong><br>fièvre · rectorragies abondantes · tachycardie · anémie · altération de l'état général</span>
+    </div>
+    <div class="alert alert-amber">
+      <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span><strong>Cholangite sclérosante primitive associée :</strong> augmente <strong>très fortement</strong> le risque de cancer → surveillance endoscopique <strong>plus rapprochée</strong>.</span>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ===== POINTS-CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    Les 10 réflexes de l'item
+  </div>
+  <ul class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Tabac : aggravant dans la MC, protecteur dans la RCH</div><div class="step-content">L'arrêt du tabac est une <strong>priorité thérapeutique</strong> dans la maladie de Crohn.</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">RCH = rectum toujours atteint, continu, muqueux, jamais de grêle ni d'anus</div><div class="step-content">Rectorragies <strong>constantes</strong>. Trois extensions : rectite, colite gauche, pancolite.</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">MC = bouche à anus, discontinu, transmural</div><div class="step-content">D'où sténoses, fistules, abcès. Triade : diarrhée + douleurs + amaigrissement.</div></div></li>
+    <li><span class="step-num">4</span><div><div class="step-title">Atteinte anopérinéale (30 %) = très évocatrice de Crohn</div><div class="step-content">Fistules, fissures, sténose anale, marisques. Jamais dans la RCH.</div></div></li>
+    <li><span class="step-num">5</span><div><div class="step-title">Granulome épithélioïde sans nécrose caséeuse = Crohn (30 %)</div><div class="step-content">Jamais dans la RCH ; son absence n'élimine pas la MC.</div></div></li>
+    <li><span class="step-num">6</span><div><div class="step-title">Symptômes nocturnes réveillant le patient = maladie organique</div><div class="step-content">Argument fort contre un trouble fonctionnel intestinal.</div></div></li>
+    <li><span class="step-num">7</span><div><div class="step-title">Iléocoloscopie + biopsies (saine et pathologique) en 1<sup>re</sup> intention</div><div class="step-content">Entéro-IRM pour le grêle, IRM pelvienne pour l'anopérinéal, TDM <strong>uniquement</strong> si complication.</div></div></li>
+    <li><span class="step-num">8</span><div><div class="step-title">Calprotectine fécale : sensible, non spécifique</div><div class="step-content">Basse → élimine une MICI active ; distingue du syndrome de l'intestin irritable ; sert au suivi.</div></div></li>
+    <li><span class="step-num">9</span><div><div class="step-title">Toujours éliminer une cause infectieuse</div><div class="step-content"><em>Clostridioides</em> à rechercher au diagnostic et à chaque poussée colique.</div></div></li>
+    <li><span class="step-num step-num-red">10</span><div><div class="step-title">Deux urgences et un risque au long cours</div><div class="step-content">Colite aiguë grave / colectasie (surtout RCH) · thromboses veineuses (les 2) · <strong>adénocarcinome colorectal</strong> → dépistage endoscopique de la dysplasie, renforcé si cholangite sclérosante primitive.</div></div></li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

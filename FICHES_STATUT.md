@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-30. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-31. Ne pas éditer à la main._
 
 **Avancement : 188 / 367 items (51.2%)**
 
@@ -289,7 +289,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 279 | [x] | Cirrhose et complications | 279_Cirrhose_v2.html |
 | 280 | [x] | Ascite | 280_Ascite.html |
 | 281 | [x] | Pancréatite chronique | 281_Pancreatite_chronique_v2.html |
-| 282 | [x] | Maladies inflammatoires chroniques de l intestin | 282_MICI_v3.html |
+| 282 | [x] | Maladies inflammatoires chroniques de l intestin | 282_MICI_v4.html |
 | 283 | [x] | Constipation chez l enfant et l adulte | 283_Constipation_v3.html |
 | 284 | [x] | Colopathie fonctionnelle | 284_Colopathie_fonctionnelle.html |
 | 285 | [x] | Diarrhée chronique chez l adulte et l enfant | 285_Diarrhee_chronique_v2.html |
