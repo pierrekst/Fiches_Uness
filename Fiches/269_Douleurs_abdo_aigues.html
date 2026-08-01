@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 269 — Douleurs abdominales aiguës</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+  .header{background:linear-gradient(135deg,#D85A30 0%,#534AB7 55%,#378ADD 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+  .intro-box{background:var(--card);border:1.5px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+  .intro-box p{font-size:.86rem;line-height:1.6;color:var(--text);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-num">Item 269</div>
+  <h1>Douleurs abdominales aiguës chez l'enfant et chez l'adulte</h1>
+  <div class="header-sub">Démarche diagnostique clinique et paraclinique devant une douleur abdominale aiguë</div>
+  <div class="header-tags">
+    <span class="htag">Urgences</span>
+    <span class="htag">Pédiatrie</span>
+    <span class="htag">Sémiologie digestive</span>
+    <span class="htag">Imagerie abdominale</span>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="intro-box">
+  <p>Une douleur abdominale aiguë (&lt; 1 semaine) est un motif fréquent, allant de la pathologie bénigne à l'urgence vitale. Le fil conducteur de l'item : chez l'<strong>enfant</strong>, savoir reconnaître la douleur (souvent non verbalisée), connaître les urgences propres à chaque tranche d'âge (dont l'invagination intestinale aiguë) et privilégier l'échographie ; chez l'<strong>adulte</strong>, structurer l'interrogatoire et l'examen clinique (siège, irradiation, type, intensité, facteurs modifiants), cibler la biologie et l'imagerie sur l'hypothèse clinique, et reconnaître les <strong>sémiologies-types</strong> (biliaire, gastroduodénale, colique, pancréatique, ischémique) qui orientent directement vers l'étiologie.</p>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 1 : ENFANT ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Douleur abdominale aiguë de l'enfant
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Identifier une douleur abdominale chez l'enfant</div>
+  <div class="obj-line">Connaître les étiologies selon l'âge (nourrisson, 1 mois - 2 ans, 2 - 12 ans)</div>
+  <div class="obj-line">Connaître les examens nécessaires et la place de l'échographie</div>
+  <div class="obj-line">Identifier une urgence chirurgicale ou médicale</div>
+  <div class="obj-line">Connaître les signes en faveur d'une invagination intestinale aiguë</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Chez le nourrisson : la douleur se manifeste par des <strong>accès de pleurs, cris, agitation</strong> — signes non spécifiques à confirmer par un <strong>examen physique complet, enfant déshabillé</strong>. L'enfant plus grand localise mal la douleur.</div>
+</div>
+
+<table class="table-blue">
+  <thead><tr><th>Âge</th><th>Urgences à évoquer en priorité (fréquence décroissante)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Avant 1 mois</strong></td><td>Hernie inguinale étranglée, volvulus du grêle, entérocolite ulcéro-nécrosante (prématuré), maladie de Hirschsprung</td></tr>
+    <tr><td><strong>1 mois - 2 ans</strong></td><td>Invagination intestinale aiguë, hernie inguinale étranglée, traumatisme abdominal, volvulus du grêle</td></tr>
+    <tr><td><strong>2 - 12 ans</strong></td><td>Appendicite et péritonite appendiculaire, crise vaso-occlusive drépanocytaire, décompensation diabétique...</td></tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);">
+        <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      Marqueurs de gravité chez l'enfant
+    </div>
+    <ul class="lst">
+      <li>Signes de détresse vitale : respiratoire, circulatoire, neurologique</li>
+      <li>Douleur sévère, difficile à soulager</li>
+      <li>Enfant à risque : prématuré, nouveau-né, handicap, maladie chronique</li>
+      <li>Circonstances : traumatisme haute cinétique, plaie pénétrante</li>
+      <li>Signes d'alerte : vomissements bilieux, méléna, défense/contracture, tuméfaction inguinale</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Examens complémentaires
+    </div>
+    <ul class="lst">
+      <li>Examen clinique complet + <strong>réévaluation répétée</strong> = pierre angulaire</li>
+      <li>Examens complémentaires <strong>non systématiques</strong> — seulement si doute diagnostique</li>
+      <li>Imagerie de 1<sup>re</sup> intention chez l'enfant : <strong>échographie</strong> (jamais le scanner en 1<sup>re</sup> intention)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Invagination intestinale aiguë
+  </div>
+  <div class="kv-row"><span class="kv-key">Terrain typique</span><span class="kv-val">Nourrisson 2 mois - 2 ans</span></div>
+  <div class="kv-row"><span class="kv-key">Clinique</span><span class="kv-val">Crises douloureuses paroxystiques, accalmie inter-critique</span></div>
+  <div class="kv-row"><span class="kv-key">Signes associés</span><span class="kv-val">Pâleur/hypotonie critique, refus alimentaire</span></div>
+  <div class="kv-row"><span class="kv-key">Rectorragie</span><span class="kv-val">Gelée de groseille (mucus + sang) — fréquente</span></div>
+  <div class="kv-row"><span class="kv-key">Palpation</span><span class="kv-val">Boudin d'invagination sous-hépatique (rare)</span></div>
+  <div class="kv-row"><span class="kv-key">Examen de référence</span><span class="kv-val">Échographie abdominale</span></div>
+  <div class="kv-row"><span class="kv-key">Traitement (forme iléo-colique primitive)</span><span class="kv-val">Lavement radio/échoguidé — visée thérapeutique</span></div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 2 : EXAMEN CLINIQUE ADULTE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Douleur abdominale aiguë de l'adulte — interrogatoire et examen
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques de l'interrogatoire et de l'examen clinique face à une douleur abdominale aiguë</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Définition :</strong> douleur ayant débuté depuis <strong>moins d'une semaine</strong>. Spectre allant du bénin à l'urgence médico-chirurgicale engageant le pronostic vital.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+    </div>
+    Les 6 caractères de la douleur
+  </div>
+  <table>
+    <thead><tr><th>Caractère</th><th>Valeur sémiologique</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Siège</strong></td><td>Élément discriminant fort — douleur viscérale = régionale, rarement ponctuelle</td></tr>
+      <tr><td><strong>Irradiation</strong></td><td>Bonne valeur d'orientation — associations caractéristiques (ex : scapulaire droite → biliaire)</td></tr>
+      <tr><td><strong>Type</strong></td><td>Peu discriminant (innervation viscérale imprécise) : crampes (organe creux), transfixiante (pancréas), brûlure (RGO)</td></tr>
+      <tr><td><strong>Intensité</strong></td><td>EVA 0-10 — <strong>pas de corrélation intensité / gravité</strong></td></tr>
+      <tr><td><strong>Facteurs modifiants</strong></td><td>Alimentation (calme l'ulcère gastrique, aggrave la biliaire/pancréatique), position (chien de fusil = pancréatite, inspiration profonde = biliaire)</td></tr>
+      <tr><td><strong>Horaire / périodicité</strong></td><td>Rythme post-prandial, périodicité ulcéreuse (phases de 1-2 semaines)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+      </div>
+      Terrain et contexte
+    </div>
+    <ul class="lst">
+      <li>Âge, sexe, morphotype</li>
+      <li>Antécédents médicaux et chirurgicaux, FdR cardiovasculaires</li>
+      <li>Prises médicamenteuses : AINS (gastrique), anticoagulants (hématome), corticoïdes, contraception, antibiotiques</li>
+      <li>Toxiques : tabac, alcool, drogues</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);">
+        <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      Signes fonctionnels associés
+    </div>
+    <ul class="lst">
+      <li><strong>Généraux :</strong> sepsis (fièvre, frissons, hypotension), AEG</li>
+      <li><strong>Digestifs :</strong> vomissements, nausées, troubles du transit, AMG, extériorisation de sang</li>
+      <li><strong>Biliaires :</strong> ictère · <strong>Urinaires :</strong> brûlures mictionnelles, hématurie</li>
+      <li><strong>Respiratoires :</strong> dyspnée, toux · <strong>Gynéco :</strong> retard de règles, leucorrhées</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);">
+      <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+    </div>
+    Examen physique — 4 temps
+  </div>
+  <div class="kv-row"><span class="kv-key">Inspection</span><span class="kv-val">Frissons, sueurs, pâleur, DEC, position antalgique, cicatrices, hernie, météorisme, ictère</span></div>
+  <div class="kv-row"><span class="kv-key">Palpation</span><span class="kv-val">Défense/contracture, Douglas douloureux (TR/TV), orifices herniaires systématiques</span></div>
+  <div class="kv-row"><span class="kv-key">Percussion</span><span class="kv-val">Tympanisme (occlusion), matité déclive (ascite) ou fixe (globe)</span></div>
+  <div class="kv-row"><span class="kv-key">Auscultation</span><span class="kv-val">Silence auscultatoire (iléus) ou BHA augmentés (occlusion sur obstacle)</span></div>
+</div>
+
+<hr>
+
+<!-- ===== SECTION 3 : BIOLOGIE / IMAGERIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Bilan biologique et imagerie
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître le bilan biologique à prescrire en cas de douleur abdominale aiguë</div>
+  <div class="obj-line">Connaître l'indication des examens d'imagerie devant une douleur abdominale aiguë de l'adulte</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège :</strong> le bilan biologique n'est <strong>pas systématique</strong> — il doit être guidé par la clinique, à visée de confirmation étiologique.</div>
+</div>
+
+<table class="table-teal">
+  <thead><tr><th>Situation</th><th>Bilan biologique</th></tr></thead>
+  <tbody>
+    <tr><td>Systématique si prescription</td><td>NFS, CRP (syndrome infectieux/inflammatoire)</td></tr>
+    <tr><td>Douleur hypochondre droit / épigastrique</td><td>Bilan hépatique, lipasémie</td></tr>
+    <tr><td>Choc, déshydratation, avant scanner</td><td>Ionogramme, créatininémie, gaz du sang, lactatémie</td></tr>
+    <tr><td>Fièvre / frissons</td><td>Hémocultures</td></tr>
+    <tr><td>Saignement extériorisé</td><td>Hémostase</td></tr>
+    <tr><td><strong>Toute femme en âge de procréer</strong></td><td><strong>β-HCG obligatoire</strong></td></tr>
+    <tr><td>Signes urinaires</td><td>BU + ECBU</td></tr>
+    <tr><td>Contexte évocateur</td><td>Calcémie, glycémie</td></tr>
+    <tr><td>Douleur atypique (irradiation thoracique) ou FdR CV + douleur épigastrique</td><td>ECG (dérivations postérieures + droites) + troponine — recherche SCA postérieur</td></tr>
+  </tbody>
+</table>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      Échographie abdominale
+    </div>
+    <ul class="lst">
+      <li>1<sup>re</sup> intention : gynéco, urinaire, bilio-pancréatique, foyers infectieux</li>
+      <li>Performante sur les organes pleins</li>
+      <li>Inutile si hémorragie digestive (ne localise pas le saignement)</li>
+      <li>Inutile/gênée en cas d'occlusion (gaz digestifs)</li>
+    </ul>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6h-6z"/></svg>
+      </div>
+      TDM abdomino-pelvien injecté
+    </div>
+    <ul class="lst">
+      <li><strong>Examen de référence</strong> si suspicion d'urgence chirurgicale (occlusion, perforation, péritonite, infarctus mésentérique)</li>
+      <li>Aussi utile pour causes médicales : diverticulite, foyer infectieux, masse</li>
+      <li>2<sup>e</sup> intention après échographie ou si doute diagnostique</li>
+      <li>Sensibilité &gt; 90 % — change l'attitude chirurgicale dans 1/3 des cas</li>
+    </ul>
+  </div>
+</div>
+
+<div class="kv-row"><span class="kv-key">Endoscopie œso-gastro-duodénale</span><span class="kv-val">Si suspicion d'ulcère (échographie/scanner peu performants ici)</span></div>
+<div class="kv-row"><span class="kv-key">Radiographie pulmonaire</span><span class="kv-val">Si signes respiratoires associés</span></div>
+
+<hr>
+
+<!-- ===== SECTION 4 : SÉMIOLOGIE PAR ÉTIOLOGIE ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Les grandes douleurs-types
+</div>
+
+<div class="obj-list">
+  <div class="obj-line">Connaître les caractéristiques de la douleur biliaire, gastrique (duodénale), colique, pancréatique, de l'ischémie intestinale</div>
+</div>
+
+<table class="table-red">
+  <thead><tr><th>Type</th><th>Siège / irradiation</th><th>Caractéristiques clés</th><th>Causes principales</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Biliaire</strong></td>
+      <td>Épigastre (50 %) ou HCD (50 %) → scapulaire droite</td>
+      <td>Spasme/torsion, Murphy+, aggravée par toux/inspiration, début brutal, durée &lt; 6h si non compliquée. Fièvre/ictère = complication</td>
+      <td>Lithiase (colique hépatique, cholécystite, LVBP, angiocholite), cancer vésicule/voies biliaires</td>
+    </tr>
+    <tr>
+      <td><strong>Gastroduodénale</strong></td>
+      <td>Épigastre ± HCD, sans irradiation</td>
+      <td>Crampe/torsion, rythme alimentaire (ulcère : calmée par repas ; cancer : aggravée), périodicité en phases de 1-2 sem., soulagée par pansements gastriques</td>
+      <td>Ulcère gastroduodénal, adénocarcinome gastrique, dyspepsie fonctionnelle</td>
+    </tr>
+    <tr>
+      <td><strong>Colique</strong></td>
+      <td>Le long du cadre colique, 1 segment le plus souvent</td>
+      <td>Spasmes intermittents, intensité variable, soulagée par selles/gaz, durée 1-10 min (ou plusieurs heures)</td>
+      <td>Syndrome de l'intestin irritable, adénocarcinome colique, colites (infectieuse, MICI, médicamenteuse, ischémique)</td>
+    </tr>
+    <tr>
+      <td><strong>Pancréatique</strong></td>
+      <td>Épigastre → postérieure, transfixiante</td>
+      <td>Crampe, très intense, début en coup de poignard, déclenchée par alcool/repas gras, calmée en <strong>chien de fusil</strong></td>
+      <td>Pancréatite aiguë et chronique, cancer du pancréas</td>
+    </tr>
+    <tr>
+      <td><strong>Ischémie intestinale</strong></td>
+      <td>Diffuse rapidement à tout l'abdomen</td>
+      <td>Intensité croissante, continue, <strong>contraste franc avec un examen clinique pauvre</strong> — urgence vitale</td>
+      <td>Ischémie mésentérique artérielle/veineuse, aiguë ou chronique (angor mésentérique post-prandial)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège classique — ischémie mésentérique :</strong> douleur intense mais examen clinique quasi normal au début. Terrain vasculaire (arythmie emboligène, athérome, FdR CV, thrombophilie, oestroprogestatifs, cocaïne). Signes tardifs : distension, vomissements, fièvre, défense/contracture, hématochézie.</div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);">
+      <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    Causes rares mais classiques à connaître
+  </div>
+  <div class="pills">
+    <span class="pill pill-amber">Insuffisance surrénalienne aiguë</span>
+    <span class="pill pill-amber">Fièvre méditerranéenne familiale</span>
+    <span class="pill pill-amber">Porphyries</span>
+    <span class="pill pill-amber">Purpura rhumatoïde</span>
+    <span class="pill pill-amber">Drépanocytose (CVO)</span>
+    <span class="pill pill-amber">Douleur pariétale abdominale</span>
+  </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">Douleur pariétale : contexte traumatique/cicatrice, majorée par l'effort — cause classique d'errance diagnostique.</p>
+</div>
+
+<hr>
+
+<!-- ===== POINTS-CLÉS ===== -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Enfant :</strong> examen physique complet, enfant déshabillé, réévaluation répétée. Échographie = imagerie de 1<sup>re</sup> intention (jamais le scanner). Penser IIA entre 2 mois et 2 ans (crises paroxystiques + rectorragie en gelée de groseille).</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Adulte :</strong> pas de corrélation intensité/gravité. Interrogatoire structuré en 6 caractères (siège, irradiation, type, intensité, facteurs modifiants, horaire) + terrain + signes associés.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Paraclinique :</strong> biologie guidée par la clinique, jamais systématique — sauf β-HCG obligatoire chez toute femme en âge de procréer. Échographie = 1<sup>re</sup> intention gynéco/urinaire/biliaire ; TDM injecté = référence si urgence chirurgicale suspectée.</div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>5 douleurs-types à mémoriser :</strong> biliaire (Murphy, scapulaire droite), gastroduodénale (rythme alimentaire), colique (soulagée par selles/gaz), pancréatique (transfixiante, chien de fusil), ischémique (douleur intense/examen pauvre = discordance).</div>
+</div>
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Pièges tombables :</strong> une douleur peu intense n'exclut pas une urgence. L'échographie ne sert à rien en cas d'occlusion ou d'hémorragie digestive. Toujours penser SCA postérieur devant une douleur épigastrique atypique chez un patient à risque CV. β-HCG systématique chez la femme en âge de procréer.</div>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

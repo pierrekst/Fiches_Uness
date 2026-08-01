@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-07-31. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-01. Ne pas éditer à la main._
 
-**Avancement : 188 / 367 items (51.2%)**
+**Avancement : 190 / 367 items (51.8%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -28,7 +28,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 18 | [ ] | Santé et numérique | — |
 | 19 | [x] | La sécurité sociale | 19_protection_sociale_economie_sante.html |
 | 20 | [x] | La méthodologie de la recherche en santé | 20_Methodologie_recherche.html |
-| 21 | [ ] | Mesure de l état de santé de la population | — |
+| 21 | [x] | Mesure de l état de santé de la population | 21_Mesure_etat_sante_population.html |
 | 22 | [x] | Maladies rares | 22_Maladies_rares.html |
 | 23 | [x] | Grossesse normale | 23_Grossesse_normale.html |
 | 24 | [x] | Principales complications de la grossesse | 24_Complications_grossesse_v2.html |
@@ -276,7 +276,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 266 | [ ] | Polykystose rénale | — |
 | 267 | [x] | Troubles de l équilibre acido-basique et désordres hydro-électrolytiqu… | 267_Troubles_hydroelectrolytiques.html |
 | 268 | [x] | Hypercalcémie | 268_Hypercalcemie.html |
-| 269 | [ ] | Douleurs abdominales aiguës chez l enfant et chez l adulte | — |
+| 269 | [x] | Douleurs abdominales aiguës chez l enfant et chez l adulte | 269_Douleurs_abdo_aigues.html |
 | 270 | [ ] | Douleurs lombaires aiguës | — |
 | 271 | [x] | Reflux gastro-œsophagien chez le nourrisson | 271_RGO.html |
 | 272 | [x] | Ulcère gastrique et duodénal | 272_Ulceres_Gastrite.html |

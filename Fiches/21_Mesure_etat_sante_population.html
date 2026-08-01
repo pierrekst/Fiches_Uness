@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 - Mesure de l'état de santé de la population</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tag,.htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 21</div>
+  <h1>Mesure de l'état de santé de la population</h1>
+  <div class="header-sub">Indicateurs de santé, mortalité, standardisation, priorités de santé publique et handicap</div>
+  <div class="header-tags">
+    <div class="htag">Indicateurs socio-démographiques</div>
+    <div class="htag">Mortalité / mortalité infantile</div>
+    <div class="htag">Standardisation (SMR/SIR)</div>
+    <div class="htag">Priorités de santé publique</div>
+    <div class="htag">Handicap - CIF</div>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble :</strong> évaluer l'état de santé d'une population repose sur des <strong>indicateurs</strong> quantitatifs (mortalité, espérance de vie, espérances de santé) qu'il faut savoir définir, calculer et interpréter avec leurs limites. Comparer deux populations différentes nécessite de neutraliser l'effet de structure d'âge par la <strong>standardisation</strong>. Au-delà du diagnostic populationnel, il faut savoir comment un problème de santé devient une <strong>priorité de santé publique</strong> (logique médicale, économique, sociale) et connaître les définitions réglementaires du <strong>handicap</strong>, dont l'espérance de vie sans incapacité est un indicateur de synthèse.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Indicateurs de santé et espérances de vie/santé
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition des indicateurs de santé et des indicateurs démographiques, de l'espérance de vie, de l'espérance de santé</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Indicateur de santé — définition et propriétés
+  </div>
+  <p style="font-size:.85rem;">Variable quantitative permettant d'évaluer un aspect de l'état de santé d'une population.</p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="kv-row" style="display:block;"><span class="kv-key">Validité</span><br><span style="font-size:.82rem;">Aptitude à mesurer correctement l'état de santé visé</span></div>
+    <div class="kv-row" style="display:block;"><span class="kv-key">Sensibilité au changement</span><br><span style="font-size:.82rem;">Aptitude à rendre compte des variations de l'état de santé</span></div>
+    <div class="kv-row" style="display:block;"><span class="kv-key">Fiabilité (reproductibilité)</span><br><span style="font-size:.82rem;">Résultats identiques dans des situations identiques (comparaisons inter-régionales/internationales)</span></div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Objectifs des indicateurs
+    </div>
+    <ul class="lst">
+      <li>Décrire, quantifier et surveiller l'état de santé de la population</li>
+      <li>Comparer cet état de santé dans le temps ou dans l'espace</li>
+      <li>Évaluer les effets des politiques et actions de santé publique</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Deux grandes familles
+    </div>
+    <ul class="lst">
+      <li><strong>Socio-démographiques</strong> : espérance de vie et déclinaisons, natalité, fécondité, structure d'âge</li>
+      <li><strong>Épidémiologiques</strong> : mortalité, morbidité</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — limites d'un indicateur unique :</strong> aucun indicateur ne résume à lui seul une situation sanitaire.<br>Mortalité : renseigne peu sur les pathologies non létales et leur impact fonctionnel/qualité de vie ; le poids des décès aux âges élevés rend le taux de mortalité globale peu informatif sur la mortalité des jeunes.<br>Morbidité : ne reflète que partiellement le retentissement fonctionnel (incapacité, handicap) ou la qualité de vie.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Espérance de vie et espérances de santé
+  </div>
+  <div class="kv-row"><span class="kv-key">Espérance de vie à la naissance</span><span class="kv-val">Durée de vie moyenne d'une génération fictive soumise aux conditions de mortalité de l'année de naissance</span></div>
+  <p style="font-size:.83rem;color:var(--muted);margin-top:8px;">Calculée séparément par sexe — les écarts traduisent une différence de longévité homme/femme.</p>
+  <hr style="margin:12px 0;">
+  <p style="font-size:.85rem;"><strong>Espérances de santé</strong> : famille d'indicateurs = nombre d'années à vivre dans un état de santé déterminé, compte tenu des conditions de vie du moment. Autant d'indicateurs que de mesures de la santé possibles (maladie, incapacité, santé perçue…).</p>
+  <p style="font-size:.83rem;color:var(--muted);margin-top:6px;">Calculables par sexe et par âge ; suivies dans le temps, elles indiquent si les années de vie gagnées sont des années en bonne ou en mauvaise santé.</p>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Indicateurs épidémiologiques de mortalité
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les notions de base sur les indicateurs épidémiologiques (mortalité générale, spécifique, prématurée, évitable, létalité)</div>
+  <div class="obj-line">Connaître les indicateurs de mortalité infantile, néonatale, postnéonatale, périnatale et de mortinatalité</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Indicateurs de mortalité générale
+  </div>
+  <table class="table-red">
+    <tr><th>Indicateur</th><th>Définition (× 1000)</th><th>France</th></tr>
+    <tr><td>Taux brut de mortalité</td><td>Décès de l'année / population moyenne de l'année</td><td>9,9 ‰ en 2020</td></tr>
+    <tr><td>Taux brut de mortalité par cause</td><td>Décès dus à une cause / population moyenne</td><td>Cancer solide 2018 : 123,8/100 000 H, 72,2/100 000 F</td></tr>
+    <tr><td>Taux spécifique de mortalité (âge, sexe...)</td><td>Décès du groupe / population moyenne de ce groupe</td><td>TSpM ≥90 ans : 183‰ ; H : 9,4‰ ; F : 9,0‰ (2019)</td></tr>
+    <tr><td>Taux de mortalité prématurée</td><td>Décès avant 65 ans / population moyenne &lt;65 ans</td><td>H : 2,40‰ ; F : 1,24‰ (2020)</td></tr>
+    <tr><td>Taux de létalité par cause</td><td>Décès dus à une cause / sujets atteints de la même cause</td><td>—</td></tr>
+  </table>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Mortalité évitable — les deux leviers
+  </div>
+  <div class="grid2">
+    <div>
+      <div class="pill pill-blue">Modification des habitudes de vie</div>
+      <p style="font-size:.83rem;margin-top:6px;">Comportements à risque / contexte de vie : sida, alcool, suicides, accidents de la voie publique, cancers bronchopulmonaires et des VADS</p>
+    </div>
+    <div>
+      <div class="pill pill-teal">Meilleure réponse du système de soins</div>
+      <p style="font-size:.83rem;margin-top:6px;">Actions curatives/préventives : cardiopathies ischémiques, AVC lié à l'HTA, cancer du sein et de l'utérus</p>
+    </div>
+  </div>
+  <div class="kv-row" style="margin-top:10px;"><span class="kv-key">Décès évitables France 2013</span><span class="kv-val">31 963 (H : 290,0/100 000 ; F : 143,3/100 000)</span></div>
+  <div class="kv-row"><span class="kv-key">Décès évitables liés au tabac, 2015</span><span class="kv-val">75 320</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Indicateurs de mortalité infantile et périnatale
+  </div>
+  <table class="table-blue">
+    <tr><th>Indicateur</th><th>Définition</th><th>France 2019</th></tr>
+    <tr><td>Taux de mortalité infantile</td><td>Décès avant 1 an / naissances vivantes</td><td>3,79 ‰</td></tr>
+    <tr><td>Taux de mortalité néonatale</td><td>Décès à 0-28 jours / naissances vivantes</td><td>2,74 ‰</td></tr>
+    <tr><td>Taux de mortalité postnéonatale</td><td>Décès du 28ᵉ au 365ᵉ jour / naissances vivantes</td><td>1,05 ‰</td></tr>
+    <tr><td>Taux de mortalité périnatale</td><td>Enfants nés sans vie + décès à 0-7 jours / naissances ≥22 SA</td><td>10,2 ‰</td></tr>
+    <tr><td>Taux de mortinatalité</td><td>Morts fœtales après 22 SA ou poids &gt;500 g / naissances vivantes</td><td>8,5 ‰ (IMG compris)</td></tr>
+    <tr><td>Taux de mortalité fœto-infantile</td><td>Nés sans vie + décès &lt;1 an / (nés vivants + nés sans vie)</td><td>Non calculé par l'Insee</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Standardisation
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de la standardisation et la distinction méthode directe / méthode indirecte</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Comparer deux populations n'est valide que si elles sont comparables. Les caractéristiques propres (structure d'âge, répartition par sexe) conditionnent fortement la survenue des problèmes de santé et interdisent d'emblée la comparaison brute. La <strong>standardisation</strong> neutralise cet effet de structure.</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Standardisation directe
+    </div>
+    <p style="font-size:.84rem;">Méthode de la <strong>population type</strong> : on applique aux effectifs par classe d'âge de la population de référence les taux de mortalité spécifiques par âge de la population étudiée.</p>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:6px;">Résultat : nombre total de décès attendu puis taux global = <strong>taux standardisé de mortalité (TSM)</strong>.</p>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Standardisation indirecte
+    </div>
+    <p style="font-size:.84rem;">Méthode de la <strong>mortalité type</strong> : compare le nombre de décès observés dans une petite population au nombre de décès attendus si on lui appliquait les taux de mortalité par classe d'âge d'une grande population de référence.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    SMR / SIR — ratio standardisé
+  </div>
+  <p style="font-size:.84rem;">Ratio = nombre de cas observés / nombre de cas attendus dans la petite population → <strong>SMR</strong> (standardized mortality ratio) ou <strong>SIR</strong> (standardized incidence ratio). Résultat multiplié par 100 (convention).</p>
+  <div class="grid3" style="margin-top:12px;">
+    <div class="kv-row" style="display:block;text-align:center;"><span class="pill pill-blue">SMR = 100</span><br><span style="font-size:.8rem;">Mortalité identique à la référence</span></div>
+    <div class="kv-row" style="display:block;text-align:center;"><span class="pill pill-teal">SMR &lt; 100</span><br><span style="font-size:.8rem;">Mortalité plus faible</span></div>
+    <div class="kv-row" style="display:block;text-align:center;"><span class="pill pill-red">SMR &gt; 100</span><br><span style="font-size:.8rem;">Mortalité plus forte (surmortalité)</span></div>
+  </div>
+  <div class="alert alert-amber" style="margin-top:12px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> un SMR de 150 % traduit une <strong>surmortalité de 50 %</strong> dans la population étudiée par rapport à la référence — pas une mortalité 150 fois supérieure.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Priorités de santé publique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les priorités de santé publique et le rôle du décideur politique et des institutions porteuses</div>
+  <div class="obj-line">Connaître les critères mobilisés pour définir un problème comme une priorité de santé publique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Trois logiques combinées
+  </div>
+  <div class="grid3">
+    <div class="bl-red">
+      <div class="pill pill-red">Logique médicale et scientifique</div>
+      <ul class="lst"><li>Gravité (morbidité et/ou mortalité importantes)</li><li>Fréquence (incidence élevée)</li></ul>
+    </div>
+    <div class="bl-blue">
+      <div class="pill pill-blue">Logique économique</div>
+      <ul class="lst"><li>Impact socio-économique</li><li>Faisabilité (coût...)</li></ul>
+    </div>
+    <div class="bl-teal">
+      <div class="pill pill-teal">Logique sociale</div>
+      <ul class="lst"><li>Perception du problème</li><li>Acceptabilité</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Une priorité de santé publique est la résultante d'un travail associant l'ensemble de la société civile (adhésion de tous), mais c'est le <strong>décideur politique</strong> qui la valide en dernier lieu. Une fois validée, elle doit être portée par une <strong>institution</strong> (ministère de la Santé, agence sanitaire...) qui assure financements, gestion des moyens et mobilisation des professionnels — sans quoi elle n'atteint jamais ses objectifs, aussi pertinente soit-elle.</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Handicap
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les définitions relatives au handicap (classification OMS, loi française de 2005)</div>
+  <div class="obj-line">Connaître l'espérance de vie sans handicap (EVSI)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Classification Internationale du Fonctionnement (CIF), OMS 2001
+  </div>
+  <p style="font-size:.83rem;color:var(--muted);margin-bottom:8px;">Le handicap résulte d'une interaction entre un problème de santé et des facteurs contextuels, personnels ou environnementaux.</p>
+  <table class="table-teal">
+    <tr><th>Niveau</th><th>Fonctionnement</th><th>Handicap</th></tr>
+    <tr><td>Organe</td><td>Fonctions et structures corporelles</td><td>Déficience</td></tr>
+    <tr><td>Individu</td><td>Activité</td><td>Limitation</td></tr>
+    <tr><td>Société</td><td>Participation</td><td>Restriction</td></tr>
+  </table>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:8px;">Les facteurs environnementaux interagissent avec ces niveaux pour créer ou remédier aux situations de handicap.</p>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Loi n°2005-102 — définition légale française
+  </div>
+  <p style="font-size:.84rem;">« Constitue un handicap, au sens de la présente loi, toute limitation d'activité ou restriction de participation à la vie en société subie dans son environnement par une personne en raison d'une altération substantielle, durable ou définitive d'une ou plusieurs fonctions physiques, sensorielles, mentales, cognitives ou psychiques, d'un polyhandicap ou d'un trouble de santé invalidant. »</p>
+  <hr style="margin:12px 0;">
+  <p style="font-size:.84rem;"><strong>Droit à la compensation</strong> : quels que soient l'origine, la nature de la déficience, l'âge ou le mode de vie. Droit individuel, tenant compte du projet de vie de la personne.</p>
+  <div class="pills" style="margin-top:10px;">
+    <div class="pill pill-red">PCH — Prestation de Compensation du Handicap</div>
+  </div>
+  <p style="font-size:.82rem;color:var(--muted);margin-top:6px;">Versée en espèces (aides humaines) ou en nature (aides techniques, aménagement du logement...).</p>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Espérance de vie sans incapacité (EVSI)
+  </div>
+  <p style="font-size:.84rem;">Nombre d'années sans incapacité qu'il resterait à vivre en moyenne aux individus d'un groupe, dans les conditions de mortalité d'une période donnée (= espérance de vie retranchée des années de vie en incapacité). Aussi appelée « espérance de vie en bonne santé » ou « espérance de santé ».</p>
+  <div class="grid2" style="margin-top:12px;">
+    <div class="kv-row"><span class="kv-key">EVSI naissance — Femmes (France, 2019)</span><span class="kv-val">64,6 ans</span></div>
+    <div class="kv-row"><span class="kv-key">EVSI naissance — Hommes (France, 2019)</span><span class="kv-val">63,7 ans</span></div>
+  </div>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li>Un indicateur de santé doit être <strong>valide, sensible au changement et fiable</strong> ; un seul indicateur ne suffit jamais à résumer une situation sanitaire.</li>
+    <li>Indicateurs socio-démographiques (espérance de vie, natalité, structure d'âge) ≠ indicateurs épidémiologiques (mortalité, morbidité).</li>
+    <li>Mortalité prématurée = décès avant 65 ans ; mortalité évitable = habitudes de vie (comportements à risque) <em>ou</em> système de soins (curatif/préventif).</li>
+    <li>Connaître par cœur la chaîne des indicateurs de mortalité infantile : infantile → néonatale (0-28j) → postnéonatale (28-365j) ; et périnatale/mortinatalité (≥22 SA).</li>
+    <li>Standardisation <strong>directe</strong> = population type (calcule un TSM) ; <strong>indirecte</strong> = mortalité type (calcule un SMR/SIR, comparaison petite population vs référence).</li>
+    <li>SMR &gt; 100 % = surmortalité ; un SMR de 150 % = +50 % de mortalité par rapport à la référence (piège classique de lecture).</li>
+    <li>Une priorité de santé publique combine logique <strong>médicale</strong>, <strong>économique</strong> et <strong>sociale</strong>, validée par le décideur politique et portée par une institution.</li>
+    <li>CIF (OMS 2001) : déficience (organe) / limitation (individu) / restriction (société). Loi 2005-102 = définition légale française du handicap + droit à compensation (PCH).</li>
+    <li>EVSI France 2019 : 64,6 ans (F) et 63,7 ans (H) à la naissance.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
