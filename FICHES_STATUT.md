@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-01. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-06. Ne pas éditer à la main._
 
-**Avancement : 190 / 367 items (51.8%)**
+**Avancement : 191 / 367 items (52.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -92,7 +92,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 82 | [ ] | Altération aiguë de la vision | — |
 | 83 | [ ] | Infections et inflammations oculaires | — |
 | 84 | [ ] | Glaucomes | — |
-| 85 | [ ] | Troubles de la réfraction | — |
+| 85 | [x] | Troubles de la réfraction | 85_Troubles_refraction.html |
 | 86 | [ ] | Pathologie des paupières | — |
 | 87 | [ ] | Epistaxis | — |
 | 88 | [x] | Trouble aigu de la parole | 88_Trouble_aigu_parole_Dysphonie.html |
@@ -136,7 +136,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 126 | [x] | Trouble de l érection | 126_trouble_erection.html |
 | 127 | [x] | Hypertrophie bénigne de la prostate | 127_Hypertrophie_benigne_prostate_v2.html |
 | 128 | [x] | Ostéopathies fragilisantes | 128_Osteopathies_fragilisantes.html |
-| 129 | [x] | Arthrose | 129_Arthrose.html |
+| 129 | [x] | Arthrose | 129_Arthrose_v2.html |
 | 130 | [ ] | La personne âgée malade | — |
 | 131 | [x] | Troubles de la marche et de l équilibre | 131_marche_equilibre.html |
 | 132 | [x] | Troubles cognitifs du sujet âgé | 132_Troubles_cognitifs.html |

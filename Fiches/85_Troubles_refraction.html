@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>85 - Troubles de la réfraction</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 85</div>
+  <h1>Troubles de la réfraction</h1>
+  <div class="header-sub">Emmétropie, amétropies (myopie, hypermétropie, astigmatisme), presbytie, acuité visuelle</div>
+  <div class="header-tags">
+    <span class="htag">Réfraction optique</span>
+    <span class="htag">Amétropies</span>
+    <span class="htag">Presbytie</span>
+    <span class="htag">Acuité visuelle</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble —</strong> L'œil est un système optique qui doit faire converger les rayons lumineux exactement sur la rétine (œil <strong>emmétrope</strong>). Toute anomalie de cette convergence est une <strong>amétropie</strong> : trop convergent ou trop long (myopie), pas assez convergent ou trop court (hypermétropie), ou convergence différente selon les méridiens (astigmatisme). Avec l'âge s'ajoute la <strong>presbytie</strong>, perte physiologique de l'accommodation. Le repérage de ces troubles repose sur la mesure de l'<strong>acuité visuelle</strong> (de loin et de près) et leur caractérisation sur un examen de <strong>réfraction</strong> objectif et subjectif, indispensable avant d'évoquer toute pathologie oculaire devant une baisse de vision.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Emmétropie et amétropies
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir l'œil emmétrope et comprendre le trajet des rayons lumineux dans l'appareil dioptrique</div>
+  <div class="obj-line">Savoir en quoi consistent les amétropies (myopie, hypermétropie, astigmatisme)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Œil emmétrope vs œil amétrope
+  </div>
+  <p style="font-size:.84rem;margin-bottom:8px;">Les rayons lumineux traversent des surfaces de réfraction (<strong>cornée, cristallin</strong>) et des milieux réfringents (humeur aqueuse, vitré) constituant l'<strong>appareil dioptrique</strong> de l'œil, qui converge les rayons lumineux sur la rétine.</p>
+  <div class="kv-row"><span class="kv-key">Œil emmétrope</span><span class="kv-val">rayons parallèles (infini) → convergence exacte sur la rétine, aucune correction nécessaire de loin</span></div>
+  <div class="kv-row"><span class="kv-key">Œil amétrope</span><span class="kv-val">anomalie de réfraction → image nette non formée sur la rétine</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Myopie
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Œil trop convergent ou trop long. Image d'un point à l'infini formée <strong>en avant</strong> de la rétine.</p>
+    <div class="kv-row"><span class="kv-key">Punctum remotum</span><span class="kv-val">distance finie</span></div>
+    <div class="kv-row"><span class="kv-key">Vision de loin</span><span class="kv-val">floue</span></div>
+    <div class="kv-row"><span class="kv-key">Vision de près</span><span class="kv-val">nette</span></div>
+    <div class="kv-row"><span class="kv-key">Correction</span><span class="kv-val">verres divergents (puissance négative)</span></div>
+    <div class="pills">
+      <span class="pill pill-red">Myopie axile (la plus fréquente)</span>
+      <span class="pill pill-red">Myopie d'indice (cataracte nucléaire)</span>
+      <span class="pill pill-red">Myopie de courbure</span>
+    </div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Hypermétropie
+    </div>
+    <p style="font-size:.83rem;margin-bottom:8px;">Œil pas assez convergent ou trop court. Image formée <strong>en arrière</strong> de la rétine (image virtuelle).</p>
+    <div class="kv-row"><span class="kv-key">Punctum remotum</span><span class="kv-val">en arrière de la rétine</span></div>
+    <div class="kv-row"><span class="kv-key">Vision de loin</span><span class="kv-val">floue</span></div>
+    <div class="kv-row"><span class="kv-key">Vision de près</span><span class="kv-val">floue (sauf compensation)</span></div>
+    <div class="kv-row"><span class="kv-key">Correction</span><span class="kv-val">verres convergents (puissance positive)</span></div>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>L'hypermétrope compense par une <strong>accommodation excessive</strong> → présentation typique : <strong>céphalées à l'effort visuel (asthénopie)</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18"/></svg></div>
+      Astigmatisme
+    </div>
+    <p style="font-size:.83rem;">Réfraction différente selon le plan des rayons incidents, le plus souvent par défaut de sphéricité de la face antérieure de la cornée.</p>
+    <div class="pills">
+      <span class="pill pill-purple">Régulier : 2 méridiens perpendiculaires</span>
+      <span class="pill pill-purple">Irrégulier : pas de symétrie (plaie/greffe cornéenne)</span>
+    </div>
+    <div class="kv-row" style="margin-top:8px;"><span class="kv-key">Vision</span><span class="kv-val">floue de loin ET de près</span></div>
+    <div class="kv-row"><span class="kv-key">Correction</span><span class="kv-val">verres cylindriques (+ ou −)</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Myopie forte — complications
+    </div>
+    <table class="table-red">
+      <tr><th>Seuil</th><td>&gt; 6 dioptries ou longueur axiale &gt; 26 mm</td></tr>
+      <tr><th>Évolution</th><td>allongement progressif du globe sur plusieurs années</td></tr>
+      <tr><th>Complications</th><td>glaucome primitif à angle ouvert, cataracte, <strong>décollement de rétine</strong>, maculopathie myopique</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège —</strong> Ne pas confondre myopie faible (&lt; 6D, simple amétropie débutant dans l'enfance, se stabilisant vers 25-30 ans) et myopie forte / « myopie maladie » (&gt; 6D, affection héréditaire à complications graves).</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Presbytie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Définir la presbytie, ses conséquences fonctionnelles et son mode de correction optique</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Définition et mécanisme
+  </div>
+  <p style="font-size:.84rem;margin-bottom:8px;">Perte <strong>inéluctable avec l'âge</strong> (après 40-45 ans) de l'amplitude d'accommodation, induite par le grossissement du cristallin, la faiblesse relative du muscle ciliaire et la perte d'élasticité de la capsule cristallinienne.</p>
+  <div class="alert alert-green">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div>Signe évocateur classique : le patient doit <strong>« allonger les bras »</strong> pour lire à 30 cm. S'accompagne de signes de fatigue : céphalées, yeux rouges, picotements, larmoiement.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Correction optique
+    </div>
+    <ul class="lst">
+      <li>Verres sphériques <strong>convexes</strong> (puissance toujours positive), en addition d'une éventuelle correction de loin</li>
+      <li>Verres monofocaux (vision de près seule)</li>
+      <li>Verres bifocaux (séparation nette loin/près)</li>
+      <li>Verres progressifs (transition continue loin → près)</li>
+      <li>Alternatives : lentilles multifocales, implant cristallinien multifocal (chirurgie de cataracte)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Addition selon l'âge
+    </div>
+    <div class="kv-row"><span class="kv-key">45 ans</span><span class="kv-val">+1,00 dioptrie</span></div>
+    <div class="kv-row"><span class="kv-key">60 ans et plus</span><span class="kv-val">+3,00 dioptries</span></div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>L'addition nécessaire <strong>augmente avec l'âge</strong>, la presbytie s'aggravant progressivement.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Acuité visuelle
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les valeurs normales d'acuité visuelle selon l'âge</div>
+  <div class="obj-line">Connaître les bases physiologiques, modalités et conditions de mesure de l'acuité visuelle</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Maturation de l'acuité visuelle chez l'enfant
+  </div>
+  <table class="table-teal">
+    <tr><th>Âge</th><th>AV attendue</th><th>Repère mnémotechnique</th></tr>
+    <tr><td>Naissance</td><td>1/30e</td><td>doigt à 30 cm</td></tr>
+    <tr><td>3 mois</td><td>1/10e</td><td>mine de crayon à 30 cm</td></tr>
+    <tr><td>6 mois</td><td>2/10e</td><td>—</td></tr>
+    <tr><td>1 an</td><td>4/10e</td><td>cheveu à 30 cm</td></tr>
+    <tr><td>3 ans</td><td>7/10e</td><td>—</td></tr>
+    <tr><td>À partir de 5 ans</td><td>10/10e</td><td>acuité adulte</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Définition
+    </div>
+    <p style="font-size:.84rem;">Pouvoir de discrimination de l'œil = plus petite distance discernable entre deux points (minimum séparable), soit l'inverse du pouvoir séparateur exprimé en <strong>minute d'arc</strong> (angle minimum de résolution). L'AV est un paramètre fonctionnel maculaire (avec vision des couleurs et des contrastes).</p>
+    <div class="alert alert-blue" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Mesure toujours <strong>œil par œil</strong>, d'abord sans correction puis avec la correction optimale, à deux distances (loin et près).</div>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Modalités de mesure
+    </div>
+    <div class="kv-row"><span class="kv-key">AV de loin</span><span class="kv-val">échelle Monoyer, 5 m, dixièmes</span></div>
+    <div class="kv-row"><span class="kv-key">Illettrés (loin)</span><span class="kv-val">E de Snellen, anneaux de Landolt</span></div>
+    <div class="kv-row"><span class="kv-key">AV de près</span><span class="kv-val">échelle de Parinaud, 33 cm</span></div>
+    <div class="kv-row"><span class="kv-key">Illettrés (près)</span><span class="kv-val">échelle Rossano-Weiss</span></div>
+    <div class="kv-row"><span class="kv-key">P14 vs P2/P1,5</span><span class="kv-val">lettres les plus grosses vs les plus fines</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège —</strong> L'échelle de Monoyer est à <strong>progression décimale</strong> (privilégie la mesure des bonnes AV) alors que les échelles récentes type <strong>ETDRS</strong> suivent une progression <strong>logarithmique</strong>, plus homogène entre chaque ligne.</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Bases de la réfraction optique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Comprendre les bases de la réfraction optique et son intérêt diagnostique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Intérêt et méthodes de l'examen
+  </div>
+  <p style="font-size:.84rem;margin-bottom:10px;">Examen essentiel devant tout trouble visuel : permet d'écarter une <strong>amétropie mal corrigée</strong> avant d'évoquer une pathologie oculaire organique.</p>
+  <div class="pills">
+    <span class="pill pill-blue">Méthode objective : réfractomètre automatique</span>
+    <span class="pill pill-teal">Méthode subjective : essai de verres</span>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Résultat en 4 chiffres
+    </div>
+    <div class="kv-row"><span class="kv-key">Sphère</span><span class="kv-val">amétropie sphérique (myopie/hypermétropie)</span></div>
+    <div class="kv-row"><span class="kv-key">Cylindre</span><span class="kv-val">astigmatisme</span></div>
+    <div class="kv-row"><span class="kv-key">Axe</span><span class="kv-val">astigmatisme</span></div>
+    <div class="kv-row"><span class="kv-key">Addition</span><span class="kv-val">presbytie, après 40 ans</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Type de verres selon l'amétropie
+    </div>
+    <div class="kv-row"><span class="kv-key">Myopie</span><span class="kv-val">divergents, puissance négative</span></div>
+    <div class="kv-row"><span class="kv-key">Hypermétropie</span><span class="kv-val">convergents, puissance positive</span></div>
+    <div class="kv-row"><span class="kv-key">Astigmatisme</span><span class="kv-val">cylindriques, + ou −</span></div>
+    <div class="kv-row"><span class="kv-key">Presbytie (addition)</span><span class="kv-val">toujours positive, +1 à +3D</span></div>
+  </div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Point tombable —</strong> Chez l'enfant, le fort pouvoir d'accommodation impose une <strong>instillation préalable de cycloplégique</strong> (atropine ou cyclopentolate/Skiacol®) pour paralyser l'accommodation avant toute mesure fiable de la réfraction.</div>
+</div>
+
+<hr>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li><strong>Emmétropie</strong> : convergence exacte sur la rétine sans correction ; <strong>amétropie</strong> = toute anomalie de cette convergence</li>
+    <li><strong>Myopie</strong> : trop convergent/trop long → net de près, flou de loin → verres divergents. Myopie forte (&gt;6D) = risque de décollement de rétine</li>
+    <li><strong>Hypermétropie</strong> : pas assez convergent/trop court → flou de loin et de près, compensé par accommodation → céphalées d'effort (asthénopie) → verres convergents</li>
+    <li><strong>Astigmatisme</strong> : défaut de sphéricité cornéenne → flou de loin ET de près → verres cylindriques</li>
+    <li><strong>Presbytie</strong> : perte physiologique de l'accommodation après 40-45 ans → addition positive croissante avec l'âge (+1D à 45 ans, +3D à 60 ans)</li>
+    <li><strong>AV normale</strong> : 10/10e atteinte à partir de 5 ans ; mesure œil par œil, loin (Monoyer) et près (Parinaud)</li>
+    <li>Toujours <strong>écarter une amétropie mal corrigée</strong> avant d'évoquer une pathologie oculaire devant une baisse de vision</li>
+    <li>Chez l'enfant : réfraction toujours sous <strong>cycloplégique</strong></li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
