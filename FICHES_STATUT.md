@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-10. Ne pas éditer à la main._
 
-**Avancement : 192 / 367 items (52.3%)**
+**Avancement : 193 / 367 items (52.6%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -175,7 +175,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 165 | [ ] | Oreillons | — |
 | 166 | [ ] | Grippe | — |
 | 167 | [x] | Hépatites virales | 167_Hepatites_virales.html |
-| 168 | [ ] | Infections à herpès virus du sujet immunocompétent | — |
+| 168 | [x] | Infections à herpès virus du sujet immunocompétent | 168_Herpes_virus.html |
 | 169 | [ ] | Infections à VIH | — |
 | 170 | [ ] | Paludisme | — |
 | 171 | [ ] | Gale et pédiculose | — |
