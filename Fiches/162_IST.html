@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Item 162 — Infections sexuellement transmissibles</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .phase{display:inline-block;color:#fff;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:6px;margin-bottom:4px;}
+  .phase-prod{background:var(--teal);}
+  .phase-mod {background:var(--amber);}
+  .phase-sev {background:var(--red);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .section-badge{display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 162</div>
+  <h1>Infections sexuellement transmissibles (IST)</h1>
+  <div class="header-sub">Gonococcie · Chlamydiose · Syphilis · Papillomavirus (HPV) · Trichomonose</div>
+  <div class="header-tags">
+    <div class="htag">5 agents pathogènes</div>
+    <div class="htag">Dépistage partenaire systématique</div>
+    <div class="htag">Traitement probabiliste</div>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Les IST regroupent des tableaux cliniques communs — ulcération génitale, urétrite, cervicite,
+  infection génitale haute — dont les causes diffèrent : deux bactéries intracellulaires (gonocoque, chlamydia) qui donnent
+  urétrites et cervicites souvent asymptomatiques ; un spirochète (syphilis) évoluant en trois stades cliniques bien définis
+  avec une sérologie à double lecture (tréponémique/non tréponémique) ; un virus (HPV) responsable de lésions ano-génitales et
+  de cancers ; un parasite (trichomonose) peu fréquent en France. Face à toute IST, le réflexe est le même : bilan IST complet,
+  prise en charge du/des partenaire(s), traitement probabiliste puis adapté, prévention (préservatif, vaccination).
+</div>
+
+<!-- ============ SECTION 1 : GENERALITES ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Généralités : agents, épidémiologie, prévention
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les agents responsables des IST selon leur expression clinique</div>
+  <div class="obj-line">Connaître la fréquence des différentes IST et leurs facteurs de risque</div>
+  <div class="obj-line">Connaître les mesures préventives des IST et les principes de prise en charge du/des partenaire(s)</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Les 5 agents et leurs caractéristiques
+  </div>
+  <table class="table-blue">
+    <tr><th>Agent</th><th>Type</th><th>Fréquence / terrain</th></tr>
+    <tr><td><strong>Neisseria gonorrhoeae</strong></td><td>Diplocoque Gram négatif intracellulaire</td><td>Incidence en hausse, hommes +++, Île-de-France</td></tr>
+    <tr><td><strong>Chlamydia trachomatis</strong></td><td>Bacille Gram négatif intracellulaire obligatoire</td><td>1<sup>ère</sup> cause d'IST bactérienne (prévalence jusqu'à 10%), 15-34 ans (F) / 20-39 ans (H)</td></tr>
+    <tr><td><strong>Treponema pallidum</strong></td><td>Spirochète</td><td>Recrudescence depuis 2000 ; HSH métropole (40% VIH+) ; hétérosexuels DROM (risque congénital)</td></tr>
+    <tr><td><strong>HPV</strong></td><td>Virus (bas risque 6/11, haut risque 16/18)</td><td>IST la plus fréquente ; ~40% des jeunes femmes européennes infectées</td></tr>
+    <tr><td><strong>Trichomonas vaginalis</strong></td><td>Protozoaire flagellé anaérobie</td><td>Faible en France, prévalence similaire H/F</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Facteurs de risque
+    </div>
+    <ul class="lst">
+      <li>Multipartenariat (≥2 partenaires/an)</li>
+      <li>Changement de partenaire récent</li>
+      <li>IST chez un partenaire ou antécédent personnel d'IST</li>
+      <li>Autre IST active</li>
+      <li>Homosexualité masculine</li>
+      <li>Prostitution, violences sexuelles</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10c-4.5-1.5-8-5-8-10V6z"/></svg></div>
+      Mesures préventives
+    </div>
+    <ul class="lst">
+      <li>Préservatif systématique</li>
+      <li>Vaccination HPV, hépatite B (+ hépatite A si HSH)</li>
+      <li>Dépistage/traitement du(des) partenaire(s)</li>
+      <li>Éducation : risques de recontamination</li>
+      <li>PrEP VIH si prise de risque régulière</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Bilan IST systématique (dépistage / partenaire)
+  </div>
+  <div class="pills">
+    <div class="pill pill-red">Sérologie VIH</div>
+    <div class="pill pill-purple">Test tréponémique</div>
+    <div class="pill pill-blue">Sérologie hépatite B</div>
+    <div class="pill pill-teal">PCR urinaire/génitale gonocoque + chlamydia</div>
+    <div class="pill pill-amber">PCR pharyngée et anale selon pratiques</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 2 : ULCERATIONS GENITALES ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Ulcérations génitales
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les causes des ulcérations génitales infectieuses ou non infectieuses</div>
+  <div class="obj-line">Reconnaître un herpès génital et un chancre syphilitique sur photographie</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Causes infectieuses des ulcérations
+  </div>
+  <table class="table-red">
+    <tr><th>Étiologie</th><th>Caractéristiques</th></tr>
+    <tr><td><strong>Chancre syphilitique</strong></td><td>Unique, fond propre, induré, indolore, localisation variable</td></tr>
+    <tr><td><strong>Herpès génital</strong></td><td>Ulcérations superficielles <strong>douloureuses</strong>, contours polycycliques, postvésiculeuses</td></tr>
+    <tr><td><strong>Chancre mou</strong></td><td>Terrain Afrique/Amérique du Sud/Asie ; unique ou multiple, fond sale, très douloureux, ADP inflammatoires</td></tr>
+    <tr><td><strong>Donovanose</strong></td><td>Même terrain ; lésions granulomateuses peu douloureuses</td></tr>
+    <tr><td><strong>Maladie de Nicolas-Favre</strong> (LGV)</td><td>Terrain identique + homosexuels ; anorectite, ulcérations anogénitales, diarrhée trompeuse</td></tr>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> une syphilis doit être évoquée jusqu'à preuve du contraire devant toute ulcération génitale — tous les chancres ne sont pas typiques.</div>
+  </div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div><strong>Non infectieuses :</strong> traumatique, caustique, mécanique, dermatose bulleuse, toxidermie.</div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 3 : URETRITE MASCULINE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Urétrite masculine
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes cliniques de l'urétrite masculine</div>
+  <div class="obj-line">Connaître les causes des urétrites chez l'homme</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Signes cliniques
+    </div>
+    <ul class="lst">
+      <li>Écoulement urétral</li>
+      <li>Dysurie, douleurs urétrales (brûlures permanentes ou mictionnelles)</li>
+      <li>Prurit urétral</li>
+      <li>Méatite, voire balanite</li>
+      <li>Évolution aiguë ou subaiguë</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Causes vénériennes
+    </div>
+    <ul class="lst">
+      <li><strong>Gonocoque :</strong> aiguë +++, écoulement purulent (90%)</li>
+      <li><strong>Chlamydia :</strong> moins bruyante, écoulement clair, modéré, intermittent (&lt;50%)</li>
+      <li><strong>Trichomonas :</strong> subaiguë, écoulement matinal, +/- prurit</li>
+    </ul>
+  </div>
+</div>
+<div class="alert alert-green">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <div><strong>Causes non vénériennes :</strong> infectieuse (E. coli, Klebsiella, Enterobacter, Serratia), traumatique, radique, tumorale, irritative.</div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 4 : INFECTIONS GENITALES CHEZ LA FEMME ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Infections génitales chez la femme
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes et causes des infections génitales basses (cervicite, vulvo-vaginite)</div>
+  <div class="obj-line">Connaître les signes et causes des infections génitales hautes (salpingite, endométrite)</div>
+  <div class="obj-line">Connaître les explorations à réaliser en cas d'infection génitale haute</div>
+  <div class="obj-line">Connaître les modalités thérapeutiques des infections génitales hautes</div>
+  <div class="obj-line">Connaître les conséquences à long terme des infections génitales hautes</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Infections basses — causes et présentation
+  </div>
+  <table>
+    <tr><th>Agent</th><th>Clinique</th><th>Examen gynécologique</th></tr>
+    <tr><td><strong>Gonocoque</strong></td><td>Leucorrhées purulentes, pesanteur pelvienne, urétrite associée</td><td>Col peu inflammatoire, écoulement purulent cervical</td></tr>
+    <tr><td><strong>Chlamydia / mycoplasme</strong></td><td>Leucorrhées blanc/jaunâtre, cystalgies, dyspareunie</td><td>Col fragile, sécrétions mucopurulentes, ectropion friable</td></tr>
+    <tr><td><strong>Trichomonas</strong></td><td>Prurit intense, leucorrhées verdâtres, spumeuses, malodorantes</td><td>Colpite punctiforme (« léopard »)</td></tr>
+    <tr><td><strong>Candidose</strong></td><td>Leucorrhées blanches, prurit +++, vulvite</td><td>Leucorrhées caillebottées, grumeleuses</td></tr>
+    <tr><td><strong>Vaginose bactérienne</strong></td><td>Pertes grises peu abondantes, malodorantes</td><td>Peu d'irritation locale</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Infections hautes — signes
+    </div>
+    <div class="kv-row"><span class="kv-key">Salpingite</span><span class="kv-val">+/- fièvre, douleurs pelviennes, métrorragies, TV douloureux</span></div>
+    <div class="kv-row"><span class="kv-key">Endométrite</span><span class="kv-val">Fièvre +++, douleur pelvienne au TV, écoulement cervical</span></div>
+    <div class="kv-row"><span class="kv-key">Causes vénériennes</span><span class="kv-val">Gonocoque, chlamydia, trichomonas, M. genitalium</span></div>
+    <div class="kv-row"><span class="kv-key">Causes non vénériennes</span><span class="kv-val">Strepto, staphylo, entérocoques, entérobactéries</span></div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Explorations IGH
+    </div>
+    <ul class="lst">
+      <li>CRP, NFS</li>
+      <li>Spéculum : examen direct + culture standard + PCR gonocoque/chlamydia</li>
+      <li>Si compliqué : prélèvement chirurgical/radioguidé (culture + PCR + mycoplasmes)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement des infections génitales hautes (CNGOF-SPILF 2018)
+  </div>
+  <div class="kv-row"><span class="kv-key">IGH non compliquée (probabiliste)</span><span class="kv-val">Ceftriaxone 1g IV/IM DU + Doxycycline 100mg/12h 10j + Métronidazole 500mg/12h 10j</span></div>
+  <div class="kv-row"><span class="kv-key">Gonocoque documenté</span><span class="kv-val">Ceftriaxone 1g/j IV, 14 jours</span></div>
+  <div class="kv-row"><span class="kv-key">Chlamydia documenté</span><span class="kv-val">Doxycycline 100mg/12h, 14 jours</span></div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Conséquences à long terme des IGH :</strong> algies pelviennes inflammatoires, stérilité tubaire, grossesse extra-utérine.</div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 5 : MANIFESTATIONS EXTRA-GENITALES ET BILAN ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Manifestations extra-génitales et bilan complémentaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les manifestations extra-génitales des IST</div>
+  <div class="obj-line">Connaître les examens complémentaires selon la localisation (ulcération, urétrite, orchite, infection basse/haute, extra-génitale)</div>
+  <div class="obj-line">Connaître les mesures générales de prise en charge des IST</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Gonocoque — extra-génital
+    </div>
+    <ul class="lst">
+      <li>Anorectite : asymptomatique +++, prurit anal, écoulement purulent, syndrome rectal</li>
+      <li>Oropharyngite : asymptomatique +++</li>
+      <li>Septicémie gonococcique : fièvre, purpura, papulo-pustules acrales, mono/oligo-arthrites septiques</li>
+      <li>Péri-hépatite, endocardite, méningite</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Chlamydia — extra-génital
+    </div>
+    <ul class="lst">
+      <li>Pharyngite, anorectite asymptomatique +++</li>
+      <li>Syndrome oculo-uréthro-synovial : arthrite réactionnelle + urétrite + conjonctivite bilatérale + balanite circinée + kératodermie palmoplantaire</li>
+      <li>Nouveau-né : kératoconjonctivite, pneumopathie</li>
+      <li>Péri-hépatite</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Bilan complémentaire type
+  </div>
+  <ul class="lst">
+    <li><strong>Sérologies :</strong> VIH, VHB, test tréponémique +/- non tréponémique</li>
+    <li><strong>PCR gonocoque + chlamydia :</strong> 1<sup>er</sup> jet urinaire, écoulement urétral, autoprélèvement vaginal, +/- pharyngé/anal selon pratiques</li>
+    <li><strong>Culture :</strong> systématique pour le gonocoque (écoulement urétral, autoprélèvement vaginal)</li>
+    <li><strong>IGH :</strong> CRP, NFS, prélèvement au spéculum ± chirurgical/radioguidé</li>
+    <li>Examen du col si condylome chez la patiente ou le conjoint</li>
+  </ul>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Prise en charge générale d'une IST
+  </div>
+  <ul class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Dépistage/traitement du partenaire</div><div class="step-content">Identifier et traiter le(s) partenaire(s) d'emblée</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Bilan IST complet</div><div class="step-content">VIH, tréponémique, VHB, PCR gonocoque/chlamydia +/- pharyngée/anale</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">Traitement probabiliste</div><div class="step-content">Urétrite : doxycycline 200mg/j 7j + ceftriaxone 1g DU. Chancre : benzathine pénicilline G 2,4 MUI DU</div></div></li>
+    <li><span class="step-num">4</span><div><div class="step-title">Mesures associées</div><div class="step-content">Préservatif/abstinence ≥7j, vaccination HPV/VHB(/VHA si HSH), éducation, PrEP si besoin</div></div></li>
+    <li><span class="step-num">5</span><div><div class="step-title">Réévaluation</div><div class="step-content">Contrôle systématique de l'efficacité clinique et biologique</div></div></li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 6 : TRAITEMENTS PROBABILISTE ET DOCUMENTE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitements : probabiliste et documenté
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les modalités du traitement probabiliste des IST</div>
+  <div class="obj-line">Connaître les modalités de choix des antibiotiques après documentation microbiologique</div>
+  <div class="obj-line">Connaître les examens et le traitement d'une trichomonose, d'une infection à chlamydia et à gonocoque</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement probabiliste (urétrite/cervicite) — gonocoque + chlamydia
+  </div>
+  <div class="kv-row"><span class="kv-key">Ceftriaxone</span><span class="kv-val">1000 mg IM ou IV, dose unique</span></div>
+  <div class="kv-row"><span class="kv-key">Doxycycline</span><span class="kv-val">200 mg/j PO, 7 jours (ou azithromycine 1g DU)</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Traitement documenté par agent
+  </div>
+  <table class="table-blue">
+    <tr><th>Agent</th><th>Diagnostic</th><th>Traitement</th></tr>
+    <tr><td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>Gonocoque</strong></td><td>PCR (1<sup>er</sup> jet urinaire H / autoprélèvement vaginal F, +/- pharyngé/anal)</td><td>Ceftriaxone 1000mg DU IM/IV + doxycycline 7j (anti-chlamydia systématique)</td></tr>
+    <tr><td>Culture systématique, gélose sang cuit + antibiogramme</td><td>Allergie β-lactamines : azithromycine, gentamicine ou ciprofloxacine DU</td></tr>
+    <tr><td><strong>Chlamydia</strong></td><td>PCR (1<sup>er</sup> jet urinaire / autoprélèvement vaginal, +/- pharyngé/anal) — pas d'intérêt de la sérologie</td><td>Doxycycline 200mg 7j (ou azithromycine 1g DU) ; 2<sup>e</sup> intention : érythromycine/ofloxacine</td></tr>
+    <tr><td><strong>Trichomonas</strong></td><td>Examen direct ou PCR (écoulement urétral/1<sup>er</sup> jet urinaire H, cul-de-sac vaginal postérieur F)</td><td>Métronidazole 2g DU (ou 500mg x2/j 7j) ou Secnidazole 2g DU</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Cas particuliers gonocoque
+    </div>
+    <ul class="lst">
+      <li>Femme enceinte : ceftriaxone ou céfixime DU</li>
+      <li>Orchi-épididymite : ceftriaxone DU (IM/IV) ou céfixime</li>
+      <li>Septicémie/endocardite/méningite/endométrite/salpingite : ceftriaxone +/- hospitalisation</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Cas particuliers chlamydia
+    </div>
+    <ul class="lst">
+      <li>Femme enceinte : azithromycine DU</li>
+      <li>Nouveau-né (pneumopathie/ophtalmie) : érythromycine</li>
+      <li>Orchi-épididymite : doxycycline 10j</li>
+      <li>Endométrite/salpingite : doxycycline 14j</li>
+    </ul>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 7 : SYPHILIS ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Syphilis
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les signes cliniques de la syphilis précoce et tardive</div>
+  <div class="obj-line">Connaître les présentations cliniques de la syphilis secondaire, dont les formes neurologiques</div>
+  <div class="obj-line">Connaître les tests sérologiques au cours de la syphilis</div>
+  <div class="obj-line">Connaître le traitement de la syphilis primaire et secondaire</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Les stades de la syphilis
+  </div>
+  <div class="phase phase-prod">Primaire (~21 jours)</div>
+  <p style="margin-bottom:10px;font-size:.84rem;">Chancre unique, fond propre, induré, génital, régression spontanée + ADP satellite non inflammatoire. <em>Tout chancre atypique reste suspect.</em></p>
+
+  <div class="phase phase-mod">Secondaire (&lt;1 an)</div>
+  <p style="margin-bottom:10px;font-size:.84rem;">Éruption par « floraisons » liée à la diffusion systémique du tréponème :</p>
+  <ul class="lst" style="margin-bottom:10px;">
+    <li><strong>Roséole syphilitique :</strong> 1<sup>ère</sup> éruption, 6 semaines après le chancre, macules rosées du tronc, asymptomatique</li>
+    <li><strong>Syphilides papuleuses :</strong> papules cuivrées, nombre/localisation variables</li>
+    <li><strong>Syphilides palmoplantaires :</strong> très évocatrices, papules érythémato-cuivrées</li>
+    <li><strong>Syphilides génitales/périnéales :</strong> indolores, non prurigineuses, contagieuses +++</li>
+    <li>Autres : fausse perlèche, papules acnéiformes du menton, dépilation sourcils/langue</li>
+    <li>Signes généraux : fébricule, céphalées, poly-ADP, poly-arthralgies</li>
+    <li><strong>Formes neurologiques :</strong> manifestations ophtalmologiques, hypoacousie, acouphènes, paralysie faciale, méningite</li>
+  </ul>
+
+  <div class="phase phase-mod" style="background:var(--muted);">Latente précoce (&lt;1 an) / tardive (&gt;1 an)</div>
+  <p style="margin-bottom:10px;font-size:.84rem;">Asymptomatique, découverte sérologique.</p>
+
+  <div class="phase phase-sev">Tertiaire</div>
+  <p style="font-size:.84rem;">Syphilis gommeuse, osseuse, cardiovasculaire (aortite, sténose coronaire), neurosyphilis tertiaire, tabès.</p>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Sérologies : tréponémiques (TT) vs non tréponémiques (TNT)
+  </div>
+  <table>
+    <tr><th>TT</th><th>TNT</th><th>Interprétation</th></tr>
+    <tr><td>—</td><td>—</td><td>Absence de tréponématose, ou très récente, ou guérie traitée précocement</td></tr>
+    <tr><td>+</td><td>+</td><td>Selon cinétique du TNT : début (TNT croissant) ou syphilis traitée (TNT décroissant)</td></tr>
+    <tr><td>—</td><td>+</td><td>Faux positif</td></tr>
+    <tr><td>+</td><td>—</td><td>Tréponématose guérie, très précoce, ou syphilis tertiaire ancienne</td></tr>
+  </table>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">TT (ELISA IgM/IgG, TPHA) positif entre J7 et J10 du chancre. TNT = VDRL, RPR — non spécifiques des tréponématoses.</p>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement de la syphilis
+  </div>
+  <div class="kv-row"><span class="kv-key">Syphilis primaire / secondaire précoce</span><span class="kv-val">Benzathine pénicilline G 2,4 MUI IM, DU</span></div>
+  <div class="kv-row"><span class="kv-key">Secondaire tardive</span><span class="kv-val">Benzathine pénicilline G 2,4 MUI IM/semaine, 3 semaines</span></div>
+  <div class="kv-row"><span class="kv-key">Allergie pénicilline</span><span class="kv-val">Doxycycline 14j (précoce) ou 28j (tardive)</span></div>
+  <div class="kv-row"><span class="kv-key">Patient VIH+</span><span class="kv-val">Même traitement : benzathine pénicilline G 2,4 MUI DU</span></div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège — réaction d'Herxheimer :</strong> possible après traitement d'une syphilis primaire ou secondaire, liée à la lyse des tréponèmes (fébricule, myalgies transitoires) — ne pas confondre avec une allergie.</div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 8 : HPV ET TRICHOMONOSE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  HPV, trichomonose et autres agents parasitaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les manifestations cliniques liées au HPV et leurs modalités de dépistage</div>
+  <div class="obj-line">Connaître les modalités de traitement des infections à HPV</div>
+  <div class="obj-line">Connaître les étiologies parasitaires des IST</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+      Manifestations cliniques HPV
+    </div>
+    <ul class="lst">
+      <li><strong>Condylomes acuminés :</strong> « crêtes-de-coq »</li>
+      <li><strong>Condylomes plans :</strong> maculo-papules rosées</li>
+      <li><strong>Néoplasies intra-épithéliales (NIE) :</strong> lésions précancéreuses LSIL/HSIL</li>
+    </ul>
+    <div class="pills">
+      <div class="pill pill-red">HR : HPV 16, 18</div>
+      <div class="pill pill-teal">BR : HPV 6, 11</div>
+    </div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Dépistage HPV
+    </div>
+    <ul class="lst">
+      <li>Diagnostic de condylome = clinique</li>
+      <li>Homme, atteinte urétrale : +/- urétroscopie</li>
+      <li>Femme : FCV ou test HPV-HR +/- colposcopie-biopsie</li>
+      <li>Atteinte anale : examen proctologique complet</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement HPV
+  </div>
+  <div class="kv-row"><span class="kv-key">Préventif</span><span class="kv-val">Vaccin nonavalent 2-3 doses (11-19 ans ; HSH jusqu'à 26 ans)</span></div>
+  <div class="kv-row"><span class="kv-key">Curatif physique</span><span class="kv-val">Cryothérapie, laser CO2, électrocoagulation, chirurgie</span></div>
+  <div class="kv-row"><span class="kv-key">Curatif chimique</span><span class="kv-val">Podophyllotoxine</span></div>
+  <div class="kv-row"><span class="kv-key">Curatif immunologique</span><span class="kv-val">Imiquimod</span></div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Étiologies parasitaires assimilées aux IST
+  </div>
+  <ul class="lst">
+    <li><strong>Trichomonose :</strong> Trichomonas vaginalis (H : souvent asymptomatique ; F : prurit +++, cervicovaginite)</li>
+    <li><strong>Gale :</strong> Sarcoptes scabiei hominis</li>
+    <li><strong>Pédiculose du pubis (morpion) :</strong> Phtirius inguinalis</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Le mode de transmission de la gale/pédiculose impose une recherche de conduite à risque et un dépistage des autres IST.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ============ SECTION 9 : PARTICULARITES SELON AGE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  Particularités selon l'âge
+</div>
+<div class="obj-list">
+  <div class="obj-line">Reconnaître les particularités des IST en fonction de l'âge</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Chez l'enfant :</strong> une IST doit faire suspecter un sévice sexuel. Interrogatoire et examen clinique minutieux et prudents, pour ne pas accuser à tort un parent.</div>
+</div>
+<ul class="lst">
+  <li>Pas de modification des signes cliniques selon l'âge, sauf chez le nouveau-né (atteinte oculaire et respiratoire possible)</li>
+  <li>Les cancers HPV-induits mettent plusieurs années à se développer après les premiers rapports sexuels</li>
+  <li>Majoration actuelle de l'incidence des salpingites entre 35 et 45 ans (recomposition de couples, reprise d'activité sexuelle)</li>
+</ul>
+
+<hr>
+
+<!-- ============ SYNTHESE FINALE ============ -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+  Points-clés à retenir
+</div>
+<div class="card card-teal">
+  <ul class="lst">
+    <li><strong>Toute ulcération génitale = syphilis jusqu'à preuve du contraire</strong>, même atypique.</li>
+    <li>Devant toute IST : bilan complet (VIH, tréponémique, VHB, PCR gonocoque/chlamydia) + prise en charge systématique du/des partenaire(s).</li>
+    <li>Urétrite/cervicite : traitement probabiliste = <strong>ceftriaxone 1g DU + doxycycline 7j</strong>.</li>
+    <li>Syphilis précoce (primaire, secondaire) : <strong>benzathine pénicilline G 2,4 MUI IM DU</strong>, y compris chez le patient VIH+.</li>
+    <li>Réaction d'Herxheimer après traitement de syphilis = lyse des tréponèmes, pas une allergie.</li>
+    <li>Sérologie syphilis : interpréter <strong>TT et TNT ensemble</strong>, jamais isolément.</li>
+    <li>Chlamydia = 1<sup>ère</sup> cause d'IST bactérienne et d'urétrite, souvent asymptomatique (piège de sous-diagnostic).</li>
+    <li>IGH non traitée : risque de stérilité tubaire et de GEU — explorer et traiter systématiquement.</li>
+    <li>HPV = IST la plus fréquente ; diagnostic clinique des condylomes, dépistage organisé par FCV/test HPV-HR chez la femme.</li>
+    <li>IST chez l'enfant : évoquer un sévice sexuel, mener l'enquête avec prudence.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

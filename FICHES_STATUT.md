@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-06. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-10. Ne pas éditer à la main._
 
-**Avancement : 191 / 367 items (52.0%)**
+**Avancement : 192 / 367 items (52.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -169,7 +169,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 159 | [ ] | Tuberculose de l adulte et de l enfant | — |
 | 160 | [ ] | Tétanos | — |
 | 161 | [x] | Infections urinaires de l enfant et de l adulte | 161_infections_urinaires.html |
-| 162 | [ ] | Infections sexuellement transmissibles | — |
+| 162 | [x] | Infections sexuellement transmissibles | 162_IST.html |
 | 163 | [ ] | Coqueluche | — |
 | 164 | [ ] | Exanthèmes fébriles de l enfant | — |
 | 165 | [ ] | Oreillons | — |
