@@ -119,7 +119,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 109 | [x] | Troubles de la marche et de l équilibre | 109_troubles_marche_equilibre.html |
 | 110 | [x] | Troubles du sommeil de l enfant et de l adulte | 110_Troubles_sommeil_v2.html |
 | 111 | [x] | Dermatoses faciales | 111_Dermatoses_faciales.html |
-| 112 | [x] | Dermatose bulleuse touchant la peau et ou les muqueuses externes | 112_Dermatose_bulleuse.html |
+| 112 | [x] | Dermatose bulleuse touchant la peau et ou les muqueuses externes | 112_Dermatose_bulleuse_v2.html |
 | 113 | [x] | Hémangiomes et malformations vasculaires cutanées | 113_Hemangiomes_malformations_vasculaires.html |
 | 114 | [x] | Exanthème et érythrodermie de l adulte et de l enfant | 114_Exantheme_Erythrodermie.html |
 | 115 | [x] | Toxidermies | 115_Toxidermies.html |
