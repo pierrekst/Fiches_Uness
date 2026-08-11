@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-10. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-11. Ne pas éditer à la main._
 
-**Avancement : 193 / 367 items (52.6%)**
+**Avancement : 194 / 367 items (52.9%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -121,7 +121,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 111 | [x] | Dermatoses faciales | 111_Dermatoses_faciales.html |
 | 112 | [x] | Dermatose bulleuse touchant la peau et ou les muqueuses externes | 112_Dermatose_bulleuse_v2.html |
 | 113 | [x] | Hémangiomes et malformations vasculaires cutanées | 113_Hemangiomes_malformations_vasculaires.html |
-| 114 | [x] | Exanthème et érythrodermie de l adulte et de l enfant | 114_Exantheme_Erythrodermie.html |
+| 114 | [x] | Exanthème et érythrodermie de l adulte et de l enfant | 114_Exantheme_Erythrodermie_v2.html |
 | 115 | [x] | Toxidermies | 115_Toxidermies.html |
 | 116 | [x] | Prurit | 116_Prurit.html |
 | 117 | [x] | Psoriasis | 117_Psoriasis.html |
@@ -188,7 +188,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 178 | [ ] | Risques émergents | — |
 | 179 | [ ] | Risques sanitaires liés à l eau et à l alimentation | — |
 | 180 | [ ] | Risques sanitaires liés aux irradiations | — |
-| 181 | [ ] | La sécurité sanitaire des produits destinés à l homme | — |
+| 181 | [x] | La sécurité sanitaire des produits destinés à l homme | 181_Securite_sanitaire_veille.html |
 | 182 | [ ] | Environnement professionnel et santé au travail | — |
 | 183 | [ ] | Organisation de la médecine du travail | — |
 | 184 | [ ] | Accidents du travail et maladies professionnelles | — |

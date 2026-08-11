@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>181 — Sécurité sanitaire et veille sanitaire</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 181</div>
+  <h1>Sécurité sanitaire des produits destinés à l'homme — La veille sanitaire</h1>
+  <div class="header-sub">Vigilances sanitaires, agences de sécurité sanitaire et never events</div>
+  <div class="header-tags">
+    <span class="htag">ANSM · ANSES · ABM · HAS · Santé Publique France</span>
+    <span class="htag">Voir item 325 (crise sanitaire)</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> La sécurité sanitaire est née en 1993 après le drame du sang contaminé : elle protège la population contre les risques liés aux produits de santé. Elle repose sur 4 principes (évaluation, précaution, impartialité, transparence) et se décline en <strong>vigilances</strong> spécifiques à chaque type de produit, pilotées par des <strong>agences</strong> dédiées (ANSM, ANSES, Agence de la biomédecine), avec un rôle transversal de la HAS et de Santé Publique France.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Concepts fondamentaux
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de la sécurité sanitaire</div>
+  <div class="obj-line">Connaître la définition de la crise sanitaire</div>
+  <div class="obj-line">Connaître la définition de la veille et de la vigilance sanitaire</div>
+  <div class="obj-line">Connaître la définition des produits de santé destinés à l'homme</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+      Sécurité sanitaire
+    </div>
+    Protection de la santé de l'homme contre les risques induits par le fonctionnement de la société (alimentaires, environnementaux, sanitaires).
+    <div class="kv-row"><span class="kv-key">Née en</span><span class="kv-val">1993, après le sang contaminé</span></div>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Crise sanitaire
+    </div>
+    Situation imprévue et complexe, de gravité potentielle ou avérée, nécessitant des actions immédiates et des moyens exceptionnels et transversaux.
+    <div class="pills"><span class="pill pill-red">Sang contaminé</span><span class="pill pill-red">ESB</span><span class="pill pill-red">Mediator</span></div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Veille sanitaire
+    </div>
+    Processus continu de recueil, identification, évaluation et investigation des risques ou événements indésirables menaçant la santé humaine (ex. : maladies à déclaration obligatoire, cellules de veille des ARS).
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Vigilances sanitaires
+    </div>
+    Dispositifs réglementés de surveillance des événements indésirables liés aux produits de santé — élargis aux infections nosocomiales, aux soins et aux cosmétiques/tatouages.
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Produits de santé destinés à l'homme
+  </div>
+  <table class="table-blue">
+    <tr><th>Catégorie</th><th>Contenu</th></tr>
+    <tr><td><strong>Médicaments</strong></td><td>Avant/après AMM ; matières premières, médicaments dérivés du sang, stupéfiants, psychotropes, vaccins, homéopathie, phytothérapie, préparations magistrales/hospitalières</td></tr>
+    <tr><td><strong>Produits biologiques</strong></td><td>Organes, tissus, cellules à visée thérapeutique ; thérapie cellulaire/génique ; produits sanguins labiles ; produits thérapeutiques annexes</td></tr>
+    <tr><td><strong>Dispositifs médicaux</strong></td><td>Usage thérapeutique, diagnostique (dont diagnostic in vitro), plateaux techniques</td></tr>
+    <tr><td><strong>Autres</strong></td><td>Produits cosmétiques, produits de tatouage</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Les 4 principes de la sécurité sanitaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de sécurité sanitaire : évaluation, précaution, impartialité, transparence</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Évaluation
+    </div>
+    Capacité de détection et d'analyse des risques ; obligation d'évaluer les actes <em>a priori</em> et <em>a posteriori</em> (balance bénéfices/risques).
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Précaution
+    </div>
+    L'incertitude scientifique ne doit pas retarder des mesures visant à prévenir <em>a priori</em> un risque grave et irréversible, à coût acceptable.
+    <div class="pills"><span class="pill pill-amber">Ex. hépatite B / démyélinisation, 1998</span></div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+      Impartialité
+    </div>
+    Indépendance des autorités et professionnels ; absence de liens financiers avec l'industrie pour éviter les conflits d'intérêts.
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Transparence
+    </div>
+    Communication effective des connaissances sanitaires (population, scientifiques, associations, autorités) pour permettre des décisions adaptées et révisables.
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège fréquent.</strong> Ne pas confondre principe de précaution (agir malgré l'incertitude scientifique) et principe d'évaluation (mesurer objectivement un risque déjà caractérisé).</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Les vigilances sanitaires
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la pharmacovigilance, la pharmacodépendance/addictovigilance, l'hémovigilance</div>
+  <div class="obj-line">Connaître la matériovigilance, la réactovigilance, la cosmétovigilance, la vigilance des produits de tatouage</div>
+  <div class="obj-line">Connaître l'identitovigilance et l'infectiovigilance</div>
+  <div class="obj-line">Connaître la toxicovigilance, la nutrivigilance et la biovigilance</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>Toute vigilance = processus continu de recueil, identification, évaluation, investigation des événements indésirables liés à un type de produit ou de soin. Seul l'<strong>objet surveillé</strong> et l'<strong>agence pilote</strong> changent.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    8 vigilances réglementaires de l'ANSM
+  </div>
+  <table class="table-blue">
+    <tr><th>Vigilance</th><th>Objet surveillé</th></tr>
+    <tr><td><strong>Pharmacovigilance</strong></td><td>Médicaments à usage humain et matières premières pharmaceutiques</td></tr>
+    <tr><td><strong>Addictovigilance</strong> (pharmacodépendance)</td><td>Substances psychoactives : stupéfiants, psychotropes</td></tr>
+    <tr><td><strong>Hémovigilance</strong></td><td>Chaîne transfusionnelle : du prélèvement du donneur au suivi du receveur</td></tr>
+    <tr><td><strong>Matériovigilance</strong></td><td>Dispositifs médicaux</td></tr>
+    <tr><td><strong>Réactovigilance</strong></td><td>Dispositifs de diagnostic in vitro (analyses biologiques, réactifs)</td></tr>
+    <tr><td><strong>Cosmétovigilance</strong></td><td>Produits cosmétiques</td></tr>
+    <tr><td><strong>Vigilance des produits de tatouage</strong></td><td>Produits de tatouage</td></tr>
+  </table>
+  <div class="kv-row"><span class="kv-key">Déclaration</span><span class="kv-val">Portail national unique de déclaration des événements sanitaires indésirables</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Vigilances ANSES
+    </div>
+    <div class="kv-row"><span class="kv-key">Toxicovigilance</span><span class="kv-val">Effets toxiques d'une substance/mélange (dont centres antipoison)</span></div>
+    <div class="kv-row"><span class="kv-key">Nutrivigilance</span><span class="kv-val">Effets indésirables des denrées alimentaires et compléments</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+      Biovigilance (Agence de la biomédecine)
+    </div>
+    Risques liés à l'utilisation thérapeutique d'éléments issus du corps humain : organes, tissus, cellules, lait maternel.
+    <div class="pills"><span class="pill pill-purple">AMPvigilance = biovigilance spécifique à l'AMP</span></div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Identitovigilance
+    </div>
+    Erreurs d'identification des patients à toutes les étapes des soins. Mesures : bracelet d'identification, vérification systématique avant tout acte.
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Infectiovigilance
+    </div>
+    Infections associées aux soins. Coordonnée par Santé Publique France, appuyée sur un réseau de correspondants locaux.
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège.</strong> Identitovigilance et infectiovigilance ne sont <strong>pas</strong> des vigilances réglementaires de l'ANSM : elles ne relèvent d'aucune vigilance produit — la seconde est coordonnée par Santé Publique France.</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Les agences et autorités de sécurité sanitaire
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître l'ANSM, ses missions, son organisation</div>
+  <div class="obj-line">Connaître l'Anses et l'Agence de la biomédecine</div>
+  <div class="obj-line">Connaître la Haute Autorité de Santé : déclaration des EPR, missions qualité/sécurité des soins</div>
+  <div class="obj-line">Connaître Santé Publique France, les centres nationaux de référence et leurs missions</div>
+</div>
+
+<div class="card card-blue">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    ANSM — Agence nationale de sécurité du médicament et des produits de santé
+  </div>
+  Garantit la sécurité des produits de santé tout au long du cycle de vie (essais initiaux → surveillance post-AMM). Pilote <strong>8 vigilances réglementaires</strong>.
+  <ul class="lst">
+    <li>Surveillance continue des effets indésirables prévisibles ou inattendus</li>
+    <li>Inspection des établissements (fabrication, importation, distribution, pharmacovigilance, essais cliniques)</li>
+    <li>Contrôle en laboratoire des lots de vaccins et médicaments dérivés du sang</li>
+    <li>Contrôle des produits sur le marché (inspections, saisies judiciaires/douanières)</li>
+  </ul>
+  <div class="pills"><span class="pill pill-blue">AMM</span><span class="pill pill-blue">ATU</span><span class="pill pill-blue">RTU</span><span class="pill pill-blue">Essais cliniques</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      ANSES
+    </div>
+    Veille, expertise, recherche et référence en santé humaine, animale, végétale. Gère toxicovigilance, nutrivigilance, pharmacovigilance vétérinaire et phytopharmacovigilance.
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+      Agence de la biomédecine (ABM)
+    </div>
+    Expertise sur greffe d'organes/tissus, cellules souches hématopoïétiques, AMP, embryologie et génétique humaines. Gère la biovigilance et l'AMPvigilance.
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Haute Autorité de Santé (HAS)
+  </div>
+  Autorité publique indépendante ; <strong>ne pilote aucune vigilance réglementée</strong> mais participe à la sécurité sanitaire.
+  <div class="kv-row"><span class="kv-key">Événements porteurs de risque (EPR)</span><span class="kv-val">Recueil déclaré par médecins de spécialités à risque dans le cadre de l'accréditation</span></div>
+  <div class="kv-row"><span class="kv-key">Qualité et sécurité des soins</span><span class="kv-val">DPC, référentiels/guides de bonnes pratiques, certification des établissements, accréditation des équipes</span></div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Santé Publique France et les CNR
+  </div>
+  Agence nationale de santé publique.
+  <ul class="lst">
+    <li>Détection des risques sanitaires : surveillance continue de l'état de santé de la population</li>
+    <li>Amélioration des connaissances : veille et vigilance, stratégies de prévention/promotion de la santé</li>
+    <li>Action : promotion/prévention, réponse aux crises, alerte du ministre en charge de la Santé</li>
+    <li>Coordination de l'<strong>infectiovigilance</strong> et de la surveillance des maladies à déclaration obligatoire</li>
+  </ul>
+  <div class="kv-row"><span class="kv-key">Centres nationaux de référence (CNR)</span><span class="kv-val">Laboratoires publics/privés, nommés 5 ans par le ministre sur proposition de SPF, experts d'un micro-organisme</span></div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Les 12 « never events » selon l'ANSM
+</div>
+<div class="obj-list">
+  <div class="obj-line">Savoir qu'il existe une liste des événements qui ne devraient jamais arriver en établissement de santé selon l'ANSM</div>
+</div>
+
+<div class="alert alert-red">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Liste établie en 2012 par l'ANSM</strong>, équivalent français des « never events » anglo-saxons — tous liés à l'utilisation de produits de santé.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Les 12 événements qui ne devraient jamais arriver
+  </div>
+  <ul class="lst">
+    <li>Erreurs de prise en charge des patients sous anticoagulants</li>
+    <li>Erreurs d'administration du chlorure de potassium injectable</li>
+    <li>Erreurs de préparation de spécialités injectables à risque</li>
+    <li>Erreur d'administration par voie intrathécale au lieu d'intraveineuse</li>
+    <li>Erreur d'administration par voie parentérale au lieu d'orale/entérale</li>
+    <li>Surdosage en anticancéreux, notamment en pédiatrie</li>
+    <li>Erreurs de rythme d'administration du méthotrexate oral (hors cancérologie)</li>
+    <li>Erreurs d'administration d'insuline</li>
+    <li>Erreurs d'administration en anesthésie-réanimation au bloc opératoire</li>
+    <li>Erreurs d'administration de gaz à usage médical</li>
+    <li>Erreurs de programmation des dispositifs d'administration (pompes, seringues électriques)</li>
+    <li>Erreurs liées aux unidoses en matière plastique (sérum physiologique, antiseptique), notamment en maternité/pédiatrie</li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li>Sécurité sanitaire née en <strong>1993</strong> après l'affaire du sang contaminé ; 4 principes : évaluation, précaution, impartialité, transparence</li>
+    <li><strong>ANSM</strong> = 8 vigilances réglementaires (pharmaco-, addicto-, hémo-, matério-, réacto-, cosméto-vigilance, vigilance tatouage, portail unique)</li>
+    <li><strong>ANSES</strong> = toxicovigilance + nutrivigilance (+ pharmacovigilance vétérinaire, phytopharmacovigilance)</li>
+    <li><strong>Agence de la biomédecine</strong> = biovigilance + AMPvigilance</li>
+    <li><strong>Identitovigilance</strong> et <strong>infectiovigilance</strong> ne sont pas des vigilances ANSM ; l'infectiovigilance est coordonnée par <strong>Santé Publique France</strong></li>
+    <li><strong>HAS</strong> ne pilote pas de vigilance réglementée : rôle via les EPR et la qualité/sécurité des soins (certification, DPC, accréditation)</li>
+    <li>12 <strong>never events</strong> ANSM (2012), tous liés aux produits de santé — anticoagulants, KCl injectable, insuline, méthotrexate oral, etc.</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
