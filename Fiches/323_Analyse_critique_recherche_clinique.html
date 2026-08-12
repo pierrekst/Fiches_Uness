@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>323 — Analyse critique, recherche clinique et niveaux de preuve</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.7rem;font-weight:800;margin-bottom:10px;}
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;gap:12px;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 323</div>
+  <h1>Analyser et utiliser les résultats des études cliniques dans la perspective du bon usage — analyse critique, recherche clinique et niveaux de preuve</h1>
+  <div class="header-sub">EBM, niveau de preuve, méthodologie des essais randomisés, validité et pertinence clinique</div>
+  <div class="header-tags">
+    <span class="htag">Voir item 3 (info médicale)</span>
+    <span class="htag">Voir item 20 (biostatistiques)</span>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Analyser une étude clinique, c'est répondre à 4 questions successives : le protocole permet-il de croire aux résultats (<strong>validité interne</strong>) ? Ces résultats sont-ils transposables à mes patients (<strong>validité externe</strong>) ? Sont-ils cohérents avec les autres données disponibles (<strong>cohérence externe</strong>) ? Et sont-ils cliniquement utiles (<strong>pertinence clinique</strong>) ? Toute la méthodologie des essais randomisés — randomisation, aveugle, assignation secrète, analyse en intention de traiter — vise à sécuriser la validité interne. Le <strong>niveau de preuve</strong> et les grades HAS synthétisent la fiabilité des sources d'information thérapeutique, dont il faut savoir apprécier les biais et les liens d'intérêt.
+</div>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  EBM et évaluation thérapeutique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les notions de médecine basée sur les preuves (EBM) et d'évaluation thérapeutique</div>
+  <div class="obj-line">Argumenter l'évaluation d'un médicament ou d'une thérapeutique non médicamenteuse</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+    Médecine fondée sur les preuves (EBM)
+  </div>
+  Utiliser de manière rigoureuse, explicite et judicieuse les preuves actuelles les plus pertinentes pour décider des soins d'un patient donné (Sackett, 1996).
+  <div class="steps">
+    <li><div class="step-num">1</div><div><div class="step-title">Formuler</div><div class="step-content">Poser une question clinique claire et précise</div></div></li>
+    <li><div class="step-num">2</div><div><div class="step-title">Rechercher</div><div class="step-content">Identifier les articles les plus pertinents dans la littérature</div></div></li>
+    <li><div class="step-num">3</div><div><div class="step-title">Évaluer</div><div class="step-content">Apprécier fiabilité, applicabilité, pertinence clinique des conclusions</div></div></li>
+    <li><div class="step-num">4</div><div><div class="step-title">Utiliser</div><div class="step-content">Répondre à la question initiale</div></div></li>
+  </div>
+  <div class="pills"><span class="pill pill-purple">Expérience clinique</span><span class="pill pill-purple">Données de la recherche</span><span class="pill pill-purple">Préférences du patient</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Évaluation thérapeutique
+    </div>
+    Médicament ou thérapeutique non médicamenteuse (thérapie génique, dispositif médical, chirurgie, radiothérapie, psychothérapie…).
+    <ul class="lst">
+      <li>Amélioration de l'état de santé, événements indésirables, coût, rapport bénéfice/risque, coût/efficacité</li>
+      <li>Tient compte du niveau de preuve et de la pertinence clinique</li>
+      <li>Méthodes : essais cliniques, méta-analyse, cohorte, cas-témoin, séries de cas — niveau de preuve variable selon le schéma</li>
+    </ul>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Niveau de preuve
+    </div>
+    Capacité d'une étude à répondre à la question posée.
+    <div class="kv-row"><span class="kv-key">1. Adéquation</span><span class="kv-val">Protocole ↔ question posée</span></div>
+    <div class="kv-row"><span class="kv-key">2. Biais</span><span class="kv-val">Existence de biais</span></div>
+    <div class="kv-row"><span class="kv-key">3. Puissance</span><span class="kv-val">Puissance de l'étude</span></div>
+  </div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div><strong>Piège.</strong> Le niveau de preuve ne dépend pas du résultat de l'étude : une étude négative bien conduite a le même niveau de preuve qu'une étude positive bien conduite.</div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Méta-analyses et grades de recommandation HAS
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la démarche et le principe des méta-analyses d'essais</div>
+  <div class="obj-line">Argumenter les niveaux de preuve des principales sources d'information</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Méta-analyse — démarche
+  </div>
+  Synthèse quantitative de l'effet d'une intervention, précédée d'une revue systématique de la littérature.
+  <div class="steps">
+    <li><div class="step-num">1</div><div><div class="step-title">Revue systématique</div><div class="step-content">Identifier/sélectionner toutes les études éligibles, publiées et non publiées (éviter le biais de publication)</div></div></li>
+    <li><div class="step-num">2</div><div><div class="step-title">Évaluer les biais</div><div class="step-content">Dans chaque étude identifiée</div></div></li>
+    <li><div class="step-num">3</div><div><div class="step-title">Agréger</div><div class="step-content">Calculer un effet combiné (différence de moyenne, odds ratio, risque relatif…)</div></div></li>
+    <li><div class="step-num">4</div><div><div class="step-title">Hétérogénéité</div><div class="step-content">Analyser et explorer l'hétérogénéité entre études (test, coefficient I²)</div></div></li>
+    <li><div class="step-num">5</div><div><div class="step-title">Interpréter</div><div class="step-content">Sur le plan statistique et clinique — utilité pour les recommandations</div></div></li>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Forest plot
+    </div>
+    Représentation graphique des effets de chaque étude et de l'effet combiné.
+    <ul class="lst">
+      <li>Abscisse = mesure d'association ; ligne verticale = absence d'effet</li>
+      <li>Carré = effet de l'étude, taille ∝ poids de l'étude ; ligne horizontale = IC</li>
+      <li>Losange = effet combiné ; significatif si pas de chevauchement avec la ligne verticale</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Hétérogénéité
+    </div>
+    <div class="kv-row"><span class="kv-key">Test d'hétérogénéité</span><span class="kv-val">p&lt;0,05 → homogénéité rejetée</span></div>
+    <div class="kv-row"><span class="kv-key">Coefficient I²</span><span class="kv-val">0-100%, plus élevé = plus d'hétérogénéité</span></div>
+    Causes : populations/interventions dissemblables, différences méthodologiques, biais de publication.
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Grades de recommandation HAS et niveaux de preuve
+  </div>
+  <table class="table-teal">
+    <tr><th>Grade</th><th>Niveau de preuve</th><th>Schémas d'étude</th></tr>
+    <tr><td><strong>A</strong><br>Preuve établie</td><td>Niveau 1</td><td>Essais randomisés de forte puissance · méta-analyse d'essais randomisés · analyse de décision bien menée</td></tr>
+    <tr><td><strong>B</strong><br>Présomption scientifique</td><td>Niveau 2</td><td>Essais randomisés de faible puissance · études comparatives non randomisées bien menées · cohortes</td></tr>
+    <tr><td rowspan="2" style="vertical-align:middle; text-align:center;"><strong>C</strong><br>Faible niveau de preuve</td><td>Niveau 3</td><td>Études cas-témoins</td></tr>
+    <tr><td>Niveau 4</td><td>Études comparatives avec biais importants · rétrospectives · séries de cas · études descriptives</td></tr>
+  </table>
+  <div class="pills"><span class="pill pill-teal">Méta-analyse d'ECR = grade A</span></div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Pharmaco-épidémiologie
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition, les justifications, les indications et l'interprétation des études de pharmaco-épidémiologie</div>
+</div>
+
+<div class="card card-teal">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+    Définition et justification
+  </div>
+  Évaluation épidémiologique post-AMM sur de grands échantillons (≈ « phase IV »), en conditions réelles d'utilisation.
+  <div class="alert alert-blue">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Limites des essais cliniques qui justifient la pharmaco-épidémiologie :</strong> échantillon trop petit (événements rares), populations peu représentées (âgés), généralisation limitée, question très spécifique, pas d'évaluation à long terme.</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Indications
+    </div>
+    <ul class="lst">
+      <li><strong>Efficacité :</strong> réévaluation en conditions réelles, répondeurs/non-répondeurs, effet à long terme, comparaison de stratégies</li>
+      <li><strong>Effets indésirables :</strong> détection d'effets non connus/à long terme, sujets à risque, mésusage</li>
+      <li><strong>Utilisation :</strong> modalités et déterminants de prescription, bon usage</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Méthodologie et piège
+    </div>
+    Approche observationnelle : études transversales descriptives, cohortes, cas-témoins. L'exposition étudiée = toujours le médicament.
+    <div class="pills"><span class="pill pill-amber">Piège : biais d'indication</span></div>
+    Cas particulier du biais de confusion : le médicament est prescrit pour une indication elle-même associée à l'événement étudié.
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Effets placebo et nocebo
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les notions d'effets placebo et nocebo dans les essais cliniques</div>
+  <div class="obj-line">Connaître la définition et le rôle d'un médicament placebo</div>
+  <div class="obj-line">Connaître les principaux mécanismes et facteurs influençant l'effet placebo</div>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+      Placebo et effet placebo
+    </div>
+    <div class="kv-row"><span class="kv-key">Placebo</span><span class="kv-val">Préparation sans principe actif</span></div>
+    <div class="kv-row"><span class="kv-key">Effet placebo</span><span class="kv-val">Écart positif entre effet observé et effet pharmacologique attendu</span></div>
+    Non spécifique au placebo : peut coexister avec l'effet pharmacologique propre du traitement.
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Effet nocebo
+    </div>
+    Identique au placebo mais pour un effet indésirable ressenti (écart négatif).
+    <div class="pills"><span class="pill pill-red">Somnolence</span><span class="pill pill-red">Céphalées</span><span class="pill pill-red">Troubles digestifs</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Mécanismes et facteurs influençant l'effet placebo
+  </div>
+  <div class="grid2">
+    <div>
+      <strong>Mécanismes</strong>
+      <ul class="lst">
+        <li>Largement inconnus (ex. production d'endorphines)</li>
+        <li>Variabilité individuelle : répondeurs / non-répondeurs / occasionnels</li>
+        <li>Non reproductible, non spécifique, sans effet-dose</li>
+        <li>Existe chez l'enfant (« placebo par procuration », médié par les parents)</li>
+      </ul>
+    </div>
+    <div>
+      <strong>Facteurs</strong>
+      <ul class="lst">
+        <li>Aspect du traitement (voie, couleur, goût)</li>
+        <li>Médecin (empathie, conviction, notoriété)</li>
+        <li>Patient (psychologie, culture, attentes)</li>
+        <li>Relation médecin-malade, représentation de la maladie</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Conditions d'utilisation du placebo en recherche
+  </div>
+  <ul class="lst">
+    <li>Absence de traitement de référence dans l'indication (situation rare)</li>
+    <li>Comparaison de 2 traitements actifs à l'aveugle : <strong>double placebo</strong></li>
+    <li>Essai « add-on » : traitement de référence + nouveau traitement vs traitement de référence + placebo</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>En pratique clinique, aucun « médicament » placebo n'a d'indication de nos jours. L'homéopathie repose sur l'effet placebo.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Sources d'information thérapeutique et liens d'intérêt
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les sources d'information thérapeutique (littérature primaire, secondaire, tertiaire, quaternaire), les recommandations HAS/ANSM/INCA, la fiche bon usage du médicament</div>
+  <div class="obj-line">Évoquer les liens d'intérêts et l'impact potentiel sur l'information médicale</div>
+  <div class="obj-line">Connaître les limites potentielles de l'information provenant de l'industrie pharmaceutique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Les 4 niveaux de littérature médicale
+  </div>
+  <table class="table-blue">
+    <tr><th>Niveau</th><th>Définition</th><th>Exemples</th></tr>
+    <tr><td><strong>Primaire</strong></td><td>Résultats immédiats de recherches originales</td><td>Essais cliniques, articles de recherche</td></tr>
+    <tr><td><strong>Secondaire</strong></td><td>Indexation de la littérature, y compris négative</td><td>Medline, Embase</td></tr>
+    <tr><td><strong>Tertiaire</strong></td><td>Synthèse et mise en perspective</td><td>Revues systématiques, méta-analyses, livres</td></tr>
+    <tr><td><strong>Quaternaire</strong></td><td>Recommandations pour la pratique</td><td>Publications HAS, guidelines</td></tr>
+  </table>
+</div>
+
+<div class="grid2">
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Pièges de la publication scientifique
+    </div>
+    <div class="kv-row"><span class="kv-key">Biais de publication</span><span class="kv-val">Résultats positifs surreprésentés</span></div>
+    <div class="kv-row"><span class="kv-key">Pré-prints</span><span class="kv-val">Non relus par les pairs → prudence</span></div>
+    <div class="kv-row"><span class="kv-key">Revues prédatrices</span><span class="kv-val">Publication payante sans relecture critique</span></div>
+    <div class="kv-row"><span class="kv-key">Facteur d'impact</span><span class="kv-val">Faible = méfiance ; élevé ≠ toujours qualité</span></div>
+  </div>
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      Référentiels
+    </div>
+    <div class="kv-row"><span class="kv-key">Officiels</span><span class="kv-val">ANSM, HAS, INCA</span></div>
+    <div class="kv-row"><span class="kv-key">Non officiels</span><span class="kv-val">Sociétés savantes, experts</span></div>
+    Objectifs : informer/former, préciser l'usage d'une classe, rapport bénéfice/risque, données économiques (ex. fiche bon usage du médicament).
+    <div class="pills"><span class="pill pill-teal">Limites : hétérogénéité, actualisation, commanditaires</span></div>
+  </div>
+</div>
+
+<div class="card card-red">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Liens et conflits d'intérêts
+  </div>
+  <div class="kv-row"><span class="kv-key">Expert</span><span class="kv-val">Personne sollicitée pour conseil/avis par agence, État ou industrie</span></div>
+  <div class="kv-row"><span class="kv-key">Lien d'intérêt</span><span class="kv-val">Toute nature, direct/indirect, ancien/actuel/futur — définition objective</span></div>
+  <div class="kv-row"><span class="kv-key">Conflit d'intérêt</span><span class="kv-val">Lien qui met en question l'indépendance — définition subjective/contextuelle</span></div>
+  <div class="kv-row"><span class="kv-key">Déclaration</span><span class="kv-val">Obligation légale depuis 2013 (expertises), fin d'article, congrès, médias</span></div>
+  <div class="alert alert-red" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège.</strong> Un lien d'intérêt n'implique pas systématiquement un conflit d'intérêt. Prévention = examen des liens déclarés puis récusation si conflit avéré en rapport avec l'expertise.</div>
+  </div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Lecture critique de l'indépendance et limites de l'industrie pharmaceutique
+  </div>
+  Critères d'indépendance à rechercher : cohérence protocole/résultats, bonnes pratiques cliniques, indépendance investigateurs/industrie/revue, analyse statistique indépendante du promoteur, déclaration des liens d'intérêt.
+  <div class="alert alert-blue" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>L'industrie finance une part majeure de la recherche (essais, articles, réseaux) car elle a un intérêt économique direct à l'AMM et au remboursement → lien d'intérêt par définition, souvent conflit d'intérêt mettant en doute l'objectivité de l'information produite.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Cadre de l'évaluation thérapeutique : phases du développement
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition du cadre de l'évaluation thérapeutique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Phases précliniques et cliniques
+  </div>
+  <table class="table-blue">
+    <tr><th>Phase</th><th>Objectif</th><th>Sujets / modalités</th></tr>
+    <tr><td><strong>Préclinique</strong></td><td>Toxicité aiguë/chronique, mutagénicité, cancérogénicité ; 1ères données PK/PD</td><td>In vitro, animal</td></tr>
+    <tr><td><strong>Phase I</strong></td><td>Dose maximale tolérée, mode d'administration, tolérance, PK/PD</td><td>10-30 sujets — volontaires sains (ou malades si toxicité probable)</td></tr>
+    <tr><td><strong>Phase II</strong></td><td>1ère estimation d'efficacité, sécurité à court terme ; parfois dose optimale</td><td>Malades sélectionnés, souvent sans groupe contrôle, critère intermédiaire</td></tr>
+    <tr><td><strong>Phase III</strong></td><td>Efficacité clinique vs référence/placebo, sécurité court/moyen terme, obtention de l'AMM</td><td>Essai comparatif randomisé, double aveugle, effectif large</td></tr>
+    <tr><td><strong>Phase IV</strong></td><td>Pharmacovigilance : effets rares/tardifs, interactions, usage réel</td><td>Post-AMM, observationnel, très grand nombre de patients</td></tr>
+  </table>
+  <div class="pills"><span class="pill pill-blue">AMM parfois obtenue après phase II (maladies rares, oncologie)</span></div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+  Méthodologie des essais randomisés
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de la randomisation</div>
+  <div class="obj-line">Connaître la définition de l'aveugle du patient, du soignant et de l'évaluateur ; les situations acceptables de simple insu</div>
+  <div class="obj-line">Connaître la définition de l'assignation secrète</div>
+  <div class="obj-line">Connaître la typologie des essais randomisés</div>
+  <div class="obj-line">Connaître la vérification de la comparabilité initiale des groupes</div>
+  <div class="obj-line">Connaître l'analyse en intention de traiter et per protocole</div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Randomisation
+  </div>
+  Technique d'attribution au hasard (tirage au sort) des traitements. Objectif : groupes comparables sur facteurs pronostiques connus et inconnus ; prévient biais de sélection et de confusion (dont biais d'indication).
+  <div class="kv-row"><span class="kv-key">Randomisation par blocs</span><span class="kv-val">Équilibre le nombre de sujets par bras au cours des inclusions</span></div>
+  <div class="kv-row"><span class="kv-key">Stratification</span><span class="kv-val">Équilibre un facteur pronostique connu (ex. centre en multicentrique)</span></div>
+  <div class="kv-row"><span class="kv-key">Minimisation</span><span class="kv-val">Procédure adaptative, utile si petits effectifs et nombreux facteurs</span></div>
+  <div class="kv-row"><span class="kv-key">Moment</span><span class="kv-val">Au plus tôt après inclusion, juste avant le traitement</span></div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    Aveugle (insu)
+  </div>
+  Masquer le traitement reçu pour limiter les biais de suivi/performance et d'évaluation/mesure.
+  <table class="table-blue">
+    <tr><th>Type</th><th>Qui est aveugle ?</th></tr>
+    <tr><td><strong>Simple aveugle</strong></td><td>Le patient seul</td></tr>
+    <tr><td><strong>Double aveugle</strong></td><td>Patient et équipe soignante/évaluateur</td></tr>
+    <tr><td><strong>Double placebo</strong></td><td>Traitements A/B de présentation différente → placebo de chacun pour l'autre groupe</td></tr>
+    <tr><td><strong>Essai ouvert</strong></td><td>Pas d'aveugle</td></tr>
+    <tr><td><strong>PROBE</strong></td><td>Ouvert, mais critère de jugement recueilli en aveugle (tierce personne, comité d'adjudication, lecture centralisée)</td></tr>
+  </table>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Situations acceptables de simple insu (ou ouvert)
+  </div>
+  <ul class="lst">
+    <li><strong>Éthiques :</strong> placebo exposant à un risque intolérable (ex. chirurgie fictive)</li>
+    <li><strong>Logistiques :</strong> galéniques/voies multiples, effets secondaires évidents non reproductibles (alopécie, coloration urines), interventions impossibles à imiter (domicile vs hôpital)</li>
+    <li><strong>Scientifiques :</strong> objectif = évaluer l'impact d'un changement de forme galénique sur la perception/observance</li>
+  </ul>
+</div>
+
+<div class="grid2">
+  <div class="card card-teal">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Assignation secrète
+    </div>
+    Ne pas révéler à l'avance quel traitement le patient recevra à l'inclusion (« allocation concealment »). Évite le biais de sélection lié au choix d'inclure ou non un patient.
+    <div class="pills"><span class="pill pill-teal">Méthode idéale : randomisation centralisée</span><span class="pill pill-teal">Enveloppes scellées opaques numérotées</span></div>
+  </div>
+  <div class="card card-purple">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Comparabilité initiale des groupes
+    </div>
+    Vérifier la distribution des caractéristiques initiales (« Tableau 1 » / baseline characteristics).
+    <div class="alert alert-red" style="margin-top:8px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Piège classique.</strong> Il ne faut PAS tester statistiquement la différence entre groupes à l'inclusion : même bien randomisé, 5% des caractéristiques testées seront « significativement différentes » par définition du risque α.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Typologie des essais randomisés
+  </div>
+  <div class="grid2">
+    <div>
+      <strong>Objectif de comparaison</strong>
+      <ul class="lst">
+        <li><strong>Supériorité :</strong> A statistiquement différent (meilleur) que B</li>
+        <li><strong>Non-infériorité :</strong> A pas « trop inférieur » à B (jamais un placebo), marge prédéfinie</li>
+        <li><strong>Équivalence :</strong> A ni supérieur ni inférieur à B, borne dans les 2 sens</li>
+      </ul>
+    </div>
+    <div>
+      <strong>Schéma d'administration</strong>
+      <ul class="lst">
+        <li><strong>Bras parallèles :</strong> chaque patient reçoit un seul traitement</li>
+        <li><strong>Cross-over :</strong> chaque patient reçoit A puis B (ou l'inverse), avec période de wash-out ; réservé aux pathologies stables</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Analyse en intention de traiter (ITT) vs per protocole (PP)
+  </div>
+  <table class="table-red">
+    <tr><th>Analyse</th><th>Principe</th><th>Effet sur la différence observée</th></tr>
+    <tr><td><strong>ITT</strong></td><td>Tout patient randomisé analysé dans son groupe d'attribution, même en cas de déviation au protocole ; données manquantes imputées</td><td>Tend à diminuer la différence — méthode de référence pour la supériorité</td></tr>
+    <tr><td><strong>mITT</strong></td><td>Exclusion des patients inclus à tort (diagnostic erroné) ou n'ayant reçu aucune évaluation post-randomisation</td><td>Intermédiaire</td></tr>
+    <tr><td><strong>Per protocole</strong></td><td>Exclusion des patients avec déviation au protocole (observance &lt;75%, perdus de vue, données manquantes)</td><td>Tend à faciliter la mise en évidence d'une différence — risque de biais d'attrition</td></tr>
+  </table>
+  <div class="alert alert-blue" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div>Dans un essai de non-infériorité, il est recommandé de réaliser les deux analyses (ITT et PP) et de vérifier la concordance des conclusions.</div>
+  </div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Validité, cohérence et pertinence des résultats
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître la définition de la pertinence clinique</div>
+  <div class="obj-line">Connaître la transposabilité des résultats (validité externe)</div>
+  <div class="obj-line">Connaître la validité interne, la validité externe, la cohérence externe</div>
+  <div class="obj-line">Connaître la définition de la taille de l'effet</div>
+  <div class="obj-line">Connaître la notion de rapport bénéfice / risque</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    4 questions à se poser en lisant un essai clinique
+  </div>
+  <div class="kv-row"><span class="kv-key"><strong>Validité interne</strong></span><span class="kv-val">« Croit-on aux résultats ? » — qualité méthodologique, prévention des biais</span></div>
+  <div class="kv-row"><span class="kv-key"><strong>Validité externe</strong></span><span class="kv-val">« Puis-je extrapoler à mes patients ? » — critères d'inclusion, prise en charge, centres</span></div>
+  <div class="kv-row"><span class="kv-key"><strong>Cohérence externe</strong></span><span class="kv-val">« Cohérent avec les autres données (biologiques, épidémio, autres études) ? »</span></div>
+  <div class="kv-row"><span class="kv-key"><strong>Pertinence clinique</strong></span><span class="kv-val">« Le résultat change-t-il la pratique ? »</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Biais (validité interne)
+    </div>
+    Différence systématique entre effet mesuré et effet réel, liée à un défaut méthodologique, indépendante de la taille d'échantillon.
+    <div class="pills"><span class="pill pill-red">Sélection</span><span class="pill pill-red">Mesure/classement</span><span class="pill pill-red">Confusion</span></div>
+  </div>
+  <div class="card card-blue">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+      Validité externe / transposabilité
+    </div>
+    <ul class="lst">
+      <li>Critères d'inclusion proches de la population cible</li>
+      <li><strong>Essai pragmatique :</strong> critères larges, proches de la pratique</li>
+      <li><strong>Essai explicatif :</strong> critères stricts (peu de comorbidités)</li>
+      <li>Centres/médecins investigateurs, mode de recrutement, adhérence</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card card-amber">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    Pertinence clinique
+  </div>
+  <ul class="lst">
+    <li>Population représentative, critère de jugement clinique (survie, morbi-mortalité) plutôt que critère de substitution</li>
+    <li>Comparateur pertinent (placebo alors qu'un traitement de référence existe → non pertinent), durée de suivi adaptée</li>
+    <li>Taille d'effet suffisante et précise ; gravité/fréquence des effets indésirables</li>
+  </ul>
+  <div class="alert alert-amber" style="margin-top:8px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège.</strong> Une différence statistiquement significative n'implique pas une pertinence clinique (surtout sur de très larges effectifs).</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+    Taille de l'effet — principales mesures
+  </div>
+  <table class="table-teal">
+    <tr><th>Type de comparaison</th><th>Mesure</th><th>Valeur = absence d'effet</th></tr>
+    <tr><td>2 variables quantitatives</td><td>Coefficient de corrélation (r), coefficient de détermination (r²)</td><td>0</td></tr>
+    <tr><td>1 quantitative / 1 qualitative</td><td>Différence de moyennes ; d de Cohen</td><td>0</td></tr>
+    <tr><td>2 variables qualitatives</td><td>Odds ratio, risque relatif</td><td>1</td></tr>
+    <tr><td>Critère censuré</td><td>Hazard ratio</td><td>1</td></tr>
+  </table>
+  <div class="kv-row"><span class="kv-key">Significativité</span><span class="kv-val">Dépend de la taille d'effet ET de la taille d'échantillon</span></div>
+</div>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8.5-8 9c-4.5-.5-8-4-8-9V7l8-4z"/></svg></div>
+    Rapport bénéfice / risque
+  </div>
+  Ratio entre l'efficacité et les effets indésirables potentiels — évolutif, évalué à chaque étape.
+  <div class="kv-row"><span class="kv-key">Développement/enregistrement</span><span class="kv-val">AMM, plan de gestion des risques, SMR, ASMR</span></div>
+  <div class="kv-row"><span class="kv-key">Post-AMM</span><span class="kv-val">Pharmacovigilance, addictovigilance, pharmaco-épidémiologie</span></div>
+  <div class="kv-row"><span class="kv-key">Efficacité</span><span class="kv-val">Effet positif en essai clinique / laboratoire</span></div>
+  <div class="kv-row"><span class="kv-key">Efficience</span><span class="kv-val">Service rendu en situation réelle d'utilisation</span></div>
+</div>
+
+<hr>
+
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg>
+  Lecture critique d'un protocole d'essai clinique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes de lecture critique d'un protocole d'essai clinique</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"/><line x1="3" y1="6" x2="3" y2="19"/><line x1="12" y1="6" x2="12" y2="19"/><line x1="21" y1="6" x2="21" y2="19"/></svg></div>
+    Grille de lecture — rubriques clés
+  </div>
+  <table class="table-blue">
+    <tr><th>Rubrique</th><th>Question à se poser</th></tr>
+    <tr><td><strong>Rationnel scientifique</strong></td><td>Question pertinente, innovante ? Essai nécessaire ?</td></tr>
+    <tr><td><strong>Objectif</strong></td><td>Formulation PICO (Population, Intervention, Comparateur, Outcome) complète ?</td></tr>
+    <tr><td><strong>Type d'étude</strong></td><td>Adapté à la question ? Groupes, aveugle, randomisation ?</td></tr>
+    <tr><td><strong>Sujets éligibles</strong></td><td>Validité externe : proche de la population cible ?</td></tr>
+    <tr><td><strong>Randomisation</strong></td><td>Ratio, blocs, stratification, assignation secrète → validité interne</td></tr>
+    <tr><td><strong>Traitements évalués</strong></td><td>Aveugle, observance, perdus de vue → validité interne/externe</td></tr>
+    <tr><td><strong>Critère de jugement principal</strong></td><td>Défini précisément, mesuré en aveugle ? Pertinence clinique</td></tr>
+    <tr><td><strong>Nombre de sujets nécessaire</strong></td><td>Calcul explicite (α, β, différence attendue) → puissance</td></tr>
+    <tr><td><strong>Analyses statistiques</strong></td><td>ITT/PP, gestion données manquantes, sous-groupes → validité interne</td></tr>
+    <tr><td><strong>Éthique et réglementaire</strong></td><td>Consentement éclairé, avis CPP, CNIL</td></tr>
+  </table>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li>Le <strong>niveau de preuve</strong> ne dépend pas du résultat, mais de l'adéquation du protocole, des biais et de la puissance</li>
+    <li>Grade HAS <strong>A</strong> = méta-analyse d'ECR / ECR forte puissance ; <strong>B</strong> = ECR faible puissance, cohortes ; <strong>C</strong> = cas-témoins, séries de cas</li>
+    <li><strong>Randomisation</strong> → comparabilité initiale ; <strong>double aveugle</strong> → maintien de la comparabilité ; <strong>assignation secrète</strong> → prévient le biais de sélection à l'inclusion</li>
+    <li>Ne jamais tester statistiquement la comparabilité initiale des groupes randomisés (piège classique)</li>
+    <li><strong>ITT</strong> = référence pour un essai de supériorité (diminue la différence) ; <strong>per protocole</strong> facilite la mise en évidence d'une différence mais risque un biais d'attrition</li>
+    <li>4 questions de lecture critique : validité interne (croit-on aux résultats ?), validité externe (extrapolable ?), cohérence externe (cohérent avec le reste ?), pertinence clinique (utile en pratique ?)</li>
+    <li>Une différence statistiquement significative ≠ pertinence clinique, surtout sur de grands effectifs</li>
+    <li>Lien d'intérêt (objectif) ≠ conflit d'intérêt (subjectif) ; industrie pharmaceutique = lien d'intérêt par définition du fait de ses enjeux économiques</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>

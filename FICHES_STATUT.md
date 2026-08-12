@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-11. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-12. Ne pas éditer à la main._
 
-**Avancement : 194 / 367 items (52.9%)**
+**Avancement : 195 / 367 items (53.1%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -330,7 +330,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 320 | [ ] | Myélome multiple des os | — |
 | 321 | [ ] | Principe du bon usage du médicament et des thérapeutiques non médicame… | — |
 | 322 | [ ] | La décision thérapeutique personnalisée | — |
-| 323 | [ ] | Analyser et utiliser les résultats des études cliniques dans la perspe… | — |
+| 323 | [x] | Analyser et utiliser les résultats des études cliniques dans la perspe… | 323_Analyse_critique_recherche_clinique.html |
 | 324 | [ ] | Éducation thérapeutique | — |
 | 325 | [x] | Identification et gestion des risques liés aux médicaments et aux biom… | 325_risque_iatrogenemedicamenteux_v2.html |
 | 326 | [x] | Cadre réglementaire de la prescription thérapeutique et recommandation… | 326_prescription_reglementaire.html |
