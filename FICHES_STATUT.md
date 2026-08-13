@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-12. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-13. Ne pas éditer à la main._
 
-**Avancement : 195 / 367 items (53.1%)**
+**Avancement : 196 / 367 items (53.4%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -272,7 +272,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 262 | [x] | Néphropathies interstitielles | 262_nephropathies_interstitielles.html |
 | 263 | [ ] | Néphropathies vasculaires | — |
 | 264 | [ ] | Insuffisance rénale chronique chez l adulte et l enfant | — |
-| 265 | [ ] | Lithiase urinaire | — |
+| 265 | [x] | Lithiase urinaire | 265_Lithiase_urinaire.html |
 | 266 | [ ] | Polykystose rénale | — |
 | 267 | [x] | Troubles de l équilibre acido-basique et désordres hydro-électrolytiqu… | 267_Troubles_hydroelectrolytiques.html |
 | 268 | [x] | Hypercalcémie | 268_Hypercalcemie.html |
