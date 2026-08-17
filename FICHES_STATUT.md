@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-17. Ne pas éditer à la main._
 
-**Avancement : 200 / 367 items (54.5%)**
+**Avancement : 201 / 367 items (54.8%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -180,7 +180,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 170 | [ ] | Paludisme | — |
 | 171 | [ ] | Gale et pédiculose | — |
 | 172 | [x] | Parasitoses digestives | 172_Parasitoses_digestives.html |
-| 173 | [ ] | Zoonoses | — |
+| 173 | [x] | Zoonoses | 173_Zoonoses.html |
 | 174 | [ ] | Pathologie infectieuse chez les migrants adultes et enfants | — |
 | 175 | [x] | Voyage en pays tropical de l adulte et de l enfant | 175_Voyage_pays_tropical.html |
 | 176 | [ ] | Diarrhées infectieuses de l adulte et de l enfant | — |
