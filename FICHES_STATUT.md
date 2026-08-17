@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-17. Ne pas éditer à la main._
 
-**Avancement : 199 / 367 items (54.2%)**
+**Avancement : 200 / 367 items (54.5%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -266,7 +266,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 256 | [x] | Aptitude au sport chez l adulte et l enfant | 256_Aptitude_sport_nutrition_v2.html |
 | 257 | [x] | Œdèmes des membres inférieurs localisés ou généralisés | 257_Oedemes_membres_inferieurs.html |
 | 258 | [ ] | Élévation de la créatininémie | — |
-| 259 | [ ] | Protéinurie et syndrome néphrotique chez l adulte et de l enfant | — |
+| 259 | [x] | Protéinurie et syndrome néphrotique chez l adulte et de l enfant | 259_Proteinurie_SdNephrotique.html |
 | 260 | [x] | Hématurie | 260_Hematurie.html |
 | 261 | [ ] | Néphropathie glomérulaire | — |
 | 262 | [x] | Néphropathies interstitielles | 262_nephropathies_interstitielles.html |
