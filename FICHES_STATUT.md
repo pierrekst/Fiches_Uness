@@ -2,7 +2,7 @@
 
 _Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-17. Ne pas éditer à la main._
 
-**Avancement : 201 / 367 items (54.8%)**
+**Avancement : 202 / 367 items (55.0%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -176,7 +176,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 166 | [ ] | Grippe | — |
 | 167 | [x] | Hépatites virales | 167_Hepatites_virales.html |
 | 168 | [x] | Infections à herpès virus du sujet immunocompétent | 168_Herpes_virus.html |
-| 169 | [ ] | Infections à VIH | — |
+| 169 | [x] | Infections à VIH | 169_Infections_VIH.html |
 | 170 | [ ] | Paludisme | — |
 | 171 | [ ] | Gale et pédiculose | — |
 | 172 | [x] | Parasitoses digestives | 172_Parasitoses_digestives.html |
