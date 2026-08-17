@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-13. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-17. Ne pas éditer à la main._
 
-**Avancement : 196 / 367 items (53.4%)**
+**Avancement : 199 / 367 items (54.2%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -242,9 +242,9 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 232 | [x] | Fibrillation atriale | 232_fibrillation_atriale.html |
 | 233 | [x] | Valvulopathies | 233_Valvulopathies_v2.html |
 | 234 | [x] | Insuffisance cardiaque de l adulte | 234_Insuffisance_cardiaque.html |
-| 235 | [ ] | Péricardite aiguë | — |
+| 235 | [x] | Péricardite aiguë | 235_Pericardite_aigue.html |
 | 236 | [x] | Troubles de la conduction intracardiaque | 236_Troubles_conduction_intracardiaque.html |
-| 237 | [ ] | Palpitations | — |
+| 237 | [x] | Palpitations | 237_Palpitations.html |
 | 238 | [x] | Souffle cardiaque chez l enfant | 238_souffle_cardiaque_enfant_v2.html |
 | 239 | [x] | Acrosyndromes | 239_Acrosyndromes.html |
 | 240 | [x] | Hypoglycémie chez l adulte et l enfant | 240_hypoglycemie.html |
@@ -264,7 +264,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 254 | [x] | Besoins nutritionnels de la femme enceinte | 254_besoins_nutritionnels_enceinte.html |
 | 255 | [ ] | Diabète gestationnel | — |
 | 256 | [x] | Aptitude au sport chez l adulte et l enfant | 256_Aptitude_sport_nutrition_v2.html |
-| 257 | [ ] | Œdèmes des membres inférieurs localisés ou généralisés | — |
+| 257 | [x] | Œdèmes des membres inférieurs localisés ou généralisés | 257_Oedemes_membres_inferieurs.html |
 | 258 | [ ] | Élévation de la créatininémie | — |
 | 259 | [ ] | Protéinurie et syndrome néphrotique chez l adulte et de l enfant | — |
 | 260 | [x] | Hématurie | 260_Hematurie.html |
