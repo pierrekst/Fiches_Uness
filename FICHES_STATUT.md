@@ -1,8 +1,8 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-17. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-18. Ne pas éditer à la main._
 
-**Avancement : 202 / 367 items (55.0%)**
+**Avancement : 203 / 367 items (55.3%)**
 
 Légende : `[x]` fiche faite · `[ ]` à faire
 
@@ -165,7 +165,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 155 | [x] | Infections cutanéo-muqueuses et des phanères | 155_infections_cutaneo_muqueuses.html |
 | 156 | [ ] | Infections ostéo articulaires | — |
 | 157 | [ ] | Bactériémie Fongémie de l adulte et de l enfant | — |
-| 158 | [ ] | Sepsis et choc septique de l enfant et de l adulte | — |
+| 158 | [x] | Sepsis et choc septique de l enfant et de l adulte | 158_Sepsis_choc_septique.html |
 | 159 | [ ] | Tuberculose de l adulte et de l enfant | — |
 | 160 | [ ] | Tétanos | — |
 | 161 | [x] | Infections urinaires de l enfant et de l adulte | 161_infections_urinaires.html |
