@@ -1,6 +1,6 @@
 # Statut des fiches — items LiSa
 
-_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-18. Ne pas éditer à la main._
+_Régénéré automatiquement par `Config/update_avancement.py` le 2026-08-19. Ne pas éditer à la main._
 
 **Avancement : 203 / 367 items (55.3%)**
 
@@ -179,7 +179,7 @@ Légende : `[x]` fiche faite · `[ ]` à faire
 | 169 | [x] | Infections à VIH | 169_Infections_VIH.html |
 | 170 | [ ] | Paludisme | — |
 | 171 | [ ] | Gale et pédiculose | — |
-| 172 | [x] | Parasitoses digestives | 172_Parasitoses_digestives.html |
+| 172 | [x] | Parasitoses digestives | 172_Parasitoses_digestives_v2.html |
 | 173 | [x] | Zoonoses | 173_Zoonoses.html |
 | 174 | [ ] | Pathologie infectieuse chez les migrants adultes et enfants | — |
 | 175 | [x] | Voyage en pays tropical de l adulte et de l enfant | 175_Voyage_pays_tropical.html |

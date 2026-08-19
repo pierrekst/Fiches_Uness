@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>172 — Parasitoses digestives</title>
+<link rel="icon" href="../Config/favicon.svg">
+<link rel="stylesheet" href="../Config/annotations.css">
+<style>
+  :root {
+    --purple:#534AB7; --purple-light:#eeecfb;
+    --teal:#1D9E75;   --teal-light:#e6f7f2;
+    --coral:#D85A30;  --coral-light:#fbeee9;
+    --blue:#378ADD;   --blue-light:#eaf2fc;
+    --red:#E24B4A;    --red-light:#fdeaea;
+    --amber:#C97B2A;  --amber-light:#fdf3e3;
+    --text:#1e2029; --muted:#6b7280;
+    --border:#e5e7eb; --bg:#f9fafb; --card:#fff;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --text:#e8eaf0; --muted:#9ca3af;
+      --border:#2d3040; --bg:#141520; --card:#1e2030;
+      --purple-light:#1e1b3a; --teal-light:#0f2a22;
+      --coral-light:#2a1810; --blue-light:#0f1e2e;
+      --red-light:#2a0f0f; --amber-light:#2a1e0a;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:.9rem;line-height:1.5;padding:20px;}
+  .page{max-width:920px;margin:0 auto;}
+
+  .header{background:linear-gradient(135deg,#534AB7 0%,#378ADD 60%,#1D9E75 100%);border-radius:16px;padding:28px 32px;margin-bottom:24px;color:#fff;}
+  .header-num{font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;opacity:.8;margin-bottom:6px;}
+  .header h1{font-size:1.9rem;font-weight:800;margin-bottom:10px;}
+  .header-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .htag{background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:600;}
+
+  .objectifs{background:var(--blue-light);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin-bottom:22px;font-size:.84rem;color:var(--blue);}
+  .objectifs strong{font-weight:800;}
+
+  hr{border:none;border-top:1.5px solid var(--border);margin:22px 0;}
+
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px;}
+  .card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .card-icon{width:28px;height:28px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .card-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+  .alert{border-radius:10px;padding:11px 16px;font-size:.84rem;margin-bottom:10px;line-height:1.55;display:flex;gap:10px;align-items:flex-start;}
+  .alert strong{font-weight:800;}
+  .alert-icon{flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:15px;height:15px;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .alert-red   {background:var(--red-light);  color:var(--red);  border-left:3px solid var(--red);  }
+  .alert-blue  {background:var(--blue-light); color:var(--blue); border-left:3px solid var(--blue); }
+  .alert-green {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-amber {background:var(--amber-light);color:var(--amber);border-left:3px solid var(--amber);}
+  .alert-teal  {background:var(--teal-light); color:var(--teal); border-left:3px solid var(--teal); }
+  .alert-red   .alert-icon svg{stroke:var(--red);  }
+  .alert-blue  .alert-icon svg{stroke:var(--blue); }
+  .alert-green .alert-icon svg{stroke:var(--teal); }
+  .alert-amber .alert-icon svg{stroke:var(--amber);}
+  .alert-teal  .alert-icon svg{stroke:var(--teal); }
+
+  .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .pill{border-radius:20px;padding:3px 11px;font-size:.76rem;font-weight:600;}
+  .pill-red   {background:var(--red-light);   color:var(--red);   }
+  .pill-blue  {background:var(--blue-light);  color:var(--blue);  }
+  .pill-teal  {background:var(--teal-light);  color:var(--teal);  }
+  .pill-amber {background:var(--amber-light); color:var(--amber); }
+  .pill-purple{background:var(--purple-light);color:var(--purple);}
+  .pill-coral {background:var(--coral-light); color:var(--coral); }
+  .pill-gray{background:#f3f4f6;color:#6b7280;}
+
+  .kv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.84rem;}
+  .kv-row:last-child{border-bottom:none;}
+  .kv-key{color:var(--muted);flex:1;}
+  .kv-val{font-weight:700;color:var(--text);text-align:right;}
+
+  table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:8px;background:var(--card);border:0.5px solid var(--border);border-radius:10px;overflow:hidden;}
+  th{background:var(--purple-light);color:var(--purple);font-weight:700;padding:8px 10px;text-align:left;}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:var(--bg);}
+  .table-blue th {background:var(--blue-light); color:var(--blue); }
+  .table-teal th {background:var(--teal-light); color:var(--teal); }
+  .table-red  th {background:var(--red-light);  color:var(--red);  }
+  .table-amber th{background:var(--amber-light);color:var(--amber);}
+
+  .steps{list-style:none;padding:0;}
+  .steps li{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);font-size:.85rem;}
+  .steps li:last-child{border-bottom:none;}
+  .step-num{min-width:24px;height:24px;border-radius:50%;background:var(--purple-light);color:var(--purple);font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .step-num-red{background:var(--red-light);color:var(--red);}
+  .step-title{font-weight:700;margin-bottom:2px;}
+  .step-content{font-size:.83rem;color:var(--muted);}
+
+  ul.lst,ul.list{padding-left:16px;margin-top:6px;}
+  ul.lst li,ul.list li{margin-bottom:4px;font-size:.84rem;}
+
+  .badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.72rem;font-weight:700;margin-left:4px;}
+  .badge-red   {background:var(--red-light);  color:var(--red);  }
+  .badge-amber {background:var(--amber-light);color:var(--amber);}
+  .badge-green {background:var(--teal-light); color:var(--teal); }
+  .badge-blue  {background:var(--blue-light); color:var(--blue); }
+  .badge-purple{background:var(--purple-light);color:var(--purple);}
+
+  .bl-red   {border-left:4px solid var(--red);  padding-left:12px;}
+  .bl-amber {border-left:4px solid var(--amber);padding-left:12px;}
+  .bl-blue  {border-left:4px solid var(--blue); padding-left:12px;}
+  .bl-teal  {border-left:4px solid var(--teal); padding-left:12px;}
+
+  .header-sub{font-size:.9rem;opacity:.9;margin-top:4px;}
+
+  .card-red   {border-left:4px solid var(--red);   }
+  .card-blue  {border-left:4px solid var(--blue);  }
+  .card-teal  {border-left:4px solid var(--teal);  }
+  .card-amber {border-left:4px solid var(--amber); }
+  .card-purple{border-left:4px solid var(--purple);}
+
+  .section-title{font-size:1rem;font-weight:800;color:var(--purple);margin:22px 0 12px;display:flex;align-items:center;gap:8px;}
+  .section-title svg{width:18px;height:18px;fill:none;stroke:var(--purple);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+
+  .obj-list{margin-bottom:18px;}
+  .obj-line{padding:5px 2px;font-size:.85rem;color:var(--muted);line-height:1.45;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="header">
+  <div class="header-num">Item 172</div>
+  <h1>Parasitoses digestives</h1>
+  <div class="header-sub">Giardiose, amoebose, téniasis, ascaridiose, oxyurose, anguillulose, cryptosporidiose — reconnaître, prescrire les bons examens, traiter et surveiller</div>
+  <div class="header-tags">
+    <div class="htag">Péril fécal</div>
+    <div class="htag">Amoebose hépatique</div>
+    <div class="htag">Anguillulose et corticoïdes</div>
+    <div class="htag">Cysticercose</div>
+  </div>
+</div>
+
+<div class="objectifs">
+  <strong>Vue d'ensemble.</strong> Ce chapitre regroupe des parasitoses intestinales autochtones fréquentes (giardiose, oxyurose, téniasis à <em>T. saginata</em>, cryptosporidiose) et des parasitoses essentiellement importées (amoebose, ascaridiose, téniasis à <em>T. solium</em>, anguillulose). Le fil conducteur est double : <strong>1)</strong> reconnaître le tableau clinique selon le mode de transmission (péril fécal, transcutané, viande crue) pour orienter le diagnostic ; <strong>2)</strong> savoir que l'examen parasitologique des selles standard ne détecte ni les anguillules ni les cryptosporidies — il faut les prescrire nommément. Deux situations sont des pièges classiques et récurrents à l'ECNi : l'<strong>anguillulose maligne</strong> déclenchée par une corticothérapie, et la <strong>cysticercose</strong> due à l'ingestion d'œufs (et non de viande) de <em>Taenia solium</em>.
+</div>
+
+<!-- SECTION 1 : EPIDEMIOLOGIE ET TRANSMISSION -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg>
+  Épidémiologie, atteintes hépatiques et transmission
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les parasitoses les plus fréquentes responsables d'atteinte intestinale</div>
+  <div class="obj-line">Connaître les deux parasitoses responsables d'atteinte hépatique et leurs agents pathogènes</div>
+  <div class="obj-line">Connaître les modes de transmission des parasitoses digestives</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><rect x="3" y="12" width="6" height="8" rx="1"/><rect x="9" y="8" width="6" height="12" rx="1"/><rect x="15" y="4" width="6" height="16" rx="1"/><line x1="4" y1="20" x2="18" y2="20"/></svg></div>
+      Répartition en France métropolitaine
+    </div>
+    <div style="font-size:.83rem;color:var(--muted);margin-bottom:6px;"><strong>Autochtones — fréquentes</strong></div>
+    <div class="pills">
+      <div class="pill pill-teal">Giardiose (Giardia intestinalis)</div>
+      <div class="pill pill-teal">Cryptosporidiose (Cryptosporidium sp.)</div>
+      <div class="pill pill-teal">Oxyurose (Enterobius vermicularis)</div>
+      <div class="pill pill-teal">Téniasis à T. saginata</div>
+    </div>
+    <div style="font-size:.83rem;color:var(--muted);margin:10px 0 6px;"><strong>Importées — occasionnelles</strong></div>
+    <div class="pills">
+      <div class="pill pill-red">Amoebose (Entamoeba histolytica)</div>
+      <div class="pill pill-red">Ascaridiose (Ascaris lumbricoides)</div>
+      <div class="pill pill-red">Anguillulose (Strongyloides stercoralis)</div>
+      <div class="pill pill-red">Téniasis à T. solium</div>
+    </div>
+    <div class="alert alert-blue" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div>Séjour dans les DOM des Caraïbes ou en Guyane → évoquer en priorité l'anguillulose.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Les 2 parasitoses à atteinte hépatique
+    </div>
+    <table>
+      <tr><th>Parasitose</th><th>Agent</th><th>Mécanisme</th></tr>
+      <tr><td><strong>Amoebose hépatique</strong></td><td>Entamoeba histolytica</td><td>Protozoaire hématophage, lyse et traverse la muqueuse digestive, dissémine par voie hématogène → abcès hépatique</td></tr>
+      <tr><td><strong>Hydatidose</strong> (item 173)</td><td>Echinococcus granulosus</td><td>Forme larvaire chez l'hôte intermédiaire accidentel (homme), kyste hydatique surtout hépatique ; cosmopolite, zones d'élevage ovin (Maghreb)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37c1 .608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg></div>
+    Modes de transmission
+  </div>
+  <table>
+    <tr><th>Voie</th><th>Circonstances</th><th>Parasitoses associées</th></tr>
+    <tr>
+      <td style="vertical-align:middle; text-align:center;" rowspan="3"><strong>Orale</strong></td>
+      <td>Ingestion d'œufs ou kystes souillant mains, eau, fruits/légumes, terre (<strong>péril fécal</strong>)</td>
+      <td>Amoebose, giardiose, cryptosporidiose, ascaridiose, cysticercose à T. solium</td>
+    </tr>
+    <tr>
+      <td>Ingestion d'œufs présents sur la marge anale ou l'environnement domestique (mains, draps, sous-vêtements)</td>
+      <td>Oxyurose</td>
+    </tr>
+    <tr>
+      <td>Ingestion de larves par viande crue ou peu cuite</td>
+      <td>T. saginata (bœuf), T. solium (porc)</td>
+    </tr>
+    <tr>
+      <td><strong>Transcutanée</strong></td>
+      <td>Pénétration de larves infestantes lors de la marche pieds nus</td>
+      <td>Anguillulose, ankylostomoses</td>
+    </tr>
+  </table>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div><strong>Piège :</strong> la cysticercose s'acquiert par ingestion d'<strong>œufs</strong> de T. solium (péril fécal), pas par la viande de porc crue — celle-ci ne donne qu'un téniasis intestinal simple.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 2 : CLINIQUE PARASITOSES INTESTINALES HORS AMOEBOSE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg>
+  Clinique des parasitoses intestinales (hors amoebose)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les manifestations cliniques des parasitoses intestinales (hors amoebose)</div>
+  <div class="obj-line">Connaître les circonstances cliniques et épidémiologiques évocatrices d'anguillulose</div>
+  <div class="obj-line">Connaître les circonstances cliniques et épidémiologiques évocatrices de cryptosporidiose</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Protozooses intestinales
+    </div>
+    <div class="bl-teal" style="margin-bottom:10px;">
+      <div class="step-title">Giardiose</div>
+      <ul class="lst">
+        <li>Diarrhée modérée, selles malodorantes et décolorées, parfois mousseuses</li>
+        <li>Douleurs épigastriques, ballonnements post-prandiaux, nausées, anorexie</li>
+        <li>Peut persister plusieurs mois (enfant ++)</li>
+        <li>Forme chronique massive rare : malabsorption (stéatorrhée) et carences</li>
+      </ul>
+    </div>
+    <div class="bl-amber">
+      <div class="step-title">Cryptosporidiose</div>
+      <ul class="lst">
+        <li>Diarrhée subaiguë ou chronique, 3-10 selles/jour, non sanglantes</li>
+        <li>Douleurs abdominales, nausées, fièvre modérée inconstante (38-38,5°C)</li>
+        <li>Résolution spontanée en ~10 jours chez l'immunocompétent</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      Helminthoses intestinales
+    </div>
+    <div class="bl-teal" style="margin-bottom:8px;">
+      <div class="step-title">Oxyurose</div>
+      <ul class="lst">
+        <li>Prurit anal, exacerbation nocturne, eczématisation de la marge anale</li>
+        <li>Douleurs de la fosse iliaque droite ; vulvovaginite chez la petite fille</li>
+      </ul>
+    </div>
+    <div class="bl-amber" style="margin-bottom:8px;">
+      <div class="step-title">Ascaridiose</div>
+      <ul class="lst">
+        <li>Invasion : syndrome de Löffler (toux, dyspnée résolutive en 2-3 sem) + éosinophilie</li>
+        <li>Émission possible de vers adultes (15-20 cm, rosés, mobiles)</li>
+      </ul>
+    </div>
+    <div class="bl-blue">
+      <div class="step-title">Taeniasis</div>
+      <ul class="lst">
+        <li>Anneaux isolés (1-2 cm) ou en chaîne (10-100 cm) ; T. saginata émis activement hors des selles (sous-vêtements, literie) avec prurit anal ; T. solium éliminé passivement, souvent inaperçu</li>
+        <li>Troubles de l'appétit, nausées, alternance diarrhée/constipation</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Anguillulose — points d'appel
+    </div>
+    <ul class="lst">
+      <li>Séjour même très ancien en zone tropicale/DOM : ré-infestations endogènes → infection possible à vie</li>
+      <li>Souvent asymptomatique, découverte sur éosinophilie fluctuante</li>
+      <li>Phase d'état : douleurs épigastriques et/ou diarrhées récurrentes</li>
+      <li><strong>Larva currens</strong> : dermatite linéaire rampante prurigineuse, migration de plusieurs cm/heure, peut prendre l'aspect d'une urticaire</li>
+    </ul>
+    <div class="alert alert-red" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div><strong>Anguillulose disséminée :</strong> déclenchée par corticothérapie (même faible dose) ou immunodépression (greffe, hémopathie, HTLV-1) ; potentiellement mortelle, infections profondes à BGN/anaérobies par translocation. Dépistage systématique + traitement préventif avant toute corticothérapie chez un patient ayant séjourné en zone tropicale.</div>
+    </div>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Cryptosporidiose — points d'appel
+    </div>
+    <ul class="lst">
+      <li>Eau contaminée (robinet, baignade, puits), fromages au lait cru, aliments souillés par fèces bovines</li>
+      <li>Immunocompétent : pic vers 5 ans, possible chez l'adulte, épidémies</li>
+      <li>Immunodéprimé : VIH stade SIDA (&lt; 100 CD4/mm³), transplanté rénal, autre déficit cellulaire</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>Chez l'immunodéprimé : diarrhée prolongée, déshydratation, troubles hydro-électrolytiques, malabsorption sévère — peut être directement responsable du décès.</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 3 : AMOEBOSE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Amoebose intestinale et hépatique
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les manifestations cliniques de l'amoebose intestinale et hépatique</div>
+  <div class="obj-line">Connaître les moyens diagnostiques de l'amoebose intestinale et hépatique</div>
+</div>
+
+<div class="alert alert-blue">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+  <div>L'infection intestinale par Entamoeba histolytica est souvent asymptomatique (porteurs sains). Les manifestations peuvent survenir des mois ou années après l'infection.</div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24"><path d="M3 12h4l3 8l4-16l3 8h4"/></svg></div>
+      Amoebose intestinale aiguë
+    </div>
+    <div style="font-size:.83rem;color:var(--muted);margin-bottom:4px;"><strong>Forme typique — syndrome dysentérique</strong></div>
+    <ul class="lst">
+      <li>Début brutal, diarrhée <strong>afécale</strong> (10-15 selles/j) avec glaires et sang</li>
+      <li>Douleurs à type d'épreintes et ténesmes</li>
+      <li><strong>Absence de fièvre</strong> en général, état général conservé au début</li>
+      <li>Abdomen sensible (fosses iliaques), pas d'hépatomégalie, TR douloureux</li>
+      <li>Évolution : aggravation progressive avec phases de rémission</li>
+    </ul>
+    <div style="font-size:.83rem;color:var(--muted);margin:10px 0 4px;"><strong>Forme atténuée (la plus fréquente)</strong></div>
+    <p style="font-size:.84rem;">Selles simplement striées de sang, peut passer inaperçue.</p>
+  </div>
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      Amoebose hépatique
+    </div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:8px;">Complication d'une amoebose intestinale non traitée ; peut apparaître des mois/années après contamination.</p>
+    <div class="kv-row"><div class="kv-key">Fièvre</div><div class="kv-val">Précoce, constante, plateau 39-40°C</div></div>
+    <div class="kv-row"><div class="kv-key">Douleur</div><div class="kv-val">Hypocondre droit → épaule</div></div>
+    <div class="kv-row"><div class="kv-key">Hépatomégalie</div><div class="kv-val">Lisse, douloureuse à l'ébranlement</div></div>
+    <ul class="lst" style="margin-top:8px;">
+      <li>Triade = hépatomégalie douloureuse et fébrile + AEG</li>
+      <li>Possibles manifestations pulmonaires base droite</li>
+      <li>Abcès visible en imagerie (échographie/TDM) — évolution toujours défavorable sans traitement</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Diagnostic de l'amoebose
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:6px;">Intestinale</div>
+      <ul class="lst">
+        <li>EPS émis <strong>frais</strong>, examiné dans les 3h (fragilité des formes hématophages, seules à donner le diagnostic de certitude)</li>
+        <li>Kystes/formes non hématophages non distinguables morphologiquement d'amibes non pathogènes → PCR spécifique ou détection d'antigènes</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:6px;">Hépatique</div>
+      <ul class="lst">
+        <li>Échographie (hypo/anéchogène) et/ou TDM (hypodense)</li>
+        <li>Sérologie : si négative, à renouveler à 7-10j, sans retarder le traitement si forte suspicion</li>
+        <li>Ponction : peu d'intérêt diagnostique direct, mais détection d'ADN parasitaire possible</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 4 : COMPLICATIONS T. SOLIUM -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  Complications de l'infestation par Taenia solium
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les complications liées à l'infestation par Taenia solium</div>
+</div>
+
+<div class="alert alert-amber">
+  <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div>Cysticercose : ingestion d'<strong>œufs</strong> de T. solium (Amérique latine, Asie, Madagascar, Afrique — promiscuité porcs/humains, mauvaise hygiène fécale). Larves cysticerques = formations kystiques selon la localisation.</div>
+</div>
+
+<div class="grid3">
+  <div class="card card-red">
+    <div class="step-title">1. Neurocysticercose</div>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:6px;">Complication la plus sévère.</p>
+    <ul class="lst">
+      <li>Épilepsie = principale cause d'épilepsie en zone d'endémie</li>
+      <li>Imagerie : cysticerques calcifiés sphériques, hypodensités à halo clair</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="step-title">2. Sous-cutanée / musculaire</div>
+    <ul class="lst">
+      <li>Le plus souvent asymptomatique</li>
+      <li>Nombre et localisation variables</li>
+      <li>Calcifications radiographiques après 3-5 ans (« grain de riz »)</li>
+    </ul>
+  </div>
+  <div class="card card-blue">
+    <div class="step-title">3. Oculaire</div>
+    <p style="font-size:.84rem;">Localisation rare.</p>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 5 : DIAGNOSTIC PARASITOLOGIQUE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  Diagnostic des parasitoses intestinales (hors amoebose)
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les moyens diagnostiques des parasitoses intestinales (hors amoebose)</div>
+  <div class="obj-line">Connaître les modalités de prescription d'une recherche spécifique d'anguillulose</div>
+  <div class="obj-line">Connaître les modalités de prescription d'une recherche spécifique de cryptosporidiose</div>
+  <div class="obj-line">Reconnaître l'aspect macroscopique d'un Taenia sp et d'oxyures</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Examens de première intention
+  </div>
+  <ol class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Examen parasitologique des selles (EPS)</div><div class="step-content">Renouvelé 3 fois à 2-3 jours d'intervalle. Pour les helminthoses, à réaliser 1-3 mois après contamination supposée (temps que le parasite atteigne l'âge adulte et ponde)</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">PCR multiplex</div><div class="step-content">Pour la recherche des principaux protozoaires pathogènes</div></div></li>
+    <li><span class="step-num">3</span><div><div class="step-title">Recherche de cryptosporidies</div><div class="step-content">À prescrire nommément : colorations spécifiques ou PCR</div></div></li>
+    <li><span class="step-num">4</span><div><div class="step-title">Scotch-test anal</div><div class="step-content">Œufs d'oxyures et de T. saginata. À faire le matin avant toilette anale et avant la selle ; lecture directe sur lame après application/retrait immédiat</div></div></li>
+    <li><span class="step-num">5</span><div><div class="step-title">Identification de vers adultes extériorisés</div><div class="step-content">Ascaris, oxyures, ténia (fragments/anneaux) — en France, seul T. saginata est endémique</div></div></li>
+    <li><span class="step-num step-num-red">6</span><div><div class="step-title">Recherche d'anguillules</div><div class="step-content">À prescrire nommément : Baermann, coproculture parasitaire, ou PCR</div></div></li>
+  </ol>
+</div>
+
+<div class="grid2">
+  <div class="card card-red">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Recherche spécifique d'anguillulose
+    </div>
+    <ul class="lst">
+      <li>EPS standard : ne détecte pas les larves — prescrire « EPS avec recherche d'anguillules » ou technique de Baermann</li>
+      <li>À répéter (émission discontinue, pauci-infestation fréquente)</li>
+      <li>Sérologie : peu spécifique (croisements avec autres vers), utile si EPS non répétable ou avant traitement immunosuppresseur/stéroïdien</li>
+    </ul>
+  </div>
+  <div class="card card-amber">
+    <div class="card-title">
+      <div class="card-icon" style="background:var(--amber);"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      Recherche spécifique de cryptosporidiose
+    </div>
+    <ul class="lst">
+      <li>EPS standard : ne détecte pas les oocystes (trop petits)</li>
+      <li>Prescrire spécifiquement : colorations spécifiques ou PCR</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v10m-2 8h4a2 2 0 0 0 2-2v-4M6 21H4a2 2 0 0 1-2-2v-4"/></svg></div>
+    Aspect macroscopique
+  </div>
+  <div class="grid2" style="margin-bottom:0;">
+    <div>
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:4px;">Taenia saginata</div>
+      <p style="font-size:.84rem;">Chaînes d'anneaux, aspect rubané verdâtre (jusqu'à 10 m). Segments de quelques dizaines de cm émis activement, en dehors des selles.</p>
+    </div>
+    <div>
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:4px;">Oxyures</div>
+      <p style="font-size:.84rem;">Femelles adultes filiformes, ~1 cm, visibles sur la marge anale ou à la surface des selles.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- SECTION 6 : TRAITEMENT ET SURVEILLANCE -->
+<div class="section-title">
+  <svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg>
+  Traitement et surveillance
+</div>
+<div class="obj-list">
+  <div class="obj-line">Connaître les principes du traitement de la giardiose, l'oxyurose, le taeniasis et l'ascaridiose</div>
+  <div class="obj-line">Connaître les principes du traitement de l'amoebose intestinale et hépatique</div>
+  <div class="obj-line">Connaître le principe de la surveillance post-thérapeutique des parasitoses intestinales</div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement des parasitoses intestinales courantes
+  </div>
+  <table class="table-teal">
+    <tr><th>Parasitose</th><th>Traitement</th></tr>
+    <tr><td>Giardiose</td><td>Nitro-imidazolés (ex. métronidazole per os, 5 j)</td></tr>
+    <tr><td>Oxyurose</td><td>Flubendazole (1ʳᵉ intention) ou albendazole — <strong>2 cures à 2-3 semaines d'intervalle</strong></td></tr>
+    <tr><td>Ascaridiose</td><td>Flubendazole (albendazole en alternative)</td></tr>
+    <tr><td>Taeniasis</td><td>Praziquantel en cure unique</td></tr>
+  </table>
+  <div class="alert alert-blue" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+    <div><strong>Oxyurose — prévenir les récidives :</strong> traiter toute la famille (2 cures), lavage des mains avant repas et après toilettes, ongles courts, ne pas porter les mains à la bouche, pyjama, linge/doudous lavés &gt; 60°C, literie changée le jour du traitement et lavée à 60°C, aspiration autour du lit.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--red);"><svg viewBox="0 0 24 24"><path d="M4.5 12.5l8-8a4.94 4.94 0 0 1 7 7l-8 8a4.94 4.94 0 0 1-7-7"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg></div>
+    Traitement de l'amoebose
+  </div>
+  <ol class="steps">
+    <li><span class="step-num">1</span><div><div class="step-title">Amoebicide tissulaire</div><div class="step-content">Nitro-imidazolés : métronidazole pendant 7-10 jours</div></div></li>
+    <li><span class="step-num">2</span><div><div class="step-title">Amoebicide de contact</div><div class="step-content">Non absorbé, détruit les formes endo-luminales (kystes, formes non pathogènes) à l'origine des rechutes et de la transmission à l'entourage</div></div></li>
+  </ol>
+  <div class="alert alert-amber" style="margin-top:10px;">
+    <div class="alert-icon"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+    <div>Ponction évacuatrice de l'abcès amibien hépatique : uniquement si volumineux et ne régressant pas suffisamment sous traitement médical.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    Surveillance post-thérapeutique
+  </div>
+  <ul class="lst">
+    <li>Amélioration clinique et, le cas échéant, radiologique</li>
+    <li>EPS de contrôle, 1 mois après la fin du traitement (à répéter)</li>
+    <li>T. saginata : absence d'émission d'anneaux dans les 3 mois suivant le traitement</li>
+    <li>NFS de contrôle : normalisation de l'éosinophilie, le cas échéant</li>
+  </ul>
+</div>
+
+<hr>
+
+<div class="card card-purple">
+  <div class="card-title">
+    <div class="card-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    Points-clés à retenir
+  </div>
+  <ul class="lst">
+    <li>Parasitoses autochtones fréquentes : giardiose, cryptosporidiose, oxyurose, téniasis à T. saginata</li>
+    <li>Seulement 2 parasitoses digestives à atteinte hépatique : amoebose (E. histolytica) et hydatidose (E. granulosus)</li>
+    <li>Anguillulose : rechercher systématiquement (Baermann) avant toute corticothérapie chez un patient ayant séjourné en zone tropicale — risque d'hyperinfection mortelle</li>
+    <li>Amoebose intestinale = diarrhée glairo-sanglante <strong>afébrile</strong> ; amoebose hépatique = triade fièvre + hépatomégalie douloureuse + AEG</li>
+    <li>Cysticercose = ingestion d'œufs de T. solium (péril fécal), pas la viande de porc — 1ʳᵉ cause d'épilepsie en zone d'endémie</li>
+    <li>EPS standard ne détecte ni anguillules ni cryptosporidies : les prescrire nommément</li>
+    <li>Oxyurose : toujours traiter toute la famille en 2 cures + mesures d'hygiène strictes</li>
+    <li>Amoebose : toujours associer amoebicide tissulaire et amoebicide de contact pour éviter les rechutes</li>
+  </ul>
+</div>
+
+</div>
+<script src="../Config/annotations.js" defer></script>
+</body>
+</html>
